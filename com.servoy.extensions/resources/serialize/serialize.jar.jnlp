@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/serialize.jar.jnlp">
+   <information> 
+      <title>Servoy Client Plugins</title> 
+      <vendor>Servoy and Others</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/serialize.jar" download="eager" version="%%version%%"/>
+      <jar href="/lib/slf4j-api.jar" part="slf" download="%%loadmethod%%" version="1.4.2"/>
+      <jar href="/lib/client/slf4j-jdk14.jar" part="slf" download="%%loadmethod%%" version="1.4.2"/>
+  	  <package name="org.slf4j.*" part="slf" recursive="true"/>
+   </resources>
+   <component-desc/>
+	<security>
+		<all-permissions/>
+	</security>
+</jnlp>

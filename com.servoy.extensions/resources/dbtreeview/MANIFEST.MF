@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+
+Name: com/servoy/extensions/beans/dbtreeview/DBTreeView.class
+Java-Bean: True
+
+Name: com/servoy/extensions/beans/dbtreeview/table/DBTreeTableView.class
+Java-Bean: True
+
