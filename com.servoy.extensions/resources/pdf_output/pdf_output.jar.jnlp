@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/pdf_output.jar.jnlp">
+   <information> 
+      <title>Servoy Client Plugins</title> 
+      <vendor>Servoy and Others</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/pdf_output.jar" download="eager" part="pdfoutput" version="%%version%%"/>
+      <jar href="/plugins/pdf_output/itext.jar" download="%%loadmethod%%" part="itext" version="2.0.3"/>
+      <jar href="/plugins/pdf_output/bcmail-jdk14-135.jar" download="%%loadmethod%%" part="bouncycastle" version="1.35.0"/>
+      <jar href="/plugins/pdf_output/bcprov-jdk14-135.jar" download="%%loadmethod%%" part="bouncycastle" version="1.35.0"/>
+      <package name="com.lowagie.*" part="itext" recursive="true"/>
+      <package name="org.bouncycastle.*" part="bouncycastle" recursive="true"/>
+   </resources>
+   <component-desc/>
+	<security>
+		<all-permissions/>
+	</security>
+</jnlp>

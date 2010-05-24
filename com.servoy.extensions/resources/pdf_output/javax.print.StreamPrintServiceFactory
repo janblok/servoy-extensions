@@ -1,0 +1,2 @@
+# Provider of a pdf StreamPrintService
+com.servoy.extensions.plugins.pdf_output.PDFStreamPrintServiceFactory

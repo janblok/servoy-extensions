@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/images.jar.jnlp">
+   <information> 
+      <title>Servoy Client Plugins</title> 
+      <vendor>Servoy and Others</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/images.jar" download="eager" part="images" version="%%version%%"/>
+      <jar href="/plugins/images/jai_imageio.jar" download="%%loadmethod%%" part="imageio" version="1.1a"/>
+      <package name="com.sun.media.*" part="imageio" recursive="true"/>
+      <package name="jj2000.j2k.*" part="imageio" recursive="true"/>
+      <jar href="/plugins/images/metadataextractor.jar" download="%%loadmethod%%" part="metadata" version="2.3.1"/>
+      <package name="com.drew.*" part="metadata" recursive="true"/>
+   </resources>
+   <component-desc/>
+	<security>
+		<all-permissions/>
+	</security>
+</jnlp>
