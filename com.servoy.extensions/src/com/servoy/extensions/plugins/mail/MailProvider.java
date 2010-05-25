@@ -310,7 +310,7 @@ public class MailProvider implements IScriptObject
 
 		if ("sendMail".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "to", "from", "subject", "msgText", "[cc]", "[bcc]", "[attachment/attachments array]", "[overridePreferenceSMTPHost/properties array]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			return new String[] { "to[,to2,toN]", "from[,reply]", "subject", "msgText", "[cc,cc2,ccN]", "[bcc,bcc2,bccN]", "[attachment/attachments array]", "[overridePreferenceSMTPHost/properties array]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		}
 		else if ("receiveMail".equals(methodName)) //$NON-NLS-1$
 		{

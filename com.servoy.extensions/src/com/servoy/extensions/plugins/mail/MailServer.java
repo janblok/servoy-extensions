@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.mail;
 
 import java.io.ByteArrayInputStream;
@@ -158,7 +158,19 @@ public class MailServer implements IMailService, IServerPlugin
 
 			// create a new MimeMessage object (using the Session created above)
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from == null ? properties.getProperty("mail.from") : from));
+			String reply = null;
+			if (from == null)
+			{
+				from = properties.getProperty("mail.from");
+			}
+			else
+			{
+				String[] froma = from.split(",");
+				from = froma[0];
+				if (froma.length > 1) reply = froma[1];
+			}
+			message.setFrom(new InternetAddress(from));
+			if (reply != null) message.setReplyTo(new InternetAddress[] { new InternetAddress(reply) });
 			message.setSentDate(new Date());
 			String overrideAddress = properties.getProperty("mail.development.override.address");
 			String overrideFeedback = null;
