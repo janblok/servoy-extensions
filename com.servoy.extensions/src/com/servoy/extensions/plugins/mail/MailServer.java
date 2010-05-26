@@ -138,7 +138,7 @@ public class MailServer implements IMailService, IServerPlugin
 	}
 
 	public void sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments, String[] overrideProperties)
-		throws MessagingException
+		throws Exception
 	{
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
 		try
@@ -321,7 +321,7 @@ public class MailServer implements IMailService, IServerPlugin
 		catch (Exception ex)
 		{
 			Debug.error("SMTPSend " + ex.getMessage(), ex); //$NON-NLS-1$
-			if (ex instanceof MessagingException) throw (MessagingException)ex;
+			throw new Exception(ex.getMessage()); //not all exceptions are serializable
 		}
 		finally
 		{

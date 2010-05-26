@@ -16,13 +16,10 @@
  */
 package com.servoy.extensions.plugins.mail;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import javax.mail.MessagingException;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -267,20 +264,15 @@ public class MailProvider implements IScriptObject
 				mailService.sendMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
 				return true;
 			}
-			catch (MessagingException mex)
+			catch (Exception mex)
 			{
+				Debug.error(mex);
 				sendMailException = mex.getMessage();
-				if (mex.getNextException() != null)
+				if (mex.getCause() != null)
 				{
-					String nested = mex.getNextException().getMessage();
+					String nested = mex.getCause().getMessage();
 					if (!("".equals(nested))) sendMailException = sendMailException + "; " + nested; //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				Debug.error(mex);
-				return false;
-			}
-			catch (RemoteException e)
-			{
-				Debug.error(e);
 				return false;
 			}
 		}
