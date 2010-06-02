@@ -13,10 +13,9 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
-import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.ajax.calldecorator.CancelEventIfNoAjaxDecorator;
@@ -24,6 +23,8 @@ import org.apache.wicket.ajax.markup.html.IAjaxLink;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.model.IModel;
+
+import com.servoy.j2db.server.headlessclient.dataui.ServoyAjaxEventBehavior;
 
 public abstract class OnlyTargetAjaxLink extends AbstractLink implements IAjaxLink
 {
@@ -49,7 +50,7 @@ public abstract class OnlyTargetAjaxLink extends AbstractLink implements IAjaxLi
 	{
 		super(id, model);
 
-		add(new AjaxEventBehavior("onclick")
+		add(new ServoyAjaxEventBehavior("onclick")
 		{
 			private static final long serialVersionUID = 1L;
 

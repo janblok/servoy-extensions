@@ -31,7 +31,6 @@ import org.apache.wicket.Page;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.Component.IVisitor;
-import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.resources.JavascriptResourceReference;
@@ -41,6 +40,7 @@ import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.dataui.AbstractServoyDefaultAjaxBehavior;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
@@ -177,7 +177,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 		return true;
 	}
 
-	private class HandleShortcutbehaviour extends AbstractDefaultAjaxBehavior
+	private class HandleShortcutbehaviour extends AbstractServoyDefaultAjaxBehavior
 	{
 		boolean headRendered = false;
 		Set<String> renderedShortcuts = new HashSet<String>();

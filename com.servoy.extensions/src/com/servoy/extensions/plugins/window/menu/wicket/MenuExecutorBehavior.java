@@ -22,7 +22,6 @@ import java.util.Map;
 import org.apache.wicket.Application;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ResourceReference;
-import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.resources.CompressedResourceReference;
@@ -30,13 +29,14 @@ import org.apache.wicket.protocol.http.WebRequest;
 
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.dataui.AbstractServoyDefaultAjaxBehavior;
 import com.servoy.j2db.server.headlessclient.yui.YUILoader;
 import com.servoy.j2db.util.Utils;
 
 /**
  * @author jblok
  */
-public final class MenuExecutorBehavior extends AbstractDefaultAjaxBehavior
+public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavior
 {
 	private static final long serialVersionUID = 1L;
 	private Map<Integer, IMenuItem> callableMenuItems;
