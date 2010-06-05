@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/scheduler.jar.jnlp">
+   <information> 
+      <title>Servoy Client Plugins</title> 
+      <vendor>Servoy and Others</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/scheduler.jar" download="eager" part="scheduler" version="%%version%%"/>
+      <jar href="/plugins/scheduler/quartz.jar" download="%%loadmethod%%" part="quartz" version="1.0"/>
+      <jar href="/lib/commons-logging.jar" download="%%loadmethod%%" part="logging" version="1.0"/>
+      <package name="org.quartz.*" part="quartz" recursive="true"/>
+      <package name="org.apache.commons.logging.*" part="logging" recursive="true"/>
+   </resources>
+   <component-desc/>
+	<security>
+		<all-permissions/>
+	</security>
+</jnlp>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/excelxport.jar.jnlp">
+   <information> 
+      <title>Servoy Client Plugins</title> 
+      <vendor>Servoy and Others</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/excelxport.jar" download="eager" part="xport" version="%%version%%"/>
+      <jar href="/plugins/jakarta-poi/jakarta-poi.jar" part="poi" download="%%loadmethod%%" version="3.0-rc4-20070503"/>
+      <package name="org.apache.poi.*" part="poi" recursive="true"/>
+   </resources>
+   <component-desc/>
+	<security>
+		<all-permissions/>
+	</security>
+</jnlp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/servoy_headless_client"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/servoy_shared"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/servoy_smart_client"/>
+	<classpathentry exported="true" kind="lib" path="lib/inmethod-grid.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jakarta-poi.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/metadataextractor.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jFdfTk.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/itext.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/quartz.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/RapidSpell_US_UK_Dict.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/RapidSpell.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.dltk.javascript.rhino"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
