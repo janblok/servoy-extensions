@@ -1,0 +1,708 @@
+<?xml version="1.0"?>
+
+<!-- vi: ts=4 sw=4 sts=4
+  - Build file for Servoy plugins
+  -
+  - Authors:
+  -  	Joas de Haan
+  -		Jan Blok
+  -		Johan Compagner
+  -		Rob Gansevles
+  -		Sandor Vroemisse
+  -->
+
+<project name="servoy_plugins" basedir="." default="all_plugins">
+
+	<!-- Get common targets and properties -->
+	<import file="../eclipse_build/build_installer_properties.xml"/>
+
+
+	<property name="bin_plugins.dir" value="${bin.dir}/com/servoy/extensions/plugins"/>
+	<property name="bin_beans.dir" value="${bin.dir}/com/servoy/extensions/beans"/>
+	<property name="bin_template.dir" value="${bin.dir}/com/servoy/extensions/template"/>
+	<property name="bin_oraclefix.dir" value="${bin.dir}/com/servoy/extensions/oraclefix"/>
+
+	<property name="src_plugins.dir" value="${src.dir}/com/servoy/extensions/plugins"/>
+	<property name="src_beans.dir" value="${src.dir}/com/servoy/extensions/beans"/>
+	<property name="src_template.dir" value="${src.dir}/com/servoy/extensions/template"/>
+	<property name="src_oraclefix.dir" value="${src.dir}/com/servoy/extensions/oraclefix"/>
+
+	<property name="plugins.dir" value="${build_build.build.dir}/plugins"/>
+	<property name="beans.dir" value="${build_build.build.dir}/beans"/>
+	<property name="server_lib.dir" value="${build_build.build.dir}/server/lib"/>
+	<property name="drivers.dir" value="${build_build.build.dir}/drivers"/>
+
+	<property name="tempForJar.dir" value="${com.servoy.extensions.dir}/tempForJar"/>
+
+	<patternset id="javaGifData.sources">
+	  <include name="**/*.java"/>
+	  <include name="**/*.gif"/>
+	  <include name="**/*.data"/>
+	</patternset>
+
+	<patternset id="javaGif.sources">
+	  <include name="**/*.java"/>
+	  <include name="**/*.gif"/>
+	</patternset>
+
+ 	<patternset id="gif.sources">
+	  <include name="**/*.gif"/>
+	</patternset>
+
+	<patternset id="jpgPng.sources">
+	  <include name="**/*.jpg"/>
+	  <include name="**/*.png"/>
+	</patternset>
+
+	<patternset id="java.sources">
+	  <include name="**/*.java"/>
+	</patternset>
+
+	<patternset id="htmlServoy.sources">
+	  <include name="**/*.html"/>
+	  <include name="**/*.servoy"/>
+	</patternset>
+
+	<path id="classpath">
+		<fileset dir="${com.servoy.extensions.lib.dir}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+		<fileset dir="${servoy_shared.lib.dir}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+		<fileset dir="${build_build.server.dir}/${lib.dir}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+	</path>
+
+	<!--===================================================
+		Targets that only apply to the j2db_plugins project
+		===================================================-->
+	
+	<target name="check_jdk">
+		<!--
+				<fail message="Wrong jdk version detected. Version ${java.version} was detected whereas the project needs ${target.version}.">
+					<condition>
+						<not>
+							<contains string="${java.version}" substring="${target.version}" />
+						</not>
+					</condition>
+				</fail>
+		-->
+	</target>
+	
+	<target name="compile" depends="check_jdk,prepare" description="Compile entire j2db_plugins project">
+		<javac verbose="${javacVerbose}" debug="${javacDebugInfo}" source="${bundleJavacSource}" target="${bundleJavacTarget}"
+			srcdir="${com.servoy.extensions.src.dir}"
+			destdir="${com.servoy.extensions.bin.dir}"
+			compiler="${compiler}"
+			encoding="ISO-8859-1"
+			deprecation="off"
+			classpathref="classpath"
+			fork="yes"
+			executable="${javac_1.5}"
+		/>
+	</target>
+
+	<target name="clean" description="Delete all j2db_plugins' temporary files" unless="do_not_clean">
+		<delete dir="${com.servoy.extensions.bin.dir}"/>
+	</target>
+
+	<target name="clean_thoroughly"
+			depends="clean"
+			description="Delete all j2db_plugins' temporary and result files" unless="do_not_clean">
+		<delete dir="${plugins.dir}"/>
+		<delete file="${beans.dir}/barcode.jar"/>
+		<delete file="${beans.dir}/datagrid.jar"/>
+		<delete file="${beans.dir}/dbtreeview.jar"/>
+		<delete file="${beans.dir}/treeview.jar"/>
+		<delete file="${beans.dir}/mediaplayer.jar"/>
+		<delete dir="${server_lib.dir}/template-handler.jar"/>
+		<delete dir="${drivers.dir}/oraclelobfix.jar"/>
+	</target>
+
+ 	<target name="prepare">
+		<mkdir dir="${plugins.dir}"/>
+		<mkdir dir="${beans.dir}"/>
+		<mkdir dir="${server_lib.dir}"/>
+		<mkdir dir="${drivers.dir}"/>
+		<mkdir dir="${bin_oraclefix.dir}"/>
+		<mkdir dir="${com.servoy.extensions.bin.dir}"/>
+	</target>
+
+	<target	name="all_plugins"
+			    depends="_all_common_plugins,compile"
+	/>
+	
+	<target	name="_all_common_plugins"
+			    depends="agent.jar,dialog.jar,http.jar,mail.jar,tabxport.jar,excelxport.jar,pdf_output.jar,file.jar,scheduler.jar,
+			 	   pdf_forms.jar,dbtreeview.jar,amortization.jar,spellcheck.jar,images.jar,window.jar,udp.jar,rawSQL.jar,
+			 	   xmlreader.jar,serialize.jar,default_validators.jar,converters.jar,rest_ws.jar,headlessclient.jar"
+	>
+		<!--<ant target="clean"/>-->
+	</target>
+
+	<!--================================================
+		From here on only targets for specific jar files
+		================================================-->
+
+	<target name="agent.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/agent.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/agent">
+			<fileset dir="${src_plugins.dir}/agent">
+				<patternset refid="javaGifData.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/agent">
+			<fileset dir="${bin_plugins.dir}/agent">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/agent.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="dialog.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/dialog.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/dialog">
+			<fileset dir="${src_plugins.dir}/dialog">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/dialog">
+			<fileset dir="${bin_plugins.dir}/dialog">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/dialog.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="http.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/http.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/http">
+			<fileset dir="${src_plugins.dir}/http">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/http">
+			<fileset dir="${bin_plugins.dir}/http">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/http.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/http/http.jar.jnlp"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="serialize.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/serialize.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/serialize">
+			<fileset dir="${src_plugins.dir}/serialize">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/serialize">
+			<fileset dir="${bin_plugins.dir}/serialize">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/serialize.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/serialize/serialize.jar.jnlp"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="converters.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/converters.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/converters">
+			<fileset dir="${src_plugins.dir}/converters">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/converters">
+			<fileset dir="${bin_plugins.dir}/converters">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/converters.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	
+	<target name="rest_ws.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/rest_ws.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/rest_ws">
+			<fileset dir="${src_plugins.dir}/rest_ws">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+			<fileset dir="${bin_plugins.dir}/rest_ws">
+				<include name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/rest_ws.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="headlessclient.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/headlessclient.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/headlessclient">
+			<fileset dir="${src_plugins.dir}/headlessclient">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+			<fileset dir="${bin_plugins.dir}/headlessclient">
+				<include name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/headlessclient.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	
+	<target name="mail.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/mail.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/mail">
+			<fileset dir="${src_plugins.dir}/mail">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/mail">
+			<fileset dir="${bin_plugins.dir}/mail">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/mail.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="tabxport.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/tabxport.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/tabxport">
+			<fileset dir="${src_plugins.dir}/tabxport">
+				<patternset refid="gif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/tabxport">
+			<fileset dir="${bin_plugins.dir}/tabxport">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/tabxport.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="excelxport.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/excelxport.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/excelxport">
+			<fileset dir="${src_plugins.dir}/excelxport">
+				<patternset refid="gif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/excelxport">
+			<fileset dir="${bin_plugins.dir}/excelxport">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/excelxport.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/excelxport/excelxport.jar.jnlp"/>
+		</copy>
+		<copy overwrite="true" todir="${plugins.dir}/jakarta-poi">
+			<fileset file="lib/jakarta-poi.jar"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="pdf_output.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/pdf_output.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/pdf_output">
+			<fileset dir="${src_plugins.dir}/pdf_output">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/pdf_output">
+			<fileset dir="${bin_plugins.dir}/pdf_output">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/META-INF/services/">
+			<fileset file="resources/pdf_output/javax.print.StreamPrintServiceFactory"/>
+		</copy>
+		<jar	destfile="${plugins.dir}/pdf_output.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/pdf_output/pdf_output.jar.jnlp"/>
+		</copy>
+		<copy overwrite="true" todir="${plugins.dir}/pdf_output">
+			<fileset file="lib/itext.jar"/>
+			<fileset file="lib/bcmail-jdk14-135.jar"/>
+			<fileset file="lib/bcprov-jdk14-135.jar"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="scheduler.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/scheduler.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/scheduler">
+			<fileset dir="${src_plugins.dir}/scheduler">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/scheduler">
+			<fileset dir="${bin_plugins.dir}/scheduler">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" file="${com.servoy.extensions.src.dir}/quartz.properties" todir="${tempForJar.dir}"/>
+		<jar	destfile="${plugins.dir}/scheduler.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/scheduler/scheduler.jar.jnlp"/>
+		</copy>
+		<copy overwrite="true" todir="${plugins.dir}/scheduler">
+			<fileset file="lib/quartz.jar"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="pdf_forms.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/pdf_forms.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/pdf_forms">
+			<fileset dir="${bin_plugins.dir}/pdf_forms">
+				<include name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/pdf_forms.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}/adobe_pdf_forms">
+			<fileset file="lib/jFdfTk.jar"/>
+		</copy>
+	</target>
+
+	<target name="file.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/file.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/file">
+			<fileset dir="${src_plugins.dir}/file">
+				<patternset refid="gif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/file">
+			<fileset dir="${bin_plugins.dir}/file">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/file.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="default_validators.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/default_validators.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/validators">
+			<fileset dir="${src_plugins.dir}/validators">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/validators">
+			<fileset dir="${bin_plugins.dir}/validators">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/default_validators.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="dbtreeview.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}/META-INF"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/META-INF">
+			<fileset file="resources/dbtreeview/MANIFEST.MF"/>
+		</copy>
+		<delete file="${beans.dir}/dbtreeview.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/dbtreeview/res">
+			<fileset dir="${src_beans.dir}/dbtreeview/res">
+				<include name="**/*.css"/>
+				<include name="**/*.png"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/dbtreeview/table/res">
+			<fileset dir="${src_beans.dir}/dbtreeview/table/res">
+				<include name="**/*.css"/>
+				<include name="**/*.png"/>
+				<include name="**/*.gif"/>
+			</fileset>
+		</copy>		
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/dbtreeview">
+			<fileset dir="${src_beans.dir}/dbtreeview">
+				<filename name="**/*.html"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/dbtreeview">
+			<fileset dir="${bin_beans.dir}/dbtreeview">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${beans.dir}/dbtreeview.jar"
+				manifest="${tempForJar.dir}/META-INF/MANIFEST.MF"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${beans.dir}/dbtreeview">
+			<fileset file="lib/inmethod-grid.jar"/>
+		</copy>		
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	<target name="amortization.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/amortization.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/amortization">
+			<fileset dir="${src_plugins.dir}/amortization">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/amortization">
+			<fileset dir="${bin_plugins.dir}/amortization">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/amortization.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="spellcheck.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/spellcheck.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/spellcheck">
+			<fileset dir="${src_plugins.dir}/spellcheck">
+				<patternset refid="gif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/spellcheck">
+			<fileset dir="${bin_plugins.dir}/spellcheck">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/spellcheck.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/spellcheck/spellcheck.jar.jnlp"/>
+		</copy>
+		<copy overwrite="true" todir="${plugins.dir}/spellcheck">
+			<fileset file="lib/RapidSpell*.jar"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="images.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/images.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/images">
+			<fileset dir="${src_plugins.dir}/images">
+				<patternset refid="gif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/images">
+			<fileset dir="${bin_plugins.dir}/images">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/images.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" file="resources/images/images.jar.jnlp" todir="${plugins.dir}"/>
+		<copy overwrite="true" todir="${plugins.dir}/images">
+			<fileset file="lib/jai_imageio.jar"/>
+			<fileset file="lib/metadataextractor.jar"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="window.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+
+		<delete file="${plugins.dir}/window.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window">
+			<fileset dir="${src_plugins.dir}/window">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window">
+			<fileset dir="${bin_plugins.dir}/window">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window/shortcut/wicket/res">
+			<fileset dir="${src_plugins.dir}/window/shortcut/wicket/res">
+				<include name="**/*.css"/>
+				<include name="**/*.png"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window/menu/wicket/res">
+			<fileset dir="${src_plugins.dir}/window/menu/wicket/res">
+				<include name="**/*.css"/>
+				<include name="**/*.png"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+
+		<jar	destfile="${plugins.dir}/window.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="udp.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/udp.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/udp">
+			<fileset dir="${src_plugins.dir}/udp">
+				<patternset refid="gif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/udp">
+			<fileset dir="${bin_plugins.dir}/udp">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/udp.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="rawSQL.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/rawSQL.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/rawSQL">
+			<fileset dir="${src_plugins.dir}/rawSQL">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/rawSQL">
+			<fileset dir="${bin_plugins.dir}/rawSQL">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/rawSQL.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="xmlreader.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/xmlreader.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/xmlreader">
+			<fileset dir="${src_plugins.dir}/xmlreader">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/xmlreader">
+			<fileset dir="${bin_plugins.dir}/xmlreader">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/xmlreader.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+</project>
