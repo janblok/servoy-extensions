@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import java.util.ArrayList;
@@ -95,6 +95,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 			rootFs = (IFoundSet)rootFoundSets.get(j);
 			for (int i = 0; i < rootFs.getSize(); i++)
 			{
+				rootFs.getRecord(i);
 				child = createChildNode(root, rootFs, i);
 			}
 			//check child item to detect dir/leaf status (need this for icon display)
