@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu;
 
 import java.util.Arrays;
@@ -316,19 +316,15 @@ public abstract class AbstractMenu implements IScriptObject
 	{
 		if ("addMenuItem".equals(methodName)) //$NON-NLS-1$ 
 		{
-			return new String[] { "[index|name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
+			return new String[] { "[name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
 		}
 		if ("addCheckBox".equals(methodName)) //$NON-NLS-1$ 
 		{
-			return new String[] { "[index|name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
+			return new String[] { "[name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
 		}
 		if ("addRadioButton".equals(methodName)) //$NON-NLS-1$ 
 		{
-			return new String[] { "[index|name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
-		}
-		if ("addSeparator".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "[index]" }; //$NON-NLS-1$ 
+			return new String[] { "[name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
 		}
 		if ("getItem".equals(methodName)) //$NON-NLS-1$ 
 		{
@@ -348,7 +344,7 @@ public abstract class AbstractMenu implements IScriptObject
 		}
 		if ("addMenu".equals(methodName)) //$NON-NLS-1$ 
 		{
-			return new String[] { "[index|name]", "[menu]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
+			return new String[] { "[name]", "[menu]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
 		}
 		if ("getMenu".equals(methodName)) //$NON-NLS-1$ 
 		{
