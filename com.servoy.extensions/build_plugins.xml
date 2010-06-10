@@ -13,10 +13,18 @@
 
 <project name="servoy_plugins" basedir="." default="all_plugins">
 
-	<!-- Get common targets and properties -->
-	<import file="../eclipse_build/build_installer_properties.xml"/>
+	<property name="src.dir" value="src"/>
+	<property name="bin.dir" value="bin"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="build_build.build.dir" value="build"/>
+	<property name="servoy_shared.lib.dir" value="../servoy_shared/lib"/>
+	<property name="javacVerbose" value="false"/>
+	<property name="javacDebugInfo" value="true"/>
+	<property name="bundleJavacSource" value="1.5"/>
+	<property name="bundleJavacTarget" value="1.5"/>
 
-
+		
+		
 	<property name="bin_plugins.dir" value="${bin.dir}/com/servoy/extensions/plugins"/>
 	<property name="bin_beans.dir" value="${bin.dir}/com/servoy/extensions/beans"/>
 	<property name="bin_template.dir" value="${bin.dir}/com/servoy/extensions/template"/>
@@ -32,7 +40,7 @@
 	<property name="server_lib.dir" value="${build_build.build.dir}/server/lib"/>
 	<property name="drivers.dir" value="${build_build.build.dir}/drivers"/>
 
-	<property name="tempForJar.dir" value="${com.servoy.extensions.dir}/tempForJar"/>
+	<property name="tempForJar.dir" value="${basedir}/tempForJar"/>
 
 	<patternset id="javaGifData.sources">
 	  <include name="**/*.java"/>
@@ -64,15 +72,11 @@
 	</patternset>
 
 	<path id="classpath">
-		<fileset dir="${com.servoy.extensions.lib.dir}">
+		<fileset dir="${lib.dir}">
 			<include name="*.jar" />
 			<include name="*.zip" />
 		</fileset>
 		<fileset dir="${servoy_shared.lib.dir}">
-			<include name="*.jar" />
-			<include name="*.zip" />
-		</fileset>
-		<fileset dir="${build_build.server.dir}/${lib.dir}">
 			<include name="*.jar" />
 			<include name="*.zip" />
 		</fileset>
@@ -96,19 +100,17 @@
 	
 	<target name="compile" depends="check_jdk,prepare" description="Compile entire j2db_plugins project">
 		<javac verbose="${javacVerbose}" debug="${javacDebugInfo}" source="${bundleJavacSource}" target="${bundleJavacTarget}"
-			srcdir="${com.servoy.extensions.src.dir}"
-			destdir="${com.servoy.extensions.bin.dir}"
-			compiler="${compiler}"
+			srcdir="${src.dir}"
+			destdir="${bin.dir}"
 			encoding="ISO-8859-1"
 			deprecation="off"
 			classpathref="classpath"
 			fork="yes"
-			executable="${javac_1.5}"
 		/>
 	</target>
 
 	<target name="clean" description="Delete all j2db_plugins' temporary files" unless="do_not_clean">
-		<delete dir="${com.servoy.extensions.bin.dir}"/>
+		<delete dir="${bin.dir}"/>
 	</target>
 
 	<target name="clean_thoroughly"
@@ -130,7 +132,7 @@
 		<mkdir dir="${server_lib.dir}"/>
 		<mkdir dir="${drivers.dir}"/>
 		<mkdir dir="${bin_oraclefix.dir}"/>
-		<mkdir dir="${com.servoy.extensions.bin.dir}"/>
+		<mkdir dir="${bin.dir}"/>
 	</target>
 
 	<target	name="all_plugins"
@@ -413,7 +415,7 @@
 				<filename name="**/*.class"/>
 			</fileset>
 		</copy>
-		<copy overwrite="true" file="${com.servoy.extensions.src.dir}/quartz.properties" todir="${tempForJar.dir}"/>
+		<copy overwrite="true" file="${src.dir}/quartz.properties" todir="${tempForJar.dir}"/>
 		<jar	destfile="${plugins.dir}/scheduler.jar"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
