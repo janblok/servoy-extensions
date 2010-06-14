@@ -26,11 +26,11 @@ import java.util.Set;
 import javax.swing.KeyStroke;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Page;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ResourceReference;
-import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.resources.JavascriptResourceReference;
@@ -200,7 +200,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 					"else if(e.srcElement) element=e.srcElement;").append( //$NON-NLS-1$
 					"if(element.nodeType==3) element=element.parentNode;").append(// defeat Safari bug //$NON-NLS-1$
 					getCallbackScript()).append(//
-					"},{'propagate':false,'disable_in_input':false})}"), "registerShortcut"); //$NON-NLS-1$ //$NON-NLS-2$
+					"},{'propagate':true,'disable_in_input':false})}"), "registerShortcut"); //$NON-NLS-1$ //$NON-NLS-2$
 
 				if (headRendered && !isAjax)
 				{
