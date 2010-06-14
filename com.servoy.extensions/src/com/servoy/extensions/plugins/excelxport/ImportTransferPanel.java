@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.excelxport;
 
 import java.awt.BorderLayout;
@@ -280,8 +280,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 								try
 								{
 									fsm.startTransaction();
-									fsm.getEditRecordList().stopEditing(true);
-									fsm.commitTransaction();
+									fsm.commitTransaction(true);
 								}
 								catch (Exception ex)
 								{
@@ -304,8 +303,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 						try
 						{
 							fsm.startTransaction();
-							fsm.getEditRecordList().stopEditing(true);
-							fsm.commitTransaction();
+							fsm.commitTransaction(true);
 						}
 						catch (Exception ex)
 						{
