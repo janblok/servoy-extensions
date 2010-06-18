@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.rest_ws.servlets;
 
 import java.io.ByteArrayOutputStream;
@@ -30,8 +30,11 @@ import org.json.XML;
 
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NoClientsException;
+import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedException;
+import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.HTTPUtils;
+import com.servoy.j2db.util.Utils;
 
 /**
  * Servlet for mapping RESTfull Web Service request to Servoy methods.
@@ -95,16 +98,42 @@ public class RestWSServlet extends HttpServlet
 			HTTPUtils.setNoCacheHeaders(response);
 			sendResult(request, response, result, CONTENT_DEFAULT);
 		}
-		catch (NoClientsException e)
-		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-		}
 		catch (Exception e)
 		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			handleException(e, request, response);
 		}
+	}
+
+	private void handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		final int error;
+		if (e instanceof NotAuthenticatedException)
+		{
+			plugin.log.debug(request.getRequestURI() + ": Not authenticated"); //$NON-NLS-1$
+			response.setHeader("WWW-Authenticate", "Basic realm=\"" + ((NotAuthenticatedException)e).getRealm() + '"'); //$NON-NLS-1$ //$NON-NLS-2$
+			error = HttpServletResponse.SC_UNAUTHORIZED;
+		}
+		else if (e instanceof NotAuthorizedException)
+		{
+			plugin.log.info(request.getRequestURI() + ": Not authorised: " + e.getMessage()); //$NON-NLS-1$ 
+			error = HttpServletResponse.SC_FORBIDDEN;
+		}
+		else if (e instanceof NoClientsException)
+		{
+			plugin.log.error(request.getRequestURI(), e);
+			error = HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+		}
+		else if (e instanceof IllegalArgumentException)
+		{
+			plugin.log.info("Could not parse path '" + e.getMessage() + '\''); //$NON-NLS-1$
+			error = HttpServletResponse.SC_BAD_REQUEST;
+		}
+		else
+		{
+			plugin.log.error(request.getRequestURI(), e);
+			error = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+		}
+		response.sendError(error);
 	}
 
 	@Override
@@ -119,15 +148,9 @@ public class RestWSServlet extends HttpServlet
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
-		catch (NoClientsException e)
-		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-		}
 		catch (Exception e)
 		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			handleException(e, request, response);
 		}
 	}
 
@@ -156,15 +179,9 @@ public class RestWSServlet extends HttpServlet
 				sendResult(request, response, result, contentType);
 			}
 		}
-		catch (NoClientsException e)
-		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-		}
 		catch (Exception e)
 		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			handleException(e, request, response);
 		}
 	}
 
@@ -192,15 +209,9 @@ public class RestWSServlet extends HttpServlet
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
-		catch (NoClientsException e)
-		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-		}
 		catch (Exception e)
 		{
-			plugin.log.error(request.getRequestURI(), e);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			handleException(e, request, response);
 		}
 	}
 
@@ -224,12 +235,12 @@ public class RestWSServlet extends HttpServlet
 		String[] segments = path == null ? null : path.split("/"); //$NON-NLS-1$
 		if (segments == null || segments.length < 4 || !webServiceName.equals(segments[1]))
 		{
-			plugin.log.info("Could not parse path '" + path + '\''); //$NON-NLS-1$
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return null;
+			throw new IllegalArgumentException(path);
 		}
 
 		String solutionName = segments[2];
+		checkAuthorization(request, solutionName);
+
 		String formName = segments[3];
 		Object[] args = null;
 		if (fixedArgs != null || segments.length > 4)
@@ -254,6 +265,63 @@ public class RestWSServlet extends HttpServlet
 		{
 			plugin.releaseClient(solutionName, client);
 		}
+	}
+
+	private void checkAuthorization(HttpServletRequest request, String solutionName) throws Exception
+	{
+		String[] authorizedGroups = plugin.getAuthorizedGroups();
+		if (authorizedGroups == null)
+		{
+			plugin.log.debug("No authorization to check, allow all access"); //$NON-NLS-1$
+			return;
+		}
+
+		String authorizationHeader = request.getHeader("Authorization"); //$NON-NLS-1$
+		String userUid = null;
+		String user = null;
+		if (authorizationHeader != null && authorizationHeader.toLowerCase().startsWith("basic ")) //$NON-NLS-1$
+		{
+			String authorization = authorizationHeader.substring(6);
+			authorization = new String(Utils.decodeBASE64(authorization));
+			int index = authorization.indexOf(':');
+			if (index > 0)
+			{
+				user = authorization.substring(0, index);
+				String password = authorization.substring(index + 1);
+				userUid = plugin.getServerAccess().checkPasswordForUserName(user, password);
+			}
+		}
+		else
+		{
+			plugin.log.debug("No or unsupported Authorization header"); //$NON-NLS-1$
+		}
+		if (userUid == null)
+		{
+			throw new NotAuthenticatedException(solutionName);
+		}
+
+		String[] userGroups = plugin.getServerAccess().getUserGroups(userUid);
+		// find a match in groups
+		if (userGroups != null)
+		{
+			for (String ug : userGroups)
+			{
+				for (String ag : authorizedGroups)
+				{
+					if (ag.trim().equals(ug))
+					{
+						if (plugin.log.isDebugEnabled())
+						{
+							plugin.log.debug("Authorized access for user " + user + ", group " + ug); //$NON-NLS-1$ //$NON-NLS-2$
+						}
+						return;
+					}
+				}
+			}
+		}
+
+		// no match
+		throw new NotAuthorizedException(user);
 	}
 
 	protected String getBody(HttpServletRequest request) throws IOException
