@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.rest_ws;
 
 import java.util.HashMap;
@@ -61,6 +61,7 @@ public class RestWSPlugin implements IServerPlugin
 	private static final String ACTION_BLOCK = "block"; //$NON-NLS-1$
 	private static final String ACTION_FAIL = "fail"; //$NON-NLS-1$
 	private static final String ACTION_GROW = "grow"; //$NON-NLS-1$
+	private static final String AUTHORIZED_GROUPS_PROPERTY = "rest_ws_plugin_authorized_groups"; //$NON-NLS-1$
 
 	private static final String WEBSERVICE_NAME = "rest_ws"; //$NON-NLS-1$
 	private static final String[] SOLUTION_OPEN_METHOD_ARGS = new String[] { "rest_ws_server" }; //$NON-NLS-1$
@@ -99,6 +100,8 @@ public class RestWSPlugin implements IServerPlugin
 			//
 			ACTION_GROW +
 			": allows the pool to temporarily grow, by starting additional clients. These will be automatically removed when not required anymore."); //$NON-NLS-1$ 
+		req.put(AUTHORIZED_GROUPS_PROPERTY,
+			"Only authenticated users in the listed groups (comma-separated) have access, when left empty unauthorised access is allowed"); //$NON-NLS-1$ 
 		return req;
 	}
 
@@ -117,6 +120,11 @@ public class RestWSPlugin implements IServerPlugin
 		return props;
 	}
 
+	public IServerAccess getServerAccess()
+	{
+		return application;
+	}
+
 	public JSONSerializerWrapper getJSONSerializer()
 	{
 		if (serializerWrapper == null)
@@ -124,6 +132,16 @@ public class RestWSPlugin implements IServerPlugin
 			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(false, false));
 		}
 		return serializerWrapper;
+	}
+
+	public String[] getAuthorizedGroups()
+	{
+		String property = application.getSettings().getProperty(AUTHORIZED_GROUPS_PROPERTY);
+		if (property == null || property.trim().length() == 0)
+		{
+			return null;
+		}
+		return property.split(","); //$NON-NLS-1$
 	}
 
 	synchronized KeyedObjectPool getClientPool()
@@ -202,5 +220,26 @@ public class RestWSPlugin implements IServerPlugin
 
 	public static class NoClientsException extends Exception
 	{
+	}
+	public static class NotAuthorizedException extends Exception
+	{
+		public NotAuthorizedException(String message)
+		{
+			super(message);
+		}
+	}
+	public static class NotAuthenticatedException extends Exception
+	{
+		private final String realm;
+
+		public NotAuthenticatedException(String realm)
+		{
+			this.realm = realm;
+		}
+
+		public String getRealm()
+		{
+			return realm;
+		}
 	}
 }
