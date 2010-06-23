@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.mail;
 
 import java.io.ByteArrayInputStream;
@@ -25,17 +25,18 @@ import javax.activation.DataSource;
 import javax.activation.MimetypesFileTypeMap;
 
 /**
- * Separate class becouse we do not have DataSource class on client
- * @author Jan Blok
+ * Separate class because we do not have DataSource class on client
+ * @author jblok
  */
 public class AttachmentDataSource implements DataSource
 {
-	private Attachment attachment;
+	private final Attachment attachment;
+
 	public AttachmentDataSource(Attachment att)
 	{
 		attachment = att;
 	}
-	
+
 	public String getContentType()
 	{
 		String mimeType = attachment.getMimeType();

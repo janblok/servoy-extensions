@@ -30,7 +30,7 @@ import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class MailPlugin implements IClientPlugin
 {

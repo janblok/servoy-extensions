@@ -22,7 +22,7 @@ import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.ImageLoader;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class Attachment implements Serializable, IScriptObject
 {

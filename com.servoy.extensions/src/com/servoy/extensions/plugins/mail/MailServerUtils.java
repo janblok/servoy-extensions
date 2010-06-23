@@ -37,7 +37,7 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class MailServerUtils
 {

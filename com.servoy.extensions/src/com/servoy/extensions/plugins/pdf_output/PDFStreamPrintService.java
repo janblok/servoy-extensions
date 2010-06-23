@@ -28,7 +28,7 @@ import javax.print.attribute.PrintServiceAttributeSet;
 import javax.print.event.PrintServiceAttributeListener;
 
 /**
- * @author Jan Blok
+ * @author jblok
  * 
  * We have to do some work on this class to make it more compatible with a real StreamPrintService class.
  * @see sun.print.PSStreamPrintService

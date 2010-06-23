@@ -24,7 +24,7 @@ import java.util.List;
 import com.servoy.j2db.scripting.IScriptObject;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class MailMessage implements Serializable, IScriptObject
 {
