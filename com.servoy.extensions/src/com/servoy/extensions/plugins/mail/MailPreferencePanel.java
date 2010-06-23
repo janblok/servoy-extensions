@@ -36,7 +36,7 @@ import com.servoy.j2db.util.Debug;
 
 /**
  * This panels sets the default java mail property "mail.smtp.host"
- * @author 		Jan Blok
+ * @author 		jblok
  */
 public class MailPreferencePanel extends PreferencePanel implements DocumentListener
 {

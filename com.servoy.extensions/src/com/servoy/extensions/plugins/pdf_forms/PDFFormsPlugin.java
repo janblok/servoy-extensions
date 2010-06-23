@@ -27,7 +27,7 @@ import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class PDFFormsPlugin implements IServerPlugin
 {

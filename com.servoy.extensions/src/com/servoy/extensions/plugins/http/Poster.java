@@ -38,7 +38,7 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class Poster implements IScriptObject
 {

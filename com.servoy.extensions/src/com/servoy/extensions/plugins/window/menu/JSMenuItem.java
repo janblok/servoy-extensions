@@ -21,7 +21,7 @@ import com.servoy.j2db.scripting.IDeprecated;
 
 /**
  * Dummy class to show methods  in designer
- * @author Jan Blok
+ * @author jblok
  */
 @Deprecated
 public class JSMenuItem extends MenuItem implements IDeprecated

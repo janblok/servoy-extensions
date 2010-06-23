@@ -32,7 +32,7 @@ import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
 
 /**
- * @author Jan Blok
+ * @author jblok
  */
 public class PDFPrinterJob extends PrinterJob
 {
