@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import javax.swing.Icon;
@@ -35,7 +35,7 @@ import org.apache.wicket.model.Model;
 
 
 /**
- * DBTreeView node panel
+ * Class representing a tree node in the web based tree
  * 
  * @author gboros
  */

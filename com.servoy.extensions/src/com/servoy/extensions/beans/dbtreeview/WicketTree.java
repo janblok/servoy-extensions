@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import java.awt.Color;
@@ -53,6 +53,11 @@ import com.servoy.j2db.util.HtmlUtils;
 import com.servoy.j2db.util.PersistHelper;
 import com.servoy.j2db.util.Utils;
 
+/**
+ * Class representing the web client tree
+ * 
+ * @author gboros
+ */
 public class WicketTree implements IComponent, ITreeViewScriptMethods, TableModelListener, ISupportWebBounds
 {
 	private final AbstractTree abstractTree;
@@ -394,7 +399,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 		if (selection != null && selection.size() > 0)
 		{
 			//selection.add(0, treemodel.getRoot());
-			abstractTree.getTreeState().selectNode((TreeNode)selection.get(selection.size() - 1), isSelected);
+			abstractTree.getTreeState().selectNode(selection.get(selection.size() - 1), isSelected);
 			updateTree();
 		}
 	}

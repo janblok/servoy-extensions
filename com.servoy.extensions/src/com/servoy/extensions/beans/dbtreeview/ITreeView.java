@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import java.awt.Color;
@@ -23,26 +23,38 @@ import java.awt.Point;
 
 import javax.swing.border.Border;
 
-public interface ITreeView 
+/**
+ * Interface to which both the smart and webclient tree need to conform
+ * 
+ * @author gboros
+ */
+public interface ITreeView
 {
 	public Border getBorder();
+
 	public void setBorder(Border border);
 
 	public Color getForeground();
+
 	public void setForeground(Color foreground);
 
 	public Color getBackground();
+
 	public void setBackground(Color background);
 
 	public boolean isOpaque();
+
 	public void setOpaque(boolean opaque);
 
 	public Font getFont();
+
 	public void setFont(Font font);
 
 	public Point getLocation();
+
 	public void setLocation(Point location);
 
 	public Dimension getSize();
+
 	public void setSize(Dimension size);
 }

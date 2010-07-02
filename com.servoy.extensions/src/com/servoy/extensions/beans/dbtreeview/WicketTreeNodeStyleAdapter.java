@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import java.awt.Font;
@@ -35,6 +35,11 @@ import com.servoy.j2db.util.ImageLoader;
 import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.PersistHelper;
 
+/**
+ * Class used to apply styles on web based tree nodes
+ * 
+ * @author gboros
+ */
 public class WicketTreeNodeStyleAdapter
 {
 	private final MarkupContainer treeNode;

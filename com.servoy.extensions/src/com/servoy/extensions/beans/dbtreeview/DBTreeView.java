@@ -35,6 +35,7 @@ import com.servoy.j2db.util.PersistHelper;
 
 /**
  * DB Tree View bean main class
+ * 
  * @author jblok
  */
 public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView

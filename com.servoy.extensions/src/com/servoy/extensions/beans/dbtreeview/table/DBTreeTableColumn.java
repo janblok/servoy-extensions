@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import javax.swing.tree.TreeNode;
@@ -27,6 +27,11 @@ import com.inmethod.grid.column.AbstractLightWeightColumn;
 import com.servoy.extensions.beans.dbtreeview.BindingInfo;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 
+/**
+ * Class representing a column in the web based tree table
+ * 
+ * @author gboros
+ */
 public class DBTreeTableColumn extends AbstractLightWeightColumn
 {
 	private static final long serialVersionUID = 1L;

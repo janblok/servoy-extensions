@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import java.beans.PropertyDescriptor;
@@ -21,9 +21,14 @@ import java.beans.PropertyDescriptor;
 import com.servoy.extensions.beans.dbtreeview.DBTreeViewBeanInfo;
 import com.servoy.j2db.util.Debug;
 
-
-public class DBTreeTableViewBeanInfo extends DBTreeViewBeanInfo 
+/**
+ * DBTreeTableView bean info
+ * 
+ * @author gboros
+ */
+public class DBTreeTableViewBeanInfo extends DBTreeViewBeanInfo
 {
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors()
 	{
 		try
@@ -37,7 +42,7 @@ public class DBTreeTableViewBeanInfo extends DBTreeViewBeanInfo
 			PropertyDescriptor loc = new PropertyDescriptor("location", DBTreeTableView.class); //$NON-NLS-1$
 			PropertyDescriptor size = new PropertyDescriptor("size", DBTreeTableView.class); //$NON-NLS-1$
 
-			PropertyDescriptor result[] = { name,border,foreground,background,opaque,font,loc,size};
+			PropertyDescriptor result[] = { name, border, foreground, background, opaque, font, loc, size };
 			return result;
 		}
 		catch (Exception ex)

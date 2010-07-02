@@ -13,16 +13,21 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import com.servoy.j2db.scripting.IScriptObject;
 
+/**
+ * Script object holding informations needed to display a tree table column
+ * 
+ * @author gboros
+ */
 public class Column implements IScriptObject
 {
 	private String serverName;
 	private String tableName;
-	
+
 	private String header;
 	private String dataprovider;
 
@@ -30,33 +35,40 @@ public class Column implements IScriptObject
 	{
 		this.serverName = serverName;
 	}
+
 	public void setTableName(String tableName)
 	{
 		this.tableName = tableName;
 	}
+
 	public String getDataprovider()
 	{
 		return dataprovider;
 	}
-	
+
 	public void setDataprovider(String fieldName)
 	{
 		this.dataprovider = fieldName;
 	}
-	
-	public void js_setDataprovider(String fieldName){}
-	
+
+	public void js_setDataprovider(String fieldName)
+	{
+	}
+
 	public String getHeader()
 	{
 		return header;
 	}
+
 	public void setHeader(String header)
 	{
 		this.header = header;
 	}
-	
-	public void js_setHeader(String header){}
-	
+
+	public void js_setHeader(String header)
+	{
+	}
+
 	public String getServerName()
 	{
 		return serverName;
@@ -66,24 +78,27 @@ public class Column implements IScriptObject
 	{
 		return tableName;
 	}
+
 	public Class[] getAllReturnedTypes()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	public String[] getParameterNames(String methodName)
 	{
 		if (methodName.endsWith("Header"))
 		{
-			return new String[]{"headerText"};
+			return new String[] { "headerText" };
 		}
 		else if (methodName.endsWith("Dataprovider"))
 		{
-			return new String[]{"fieldName"};
+			return new String[] { "fieldName" };
 		}
-		
+
 		return null;
 	}
+
 	public String getSample(String methodName)
 	{
 		if (methodName.endsWith("Header"))
@@ -104,9 +119,10 @@ public class Column implements IScriptObject
 			retval.append("column.setDataprovider('fieldName');\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		
+
 		return null;
 	}
+
 	public String getToolTip(String methodName)
 	{
 		if (methodName.endsWith("Header"))
@@ -117,9 +133,10 @@ public class Column implements IScriptObject
 		{
 			return "Set column dataprovider";
 		}
-		
+
 		return null;
 	}
+
 	public boolean isDeprecated(String methodName)
 	{
 		// TODO Auto-generated method stub

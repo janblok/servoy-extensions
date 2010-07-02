@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import javax.swing.Icon;
@@ -44,6 +44,11 @@ import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.OnlyTargetAjaxLink;
 import com.servoy.extensions.beans.dbtreeview.WicketTreeNodeStyleAdapter;
 
+/**
+ * Class representing a tree node in the web based tree table
+ * 
+ * @author gboros
+ */
 public abstract class DBTreeTableTreeNode extends Panel
 {
 	private static final long serialVersionUID = 1L;

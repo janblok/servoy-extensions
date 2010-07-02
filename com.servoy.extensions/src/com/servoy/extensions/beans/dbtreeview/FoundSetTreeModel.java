@@ -42,6 +42,11 @@ import com.servoy.j2db.persistence.Table;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.util.Debug;
 
+/**
+ * Data model based on foundset(s) used by the tree
+ * 
+ * @author gboros
+ */
 public class FoundSetTreeModel extends DefaultTreeModel
 {
 	private static final long serialVersionUID = 1L;

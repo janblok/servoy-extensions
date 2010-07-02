@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import java.awt.Font;
@@ -42,6 +42,11 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.PersistHelper;
 import com.servoy.j2db.util.Utils;
 
+/**
+ * Class used to get binding informations need to display a tree node
+ * 
+ * @author gboros
+ */
 public class BindingInfo
 {
 	public static final String MEDIA_URL_DEF = "media:///";

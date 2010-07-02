@@ -13,11 +13,16 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods;
 
+/**
+ * Interface to which both the smart and webclient tree table need to conform
+ * 
+ * @author gboros
+ */
 public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 {
 	public void js_setTreeColumnHeader(String treeColumnHeader);

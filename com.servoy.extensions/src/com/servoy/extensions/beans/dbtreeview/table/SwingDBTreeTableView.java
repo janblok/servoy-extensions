@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import java.awt.Color;
@@ -46,7 +46,11 @@ import com.servoy.extensions.beans.dbtreeview.SwingDBTree;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 
-
+/**
+ * Class representing the smart client db tree table view
+ * 
+ * @author gboros
+ */
 public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableScriptMethods
 {
 	private static final long serialVersionUID = 1L;
