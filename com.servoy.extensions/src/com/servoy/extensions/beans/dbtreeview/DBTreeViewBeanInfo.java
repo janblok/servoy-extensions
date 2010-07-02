@@ -13,15 +13,23 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
-import java.beans.*;
+import java.beans.PropertyDescriptor;
+import java.beans.SimpleBeanInfo;
 
 import com.servoy.j2db.util.Debug;
 
-public class DBTreeViewBeanInfo extends SimpleBeanInfo 
+
+/**
+ * DBTreeView bean info
+ * 
+ * @author gboros
+ */
+public class DBTreeViewBeanInfo extends SimpleBeanInfo
 {
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors()
 	{
 		try
@@ -35,7 +43,7 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 			PropertyDescriptor loc = new PropertyDescriptor("location", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor size = new PropertyDescriptor("size", DBTreeView.class); //$NON-NLS-1$
 //			pd.setPropertyEditorClass(MoleculeNameEditor.class);
-			PropertyDescriptor result[] = { name,border,foreground,background,opaque,font,loc,size };
+			PropertyDescriptor result[] = { name, border, foreground, background, opaque, font, loc, size };
 			return result;
 		}
 		catch (Exception ex)

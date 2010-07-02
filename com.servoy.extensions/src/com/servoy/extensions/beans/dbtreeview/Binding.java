@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
@@ -22,7 +22,12 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.DataSourceUtils;
 
-
+/**
+ * Script object holding informations needed to display a tree node that is binded
+ * to the same data source
+ * 
+ * @author gboros
+ */
 public class Binding implements IScriptObject
 {
 	private String dataSource;

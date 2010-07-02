@@ -26,6 +26,12 @@ import org.apache.wicket.model.IModel;
 
 import com.servoy.j2db.server.headlessclient.dataui.ServoyAjaxEventBehavior;
 
+/**
+ * This class represents an ajax link, who's callback will be ignored if
+ * the page is not the last the user accessed
+ * 
+ * @author gboros
+ */
 public abstract class OnlyTargetAjaxLink extends AbstractLink implements IAjaxLink
 {
 	private static final long serialVersionUID = 1L;

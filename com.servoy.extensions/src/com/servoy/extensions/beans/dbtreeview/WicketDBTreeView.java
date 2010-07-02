@@ -54,7 +54,11 @@ import com.servoy.j2db.server.headlessclient.dataui.StyleAttributeModifierModel;
 import com.servoy.j2db.ui.IStylePropertyChanges;
 import com.servoy.j2db.util.DataSourceUtils;
 
-
+/**
+ * Class representing the web client db tree view
+ * 
+ * @author gboros
+ */
 public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderContributor
 {
 	private static final long serialVersionUID = 1L;

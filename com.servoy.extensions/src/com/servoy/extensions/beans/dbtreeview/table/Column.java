@@ -13,11 +13,16 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import com.servoy.j2db.scripting.IScriptObject;
 
+/**
+ * Script object holding informations needed to display a tree table column
+ * 
+ * @author gboros
+ */
 public class Column implements IScriptObject
 {
 	private String serverName;
