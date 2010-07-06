@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window;
 
 import java.awt.Component;
@@ -34,6 +34,7 @@ import javax.swing.KeyStroke;
 import org.mozilla.javascript.Function;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -48,7 +49,6 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -150,6 +150,10 @@ public class WindowProvider implements IScriptObject
 
 	public static KeyStroke parseShortcut(IClientPluginAccess pluginAccess, String shortcut)
 	{
+		if (shortcut == null)
+		{
+			return null;
+		}
 		String keyStrokeString = shortcut.trim();
 		if (keyStrokeString.length() == 1)
 		{
