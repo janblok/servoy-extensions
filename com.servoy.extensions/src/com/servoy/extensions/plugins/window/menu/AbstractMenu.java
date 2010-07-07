@@ -211,7 +211,14 @@ public abstract class AbstractMenu implements IScriptObject
 		IMenuItem menuItem = menu.getMenuItem(index);
 		if (menuItem != null)
 		{
-			return AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, null, true);
+			AbstractMenuItem scriptObjectWrapper = menuItem.getScriptObjectWrapper();
+			if (scriptObjectWrapper == null)
+			{
+				scriptObjectWrapper = AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, null, true);
+				menuItem.setScriptObjectWrapper(scriptObjectWrapper);
+			}
+
+			return scriptObjectWrapper;
 		}
 		return null;
 	}

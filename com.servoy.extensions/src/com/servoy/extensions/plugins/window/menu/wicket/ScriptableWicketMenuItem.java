@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.wicket;
 
 import java.awt.event.ActionListener;
@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
+import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 
@@ -29,6 +30,8 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	private final IMenu parentMenu;
 
 	private boolean selected;
+
+	private AbstractMenuItem scriptObjectWrapper;
 
 	public ScriptableWicketMenuItem(IMenu parentMenu)
 	{
@@ -132,5 +135,15 @@ public class ScriptableWicketMenuItem implements IMenuItem
 
 	public void doClick()
 	{
+	}
+
+	public AbstractMenuItem getScriptObjectWrapper()
+	{
+		return scriptObjectWrapper;
+	}
+
+	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem)
+	{
+		this.scriptObjectWrapper = abstractMenuItem;
 	}
 }

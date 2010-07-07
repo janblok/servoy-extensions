@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.swing;
 
 import java.awt.event.ActionListener;
@@ -22,6 +22,7 @@ import javax.swing.Icon;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.util.Utilities;
@@ -29,6 +30,7 @@ import com.servoy.extensions.plugins.window.util.Utilities;
 public class ScriptableJMenuItem implements IMenuItem
 {
 	private final JMenuItem jMenuItem;
+	private AbstractMenuItem scriptObjectWrapper;
 
 	public ScriptableJMenuItem()
 	{
@@ -138,5 +140,15 @@ public class ScriptableJMenuItem implements IMenuItem
 	public void setIconURL(String iconURL)
 	{
 		setIcon(Utilities.getImageIcon(iconURL));
+	}
+
+	public AbstractMenuItem getScriptObjectWrapper()
+	{
+		return scriptObjectWrapper;
+	}
+
+	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem)
+	{
+		this.scriptObjectWrapper = abstractMenuItem;
 	}
 }

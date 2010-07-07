@@ -29,6 +29,7 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
+import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.menu.IPopupMenu;
@@ -36,6 +37,8 @@ import com.servoy.extensions.plugins.window.menu.IPopupMenu;
 
 public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 {
+	private AbstractMenuItem scriptObjectWrapper;
+
 	public ScriptableJPopupMenu()
 	{
 		addKeyListener(new KeyListener()
@@ -200,5 +203,15 @@ public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 	public boolean isSelected()
 	{
 		return false;
+	}
+
+	public AbstractMenuItem getScriptObjectWrapper()
+	{
+		return scriptObjectWrapper;
+	}
+
+	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem)
+	{
+		this.scriptObjectWrapper = abstractMenuItem;
 	}
 }
