@@ -13,17 +13,20 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.swing;
 
 import javax.swing.JCheckBoxMenuItem;
 
+import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.ICheckboxMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.util.Utilities;
 
 public class ScriptableJCheckBoxMenuItem extends JCheckBoxMenuItem implements ICheckboxMenuItem
 {
+	private AbstractMenuItem scriptObjectWrapper;
+
 	public ScriptableJCheckBoxMenuItem()
 	{
 	}
@@ -41,5 +44,15 @@ public class ScriptableJCheckBoxMenuItem extends JCheckBoxMenuItem implements IC
 	public void setIconURL(String iconURL)
 	{
 		setIcon(Utilities.getImageIcon(iconURL));
+	}
+
+	public AbstractMenuItem getScriptObjectWrapper()
+	{
+		return scriptObjectWrapper;
+	}
+
+	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem)
+	{
+		this.scriptObjectWrapper = abstractMenuItem;
 	}
 }

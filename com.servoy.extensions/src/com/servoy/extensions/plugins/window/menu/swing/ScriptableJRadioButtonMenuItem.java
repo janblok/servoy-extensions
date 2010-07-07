@@ -13,17 +13,20 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.swing;
 
 import javax.swing.JRadioButtonMenuItem;
 
+import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IRadioButtonMenuItem;
 import com.servoy.extensions.plugins.window.util.Utilities;
 
 public class ScriptableJRadioButtonMenuItem extends JRadioButtonMenuItem implements IRadioButtonMenuItem
 {
+	private AbstractMenuItem scriptObjectWrapper;
+
 	public ScriptableJRadioButtonMenuItem()
 	{
 	}
@@ -41,5 +44,15 @@ public class ScriptableJRadioButtonMenuItem extends JRadioButtonMenuItem impleme
 	public void setIconURL(String iconURL)
 	{
 		setIcon(Utilities.getImageIcon(iconURL));
+	}
+
+	public AbstractMenuItem getScriptObjectWrapper()
+	{
+		return scriptObjectWrapper;
+	}
+
+	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem)
+	{
+		this.scriptObjectWrapper = abstractMenuItem;
 	}
 }
