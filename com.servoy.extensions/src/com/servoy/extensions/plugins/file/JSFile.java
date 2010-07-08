@@ -53,8 +53,15 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 
 	public JSFile(IUploadData upload)
 	{
-		this.file = null;
-		this.upload = upload;
+		this.file = upload.getFile();
+		if (this.file == null)
+		{
+			this.upload = upload;
+		}
+		else
+		{
+			this.upload = null;
+		}
 	}
 
 	/**
