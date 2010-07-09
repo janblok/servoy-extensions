@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.rawSQL;
 
 import com.servoy.j2db.dataprocessing.IDataSet;
@@ -274,7 +274,7 @@ public class RawSQLProvider implements IScriptObject
 	{
 		try
 		{
-			return getSQLService().flushAllClientsCache(null/* notify self */, serverName, tableName,
+			return getSQLService().flushAllClientsCache(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName,
 				plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName));
 		}
 		catch (Exception ex)
@@ -316,11 +316,11 @@ public class RawSQLProvider implements IScriptObject
 	 */
 	public boolean js_notifyDataChange(String serverName, String tableName, IDataSet pks, int action)
 	{
-		if (pks == null || pks.getRowCount() == 0) return false; //make sure developer do not call this without knwoing this whould be the same as flushAllClientsCache function
+		if (pks == null || pks.getRowCount() == 0) return false; //make sure developer does not call this without knowing this would be the same as flushAllClientsCache function
 
 		try
 		{
-			return getSQLService().notifyDataChange(null/* notify self */, serverName, tableName, pks, action,
+			return getSQLService().notifyDataChange(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, pks, action,
 				plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName));
 		}
 		catch (Exception ex)

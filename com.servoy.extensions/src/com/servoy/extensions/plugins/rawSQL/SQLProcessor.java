@@ -89,11 +89,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 
 	public boolean executeSQL(String clientId, String server, String table, String sql, Object[] questiondata, String tid)
 	{
-		if (!application.isAuthenticated(clientId))
-		{
-			Debug.warn("Rejected unauthenticated access");
-			return false;
-		}
+		if (!checkAccess(clientId)) return false;
 
 		Connection connection = null;
 		Statement ps = null;
@@ -167,44 +163,42 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 	public IDataSet executeStoredProcedure(String clientId, String serverName, String transaction_id, String procedureDeclaration, Object[] questiondata,
 		int[] inOutType, int startRow, int rowsToRetrieve) throws RepositoryException, RemoteException
 	{
-		if (!application.isAuthenticated(clientId))
-		{
-			Debug.warn("Rejected unauthenticated access");
-			return null;
-		}
+		if (!checkAccess(clientId)) return null;
 
 		return ApplicationServerSingleton.get().getDataServer().executeStoredProcedure(clientId, serverName, transaction_id, procedureDeclaration,
 			questiondata, inOutType, startRow, rowsToRetrieve);
 	}
 
-	public boolean flushAllClientsCache(String client_id, String server_name, String table, String tid) throws RemoteException
+	public boolean flushAllClientsCache(String client_id, boolean notifySelf, String server_name, String table, String tid) throws RemoteException
 	{
-		if (!application.isAuthenticated(client_id))
-		{
-			Debug.warn("Rejected unauthenticated access");
-			return false;
-		}
-
 		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true"))) //$NON-NLS-1$ //$NON-NLS-2$
 		{
-			return notifyDataChange(client_id, server_name, table, null, 0, tid);
+			return notifyDataChange(client_id, notifySelf, server_name, table, null, 0, tid);
 		}
 		return false;
 	}
 
-	public boolean notifyDataChange(String client_id, String server_name, String tableName, IDataSet pks, int action, String transaction_id)
+	public boolean notifyDataChange(String client_id, boolean notifySelf, String server_name, String tableName, IDataSet pks, int action, String transaction_id)
 		throws RemoteException
 	{
-		if (!application.isAuthenticated(client_id))
-		{
-			Debug.warn("Rejected unauthenticated access");
-			return false;
-		}
+		if (!checkAccess(client_id)) return false;
 
 		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true"))) //$NON-NLS-1$ //$NON-NLS-2$
 		{
-			return ApplicationServerSingleton.get().getDataServer().notifyDataChange(client_id, server_name, tableName, pks, action, transaction_id);
+			return ApplicationServerSingleton.get().getDataServer().notifyDataChange(notifySelf ? null : client_id, server_name, tableName, pks, action,
+				transaction_id);
 		}
 		return false;
+	}
+
+	protected final boolean checkAccess(String clientId)
+	{
+		// this plugin may be accessed by server processes or authenticated clients
+		boolean access = application.isServerProcess(clientId) || application.isAuthenticated(clientId);
+		if (!access)
+		{
+			Debug.warn("Rejected unauthenticated access"); //$NON-NLS-1$
+		}
+		return access;
 	}
 }

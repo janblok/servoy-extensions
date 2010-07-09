@@ -17,6 +17,7 @@
 package com.servoy.extensions.plugins.mail;
 
 import java.io.ByteArrayInputStream;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -114,32 +115,35 @@ public class MailServer implements IMailService, IServerPlugin
 		settings = null;
 	}
 
-	public Map getRequiredPropertyNames()
+	public Map<String, String> getRequiredPropertyNames()
 	{
-		LinkedMap req = new LinkedMap();
+		Map<String, String> req = new LinkedMap();
+		req.put("mail.server.allowUnauthenticatedRMIAccess", "Allow mailserver access for unauthenticated smart (rmi) client (true/false), defaults to false"); //$NON-NLS-1$ //$NON-NLS-2$
 		req.put("mail.pop3.host", "The name of POP3 server to recieve mails from"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.pop3.apop.enable", "Whether or not to use APOP for authentication (true/false)"); //$NON-NLS-1$ //$NON-NLS-2$
+		req.put("mail.pop3.apop.enable", "Whether or not to use APOP for authentication (true/false), defaults to false."); //$NON-NLS-1$ //$NON-NLS-2$
 		req.put("mail.smtp.host", "The name of SMTP server to deliver the mails to"); //$NON-NLS-1$ //$NON-NLS-2$
 		req.put("mail.smtp.port", "The port of SMTP server to deliver the mails to"); //$NON-NLS-1$ //$NON-NLS-2$
 		req.put("mail.from", "Default 'from' address if none is specified"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.auth", "Use authentication (true/false)"); //$NON-NLS-1$ //$NON-NLS-2$
+		req.put("mail.smtp.auth", "Use authentication (true/false), defaults to false."); //$NON-NLS-1$ //$NON-NLS-2$
 		req.put("mail.smtp.username", "Specify username if using authentication"); //$NON-NLS-1$ //$NON-NLS-2$
 		req.put("mail.smtp.password", "Specify password if using authentication"); //$NON-NLS-1$ //$NON-NLS-2$		
 		req.put("mail.smtp.connectiontimeout", "Socket connection timeout value in milliseconds. Default is infinite timeout."); //$NON-NLS-1$ //$NON-NLS-2$       
 		req.put("mail.smtp.timeout", "Socket I/O timeout value in milliseconds. Default is infinite timeout."); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.ssl.enable", "Use SSL (true/false)"); //$NON-NLS-1$ 
+		req.put("mail.smtp.ssl.enable", "Use SSL (true/false), defaults to false ."); //$NON-NLS-1$ //$NON-NLS-2$ 
 		req.put(
-			"mail.mime.charset",
+			"mail.mime.charset", //$NON-NLS-1$
 			"Specify the name of the charset to use for mail encoding (leave emtpy for system default), see http://java.sun.com/j2se/1.4.2/docs/api/java/nio/charset/Charset.html forinfo which charset names are usable"); //$NON-NLS-1$ 
 		req.put(
-			"mail.development.override.address",
+			"mail.development.override.address", //$NON-NLS-1$
 			"Specify an email address to which all email will be send instead of the specified To, Cc and Bcc addresses.\nThe specified to, Cc and Bcc addresses will be added to the Subject."); //$NON-NLS-1$ 
 		return req;
 	}
 
-	public void sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments, String[] overrideProperties)
-		throws Exception
+	public void sendMail(String clientId, String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties) throws RemoteException, Exception
 	{
+		if (!checkAccess(clientId)) return;
+
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
 		try
 		{
@@ -367,9 +371,11 @@ public class MailServer implements IMailService, IServerPlugin
 		return properties;
 	}
 
-	public MailMessage[] receiveMail(String userName, String password, boolean leaveMsgsOnServer, int recieveMode, Date onlyRecieveMsgWithSentDate,
-		String[] overrideProperties)
+	public MailMessage[] receiveMail(String clientId, String userName, String password, boolean leaveMsgsOnServer, int recieveMode,
+		Date onlyRecieveMsgWithSentDate, String[] overrideProperties) throws RemoteException
 	{
+		if (!checkAccess(clientId)) return null;
+
 		Store store = null;
 		Folder folder = null;
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
@@ -470,8 +476,10 @@ public class MailServer implements IMailService, IServerPlugin
 		}
 	}
 
-	public MailMessage createMailMessageFromBinary(byte[] data)
+	public MailMessage createMailMessageFromBinary(String clientId, byte[] data) throws RemoteException
 	{
+		if (!checkAccess(clientId)) return null;
+
 		MimeMessage mm = null;
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
 		try
@@ -548,5 +556,17 @@ public class MailServer implements IMailService, IServerPlugin
 		{
 			return mimeBodyParts;
 		}
+	}
+
+	protected final boolean checkAccess(String clientId)
+	{
+		// this plugin may be accessed by server processes or authenticated clients, unless overridden in props
+		boolean access = Boolean.valueOf(settings.getProperty("mail.server.allowUnauthenticatedRMIAccess", "false")).booleanValue() || //$NON-NLS-1$//$NON-NLS-2$
+			application.isServerProcess(clientId) || application.isAuthenticated(clientId);
+		if (!access)
+		{
+			Debug.warn("Rejected unauthenticated access"); //$NON-NLS-1$
+		}
+		return access;
 	}
 }

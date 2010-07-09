@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.rawSQL;
 
 import java.rmi.Remote;
@@ -29,8 +29,8 @@ public interface ISQLService extends Remote
 	public IDataSet executeStoredProcedure(String clientId, String serverName, String transaction_id, String procedureDeclaration, Object[] args,
 		int[] inOutType, int startRow, int maxNumberOfRowsToRetrieve) throws RepositoryException, RemoteException;
 
-	public boolean flushAllClientsCache(String client_id, String server_name, String table, String transaction_id) throws RemoteException;
+	public boolean flushAllClientsCache(String client_id, boolean notifySelf, String server_name, String table, String transaction_id) throws RemoteException;
 
-	public boolean notifyDataChange(String client_id, String server_name, String tableName, IDataSet pks, int action, String transaction_id)
+	public boolean notifyDataChange(String client_id, boolean notifySelf, String server_name, String tableName, IDataSet pks, int action, String transaction_id)
 		throws RemoteException;
 }

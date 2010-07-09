@@ -86,7 +86,8 @@ public class MailProvider implements IScriptObject
 			//receive mail
 			try
 			{
-				return mailService.receiveMail(userName, password, leaveMsgsOnServer, receiveMode, onlyreceiveMsgWithSentDate, overrideProperties);
+				return mailService.receiveMail(plugin.getClientPluginAccess().getClientID(), userName, password, leaveMsgsOnServer, receiveMode,
+					onlyreceiveMsgWithSentDate, overrideProperties);
 			}
 			catch (Exception e)
 			{
@@ -158,11 +159,11 @@ public class MailProvider implements IScriptObject
 			{
 				if (data.getClass().isArray())
 				{
-					return mailService.createMailMessageFromBinary((byte[])data);
+					return mailService.createMailMessageFromBinary(plugin.getClientPluginAccess().getClientID(), (byte[])data);
 				}
 				else if (data instanceof String)
 				{
-					return mailService.createMailMessageFromBinary(((String)data).getBytes());
+					return mailService.createMailMessageFromBinary(plugin.getClientPluginAccess().getClientID(), ((String)data).getBytes());
 				}
 			}
 			catch (Exception e)
@@ -261,7 +262,7 @@ public class MailProvider implements IScriptObject
 			//send mail
 			try
 			{
-				mailService.sendMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
+				mailService.sendMail(plugin.getClientPluginAccess().getClientID(), to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
 				return true;
 			}
 			catch (Exception mex)
