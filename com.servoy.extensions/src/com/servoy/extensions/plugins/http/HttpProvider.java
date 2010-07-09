@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.http;
 
 import java.io.BufferedInputStream;
@@ -64,6 +64,7 @@ public class HttpProvider implements IScriptObject
 	private String lastPageEncoding = null;
 	private String proxyUser = null;
 	private String proxyPassword = null;
+	private int timeout = -1;
 
 	public HttpProvider(HttpPlugin plugin)
 	{
@@ -126,6 +127,7 @@ public class HttpProvider implements IScriptObject
 		{
 			URL url = new URL(input);
 			URLConnection connection = url.openConnection();
+			if (timeout >= 0) connection.setConnectTimeout(timeout);
 			InputStream is = connection.getInputStream();
 			final String type = connection.getContentType();
 			String charset = null;
@@ -274,7 +276,9 @@ public class HttpProvider implements IScriptObject
 			try
 			{
 				URL url = new URL(input);
-				InputStream is = url.openStream();
+				URLConnection connection = url.openConnection();
+				if (timeout >= 0) connection.setConnectTimeout(timeout);
+				InputStream is = connection.getInputStream();
 				BufferedInputStream bis = new BufferedInputStream(is);
 				Utils.streamCopy(bis, sb);
 				bis.close();
@@ -592,6 +596,25 @@ public class HttpProvider implements IScriptObject
 		httpClients.remove(name);
 	}
 
+	public void js_setTimeout(Object[] args)
+	{
+		if (args == null || args.length == 0 || args.length > 2) return;
+		int timeout = Utils.getAsInteger(args[0], true);
+		String name = args.length == 2 ? (String)args[1] : null;
+		if (name == null)
+		{
+			this.timeout = timeout;
+		}
+		else
+		{
+			HttpClient client = getOrCreateHTTPclient(name, null);
+			if (client != null)
+			{
+				client.setTimeout(timeout);
+			}
+		}
+	}
+
 	public boolean isDeprecated(String methodName)
 	{
 		if ("getLastPageEncoding".equals(methodName))
@@ -646,6 +669,10 @@ public class HttpProvider implements IScriptObject
 		else if ("put".equals(methodName))
 		{
 			return new String[] { "clientName", "url", "fileName", "filePath", "[username]", "[password]" };
+		}
+		else if ("setTimeout".equals(methodName))
+		{
+			return new String[] { "msTimeout", "[http_clientname]" };
 		}
 		return null;
 	}
@@ -771,6 +798,15 @@ public class HttpProvider implements IScriptObject
 			retval.append("var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')\n");
 			return retval.toString();
 		}
+		else if ("setTimeout".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\n"); //$NON-NLS-1$
+			retval.append("plugins.http.setTimeout(1000,'client_name')\n");
+			return retval.toString();
+		}
 		return null;
 	}
 
@@ -822,6 +858,10 @@ public class HttpProvider implements IScriptObject
 		else if ("put".equals(methodName))
 		{
 			return "Put a file at the specified URL.";
+		}
+		else if ("setTimeout".equals(methodName))
+		{
+			return "Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).";
 		}
 		else
 		{
