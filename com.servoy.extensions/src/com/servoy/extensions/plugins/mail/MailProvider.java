@@ -61,7 +61,6 @@ public class MailProvider implements IScriptObject
 		if (args.length >= 4 && args[3] != null) receiveMode = Utils.getAsInteger(args[3]);
 		Date onlyreceiveMsgWithSentDate = null;//null is all
 		if (args.length >= 5 && args[4] != null && args[4] instanceof Date) onlyreceiveMsgWithSentDate = (Date)args[4];
-		String override_pop3_host = null;//is default
 		String[] overrideProperties = null;
 		if (args.length >= 6 && args[5] != null)
 		{
@@ -73,7 +72,7 @@ public class MailProvider implements IScriptObject
 			}
 			else if (args[5] instanceof String)
 			{
-				overrideProperties = new String[] { "mail.pop3.host=" + args[5] };
+				overrideProperties = new String[] { "mail.pop3.host=" + args[5] }; //$NON-NLS-1$
 			}
 		}
 
@@ -86,7 +85,8 @@ public class MailProvider implements IScriptObject
 			//receive mail
 			try
 			{
-				return mailService.receiveMail(userName, password, leaveMsgsOnServer, receiveMode, onlyreceiveMsgWithSentDate, overrideProperties);
+				return mailService.receiveMail(plugin.getClientPluginAccess().getClientID(), userName, password, leaveMsgsOnServer, receiveMode,
+					onlyreceiveMsgWithSentDate, overrideProperties);
 			}
 			catch (Exception e)
 			{
@@ -104,15 +104,15 @@ public class MailProvider implements IScriptObject
 	{
 		if (addresses == null) return new String[0];
 
-		List retval = new ArrayList();
-		StringTokenizer tk = new StringTokenizer(addresses.toLowerCase(), " ;,<>[]()'\":\n\t\r");
+		List<String> retval = new ArrayList<String>();
+		StringTokenizer tk = new StringTokenizer(addresses.toLowerCase(), " ;,<>[]()'\":\n\t\r"); //$NON-NLS-1$
 		while (tk.hasMoreTokens())
 		{
 			String token = tk.nextToken();
 			if (token.indexOf('@') != -1) retval.add(token);
 		}
 
-		return (String[])retval.toArray(new String[retval.size()]);
+		return retval.toArray(new String[retval.size()]);
 	}
 
 	private void createMailService()
@@ -133,11 +133,11 @@ public class MailProvider implements IScriptObject
 
 	public boolean isDeprecated(String methodName)
 	{
-		if ("recieveMail".equals(methodName))
+		if ("recieveMail".equals(methodName)) //$NON-NLS-1$
 		{
 			return true;
 		}
-		else if ("getLastSendMailException".equals(methodName))
+		else if ("getLastSendMailException".equals(methodName)) //$NON-NLS-1$
 		{
 			return true;
 		}
@@ -158,11 +158,11 @@ public class MailProvider implements IScriptObject
 			{
 				if (data.getClass().isArray())
 				{
-					return mailService.createMailMessageFromBinary((byte[])data);
+					return mailService.createMailMessageFromBinary(plugin.getClientPluginAccess().getClientID(), (byte[])data);
 				}
 				else if (data instanceof String)
 				{
-					return mailService.createMailMessageFromBinary(((String)data).getBytes());
+					return mailService.createMailMessageFromBinary(plugin.getClientPluginAccess().getClientID(), ((String)data).getBytes());
 				}
 			}
 			catch (Exception e)
@@ -197,7 +197,7 @@ public class MailProvider implements IScriptObject
 		byte[] data = args[1].toString().getBytes();
 		String mimeType = null;
 		if (args.length > 2) mimeType = args[2].toString();
-		return new Attachment(name, data, mimeType == null ? "text/plain" : mimeType);
+		return new Attachment(name, data, mimeType == null ? "text/plain" : mimeType); //$NON-NLS-1$
 	}
 
 	public boolean js_sendMail(Object[] args)
@@ -251,7 +251,7 @@ public class MailProvider implements IScriptObject
 			}
 			else if (args[7] instanceof String)
 			{
-				overrideProperties = new String[] { "mail.smtp.host=" + args[7] };
+				overrideProperties = new String[] { "mail.smtp.host=" + args[7] }; //$NON-NLS-1$
 			}
 		}
 
@@ -261,7 +261,7 @@ public class MailProvider implements IScriptObject
 			//send mail
 			try
 			{
-				mailService.sendMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
+				mailService.sendMail(plugin.getClientPluginAccess().getClientID(), to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
 				return true;
 			}
 			catch (Exception mex)
@@ -302,7 +302,7 @@ public class MailProvider implements IScriptObject
 
 		if ("sendMail".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "to[,to2,toN]", "from[,reply]", "subject", "msgText", "[cc,cc2,ccN]", "[bcc,bcc2,bccN]", "[attachment/attachments array]", "[overridePreferenceSMTPHost/properties array]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			return new String[] { "to[,to2,toN]", "from[,reply]", "subject", "msgText", "[cc,cc2,ccN]", "[bcc,bcc2,bccN]", "[attachment/attachments array]", "[overridePreferenceSMTPHost/properties array]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		}
 		else if ("receiveMail".equals(methodName)) //$NON-NLS-1$
 		{
@@ -310,11 +310,11 @@ public class MailProvider implements IScriptObject
 		}
 		else if ("createBinaryAttachment".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "filename", "binarydata", "[mimeType]" }; //$NON-NLS-1$//$NON-NLS-2$
+			return new String[] { "filename", "binarydata", "[mimeType]" }; //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		}
 		else if ("createTextAttachment".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "filename", "textdata", "[mimeType]" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "filename", "textdata", "[mimeType]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		else if ("getMailMessage".equals(methodName)) //$NON-NLS-1$
 		{
@@ -492,14 +492,14 @@ public class MailProvider implements IScriptObject
 		{
 			return "Creates a text based attachment object."; //$NON-NLS-1$
 		}
-		else if ("getLastSendMailExceptionMsg".equals(methodName))
+		else if ("getLastSendMailExceptionMsg".equals(methodName)) //$NON-NLS-1$
 		{
-			return "Get the exception that occurred in the last sendMail attempt (null if no exception occurred).";
+			return "Get the exception that occurred in the last sendMail attempt (null if no exception occurred)."; //$NON-NLS-1$
 		}
 		return null;
 	}
 
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { MailMessage.class, Attachment.class };
 	}

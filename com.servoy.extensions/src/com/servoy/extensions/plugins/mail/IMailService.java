@@ -32,11 +32,11 @@ public interface IMailService extends Remote
 	public static final int HEADERS_ONLY = 1;//recieveMode
 	public static final int NO_ATTACHMENTS = 2;//recieveMode
 
-	public void sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachemnts, String[] overrideProperties)
-		throws RemoteException, Exception;
+	public void sendMail(String clientId, String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties) throws RemoteException, Exception;
 
-	public MailMessage[] receiveMail(String userName, String password, boolean leaveMsgsOnServer, int recieveMode, Date onlyRecieveMsgWithSentDate,
-		String[] overrideProperties) throws RemoteException;
+	public MailMessage[] receiveMail(String clientId, String userName, String password, boolean leaveMsgsOnServer, int recieveMode,
+		Date onlyRecieveMsgWithSentDate, String[] overrideProperties) throws RemoteException;
 
-	public MailMessage createMailMessageFromBinary(byte[] data) throws RemoteException;
+	public MailMessage createMailMessageFromBinary(String clientId, byte[] data) throws RemoteException;
 }
