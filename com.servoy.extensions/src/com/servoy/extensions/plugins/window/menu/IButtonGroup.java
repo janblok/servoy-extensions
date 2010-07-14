@@ -13,9 +13,13 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu;
 
+/**
+ * Interface for client type independent (smart/web) button groups.
+ * 
+ */
 public interface IButtonGroup
 {
 	public void add(IRadioButtonMenuItem menuItem);

@@ -21,6 +21,10 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
+/**
+ * Interface for client type independent (smart/web) menu items.
+ * 
+ */
 public interface IMenuItem
 {
 	static final int MENU_ITEM_BUTTON = 0;
