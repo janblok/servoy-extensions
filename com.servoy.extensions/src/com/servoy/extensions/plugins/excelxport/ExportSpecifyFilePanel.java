@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.excelxport;
 
 import java.awt.BorderLayout;
@@ -160,49 +160,17 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 				parent.blockGUI(Messages.getString("servoy.plugin.export.status.loadingData")); //$NON-NLS-1$
 				try
 				{
-					wb = new HSSFWorkbook();
-					HSSFSheet sheet = wb.createSheet("Servoy Data"); //$NON-NLS-1$
 
 					DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs"); //$NON-NLS-1$
-					HSSFRow header = sheet.createRow((short)0);
-					for (int k = 0; k < dlm.getSize(); k++)
+
+					String[] dataProviders = new String[dlm.getSize()];
+					for (int i = 0; i < dlm.getSize(); i++)
 					{
-						DataProviderWithLabel dpl = (DataProviderWithLabel)dlm.get(k);
-						HSSFCell cell = header.createCell((short)k);
-						cell.setCellValue(dpl.label);
+						dataProviders[i] = ((DataProviderWithLabel)dlm.get(i)).dataProvider.getDataProviderID();
 					}
 					IFoundSet data = (IFoundSet)state.getProperty("foundset"); //$NON-NLS-1$
-					for (int i = 0; i < data.getSize(); i++)
-					{
-						HSSFRow row = sheet.createRow((short)(i + 1));
-						IRecord s = data.getRecord(i);
-						for (int k = 0; k < dlm.getSize(); k++)
-						{
-							HSSFCell cell = row.createCell((short)k);
-							DataProviderWithLabel dpl = (DataProviderWithLabel)dlm.get(k);
-							Object obj = s.getValue(dpl.dataProvider.getDataProviderID());
-							if (obj instanceof Date)
-							{
-								HSSFCellStyle cellStyle = wb.createCellStyle();
-								cellStyle.setDataFormat((short)16);//HSSFDataFormat.getFormat(
-								cell.setCellValue((Date)obj);
-								cell.setCellStyle(cellStyle);
-							}
-							else if (obj instanceof String)
-							{
-								cell.setCellValue((String)obj);
-							}
-							else if (obj instanceof Number)
-							{
-								cell.setCellValue(((Number)obj).doubleValue());
-							}
-							else
-							{
-								cell.setCellValue(""); //$NON-NLS-1$
-							}
-						}
-						rows++;
-					}
+					wb = populateWb(data, dataProviders);
+					rows = data.getSize();
 				}
 				catch (Exception ex)
 				{
@@ -215,5 +183,53 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 				}
 			}
 		};
+	}
+
+	public static HSSFWorkbook populateWb(IFoundSet foundSet, String[] dataProviders)
+	{
+		HSSFWorkbook hwb = new HSSFWorkbook();
+		HSSFSheet sheet = hwb.createSheet("Servoy Data");
+
+		HSSFRow header = sheet.createRow((short)0);
+		for (int k = 0; k < dataProviders.length; k++)
+		{
+			HSSFCell cell = header.createCell((short)k);
+			cell.setCellValue(dataProviders[k]);
+		}
+
+		for (int i = 0; i < foundSet.getSize(); i++)
+		{
+			HSSFRow row = sheet.createRow((short)(i + 1));
+			IRecord s = foundSet.getRecord(i);
+			for (int k = 0; k < dataProviders.length; k++)
+			{
+				HSSFCell cell = row.createCell((short)k);
+
+				Object obj = s.getValue(dataProviders[k]);
+
+
+				if (obj instanceof Date)
+				{
+					HSSFCellStyle cellStyle = hwb.createCellStyle();
+					cellStyle.setDataFormat((short)16);
+					cell.setCellValue((Date)obj);
+					cell.setCellStyle(cellStyle);
+				}
+				else if (obj instanceof String)
+				{
+					cell.setCellValue((String)obj);
+				}
+				else if (obj instanceof Number)
+				{
+					cell.setCellValue(((Number)obj).doubleValue());
+				}
+				else
+				{
+					cell.setCellValue(""); //$NON-NLS-1$
+				}
+			}
+
+		}
+		return hwb;
 	}
 }

@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.excelxport;
 
 import javax.swing.JMenuItem;
 
+import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.scripting.IScriptObject;
 
 /**
@@ -63,6 +64,15 @@ public class Enabler implements IScriptObject
 			retval.append("var isEnabled = %%elementName%%.importEnabled;\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
+		else if (methodName.endsWith("excelExport"))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("var bytes = %%elementName%%.excelExport(forms.form1.foundset, ['id','name']);\n");
+			return retval.toString();
+		}
 		return null;
 	}
 
@@ -77,11 +87,16 @@ public class Enabler implements IScriptObject
 		{
 			return "Enable the import feature of this plugin."; //$NON-NLS-1$
 		}
+		else if (methodName.endsWith("excelExport"))
+		{
+			return "Export to Excel data";
+		}
 		return null;
 	}
 
 	public String[] getParameterNames(String methodName)
 	{
+		if (methodName.endsWith("excelExport")) return new String[] { "foundSet", "dataProviderIds" };
 		return null;
 	}
 
@@ -157,4 +172,18 @@ public class Enabler implements IScriptObject
 			imp.setEnabled(b);
 		}
 	}
+
+	public byte[] js_excelExport(Object foundSet, Object dataProviders)
+	{
+		if (foundSet instanceof IFoundSet && dataProviders instanceof Object[])
+		{
+			Object[] dataProvidersArray = (Object[])dataProviders;
+			String[] dps = new String[dataProvidersArray.length];
+			for (int i = 0; i < dataProvidersArray.length; i++)
+				dps[i] = (String)dataProvidersArray[i];
+			return ExportSpecifyFilePanel.populateWb((IFoundSet)foundSet, dps).getBytes();
+		}
+		return null;
+	}
+
 }

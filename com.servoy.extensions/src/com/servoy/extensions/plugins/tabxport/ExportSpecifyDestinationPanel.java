@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.tabxport;
 
 import java.awt.BorderLayout;
@@ -100,6 +100,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		otherRadio.setActionCommand("separatorIsOther"); //$NON-NLS-1$
 		otherRadio.addActionListener(this);
 		formatPanel.add(otherSeparator);
+		otherSeparator.setEditable(false);
 		delimButtonGroup.add(tabRadio);
 		delimButtonGroup.add(semicolonRadio);
 		delimButtonGroup.add(commaRadio);
@@ -221,10 +222,11 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		else if (command.equals("down")) down(); //$NON-NLS-1$
 		else
 		{
+			otherSeparator.setEditable(false);
 			String sep = "\t"; //$NON-NLS-1$
 			if (otherRadio.isSelected())
 			{
-				sep = otherSeparator.getText();
+				otherSeparator.setEditable(true);
 			}
 			else if (tabRadio.isSelected())
 			{
@@ -337,6 +339,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 	public String getNextPanelName()
 	{
+		if (otherRadio.isSelected()) state.setProperty("separator", otherSeparator.getText());
 		return "SpecifyFilePanel"; //$NON-NLS-1$
 	}
 

@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.tabxport;
 
 import java.awt.BorderLayout;
@@ -134,17 +134,12 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 			if (header.isSelected())
 			{
 				DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs"); //$NON-NLS-1$
-				StringBuffer headerBuffer = new StringBuffer();
-				for (int k = 0; k < dlm.getSize(); k++)
+				String[] dataProviders = new String[dlm.getSize()];
+				for (int i = 0; i < dlm.getSize(); i++)
 				{
-					DataProviderWithLabel dpl = (DataProviderWithLabel)dlm.get(k);
-					headerBuffer.append("\""); //$NON-NLS-1$
-					headerBuffer.append(dpl.label);
-					headerBuffer.append("\""); //$NON-NLS-1$
-					if (k < dlm.getSize() - 1) headerBuffer.append(sep);
+					dataProviders[i] = ((DataProviderWithLabel)dlm.get(i)).label;
 				}
-				headerBuffer.append("\n"); //$NON-NLS-1$
-				fileData.insert(0, headerBuffer.toString());
+				fileData.insert(0, createHeader(dataProviders, sep));
 			}
 
 			boolean suc6 = false;
@@ -180,6 +175,20 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		}
 	}
 
+	public static StringBuffer createHeader(String[] dataProviders, String sep)
+	{
+		StringBuffer headerBuffer = new StringBuffer();
+		for (int k = 0; k < dataProviders.length; k++)
+		{
+			headerBuffer.append("\""); //$NON-NLS-1$
+			headerBuffer.append(dataProviders[k]);
+			headerBuffer.append("\""); //$NON-NLS-1$
+			if (k < dataProviders.length - 1) headerBuffer.append(sep);
+		}
+		headerBuffer.append("\n"); //$NON-NLS-1$
+		return headerBuffer;
+	}
+
 	public String getNextPanelName()
 	{
 		return null;//"TransferExportPanel";
@@ -204,41 +213,16 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 				parent.blockGUI(Messages.getString("servoy.plugin.export.status.loadingData")); //$NON-NLS-1$
 				try
 				{
-					fileData = new StringBuffer();
 					String sep = (String)state.getProperty("separator"); //$NON-NLS-1$
 					DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs"); //$NON-NLS-1$
-					IFoundSet data = (IFoundSet)state.getProperty("foundset"); //$NON-NLS-1$
-					for (int i = 0; i < data.getSize(); i++)
+					String[] dataProviders = new String[dlm.getSize()];
+					for (int i = 0; i < dlm.getSize(); i++)
 					{
-						IRecord s = data.getRecord(i);
-						for (int k = 0; k < dlm.getSize(); k++)
-						{
-							DataProviderWithLabel dpl = (DataProviderWithLabel)dlm.get(k);
-							Object obj = s.getValue(dpl.dataProvider.getDataProviderID());
-							if (obj instanceof String && ((String)obj).length() != 0)
-							{
-								fileData.append("\""); //$NON-NLS-1$
-								obj = Utils.stringReplace((String)obj, "\"", "\"\""); //$NON-NLS-1$//$NON-NLS-2$
-								//obj = Utils.stringReplace((String)obj, "\n", " "); //$NON-NLS-1$ //$NON-NLS-2$
-							}
-							if (obj instanceof Date)
-							{
-								fileData.append("\""); //$NON-NLS-1$
-							}
-							if (obj != null) fileData.append(obj);
-							if (obj instanceof String && ((String)obj).length() != 0)
-							{
-								fileData.append("\""); //$NON-NLS-1$
-							}
-							if (obj instanceof Date)
-							{
-								fileData.append("\""); //$NON-NLS-1$
-							}
-							if (k < dlm.getSize() - 1) fileData.append(sep);
-						}
-						fileData.append("\n"); //$NON-NLS-1$
-						rows++;
+						dataProviders[i] = ((DataProviderWithLabel)dlm.get(i)).dataProvider.getDataProviderID();
 					}
+					IFoundSet data = (IFoundSet)state.getProperty("foundset"); //$NON-NLS-1$
+					fileData = populateFileData(data, dataProviders, sep);
+					rows = data.getSize();
 				}
 				catch (Exception ex)
 				{
@@ -251,5 +235,39 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 				}
 			}
 		};
+	}
+
+	public static StringBuffer populateFileData(IFoundSet foundSet, String[] dataProviders, String sep)
+	{
+		StringBuffer fData = new StringBuffer();
+		for (int i = 0; i < foundSet.getSize(); i++)
+		{
+			IRecord s = foundSet.getRecord(i);
+			for (int k = 0; k < dataProviders.length; k++)
+			{
+				Object obj = s.getValue(dataProviders[k]);
+				if (obj instanceof String && ((String)obj).length() != 0)
+				{
+					fData.append("\""); //$NON-NLS-1$
+					obj = Utils.stringReplace((String)obj, "\"", "\"\""); //$NON-NLS-1$
+				}
+				if (obj instanceof Date)
+				{
+					fData.append("\""); //$NON-NLS-1$
+				}
+				if (obj != null) fData.append(obj);
+				if (obj instanceof String && ((String)obj).length() != 0)
+				{
+					fData.append("\""); //$NON-NLS-1$
+				}
+				if (obj instanceof Date)
+				{
+					fData.append("\""); //$NON-NLS-1$
+				}
+				if (k < dataProviders.length - 1) fData.append(sep);
+			}
+			fData.append("\n"); //$NON-NLS-1$
+		}
+		return fData;
 	}
 }

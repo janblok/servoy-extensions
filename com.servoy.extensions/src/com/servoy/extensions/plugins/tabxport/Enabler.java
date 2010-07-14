@@ -18,7 +18,9 @@ package com.servoy.extensions.plugins.tabxport;
 
 import javax.swing.JMenuItem;
 
+import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.util.Utils;
 
 /**
  * Xport menu enabler
@@ -63,6 +65,20 @@ public class Enabler implements IScriptObject
 			retval.append("var isEnabled = %%elementName%%.importEnabled;\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
+		else if (methodName.endsWith("textExport")) //$NON-NLS-1$
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\n"); //$NON-NLS-1$
+			retval.append("//export with default separator(tab) and no header\n");
+			retval.append("var dataToBeWritten = %%elementName%%.textExport(forms.form1.foundset,['id','name']);\n"); //$NON-NLS-1$
+			retval.append("//export with ';' separator and no header\n");
+			retval.append("var dataToBeWritten = %%elementName%%.textExport(forms.form1.foundset,['id','name'],';');\n"); //$NON-NLS-1$
+			retval.append("//export with ';' separator and header\n");
+			retval.append("var dataToBeWritten = %%elementName%%.textExport(forms.form1.foundset,['id','name'],';',true);\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
 		return null;
 	}
 
@@ -77,11 +93,16 @@ public class Enabler implements IScriptObject
 		{
 			return "Enable the import feature of this plugin."; //$NON-NLS-1$
 		}
+		else if (methodName.endsWith("textExport"))
+		{
+			return "Export to text 'separated value' data (*.tab/*.csv)";
+		}
 		return null;
 	}
 
 	public String[] getParameterNames(String methodName)
 	{
+		if (methodName.endsWith("textExport")) return new String[] { "foundSet", "dataProviderIds", "[separator]", "[exportHeader]" };
 		return null;
 	}
 
@@ -142,5 +163,33 @@ public class Enabler implements IScriptObject
 		{
 			imp.setEnabled(b);
 		}
+	}
+
+	public String js_textExport(Object[] args)
+	{
+		if ((args.length >= 2) && (args[0] != null) && (args[1] instanceof Object[]) && ((Object[])args[1]).length != 0)
+		{
+			IFoundSet foundSet = ((IFoundSet)args[0]);
+			Object[] data = (Object[])args[1];
+			String[] dataProviders = new String[data.length];
+			for (int i = 0; i < data.length; i++)
+				dataProviders[i] = (String)data[i];
+			String sep = "\t";
+			boolean exportHeader = false;
+			if (args.length > 2)
+			{
+				sep = (String)args[2];
+				if (args.length > 3)
+				{
+					exportHeader = Utils.getAsBoolean(args[3]);
+				}
+			}
+			StringBuffer fileData = new StringBuffer();
+			if (exportHeader) fileData.insert(0, ExportSpecifyFilePanel.createHeader(dataProviders, sep));
+			fileData.append(ExportSpecifyFilePanel.populateFileData(foundSet, dataProviders, sep));
+
+			return fileData.toString();
+		}
+		return null;
 	}
 }
