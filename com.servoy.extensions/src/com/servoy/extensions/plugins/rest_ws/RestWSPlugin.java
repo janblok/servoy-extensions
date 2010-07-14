@@ -50,7 +50,7 @@ import com.servoy.j2db.util.serialize.NativeObjectSerializer;
  * 
  * @see RestWSServlet
  * 
- * @author rob
+ * @author rgansevles
  * 
  */
 public class RestWSPlugin implements IServerPlugin

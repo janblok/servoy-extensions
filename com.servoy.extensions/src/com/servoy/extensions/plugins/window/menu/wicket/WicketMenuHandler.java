@@ -31,7 +31,7 @@ import com.servoy.j2db.ui.IComponent;
 /**
  * Handle menu actions for web client (Wicket).
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 public class WicketMenuHandler implements IMenuHandler

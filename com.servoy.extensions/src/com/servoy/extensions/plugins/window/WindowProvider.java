@@ -72,7 +72,7 @@ import com.servoy.j2db.util.toolbar.IToolbarPanel;
 /**
  * Provider for the Window plugin.
  * 
- * @author rob
+ * @author rgansevles
  */
 @SuppressWarnings("nls")
 public class WindowProvider implements IScriptObject

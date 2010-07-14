@@ -29,7 +29,7 @@ import com.servoy.j2db.util.Utils;
 /**
  * Handles menubar actions, delegates to client-specific (Swing/Wicket) handler.
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 @SuppressWarnings("nls")

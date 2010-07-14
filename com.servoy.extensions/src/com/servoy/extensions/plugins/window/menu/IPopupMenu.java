@@ -19,7 +19,7 @@ package com.servoy.extensions.plugins.window.menu;
 /**
  * Interface for client-specific (Swing/Wicket) popupmenu implementations.
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 public interface IPopupMenu extends IMenu

@@ -61,7 +61,7 @@ import com.servoy.j2db.util.Utils;
  * The solution is opened via a Servoy Headless Client which is shared across multiple requests, requests are assumed to be stateless. Clients are managed via a
  * pool, 1 client per concurrent request is used.
  * 
- * @author rob
+ * @author rgansevles
  * 
  */
 public class RestWSServlet extends HttpServlet

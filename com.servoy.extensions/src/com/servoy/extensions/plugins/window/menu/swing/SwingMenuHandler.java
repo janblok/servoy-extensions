@@ -47,7 +47,7 @@ import com.servoy.j2db.ui.IComponent;
 /**
  * Handle menu actions for smart client (Swing).
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 public class SwingMenuHandler implements IMenuHandler

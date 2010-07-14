@@ -34,7 +34,7 @@ import com.servoy.j2db.util.Debug;
 /**
  * Window plugin
  * 
- * @author rob
+ * @author rgansevles
  */
 public class WindowPlugin implements IClientPlugin
 {
