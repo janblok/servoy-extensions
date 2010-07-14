@@ -13,8 +13,9 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.agent;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,11 +29,12 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.preference.PreferencePanel;
 
 /**
- * @author	Johan Compagner
+ * @author	jcompagner
  */
 public class AgentPreferencePanel extends PreferencePanel implements ActionListener
 {
 	protected IClientPluginAccess application;
+
 	/**
 	 * Constructor for AgentPreferencePanel.
 	 */
@@ -40,25 +42,31 @@ public class AgentPreferencePanel extends PreferencePanel implements ActionListe
 	{
 		super();
 		application = app;
-		boolean showAgent = new Boolean( app.getSettings().getProperty("plugin.agent.showAgentOnStart","false")).booleanValue(); //$NON-NLS-1$ //$NON-NLS-2$
-		
-		JCheckBox check = new JCheckBox(Messages.getString("servoy.plugin.agent.preference.showOnStartup") , showAgent); //$NON-NLS-1$
+		boolean showAgent = new Boolean(app.getSettings().getProperty("plugin.agent.showAgentOnStart", "false")).booleanValue(); //$NON-NLS-1$ //$NON-NLS-2$
+
+		JCheckBox check = new JCheckBox(Messages.getString("servoy.plugin.agent.preference.showOnStartup"), showAgent); //$NON-NLS-1$
 		check.addActionListener(this);
 		this.setLayout(new BorderLayout());
-		this.add(check,BorderLayout.NORTH);
+		this.add(check, BorderLayout.NORTH);
 	}
 
 	private ChangeListener listener;
+
+	@Override
 	public void addChangeListener(ChangeListener l)
 	{
 		listener = l;
 	}
+
 	private void fireChangeEvent()
 	{
 		changed = true;
 		listener.stateChanged(new ChangeEvent(this));
 	}
+
 	private boolean changed = false;
+
+	@Override
 	public int getRequiredUserAction()
 	{
 		int retval = PreferencePanel.NO_USER_ACTION_REQUIRED;
@@ -69,36 +77,41 @@ public class AgentPreferencePanel extends PreferencePanel implements ActionListe
 		changed = false;
 		return retval;
 	}
-	
+
 	/*
 	 * @see PreferencePanel#cancel()
 	 */
+	@Override
 	public boolean handleCancel()
 	{
 		return true;
 	}
+
 	/*
 	 * @see PreferencePanel#ok()
 	 */
+	@Override
 	public boolean handleOK()
 	{
 		return true;
 	}
+
 	/*
 	 * @see PreferencePanel#getTabName()
 	 */
+	@Override
 	public String getTabName()
 	{
 		return Messages.getString("servoy.plugin.agent.preference.tabname"); //$NON-NLS-1$
 	}
-	
+
 	/**
 	 * @see ChangeListener#stateChanged(ChangeEvent)
 	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		fireChangeEvent();
-		if(((JCheckBox)e.getSource()).isSelected())
+		if (((JCheckBox)e.getSource()).isSelected())
 		{
 			application.getSettings().setProperty("plugin.agent.showAgentOnStart", "true"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
