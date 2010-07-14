@@ -27,11 +27,16 @@ import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 
+/**
+ * Menu in webclient.
+ * 
+ * @author jblok
+ */
+
 public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IMenu
 {
 	private final List<IMenuItem> menuItems = new ArrayList<IMenuItem>();
 	protected final IWebClientPluginAccess app;
-
 
 	public ScriptableWicketMenu(IMenu parentMenu, IClientPluginAccess access)
 	{
@@ -161,5 +166,4 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 		}
 		return js.toString();
 	}
-
 }

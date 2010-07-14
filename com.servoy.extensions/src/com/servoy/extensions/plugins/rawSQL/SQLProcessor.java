@@ -36,6 +36,12 @@ import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
+/**
+ * Rawsql plugin server plugin.
+ * 
+ * @author jblok
+ */
+
 public class SQLProcessor implements ISQLService, IServerPlugin
 {
 	private IServerAccess application;

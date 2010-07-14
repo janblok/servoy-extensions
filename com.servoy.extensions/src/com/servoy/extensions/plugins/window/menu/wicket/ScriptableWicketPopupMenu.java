@@ -13,17 +13,17 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.wicket;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Page;
 import org.apache.wicket.RequestCycle;
-import org.apache.wicket.Component.IVisitor;
 
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.menu.IPopupMenu;
@@ -32,6 +32,12 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.Utils;
+
+/**
+ * Popupmenu in webclient.
+ * 
+ * @author jblok
+ */
 
 public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements IPopupMenu
 {

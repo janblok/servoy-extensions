@@ -13,10 +13,15 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.util;
 
 import java.util.Comparator;
+
+/**
+ * Compare numbers descending.
+ * 
+ */
 
 public class DescendingNumberComparator implements Comparator<Object>
 {

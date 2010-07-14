@@ -23,6 +23,12 @@ import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IRadioButtonMenuItem;
 import com.servoy.extensions.plugins.window.util.Utilities;
 
+/**
+ * Radio button menu item in smart client.
+ * 
+ * @author jblok
+ */
+
 public class ScriptableJRadioButtonMenuItem extends JRadioButtonMenuItem implements IRadioButtonMenuItem
 {
 	private AbstractMenuItem scriptObjectWrapper;
