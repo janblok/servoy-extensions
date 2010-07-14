@@ -23,6 +23,13 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.UUID;
 
+/**
+ * Rawsql plugin scriptable.
+ * 
+ * @author jblok
+ */
+
+
 public class RawSQLProvider implements IScriptObject
 {
 	private final RawSQLPlugin plugin;

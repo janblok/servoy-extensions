@@ -25,6 +25,12 @@ import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 
+/**
+ * Menu item in webclient.
+ * 
+ * @author jblok
+ */
+
 public class ScriptableWicketMenuItem implements IMenuItem
 {
 	private final IMenu parentMenu;

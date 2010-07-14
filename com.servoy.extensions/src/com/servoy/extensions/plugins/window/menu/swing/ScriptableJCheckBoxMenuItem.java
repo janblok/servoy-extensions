@@ -23,6 +23,12 @@ import com.servoy.extensions.plugins.window.menu.ICheckboxMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.util.Utilities;
 
+/**
+ * Checkbox menu item in smart client.
+ * 
+ * @author jblok
+ */
+
 public class ScriptableJCheckBoxMenuItem extends JCheckBoxMenuItem implements ICheckboxMenuItem
 {
 	private AbstractMenuItem scriptObjectWrapper;

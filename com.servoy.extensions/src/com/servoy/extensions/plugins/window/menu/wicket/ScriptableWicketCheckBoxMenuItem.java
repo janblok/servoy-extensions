@@ -13,11 +13,17 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.wicket;
 
 import com.servoy.extensions.plugins.window.menu.ICheckboxMenuItem;
 import com.servoy.extensions.plugins.window.menu.IMenu;
+
+/**
+ * Checkbox menu item in webclient.
+ * 
+ * @author jblok
+ */
 
 public class ScriptableWicketCheckBoxMenuItem extends ScriptableWicketMenuItem implements ICheckboxMenuItem
 {

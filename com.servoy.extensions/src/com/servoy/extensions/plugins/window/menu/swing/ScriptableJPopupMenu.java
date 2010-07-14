@@ -34,6 +34,12 @@ import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.menu.IPopupMenu;
 
+/**
+ * Popupmenu in smart client.
+ * 
+ * @author jblok
+ */
+
 
 public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 {
