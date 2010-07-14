@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.wicket;
 
 import java.util.ArrayList;
@@ -104,6 +104,10 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 
 				js.append("var m" + currentMenuNr + " = new YAHOO.widget.MenuItem('" + elem.getText() + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				js.append("m" + currentMenuNr + ".cfg.setProperty('submenu',menu" + currentMenuNr + ");"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (!elem.isEnabled())
+				{
+					js.append("m" + currentMenuNr + ".cfg.setProperty('disabled', true);"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
 				js.append(menuName + ".addItem(m" + currentMenuNr + "," + groupCount + ");"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			else
@@ -146,6 +150,11 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				}
 				js.append("mi = new YAHOO.widget.MenuItem('" + text + "');"); //$NON-NLS-1$ //$NON-NLS-2$ 
 				js.append("mi.cfg.setProperty('onclick', {fn:svy_popmenu_click,obj:\"" + popupMenu.getCallBackUrl(elem) + "\"});"); //$NON-NLS-1$ //$NON-NLS-2$ 
+
+				if (!elem.isEnabled())
+				{
+					js.append("mi.cfg.setProperty('disabled', true);"); //$NON-NLS-1$
+				}
 
 				js.append(menuName + ".addItem(mi," + groupCount + ");"); //$NON-NLS-1$ //$NON-NLS-2$ 
 			}
