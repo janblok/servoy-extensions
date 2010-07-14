@@ -44,7 +44,7 @@ import com.servoy.j2db.util.Debug;
 /**
  * This class handles (de)registering of shortcuts in the smart client (Swing).
  * 
- * @author rob
+ * @author rgansevles
  * 
  */
 public class SwingShortcutHandler implements IShortcutHandler

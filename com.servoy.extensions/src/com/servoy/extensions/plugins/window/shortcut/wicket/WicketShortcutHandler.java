@@ -49,7 +49,7 @@ import com.servoy.j2db.util.TreeBidiMap;
 /**
  * This class handles (de)registering of shortcuts in the Web client (Wicket).
  * 
- * @author rob
+ * @author rgansevles
  * 
  */
 public class WicketShortcutHandler implements IShortcutHandler

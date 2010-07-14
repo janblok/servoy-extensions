@@ -21,7 +21,7 @@ import javax.swing.KeyStroke;
 /**
  * Interface for shortcut handlers
  * 
- * @author rob
+ * @author rgansevles
  * 
  */
 public interface IShortcutHandler

@@ -37,7 +37,7 @@ import com.servoy.j2db.util.Utils;
 /**
  * Base class for Menu items. Wraps IMenuItem client-specific menu item implementation, is exposed in scripting.
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 public abstract class AbstractMenuItem implements IScriptObject

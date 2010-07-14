@@ -30,7 +30,7 @@ import com.servoy.j2db.util.Utils;
 /**
  * Base class for Menus. Wraps IMenu client-specific menu implementation, is exposed in scripting.
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 public abstract class AbstractMenu implements IScriptObject

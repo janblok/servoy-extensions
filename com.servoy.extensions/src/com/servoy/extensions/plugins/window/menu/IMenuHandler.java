@@ -27,7 +27,7 @@ import com.servoy.j2db.ui.IComponent;
 /**
  * Interface for client-specific (Swing/Wicket) actions.
  * 
- * @author rob
+ * @author rgansevles
  *
  */
 public interface IMenuHandler
