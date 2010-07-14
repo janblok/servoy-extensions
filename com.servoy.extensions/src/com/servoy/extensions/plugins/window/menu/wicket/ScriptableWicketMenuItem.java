@@ -30,12 +30,14 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	private final IMenu parentMenu;
 
 	private boolean selected;
+	private boolean enabled;
 
 	private AbstractMenuItem scriptObjectWrapper;
 
 	public ScriptableWicketMenuItem(IMenu parentMenu)
 	{
 		this.parentMenu = parentMenu;
+		this.enabled = true;
 	}
 
 	public Object getMenuComponent()
@@ -60,11 +62,12 @@ public class ScriptableWicketMenuItem implements IMenuItem
 
 	public void setEnabled(boolean enabled)
 	{
+		this.enabled = enabled;
 	}
 
 	public boolean isEnabled()
 	{
-		return true;
+		return enabled;
 	}
 
 	public void setName(String name)
