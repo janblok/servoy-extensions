@@ -31,6 +31,7 @@ import com.servoy.j2db.IForm;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.ui.IComponent;
+import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -150,10 +151,9 @@ public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements I
 			MarkupContainer parentForm;
 			while ((parentForm = formComp.getParent()) != null)
 			{
-				if (parentForm.getId().equals("servoywebform")) //$NON-NLS-1$
+				if (parentForm instanceof IFormUI)
 				{
-					String formName = parentForm.getMarkupId();
-					formName = formName.substring("form_".length()); //$NON-NLS-1$
+					String formName = ((IFormUI)parentForm).getController().getName();
 					return app.getFormManager().getForm(formName);
 				}
 				formComp = parentForm;
