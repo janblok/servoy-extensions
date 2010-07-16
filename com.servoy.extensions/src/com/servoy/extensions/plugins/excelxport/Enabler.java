@@ -16,7 +16,12 @@
  */
 package com.servoy.extensions.plugins.excelxport;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import javax.swing.JMenuItem;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -70,7 +75,14 @@ public class Enabler implements IScriptObject
 			retval.append("//");
 			retval.append(getToolTip(methodName));
 			retval.append("\n");
+			retval.append("//export in new byte array\n");
 			retval.append("var bytes = %%elementName%%.excelExport(forms.form1.foundset, ['id','name']);\n");
+			retval.append("//export by adding to templateXLS in default (new) 'Servoy Data' worksheet\n");
+			retval.append("var bytes = %%elementName%%.excelExport(forms.form1.foundset, ['id','name'],templateXLS);\n");
+			retval.append("//export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column\n");
+			retval.append("var bytes = %%elementName%%.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');\n");
+			retval.append("//export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column\n");
+			retval.append("var bytes = %%elementName%%.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);\n");
 			return retval.toString();
 		}
 		return null;
@@ -96,7 +108,7 @@ public class Enabler implements IScriptObject
 
 	public String[] getParameterNames(String methodName)
 	{
-		if (methodName.endsWith("excelExport")) return new String[] { "foundSet", "dataProviderIds" };
+		if (methodName.endsWith("excelExport")) return new String[] { "foundSet", "dataProviderIds", "[templateXLS]", "[sheetName]", "[startRow]", "[startColumn]" };
 		return null;
 	}
 
@@ -173,15 +185,42 @@ public class Enabler implements IScriptObject
 		}
 	}
 
-	public byte[] js_excelExport(Object foundSet, Object dataProviders)
+	public byte[] js_excelExport(Object[] args) throws IOException
 	{
-		if (foundSet instanceof IFoundSet && dataProviders instanceof Object[])
+		if ((args != null) && (args.length >= 2) && (args[0] instanceof IFoundSet) && ((Object[])args[1]).length != 0)
 		{
-			Object[] dataProvidersArray = (Object[])dataProviders;
+			IFoundSet foundSet = (IFoundSet)args[0];
+			Object[] dataProvidersArray = (Object[])args[1];
 			String[] dps = new String[dataProvidersArray.length];
 			for (int i = 0; i < dataProvidersArray.length; i++)
 				dps[i] = (String)dataProvidersArray[i];
-			return ExportSpecifyFilePanel.populateWb((IFoundSet)foundSet, dps).getBytes();
+			byte[] templateXLS = null;
+			String sheetName = "Servoy Data";
+			int startRow = 0;
+			int startColumn = 0;
+			if (args.length > 2 && args[2] instanceof byte[])
+			{
+				templateXLS = (byte[])args[2];
+			}
+			if (args.length > 3 && args[3] instanceof String)
+			{
+				sheetName = (String)args[3];
+			}
+			if (args.length > 4 && args[4] instanceof Double)
+			{
+				double i = (Double)args[4];
+				startRow = (int)(i - 1);
+			}
+			if (args.length > 5 && args[5] instanceof Double)
+			{
+				double i = (Double)args[5];
+				startColumn = (int)(i - 1);
+			}
+
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dps, templateXLS, sheetName, startRow, startColumn);
+			wb.write(buffer);
+			return buffer.toByteArray();
 		}
 		return null;
 	}

@@ -20,7 +20,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
@@ -169,7 +172,7 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 						dataProviders[i] = ((DataProviderWithLabel)dlm.get(i)).dataProvider.getDataProviderID();
 					}
 					IFoundSet data = (IFoundSet)state.getProperty("foundset"); //$NON-NLS-1$
-					wb = populateWb(data, dataProviders);
+					wb = populateWb(data, dataProviders, null, null, 0, 0);
 					rows = data.getSize();
 				}
 				catch (Exception ex)
@@ -185,29 +188,40 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		};
 	}
 
-	public static HSSFWorkbook populateWb(IFoundSet foundSet, String[] dataProviders)
+	public static HSSFWorkbook populateWb(IFoundSet foundSet, String[] dataProviders, byte[] templateXLS, String sheetName, int startRow, int startColumn)
+		throws IOException
 	{
-		HSSFWorkbook hwb = new HSSFWorkbook();
-		HSSFSheet sheet = hwb.createSheet("Servoy Data");
+		HSSFWorkbook hwb;
+		if (templateXLS == null)
+		{
+			hwb = new HSSFWorkbook();
+		}
+		else
+		{
+			InputStream buff = new ByteArrayInputStream(templateXLS);
+			hwb = new HSSFWorkbook(buff);
+		}
+		if (sheetName == null) sheetName = "Servoy Data";
+		HSSFSheet sheet = hwb.getSheet(sheetName);
+		if (sheet == null) sheet = hwb.createSheet(sheetName);
+		sheet.setActive(true);
 
-		HSSFRow header = sheet.createRow((short)0);
+		HSSFRow header = sheet.createRow((short)0 + startRow);
 		for (int k = 0; k < dataProviders.length; k++)
 		{
-			HSSFCell cell = header.createCell((short)k);
+			HSSFCell cell = header.createCell((short)(k + startColumn));
 			cell.setCellValue(dataProviders[k]);
 		}
 
 		for (int i = 0; i < foundSet.getSize(); i++)
 		{
-			HSSFRow row = sheet.createRow((short)(i + 1));
+			HSSFRow row = sheet.createRow((short)(i + 1 + startRow));
 			IRecord s = foundSet.getRecord(i);
 			for (int k = 0; k < dataProviders.length; k++)
 			{
-				HSSFCell cell = row.createCell((short)k);
+				HSSFCell cell = row.createCell((short)(k + startColumn));
 
 				Object obj = s.getValue(dataProviders[k]);
-
-
 				if (obj instanceof Date)
 				{
 					HSSFCellStyle cellStyle = hwb.createCellStyle();
@@ -228,8 +242,8 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 					cell.setCellValue(""); //$NON-NLS-1$
 				}
 			}
-
 		}
+
 		return hwb;
 	}
 }
