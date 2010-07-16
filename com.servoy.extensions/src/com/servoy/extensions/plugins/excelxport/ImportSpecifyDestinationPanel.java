@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.excelxport;
 
 import java.awt.BorderLayout;
@@ -125,7 +125,7 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 		p1.add(serverCombobox);
 
 		tableCombobox = new JComboBox();
-		tableCombobox.setModel(new SortedComboModel(StringComparator.INSTANCE, server == null ? Collections.EMPTY_LIST : server.getTableAndViewNames()));
+		tableCombobox.setModel(new SortedComboModel(StringComparator.INSTANCE, server == null ? Collections.EMPTY_LIST : server.getTableAndViewNames(false)));
 		if (table != null) tableCombobox.setSelectedItem(table.getName());
 		tableCombobox.addItemListener(this);
 		p1.add(tableCombobox);
@@ -334,7 +334,7 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 				IServer server = (IServer)serverCombobox.getSelectedItem();
 				try
 				{
-					tableCombobox.setModel(new SortedComboModel(StringComparator.INSTANCE, server.getTableAndViewNames()));
+					tableCombobox.setModel(new SortedComboModel(StringComparator.INSTANCE, server.getTableAndViewNames(false)));
 				}
 				catch (Exception e1)
 				{
