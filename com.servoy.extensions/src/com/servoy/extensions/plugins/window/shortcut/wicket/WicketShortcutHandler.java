@@ -18,19 +18,22 @@ package com.servoy.extensions.plugins.window.shortcut.wicket;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.swing.KeyStroke;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Page;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ResourceReference;
+import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.resources.JavascriptResourceReference;
@@ -118,11 +121,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 
 		shortcuts.put(new ComparableKeyStroke(key), shortcut);
 		// always call registerShortcut() (also when shortcut is already in the set), needed when called after opening new dialog
-		CharSequence js = behavior.getRegisterShortcutJS(shortcut);
-		if (js != null)
-		{
-			access.getPageContributor().addDynamicJavaScript(js.toString());
-		}
+		behavior.getRegisterShortcutJS(shortcut);
 		return true;
 	}
 
@@ -220,8 +219,27 @@ public class WicketShortcutHandler implements IShortcutHandler
 						response.renderJavascript(sb, null);
 					}
 				}
+				else
+				{
+					renderNewShortCuts(response);
+				}
+
 				headRendered = true;
 			}
+			else
+			{
+				renderNewShortCuts(response);
+			}
+		}
+
+		private void renderNewShortCuts(IHeaderResponse response)
+		{
+			Iterator<CharSequence> newShortcuts = newShortCuts.iterator();
+			while (newShortcuts.hasNext())
+			{
+				response.renderJavascript(newShortcuts.next(), null);
+			}
+			newShortCuts.clear();
 		}
 
 		@Override
@@ -230,11 +248,13 @@ public class WicketShortcutHandler implements IShortcutHandler
 			return super.generateCallbackScript(partialCall + "+'&shortcut='+encodeURIComponent(sc)+'&elementId='+element.id"); //$NON-NLS-1$
 		}
 
+		List<CharSequence> newShortCuts = new ArrayList<CharSequence>();
+
 		public CharSequence getRegisterShortcutJS(String sc)
 		{
 			if (renderedShortcuts.add(sc))
 			{
-				return new StringBuilder().append("registerShortcut('").append(sc).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
+				newShortCuts.add(new StringBuilder().append("registerShortcut('").append(sc).append("');")); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			return null;
 		}
