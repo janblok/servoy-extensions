@@ -28,8 +28,8 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ImageLoader;
 
 /**
+ * Web plugin provider implementation
  * @author jcompagner
- *
  */
 public class WebFileProvider extends FileProvider
 {
@@ -44,7 +44,7 @@ public class WebFileProvider extends FileProvider
 
 	@SuppressWarnings("nls")
 	@Override
-	public boolean js_writeFile(Object f, byte[] data)
+	public boolean js_writeFile(Object f, byte[] data, String mimeType)
 	{
 		if (data == null) return false;
 		File file = getFileFromArg(f, false);
@@ -54,7 +54,8 @@ public class WebFileProvider extends FileProvider
 			if (f instanceof JSFile) name = ((JSFile)f).js_getName();
 			else if (f != null) name = f.toString();
 			IClientPluginAccess access = plugin.getClientPluginAccess();
-			String url = ((IWebClientPluginAccess)access).serveResource(name, data, ImageLoader.getContentType(data, name));
+			String type = (mimeType == null) ? ImageLoader.getContentType(data, name) : mimeType.trim();
+			String url = ((IWebClientPluginAccess)access).serveResource(name, data, type);
 			((IWebClientPluginAccess)access).showURL(url, "_self", null, 0);
 			return true;
 		}

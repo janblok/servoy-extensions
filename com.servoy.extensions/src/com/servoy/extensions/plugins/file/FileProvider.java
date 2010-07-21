@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.file;
 
 import java.io.BufferedOutputStream;
@@ -31,11 +31,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -43,6 +45,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileSystemView;
 
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeArray;
 
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -56,6 +59,7 @@ import com.servoy.j2db.util.Utils;
 
 /**
  * @author jcompagner
+ * @author Servoy Stuff
  */
 public class FileProvider implements IScriptObject
 {
@@ -63,6 +67,18 @@ public class FileProvider implements IScriptObject
 	private final FileSystemView fsf = FileSystemView.getFileSystemView();
 	private final Map<String, File> tempFiles = new HashMap<String, File>(); //check this map when saving (txt/binary) files
 	private static final JSFile[] EMPTY = new JSFile[0];
+
+	/**
+	 * Line Separator constant, used to append to Text file
+	 * @since Servoy 5.2
+	 */
+	private static final String LF = System.getProperty("line.separator"); //$NON-NLS-1$
+
+	/**
+	 * Size of the buffer used to stream files to the server
+	 * @since Servoy 5.2
+	 */
+	private static final int CHUNK_BUFFER_SIZE = 64 * 1024;
 
 	public FileProvider(FilePlugin plugin)
 	{
@@ -603,13 +619,13 @@ public class FileProvider implements IScriptObject
 		return jsRoots;
 	}
 
+	@SuppressWarnings("nls")
 	public JSFile js_createTempFile(String prefix, String suffix)
 	{
 		try
 		{
 			// If shorter than three, then pad with something, so that we don't get exception.
-			if (prefix.length() < 3) prefix += "svy"; //$NON-NLS-1$
-			File f = File.createTempFile(prefix, suffix);
+			File f = File.createTempFile((prefix.length() < 3) ? (prefix + "svy") : prefix, suffix);
 			f.deleteOnExit();
 			String name = f.getAbsolutePath();
 			tempFiles.put(name, f);
@@ -634,9 +650,11 @@ public class FileProvider implements IScriptObject
 		Object f = (args.length > 0 ? args[0] : null);
 		String data = (args.length > 1 && args[1] != null ? args[1].toString() : null);
 		String encoding = (args.length > 2 && args[2] != null ? args[2].toString() : null);
+		String mimeType = (args.length > 3 && args[3] != "text/plain" ? args[3].toString() : null);
 		if (data == null) data = "";
-		return writeTXT(f, data, encoding, "text/plain");
+		return writeTXT(f, data, encoding, mimeType);
 	}
+
 
 	/**
 	 * @param f
@@ -694,7 +712,7 @@ public class FileProvider implements IScriptObject
 			}
 			else
 			{
-				return false;//unknown enc.
+				return false;//unknown encoding
 			}
 		}
 
@@ -711,6 +729,13 @@ public class FileProvider implements IScriptObject
 		bw.write(data);
 		bw.close();
 		return true;
+	}
+
+	@SuppressWarnings("nls")
+	public boolean js_writeXMLFile(Object f, String xml, String encoding)
+	{
+		if (xml == null) return false;
+		return writeTXT(f == null ? "file.xml" : f, xml, encoding, "text/xml");
 	}
 
 	@SuppressWarnings("nls")
@@ -734,6 +759,11 @@ public class FileProvider implements IScriptObject
 	}
 
 	public boolean js_writeFile(Object f, byte[] data)
+	{
+		return js_writeFile(f, data, null);
+	}
+
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -916,314 +946,394 @@ public class FileProvider implements IScriptObject
 	@SuppressWarnings("nls")
 	public String getSample(String methodName)
 	{
-		if ("convertToJSFile".equals(methodName)) //$NON-NLS-1$
+		if ("convertToJSFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile(\"story.txt\");\n"); //$NON-NLS-1$
-			sb.append("if (f.canRead())\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"File can be read.\");\n"); //$NON-NLS-1$
+			sb.append("var f = %%elementName%%.convertToJSFile(\"story.txt\");\n");
+			sb.append("if (f.canRead())\n");
+			sb.append("\tapplication.output(\"File can be read.\");\n");
 			return sb.toString();
 
 		}
-		else if ("copyFile".equals(methodName)) //$NON-NLS-1$
+		else if ("copyFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// Copy based on file names.\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.copyFile(\"story.txt\", \"story.txt.copy\"))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"Copy failed.\");\n"); //$NON-NLS-1$
-			sb.append("// Copy based on JSFile instances.\n"); //$NON-NLS-1$
-			sb.append("var f = plugins.file.createFile(\"story.txt\");\n"); //$NON-NLS-1$
-			sb.append("var fcopy = plugins.file.createFile(\"story.txt.copy2\");\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.copyFile(f, fcopy))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"Copy failed.\");\n"); //$NON-NLS-1$
+			sb.append("// Copy based on file names.\n");
+			sb.append("if (!%%elementName%%.copyFile(\"story.txt\", \"story.txt.copy\"))\n");
+			sb.append("\tapplication.output(\"Copy failed.\");\n");
+			sb.append("// Copy based on JSFile instances.\n");
+			sb.append("var f = %%elementName%%.createFile(\"story.txt\");\n");
+			sb.append("var fcopy = %%elementName%%.createFile(\"story.txt.copy2\");\n");
+			sb.append("if (!%%elementName%%.copyFile(f, fcopy))\n");
+			sb.append("\tapplication.output(\"Copy failed.\");\n");
 			return sb.toString();
 		}
-		else if ("copyFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("copyFolder".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// Copy folder based on names.\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.copyFolder(\"stories\", \"stories_copy\"))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"Folder copy failed.\");\n"); //$NON-NLS-1$
-			sb.append("// Copy folder based on JSFile instances.\n"); //$NON-NLS-1$
-			sb.append("var d = plugins.file.createFile(\"stories\");\n"); //$NON-NLS-1$
-			sb.append("var dcopy = plugins.file.createFile(\"stories_copy_2\");\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.copyFolder(d, dcopy))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"Folder copy failed.\");\n"); //$NON-NLS-1$
+			sb.append("// Copy folder based on names.\n");
+			sb.append("if (!%%elementName%%.copyFolder(\"stories\", \"stories_copy\"))\n");
+			sb.append("\tapplication.output(\"Folder copy failed.\");\n");
+			sb.append("// Copy folder based on JSFile instances.\n");
+			sb.append("var d = %%elementName%%.createFile(\"stories\");\n");
+			sb.append("var dcopy = %%elementName%%.createFile(\"stories_copy_2\");\n");
+			sb.append("if (!%%elementName%%.copyFolder(d, dcopy))\n");
+			sb.append("\tapplication.output(\"Folder copy failed.\");\n");
 			return sb.toString();
 		}
-		else if ("createFile".equals(methodName)) //$NON-NLS-1$
+		else if ("createFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// Create the JSFile instance based on the file name.\n"); //$NON-NLS-1$
-			sb.append("var f = plugins.file.createFile(\"newfile.txt\");\n"); //$NON-NLS-1$
-			sb.append("// Create the file on disk.\n"); //$NON-NLS-1$
-			sb.append("if (!f.createNewFile())\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"The file could not be created.\");\n"); //$NON-NLS-1$
+			sb.append("// Create the JSFile instance based on the file name.\n");
+			sb.append("var f = %%elementName%%.createFile(\"newfile.txt\");\n");
+			sb.append("// Create the file on disk.\n");
+			sb.append("if (!f.createNewFile())\n");
+			sb.append("\tapplication.output(\"The file could not be created.\");\n");
 			return sb.toString();
 		}
-		else if ("createFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("createFolder".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var d = plugins.file.convertToJSFile(\"newfolder\");\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.createFolder(d))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(\"Folder could not be created.\");\n"); //$NON-NLS-1$
+			sb.append("var d = %%elementName%%.convertToJSFile(\"newfolder\");\n");
+			sb.append("if (!%%elementName%%.createFolder(d))\n");
+			sb.append("\tapplication.output(\"Folder could not be created.\");\n");
 			return sb.toString();
 		}
-		else if ("createTempFile".equals(methodName)) //$NON-NLS-1$
+		else if ("createTempFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var tempFile = plugins.file.createTempFile('myfile','.txt');\n"); //$NON-NLS-1$
-			sb.append("application.output('Temporary file created as: ' + tempFile.getAbsolutePath());\n"); //$NON-NLS-1$
-			sb.append("plugins.file.writeTXTFile(tempFile, 'abcdefg');\n"); //$NON-NLS-1$
+			sb.append("var tempFile = %%elementName%%.createTempFile('myfile','.txt');\n");
+			sb.append("application.output('Temporary file created as: ' + tempFile.getAbsolutePath());\n");
+			sb.append("%%elementName%%.writeTXTFile(tempFile, 'abcdefg');\n");
 			return sb.toString();
 		}
-		else if ("deleteFile".equals(methodName)) //$NON-NLS-1$
+		else if ("deleteFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("if (plugins.file.deleteFile('story.txt'))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output('File deleted.');\n"); //$NON-NLS-1$
+			sb.append("if (%%elementName%%.deleteFile('story.txt'))\n");
+			sb.append("\tapplication.output('File deleted.');\n");
 			return sb.toString();
 		}
-		else if ("deleteFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("deleteFolder".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("if (plugins.file.deleteFolder('stories', true))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output('Folder deleted.');\n"); //$NON-NLS-1$
+			sb.append("if (%%elementName%%.deleteFolder('stories', true))\n");
+			sb.append("\tapplication.output('Folder deleted.');\n");
 			return sb.toString();
 		}
-		else if ("getDesktopFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("getDesktopFolder".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var d = plugins.file.getDesktopFolder();\n"); //$NON-NLS-1$
-			sb.append("application.output('desktop folder is: ' + d.getAbsolutePath());\n"); //$NON-NLS-1$
+			sb.append("var d = %%elementName%%.getDesktopFolder();\n");
+			sb.append("application.output('desktop folder is: ' + d.getAbsolutePath());\n");
 			return sb.toString();
 		}
-		else if ("getDiskList".equals(methodName)) //$NON-NLS-1$
+		else if ("getDiskList".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var roots = plugins.file.getDiskList();\n"); //$NON-NLS-1$
-			sb.append("for (var i = 0; i < roots.length; i++)\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(roots[i].getAbsolutePath());\n"); //$NON-NLS-1$
+			sb.append("var roots = %%elementName%%.getDiskList();\n");
+			sb.append("for (var i = 0; i < roots.length; i++)\n");
+			sb.append("\tapplication.output(roots[i].getAbsolutePath());\n");
 			return sb.toString();
 		}
-		else if ("getFileSize".equals(methodName)) //$NON-NLS-1$
+		else if ("getFileSize".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n"); //$NON-NLS-1$
-			sb.append("application.output('file size: ' + plugins.file.getFileSize(f));\n"); //$NON-NLS-1$
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
+			sb.append("application.output('file size: ' + %%elementName%%.getFileSize(f));\n");
 			return sb.toString();
 		}
-		else if ("getFolderContents".equals(methodName)) //$NON-NLS-1$
+		else if ("getFolderContents".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var files = plugins.file.getFolderContents('stories', '.txt');\n"); //$NON-NLS-1$
-			sb.append("for (var i=0; i<files.length; i++)\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output(files[i].getAbsolutePath());\n"); //$NON-NLS-1$
+			sb.append("var files = %%elementName%%.getFolderContents('stories', '.txt');\n");
+			sb.append("for (var i=0; i<files.length; i++)\n");
+			sb.append("\tapplication.output(files[i].getAbsolutePath());\n");
 			return sb.toString();
 		}
-		else if ("getHomeDirectory".equals(methodName)) //$NON-NLS-1$
+		else if ("getHomeDirectory".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var d = plugins.file.getHomeDirectory();\n"); //$NON-NLS-1$
-			sb.append("application.output('home folder: ' + d.getAbsolutePath());\n"); //$NON-NLS-1$
+			sb.append("var d = %%elementName%%.getHomeDirectory();\n");
+			sb.append("application.output('home folder: ' + d.getAbsolutePath());\n");
 			return sb.toString();
 		}
-		else if ("getModificationDate".equals(methodName)) //$NON-NLS-1$
+		else if ("getModificationDate".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n"); //$NON-NLS-1$
-			sb.append("application.output('last changed: ' + plugins.file.getModificationDate(f));\n"); //$NON-NLS-1$
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
+			sb.append("application.output('last changed: ' + %%elementName%%.getModificationDate(f));\n");
 			return sb.toString();
 		}
-		else if ("moveFile".equals(methodName)) //$NON-NLS-1$
+		else if ("moveFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// Move file based on names.\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.moveFile('story.txt','story.txt.new'))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output('File move failed.');\n"); //$NON-NLS-1$
-			sb.append("// Move file based on JSFile instances.\n"); //$NON-NLS-1$
-			sb.append("var f = plugins.file.convertToJSFile('story.txt.new');\n"); //$NON-NLS-1$
-			sb.append("var fmoved = plugins.file.convertToJSFile('story.txt');\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.moveFile(f, fmoved))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output('File move back failed.');\n"); //$NON-NLS-1$
+			sb.append("// Move file based on names.\n");
+			sb.append("if (!%%elementName%%.moveFile('story.txt','story.txt.new'))\n");
+			sb.append("\tapplication.output('File move failed.');\n");
+			sb.append("// Move file based on JSFile instances.\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt.new');\n");
+			sb.append("var fmoved = %%elementName%%.convertToJSFile('story.txt');\n");
+			sb.append("if (!%%elementName%%.moveFile(f, fmoved))\n");
+			sb.append("\tapplication.output('File move back failed.');\n");
 			return sb.toString();
 		}
-		else if ("readFile".equals(methodName)) //$NON-NLS-1$
+		else if ("readFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// Read all content from the file.\n"); //$NON-NLS-1$
-			sb.append("var bytes = plugins.file.readFile('big.jpg');\n"); //$NON-NLS-1$
-			sb.append("application.output('file size: ' + bytes.length);\n"); //$NON-NLS-1$
-			sb.append("// Read only the first 1KB from the file.\n"); //$NON-NLS-1$
-			sb.append("var bytesPartial = plugins.file.readFile('big.jpg', 1024);\n"); //$NON-NLS-1$
-			sb.append("application.output('partial file size: ' + bytesPartial.length);\n"); //$NON-NLS-1$
-			sb.append("// Read all content from a file selected from the file open dialog.\n"); //$NON-NLS-1$
-			sb.append("var bytesUnknownFile = plugins.file.readFile();\n"); //$NON-NLS-1$
-			sb.append("application.output('unknown file size: ' + bytesUnknownFile.length);\n"); //$NON-NLS-1$
+			sb.append("// Read all content from the file.\n");
+			sb.append("var bytes = %%elementName%%.readFile('big.jpg');\n");
+			sb.append("application.output('file size: ' + bytes.length);\n");
+			sb.append("// Read only the first 1KB from the file.\n");
+			sb.append("var bytesPartial = %%elementName%%.readFile('big.jpg', 1024);\n");
+			sb.append("application.output('partial file size: ' + bytesPartial.length);\n");
+			sb.append("// Read all content from a file selected from the file open dialog.\n");
+			sb.append("var bytesUnknownFile = %%elementName%%.readFile();\n");
+			sb.append("application.output('unknown file size: ' + bytesUnknownFile.length);\n");
 			return sb.toString();
 		}
-		else if ("readTXTFile".equals(methodName)) //$NON-NLS-1$
+		else if ("readTXTFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// Read content from a known text file.\n"); //$NON-NLS-1$
-			sb.append("var txt = plugins.file.readTXTFile('story.txt');\n"); //$NON-NLS-1$
-			sb.append("application.output(txt);\n"); //$NON-NLS-1$
-			sb.append("// Read content from a text file selected from the file open dialog.\n"); //$NON-NLS-1$
-			sb.append("var txtUnknown = plugins.file.readTXTFile();\n"); //$NON-NLS-1$
-			sb.append("application.output(txtUnknown);\n"); //$NON-NLS-1$
+			sb.append("// Read content from a known text file.\n");
+			sb.append("var txt = %%elementName%%.readTXTFile('story.txt');\n");
+			sb.append("application.output(txt);\n");
+			sb.append("// Read content from a text file selected from the file open dialog.\n");
+			sb.append("var txtUnknown = %%elementName%%.readTXTFile();\n");
+			sb.append("application.output(txtUnknown);\n");
 			return sb.toString();
 		}
-		else if ("showDirectorySelectDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showDirectorySelectDialog".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var dir = plugins.file.showDirectorySelectDialog();\n"); //$NON-NLS-1$
-			sb.append("application.output(\"you've selected folder: \" + dir.getAbsolutePath());\n"); //$NON-NLS-1$
+			sb.append("var dir = %%elementName%%.showDirectorySelectDialog();\n");
+			sb.append("application.output(\"you've selected folder: \" + dir.getAbsolutePath());\n");
 			return sb.toString();
 		}
-		else if ("showFileOpenDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showFileOpenDialog".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and\n"); //$NON-NLS-1$
-			sb.append("// the filter \"JPG and GIF\" should be used: ('new Array(\"JPG and GIF\",\"jpg\",\"gif\")').\n"); //$NON-NLS-1$
-			sb.append("var file = plugins.file.showFileOpenDialog(1, null, false, new Array(\"JPG and GIF\",\"jpg\",\"gif\"));\n"); //$NON-NLS-1$
-			sb.append("application.output(\"you've selected file: \" + file.getAbsolutePath());\n"); //$NON-NLS-1$
-			sb.append("//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)\n"); //$NON-NLS-1$
-			sb.append("var file = plugins.file.showFileOpenDialog(myCallbackMethod)\n");
+			sb.append("// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and\n");
+			sb.append("// the filter \"JPG and GIF\" should be used: ('new Array(\"JPG and GIF\",\"jpg\",\"gif\")').\n");
+			sb.append("var file = %%elementName%%.showFileOpenDialog(1, null, false, new Array(\"JPG and GIF\",\"jpg\",\"gif\"));\n");
+			sb.append("application.output(\"you've selected file: \" + file.getAbsolutePath());\n");
+			sb.append("//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)\n");
+			sb.append("var file = %%elementName%%.showFileOpenDialog(myCallbackMethod)\n");
 			return sb.toString();
 		}
-		else if ("showFileSaveDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showFileSaveDialog".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var file = plugins.file.showFileSaveDialog();\n"); //$NON-NLS-1$
-			sb.append("application.output(\"you've selected file: \" + file.getAbsolutePath());\n"); //$NON-NLS-1$
+			sb.append("var file = %%elementName%%.showFileSaveDialog();\n");
+			sb.append("application.output(\"you've selected file: \" + file.getAbsolutePath());\n");
 			return sb.toString();
 		}
-		else if ("writeFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var bytes = new Array();\n"); //$NON-NLS-1$
-			sb.append("for (var i=0; i<1024; i++)\n"); //$NON-NLS-1$
-			sb.append("\tbytes[i] = i % 100;\n"); //$NON-NLS-1$
-			sb.append("var f = plugins.file.convertToJSFile('bin.dat');\n"); //$NON-NLS-1$
-			sb.append("if (!plugins.file.writeFile(f, bytes))\n"); //$NON-NLS-1$
-			sb.append("\tapplication.output('Failed to write the file.');\n"); //$NON-NLS-1$
+			sb.append("var bytes = new Array();\n");
+			sb.append("\tfor (var i=0; i<1024; i++)\n");
+			sb.append("\t\tbytes[i] = i % 100;\n");
+			sb.append("\tvar f = %%elementName%%.convertToJSFile('bin.dat');\n");
+			sb.append("\tif (!%%elementName%%.writeFile(f, bytes))\n");
+			sb.append("\t\tapplication.output('Failed to write the file.');\n");
+			sb.append("\t// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'\n"); //$NON-NLS-1$
+			sb.append("\tvar mimeType = 'application/vnd.ms-excel'\n"); //$NON-NLS-1$
+			sb.append("\tif (!plugins.file.writeFile(f, bytes, mimeType))\n"); //$NON-NLS-1$
+			sb.append("\t\tapplication.output('Failed to write the file.');\n");
 			return sb.toString();
 		}
-		else if ("writeTXTFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeTXTFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var fileNameSuggestion = 'myspecialexport.tab'\n"); //$NON-NLS-1$
-			sb.append("var textData = 'load of data...'\n"); //$NON-NLS-1$
-			sb.append("var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);\n"); //$NON-NLS-1$
-			sb.append("if (!success) application.output('Could not write file.');\n"); //$NON-NLS-1$
-			sb.append("// For file-encoding parameter options (default OS encoding is used), http://java.sun.com/j2se/1.4.2/docs/guide/intl/encoding.doc.html\n"); //$NON-NLS-1$
+			sb.append("var fileNameSuggestion = 'myspecialexport.tab'\n");
+			sb.append("\tvar textData = 'load of data...'\n");
+			sb.append("\tvar success = %%elementName%%.writeTXTFile(fileNameSuggestion, textData);\n");
+			sb.append("\tif (!success) application.output('Could not write file.');\n");
+			sb.append("\t// For file-encoding parameter options (default OS encoding is used), http://java.sun.com/j2se/1.4.2/docs/guide/intl/encoding.doc.html\n");
+			sb.append("\t// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'\n"); //$NON-NLS-1$
 			return sb.toString();
 		}
-		else if ("writeXMLFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeXMLFile".equals(methodName))
 		{
 			StringBuffer retval = new StringBuffer();
-			retval.append("var fileName = 'form.xml'\n"); //$NON-NLS-1$
-			retval.append("var xml = controller.printXML()\n"); //$NON-NLS-1$
-			retval.append("var success = plugins.file.writeXMLFile(fileName, xml);\n"); //$NON-NLS-1$
-			retval.append("if (!success) application.output('Could not write file.');\n"); //$NON-NLS-1$
+			retval.append("var fileName = 'form.xml'\n");
+			retval.append("var xml = controller.printXML()\n");
+			retval.append("var success = %%elementName%%.writeXMLFile(fileName, xml);\n");
+			retval.append("if (!success) application.output('Could not write file.');\n");
 			return retval.toString();
+		}
+		else if ("streamFilesToServer".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("// send one file:\n");
+			sb.append("\tvar file = %%elementName%%.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );\n");
+			sb.append("\tif (file) {\n");
+			sb.append("\t\t%%elementName%%.streamFilesToServer( file, callbackFunction );\n");
+			sb.append("\t}\n");
+			sb.append("\t// send an array of files:\n");
+			sb.append("\tvar folder = %%elementName%%.showDirectorySelectDialog();\n");
+			sb.append("\tif (folder) {\n");
+			sb.append("\t\tvar files = %%elementName%%.getFolderContents(folder);\n");
+			sb.append("\t\tif (files) {\n");
+			sb.append("\t\t\t%%elementName%%.streamFilesToServer( files, callbackFunction );\n");
+			sb.append("\t\t}\n");
+			sb.append("\t}\n");
+			return sb.toString();
+		}
+		else if ("streamFilesFromServer".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("// transfer the first file of the default server folder to a chosen file on the client\n");
+			sb.append("\tvar dir = plugins.file.getDesktopFolder();\n");
+			sb.append("\tvar file = plugins.file.showFileSaveDialog(dir,'Save file to');\n");
+			sb.append("\tif (file) {\n");
+			sb.append("\t\tvar list = plugins.file.getRemoteList('/', true);\n");
+			sb.append("\t\tif (list && list.length > 0) {\n");
+			sb.append("\t\t\tplugins.file.streamFilesFromServer(file, list[0], callbackFunction);\n");
+			sb.append("\t\t}\n");
+			sb.append("\t}\n");
+			return sb.toString();
+		}
+		else if ("getRemoteDirList".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("// retrieves an array of files located on the server side inside the default upload folder:\n");
+			sb.append("\tvar files = %%elementName%%.getRemoteList('/', true);\n");
+			return sb.toString();
+		}
+		else if ("convertToRemoteJSFile".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("var f = %%elementName%%.convertToRemoteJSFile('/story.txt');\n");
+			sb.append("if (f && f.canRead())\n");
+			sb.append("\tapplication.output('File can be read.');\n");
+			return sb.toString();
+		}
+		else if ("appendToTXTFile".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("// append some text to a text file:\n");
+			sb.append("\tvar ok = %%elementName%%.appendToTXTFile('myTextFile.txt', '\\nMy fantastic new line of text\\n');\n");
+			return sb.toString();
 		}
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String getToolTip(String methodName)
 	{
-		if ("convertToJSFile".equals(methodName)) //$NON-NLS-1$
+		if ("convertToJSFile".equals(methodName))
 		{
-			return "Returns a JSFile instance corresponding to an alternative representation of a file (for example a string)."; //$NON-NLS-1$
+			return "Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).";
 		}
-		else if ("copyFile".equals(methodName)) //$NON-NLS-1$
+		else if ("copyFile".equals(methodName))
 		{
-			return "Copies the sourcefile to the destination file. Returns true if the copy succeeds, false if any error occurs."; //$NON-NLS-1$
+			return "Copies the sourcefile to the destination file. Returns true if the copy succeeds, false if any error occurs.";
 		}
-		else if ("copyFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("copyFolder".equals(methodName))
 		{
-			return "Copies the sourcefolder to the destination folder, recursively. Returns true if the copy succeeds, false if any error occurs."; //$NON-NLS-1$
+			return "Copies the sourcefolder to the destination folder, recursively. Returns true if the copy succeeds, false if any error occurs.";
 		}
-		else if ("createFile".equals(methodName)) //$NON-NLS-1$
+		else if ("createFile".equals(methodName))
 		{
-			return "Creates a JSFile instance. Does not create the file on disk."; //$NON-NLS-1$
+			return "Creates a JSFile instance. Does not create the file on disk.";
 		}
-		else if ("createFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("createFolder".equals(methodName))
 		{
-			return "Creates a folder on disk. Returns true if the folder is successfully created, false if any error occurs."; //$NON-NLS-1$
+			return "Creates a folder on disk. Returns true if the folder is successfully created, false if any error occurs.";
 		}
-		else if ("createTempFile".equals(methodName)) //$NON-NLS-1$
+		else if ("createTempFile".equals(methodName))
 		{
-			return "Creates a temporary file on disk. A prefix and an extension are specified and they will be part of the file name."; //$NON-NLS-1$
+			return "Creates a temporary file on disk. A prefix and an extension are specified and they will be part of the file name.";
 		}
-		else if ("deleteFile".equals(methodName)) //$NON-NLS-1$
+		else if ("deleteFile".equals(methodName))
 		{
-			return "Removes a file from disk. Returns true on success, false otherwise."; //$NON-NLS-1$
+			return "Removes a file from disk. Returns true on success, false otherwise.";
 		}
-		else if ("deleteFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("deleteFolder".equals(methodName))
 		{
-			return "Deletes a folder from disk recursively. Returns true on success, false otherwise. If the second parameter is set to true, then a warning will be issued to the user before actually removing the folder."; //$NON-NLS-1$
+			return "Deletes a folder from disk recursively. Returns true on success, false otherwise. If the second parameter is set to true, then a warning will be issued to the user before actually removing the folder.";
 		}
-		else if ("getDesktopFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("getDesktopFolder".equals(methodName))
 		{
-			return "Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user."; //$NON-NLS-1$
+			return "Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.";
 		}
-		else if ("getDiskList".equals(methodName)) //$NON-NLS-1$
+		else if ("getDiskList".equals(methodName))
 		{
-			return "Returns an Array of JSFile instances correponding to the file system root folders."; //$NON-NLS-1$
+			return "Returns an Array of JSFile instances correponding to the file system root folders.";
 		}
-		else if ("getFileSize".equals(methodName)) //$NON-NLS-1$
+		else if ("getFileSize".equals(methodName))
 		{
-			return "Returns the size of the specified file."; //$NON-NLS-1$
+			return "Returns the size of the specified file.";
 		}
-		else if ("getFolderContents".equals(methodName)) //$NON-NLS-1$
+		else if ("getFolderContents".equals(methodName))
 		{
-			return "Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status."; //$NON-NLS-1$
+			return "Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.";
 		}
-		else if ("getHomeDirectory".equals(methodName)) //$NON-NLS-1$
+		else if ("getHomeDirectory".equals(methodName))
 		{
-			return "Returns a JSFile instance corresponding to the home folder of the logged in used."; //$NON-NLS-1$
+			return "Returns a JSFile instance corresponding to the home folder of the logged in used.";
 		}
-		else if ("getModificationDate".equals(methodName)) //$NON-NLS-1$
+		else if ("getModificationDate".equals(methodName))
 		{
-			return "Returns the modification date of a file."; //$NON-NLS-1$
+			return "Returns the modification date of a file.";
 		}
-		else if ("moveFile".equals(methodName)) //$NON-NLS-1$
+		else if ("moveFile".equals(methodName))
 		{
-			return "Moves the file from the source to the destination place. Returns true on success, false otherwise."; //$NON-NLS-1$
+			return "Moves the file from the source to the destination place. Returns true on success, false otherwise.";
 		}
-		else if ("readFile".equals(methodName)) //$NON-NLS-1$
+		else if ("readFile".equals(methodName))
 		{
-			return "Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled)"; //$NON-NLS-1$
+			return "Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled)";
 		}
-		else if ("readTXTFile".equals(methodName)) //$NON-NLS-1$
+		else if ("readTXTFile".equals(methodName))
 		{
-			return "Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled)"; //$NON-NLS-1$
+			return "Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled)";
 		}
-		else if ("showDirectorySelectDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showDirectorySelectDialog".equals(methodName))
 		{
-			return "Shows a directory selector dialog."; //$NON-NLS-1$
+			return "Shows a directory selector dialog.";
 		}
-		else if ("showFileOpenDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showFileOpenDialog".equals(methodName))
 		{
-			return "Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled)"; //$NON-NLS-1$
+			return "Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled)";
 		}
-		else if ("showFileSaveDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showFileSaveDialog".equals(methodName))
 		{
-			return "Shows a file save dialog."; //$NON-NLS-1$
+			return "Shows a file save dialog.";
 		}
-		else if ("writeFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeFile".equals(methodName))
 		{
-			return "Writes data into a binary file. (Web Enabled)"; //$NON-NLS-1$
+			return "Writes data into a binary file. (Web Enabled)";
 		}
-		else if ("writeTXTFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeTXTFile".equals(methodName))
 		{
-			return "Writes data into a text file. (Web Enabled)"; //$NON-NLS-1$
+			return "Writes data into a text file. (Web Enabled)";
 		}
-		else if ("writeXMLFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeXMLFile".equals(methodName))
 		{
-			return "Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled)"; //$NON-NLS-1$
+			return "Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled)";
+		}
+		else if ("streamFilesToServer".equals(methodName))
+		{
+			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done";
+		}
+		else if ("streamFilesFromServer".equals(methodName))
+		{
+			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done";
+		}
+		else if ("getRemoteList".equals(methodName))
+		{
+			return "Retrieves a list of files existing in a folder on the server side (in the path provided, relative to the default server location)";
+		}
+		else if ("convertToRemoteJSFile".equals(methodName))
+		{
+			return "Returns the JSFile object of a server file, given its path (relative the default server location)";
+		}
+		else if ("appendToTXTFile".equals(methodName))
+		{
+			return "Appends data into a text file.";
 		}
 		return null;
 	}
@@ -1231,93 +1341,113 @@ public class FileProvider implements IScriptObject
 	@SuppressWarnings("nls")
 	public String[] getParameterNames(String methodName)
 	{
-		if ("convertToJSFile".equals(methodName)) //$NON-NLS-1$
+		if ("convertToJSFile".equals(methodName))
 		{
-			return new String[] { "file" }; //$NON-NLS-1$
+			return new String[] { "file" };
 		}
-		else if ("copyFile".equals(methodName)) //$NON-NLS-1$
+		else if ("copyFile".equals(methodName))
 		{
-			return new String[] { "sourceFile", "destinationFile" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "sourceFile", "destinationFile" };
 		}
-		else if ("copyFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("copyFolder".equals(methodName))
 		{
-			return new String[] { "sourceFolder", "destinationFolder" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "sourceFolder", "destinationFolder" };
 		}
-		else if ("createFile".equals(methodName)) //$NON-NLS-1$
+		else if ("createFile".equals(methodName))
 		{
-			return new String[] { "targetFile" }; //$NON-NLS-1$
+			return new String[] { "targetFile" };
 		}
-		else if ("createFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("createFolder".equals(methodName))
 		{
-			return new String[] { "targetFolder" }; //$NON-NLS-1$
+			return new String[] { "targetFolder" };
 		}
-		else if ("createTempFile".equals(methodName)) //$NON-NLS-1$
+		else if ("createTempFile".equals(methodName))
 		{
-			return new String[] { "filePrefix", "fileSuffix" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "filePrefix", "fileSuffix" };
 		}
-		else if ("deleteFile".equals(methodName)) //$NON-NLS-1$
+		else if ("deleteFile".equals(methodName))
 		{
-			return new String[] { "targetFile" }; //$NON-NLS-1$
+			return new String[] { "targetFile" };
 		}
-		else if ("deleteFolder".equals(methodName)) //$NON-NLS-1$
+		else if ("deleteFolder".equals(methodName))
 		{
-			return new String[] { "targetFolder", "showWarning" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "targetFolder", "showWarning" };
 		}
-		else if ("getFileSize".equals(methodName)) //$NON-NLS-1$
+		else if ("getFileSize".equals(methodName))
 		{
-			return new String[] { "targetFile" }; //$NON-NLS-1$
+			return new String[] { "targetFile" };
 		}
-		else if ("getFolderContents".equals(methodName)) //$NON-NLS-1$
+		else if ("getFolderContents".equals(methodName))
 		{
-			return new String[] { "targetFolder", "[fileFilter]", "[fileOption(1=files,2=dirs)]", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			"[visibleOption(1=visible,2=nonvisible)]", "[lockedOption(1=locked,2=nonlocked)]" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "targetFolder", "[fileFilter]", "[fileOption(1=files,2=dirs)]", "[visibleOption(1=visible,2=nonvisible)]", "[lockedOption(1=locked,2=nonlocked)]" };
 		}
-		else if ("getModificationDate".equals(methodName)) //$NON-NLS-1$
+		else if ("getModificationDate".equals(methodName))
 		{
-			return new String[] { "targetFile" }; //$NON-NLS-1$
+			return new String[] { "targetFile" };
 		}
-		else if ("moveFile".equals(methodName)) //$NON-NLS-1$
+		else if ("moveFile".equals(methodName))
 		{
-			return new String[] { "sourceFile", "destinationFile" }; //$NON-NLS-1$//$NON-NLS-2$
+			return new String[] { "sourceFile", "destinationFile" };
 		}
-		else if ("readFile".equals(methodName)) //$NON-NLS-1$
+		else if ("readFile".equals(methodName))
 		{
-			return new String[] { "[file]", "[size]" }; //$NON-NLS-1$ //$NON-NLS-2$ 
+			return new String[] { "[file]", "[size]" };
 		}
-		else if ("readTXTFile".equals(methodName)) //$NON-NLS-1$
+		else if ("readTXTFile".equals(methodName))
 		{
-			return new String[] { "[file]", "[charsetname]" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "[file]", "[charsetname]" };
 		}
-		else if ("showDirectorySelectDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showDirectorySelectDialog".equals(methodName))
 		{
-			return new String[] { "[directory suggestion]", "[dialog title text]" }; //$NON-NLS-1$
+			return new String[] { "[directory suggestion]", "[dialog title text]" };
 		}
-		else if ("showFileOpenDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showFileOpenDialog".equals(methodName))
 		{
 			return new String[] { "[selectionMode(0=both,1=Files,2=Dirs)]", "[startDirectory(null=default/previous)]", "[multiselect(true/false)]", "[filterarray]", "[callbackmethod]", "[dialog title text]" };
 		}
-		else if ("showFileSaveDialog".equals(methodName)) //$NON-NLS-1$
+		else if ("showFileSaveDialog".equals(methodName))
 		{
-			return new String[] { "[fileName/dir suggestion]", "[dialog title text]" }; //$NON-NLS-1$
+			return new String[] { "[fileName/dir suggestion]", "[dialog title text]" };
 		}
-		else if ("writeFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeFile".equals(methodName))
 		{
-			return new String[] { "file", "binary_data" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "file", "binary_data", "[mimeType]" };
 		}
-		else if ("writeTXTFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeTXTFile".equals(methodName))
 		{
-			return new String[] { "file", "text_data", "[charsetname]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			return new String[] { "file", "text_data", "[charsetname]", "[mimeType]" };
 		}
-		else if ("writeXMLFile".equals(methodName)) //$NON-NLS-1$
+		else if ("writeXMLFile".equals(methodName))
 		{
-			return new String[] { "file", "xml_data" }; //$NON-NLS-1$ //$NON-NLS-2$
+			return new String[] { "file", "xml_data" };
+		}
+		else if ("streamFilesToServer".equals(methodName))
+		{
+			return new String[] { "file/fileName|fileArray/fileNameArray", "[serverFile/serverFileName|serverFileArray/serverFileNameArray]", "[callbackFunction]" };
+		}
+		else if ("streamFilesFromServer".equals(methodName))
+		{
+			return new String[] { "file/fileName|fileArray/fileNameArray", "serverFile/serverFileName|serverFileArray/serverFileNameArray", "[callbackFunction]" };
+		}
+		else if ("getRemoteList".equals(methodName))
+		{
+			return new String[] { "serverFolder/serverFolderPath", "[filesOnly]" };
+		}
+		else if ("convertToRemoteJSFile".equals(methodName))
+		{
+			return new String[] { "serverPath" };
+		}
+		else if ("appendToTXTFile".equals(methodName))
+		{
+			return new String[] { "file/fileName", "text", "[encoding]" };
 		}
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public boolean isDeprecated(String methodName)
 	{
-		if (methodName.equals("convertStringToJSFile")) //$NON-NLS-1$
+		if (methodName.equals("convertStringToJSFile"))
 		{
 			return true;
 		}
@@ -1327,6 +1457,511 @@ public class FileProvider implements IScriptObject
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { JSFile.class };
+	}
+
+
+	/**
+	 * Appends a string given in parameter to a file, using default platform encoding
+	 * @since Servoy 5.2
+	 * 
+	 * @param f either a {@link File}, a local {@link JSFile} or a the file path as a String
+	 * @param text the text to append to the file
+	 * @return true if appending worked
+	 */
+	public boolean js_appendToTXTFile(Object f, String text)
+	{
+		return js_appendToTXTFile(f, text, null);
+	}
+
+	/**
+	 * Appends a string given in parameter to a file, using default platform encoding
+	 * @since Servoy 5.2
+	 * 
+	 * @param f either a {@link File}, a local {@link JSFile} or a the file path as a String
+	 * @param text the text to append to the file
+	 * @param encoding the encoding to use
+	 * @return true if appending worked
+	 */
+	@SuppressWarnings("nls")
+	public boolean js_appendToTXTFile(Object f, String text, String encoding)
+	{
+		if (text != null)
+		{
+			try
+			{
+				final IClientPluginAccess access = plugin.getClientPluginAccess();
+				File file = getFileFromArg(f, true);
+				if (file == null)
+				{
+					file = FileChooserUtils.getAWriteFile(access.getCurrentWindow(), file, false);
+				}
+				FileOutputStream fos = new FileOutputStream(file, true);
+				try
+				{
+					return writeToOutputStream(fos, text.replaceAll("\\n", LF), encoding);
+				}
+				finally
+				{
+					fos.close();
+				}
+			}
+			catch (final Exception ex)
+			{
+				Debug.error(ex);
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Convenience return to get a JSFile representation of a server file based on its path<br/>
+	 * @since Servoy 5.2
+	 * 
+	 * @param path the path representing a file on the server (should start with "/")
+	 * @return the {@link JSFile}
+	 */
+	public JSFile js_convertToRemoteJSFile(final String path)
+	{
+		JSFile[] files = js_getRemoteList(path, false);
+		if (files != null && files.length > 0)
+		{
+			return files[0];
+		}
+		return null;
+	}
+
+	/**
+	 * Retrieves an array of files/folders from the server
+	 * @since Servoy 5.2
+	 * 
+	 * @param serverPath the path of a remote directory (relative to the defaultFolder)
+	 * 
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteList(final Object serverPath)
+	{
+		return js_getRemoteList(serverPath, false);
+	}
+
+	/**
+	 * Retrieves an array of files/folders from the server
+	 * @since Servoy 5.2
+	 * 
+	 * @param serverPath a {@link JSFile} or String with the path of a remote directory (relative to the defaultFolder)
+	 * @param filesOnly if true only files will be retrieve, if false, files and folders will be retrieved
+	 * 
+	 * @return the array of file names
+	 */
+	@SuppressWarnings("nls")
+	public JSFile[] js_getRemoteList(final Object serverPath, final boolean filesOnly)
+	{
+		try
+		{
+			if (serverPath == null)
+			{
+				throw new IllegalArgumentException("Server path cannot be null");
+			}
+			String serverFileName = null;
+			if (serverPath instanceof JSFile)
+			{
+				IAbstractFile abstractFile = ((JSFile)serverPath).getAbstractFile();
+				if (abstractFile instanceof RemoteFile)
+				{
+					serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+				}
+				else
+				{
+					throw new IllegalArgumentException("Local file path doesn't make sense for the getRemoteDirList method");
+				}
+			}
+			else
+			{
+				serverFileName = serverPath.toString();
+			}
+			final IFileService service = getFileService();
+			RemoteFileData[] remoteList = service.getRemoteList(plugin.getClientPluginAccess().getClientID(), serverFileName, filesOnly);
+			JSFile[] files = new JSFile[remoteList.length];
+			for (int i = 0; i < files.length; i++)
+			{
+				files[i] = new JSFile(new RemoteFile(remoteList[i], service, plugin.getClientPluginAccess().getClientID()));
+			}
+			return files;
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+		}
+		return null;
+	}
+
+
+	/**
+	 * Overloaded method, only defines file(s) to be streamed
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 */
+	public void js_streamFilesToServer(final Object f)
+	{
+		js_streamFilesToServer(f, null, null);
+	}
+
+	/**
+	 * Overloaded method, defines file(s) to be streamed and a callback function
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param o can be a JSFile or JSFile[], a String or String[] or the {@link Function} to be called back at the end of the process
+	 */
+	public void js_streamFilesToServer(final Object f, final Object o)
+	{
+		if (o instanceof Function)
+		{
+			js_streamFilesToServer(f, null, (Function)o);
+		}
+		else
+		{
+			js_streamFilesToServer(f, o, null);
+		}
+	}
+
+	/**
+	 * Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param names can be a JSFile or JSFile[], a String or String[]
+	 * @param callback the {@link Function} to be called back at the end of the process
+	 */
+	public void js_streamFilesToServer(final Object f, final Object names, final Function callback)
+	{
+		if (f != null)
+		{
+			Object[] files = unwrap(f);
+			Object[] serverFileNames = unwrap(names);
+			if (files != null)
+			{
+				// the FunctionDefinition is only created once for all files:
+				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
+				for (int i = 0; i < files.length; i++)
+				{
+					final Object file = files[i];
+					// the serverName can be derived from an Array of String, at the same index as the file
+					String serverFileName = null;
+					if (serverFileNames != null && i < serverFileNames.length)
+					{
+						if (serverFileNames[i] instanceof JSFile)
+						{
+							JSFile jsFile = (JSFile)serverFileNames[i];
+							IAbstractFile abstractFile = jsFile.getAbstractFile();
+							if (abstractFile instanceof RemoteFile)
+							{
+								serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+							}
+							else
+							{
+								serverFileName = abstractFile.getName();
+							}
+						}
+						else
+						{
+							serverFileName = serverFileNames[i].toString();
+						}
+					}
+					streamFileToServer(file, serverFileName, function);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Proxy method, will create the File instance to use from the file Object representation given<br/>
+	 * with a name to use on the server, and a callback function
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param serverFileName the name of the file to stream into on the server
+	 * @param function the function to call at the end of the process
+	 */
+	private void streamFileToServer(final Object f, final String serverFileName, final FunctionDefinition function)
+	{
+		if (f != null)
+		{
+			try
+			{
+				final File file = getFileFromArg(f, true);
+				if (file != null && file.canRead())
+				{
+					streamFileToServer(file, (serverFileName == null) ? '/' + file.getName() : serverFileName, function);
+				}
+			}
+			catch (final Exception ex)
+			{
+				Debug.error(ex);
+			}
+		}
+	}
+
+	/**
+	 * Sends the content of a {@link File} in chunks to the server using a background thread
+	 * @since Servoy 5.2
+	 * 
+	 * @param is the {@link File} to read from
+	 * @param serverFileName the name of the file to stream into on the server
+	 * @param function the function to call at the end of the process
+	 */
+	private void streamFileToServer(final File file, final String serverFileName, final FunctionDefinition function) throws Exception
+	{
+		final IFileService service = getFileService();
+		plugin.getClientPluginAccess().getExecutor().execute(new Runnable()
+		{
+			public void run()
+			{
+				UUID uuid = null;
+				Object fileName = null;
+				InputStream is = null;
+				Exception ex = null;
+				try
+				{
+					is = new FileInputStream(file);
+					uuid = service.openTransfer(plugin.getClientPluginAccess().getClientID(), serverFileName);
+					if (uuid != null)
+					{
+						byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
+						int read = is.read(buffer);
+						while (read > -1)
+						{
+							service.writeBytes(uuid, buffer, 0, read);
+							read = is.read(buffer);
+						}
+					}
+				}
+				catch (final Exception e)
+				{
+					Debug.error(e);
+					ex = e;
+				}
+				finally
+				{
+					try
+					{
+						if (uuid != null) fileName = service.closeTransfer(uuid);
+					}
+					catch (final RemoteException ignore)
+					{
+					}
+					try
+					{
+						if (is != null) is.close();
+					}
+					catch (final IOException ignore)
+					{
+					}
+					if (function != null) function.execute(plugin.getClientPluginAccess(), new Object[] { fileName, ex }, true);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Stream 1 or more file from the server to the client
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param names of the files on the server that will be transfered to the client, can be a String or a String[]
+	 */
+	public void js_streamFilesFromServer(final Object f, final Object names)
+	{
+		js_streamFilesFromServer(f, names, null);
+	}
+
+	/**
+	 * Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
+	 * the filename that was transfered. An extra second exception parameter can be given if an exception did occur.
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param names of the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
+	 * @param callback the {@link Function} to be called back at the end of the process (after every file)
+	 */
+	public void js_streamFilesFromServer(final Object f, final Object names, final Function callback)
+	{
+		if (f != null)
+		{
+			Object[] files = unwrap(f);
+			Object[] serverFileNames = unwrap(names);
+			if (files != null)
+			{
+				// the FunctionDefinition is only created once for all files:
+				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
+				for (int i = 0; i < files.length; i++)
+				{
+					final Object file = files[i];
+					// the serverFile can be derived from an Array of String or JSFile, at the same index as the file
+					Object serverFile = null;
+					if (serverFileNames != null && i < serverFileNames.length)
+					{
+						serverFile = serverFileNames[i];
+					}
+					streamFileFromServer(file, serverFile, function);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Proxy method, will create the File instance to use from the file Object representation given<br/>
+	 * with a name to use on the server, and a callback function
+	 * @since Servoy 5.2
+	 * 
+	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param serverFile a JSFile object or its path as String
+	 * @param function the function to call at the end of the process
+	 */
+	private void streamFileFromServer(final Object f, final Object serverFile, final FunctionDefinition function)
+	{
+		if (f != null)
+		{
+			try
+			{
+				final File file = getFileFromArg(f, true);
+				if (file != null)
+				{
+					String serverFileName = file.getName();
+					if (serverFile != null)
+					{
+						if (serverFile instanceof JSFile)
+						{
+							IAbstractFile abstractFile = ((JSFile)serverFile).getAbstractFile();
+							if (abstractFile instanceof RemoteFile)
+							{
+								serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+							}
+							else
+							{
+								serverFileName = abstractFile.getName();
+							}
+						}
+						else
+						{
+							serverFileName = serverFile.toString();
+						}
+					}
+					streamFileFromServer(file, (serverFileName == null) ? '/' + file.getName() : serverFileName, function);
+				}
+			}
+			catch (final Exception ex)
+			{
+				Debug.error(ex);
+			}
+		}
+	}
+
+	/**
+	 * Gets the content of a {@link File} on the server using a background thread
+	 * @since Servoy 5.2
+	 * 
+	 * @param is the {@link File} to write to.
+	 * @param serverFileName the name of the file to stream from the server
+	 * @param function the function to call at the end of the process
+	 */
+	private void streamFileFromServer(final File file, final String serverFileName, final FunctionDefinition function) throws Exception
+	{
+		final IFileService service = getFileService();
+		plugin.getClientPluginAccess().getExecutor().execute(new Runnable()
+		{
+			public void run()
+			{
+				UUID uuid = null;
+				OutputStream os = null;
+				Exception ex = null;
+				try
+				{
+					if (file.exists() || file.createNewFile())
+					{
+						os = new FileOutputStream(file);
+						uuid = service.openTransfer(plugin.getClientPluginAccess().getClientID(), serverFileName);
+						if (uuid != null)
+						{
+							byte[] bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+							while (bytes != null)
+							{
+								os.write(bytes);
+								// check for the length (this results in 1 less call to the server)
+								if (bytes.length == CHUNK_BUFFER_SIZE)
+								{
+									bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+								}
+								else break;
+							}
+						}
+					}
+				}
+				catch (final Exception e)
+				{
+					Debug.error(e);
+					ex = e;
+				}
+				finally
+				{
+					try
+					{
+						if (uuid != null) service.closeTransfer(uuid);
+					}
+					catch (final RemoteException ignore)
+					{
+					}
+					try
+					{
+						if (os != null) os.close();
+					}
+					catch (final IOException ignore)
+					{
+					}
+					if (function != null) function.execute(plugin.getClientPluginAccess(), new Object[] { file.getName(), ex }, true);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Utility method to give access to the {@link IFileService} remote service
+	 * @since Servoy 5.2
+	 * 
+	 * @return the service
+	 */
+	private IFileService getFileService() throws Exception
+	{
+		return (IFileService)plugin.getClientPluginAccess().getServerService(IFileService.SERVICE_NAME);
+	}
+
+	/**
+	 * Utility method to unwrap a given object to Object[] array
+	 * @since Servoy 5.2
+	 * 
+	 * @param f The object to unwrap
+	 * @return The Object[] array
+	 */
+	private Object[] unwrap(final Object f)
+	{
+		Object[] files = null;
+		if (f != null)
+		{
+			if (f instanceof NativeArray)
+			{
+				files = (Object[])((NativeArray)f).unwrap();
+			}
+			else if (f instanceof Object[])
+			{
+				return (Object[])f;
+			}
+			else
+			{
+				files = new Object[] { f };
+			}
+		}
+		return files;
+
 	}
 
 }
