@@ -129,7 +129,8 @@ public class RestWSPlugin implements IServerPlugin
 	{
 		if (serializerWrapper == null)
 		{
-			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(false, false));
+			boolean handleArrays = Boolean.parseBoolean(application.getSettings().getProperty("plugin.rest_ws.useNewArrayFormat", "true")); //$NON-NLS-1$ //$NON-NLS-2$
+			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(false, false, handleArrays), handleArrays);
 		}
 		return serializerWrapper;
 	}
