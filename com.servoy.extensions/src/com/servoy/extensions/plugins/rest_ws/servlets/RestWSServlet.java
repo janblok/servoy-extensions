@@ -413,6 +413,7 @@ public class RestWSServlet extends HttpServlet
 		throw new IllegalStateException();
 	}
 
+	@SuppressWarnings("nls")
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
 	{
 		int contentType = getContentType(request, "Accept", null, defaultContentType); //$NON-NLS-1$
@@ -423,7 +424,15 @@ public class RestWSServlet extends HttpServlet
 		switch (contentType)
 		{
 			case CONTENT_JSON :
-				content = json.toString();
+				String callback = request.getParameter("callback");
+				if (callback != null && !callback.equals(""))
+				{
+					content = callback + '(' + json.toString() + ')';
+				}
+				else
+				{
+					content = json.toString();
+				}
 				break;
 
 			case CONTENT_XML :
