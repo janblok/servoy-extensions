@@ -245,8 +245,15 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		else
 		{
 			RemoteFileData parent = constructHierarchy(f.getParentFile());
-			RemoteFileData data = new RemoteFileData(f, parent);
-			return data;
+			if (f.isDirectory())
+			{
+				RemoteFileData data = new RemoteFileData(f, parent);
+				return data;
+			}
+			else
+			{
+				return parent;
+			}
 		}
 	}
 
