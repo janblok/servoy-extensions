@@ -25,43 +25,48 @@ import org.mozilla.javascript.Wrapper;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptObject;
-import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.FileChooserUtils;
-import com.servoy.j2db.util.ImageLoader;
 
 /**
+ * The {@link IScriptObject} representation of a file, either local, remote or web.
+ * 
  * @author jcompagner
+ * @author Servoy Stuff
  */
 public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 {
-	private final File file;
-	private final IUploadData upload;
+	private final IAbstractFile file;
 	private JSFile[] EMPTY;
 
 	// only used by script engine.	
 	public JSFile()
 	{
 		this.file = null;
-		this.upload = null;
 	}
 
 	public JSFile(File file)
 	{
-		this.file = file;
-		this.upload = null;
+		this.file = new LocalFile(file);
 	}
 
 	public JSFile(IUploadData upload)
 	{
-		this.file = upload.getFile();
-		if (this.file == null)
+		if (upload.getFile() != null)
 		{
-			this.upload = upload;
+			this.file = new LocalFile(upload.getFile());
+		}
+		else if (upload instanceof IAbstractFile)
+		{
+			this.file = (IAbstractFile)upload;
 		}
 		else
 		{
-			this.upload = null;
+			this.file = new UploadData(upload);
 		}
+	}
+
+	public IAbstractFile getAbstractFile()
+	{
+		return this.file;
 	}
 
 	/**
@@ -71,7 +76,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public String js_getName()
 	{
-		if (upload != null) return upload.getName();
 		return file.getName();
 	}
 
@@ -82,7 +86,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public String js_getParent()
 	{
-		if (upload != null) return null;
 		return file.getParent();
 	}
 
@@ -93,7 +96,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public JSFile js_getParentFile()
 	{
-		if (upload != null) return null;
 		return new JSFile(file.getParentFile());
 	}
 
@@ -104,7 +106,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public String js_getPath()
 	{
-		if (upload != null) return null;
 		return file.getPath();
 	}
 
@@ -115,7 +116,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_isAbsolute()
 	{
-		if (upload != null) return false;
 		return file.isAbsolute();
 	}
 
@@ -126,7 +126,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public String js_getAbsolutePath()
 	{
-		if (upload != null) return null;
 		return file.getAbsolutePath();
 	}
 
@@ -138,7 +137,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public JSFile js_getAbsoluteFile()
 	{
-		if (upload != null) return this;
 		return new JSFile(file.getAbsoluteFile());
 	}
 
@@ -149,7 +147,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_canRead()
 	{
-		if (upload != null) return true;
 		return file.canRead();
 	}
 
@@ -160,7 +157,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_canWrite()
 	{
-		if (upload != null) return false;
 		return file.canWrite();
 	}
 
@@ -171,7 +167,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_exists()
 	{
-		if (upload != null) return false;
 		return file.exists();
 	}
 
@@ -182,22 +177,12 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_isDirectory()
 	{
-		if (upload != null) return false;
 		return file.isDirectory();
 	}
 
 	public byte[] js_getBytes()
 	{
-		if (upload != null) return upload.getBytes();
-		try
-		{
-			if (file.exists() && !file.isDirectory()) return FileChooserUtils.readFile(file);
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("Error getting the bytes of file " + file, e); //$NON-NLS-1$
-		}
-		return null;
+		return file.getBytes();
 	}
 
 	/**
@@ -207,7 +192,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_isFile()
 	{
-		if (upload != null) return false;
 		return file.isFile();
 	}
 
@@ -218,7 +202,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_isHidden()
 	{
-		if (upload != null) return false;
 		return file.isHidden();
 	}
 
@@ -229,7 +212,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public Date js_lastModified()
 	{
-		if (upload != null) return new Date(System.currentTimeMillis());
 		return new Date(file.lastModified());
 	}
 
@@ -240,8 +222,7 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public long js_size()
 	{
-		if (upload != null) return upload.getBytes().length;
-		return file.length();
+		return file.size();
 	}
 
 	/**
@@ -251,7 +232,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_createNewFile() throws IOException
 	{
-		if (upload != null) return false;
 		return file.createNewFile();
 	}
 
@@ -262,7 +242,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_delete()
 	{
-		if (upload != null) return false;
 		return file.delete();
 	}
 
@@ -273,7 +252,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_deleteFile()
 	{
-		if (upload != null) return false;
 		return file.delete();
 	}
 
@@ -284,7 +262,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public String[] js_list()
 	{
-		if (upload != null) return new String[0];
 		return file.list();
 	}
 
@@ -295,8 +272,7 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public JSFile[] js_listFiles()
 	{
-		if (upload != null) return new JSFile[0];
-		File[] files = file.listFiles();
+		IAbstractFile[] files = file.listFiles();
 		if (files == null) return EMPTY;
 		JSFile[] retArray = new JSFile[files.length];
 		for (int i = 0; i < files.length; i++)
@@ -313,7 +289,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_mkdir()
 	{
-		if (upload != null) return false;
 		return file.mkdir();
 	}
 
@@ -324,7 +299,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_mkdirs()
 	{
-		if (upload != null) return false;
 		return file.mkdirs();
 	}
 
@@ -337,14 +311,20 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_renameTo(Object dest)
 	{
-		if (upload != null) return false;
 		if (dest instanceof JSFile)
 		{
 			return file.renameTo(((JSFile)dest).file);
 		}
 		else if (dest instanceof String)
 		{
-			return file.renameTo(new File((String)dest));
+			if (file instanceof RemoteFile)
+			{
+				return ((RemoteFile)file).renameTo((String)dest);
+			}
+			else
+			{
+				return file.renameTo(new LocalFile(new File((String)dest)));
+			}
 		}
 		return false;
 	}
@@ -358,7 +338,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_setLastModified(Object object)
 	{
-		if (upload != null) return false;
 		long time = -1;
 		if (object instanceof Date)
 		{
@@ -382,7 +361,6 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public boolean js_setReadOnly()
 	{
-		if (upload != null) return true;
 		return file.setReadOnly();
 	}
 
@@ -393,27 +371,13 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public String js_getContentType()
 	{
-		if (upload != null) return upload.getContentType();
-		if (file.exists() && file.canRead() && file.length() > 0)
-		{
-			try
-			{
-				return ImageLoader.getContentType(FileChooserUtils.readFile(file, 32), file.getName());
-			}
-			catch (Exception e)
-			{
-				Debug.error("error reading the file " + file.getName() + "for getting the content type", e); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-		}
-		return null;
+		return file.getContentType();
 	}
 
-	@SuppressWarnings("nls")
 	@Override
 	public String toString()
 	{
-		if (upload != null) return "FileUpload[" + upload.getName() + ", contenttype:" + upload.getContentType() + ",size:" + upload.getBytes().length + "]";
-		return file.getAbsolutePath();
+		return file.toString();
 	}
 
 
@@ -432,7 +396,9 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("var f = plugins.file.convertToJSFile('./big.jpg');\n");
-			sb.append("if (f.exists()) {\n");
+			sb.append("// or for a remote file:\n");
+			sb.append("// var f = plugins.convertToRemoteJSFile('/images/big.jpg');\n");
+			sb.append("if (f && f.exists()) {\n");
 			sb.append("\tapplication.output('is absolute: ' + f.isAbsolute());\n");
 			sb.append("\tapplication.output('is dir: ' + f.isDirectory());\n");
 			sb.append("\tapplication.output('is file: ' + f.isFile());\n");
@@ -451,14 +417,22 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 			sb.append("}\n");
 			return sb.toString();
 		}
-		else if ("createNewFile".equals(methodName) || "deleteFile".equals(methodName))
+		else if ("createNewFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
-			sb.append("if (f.exists())\n");
-			sb.append("\tf.deleteFile();\n");
-			sb.append("else\n");
+			sb.append("if (!f.exists())\n");
 			sb.append("\tf.createNewFile();\n");
+			return sb.toString();
+		}
+		else if ("deleteFile".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("// or for a remote file:\n");
+			sb.append("// var f = plugins.convertToRemoteJSFile('/story.txt');\n");
+			sb.append("if (f && f.exists())\n");
+			sb.append("\tf.deleteFile();\n");
 			return sb.toString();
 		}
 		else if ("setReadOnly".equals(methodName))
@@ -483,6 +457,9 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 			StringBuffer sb = new StringBuffer();
 			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
 			sb.append("f.renameTo('otherstory.txt');\n");
+			sb.append("// or for a remote file:\n");
+			sb.append("// var f = plugins.convertToRemoteJSFile('/story.txt');\n");
+			sb.append("// f.renameTo('/otherstory.txt');\n");
 			return sb.toString();
 		}
 		else if ("mkdir".equals(methodName) || "mkdirs".equals(methodName))
@@ -498,6 +475,8 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("var d = plugins.file.convertToJSFile('plugins');\n");
+			sb.append("// or for a remote file:\n");
+			sb.append("// var d = plugins.convertToRemoteJSFile('/plugins');\n");
 			sb.append("var names = d.list();\n");
 			sb.append("application.output('Names:');\n");
 			sb.append("for (var i=0; i<names.length; i++)\n");
@@ -512,6 +491,8 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("// or for a remote file:\n");
+			sb.append("// var f = plugins.convertToRemoteJSFile('/story.txt');\n");
 			sb.append("application.output('parent folder: ' + f.getAbsoluteFile().getParent());\n");
 			sb.append("application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');\n");
 			return sb.toString();
@@ -529,91 +510,91 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	{
 		if ("canRead".equals(methodName))
 		{
-			return "Returns true if the file exists and is readable (has access to it).";
+			return "Returns true if the file exists and is readable (has access to it) - works on remote files too.";
 		}
 		else if ("canWrite".equals(methodName))
 		{
-			return "Returns true if the file exists and can be modified.";
+			return "Returns true if the file exists and can be modified - works on remote files too.";
 		}
 		else if ("createNewFile".equals(methodName))
 		{
-			return "Creates the file on disk if needed. Returns true if the file (name) did not already exists and had to be created.";
+			return "Creates the file on disk if needed. Returns true if the file (name) did not already exists and had to be created - for remote, use the streamFilesToServer to stream a file.";
 		}
 		else if ("deleteFile".equals(methodName))
 		{
-			return "Deletes the file from the disk if possible. Returns true if the file could be deleted. If the file is a directory, then it must be empty in order to be deleted.";
+			return "Deletes the file from the disk if possible. Returns true if the file could be deleted. If the file is a directory, then it must be empty in order to be deleted - works on remote files too.";
 		}
 		else if ("exists".equals(methodName))
 		{
-			return "Returns true if the file/directory exists on the filesystem.";
+			return "Returns true if the file/directory exists on the filesystem - works on remote files too.";
 		}
 		else if ("getAbsoluteFile".equals(methodName))
 		{
-			return "Returns a JSFile instance that corresponds to the absolute form of this pathname.";
+			return "Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.";
 		}
 		else if ("getAbsolutePath".equals(methodName))
 		{
-			return "Returns a String representation of the absolute form of this pathname.";
+			return "Returns a String representation of the absolute form of this pathname - works on remote files too.";
 		}
 		else if ("getContentType".equals(methodName))
 		{
-			return "Returns the contenttype of this file, like for example 'application/pdf'.";
+			return "Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.";
 		}
 		else if ("getName".equals(methodName))
 		{
-			return "Returns the name of the file. The name consists in the last part of the file path.";
+			return "Returns the name of the file. The name consists in the last part of the file path - works on remote files too.";
 		}
 		else if ("getParent".equals(methodName))
 		{
-			return "Returns the String representation of the path of the parent of this file.";
+			return "Returns the String representation of the path of the parent of this file - works on remote files too.";
 		}
 		else if ("getParentFile".equals(methodName))
 		{
-			return "Returns a JSFile instance that corresponds to the parent of this file.";
+			return "Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.";
 		}
 		else if ("getPath".equals(methodName))
 		{
-			return "Returns a String holding the path to the file.";
+			return "Returns a String holding the path to the file - works on remote files too.";
 		}
 		else if ("isAbsolute".equals(methodName))
 		{
-			return "Returns true if the path is absolute. The path is absolute if it starts with '/' on Unix/Linux/MacOS or has a driver letter on Windows.";
+			return "Returns true if the path is absolute. The path is absolute if it starts with '/' on Unix/Linux/MacOS or has a driver letter on Windows - works on remote files too.";
 		}
 		else if ("isDirectory".equals(methodName))
 		{
-			return "Returns true if the file is a directory.";
+			return "Returns true if the file is a directory - works on remote files too.";
 		}
 		else if ("isFile".equals(methodName))
 		{
-			return "Returns true if the file is a file and not a regular file.";
+			return "Returns true if the file is a file and not a regular file - works on remote files too.";
 		}
 		else if ("isHidden".equals(methodName))
 		{
-			return "Returns true if the file is hidden (a file system attribute).";
+			return "Returns true if the file is hidden (a file system attribute) - works on remote files too.";
 		}
 		else if ("lastModified".equals(methodName))
 		{
-			return "Returns the time/date of the last modification on the file.";
+			return "Returns the time/date of the last modification on the file - works on remote files too.";
 		}
 		else if ("list".equals(methodName))
 		{
-			return "Returns an array of strings naming the files and directories located inside the file, if the file is a directory.";
+			return "Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.";
 		}
 		else if ("listFiles".equals(methodName))
 		{
-			return "Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory.";
+			return "Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.";
 		}
 		else if ("mkdir".equals(methodName))
 		{
-			return "Creates a directory on disk if possible. Returns true if a new directory was created.";
+			return "Creates a directory on disk if possible. Returns true if a new directory was created - for remote, use the streamFilesToServer to create the directory instead.";
 		}
 		else if ("mkdirs".equals(methodName))
 		{
-			return "Creates a directory on disk, together with all its parent directories, if possible. Returns true if the hierarchy of directories is created.";
+			return "Creates a directory on disk, together with all its parent directories, if possible. Returns true if the hierarchy of directories is created - for remote, use the streamFilesToServer to create the directories instead.";
 		}
 		else if ("renameTo".equals(methodName))
 		{
-			return "Renames the file to a different name. Returns true if the file could be renamed.";
+			return "Renames the file to a different name. Returns true if the file could be renamed - works on remote files too.";
 		}
 		else if ("setLastModified".equals(methodName))
 		{
@@ -625,7 +606,7 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 		}
 		else if ("size".equals(methodName))
 		{
-			return "Returns the size in bytes of the file. Returns 0 if the file does not exist on disk.";
+			return "Returns the size in bytes of the file. Returns 0 if the file does not exist on disk - works on remote files too.";
 		}
 
 		return null;
@@ -660,6 +641,7 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Class[] getAllReturnedTypes()
 	{
 		return null;
@@ -667,8 +649,7 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 
 	public Object unwrap()
 	{
-		if (upload != null) return upload.getBytes();
-		return file.getAbsolutePath();
+		return file.unwrap();
 	}
 
 	/**
@@ -676,7 +657,7 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	 */
 	public File getFile()
 	{
-		return file;
+		return file.getFile();
 	}
 
 }
