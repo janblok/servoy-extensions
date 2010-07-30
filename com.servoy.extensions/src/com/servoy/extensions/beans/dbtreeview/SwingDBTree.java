@@ -18,16 +18,23 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
 import javax.swing.JTree;
+import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView.UserNodeTreeCellRenderer;
+import com.servoy.j2db.dnd.CompositeTransferHandler;
+import com.servoy.j2db.dnd.ICompositeDragNDrop;
+import com.servoy.j2db.dnd.JSDNDEvent;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 
 /**
@@ -35,7 +42,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
  * 
  * @author gboros
  */
-public class SwingDBTree extends JTree implements TableCellRenderer
+public class SwingDBTree extends JTree implements TableCellRenderer, ICompositeDragNDrop
 {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
@@ -45,6 +52,12 @@ public class SwingDBTree extends JTree implements TableCellRenderer
 	SwingDBTree(IClientPluginAccess application)
 	{
 		this.application = application;
+		setDragEnabled(true);
+		// TODO: create custom drag gesture recognizer
+		//DragSource.getDefaultDragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, dgl)
+		TransferHandler treeTransferHandler = new CompositeTransferHandler();
+		setTransferHandler(treeTransferHandler);
+		new DropTarget(this, (DropTargetListener)treeTransferHandler);
 	}
 
 	public void setVisibleRow(int visibleRow)
@@ -139,5 +152,33 @@ public class SwingDBTree extends JTree implements TableCellRenderer
 		if (e.getID() == MouseEvent.MOUSE_PRESSED) application.getDatabaseManager().saveData();
 		super.processMouseEvent(e);
 
+	}
+
+	public Object getDragSource(Point xy)
+	{
+		return this;
+	}
+
+	public int onDrag(JSDNDEvent event)
+	{
+		//System.out.println("ON DRAG");
+		return 1;
+	}
+
+	public void onDragEnd(JSDNDEvent event)
+	{
+		//System.out.println("ON DRAG END");
+	}
+
+	public boolean onDragOver(JSDNDEvent event)
+	{
+		//System.out.println("ON DRAG OVER");
+		return true;
+	}
+
+	public boolean onDrop(JSDNDEvent event)
+	{
+		//System.out.println("ON DROP");
+		return true;
 	}
 }
