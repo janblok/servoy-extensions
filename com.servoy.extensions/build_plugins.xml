@@ -141,7 +141,7 @@
 	
 	<target	name="_all_common_plugins"
 			    depends="agent.jar,dialog.jar,http.jar,mail.jar,tabxport.jar,excelxport.jar,pdf_output.jar,file.jar,scheduler.jar,
-			 	   pdf_forms.jar,dbtreeview.jar,amortization.jar,spellcheck.jar,images.jar,window.jar,udp.jar,rawSQL.jar,
+			 	   pdf_forms.jar,dbtreeview.jar,amortization.jar,spellcheck.jar,images.jar,window.jar,udp.jar,rawSQL.jar,openid.jar,
 			 	   xmlreader.jar,serialize.jar,default_validators.jar,converters.jar,rest_ws.jar,headlessclient.jar"
 	>
 		<!--<ant target="clean"/>-->
@@ -213,6 +213,30 @@
 		/>
 		<copy overwrite="true" todir="${plugins.dir}">
 			<fileset file="resources/http/http.jar.jnlp"/>
+		</copy>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+
+	<target name="openid.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/openid.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/openid">
+			<fileset dir="${src_plugins.dir}/openid">
+				<patternset refid="javaGif.sources"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/openid">
+			<fileset dir="${bin_plugins.dir}/openid">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/openid.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<copy overwrite="true" todir="${plugins.dir}/openid">
+			<fileset file="lib/openid4java.jar"/>
 		</copy>
 		<delete dir="${tempForJar.dir}"/>
 	</target>

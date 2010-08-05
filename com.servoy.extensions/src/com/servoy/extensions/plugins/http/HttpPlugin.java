@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.http;
 
 import java.beans.PropertyChangeEvent;
@@ -22,7 +22,6 @@ import java.util.Properties;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
@@ -64,7 +63,7 @@ public class HttpPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.http.displayname")); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "HTTP Plugin"); //$NON-NLS-1$
 		return props;
 	}
 
