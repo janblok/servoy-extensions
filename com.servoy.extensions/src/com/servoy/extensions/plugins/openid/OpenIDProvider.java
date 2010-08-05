@@ -21,11 +21,14 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.RequestCycle;
+import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.IBehavior;
 import org.apache.wicket.protocol.http.WebRequest;
-import org.apache.wicket.protocol.http.WebResponse;
+import org.apache.wicket.request.target.basic.RedirectRequestTarget;
+import org.mozilla.javascript.Function;
 import org.openid4java.OpenIDException;
 import org.openid4java.consumer.ConsumerException;
 import org.openid4java.consumer.ConsumerManager;
@@ -39,7 +42,10 @@ import org.openid4java.message.ax.AxMessage;
 import org.openid4java.message.ax.FetchRequest;
 import org.openid4java.message.ax.FetchResponse;
 
+import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.server.headlessclient.WebClient;
+import com.servoy.j2db.server.headlessclient.WebClientSession;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -47,20 +53,20 @@ import com.servoy.j2db.util.Debug;
  */
 public class OpenIDProvider implements IScriptObject
 {
-	public ConsumerManager manager;
+	private final ConsumerManager manager;
 
-	public OpenIDProvider(OpenIDPlugin plugin) throws ConsumerException
+	OpenIDProvider(OpenIDPlugin plugin) throws ConsumerException
 	{
 		// instantiate a ConsumerManager object 
 		manager = new ConsumerManager();
 	}
 
 	// --- placing the authentication request --- 
-	public void js_authenticateRequest(String identifier, String redirectURL) throws IOException
+	public void js_authenticateRequest(String identifier, String redirectURL, final Function callback) throws IOException
 	{
 		RequestCycle rc = RequestCycle.get();
+		if (rc == null) return; //is webclient only, during an render cycle
 		HttpServletRequest req = ((WebRequest)rc.getRequest()).getHttpServletRequest();
-		HttpServletResponse res = ((WebResponse)rc.getResponse()).getHttpServletResponse();
 
 		try
 		{
@@ -86,13 +92,47 @@ public class OpenIDProvider implements IScriptObject
 			// attach the extension to the authentication request 
 			authReq.addExtension(fetch);
 
+			WebClientSession wcs = WebClientSession.get();
+			final WebClient wc = wcs.getWebClient();
+			IBehavior b = new AbstractBehavior()
+			{
+				boolean remove = false;
+
+				@Override
+				public void onRendered(org.apache.wicket.Component component)
+				{
+					try
+					{
+						FunctionDefinition functionDef = new FunctionDefinition(callback);
+						Object[] args = verifyResponse();
+						wc.getPluginAccess().executeMethod(functionDef.getFormName(), functionDef.getMethodName(), args, true);
+					}
+					catch (Exception e)
+					{
+						Debug.error(e);
+					}
+					finally
+					{
+						remove = true;
+					}
+				}
+
+				@Override
+				public void detach(Component component)
+				{
+					if (remove) wc.getMainPage().remove(this);
+				}
+			};
+			wc.getMainPage().add(b);
+
 //assume everyone is on version2 by now			
 //			if (!discovered.isVersion2())
 			{
 				// Option 1: GET HTTP-redirect to the OpenID Provider endpoint 
 				// The only method supported in OpenID 1.x 
 				// redirect-URL usually limited ~2048 bytes 
-				res.sendRedirect(authReq.getDestinationUrl(true));
+				rc.setRequestTarget(new RedirectRequestTarget(authReq.getDestinationUrl(true)));
+//				res.sendRedirect(authReq.getDestinationUrl(true));
 			}
 //			else
 //			{
@@ -107,10 +147,11 @@ public class OpenIDProvider implements IScriptObject
 		{
 			Debug.error(e);
 		}
+
 	}
 
 	// --- processing the authentication response --- 
-	public String[] js_verifyResponse()
+	private String[] verifyResponse()
 	{
 		RequestCycle rc = RequestCycle.get();
 		HttpServletRequest httpReq = ((WebRequest)rc.getRequest()).getHttpServletRequest();
@@ -123,6 +164,7 @@ public class OpenIDProvider implements IScriptObject
 
 			// retrieve the previously stored discovery information 
 			DiscoveryInformation discovered = (DiscoveryInformation)httpReq.getSession().getAttribute("openid-disc");
+			httpReq.getSession().removeAttribute("openid-disc"); //remove to prevent mem leaks
 
 			// extract the receiving URL from the HTTP request 
 			StringBuffer receivingURL = httpReq.getRequestURL();
@@ -166,11 +208,7 @@ public class OpenIDProvider implements IScriptObject
 	{
 		if ("authenticateRequest".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "identifier", "redirectURL" };
-		}
-		else if ("verifyResponse".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[0];
+			return new String[] { "identifier", "redirectURL", "callbackFunction" };
 		}
 		return null;
 	}
@@ -183,16 +221,7 @@ public class OpenIDProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',application.getServerURL()+'/ss/s/'+application.getSolutionName());"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("verifyResponse".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var id_and_email_array = plugins.openid.verifyResponse();"); //$NON-NLS-1$
+			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',application.getServerURL()+'/ss/s/'+application.getSolutionName(),openIDLoginCallback);"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		return null;
@@ -206,10 +235,6 @@ public class OpenIDProvider implements IScriptObject
 		if ("authenticateRequest".equals(methodName)) //$NON-NLS-1$
 		{
 			return "Redirect to openID provider to login."; //$NON-NLS-1$
-		}
-		else if ("verifyResponse".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Get the openID identifier and email address when login suceeded, return null when fails."; //$NON-NLS-1$
 		}
 		else
 		{
