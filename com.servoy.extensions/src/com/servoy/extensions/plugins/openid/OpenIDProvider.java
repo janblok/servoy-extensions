@@ -221,7 +221,7 @@ public class OpenIDProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',application.getServerURL()+'/ss/s/'+application.getSolutionName(),openIDLoginCallback);"); //$NON-NLS-1$
+			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',application.getServerURL()+'/ss/s/'+application.getSolutionName(),afterLoginCallback);"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		return null;
