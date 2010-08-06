@@ -103,7 +103,6 @@ public class OpenIDProvider implements IScriptObject
 					AuthSuccess authSuccess = (AuthSuccess)verification.getAuthResponse();
 
 					FetchResponse fetchResp = null;
-					String email = null;
 					if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX))
 					{
 						fetchResp = (FetchResponse)authSuccess.getExtension(AxMessage.OPENID_NS_AX);
