@@ -18,13 +18,18 @@
 package com.servoy.extensions.plugins.openid;
 
 import java.beans.PropertyChangeEvent;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+import org.apache.commons.collections.map.LinkedMap;
+
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IServerAccess;
+import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -32,7 +37,7 @@ import com.servoy.j2db.scripting.IScriptObject;
 /**
 * @author jblok
 */
-public class OpenIDPlugin implements IClientPlugin
+public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements both to indicate is webclient/serverclient only
 {
 	private IClientPluginAccess access;
 	private OpenIDProvider impl;
@@ -52,6 +57,11 @@ public class OpenIDPlugin implements IClientPlugin
 		access = app;
 	}
 
+	public void initialize(IServerAccess app) throws PluginException
+	{
+		//not used
+	}
+
 	/*
 	 * @see IPlugin#unload()
 	 */
@@ -59,6 +69,13 @@ public class OpenIDPlugin implements IClientPlugin
 	{
 		access = null;
 		impl = null;
+	}
+
+	public Map<String, String> getRequiredPropertyNames()
+	{
+		Map<String, String> req = new LinkedMap();
+//		req.put("openid.redirectServletName", "Redirect servlet name, defaults to 'servoy-webclient'"); //$NON-NLS-1$ //$NON-NLS-2$
+		return req;
 	}
 
 	public Properties getProperties()
