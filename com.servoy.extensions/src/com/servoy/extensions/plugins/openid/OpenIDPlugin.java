@@ -23,14 +23,11 @@ import java.util.Properties;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import org.openid4java.consumer.ConsumerException;
-
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
-import com.servoy.j2db.util.Debug;
 
 /**
 * @author jblok
@@ -94,15 +91,7 @@ public class OpenIDPlugin implements IClientPlugin
 	{
 		if (impl == null)
 		{
-			try
-			{
-				impl = new OpenIDProvider(this);
-			}
-			catch (ConsumerException e)
-			{
-				Debug.error(e);
-				throw new RuntimeException(e);
-			}
+			impl = new OpenIDProvider(this);
 		}
 		return impl;
 	}

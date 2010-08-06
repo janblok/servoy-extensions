@@ -17,20 +17,19 @@
 
 package com.servoy.extensions.plugins.openid;
 
-import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.behavior.AbstractBehavior;
 import org.apache.wicket.behavior.IBehavior;
+import org.apache.wicket.behavior.IBehaviorListener;
 import org.apache.wicket.protocol.http.WebRequest;
 import org.apache.wicket.request.target.basic.RedirectRequestTarget;
 import org.mozilla.javascript.Function;
 import org.openid4java.OpenIDException;
-import org.openid4java.consumer.ConsumerException;
 import org.openid4java.consumer.ConsumerManager;
 import org.openid4java.consumer.VerificationResult;
 import org.openid4java.discovery.DiscoveryInformation;
@@ -49,20 +48,88 @@ import com.servoy.j2db.server.headlessclient.WebClientSession;
 import com.servoy.j2db.util.Debug;
 
 /**
- * @author jblok
+ * @author jblok,jcompagner
  */
+@SuppressWarnings("nls")
 public class OpenIDProvider implements IScriptObject
 {
-	private final ConsumerManager manager;
-
-	OpenIDProvider(OpenIDPlugin plugin) throws ConsumerException
+	private static final class CallBackBehavior extends AbstractBehavior implements IBehaviorListener
 	{
-		// instantiate a ConsumerManager object 
-		manager = new ConsumerManager();
+		private final FunctionDefinition functionDef;
+		private final ConsumerManager manager;
+
+		private CallBackBehavior(ConsumerManager manager, FunctionDefinition functionDef)
+		{
+			this.manager = manager;
+			this.functionDef = functionDef;
+		}
+
+		public void onRequest()
+		{
+			Object[] args = verifyResponse();
+			WebClientSession wcs = WebClientSession.get();
+			WebClient wc = wcs.getWebClient();
+			functionDef.execute(wc.getPluginAccess(), args, false);
+		}
+
+		// --- processing the authentication response --- 
+		private String[] verifyResponse()
+		{
+			RequestCycle rc = RequestCycle.get();
+			HttpServletRequest httpReq = ((WebRequest)rc.getRequest()).getHttpServletRequest();
+
+			try
+			{
+				// extract the parameters from the authentication response 
+				// (which comes in as a HTTP request from the OpenID provider) 
+				ParameterList response = new ParameterList(httpReq.getParameterMap());
+
+				// retrieve the previously stored discovery information 
+				DiscoveryInformation discovered = (DiscoveryInformation)httpReq.getSession().getAttribute("openid-disc");
+				httpReq.getSession().removeAttribute("openid-disc"); //remove to prevent mem leaks
+
+				// extract the receiving URL from the HTTP request 
+				StringBuffer receivingURL = httpReq.getRequestURL();
+				String queryString = httpReq.getQueryString();
+				if (queryString != null && queryString.length() > 0) receivingURL.append("?").append(httpReq.getQueryString());
+
+				// verify the response; ConsumerManager needs to be the same 
+				// (static) instance used to place the authentication request 
+				VerificationResult verification = manager.verify(receivingURL.toString(), response, discovered);
+
+				// examine the verification result and extract the verified identifier 
+				Identifier verified = verification.getVerifiedId();
+				if (verified != null)
+				{
+					AuthSuccess authSuccess = (AuthSuccess)verification.getAuthResponse();
+
+					String email = null;
+					if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX))
+					{
+						FetchResponse fetchResp = (FetchResponse)authSuccess.getExtension(AxMessage.OPENID_NS_AX);
+
+						@SuppressWarnings("unchecked")
+						List<String> emails = fetchResp.getAttributeValues("email");
+						email = emails.get(0);
+					}
+					return new String[] { verified.getIdentifier(), email }; // success 
+				}
+			}
+			catch (OpenIDException e)
+			{
+				Debug.error(e);
+			}
+			return null;
+		}
+
+	}
+
+	OpenIDProvider(OpenIDPlugin plugin)
+	{
 	}
 
 	// --- placing the authentication request --- 
-	public void js_authenticateRequest(String identifier, String redirectURL, final Function callback) throws IOException
+	public void js_authenticateRequest(String identifier, Function callback)
 	{
 		RequestCycle rc = RequestCycle.get();
 		if (rc == null) return; //is webclient only, during an render cycle
@@ -70,6 +137,8 @@ public class OpenIDProvider implements IScriptObject
 
 		try
 		{
+			ConsumerManager manager = new ConsumerManager();
+
 			// perform discovery on the user-supplied identifier 
 			List discoveries = manager.discover(identifier);
 
@@ -80,50 +149,26 @@ public class OpenIDProvider implements IScriptObject
 			// store the discovery information in the user's session 
 			req.getSession().setAttribute("openid-disc", discovered);
 
+			IBehavior b = new CallBackBehavior(manager, new FunctionDefinition(callback));
+			WebClientSession wcs = WebClientSession.get();
+			WebClient wc = wcs.getWebClient();
+			wc.getMainPage().add(b);
+			CharSequence behaviorUrl = rc.urlFor(wc.getMainPage(), b, IBehaviorListener.INTERFACE);
+			URL url = wc.getServerURL();
+
+			String redirectURL = url.toString() + "/servoy-webclient/" + behaviorUrl;
 			// obtain a AuthRequest message to be sent to the OpenID provider 
 			AuthRequest authReq = manager.authenticate(discovered, redirectURL);
 
 			// Attribute Exchange example: fetching the 'email' attribute 
 			FetchRequest fetch = FetchRequest.createFetchRequest();
 			fetch.addAttribute("email", // attribute alias 
-				"http://schema.openid.net/contact/email", // type URI 
-				true); // required 
+				"http://axschema.org/contact/email", // type URI 
+				false); // required 
 
 			// attach the extension to the authentication request 
 			authReq.addExtension(fetch);
 
-			WebClientSession wcs = WebClientSession.get();
-			final WebClient wc = wcs.getWebClient();
-			IBehavior b = new AbstractBehavior()
-			{
-				boolean remove = false;
-
-				@Override
-				public void onRendered(org.apache.wicket.Component component)
-				{
-					try
-					{
-						FunctionDefinition functionDef = new FunctionDefinition(callback);
-						Object[] args = verifyResponse();
-						wc.getPluginAccess().executeMethod(functionDef.getFormName(), functionDef.getMethodName(), args, true);
-					}
-					catch (Exception e)
-					{
-						Debug.error(e);
-					}
-					finally
-					{
-						remove = true;
-					}
-				}
-
-				@Override
-				public void detach(Component component)
-				{
-					if (remove) wc.getMainPage().remove(this);
-				}
-			};
-			wc.getMainPage().add(b);
 
 //assume everyone is on version2 by now			
 //			if (!discovered.isVersion2())
@@ -146,58 +191,11 @@ public class OpenIDProvider implements IScriptObject
 		catch (OpenIDException e)
 		{
 			Debug.error(e);
+			throw new RuntimeException(e);
 		}
 
 	}
 
-	// --- processing the authentication response --- 
-	private String[] verifyResponse()
-	{
-		RequestCycle rc = RequestCycle.get();
-		HttpServletRequest httpReq = ((WebRequest)rc.getRequest()).getHttpServletRequest();
-
-		try
-		{
-			// extract the parameters from the authentication response 
-			// (which comes in as a HTTP request from the OpenID provider) 
-			ParameterList response = new ParameterList(httpReq.getParameterMap());
-
-			// retrieve the previously stored discovery information 
-			DiscoveryInformation discovered = (DiscoveryInformation)httpReq.getSession().getAttribute("openid-disc");
-			httpReq.getSession().removeAttribute("openid-disc"); //remove to prevent mem leaks
-
-			// extract the receiving URL from the HTTP request 
-			StringBuffer receivingURL = httpReq.getRequestURL();
-			String queryString = httpReq.getQueryString();
-			if (queryString != null && queryString.length() > 0) receivingURL.append("?").append(httpReq.getQueryString());
-
-			// verify the response; ConsumerManager needs to be the same 
-			// (static) instance used to place the authentication request 
-			VerificationResult verification = manager.verify(receivingURL.toString(), response, discovered);
-
-			// examine the verification result and extract the verified identifier 
-			Identifier verified = verification.getVerifiedId();
-			if (verified != null)
-			{
-				AuthSuccess authSuccess = (AuthSuccess)verification.getAuthResponse();
-
-				String email = null;
-				if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX))
-				{
-					FetchResponse fetchResp = (FetchResponse)authSuccess.getExtension(AxMessage.OPENID_NS_AX);
-
-					List emails = fetchResp.getAttributeValues("email");
-					email = (String)emails.get(0);
-				}
-				return new String[] { verified.getIdentifier(), email }; // success 
-			}
-		}
-		catch (OpenIDException e)
-		{
-			Debug.error(e);
-		}
-		return null;
-	}
 
 	public boolean isDeprecated(String methodName)
 	{
@@ -208,7 +206,7 @@ public class OpenIDProvider implements IScriptObject
 	{
 		if ("authenticateRequest".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "identifier", "redirectURL", "callbackFunction" };
+			return new String[] { "identifier", "callbackFunction" };
 		}
 		return null;
 	}
@@ -221,7 +219,7 @@ public class OpenIDProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',application.getServerURL()+'/ss/s/'+application.getSolutionName(),afterLoginCallback);"); //$NON-NLS-1$
+			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',afterLoginCallback);"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		return null;
