@@ -91,7 +91,7 @@ public class OpenIDPlugin implements IClientPlugin
 	{
 		if (impl == null)
 		{
-			impl = new OpenIDProvider(this);
+			impl = new OpenIDProvider();
 		}
 		return impl;
 	}

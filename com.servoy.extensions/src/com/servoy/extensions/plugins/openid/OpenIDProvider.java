@@ -27,7 +27,6 @@ import org.apache.wicket.behavior.AbstractBehavior;
 import org.apache.wicket.behavior.IBehavior;
 import org.apache.wicket.behavior.IBehaviorListener;
 import org.apache.wicket.protocol.http.WebRequest;
-import org.apache.wicket.request.target.basic.RedirectRequestTarget;
 import org.mozilla.javascript.Function;
 import org.openid4java.OpenIDException;
 import org.openid4java.consumer.ConsumerManager;
@@ -38,7 +37,6 @@ import org.openid4java.message.AuthRequest;
 import org.openid4java.message.AuthSuccess;
 import org.openid4java.message.ParameterList;
 import org.openid4java.message.ax.AxMessage;
-import org.openid4java.message.ax.FetchRequest;
 import org.openid4java.message.ax.FetchResponse;
 
 import com.servoy.j2db.scripting.FunctionDefinition;
@@ -74,7 +72,7 @@ public class OpenIDProvider implements IScriptObject
 		}
 
 		// --- processing the authentication response --- 
-		private String[] verifyResponse()
+		private Object[] verifyResponse()
 		{
 			RequestCycle rc = RequestCycle.get();
 			HttpServletRequest httpReq = ((WebRequest)rc.getRequest()).getHttpServletRequest();
@@ -104,16 +102,13 @@ public class OpenIDProvider implements IScriptObject
 				{
 					AuthSuccess authSuccess = (AuthSuccess)verification.getAuthResponse();
 
+					FetchResponse fetchResp = null;
 					String email = null;
 					if (authSuccess.hasExtension(AxMessage.OPENID_NS_AX))
 					{
-						FetchResponse fetchResp = (FetchResponse)authSuccess.getExtension(AxMessage.OPENID_NS_AX);
-
-						@SuppressWarnings("unchecked")
-						List<String> emails = fetchResp.getAttributeValues("email");
-						email = emails.get(0);
+						fetchResp = (FetchResponse)authSuccess.getExtension(AxMessage.OPENID_NS_AX);
 					}
-					return new String[] { verified.getIdentifier(), email }; // success 
+					return new Object[] { verified.getIdentifier(), new JSAuthenticateResult(fetchResp) }; // success 
 				}
 			}
 			catch (OpenIDException e)
@@ -125,15 +120,15 @@ public class OpenIDProvider implements IScriptObject
 
 	}
 
-	OpenIDProvider(OpenIDPlugin plugin)
+	OpenIDProvider()
 	{
 	}
 
 	// --- placing the authentication request --- 
-	public void js_authenticateRequest(String identifier, Function callback)
+	public JSAuthenticateRequest js_createAuthenticateRequest(String identifier, Function callback)
 	{
 		RequestCycle rc = RequestCycle.get();
-		if (rc == null) return; //is webclient only, during an render cycle
+		if (rc == null) return null; //is webclient only, during an render cycle
 		HttpServletRequest req = ((WebRequest)rc.getRequest()).getHttpServletRequest();
 
 		try
@@ -161,33 +156,7 @@ public class OpenIDProvider implements IScriptObject
 			// obtain a AuthRequest message to be sent to the OpenID provider 
 			AuthRequest authReq = manager.authenticate(discovered, redirectURL);
 
-			// Attribute Exchange example: fetching the 'email' attribute 
-			FetchRequest fetch = FetchRequest.createFetchRequest();
-			fetch.addAttribute("email", // attribute alias 
-				"http://axschema.org/contact/email", // type URI 
-				false); // required 
-
-			// attach the extension to the authentication request 
-			authReq.addExtension(fetch);
-
-
-//assume everyone is on version2 by now			
-//			if (!discovered.isVersion2())
-			{
-				// Option 1: GET HTTP-redirect to the OpenID Provider endpoint 
-				// The only method supported in OpenID 1.x 
-				// redirect-URL usually limited ~2048 bytes 
-				rc.setRequestTarget(new RedirectRequestTarget(authReq.getDestinationUrl(true)));
-//				res.sendRedirect(authReq.getDestinationUrl(true));
-			}
-//			else
-//			{
-//				// Option 2: HTML FORM Redirection (Allows payloads >2048 bytes) 
-//				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("formredirection.jsp");
-//				httpReq.setAttribute("parameterMap", authReq.getParameterMap());
-//				httpReq.setAttribute("destinationUrl", authReq.getDestinationUrl(false));
-//				dispatcher.forward(httpReq, httpResp);
-//			}
+			return new JSAuthenticateRequest(authReq);
 		}
 		catch (OpenIDException e)
 		{
@@ -246,6 +215,6 @@ public class OpenIDProvider implements IScriptObject
 	 */
 	public Class[] getAllReturnedTypes()
 	{
-		return new Class[] { };
+		return new Class[] { JSAuthenticateRequest.class, JSAuthenticateResult.class };
 	}
 }
