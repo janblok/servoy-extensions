@@ -33,8 +33,9 @@ public class Attachment implements Serializable, IScriptObject
 
 	public Attachment()
 	{
+		//for developer script introspection only
 		this(null, null, null);
-	} // for scripting engine
+	}
 
 	public Attachment(String name, byte[] data, String mimeType)
 	{

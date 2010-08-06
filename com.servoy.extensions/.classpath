@@ -14,5 +14,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell_US_UK_Dict.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.dltk.javascript.rhino"/>
+	<classpathentry kind="lib" path="lib/openid4java.jar" sourcepath="libsrc/openid4java-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
