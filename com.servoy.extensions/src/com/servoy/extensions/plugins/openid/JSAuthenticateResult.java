@@ -20,10 +20,17 @@ package com.servoy.extensions.plugins.openid;
 import org.openid4java.message.ax.FetchResponse;
 
 import com.servoy.j2db.scripting.IJavaScriptType;
+import com.servoy.j2db.scripting.IScriptObject;
 
-public class JSAuthenticateResult implements IJavaScriptType
+public class JSAuthenticateResult implements IJavaScriptType, IScriptObject
 {
 	private final FetchResponse fetchResp;
+
+	public JSAuthenticateResult()
+	{
+		//for developer scripting introspection only
+		this(null);
+	}
 
 	public JSAuthenticateResult(FetchResponse fetchResp)
 	{
@@ -43,4 +50,62 @@ public class JSAuthenticateResult implements IJavaScriptType
 		return null;
 	}
 
+	public boolean isDeprecated(String methodName)
+	{
+		return false;
+	}
+
+	public String[] getParameterNames(String methodName)
+	{
+		if ("getAttributeValue".equals(methodName))
+		{
+			return new String[] { "alias" };
+		}
+		else if ("getAttributeValues".equals(methodName))
+		{
+			return new String[] { "alias" };
+		}
+		return null;
+	}
+
+	public String getSample(String methodName)
+	{
+		if ("getAttributeValue".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("var email = authenticateResult.getAttributeValue('email')\n");
+			return retval.toString();
+		}
+		else if ("getAttributeValue".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("var namesArray = authenticateResult.getAttributeValues('names')\n");
+			return retval.toString();
+		}
+		return null;
+	}
+
+	public String getToolTip(String methodName)
+	{
+		if ("getAttributeValue".equals(methodName))
+		{
+			return "Get attibute value";
+		}
+		else if ("getAttributeValues".equals(methodName))
+		{
+			return "Get an array of attibute values";
+		}
+		return null;
+	}
+
+	public Class[] getAllReturnedTypes()
+	{
+		return null;
+	}
 }

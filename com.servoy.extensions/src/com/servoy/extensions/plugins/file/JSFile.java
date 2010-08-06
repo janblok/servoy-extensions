@@ -37,10 +37,10 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 	private final IAbstractFile file;
 	private JSFile[] EMPTY;
 
-	// only used by script engine.	
 	public JSFile()
 	{
-		this.file = null;
+		//for developer scripting introspection only
+		this((File)null);
 	}
 
 	public JSFile(File file)

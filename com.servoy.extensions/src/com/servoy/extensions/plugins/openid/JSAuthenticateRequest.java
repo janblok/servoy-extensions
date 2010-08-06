@@ -24,13 +24,19 @@ import org.openid4java.message.MessageException;
 import org.openid4java.message.ax.FetchRequest;
 
 import com.servoy.j2db.scripting.IJavaScriptType;
+import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
 
-public class JSAuthenticateRequest implements IJavaScriptType
+public class JSAuthenticateRequest implements IJavaScriptType, IScriptObject
 {
-
 	private final AuthRequest authReq;
 	private FetchRequest fetch;
+
+	public JSAuthenticateRequest()
+	{
+		//for developer scripting introspection only
+		this(null);
+	}
 
 	public JSAuthenticateRequest(AuthRequest authReq)
 	{
@@ -78,4 +84,51 @@ public class JSAuthenticateRequest implements IJavaScriptType
 		RequestCycle.get().setRequestTarget(new RedirectRequestTarget(authReq.getDestinationUrl(true)));
 	}
 
+	public boolean isDeprecated(String methodName)
+	{
+		return false;
+	}
+
+	public String[] getParameterNames(String methodName)
+	{
+		if ("addAttributeRequest".equals(methodName))
+		{
+			return new String[] { "alias", "schemaURI", "required" };
+		}
+		return null;
+	}
+
+	public String getSample(String methodName)
+	{
+		if ("addAttributeRequest".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);\n");
+			return retval.toString();
+		}
+		else if ("execute".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//see createAuthenticateRequest sample\n");
+			return retval.toString();
+		}
+		return null;
+	}
+
+	public String getToolTip(String methodName)
+	{
+		if ("addAttributeRequest".equals(methodName))
+		{
+			return "Add attribute request";
+		}
+		return null;
+	}
+
+	public Class[] getAllReturnedTypes()
+	{
+		return null;
+	}
 }
