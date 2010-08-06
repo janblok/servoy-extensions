@@ -66,9 +66,10 @@ public class OpenIDProvider implements IScriptObject
 
 		public void onRequest()
 		{
-			Object[] args = verifyResponse();
 			WebClientSession wcs = WebClientSession.get();
 			WebClient wc = wcs.getWebClient();
+			wc.getMainPage().remove(this);
+			Object[] args = verifyResponse();
 			functionDef.execute(wc.getPluginAccess(), args, false);
 		}
 
