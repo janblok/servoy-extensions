@@ -174,7 +174,7 @@ public class OpenIDProvider implements IScriptObject
 
 	public String[] getParameterNames(String methodName)
 	{
-		if ("authenticateRequest".equals(methodName)) //$NON-NLS-1$
+		if ("createAuthenticateRequest".equals(methodName))
 		{
 			return new String[] { "identifier", "callbackFunction" };
 		}
@@ -183,13 +183,14 @@ public class OpenIDProvider implements IScriptObject
 
 	public String getSample(String methodName)
 	{
-		if ("authenticateRequest".equals(methodName)) //$NON-NLS-1$
+		if ("createAuthenticateRequest".equals(methodName))
 		{
 			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
+			retval.append("//");
 			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.openid.authenticateRequest('https://www.google.com/accounts/o8/id',afterLoginCallback);"); //$NON-NLS-1$
+			retval.append("\n");
+			retval.append("var request = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',afterLoginCallback);");
+			retval.append("request.addAttributeRequest('email','http://axschema.org/contact/email',true);");
 			return retval.toString();
 		}
 		return null;
@@ -200,9 +201,9 @@ public class OpenIDProvider implements IScriptObject
 	 */
 	public String getToolTip(String methodName)
 	{
-		if ("authenticateRequest".equals(methodName)) //$NON-NLS-1$
+		if ("createAuthenticateRequest".equals(methodName))
 		{
-			return "Redirect to openID provider to login."; //$NON-NLS-1$
+			return "Redirect to openID provider to login.";
 		}
 		else
 		{
