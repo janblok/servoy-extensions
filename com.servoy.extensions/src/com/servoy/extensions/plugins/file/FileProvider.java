@@ -1285,11 +1285,11 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("readFile".equals(methodName))
 		{
-			return "Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled)";
+			return "Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)";
 		}
 		else if ("readTXTFile".equals(methodName))
 		{
-			return "Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled)";
+			return "Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)";
 		}
 		else if ("showDirectorySelectDialog".equals(methodName))
 		{
