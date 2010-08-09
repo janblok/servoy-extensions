@@ -130,15 +130,7 @@ public class ToFileTransferObject implements ITransferObject
 		catch (IOException ignore)
 		{
 		}
-		return getName();
+		return fileData;
 	}
 
-
-	/**
-	 * Return the name of the {@link File} used
-	 */
-	private String getName()
-	{
-		return (file != null && fileData != null) ? fileData.toString() : null;
-	}
 }

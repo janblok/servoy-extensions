@@ -82,10 +82,9 @@ public interface IFileService extends Remote
 
 	/**
 	 * Safely/silently closes the {@link OutputStream} using the {@link ITransferObject} identified by the uuid<br/>
-	 * @return the identifier (name) of the file created, or null if a problem occurred during the process
+	 * @return the file created, or null if a problem occurred during the process
 	 */
 	public Object closeTransfer(final UUID uuid) throws RemoteException;
-
 
 	/**
 	 * Retrieves a list of files contained in the folder represented by the path provided,<br/>
@@ -93,14 +92,28 @@ public interface IFileService extends Remote
 	 * 
 	 * @param clientId the id of the client that wants to get the list.
 	 * @param path the path (relative to default folder) of the folder to list
-	 * @param filesOnly if true, no folder will be contained in the result
+	 * @param filesOption will return files and folders, files only or folders only depending on this value
+	 * @param visibleOption will return any files, visibles files or non visible files depending on this value
+	 * @param lockedOption will return any files, writable files or non writable files depending on this value
 	 * 
 	 * @return the list of files contained in the path provided
 	 * @throws IOException  if an IOException occurs
+	 * @throws SecurityException  if a SecurityException occurs
 	 */
-	public RemoteFileData[] getRemoteList(final String clientId, final String path, final boolean filesOnly) throws RemoteException, IOException,
-		SecurityException;
+	public RemoteFileData[] getRemoteFolderContent(final String clientId, final String path, final String[] filter, final int fileOption,
+		final int visibleOption, final int lockedOption) throws RemoteException, IOException, SecurityException;
 
+	/**
+	 * Retrieves a RemoteFileData object for the path provided either file or directory
+	 * 
+	 * @param clientId the id of the client
+	 * @param path the file path on the server
+	 * 
+	 * @return the remote file data object
+	 * @throws IOException  if an IOException occurs
+	 * @throws SecurityException  if a SecurityException occurs
+	 */
+	public RemoteFileData getRemoteFileData(final String clientId, final String path) throws RemoteException, IOException, SecurityException;
 
 	/**
 	 * Deletes a file on the server side represented by the path provided (relative to the defaultFolder)

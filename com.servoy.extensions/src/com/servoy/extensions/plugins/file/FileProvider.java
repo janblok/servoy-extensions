@@ -297,11 +297,11 @@ public class FileProvider implements IScriptObject
 		}
 		else fileFilter = null;
 		if (options.length > 2) filesOption = Utils.getAsInteger(options[2]);
-		else filesOption = 0;
+		else filesOption = AbstractFile.ALL;
 		if (options.length > 3) visibleOption = Utils.getAsInteger(options[3]);
-		else visibleOption = 0;
+		else visibleOption = AbstractFile.ALL;
 		if (options.length > 4) lockedOption = Utils.getAsInteger(options[4]);
-		else lockedOption = 0;
+		else lockedOption = AbstractFile.ALL;
 
 		File file = convertToFile(path);
 
@@ -322,24 +322,24 @@ public class FileProvider implements IScriptObject
 				if (!retVal) return retVal;
 
 				// file or folder
-				if (filesOption == 1)
+				if (filesOption == AbstractFile.FILES)
 				{
 					retVal = pathname.isFile();
 				}
-				else if (filesOption == 2)
+				else if (filesOption == AbstractFile.FOLDERS)
 				{
 					retVal = pathname.isDirectory();
 				}
 				if (!retVal) return false;
 
 				boolean hidden = pathname.isHidden();
-				if (visibleOption == 1) retVal = !hidden;
-				else if (visibleOption == 2) retVal = hidden;
+				if (visibleOption == AbstractFile.VISIBLE) retVal = !hidden;
+				else if (visibleOption == AbstractFile.NON_VISIBLE) retVal = hidden;
 				if (!retVal) return false;
 
 				boolean canWrite = pathname.canWrite();
-				if (lockedOption == 1) retVal = !canWrite;
-				else if (lockedOption == 2) retVal = canWrite;
+				if (lockedOption == AbstractFile.LOCKED) retVal = !canWrite;
+				else if (lockedOption == AbstractFile.NON_LOCKED) retVal = canWrite;
 				return retVal;
 			}
 		};
@@ -1195,11 +1195,11 @@ public class FileProvider implements IScriptObject
 			sb.append("\t}\n");
 			return sb.toString();
 		}
-		else if ("getRemoteDirList".equals(methodName))
+		else if ("getRemoteFolderContents".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("// retrieves an array of files located on the server side inside the default upload folder:\n");
-			sb.append("\tvar files = %%elementName%%.getRemoteList('/', true);\n");
+			sb.append("\tvar files = %%elementName%%.getRemoteFolderContents('/', '.txt');\n");
 			return sb.toString();
 		}
 		else if ("convertToRemoteJSFile".equals(methodName))
@@ -1229,7 +1229,7 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("copyFile".equals(methodName))
 		{
-			return "Copies the sourcefile to the destination file. Returns true if the copy succeeds, false if any error occurs.";
+			return "Copies the source file to the destination file. Returns true if the copy succeeds, false if any error occurs.";
 		}
 		else if ("copyFolder".equals(methodName))
 		{
@@ -1317,19 +1317,19 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("streamFilesToServer".equals(methodName))
 		{
-			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done";
+			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong.";
 		}
 		else if ("streamFilesFromServer".equals(methodName))
 		{
-			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done";
+			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong.";
 		}
-		else if ("getRemoteList".equals(methodName))
+		else if ("getRemoteFolderContents".equals(methodName))
 		{
-			return "Retrieves a list of files existing in a folder on the server side (in the path provided, relative to the default server location)";
+			return "Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.";
 		}
 		else if ("convertToRemoteJSFile".equals(methodName))
 		{
-			return "Returns the JSFile object of a server file, given its path (relative the default server location)";
+			return "Returns the JSFile object of a server file, given its path (relative the default server location).";
 		}
 		else if ("appendToTXTFile".equals(methodName))
 		{
@@ -1429,9 +1429,9 @@ public class FileProvider implements IScriptObject
 		{
 			return new String[] { "file/fileName|fileArray/fileNameArray", "serverFile/serverFileName|serverFileArray/serverFileNameArray", "[callbackFunction]" };
 		}
-		else if ("getRemoteList".equals(methodName))
+		else if ("getRemoteFolderContents".equals(methodName))
 		{
-			return new String[] { "serverFolder/serverFolderPath", "[filesOnly]" };
+			return new String[] { "targetFolder", "[fileFilter]", "[fileOption(1=files,2=dirs)]", "[visibleOption(1=visible,2=nonvisible)]", "[lockedOption(1=locked,2=nonlocked)]" };
 		}
 		else if ("convertToRemoteJSFile".equals(methodName))
 		{
@@ -1447,7 +1447,7 @@ public class FileProvider implements IScriptObject
 	@SuppressWarnings("nls")
 	public boolean isDeprecated(String methodName)
 	{
-		if (methodName.equals("convertStringToJSFile"))
+		if (methodName.equals("convertStringToJSFile") || methodName.equals("getRemoteList"))
 		{
 			return true;
 		}
@@ -1520,13 +1520,116 @@ public class FileProvider implements IScriptObject
 	 * @param path the path representing a file on the server (should start with "/")
 	 * @return the {@link JSFile}
 	 */
+	@SuppressWarnings("nls")
 	public JSFile js_convertToRemoteJSFile(final String path)
 	{
-		JSFile[] files = js_getRemoteList(path, false);
-		if (files != null && files.length > 0)
+		if (path == null)
 		{
-			return files[0];
+			throw new IllegalArgumentException("Server path cannot be null");
 		}
+		if (path.charAt(0) != '/')
+		{
+			throw new IllegalArgumentException("Remote path should start with '/'");
+		}
+		try
+		{
+			final IFileService service = getFileService();
+			final String clientId = plugin.getClientPluginAccess().getClientID();
+			final RemoteFileData data = service.getRemoteFileData(clientId, path);
+			return new JSFile(new RemoteFile(data, service, clientId));
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+		}
+		return null;
+	}
+
+	/**
+	 * Retrieves an array of files/folders from the server
+	 * @since Servoy 5.2.1
+	 * 
+	 * @param options the path (mandatory), an array of file extensions, fileOptions, visibleOption and lockedOption
+	 * 
+	 * @return the array of file names
+	 */
+	@SuppressWarnings("nls")
+	public JSFile[] js_getRemoteFolderContents(final Object[] options)
+	{
+		Object path = options[0];
+		if (path == null) return EMPTY;
+
+		final String[] fileFilter;
+		final int filesOption; // null/0 = files and dirs, 1 = files, 2 = dirs.
+		final int visibleOption;// null/0 = visible and non, 1 = visible, 2 = non.
+		final int lockedOption; // null/0 = locked and non, 1 = locked, 2 = non.
+
+		if (options.length > 1 && options[1] != null)
+		{
+			if (options[1].getClass().isArray())
+			{
+				Object[] tmp = (Object[])options[1];
+				fileFilter = new String[tmp.length];
+				for (int i = 0; i < tmp.length; i++)
+				{
+					fileFilter[i] = ((String)tmp[i]).toLowerCase();
+				}
+			}
+			else
+			{
+				fileFilter = new String[] { ((String)options[1]).toLowerCase() };
+			}
+		}
+		else fileFilter = null;
+		if (options.length > 2) filesOption = Utils.getAsInteger(options[2]);
+		else filesOption = AbstractFile.ALL;
+		if (options.length > 3) visibleOption = Utils.getAsInteger(options[3]);
+		else visibleOption = AbstractFile.ALL;
+		if (options.length > 4) lockedOption = Utils.getAsInteger(options[4]);
+		else lockedOption = AbstractFile.ALL;
+
+		String serverFileName = null;
+		if (path instanceof JSFile)
+		{
+			IAbstractFile abstractFile = ((JSFile)path).getAbstractFile();
+			if (abstractFile instanceof RemoteFile)
+			{
+				serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+			}
+			else
+			{
+				throw new IllegalArgumentException("Local file path doesn't make sense for the getRemoteDirList method");
+			}
+		}
+		else
+		{
+			serverFileName = path.toString();
+		}
+		try
+		{
+			final IFileService service = getFileService();
+			final String clientId = plugin.getClientPluginAccess().getClientID();
+			final RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, serverFileName, fileFilter, filesOption, visibleOption, lockedOption);
+			if (remoteList != null)
+			{
+				final JSFile[] files = new JSFile[remoteList.length];
+				for (int i = 0; i < files.length; i++)
+				{
+					files[i] = new JSFile(new RemoteFile(remoteList[i], service, clientId));
+				}
+				return files;
+			}
+			else
+			{
+				return EMPTY;
+			}
+
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+		}
+
 		return null;
 	}
 
@@ -1537,7 +1640,9 @@ public class FileProvider implements IScriptObject
 	 * @param serverPath the path of a remote directory (relative to the defaultFolder)
 	 * 
 	 * @return the array of file names
+	 * @deprecated
 	 */
+	@Deprecated
 	public JSFile[] js_getRemoteList(final Object serverPath)
 	{
 		return js_getRemoteList(serverPath, false);
@@ -1551,49 +1656,14 @@ public class FileProvider implements IScriptObject
 	 * @param filesOnly if true only files will be retrieve, if false, files and folders will be retrieved
 	 * 
 	 * @return the array of file names
+	 * @deprecated
 	 */
-	@SuppressWarnings("nls")
+	@Deprecated
 	public JSFile[] js_getRemoteList(final Object serverPath, final boolean filesOnly)
 	{
-		try
-		{
-			if (serverPath == null)
-			{
-				throw new IllegalArgumentException("Server path cannot be null");
-			}
-			String serverFileName = null;
-			if (serverPath instanceof JSFile)
-			{
-				IAbstractFile abstractFile = ((JSFile)serverPath).getAbstractFile();
-				if (abstractFile instanceof RemoteFile)
-				{
-					serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
-				}
-				else
-				{
-					throw new IllegalArgumentException("Local file path doesn't make sense for the getRemoteDirList method");
-				}
-			}
-			else
-			{
-				serverFileName = serverPath.toString();
-			}
-			final IFileService service = getFileService();
-			RemoteFileData[] remoteList = service.getRemoteList(plugin.getClientPluginAccess().getClientID(), serverFileName, filesOnly);
-			JSFile[] files = new JSFile[remoteList.length];
-			for (int i = 0; i < files.length; i++)
-			{
-				files[i] = new JSFile(new RemoteFile(remoteList[i], service, plugin.getClientPluginAccess().getClientID()));
-			}
-			return files;
-		}
-		catch (Exception ex)
-		{
-			Debug.error(ex);
-		}
-		return null;
+		final int fileOption = (filesOnly) ? AbstractFile.FILES : AbstractFile.ALL;
+		return js_getRemoteFolderContents(new Object[] { serverPath, null, new Integer(fileOption) });
 	}
-
 
 	/**
 	 * Overloaded method, only defines file(s) to be streamed
@@ -1717,14 +1787,15 @@ public class FileProvider implements IScriptObject
 		{
 			public void run()
 			{
+				final String clientId = plugin.getClientPluginAccess().getClientID();
 				UUID uuid = null;
-				Object fileName = null;
+				RemoteFileData remoteFile = null;
 				InputStream is = null;
 				Exception ex = null;
 				try
 				{
 					is = new FileInputStream(file);
-					uuid = service.openTransfer(plugin.getClientPluginAccess().getClientID(), serverFileName);
+					uuid = service.openTransfer(clientId, serverFileName);
 					if (uuid != null)
 					{
 						byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
@@ -1745,7 +1816,7 @@ public class FileProvider implements IScriptObject
 				{
 					try
 					{
-						if (uuid != null) fileName = service.closeTransfer(uuid);
+						if (uuid != null) remoteFile = (RemoteFileData)service.closeTransfer(uuid);
 					}
 					catch (final RemoteException ignore)
 					{
@@ -1757,7 +1828,11 @@ public class FileProvider implements IScriptObject
 					catch (final IOException ignore)
 					{
 					}
-					if (function != null) function.execute(plugin.getClientPluginAccess(), new Object[] { fileName, ex }, true);
+					if (function != null)
+					{
+						final JSFile returnedFile = (remoteFile == null) ? null : new JSFile(new RemoteFile(remoteFile, service, clientId));
+						function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
+					}
 				}
 			}
 		});
@@ -1918,7 +1993,7 @@ public class FileProvider implements IScriptObject
 					catch (final IOException ignore)
 					{
 					}
-					if (function != null) function.execute(plugin.getClientPluginAccess(), new Object[] { file.getName(), ex }, true);
+					if (function != null) function.execute(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex }, true);
 				}
 			}
 		});
