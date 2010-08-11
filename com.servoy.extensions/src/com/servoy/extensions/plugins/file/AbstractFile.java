@@ -34,6 +34,18 @@ import com.servoy.j2db.util.ImageLoader;
 public abstract class AbstractFile implements IAbstractFile
 {
 
+	public final static int ALL = 0;
+
+	public final static int FILES = 1;
+	public final static int FOLDERS = 2;
+
+	public final static int VISIBLE = 1;
+	public final static int NON_VISIBLE = 2;
+
+	public final static int LOCKED = 1;
+	public final static int NON_LOCKED = 2;
+
+
 	public File getFile()
 	{
 		return null;

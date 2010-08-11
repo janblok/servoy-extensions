@@ -18,6 +18,7 @@
 package com.servoy.extensions.plugins.file;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ import com.servoy.j2db.util.Debug;
  */
 public class FileServerPlugin implements IServerPlugin, IFileService
 {
-
 	/**
 	 * Contains the ITransferObject used per client/file to transfer the byte chunks
 	 */
@@ -202,11 +202,11 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteDirList(String)
+	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFolderContent(String,String,String[],int,int,int)
 	 */
 	@SuppressWarnings("nls")
-	public RemoteFileData[] getRemoteList(final String clientId, final String path, final boolean filesOnly) throws RemoteException, IOException,
-		SecurityException
+	public RemoteFileData[] getRemoteFolderContent(final String clientId, final String path, final String[] fileFilter, final int filesOption,
+		final int visibleOption, final int lockedOption) throws RemoteException, IOException, SecurityException
 	{
 		securityCheck(clientId, path);
 		final File f = new File(defaultFolder, path);
@@ -215,26 +215,103 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 			throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
 		}
 		final RemoteFileData parent = constructHierarchy(f);
-
 		if (f.isDirectory())
 		{
 			final List<RemoteFileData> list = new ArrayList<RemoteFileData>();
-			final File[] files = f.listFiles();
+			final FileFilter ff = new FileFilter()
+			{
+				public boolean accept(File pathname)
+				{
+					boolean retVal = true;
+					if (fileFilter != null)
+					{
+						String name = pathname.getName().toLowerCase();
+						for (String element : fileFilter)
+						{
+							retVal = name.endsWith(element);
+							if (retVal) break;
+						}
+					}
+					if (!retVal) return retVal;
+
+					// file or folder
+					if (filesOption == AbstractFile.FILES)
+					{
+						retVal = pathname.isFile();
+					}
+					else if (filesOption == AbstractFile.FOLDERS)
+					{
+						retVal = pathname.isDirectory();
+					}
+					if (!retVal) return false;
+
+					boolean hidden = pathname.isHidden();
+					if (visibleOption == AbstractFile.VISIBLE) retVal = !hidden;
+					else if (visibleOption == AbstractFile.NON_VISIBLE) retVal = hidden;
+					if (!retVal) return false;
+
+					boolean canWrite = pathname.canWrite();
+					if (lockedOption == AbstractFile.LOCKED) retVal = !canWrite;
+					else if (lockedOption == AbstractFile.NON_LOCKED) retVal = canWrite;
+					return retVal;
+				}
+			};
+			final File[] files = f.listFiles(ff);
 			for (final File file : files)
 			{
-				if (!filesOnly || !file.isDirectory())
-				{
-					list.add(new RemoteFileData(file, parent));
-				}
+				list.add(new RemoteFileData(file, parent));
 			}
 			return list.toArray(new RemoteFileData[0]);
 		}
 		else
 		{
-			return new RemoteFileData[] { new RemoteFileData(f, parent) };
+			if (filesOption == AbstractFile.ALL || filesOption == AbstractFile.FILES)
+			{
+				if (visibleOption == AbstractFile.ALL || (visibleOption == AbstractFile.VISIBLE && !f.isHidden()) ||
+					(visibleOption == AbstractFile.NON_VISIBLE && f.isHidden()))
+				{
+					if (lockedOption == AbstractFile.ALL || (lockedOption == AbstractFile.LOCKED && !f.canWrite()) ||
+						(lockedOption == AbstractFile.NON_LOCKED && f.canWrite()))
+					{
+						return new RemoteFileData[] { new RemoteFileData(f, parent) };
+					}
+				}
+			}
+			return null;
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFileData(String,String)
+	 */
+	@SuppressWarnings("nls")
+	public RemoteFileData getRemoteFileData(String clientId, String path) throws RemoteException, IOException, SecurityException
+	{
+		securityCheck(clientId, path);
+		final File f = new File(defaultFolder, path);
+		if (!checkParentFile(f.getCanonicalFile()))
+		{
+			throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
+		}
+		final RemoteFileData parent = constructHierarchy(f);
+		if (f.isDirectory())
+		{
+			return parent;
+		}
+		else
+		{
+			return new RemoteFileData(f, parent);
+		}
+	}
+
+	/**
+	 * Create a hierarchy of RemoteFileData recursively
+	 * 
+	 * @param f The file to construct the hierarchy for
+	 * @return the parent of the hierarchy
+	 */
 	private RemoteFileData constructHierarchy(File f)
 	{
 		if (f == null) return null;

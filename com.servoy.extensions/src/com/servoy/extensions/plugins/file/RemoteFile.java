@@ -278,7 +278,8 @@ public class RemoteFile extends AbstractFile
 		{
 			try
 			{
-				RemoteFileData[] remoteList = service.getRemoteList(clientId, data.getAbsolutePath(), false);
+				RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, data.getAbsolutePath(), null, AbstractFile.ALL, AbstractFile.ALL,
+					AbstractFile.ALL);
 				RemoteFile[] files = new RemoteFile[remoteList.length];
 				for (int i = 0; i < files.length; i++)
 				{
@@ -302,7 +303,8 @@ public class RemoteFile extends AbstractFile
 		{
 			try
 			{
-				RemoteFileData[] remoteList = service.getRemoteList(clientId, data.getAbsolutePath(), false);
+				RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, data.getAbsolutePath(), null, AbstractFile.ALL, AbstractFile.ALL,
+					AbstractFile.ALL);
 				String[] files = new String[remoteList.length];
 				for (int i = 0; i < files.length; i++)
 				{
