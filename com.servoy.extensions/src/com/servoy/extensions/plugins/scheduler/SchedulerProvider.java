@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.scheduler;
 
 import java.text.ParseException;
@@ -164,7 +164,7 @@ public class SchedulerProvider implements IScriptObject
 		}
 		else if (methodName.equals("addJob")) //$NON-NLS-1$
 		{
-			return new String[] { "jobname", "startDate", "globalMethod", "[[repeatInterval(ms)]", "[repeatCount]", "[endDate]", "[arguments]]/ [arguments]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			return new String[] { "jobname", "startDate", "globalMethod", "[repeatInterval(ms)]", "[repeatCount]", "[endDate]", "[arguments]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		}
 		else if (methodName.equals("removeJob")) //$NON-NLS-1$
 		{
@@ -204,7 +204,7 @@ public class SchedulerProvider implements IScriptObject
 	}
 
 	/**
-	 * Adds a job to the scheduler (parameter: jobname,triggerDate,globalMethod,[repeatInterval(ms),repeatCount,endDate])
+	 * Adds a job to the scheduler (parameters: jobname,triggerDate,globalMethod,[repeatInterval(ms),repeatCount,endDate,arguments]/[arguments])
 	 *
 	 * @sample
 	 * // add a job that runs at the given date (20 seconds in the future)
@@ -220,13 +220,13 @@ public class SchedulerProvider implements IScriptObject
 	 *
 	 * @param globalMethod 
 	 *
-	 * @param [[repeatInterval(ms)] optional 
+	 * @param repeatInterval(ms) optional 
 	 *
-	 * @param [repeatCount] optional 
+	 * @param repeatCount optional 
 	 *
-	 * @param [endDate] optional 
+	 * @param endDate optional 
 	 *
-	 * @param [arguments]]/_[arguments] optional 
+	 * @param arguments optional 
 	 */
 	public void js_addJob(String name, Date time, Function method, int repeatInterval, int repeatCount, Date endDate, Object[] args)
 	{
