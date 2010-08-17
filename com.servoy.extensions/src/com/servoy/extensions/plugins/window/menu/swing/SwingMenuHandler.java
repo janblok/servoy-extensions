@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.swing;
 
 import java.awt.Component;
@@ -154,17 +154,17 @@ public class SwingMenuHandler implements IMenuHandler
 			Component container = searchContainer(clientPluginAccess.getCurrentWindow(), jcomp.getName());
 			if (container != null)
 			{
-				popupMenu.showPopup(container, 0 + jcomp.getX(), popY + jcomp.getY());
+				popupMenu.showPopup(container, x + jcomp.getX(), popY + jcomp.getY());
 			}
 			else
 			{
 				// container was not found, just show it in current window
-				popupMenu.showPopup(clientPluginAccess.getCurrentWindow(), 0 + jcomp.getX(), popY + jcomp.getY());
+				popupMenu.showPopup(clientPluginAccess.getCurrentWindow(), x + jcomp.getX(), popY + jcomp.getY());
 			}
 		}
 		else
 		{
-			popupMenu.showPopup(component, 0, popY);
+			popupMenu.showPopup(component, x, popY);
 		}
 	}
 
