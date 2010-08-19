@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.converters;
 
 import java.util.HashMap;
@@ -29,11 +29,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 
 public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDescriptorProvider
 {
-
 	private IClientPluginAccess clientPluginAccess;
-	private final String TO_OBJECT_NAME_PROPERTY = "toObjectMethodName"; //$NON-NLS-1$
-	private final String FROM_OBJECT_NAME_PROPERTY = "fromObjectMethodName"; //$NON-NLS-1$
-	private final String TYPE_NAME_PROPERTY = "type"; //$NON-NLS-1$
 
 	public GlobalMethodConverter(IClientPluginAccess clientPluginAccess)
 	{

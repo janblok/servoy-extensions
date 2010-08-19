@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.validators;
 
 import java.util.HashMap;
@@ -29,7 +29,6 @@ import com.servoy.j2db.util.Utils;
 
 public class GlobalMethodValidator implements IColumnValidator, IPropertyDescriptorProvider
 {
-	private static final String GLOBAL_METHOD_NAME_PROPERTY = "globalMethodName"; //$NON-NLS-1$
 	private IClientPluginAccess clientPluginAccess;
 
 	GlobalMethodValidator(IClientPluginAccess access)
