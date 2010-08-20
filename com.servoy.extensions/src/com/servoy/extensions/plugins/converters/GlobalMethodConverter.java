@@ -23,12 +23,21 @@ import com.servoy.j2db.dataprocessing.IPropertyDescriptor;
 import com.servoy.j2db.dataprocessing.IPropertyDescriptorProvider;
 import com.servoy.j2db.dataprocessing.ITypedColumnConverter;
 import com.servoy.j2db.dataprocessing.PropertyDescriptor;
+import com.servoy.j2db.persistence.ArgumentType;
 import com.servoy.j2db.persistence.Column;
 import com.servoy.j2db.persistence.IColumnTypes;
+import com.servoy.j2db.persistence.IMethodArgument;
+import com.servoy.j2db.persistence.IMethodTemplate;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IMethodTemplatesFactory;
+import com.servoy.j2db.plugins.IMethodTemplatesProvider;
 
-public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDescriptorProvider
+public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDescriptorProvider, IMethodTemplatesProvider
 {
+	private final String TO_OBJECT_NAME_PROPERTY = "toObjectMethodName"; //$NON-NLS-1$
+	private final String FROM_OBJECT_NAME_PROPERTY = "fromObjectMethodName"; //$NON-NLS-1$
+	private final String TYPE_NAME_PROPERTY = "type"; //$NON-NLS-1$
+
 	private IClientPluginAccess clientPluginAccess;
 
 	public GlobalMethodConverter(IClientPluginAccess clientPluginAccess)
@@ -131,4 +140,36 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDe
 		this.clientPluginAccess = clientPluginAccess;
 	}
 
+	public Map<String, IMethodTemplate> getMethodTemplates(IMethodTemplatesFactory methodTemplatesFactory)
+	{
+		Map<String, IMethodTemplate> methodTemplates = new HashMap<String, IMethodTemplate>();
+
+		methodTemplates.put(
+			FROM_OBJECT_NAME_PROPERTY,
+			methodTemplatesFactory.createMethodTemplate(
+				"globalConverterObj2DB",
+				"Called for performing a conversion between a displayed value and a database value.",
+				ArgumentType.Object,
+				"the database value.",
+				new IMethodArgument[] { methodTemplatesFactory.createMethodArgument("displayedValue", ArgumentType.Object, "The displayed value."), methodTemplatesFactory.createMethodArgument(
+					"dbType", ArgumentType.String, "The type of the database column. Can be one of \"" + Column.getDisplayTypeString(IColumnTypes.TEXT) +
+						"\", \"" + Column.getDisplayTypeString(IColumnTypes.INTEGER) + "\", \"" + Column.getDisplayTypeString(IColumnTypes.NUMBER) + "\", \"" +
+						Column.getDisplayTypeString(IColumnTypes.DATETIME) + "\" or \"" + Column.getDisplayTypeString(IColumnTypes.MEDIA) + "\".") },
+				"// return the original value without conversion\n" + "return displayedValue;", true));
+
+		methodTemplates.put(
+			TO_OBJECT_NAME_PROPERTY,
+			methodTemplatesFactory.createMethodTemplate(
+				"globalConverterDB2Obj",
+				"Called for performing a conversion between a database value and a displayed value.",
+				ArgumentType.Object,
+				"the displayed value.",
+				new IMethodArgument[] { methodTemplatesFactory.createMethodArgument("databaseValue", ArgumentType.Object, "The database value."), methodTemplatesFactory.createMethodArgument(
+					"dbType", ArgumentType.String, "The type of the database column. Can be one of \"" + Column.getDisplayTypeString(IColumnTypes.TEXT) +
+						"\", \"" + Column.getDisplayTypeString(IColumnTypes.INTEGER) + "\", \"" + Column.getDisplayTypeString(IColumnTypes.NUMBER) + "\", \"" +
+						Column.getDisplayTypeString(IColumnTypes.DATETIME) + "\" or \"" + Column.getDisplayTypeString(IColumnTypes.MEDIA) + "\".") },
+				"// return the original value without conversion\n" + "return databaseValue;", true));
+
+		return methodTemplates;
+	}
 }

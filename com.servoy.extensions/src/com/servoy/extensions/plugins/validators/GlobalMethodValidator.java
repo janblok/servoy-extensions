@@ -23,12 +23,19 @@ import com.servoy.j2db.dataprocessing.IColumnValidator;
 import com.servoy.j2db.dataprocessing.IPropertyDescriptor;
 import com.servoy.j2db.dataprocessing.IPropertyDescriptorProvider;
 import com.servoy.j2db.dataprocessing.PropertyDescriptor;
+import com.servoy.j2db.persistence.ArgumentType;
+import com.servoy.j2db.persistence.IMethodArgument;
+import com.servoy.j2db.persistence.IMethodTemplate;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IMethodTemplatesFactory;
+import com.servoy.j2db.plugins.IMethodTemplatesProvider;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
-public class GlobalMethodValidator implements IColumnValidator, IPropertyDescriptorProvider
+public class GlobalMethodValidator implements IColumnValidator, IPropertyDescriptorProvider, IMethodTemplatesProvider
 {
+	public static final String GLOBAL_METHOD_NAME_PROPERTY = "globalMethodName"; //$NON-NLS-1$
+
 	private IClientPluginAccess clientPluginAccess;
 
 	GlobalMethodValidator(IClientPluginAccess access)
@@ -96,5 +103,17 @@ public class GlobalMethodValidator implements IColumnValidator, IPropertyDescrip
 	 */
 	public void validateProperties(Map<String, String> properties)
 	{
+	}
+
+	public Map<String, IMethodTemplate> getMethodTemplates(IMethodTemplatesFactory methodTemplatesFactory)
+	{
+		Map<String, IMethodTemplate> methodTemplates = new HashMap<String, IMethodTemplate>();
+
+		methodTemplates.put(GLOBAL_METHOD_NAME_PROPERTY, methodTemplatesFactory.createMethodTemplate("globalValidator",
+			"Called for performing validation on a value before storing it into the database.", ArgumentType.Boolean, "the result of the validation.",
+			new IMethodArgument[] { methodTemplatesFactory.createMethodArgument("value", ArgumentType.Object, "The value to be validated.") }, "return true;",
+			true));
+
+		return methodTemplates;
 	}
 }
