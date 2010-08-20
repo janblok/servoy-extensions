@@ -108,6 +108,10 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				js.append(((ScriptableWicketMenu)elem).generateMenuJS(popupMenu, "menu" + currentMenuNr)); //$NON-NLS-1$ 
 
 				js.append("var m" + currentMenuNr + " = new YAHOO.widget.MenuItem('" + elem.getText() + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (((ScriptableWicketMenu)elem).getBackgroundColor() != null)
+				{
+					js.append("YAHOO.util.Dom.setStyle(m").append(currentMenuNr).append(".element, 'background-color', '").append(((ScriptableWicketMenu)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				}
 				js.append("m" + currentMenuNr + ".cfg.setProperty('submenu',menu" + currentMenuNr + ");"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if (!elem.isEnabled())
 				{
@@ -154,6 +158,10 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 					text = labelText.toString();
 				}
 				js.append("mi = new YAHOO.widget.MenuItem('" + text + "');"); //$NON-NLS-1$ //$NON-NLS-2$ 
+				if (elem instanceof ScriptableWicketMenuItem && ((ScriptableWicketMenuItem)elem).getBackgroundColor() != null)
+				{
+					js.append("YAHOO.util.Dom.setStyle(mi.element, 'background-color', '").append(((ScriptableWicketMenuItem)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
 				js.append("mi.cfg.setProperty('onclick', {fn:svy_popmenu_click,obj:\"" + popupMenu.getCallBackUrl(elem) + "\"});"); //$NON-NLS-1$ //$NON-NLS-2$ 
 
 				if (!elem.isEnabled())

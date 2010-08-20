@@ -13,10 +13,12 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.util;
 
 
+import java.awt.Color;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -97,5 +99,34 @@ public class Utilities
 			}
 		}
 		return image;
+	}
+
+	public static Color createColor(String s)
+	{
+		Color retval = null;
+		if (s != null && s.length() == 7)
+		{
+			try
+			{
+				retval = Color.decode(s);
+			}
+			catch (NumberFormatException e)
+			{
+				//ignore;
+			}
+		}
+		if (s != null && retval == null)
+		{
+			try
+			{
+				Field field = Color.class.getField(s);
+				return (Color)field.get(null);
+			}
+			catch (Exception e)
+			{
+				// ignore
+			}
+		}
+		return retval;
 	}
 }

@@ -37,6 +37,7 @@ public class ScriptableWicketMenuItem implements IMenuItem
 
 	private boolean selected;
 	private boolean enabled;
+	private String bgColor;
 
 	private AbstractMenuItem scriptObjectWrapper;
 
@@ -154,5 +155,15 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem)
 	{
 		this.scriptObjectWrapper = abstractMenuItem;
+	}
+
+	public void setBackgroundColor(String bgColor)
+	{
+		this.bgColor = bgColor;
+	}
+
+	public String getBackgroundColor()
+	{
+		return bgColor;
 	}
 }

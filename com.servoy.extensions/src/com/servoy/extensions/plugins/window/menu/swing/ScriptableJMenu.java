@@ -331,4 +331,9 @@ public class ScriptableJMenu implements IMenu
 	{
 		this.scriptObjectWrapper = abstractMenuItem;
 	}
+
+	public void setBackgroundColor(String bgColor)
+	{
+		jmenu.setBackground(Utilities.createColor(bgColor));
+	}
 }

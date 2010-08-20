@@ -61,4 +61,9 @@ public class ScriptableJCheckBoxMenuItem extends JCheckBoxMenuItem implements IC
 	{
 		this.scriptObjectWrapper = abstractMenuItem;
 	}
+
+	public void setBackgroundColor(String bgColor)
+	{
+		setBackground(Utilities.createColor(bgColor));
+	}
 }

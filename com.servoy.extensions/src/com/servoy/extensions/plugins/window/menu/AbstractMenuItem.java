@@ -305,6 +305,10 @@ public abstract class AbstractMenuItem implements IScriptObject
 		return menuItem.getName();
 	}
 
+	public void js_setBackgroundColor(String bgColor)
+	{
+		menuItem.setBackgroundColor(bgColor);
+	}
 
 	public static AbstractMenuItem createmenuItem(IClientPluginAccess pluginAccess, IMenuHandler menuHandler, IMenuItem menuItem, MenuItemArgs menuItemArgs,
 		boolean legacyMenubarArguments)
@@ -400,6 +404,10 @@ public abstract class AbstractMenuItem implements IScriptObject
 		{
 			return new String[] { "method", "[methodArguments]" }; //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		if ("setBackgroundColor".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return new String[] { "backgroundColor" }; //$NON-NLS-1$
+		}
 		return null;
 	}
 
@@ -407,7 +415,7 @@ public abstract class AbstractMenuItem implements IScriptObject
 	{
 		if ("setAccelerator".equals(methodName) || "setMethod".equals(methodName) || "methodArguments".equals(methodName) || "setEnabled".equals(methodName) || //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			"setIcon".equals(methodName) || "setMethod".equals(methodName) || "setMnemonic".equals(methodName) || "setText".equals(methodName) || //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			"setVisible".equals(methodName)) //$NON-NLS-1$ 
+			"setVisible".equals(methodName) || "setBackgroundColor".equals(methodName)) //$NON-NLS-1$  //$NON-NLS-2$
 		{
 			StringBuilder sample = new StringBuilder();
 			sample.append("var menu = plugins.window.getMenu(2).getItem(0);\n// "); //$NON-NLS-1$ 
@@ -427,6 +435,7 @@ public abstract class AbstractMenuItem implements IScriptObject
 			sample.append("\nmenu.setEnabled(false);\n// "); //$NON-NLS-1$ 
 			sample.append(getToolTip("setVisible")); //$NON-NLS-1$ 
 			sample.append("\nmenu.setVisible(true);\n"); //$NON-NLS-1$ 
+			sample.append("\nmenu.setBackgroundColor('#ff0000');\n"); //$NON-NLS-1$
 			return sample.toString();
 		}
 		else if ("doClick".equals(methodName)) //$NON-NLS-1$ 
@@ -481,6 +490,10 @@ public abstract class AbstractMenuItem implements IScriptObject
 		if ("getText".equals(methodName)) //$NON-NLS-1$ 
 		{
 			return "Retrieve the text."; //$NON-NLS-1$ 
+		}
+		if ("setBackgroundColor".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return "Set the background color of the item."; //$NON-NLS-1$ 
 		}
 		return null;
 	}

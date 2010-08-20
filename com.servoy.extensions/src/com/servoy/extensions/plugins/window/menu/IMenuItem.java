@@ -74,4 +74,6 @@ public interface IMenuItem
 	public void setScriptObjectWrapper(AbstractMenuItem abstractMenuItem);
 
 	public AbstractMenuItem getScriptObjectWrapper();
+
+	public void setBackgroundColor(String bgColor);
 }

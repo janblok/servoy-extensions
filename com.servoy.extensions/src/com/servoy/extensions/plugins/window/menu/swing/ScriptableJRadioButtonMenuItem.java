@@ -61,4 +61,9 @@ public class ScriptableJRadioButtonMenuItem extends JRadioButtonMenuItem impleme
 	{
 		this.scriptObjectWrapper = abstractMenuItem;
 	}
+
+	public void setBackgroundColor(String bgColor)
+	{
+		setBackground(Utilities.createColor(bgColor));
+	}
 }

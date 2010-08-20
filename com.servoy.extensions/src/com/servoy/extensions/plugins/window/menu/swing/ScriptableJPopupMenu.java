@@ -220,4 +220,13 @@ public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 	{
 		this.scriptObjectWrapper = abstractMenuItem;
 	}
+
+	public void setBackgroundColor(String bgColor)
+	{
+	}
+
+	public String getBackgroundColor()
+	{
+		return null;
+	}
 }
