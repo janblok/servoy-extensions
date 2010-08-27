@@ -30,12 +30,20 @@ import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreePath;
 
+import org.mozilla.javascript.Function;
+
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView.UserNodeTreeCellRenderer;
+import com.servoy.j2db.dataprocessing.IRecord;
+import com.servoy.j2db.dataprocessing.Record;
 import com.servoy.j2db.dnd.CompositeTransferHandler;
+import com.servoy.j2db.dnd.DRAGNDROP;
 import com.servoy.j2db.dnd.ICompositeDragNDrop;
 import com.servoy.j2db.dnd.JSDNDEvent;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.scripting.FunctionDefinition;
 
 /**
  * Class representing the smart client tree
@@ -47,17 +55,19 @@ public class SwingDBTree extends JTree implements TableCellRenderer, ICompositeD
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private int visibleRow;
+	private final SwingDBTreeView parent;
 	private final IClientPluginAccess application;
 
-	SwingDBTree(IClientPluginAccess application)
+	private FunctionDefinition fOnDrag;
+	private FunctionDefinition fOnDragEnd;
+	private FunctionDefinition fOnDragOver;
+	private FunctionDefinition fOnDrop;
+	private boolean dragEnabled;
+
+	SwingDBTree(SwingDBTreeView parent, IClientPluginAccess application)
 	{
+		this.parent = parent;
 		this.application = application;
-		setDragEnabled(true);
-		// TODO: create custom drag gesture recognizer
-		//DragSource.getDefaultDragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, dgl)
-		TransferHandler treeTransferHandler = new CompositeTransferHandler();
-		setTransferHandler(treeTransferHandler);
-		new DropTarget(this, (DropTargetListener)treeTransferHandler);
 	}
 
 	public void setVisibleRow(int visibleRow)
@@ -156,29 +166,103 @@ public class SwingDBTree extends JTree implements TableCellRenderer, ICompositeD
 
 	public Object getDragSource(Point xy)
 	{
-		return this;
+		TreePath p = this.getPathForLocation(xy.x, xy.y);
+		return p != null ? p.getLastPathComponent() : null;
 	}
 
 	public int onDrag(JSDNDEvent event)
 	{
-		//System.out.println("ON DRAG");
-		return 1;
+		if (fOnDrag != null)
+		{
+			fillDragEvent(event);
+			Object dragReturn = fOnDrag.executeSync(application, new Object[] { event });
+			if (dragReturn instanceof Number) return ((Number)dragReturn).intValue();
+		}
+
+		return DRAGNDROP.NONE;
 	}
 
 	public void onDragEnd(JSDNDEvent event)
 	{
-		//System.out.println("ON DRAG END");
+		if (fOnDragEnd != null)
+		{
+			fillDragEvent(event);
+			fOnDragEnd.executeSync(application, new Object[] { event });
+		}
 	}
 
 	public boolean onDragOver(JSDNDEvent event)
 	{
-		//System.out.println("ON DRAG OVER");
-		return true;
+		if (fOnDragOver != null)
+		{
+			fillDragEvent(event);
+			Object dragOverReturn = fOnDragOver.executeSync(application, new Object[] { event });
+			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
+		}
+
+		return false;
 	}
 
 	public boolean onDrop(JSDNDEvent event)
 	{
-		//System.out.println("ON DROP");
-		return true;
+		if (fOnDrop != null)
+		{
+			fillDragEvent(event);
+			Object dropHappened = fOnDrop.executeSync(application, new Object[] { event });
+			if (dropHappened instanceof Boolean) return ((Boolean)dropHappened).booleanValue();
+		}
+		return false;
+	}
+
+	private void fillDragEvent(JSDNDEvent event)
+	{
+		event.setSource(parent);
+		String dragSourceName = parent.getName();
+		if (dragSourceName == null) dragSourceName = parent.getId();
+		event.setElementName(dragSourceName);
+
+		Object dragSource = getDragSource(new Point(event.js_getX(), event.js_getY()));
+		if (dragSource instanceof UserNode)
+		{
+			IRecord dragRecord = ((UserNode)dragSource).getRecord();
+			if (dragRecord instanceof Record) event.setRecord((Record)dragRecord);
+		}
+	}
+
+	void setOnDragCallback(Function fOnDrag)
+	{
+		this.fOnDrag = new FunctionDefinition(fOnDrag);
+		initDragAndDrop();
+	}
+
+	void setOnDragEndCallback(Function fOnDragEnd)
+	{
+		this.fOnDragEnd = new FunctionDefinition(fOnDragEnd);
+		initDragAndDrop();
+	}
+
+	void setOnDragOverCallback(Function fOnDragOver)
+	{
+		this.fOnDragOver = new FunctionDefinition(fOnDragOver);
+		initDragAndDrop();
+	}
+
+	void setOnDropCallback(Function fOnDrop)
+	{
+		this.fOnDrop = new FunctionDefinition(fOnDrop);
+		initDragAndDrop();
+	}
+
+	private void initDragAndDrop()
+	{
+		if (!dragEnabled)
+		{
+			setDragEnabled(true);
+
+			TransferHandler treeTransferHandler = new CompositeTransferHandler();
+			setTransferHandler(treeTransferHandler);
+			new DropTarget(this, (DropTargetListener)treeTransferHandler);
+			dragEnabled = true;
+		}
 	}
 }

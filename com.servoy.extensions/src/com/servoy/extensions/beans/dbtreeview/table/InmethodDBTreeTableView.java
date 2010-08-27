@@ -672,4 +672,48 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	{
 		return wicketTree.js_createRelationInfo();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrag(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDrag(Function fOnDrag)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragEnd(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDragEnd(Function fOnDragEnd)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragOver(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDragOver(Function fOnDragOver)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrop(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDrop(Function fOnDrop)
+	{
+		// TODO Auto-generated method stub
+
+	}
 }

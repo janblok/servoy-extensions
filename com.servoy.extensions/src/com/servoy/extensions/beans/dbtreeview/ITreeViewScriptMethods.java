@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
@@ -92,6 +92,14 @@ public interface ITreeViewScriptMethods extends IScriptObject, ITreeView
 	public RelationInfo js_createRelationInfo();
 
 	public void js_setRowHeight(int height);
+
+	public void js_setOnDrag(Function fOnDrag);
+
+	public void js_setOnDragEnd(Function fOnDragEnd);
+
+	public void js_setOnDragOver(Function fOnDragOver);
+
+	public void js_setOnDrop(Function fOnDrop);
 
 	/**
 	 * for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info

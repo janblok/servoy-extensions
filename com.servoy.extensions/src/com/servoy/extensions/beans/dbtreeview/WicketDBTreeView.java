@@ -46,11 +46,18 @@ import org.apache.wicket.markup.html.tree.ITreeStateListener;
 import org.apache.wicket.model.IModel;
 import org.mozilla.javascript.Function;
 
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.j2db.dataprocessing.IRecord;
+import com.servoy.j2db.dataprocessing.Record;
+import com.servoy.j2db.dnd.DRAGNDROP;
+import com.servoy.j2db.dnd.ICompositeDragNDrop;
+import com.servoy.j2db.dnd.JSDNDEvent;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
+import com.servoy.j2db.scripting.JSEvent.EventType;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.dataui.StyleAttributeModifierModel;
+import com.servoy.j2db.server.headlessclient.dataui.drag.DraggableBehavior;
 import com.servoy.j2db.ui.IStylePropertyChanges;
 import com.servoy.j2db.util.DataSourceUtils;
 
@@ -59,7 +66,7 @@ import com.servoy.j2db.util.DataSourceUtils;
  * 
  * @author gboros
  */
-public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderContributor
+public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderContributor, ICompositeDragNDrop
 {
 	private static final long serialVersionUID = 1L;
 
@@ -70,6 +77,11 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 
 	private final IClientPluginAccess application;
 
+	private FunctionDefinition fOnDrag;
+	private FunctionDefinition fOnDragEnd;
+	private FunctionDefinition fOnDragOver;
+	private FunctionDefinition fOnDrop;
+	private boolean dragEnabled;
 
 	protected WicketDBTreeView(String id, IClientPluginAccess application)
 	{
@@ -320,6 +332,8 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			if (unFont != null) treeNodeStyleAdapter.setContentFont(unFont);
 
 		}
+
+		if (dragEnabled) addDragNDropBehavior(nodeComp);
 
 		return nodeComp;
 
@@ -860,5 +874,199 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 					"').offsetTop;\n");
 			}
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDrag(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public int onDrag(JSDNDEvent event)
+	{
+		if (fOnDrag != null)
+		{
+			Object dragReturn = fOnDrag.executeSync(application, new Object[] { event });
+			if (dragReturn instanceof Number) return ((Number)dragReturn).intValue();
+		}
+
+		return DRAGNDROP.NONE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDragOver(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public boolean onDragOver(JSDNDEvent event)
+	{
+		if (fOnDragOver != null)
+		{
+			Object dragOverReturn = fOnDragOver.executeSync(application, new Object[] { event });
+			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
+		}
+
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDrop(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public boolean onDrop(JSDNDEvent event)
+	{
+		if (fOnDrop != null)
+		{
+			Object dropHappened = fOnDrop.executeSync(application, new Object[] { event });
+			if (dropHappened instanceof Boolean) return ((Boolean)dropHappened).booleanValue();
+		}
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDragEnd(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public void onDragEnd(JSDNDEvent event)
+	{
+		if (fOnDragEnd != null)
+		{
+			fOnDragEnd.executeSync(application, new Object[] { event });
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#getDragSource(java.awt.Point)
+	 */
+	public Object getDragSource(Point xy)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private JSDNDEvent createScriptEvent(EventType type, Point xy, WicketDBTreeViewNode node)
+	{
+		JSDNDEvent jsEvent = new JSDNDEvent();
+		jsEvent.setType(type);
+		//jsEvent.setFormName(getDragFormName());
+		//IRecordInternal dragRecord = getDragRecord(xy);
+		//if (dragRecord instanceof Record) jsEvent.setRecord((Record)dragRecord);
+
+		jsEvent.setSource(this);
+		String dragSourceName = getName();
+		if (dragSourceName == null) dragSourceName = getId();
+		jsEvent.setElementName(dragSourceName);
+
+		if (xy != null) jsEvent.setLocation(xy);
+
+		Object nodeSource = node.getDefaultModelObject();
+		if (nodeSource instanceof UserNode)
+		{
+			IRecord dragRecord = ((UserNode)nodeSource).getRecord();
+			if (dragRecord instanceof Record) jsEvent.setRecord((Record)dragRecord);
+		}
+
+		return jsEvent;
+	}
+
+	private void addDragNDropBehavior(final WicketDBTreeViewNode node)
+	{
+		DraggableBehavior dragBehavior = new DraggableBehavior()
+		{
+			@Override
+			protected void onDragEnd(String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			{
+				JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragEnd, null, node);
+				event.setData(getDragData());
+				event.setDataMimeType(getDragDataMimeType());
+				event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
+				WicketDBTreeView.this.onDragEnd(event);
+
+				super.onDragEnd(id, x, y, ajaxRequestTarget);
+			}
+
+			@Override
+			protected void onDragStart(final String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			{
+				JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrag, new Point(x, y), node);
+				setDropResult(false);
+				setCurrentDragOperation(WicketDBTreeView.this.onDrag(event));
+				setDragData(event.getData(), event.getDataMimeType());
+			}
+
+			@Override
+			protected void onDrop(String id, final String targetid, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			{
+				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				{
+					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrop, new Point(x, y), node);
+					event.setData(getDragData());
+					event.setDataMimeType(getDragDataMimeType());
+					setDropResult(WicketDBTreeView.this.onDrop(event));
+				}
+			}
+
+			@Override
+			protected void onDropHover(String id, final String targetid, AjaxRequestTarget ajaxRequestTarget)
+			{
+				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				{
+					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragOver, null, node);
+					event.setData(getDragData());
+					event.setDataMimeType(getDragDataMimeType());
+					WicketDBTreeView.this.onDragOver(event);
+				}
+			}
+
+		};
+		dragBehavior.setUseProxy(true);
+		node.add(dragBehavior);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrag(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDrag(Function fOnDrag)
+	{
+		this.fOnDrag = new FunctionDefinition(fOnDrag);
+		dragEnabled = true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragEnd(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDragEnd(Function fOnDragEnd)
+	{
+		this.fOnDragEnd = new FunctionDefinition(fOnDragEnd);
+		dragEnabled = true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragOver(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDragOver(Function fOnDragOver)
+	{
+		this.fOnDragOver = new FunctionDefinition(fOnDragOver);
+		dragEnabled = true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrop(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDrop(Function fOnDrop)
+	{
+		this.fOnDrop = new FunctionDefinition(fOnDrop);
+		dragEnabled = true;
 	}
 }

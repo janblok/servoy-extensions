@@ -52,6 +52,7 @@ public abstract class WicketDBTreeViewNode extends LinkIconPanel implements Wick
 		super(id, model, tree);
 	}
 
+
 	public Label getTreeNodeLabel()
 	{
 		return nodeLabel;

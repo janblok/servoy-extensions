@@ -102,7 +102,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		this.application = application;
 		bindingInfo = new BindingInfo(application);
 
-		setViewportView(tree = new SwingDBTree(application));
+		setViewportView(tree = new SwingDBTree(this, application));
 
 		tree.setEditable(true);
 		tree.setRootVisible(false);
@@ -1103,5 +1103,45 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	public RelationInfo js_createRelationInfo()
 	{
 		return new RelationInfo();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrag(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDrag(Function fOnDrag)
+	{
+		tree.setOnDragCallback(fOnDrag);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragEnd(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDragEnd(Function fOnDragEnd)
+	{
+		tree.setOnDragEndCallback(fOnDragEnd);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragOver(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDragOver(Function fOnDragOver)
+	{
+		tree.setOnDragOverCallback(fOnDragOver);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrop(org.mozilla.javascript.Function)
+	 */
+	public void js_setOnDrop(Function fOnDrop)
+	{
+		tree.setOnDropCallback(fOnDrop);
 	}
 }
