@@ -471,7 +471,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public Object unwrap()
 	{
-		return imageData;
+		return js_getData();
 	}
 
 	@SuppressWarnings({ "unchecked", "nls" })
