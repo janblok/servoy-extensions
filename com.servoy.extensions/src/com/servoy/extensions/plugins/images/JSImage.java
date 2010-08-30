@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.images;
 
 import java.awt.Color;
@@ -22,14 +22,17 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.mozilla.javascript.Wrapper;
 
-import com.drew.imaging.jpeg.JpegMetadataReader;
-import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.Rational;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
@@ -38,6 +41,7 @@ import com.drew.metadata.Tag;
 import com.drew.metadata.jpeg.JpegComponent;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.ImageLoader;
+import com.servoy.j2db.util.Utils;
 
 /**
  * @author jcompagner
@@ -51,16 +55,25 @@ public class JSImage implements IScriptObject, Wrapper
 
 	private Map<String, Object[]> metadataMap;
 
+	private final File file;
+
 	// used by the javascript lib
 	public JSImage()
 	{
+		file = null;
+	}
 
+	public JSImage(File file)
+	{
+		super();
+		this.file = file;
 	}
 
 	public JSImage(byte[] image)
 	{
 		super();
 		this.imageData = image;
+		file = null;
 	}
 
 	/**
@@ -197,7 +210,14 @@ public class JSImage implements IScriptObject, Wrapper
 	{
 		if (dimension == null)
 		{
-			dimension = ImageLoader.getSize(imageData);
+			if (imageData != null)
+			{
+				dimension = ImageLoader.getSize(imageData);
+			}
+			else
+			{
+				dimension = ImageLoader.getSize(file);
+			}
 		}
 		return dimension;
 	}
@@ -233,6 +253,10 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public byte[] js_getData()
 	{
+		if (imageData == null)
+		{
+			imageData = Utils.readFile(file, -1);
+		}
 		return imageData;
 	}
 
@@ -247,6 +271,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public JSImage js_resize(int width, int height)
 	{
+		js_getData();
 		byte[] array = ImageLoader.resize(imageData, width, height, true);
 		if (array != null)
 		{
@@ -268,6 +293,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public JSImage js_rotate(final double currentAngle)
 	{
+		js_getData();
 		final double radians = Math.toRadians(currentAngle);
 
 		final int currentWidth = getSize().width;
@@ -331,6 +357,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public JSImage js_flip(int type)
 	{
+		js_getData();
 		final int currentWidth = getSize().width;
 		final int currentHeight = getSize().height;
 
@@ -373,6 +400,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public String js_getContentType()
 	{
+		js_getData();
 		return ImageLoader.getContentType(imageData);
 	}
 
@@ -436,15 +464,24 @@ public class JSImage implements IScriptObject, Wrapper
 		return imageData;
 	}
 
+	@SuppressWarnings({ "unchecked", "nls" })
 	private void generateMetaData()
 	{
 		if (metadataMap != null) return;
 		metadataMap = new TreeMap<String, Object[]>();
-		if (imageData == null) return;
+		if (imageData == null && file == null) return;
 		try
 		{
 
-			Metadata metadata = JpegMetadataReader.readMetadata(imageData);
+			Metadata metadata = null;
+			if (imageData != null)
+			{
+				metadata = ImageMetadataReader.readMetadata(new BufferedInputStream(new ByteArrayInputStream(imageData), 512));
+			}
+			else
+			{
+				metadata = ImageMetadataReader.readMetadata(file);
+			}
 			Iterator<Directory> directories = metadata.getDirectoryIterator();
 			while (directories.hasNext())
 			{
@@ -455,19 +492,19 @@ public class JSImage implements IScriptObject, Wrapper
 				{
 					Tag tag = tags.next();
 					// use Tag.toString()  
-					if (tag.getDirectoryName().equals("Sony Makernote")) continue; //$NON-NLS-1$
-					String description = ""; //$NON-NLS-1$
+					if (tag.getDirectoryName().equals("Sony Makernote")) continue;
+					String description = "";
 					try
 					{
 						description = tag.getDescription();
-						if (tag.getDescription() == null || "".equals(description)) continue; //$NON-NLS-1$
+						if (tag.getDescription() == null || "".equals(description)) continue;
 					}
 					catch (MetadataException ex)
 					{
 						continue;
 					}
 					String name = tag.getTagName();
-					if (name.indexOf("Unknown tag") != -1) continue; //$NON-NLS-1$
+					if (name.indexOf("Unknown tag") != -1) continue;
 
 					Object object = directory.getObject(tag.getTagType());
 					if (object instanceof JpegComponent || object instanceof int[] || (object instanceof byte[] && ((byte[])object).length <= 4))
@@ -478,11 +515,11 @@ public class JSImage implements IScriptObject, Wrapper
 					{
 						object = ((Rational)object).toString();
 					}
-					metadataMap.put(tag.getDirectoryName() + " - " + name, new Object[] { description, object }); //$NON-NLS-1$
+					metadataMap.put(tag.getDirectoryName() + " - " + name, new Object[] { description, object });
 				}
 			}
 		}
-		catch (JpegProcessingException jpe)
+		catch (ImageProcessingException jpe)
 		{
 			// ignore not a jpg or valid image for extracting exif.
 		}

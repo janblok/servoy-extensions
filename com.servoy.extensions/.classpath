@@ -10,11 +10,11 @@
 	<classpathentry kind="lib" path="lib/jakarta-poi.jar"/>
 	<classpathentry kind="lib" path="lib/jFdfTk.jar"/>
 	<classpathentry kind="lib" path="lib/itext.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/quartz.jar" sourcepath="libsrc/quartz-1.5.2-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/quartz.jar" sourcepath="libsrc/quartz-1.8.3-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell_US_UK_Dict.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell.jar"/>
 	<classpathentry kind="lib" path="lib/jai_imageio.jar"/>
-	<classpathentry kind="lib" path="lib/metadataextractor.jar"/>
+	<classpathentry kind="lib" path="lib/metadataextractor.jar" sourcepath="libsrc/metadataextractor-src.zip"/>
 	<classpathentry kind="lib" path="lib/openid4java.jar" sourcepath="libsrc/openid4java-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

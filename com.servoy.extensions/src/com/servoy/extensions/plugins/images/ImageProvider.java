@@ -13,19 +13,16 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.images;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 
 import javax.imageio.ImageIO;
 
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IScriptObject;
-import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.SnapShot;
 
 /**
@@ -165,29 +162,7 @@ public class ImageProvider implements IScriptObject
 			File file = (File)object;
 			if (file.exists() && file.canRead() && file.length() > 0)
 			{
-				BufferedInputStream bis = null;
-				try
-				{
-					FileInputStream fis = new FileInputStream(file);
-					bis = new BufferedInputStream(fis);
-					byte[] bytes = new byte[(int)file.length()];
-					bis.read(bytes);
-					object = bytes;
-				}
-				catch (Exception e)
-				{
-					Debug.error("error reading image", e); //$NON-NLS-1$
-				}
-				finally
-				{
-					if (bis != null) try
-					{
-						bis.close();
-					}
-					catch (Exception e2)
-					{
-					}
-				}
+				return new JSImage(file);
 			}
 		}
 
