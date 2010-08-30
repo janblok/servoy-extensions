@@ -520,7 +520,6 @@ public class Binding implements IScriptObject
 
 	public boolean isDeprecated(String methodName)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return "setMethodToCallOnClick".equals(methodName);
 	}
 }
