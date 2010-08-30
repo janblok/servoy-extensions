@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.images;
 
 import java.awt.Color;
@@ -22,13 +22,16 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.util.Iterator;
 import java.util.TreeMap;
 
 import org.mozilla.javascript.Wrapper;
 
-import com.drew.imaging.jpeg.JpegMetadataReader;
-import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.Rational;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
@@ -37,6 +40,7 @@ import com.drew.metadata.Tag;
 import com.drew.metadata.jpeg.JpegComponent;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.ImageLoader;
+import com.servoy.j2db.util.Utils;
 
 /**
  * @author jcompagner
@@ -50,16 +54,25 @@ public class JSImage implements IScriptObject, Wrapper
 
 	private TreeMap metadataMap;
 
+	private final File file;
+
 	// used by the javascript lib
 	public JSImage()
 	{
+		file = null;
+	}
 
+	public JSImage(File file)
+	{
+		super();
+		this.file = file;
 	}
 
 	public JSImage(byte[] image)
 	{
 		super();
 		this.imageData = image;
+		file = null;
 	}
 
 	/**
@@ -196,7 +209,14 @@ public class JSImage implements IScriptObject, Wrapper
 	{
 		if (dimension == null)
 		{
-			dimension = ImageLoader.getSize(imageData);
+			if (imageData != null)
+			{
+				dimension = ImageLoader.getSize(imageData);
+			}
+			else
+			{
+				dimension = ImageLoader.getSize(file);
+			}
 		}
 		return dimension;
 	}
@@ -232,6 +252,10 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public byte[] js_getData()
 	{
+		if (imageData == null)
+		{
+			imageData = Utils.readFile(file, -1);
+		}
 		return imageData;
 	}
 
@@ -246,6 +270,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public JSImage js_resize(int width, int height)
 	{
+		js_getData();
 		byte[] array = ImageLoader.resize(imageData, width, height, true);
 		if (array != null)
 		{
@@ -267,6 +292,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public JSImage js_rotate(final double currentAngle)
 	{
+		js_getData();
 		final double radians = Math.toRadians(currentAngle);
 
 		final int currentWidth = getSize().width;
@@ -330,6 +356,7 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public JSImage js_flip(int type)
 	{
+		js_getData();
 		final int currentWidth = getSize().width;
 		final int currentHeight = getSize().height;
 
@@ -372,7 +399,19 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public String js_getContentType()
 	{
-		return ImageLoader.getContentType(imageData);
+		if (imageData != null)
+		{
+			return ImageLoader.getContentType(imageData, file != null ? file.getName() : null);
+		}
+		else if (file != null)
+		{
+			byte[] bytes = Utils.readFile(file, 32);
+			if (bytes != null)
+			{
+				return ImageLoader.getContentType(bytes, file.getName());
+			}
+		}
+		return null;
 	}
 
 
@@ -435,15 +474,24 @@ public class JSImage implements IScriptObject, Wrapper
 		return imageData;
 	}
 
+	@SuppressWarnings({ "unchecked", "nls" })
 	private void generateMetaData()
 	{
 		if (metadataMap != null) return;
 		metadataMap = new TreeMap();
-		if (imageData == null) return;
+		if (imageData == null && file == null) return;
 		try
 		{
 
-			Metadata metadata = JpegMetadataReader.readMetadata(imageData);
+			Metadata metadata = null;
+			if (imageData != null)
+			{
+				metadata = ImageMetadataReader.readMetadata(new BufferedInputStream(new ByteArrayInputStream(imageData), 512));
+			}
+			else
+			{
+				metadata = ImageMetadataReader.readMetadata(file);
+			}
 			Iterator directories = metadata.getDirectoryIterator();
 			while (directories.hasNext())
 			{
@@ -481,7 +529,7 @@ public class JSImage implements IScriptObject, Wrapper
 				}
 			}
 		}
-		catch (JpegProcessingException jpe)
+		catch (ImageProcessingException jpe)
 		{
 			// ignore not a jpg or valid image for extrating exif.
 		}

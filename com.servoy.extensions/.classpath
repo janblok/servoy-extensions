@@ -7,7 +7,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/servoy_smart_client"/>
 	<classpathentry exported="true" kind="lib" path="lib/inmethod-grid.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jakarta-poi.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/metadataextractor.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/metadataextractor.jar" sourcepath="libsrc/metadataextractor-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/jFdfTk.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/itext.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/quartz.jar" sourcepath="libsrc/quartz-1.5.2-src.zip"/>
