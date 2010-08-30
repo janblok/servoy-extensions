@@ -320,12 +320,6 @@ public class RemoteFile extends AbstractFile
 		return null;
 	}
 
-
-	public Object unwrap()
-	{
-		return getBytes();
-	}
-
 	@Override
 	public boolean equals(Object obj)
 	{

@@ -206,9 +206,4 @@ public class LocalFile implements IAbstractFile
 		return file.toString();
 	}
 
-	public Object unwrap()
-	{
-		return file.getAbsolutePath();
-	}
-
 }

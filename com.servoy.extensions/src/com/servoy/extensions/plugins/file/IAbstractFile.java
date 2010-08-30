@@ -159,11 +159,4 @@ public interface IAbstractFile extends IUploadData
 	 */
 	boolean setReadOnly();
 
-
-	/**
-	 * Returns a concrete object for this file
-	 * @return the concrete object (either the absolute path for a local file, or byte[] for remote/web files)
-	 */
-	Object unwrap();
-
 }

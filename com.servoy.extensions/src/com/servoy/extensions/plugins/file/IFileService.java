@@ -104,7 +104,7 @@ public interface IFileService extends Remote
 		final int visibleOption, final int lockedOption) throws RemoteException, IOException, SecurityException;
 
 	/**
-	 * Retrieves a RemoteFileData object for the path provided either file or directory
+	 * Retrieves a {@link RemoteFileData} object for the path provided either file or directory
 	 * 
 	 * @param clientId the id of the client
 	 * @param path the file path on the server
@@ -114,6 +114,18 @@ public interface IFileService extends Remote
 	 * @throws SecurityException  if a SecurityException occurs
 	 */
 	public RemoteFileData getRemoteFileData(final String clientId, final String path) throws RemoteException, IOException, SecurityException;
+
+	/**
+	 * Retrieves {@link RemoteFileData}[] for the paths provided either files or directory
+	 * 
+	 * @param clientId the id of the client
+	 * @param path an array of file path on the server
+	 * 
+	 * @return an array of remote file data objects
+	 * @throws IOException  if an IOException occurs
+	 * @throws SecurityException  if a SecurityException occurs
+	 */
+	public RemoteFileData[] getRemoteFileData(final String clientId, final String[] path) throws RemoteException, IOException, SecurityException;
 
 	/**
 	 * Deletes a file on the server side represented by the path provided (relative to the defaultFolder)
