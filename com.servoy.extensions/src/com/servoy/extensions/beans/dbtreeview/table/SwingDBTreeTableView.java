@@ -41,6 +41,8 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import org.mozilla.javascript.Function;
+
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTree;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView;
@@ -459,6 +461,46 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		repaint();
 	}
 
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrag(org.mozilla.javascript.Function)
+	 */
+	@Override
+	public void js_setOnDrag(Function fOnDrag)
+	{
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragEnd(org.mozilla.javascript.Function)
+	 */
+	@Override
+	public void js_setOnDragEnd(Function fOnDragEnd)
+	{
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDragOver(org.mozilla.javascript.Function)
+	 */
+	@Override
+	public void js_setOnDragOver(Function fOnDragOver)
+	{
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods#js_setOnDrop(org.mozilla.javascript.Function)
+	 */
+	@Override
+	public void js_setOnDrop(Function fOnDrop)
+	{
+	}
 }
 
 class SwingDBTreeTableEditor extends AbstractCellEditor implements TableCellEditor
