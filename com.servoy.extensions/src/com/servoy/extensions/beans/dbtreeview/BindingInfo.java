@@ -581,13 +581,13 @@ public class BindingInfo
 		}
 	}
 
-	public FunctionDefinition getMethodToCallOnClick(FoundSetTreeModel.UserNode tn)
+	public FunctionDefinition getCallBack(FoundSetTreeModel.UserNode tn)
 	{
 		Binding tbi = getBinding(tn);
 
 		if (tbi != null)
 		{
-			return tbi.getMethodToCallOnClick();
+			return tbi.getCallBack();
 		}
 		else
 		{

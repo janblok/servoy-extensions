@@ -46,7 +46,7 @@ public class Binding implements IScriptObject
 	private String mRelationDataprovider;
 
 
-	private FunctionDefinition methodToCallOnClick;
+	private FunctionDefinition callBack;
 	private String returnDataprovider;
 	private FunctionDefinition methodToCallOnCheckBoxChange;
 	private String returnDataproviderOnCheckBoxChange;
@@ -286,23 +286,46 @@ public class Binding implements IScriptObject
 	{
 	}
 
-	public FunctionDefinition getMethodToCallOnClick()
+	public FunctionDefinition getCallBack()
 	{
-		return methodToCallOnClick;
+		return callBack;
 	}
 
+	/**
+	 * for compatibility
+	 * 
+	 * @deprecated
+	 */
+	@Deprecated
 	public void setMethodToCallOnClick(Function methodToCallOnClick, String returnDataprovider)
 	{
-		if (methodToCallOnClick != null)
+		setCallBackInfo(methodToCallOnClick, returnDataprovider);
+	}
+
+	/**
+	 * for compatibility
+	 * 
+	 * @deprecated
+	 */
+	@Deprecated
+	public void js_setMethodToCallOnClick(Function methodToCallOnClick, String returnDataprovider)
+	{
+	}
+
+	public void setCallBackInfo(Function f, String returnDataprovider)
+	{
+		if (f != null)
 		{
-			this.methodToCallOnClick = new FunctionDefinition(methodToCallOnClick);
+			this.callBack = new FunctionDefinition(f);
 			this.returnDataprovider = returnDataprovider;
 		}
 	}
 
-	public void js_setMethodToCallOnClick(Function methodToCallOnClick, String returnDataprovider)
+	public void js_setCallBackInfo(Function f, String returnDataprovider)
 	{
+
 	}
+
 
 	public String getMRelationDataprovider()
 	{
@@ -386,7 +409,7 @@ public class Binding implements IScriptObject
 			retval.append("('dataprovider');\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else if (methodName.startsWith("setMethod"))
+		else if (methodName.startsWith("setMethod") || methodName.startsWith("setCallBackInfo"))
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//"); //$NON-NLS-1$
@@ -466,9 +489,9 @@ public class Binding implements IScriptObject
 		{
 			return "Set method to call on check box status change";
 		}
-		else if (methodName.endsWith("MethodToCallOnClick"))
+		else if (methodName.endsWith("CallBackInfo"))
 		{
-			return "Set method to call on node mouse click";
+			return "Set callback method for node selection and double click";
 		}
 		else if (methodName.endsWith("ConfigurationDataprovider"))
 		{

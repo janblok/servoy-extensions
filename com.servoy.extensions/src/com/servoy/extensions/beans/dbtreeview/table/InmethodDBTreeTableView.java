@@ -159,7 +159,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
 				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]) };
 
-				FunctionDefinition f = wicketTree.bindingInfo.getMethodToCallOnClick((FoundSetTreeModel.UserNode)tn);
+				FunctionDefinition f = wicketTree.bindingInfo.getCallBack((FoundSetTreeModel.UserNode)tn);
 				if (f != null)
 				{
 					f.execute(application, args, false);

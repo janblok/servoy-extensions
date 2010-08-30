@@ -873,7 +873,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
 				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]) };
 
-				FunctionDefinition f = bindingInfo.getMethodToCallOnClick((FoundSetTreeModel.UserNode)tn);
+				FunctionDefinition f = bindingInfo.getCallBack((FoundSetTreeModel.UserNode)tn);
 				if (f != null)
 				{
 					f.execute(application, args, true);
