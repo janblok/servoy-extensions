@@ -20,8 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import org.mozilla.javascript.Wrapper;
-
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -32,7 +30,7 @@ import com.servoy.j2db.scripting.IScriptObject;
  * @author jcompagner
  * @author Servoy Stuff
  */
-public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
+public class JSFile implements IScriptObject, IJavaScriptType
 {
 	private final IAbstractFile file;
 	private JSFile[] EMPTY;
@@ -641,15 +639,9 @@ public class JSFile implements IScriptObject, Wrapper, IJavaScriptType
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
-	}
-
-	public Object unwrap()
-	{
-		return file.unwrap();
 	}
 
 	/**

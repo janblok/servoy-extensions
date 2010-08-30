@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 import java.util.UUID;
 
 import javax.swing.JFileChooser;
@@ -63,10 +64,12 @@ import com.servoy.j2db.util.Utils;
  */
 public class FileProvider implements IScriptObject
 {
+
 	protected final FilePlugin plugin;
 	private final FileSystemView fsf = FileSystemView.getFileSystemView();
 	private final Map<String, File> tempFiles = new HashMap<String, File>(); //check this map when saving (txt/binary) files
 	private static final JSFile[] EMPTY = new JSFile[0];
+	private final Timer timer = new Timer();
 
 	/**
 	 * Line Separator constant, used to append to Text file
@@ -1176,7 +1179,7 @@ public class FileProvider implements IScriptObject
 			sb.append("\tif (folder) {\n");
 			sb.append("\t\tvar files = %%elementName%%.getFolderContents(folder);\n");
 			sb.append("\t\tif (files) {\n");
-			sb.append("\t\t\t%%elementName%%.streamFilesToServer( files, callbackFunction );\n");
+			sb.append("\t\t\tvar monitor = %%elementName%%.streamFilesToServer( files, callbackFunction );\n");
 			sb.append("\t\t}\n");
 			sb.append("\t}\n");
 			return sb.toString();
@@ -1184,13 +1187,12 @@ public class FileProvider implements IScriptObject
 		else if ("streamFilesFromServer".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("// transfer the first file of the default server folder to a chosen file on the client\n");
-			sb.append("\tvar dir = plugins.file.getDesktopFolder();\n");
-			sb.append("\tvar file = plugins.file.showFileSaveDialog(dir,'Save file to');\n");
-			sb.append("\tif (file) {\n");
-			sb.append("\t\tvar list = plugins.file.getRemoteList('/', true);\n");
-			sb.append("\t\tif (list && list.length > 0) {\n");
-			sb.append("\t\t\tplugins.file.streamFilesFromServer(file, list[0], callbackFunction);\n");
+			sb.append("// transfer all the files of a chosen server folder to a directory on the client\n");
+			sb.append("\tvar dir = plugins.file.showDirectorySelectDialog();\n");
+			sb.append("\tif (dir) {\n");
+			sb.append("\t\tvar list = plugins.file.getRemoteFolderContents('/images/user1/', null, 1);\n");
+			sb.append("\t\tif (list) {\n");
+			sb.append("\t\t\tvar monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);\n");
 			sb.append("\t\t}\n");
 			sb.append("\t}\n");
 			return sb.toString();
@@ -1317,11 +1319,11 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("streamFilesToServer".equals(methodName))
 		{
-			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong.";
+			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object.";
 		}
 		else if ("streamFilesFromServer".equals(methodName))
 		{
-			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong.";
+			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object.";
 		}
 		else if ("getRemoteFolderContents".equals(methodName))
 		{
@@ -1456,7 +1458,7 @@ public class FileProvider implements IScriptObject
 
 	public Class< ? >[] getAllReturnedTypes()
 	{
-		return new Class[] { JSFile.class };
+		return new Class[] { JSFile.class, JSProgressMonitor.class };
 	}
 
 
@@ -1670,10 +1672,11 @@ public class FileProvider implements IScriptObject
 	 * @since Servoy 5.2
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public void js_streamFilesToServer(final Object f)
+	public JSProgressMonitor js_streamFilesToServer(final Object f)
 	{
-		js_streamFilesToServer(f, null, null);
+		return js_streamFilesToServer(f, null, null);
 	}
 
 	/**
@@ -1682,16 +1685,17 @@ public class FileProvider implements IScriptObject
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param o can be a JSFile or JSFile[], a String or String[] or the {@link Function} to be called back at the end of the process
+	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public void js_streamFilesToServer(final Object f, final Object o)
+	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object o)
 	{
 		if (o instanceof Function)
 		{
-			js_streamFilesToServer(f, null, (Function)o);
+			return js_streamFilesToServer(f, null, (Function)o);
 		}
 		else
 		{
-			js_streamFilesToServer(f, o, null);
+			return js_streamFilesToServer(f, o, null);
 		}
 	}
 
@@ -1700,142 +1704,47 @@ public class FileProvider implements IScriptObject
 	 * @since Servoy 5.2
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param names can be a JSFile or JSFile[], a String or String[]
+	 * @param s can be a JSFile or JSFile[], a String or String[]
 	 * @param callback the {@link Function} to be called back at the end of the process
+	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public void js_streamFilesToServer(final Object f, final Object names, final Function callback)
+	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object s, final Function callback)
 	{
 		if (f != null)
 		{
-			Object[] files = unwrap(f);
-			Object[] serverFileNames = unwrap(names);
-			if (files != null)
+			final Object[] fileObjects = unwrap(f);
+			final Object[] serverFiles = unwrap(s);
+			if (fileObjects != null)
 			{
 				// the FunctionDefinition is only created once for all files:
 				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
-				for (int i = 0; i < files.length; i++)
+				final File[] files = new File[fileObjects.length];
+				long totalBytes = 0;
+				for (int i = 0; i < fileObjects.length; i++)
 				{
-					final Object file = files[i];
-					// the serverName can be derived from an Array of String, at the same index as the file
-					String serverFileName = null;
-					if (serverFileNames != null && i < serverFileNames.length)
+					final File file = getFileFromArg(fileObjects[i], true);
+					if (file != null && file.canRead())
 					{
-						if (serverFileNames[i] instanceof JSFile)
-						{
-							JSFile jsFile = (JSFile)serverFileNames[i];
-							IAbstractFile abstractFile = jsFile.getAbstractFile();
-							if (abstractFile instanceof RemoteFile)
-							{
-								serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
-							}
-							else
-							{
-								serverFileName = abstractFile.getName();
-							}
-						}
-						else
-						{
-							serverFileName = serverFileNames[i].toString();
-						}
+						totalBytes += file.length();
+						files[i] = file;
 					}
-					streamFileToServer(file, serverFileName, function);
 				}
-			}
-		}
-	}
-
-	/**
-	 * Proxy method, will create the File instance to use from the file Object representation given<br/>
-	 * with a name to use on the server, and a callback function
-	 * @since Servoy 5.2
-	 * 
-	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param serverFileName the name of the file to stream into on the server
-	 * @param function the function to call at the end of the process
-	 */
-	private void streamFileToServer(final Object f, final String serverFileName, final FunctionDefinition function)
-	{
-		if (f != null)
-		{
-			try
-			{
-				final File file = getFileFromArg(f, true);
-				if (file != null && file.canRead())
-				{
-					streamFileToServer(file, (serverFileName == null) ? '/' + file.getName() : serverFileName, function);
-				}
-			}
-			catch (final Exception ex)
-			{
-				Debug.error(ex);
-			}
-		}
-	}
-
-	/**
-	 * Sends the content of a {@link File} in chunks to the server using a background thread
-	 * @since Servoy 5.2
-	 * 
-	 * @param is the {@link File} to read from
-	 * @param serverFileName the name of the file to stream into on the server
-	 * @param function the function to call at the end of the process
-	 */
-	private void streamFileToServer(final File file, final String serverFileName, final FunctionDefinition function) throws Exception
-	{
-		final IFileService service = getFileService();
-		plugin.getClientPluginAccess().getExecutor().execute(new Runnable()
-		{
-			public void run()
-			{
-				final String clientId = plugin.getClientPluginAccess().getClientID();
-				UUID uuid = null;
-				RemoteFileData remoteFile = null;
-				InputStream is = null;
-				Exception ex = null;
+				final JSProgressMonitor progressMonitor = new JSProgressMonitor(this, totalBytes, files.length);
 				try
 				{
-					is = new FileInputStream(file);
-					uuid = service.openTransfer(clientId, serverFileName);
-					if (uuid != null)
-					{
-						byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
-						int read = is.read(buffer);
-						while (read > -1)
-						{
-							service.writeBytes(uuid, buffer, 0, read);
-							read = is.read(buffer);
-						}
-					}
+					final IFileService service = getFileService();
+					plugin.getClientPluginAccess().getExecutor().execute(new ToServerWorker(files, serverFiles, function, progressMonitor, service));
+
+					return progressMonitor;
 				}
-				catch (final Exception e)
+				catch (Exception ex)
 				{
-					Debug.error(e);
-					ex = e;
+					Debug.error(ex);
 				}
-				finally
-				{
-					try
-					{
-						if (uuid != null) remoteFile = (RemoteFileData)service.closeTransfer(uuid);
-					}
-					catch (final RemoteException ignore)
-					{
-					}
-					try
-					{
-						if (is != null) is.close();
-					}
-					catch (final IOException ignore)
-					{
-					}
-					if (function != null)
-					{
-						final JSFile returnedFile = (remoteFile == null) ? null : new JSFile(new RemoteFile(remoteFile, service, clientId));
-						function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
-					}
-				}
+
 			}
-		});
+		}
+		return null;
 	}
 
 	/**
@@ -1843,11 +1752,12 @@ public class FileProvider implements IScriptObject
 	 * @since Servoy 5.2
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param names of the files on the server that will be transfered to the client, can be a String or a String[]
+	 * @param s of the files on the server that will be transfered to the client, can be a String or a String[]
+	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public void js_streamFilesFromServer(final Object f, final Object names)
+	public JSProgressMonitor js_streamFilesFromServer(final Object f, final Object s)
 	{
-		js_streamFilesFromServer(f, names, null);
+		return js_streamFilesFromServer(f, s, null);
 	}
 
 	/**
@@ -1856,147 +1766,99 @@ public class FileProvider implements IScriptObject
 	 * @since Servoy 5.2
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param names of the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
+	 * @param s the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
 	 * @param callback the {@link Function} to be called back at the end of the process (after every file)
+	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public void js_streamFilesFromServer(final Object f, final Object names, final Function callback)
+	@SuppressWarnings("nls")
+	public JSProgressMonitor js_streamFilesFromServer(final Object f, final Object s, final Function callback)
 	{
-		if (f != null)
+		if (f != null && s != null)
 		{
-			Object[] files = unwrap(f);
-			Object[] serverFileNames = unwrap(names);
-			if (files != null)
+			final Object[] fileObjects = unwrap(f);
+			final Object[] serverObjects = unwrap(s);
+			if (fileObjects != null && serverObjects != null)
 			{
+				final File firstFile = getFileFromArg(fileObjects[0], true);
+				if (fileObjects.length != serverObjects.length)
+				{
+					// we may have a folder, but then it must be a single argument:
+					if (fileObjects.length == 1)
+					{
+						if (!firstFile.isDirectory())
+						{
+							throw new IllegalArgumentException(
+								"The first argument must represent an existing folder or an array of files to receive the server files.");
+						}
+					}
+					else
+					{
+						throw new IllegalArgumentException("The number of files on the client side and on the server side don't match.");
+					}
+				}
 				// the FunctionDefinition is only created once for all files:
 				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
-				for (int i = 0; i < files.length; i++)
-				{
-					final Object file = files[i];
-					// the serverFile can be derived from an Array of String or JSFile, at the same index as the file
-					Object serverFile = null;
-					if (serverFileNames != null && i < serverFileNames.length)
-					{
-						serverFile = serverFileNames[i];
-					}
-					streamFileFromServer(file, serverFile, function);
-				}
-			}
-		}
-	}
+				final File[] files = new File[serverObjects.length];
+				long totalBytes = 0;
 
-	/**
-	 * Proxy method, will create the File instance to use from the file Object representation given<br/>
-	 * with a name to use on the server, and a callback function
-	 * @since Servoy 5.2
-	 * 
-	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param serverFile a JSFile object or its path as String
-	 * @param function the function to call at the end of the process
-	 */
-	private void streamFileFromServer(final Object f, final Object serverFile, final FunctionDefinition function)
-	{
-		if (f != null)
-		{
-			try
-			{
-				final File file = getFileFromArg(f, true);
-				if (file != null)
-				{
-					String serverFileName = file.getName();
-					if (serverFile != null)
-					{
-						if (serverFile instanceof JSFile)
-						{
-							IAbstractFile abstractFile = ((JSFile)serverFile).getAbstractFile();
-							if (abstractFile instanceof RemoteFile)
-							{
-								serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
-							}
-							else
-							{
-								serverFileName = abstractFile.getName();
-							}
-						}
-						else
-						{
-							serverFileName = serverFile.toString();
-						}
-					}
-					streamFileFromServer(file, (serverFileName == null) ? '/' + file.getName() : serverFileName, function);
-				}
-			}
-			catch (final Exception ex)
-			{
-				Debug.error(ex);
-			}
-		}
-	}
-
-	/**
-	 * Gets the content of a {@link File} on the server using a background thread
-	 * @since Servoy 5.2
-	 * 
-	 * @param is the {@link File} to write to.
-	 * @param serverFileName the name of the file to stream from the server
-	 * @param function the function to call at the end of the process
-	 */
-	private void streamFileFromServer(final File file, final String serverFileName, final FunctionDefinition function) throws Exception
-	{
-		final IFileService service = getFileService();
-		plugin.getClientPluginAccess().getExecutor().execute(new Runnable()
-		{
-			public void run()
-			{
-				UUID uuid = null;
-				OutputStream os = null;
-				Exception ex = null;
 				try
 				{
-					if (file.exists() || file.createNewFile())
+					final IFileService service = getFileService();
+					final String clientId = plugin.getClientPluginAccess().getClientID();
+					final RemoteFile[] remoteFiles = new RemoteFile[serverObjects.length];
+					if (serverObjects instanceof JSFile[])
 					{
-						os = new FileOutputStream(file);
-						uuid = service.openTransfer(plugin.getClientPluginAccess().getClientID(), serverFileName);
-						if (uuid != null)
+						for (int i = 0; i < serverObjects.length; i++)
 						{
-							byte[] bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
-							while (bytes != null)
+							Object serverFile = serverObjects[i];
+							if (serverFile != null)
 							{
-								os.write(bytes);
-								// check for the length (this results in 1 less call to the server)
-								if (bytes.length == CHUNK_BUFFER_SIZE)
+								IAbstractFile abstractFile = ((JSFile)serverFile).getAbstractFile();
+								if (abstractFile instanceof RemoteFile)
 								{
-									bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+									remoteFiles[i] = (RemoteFile)abstractFile;
 								}
-								else break;
+								else
+								{
+									throw new IllegalArgumentException("Wrong file type provided: the JSFile to transfer must be a remote file!");
+								}
+							}
+							if (remoteFiles[i] != null)
+							{
+								totalBytes += remoteFiles[i].size();
+								// we can have a related local file, else a folder has been provided, thus we create a related local file to receive the transfer:
+								files[i] = (i < fileObjects.length && !firstFile.isDirectory()) ? getFileFromArg(fileObjects[i], true) : new File(firstFile,
+									remoteFiles[i].getName());
 							}
 						}
 					}
+					else
+					{
+						String[] serverFileNames = new String[serverObjects.length];
+						for (int i = 0; i < serverObjects.length; i++)
+						{
+							serverFileNames[i] = serverObjects[i].toString();
+						}
+						RemoteFileData[] datas = service.getRemoteFileData(clientId, serverFileNames);
+						for (int i = 0; i < datas.length; i++)
+						{
+							remoteFiles[i] = new RemoteFile(datas[i], service, clientId);
+							totalBytes += datas[i].size();
+							files[i] = (i < fileObjects.length && !firstFile.isDirectory()) ? getFileFromArg(fileObjects[i], true) : new File(firstFile,
+								remoteFiles[i].getName());
+						}
+					}
+					JSProgressMonitor progressMonitor = new JSProgressMonitor(this, totalBytes, remoteFiles.length);
+					plugin.getClientPluginAccess().getExecutor().execute(new FromServerWorker(files, remoteFiles, function, progressMonitor, service));
+					return progressMonitor;
 				}
-				catch (final Exception e)
+				catch (Exception ex)
 				{
-					Debug.error(e);
-					ex = e;
-				}
-				finally
-				{
-					try
-					{
-						if (uuid != null) service.closeTransfer(uuid);
-					}
-					catch (final RemoteException ignore)
-					{
-					}
-					try
-					{
-						if (os != null) os.close();
-					}
-					catch (final IOException ignore)
-					{
-					}
-					if (function != null) function.execute(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex }, true);
+					Debug.error(ex);
 				}
 			}
-		});
+		}
+		return null;
 	}
 
 	/**
@@ -2017,7 +1879,7 @@ public class FileProvider implements IScriptObject
 	 * @param f The object to unwrap
 	 * @return The Object[] array
 	 */
-	private Object[] unwrap(final Object f)
+	private Object[] unwrap(Object f)
 	{
 		Object[] files = null;
 		if (f != null)
@@ -2037,6 +1899,300 @@ public class FileProvider implements IScriptObject
 		}
 		return files;
 
+	}
+
+	/**
+	 * Schedule a JSProgressMonitor to be run at fixed interval
+	 * 
+	 * @param monitor the {@link JSProgressMonitor} to schedule
+	 * @param interval the interval (in seconds) to run the callback
+	 */
+	public void scheduleMonitor(final JSProgressMonitor monitor, final float interval)
+	{
+		long delay = Math.round(interval * 1000);
+		timer.scheduleAtFixedRate(monitor, 0L, delay);
+	}
+
+
+	/**
+	 * Callback a Servoy {@link Function} passing a JSProgressMonitor
+	 * 
+	 * @param monitor the {@link JSProgressMonitor} to return to the client
+	 * @param function the client {@link FunctionDefinition} of a Servoy {@link Function} to callback
+	 */
+	public void callbackProgress(final JSProgressMonitor monitor, final FunctionDefinition function)
+	{
+		if (function != null)
+		{
+			function.execute(plugin.getClientPluginAccess(), new Object[] { monitor }, true);
+		}
+	}
+
+	private final class FromServerWorker implements Runnable
+	{
+
+		private final File[] files;
+		private final RemoteFile[] remoteFiles;
+		private final FunctionDefinition function;
+		private final JSProgressMonitor progressMonitor;
+		private final IFileService service;
+
+		/**
+		 * @param files
+		 * @param remoteFiles
+		 * @param function
+		 * @param progressMonitor
+		 * @param service
+		 */
+		public FromServerWorker(final File[] files, RemoteFile[] remoteFiles, final FunctionDefinition function, final JSProgressMonitor progressMonitor,
+			final IFileService service)
+		{
+			this.files = files;
+			this.remoteFiles = remoteFiles;
+			this.function = function;
+			this.progressMonitor = progressMonitor;
+			this.service = service;
+		}
+
+		public void run()
+		{
+			try
+			{
+				long totalTransfered = 0L;
+				final String clientId = plugin.getClientPluginAccess().getClientID();
+				for (int i = 0; i < files.length; i++)
+				{
+					UUID uuid = null;
+					OutputStream os = null;
+					Exception ex = null;
+					File file = files[i];
+					RemoteFile remote = remoteFiles[i];
+					try
+					{
+						if (file.exists() || file.createNewFile())
+						{
+							long currentTransferred = 0L;
+							progressMonitor.setCurrentFileName(remote.getAbsolutePath());
+							progressMonitor.setCurrentBytes(remote.size());
+							progressMonitor.setCurrentFileIndex(i + 1);
+							progressMonitor.setCurrentTransferred(0L);
+
+							os = new FileOutputStream(file);
+							uuid = service.openTransfer(clientId, remote.getAbsolutePath());
+							if (uuid != null)
+							{
+								byte[] bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+								while (bytes != null && !progressMonitor.js_isCanceled())
+								{
+									os.write(bytes);
+									totalTransfered += bytes.length;
+									currentTransferred += bytes.length;
+									progressMonitor.setTotalTransferred(totalTransfered);
+									progressMonitor.setCurrentTransferred(currentTransferred);
+									if (progressMonitor.getDelay() > 0)
+									{
+										Thread.sleep(progressMonitor.getDelay()); // to test the process
+									}
+									// check for the length (this results in 1 less call to the server)
+									if (bytes.length == CHUNK_BUFFER_SIZE)
+									{
+										bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+									}
+									else break;
+								}
+							}
+						}
+					}
+					catch (final Exception e)
+					{
+						Debug.error(e);
+						ex = e;
+					}
+					finally
+					{
+						try
+						{
+							if (uuid != null) service.closeTransfer(uuid);
+						}
+						catch (final RemoteException ignore)
+						{
+						}
+						try
+						{
+							if (os != null) os.close();
+						}
+						catch (final IOException ignore)
+						{
+						}
+						if (function != null && !progressMonitor.js_isCanceled())
+						{
+							function.execute(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex }, true);
+						}
+						if (progressMonitor.js_isCanceled())
+						{
+							file.delete();
+							progressMonitor.run();
+							break;
+						}
+					}
+				}
+			}
+			finally
+			{
+				if (!progressMonitor.js_isCanceled())
+				{
+					progressMonitor.setFinished(true);
+					progressMonitor.run();
+				}
+				progressMonitor.cancel(); // stops the TimerTask
+			}
+		}
+	}
+
+	private final class ToServerWorker implements Runnable
+	{
+
+		private final File[] files;
+		private final Object[] serverFiles;
+		private final FunctionDefinition function;
+		private final JSProgressMonitor progressMonitor;
+		private final IFileService service;
+
+		/**
+		 * @param files
+		 * @param serverFiles
+		 * @param function
+		 * @param progressMonitor
+		 * @param service
+		 */
+		public ToServerWorker(final File[] files, final Object[] serverFiles, final FunctionDefinition function, final JSProgressMonitor progressMonitor,
+			final IFileService service)
+		{
+			this.files = files;
+			this.serverFiles = serverFiles;
+			this.function = function;
+			this.progressMonitor = progressMonitor;
+			this.service = service;
+		}
+
+		public void run()
+		{
+			try
+			{
+				long totalTransfered = 0L;
+				for (int i = 0; i < files.length; i++)
+				{
+					final File file = files[i];
+					// the serverName can be derived from an Array of String, at the same index as the file
+					String serverFileName = null;
+					if (serverFiles != null && i < serverFiles.length)
+					{
+						if (serverFiles[i] instanceof JSFile)
+						{
+							JSFile jsFile = (JSFile)serverFiles[i];
+							IAbstractFile abstractFile = jsFile.getAbstractFile();
+							if (abstractFile instanceof RemoteFile)
+							{
+								serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+							}
+							else
+							{
+								serverFileName = abstractFile.getName();
+							}
+						}
+						else
+						{
+							serverFileName = serverFiles[i].toString();
+						}
+					}
+
+					long currentTransferred = 0L;
+					progressMonitor.setCurrentFileName(file.getAbsolutePath());
+					progressMonitor.setCurrentBytes(file.length());
+					progressMonitor.setCurrentFileIndex(i + 1);
+					progressMonitor.setCurrentTransferred(0L);
+
+					final String clientId = plugin.getClientPluginAccess().getClientID();
+					UUID uuid = null;
+					RemoteFileData remoteFile = null;
+					InputStream is = null;
+					Exception ex = null;
+					try
+					{
+						is = new FileInputStream(file);
+						uuid = service.openTransfer(clientId, serverFileName);
+						if (uuid != null)
+						{
+							byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
+							int read = is.read(buffer);
+							while (read > -1 && !progressMonitor.js_isCanceled())
+							{
+								service.writeBytes(uuid, buffer, 0, read);
+								totalTransfered += read;
+								currentTransferred += read;
+								progressMonitor.setTotalTransferred(totalTransfered);
+								progressMonitor.setCurrentTransferred(currentTransferred);
+
+								if (progressMonitor.getDelay() > 0)
+								{
+									Thread.sleep(progressMonitor.getDelay()); // to test the process
+								}
+
+								read = is.read(buffer);
+							}
+						}
+					}
+					catch (final Exception e)
+					{
+						Debug.error(e);
+						ex = e;
+					}
+					finally
+					{
+						try
+						{
+							if (uuid != null) remoteFile = (RemoteFileData)service.closeTransfer(uuid);
+						}
+						catch (final RemoteException ignore)
+						{
+						}
+						try
+						{
+							if (is != null) is.close();
+						}
+						catch (final IOException ignore)
+						{
+						}
+						if (function != null && !progressMonitor.js_isCanceled())
+						{
+							final JSFile returnedFile = (remoteFile == null) ? null : new JSFile(new RemoteFile(remoteFile, service, clientId));
+							function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
+						}
+						if (progressMonitor.js_isCanceled())
+						{
+							try
+							{
+								service.delete(clientId, remoteFile.getAbsolutePath());
+								progressMonitor.run();
+								break;
+							}
+							catch (final IOException ignore)
+							{
+							}
+						}
+					}
+				}
+			}
+			finally
+			{
+				if (!progressMonitor.js_isCanceled())
+				{
+					progressMonitor.setFinished(true);
+					progressMonitor.run();
+				}
+				progressMonitor.cancel(); // stops the TimerTask
+			}
+		}
 	}
 
 }

@@ -71,11 +71,6 @@ public class UploadData extends AbstractFile
 		return getBytes().length;
 	}
 
-	public Object unwrap()
-	{
-		return getBytes();
-	}
-
 	@SuppressWarnings("nls")
 	@Override
 	public String toString()

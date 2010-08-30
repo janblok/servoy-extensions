@@ -287,7 +287,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFileData(String,String)
 	 */
 	@SuppressWarnings("nls")
-	public RemoteFileData getRemoteFileData(String clientId, String path) throws RemoteException, IOException, SecurityException
+	public RemoteFileData getRemoteFileData(final String clientId, final String path) throws RemoteException, IOException, SecurityException
 	{
 		securityCheck(clientId, path);
 		final File f = new File(defaultFolder, path);
@@ -306,13 +306,32 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFileData(String,String[])
+	 */
+	public RemoteFileData[] getRemoteFileData(final String clientId, final String[] paths) throws RemoteException, IOException, SecurityException
+	{
+		if (paths != null)
+		{
+			final RemoteFileData[] datas = new RemoteFileData[paths.length];
+			for (int i = 0; i < paths.length; i++)
+			{
+				datas[i] = getRemoteFileData(clientId, paths[i]);
+			}
+			return datas;
+		}
+		return null;
+	}
+
 	/**
 	 * Create a hierarchy of RemoteFileData recursively
 	 * 
 	 * @param f The file to construct the hierarchy for
 	 * @return the parent of the hierarchy
 	 */
-	private RemoteFileData constructHierarchy(File f)
+	private RemoteFileData constructHierarchy(final File f)
 	{
 		if (f == null) return null;
 		if (defaultFolder.equals(f))
@@ -342,7 +361,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * 
 	 * @return true if parent is defaultFolder
 	 */
-	private boolean checkParentFile(File f)
+	private boolean checkParentFile(final File f)
 	{
 		if (f == null) return false;
 		if (defaultFolder.equals(f) || defaultFolder.equals(f.getParentFile()))
@@ -413,7 +432,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * @see com.servoy.extensions.plugins.file.IFileService#readBytes(UUID,int)
 	 */
 	@SuppressWarnings("nls")
-	public byte[] readBytes(UUID uuid, long length) throws RemoteException, IOException
+	public byte[] readBytes(final UUID uuid, final long length) throws RemoteException, IOException
 	{
 		if (defaultFolder == null) throw new IOException("File Plugin is unloaded");
 		final ITransferObject to = transferMap.get(uuid);
@@ -455,7 +474,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * @see com.servoy.extensions.plugins.file.IFileService#getContentType(String,String)
 	 */
 	@SuppressWarnings("nls")
-	public String getContentType(String clientId, String filePath) throws RemoteException, IOException
+	public String getContentType(final String clientId, final String filePath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, filePath);
 		final File f = new File(getDefaultFolder(), filePath);
@@ -472,7 +491,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * @see com.servoy.extensions.plugins.file.IFileService#renameTo(String,String,String)
 	 */
 	@SuppressWarnings("nls")
-	public RemoteFileData renameTo(String clientId, String srcPath, String destPath) throws RemoteException, IOException
+	public RemoteFileData renameTo(final String clientId, final String srcPath, final String destPath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, srcPath);
 		filePathCheck(destPath);
