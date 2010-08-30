@@ -400,8 +400,19 @@ public class JSImage implements IScriptObject, Wrapper
 	 */
 	public String js_getContentType()
 	{
-		js_getData();
-		return ImageLoader.getContentType(imageData);
+		if (imageData != null)
+		{
+			return ImageLoader.getContentType(imageData, file != null ? file.getName() : null);
+		}
+		else if (file != null)
+		{
+			byte[] bytes = Utils.readFile(file, 32);
+			if (bytes != null)
+			{
+				return ImageLoader.getContentType(bytes, file.getName());
+			}
+		}
+		return null;
 	}
 
 
