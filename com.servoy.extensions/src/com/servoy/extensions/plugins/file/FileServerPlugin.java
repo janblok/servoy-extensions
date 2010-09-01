@@ -192,7 +192,8 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		{
 			throw new SecurityException("Saving  on the server out of the defaultFolder is not allowed");
 		}
-		final RemoteFileData fileData = new RemoteFileData(f, filePath);
+		final RemoteFileData parent = constructHierarchy(f);
+		final RemoteFileData fileData = new RemoteFileData(f, parent);
 		final ITransferObject to = new ToFileTransferObject(f, fileData);
 		final UUID id = UUID.randomUUID();
 		transferMap.put(id, to);
