@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.lang.ref.WeakReference;
@@ -33,6 +33,7 @@ import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.serialize.JSONConverter;
 
+@SuppressWarnings("nls")
 public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 {
 	private final Map<String, WeakReference<IHeadlessClient>> clients = new HashMap<String, WeakReference<IHeadlessClient>>();
@@ -47,7 +48,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "HeadlessServerPlugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "HeadlessServerPlugin");
 		return props;
 	}
 
@@ -172,14 +173,22 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException("exception when serializing value " + dataProviderValue, e); //$NON-NLS-1$
+			throw new RuntimeException("exception when serializing value " + dataProviderValue, e);
 		}
 	}
 
 	public boolean isValid(String clientID)
 	{
-		IHeadlessClient c = getClient(clientID);
-		return c.isValid();
+		try
+		{
+			IHeadlessClient c = getClient(clientID);
+			return c.isValid();
+		}
+		catch (RuntimeException re)
+		{
+			Debug.trace("client not found for " + clientID, re);
+		}
+		return false;
 	}
 
 	public Object setDataProviderValue(String clientID, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
@@ -203,7 +212,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException("exception when deserializing value " + value, e); //$NON-NLS-1$
+			throw new RuntimeException("exception when deserializing value " + value, e);
 		}
 
 		try
@@ -212,7 +221,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException("exception when serializing value " + retValue, e); //$NON-NLS-1$
+			throw new RuntimeException("exception when serializing value " + retValue, e);
 		}
 
 	}
