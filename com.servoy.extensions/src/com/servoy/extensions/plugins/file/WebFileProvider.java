@@ -61,7 +61,7 @@ public class WebFileProvider extends FileProvider
 		}
 		else
 		{
-			return super.js_writeFile(file, data);
+			return super.js_writeFile(file, data, mimeType);
 		}
 	}
 
