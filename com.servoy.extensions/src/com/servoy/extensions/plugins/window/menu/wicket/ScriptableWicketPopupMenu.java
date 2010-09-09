@@ -58,24 +58,10 @@ public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements I
 			if (pc != null)
 			{
 				String jsComp = null;
-				if (comp instanceof IComponent)
+				if (comp instanceof IComponent && comp instanceof Component)
 				{
 					IComponent c = (IComponent)comp;
-
-					IForm componentForm = getComponentForm(c);
-
-					int viewType = componentForm.getView();
-
-					if (viewType == IForm.RECORD_VIEW || viewType == IForm.LOCKED_RECORD_VIEW)
-					{
-						jsComp = "document.getElementById('" + c.getId() + "')"; //$NON-NLS-1$ //$NON-NLS-2$ 
-					}
-					else
-					// if(viewType == IForm.LIST_VIEW || IForm.TABLE_VIEW)
-					{
-						jsComp = "document.getElementById('" + componentForm.getFoundSet().getSelectedIndex() + ":" + c.getId() + "')"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
-					}
-
+					jsComp = "document.getElementById('" + ((Component)c).getMarkupId() + "')"; //$NON-NLS-1$ //$NON-NLS-2$ 
 				}
 
 				StringBuilder js = new StringBuilder();
