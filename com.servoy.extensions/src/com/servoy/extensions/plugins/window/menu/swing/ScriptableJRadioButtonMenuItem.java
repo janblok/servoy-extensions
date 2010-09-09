@@ -66,4 +66,9 @@ public class ScriptableJRadioButtonMenuItem extends JRadioButtonMenuItem impleme
 	{
 		setBackground(Utilities.createColor(bgColor));
 	}
+
+	public void setForegroundColor(String fgColor)
+	{
+		setForeground(Utilities.createColor(fgColor));
+	}
 }

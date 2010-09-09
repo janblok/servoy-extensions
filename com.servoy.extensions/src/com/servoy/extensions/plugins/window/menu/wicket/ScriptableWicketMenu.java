@@ -112,6 +112,12 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				{
 					js.append("YAHOO.util.Dom.setStyle(m").append(currentMenuNr).append(".element, 'background-color', '").append(((ScriptableWicketMenu)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
+				if (((ScriptableWicketMenu)elem).getForegroundColor() != null)
+				{
+					js.append("menuLabel = YAHOO.util.Dom.getElementsByClassName('yuimenuitemlabel', 'a', m").append(currentMenuNr).append(".element);"); //$NON-NLS-1$ //$NON-NLS-2$  
+					js.append("if(menuLabel) { YAHOO.util.Dom.setStyle(menuLabel, 'color', '").append(((ScriptableWicketMenu)elem).getForegroundColor()).append("') };"); //$NON-NLS-1$ //$NON-NLS-2$ 
+				}
+
 				js.append("m" + currentMenuNr + ".cfg.setProperty('submenu',menu" + currentMenuNr + ");"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if (!elem.isEnabled())
 				{
@@ -158,9 +164,18 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 					text = labelText.toString();
 				}
 				js.append("mi = new YAHOO.widget.MenuItem('" + text + "');"); //$NON-NLS-1$ //$NON-NLS-2$ 
-				if (elem instanceof ScriptableWicketMenuItem && ((ScriptableWicketMenuItem)elem).getBackgroundColor() != null)
+				if (elem instanceof ScriptableWicketMenuItem)
 				{
-					js.append("YAHOO.util.Dom.setStyle(mi.element, 'background-color', '").append(((ScriptableWicketMenuItem)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
+					if (((ScriptableWicketMenuItem)elem).getBackgroundColor() != null)
+					{
+						js.append("YAHOO.util.Dom.setStyle(mi.element, 'background-color', '").append(((ScriptableWicketMenuItem)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
+					}
+
+					if (((ScriptableWicketMenuItem)elem).getForegroundColor() != null)
+					{
+						js.append("menuLabel = YAHOO.util.Dom.getElementsByClassName('yuimenuitemlabel', 'a', mi.element);"); //$NON-NLS-1$ 
+						js.append("if(menuLabel) { YAHOO.util.Dom.setStyle(menuLabel, 'color', '").append(((ScriptableWicketMenuItem)elem).getForegroundColor()).append("') };"); //$NON-NLS-1$ //$NON-NLS-2$
+					}
 				}
 				js.append("mi.cfg.setProperty('onclick', {fn:svy_popmenu_click,obj:\"" + popupMenu.getCallBackUrl(elem) + "\"});"); //$NON-NLS-1$ //$NON-NLS-2$ 
 

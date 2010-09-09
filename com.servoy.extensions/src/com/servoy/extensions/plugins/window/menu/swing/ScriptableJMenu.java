@@ -336,4 +336,9 @@ public class ScriptableJMenu implements IMenu
 	{
 		jmenu.setBackground(Utilities.createColor(bgColor));
 	}
+
+	public void setForegroundColor(String fgColor)
+	{
+		jmenu.setForeground(Utilities.createColor(fgColor));
+	}
 }

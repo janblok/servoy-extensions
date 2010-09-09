@@ -38,6 +38,7 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	private boolean selected;
 	private boolean enabled;
 	private String bgColor;
+	private String fgColor;
 
 	private AbstractMenuItem scriptObjectWrapper;
 
@@ -165,5 +166,15 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	public String getBackgroundColor()
 	{
 		return bgColor;
+	}
+
+	public void setForegroundColor(String fgColor)
+	{
+		this.fgColor = fgColor;
+	}
+
+	public String getForegroundColor()
+	{
+		return fgColor;
 	}
 }

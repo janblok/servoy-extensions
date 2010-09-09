@@ -229,4 +229,13 @@ public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 	{
 		return null;
 	}
+
+	public void setForegroundColor(String fgColor)
+	{
+	}
+
+	public String getForegroundColor()
+	{
+		return null;
+	}
 }

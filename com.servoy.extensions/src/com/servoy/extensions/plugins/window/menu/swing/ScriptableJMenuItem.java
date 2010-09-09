@@ -162,4 +162,9 @@ public class ScriptableJMenuItem implements IMenuItem
 	{
 		jMenuItem.setBackground(Utilities.createColor(bgColor));
 	}
+
+	public void setForegroundColor(String fgColor)
+	{
+		jMenuItem.setForeground(Utilities.createColor(fgColor));
+	}
 }

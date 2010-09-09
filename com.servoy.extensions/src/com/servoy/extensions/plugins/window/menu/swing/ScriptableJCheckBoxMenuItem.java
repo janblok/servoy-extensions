@@ -66,4 +66,9 @@ public class ScriptableJCheckBoxMenuItem extends JCheckBoxMenuItem implements IC
 	{
 		setBackground(Utilities.createColor(bgColor));
 	}
+
+	public void setForegroundColor(String fgColor)
+	{
+		setForeground(Utilities.createColor(fgColor));
+	}
 }
