@@ -1728,6 +1728,16 @@ public class FileProvider implements IScriptObject
 						totalBytes += file.length();
 						files[i] = file;
 					}
+					else if (fileObjects[i] instanceof JSFile)
+					{
+						IAbstractFile af = ((JSFile)fileObjects[i]).getAbstractFile();
+						if (af instanceof UploadData)
+						{
+							throw new RuntimeException(
+								"Using streamFilesToServer with an uploadData in the web client makes no sense since the process is already on the server-side, consider using writeFile(), writeTXTFile() or writeXMLFile() instead!"); //$NON-NLS-1$
+						}
+						files[i] = null;
+					}
 				}
 				final JSProgressMonitor progressMonitor = new JSProgressMonitor(this, totalBytes, files.length);
 				try
@@ -1966,73 +1976,76 @@ public class FileProvider implements IScriptObject
 					OutputStream os = null;
 					Exception ex = null;
 					File file = files[i];
-					RemoteFile remote = remoteFiles[i];
-					try
+					if (file != null)
 					{
-						if (file.exists() || file.createNewFile())
+						RemoteFile remote = remoteFiles[i];
+						try
 						{
-							long currentTransferred = 0L;
-							progressMonitor.setCurrentFileName(remote.getAbsolutePath());
-							progressMonitor.setCurrentBytes(remote.size());
-							progressMonitor.setCurrentFileIndex(i + 1);
-							progressMonitor.setCurrentTransferred(0L);
-
-							os = new FileOutputStream(file);
-							uuid = service.openTransfer(clientId, remote.getAbsolutePath());
-							if (uuid != null)
+							if (file.exists() || file.createNewFile())
 							{
-								byte[] bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
-								while (bytes != null && !progressMonitor.js_isCanceled())
+								long currentTransferred = 0L;
+								progressMonitor.setCurrentFileName(remote.getAbsolutePath());
+								progressMonitor.setCurrentBytes(remote.size());
+								progressMonitor.setCurrentFileIndex(i + 1);
+								progressMonitor.setCurrentTransferred(0L);
+
+								os = new FileOutputStream(file);
+								uuid = service.openTransfer(clientId, remote.getAbsolutePath());
+								if (uuid != null)
 								{
-									os.write(bytes);
-									totalTransfered += bytes.length;
-									currentTransferred += bytes.length;
-									progressMonitor.setTotalTransferred(totalTransfered);
-									progressMonitor.setCurrentTransferred(currentTransferred);
-									if (progressMonitor.getDelay() > 0)
+									byte[] bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+									while (bytes != null && !progressMonitor.js_isCanceled())
 									{
-										Thread.sleep(progressMonitor.getDelay()); // to test the process
+										os.write(bytes);
+										totalTransfered += bytes.length;
+										currentTransferred += bytes.length;
+										progressMonitor.setTotalTransferred(totalTransfered);
+										progressMonitor.setCurrentTransferred(currentTransferred);
+										if (progressMonitor.getDelay() > 0)
+										{
+											Thread.sleep(progressMonitor.getDelay()); // to test the process
+										}
+										// check for the length (this results in 1 less call to the server)
+										if (bytes.length == CHUNK_BUFFER_SIZE)
+										{
+											bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
+										}
+										else break;
 									}
-									// check for the length (this results in 1 less call to the server)
-									if (bytes.length == CHUNK_BUFFER_SIZE)
-									{
-										bytes = service.readBytes(uuid, CHUNK_BUFFER_SIZE);
-									}
-									else break;
 								}
 							}
 						}
-					}
-					catch (final Exception e)
-					{
-						Debug.error(e);
-						ex = e;
-					}
-					finally
-					{
-						try
+						catch (final Exception e)
 						{
-							if (uuid != null) service.closeTransfer(uuid);
+							Debug.error(e);
+							ex = e;
 						}
-						catch (final RemoteException ignore)
+						finally
 						{
-						}
-						try
-						{
-							if (os != null) os.close();
-						}
-						catch (final IOException ignore)
-						{
-						}
-						if (function != null && !progressMonitor.js_isCanceled())
-						{
-							function.execute(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex }, true);
-						}
-						if (progressMonitor.js_isCanceled())
-						{
-							file.delete();
-							progressMonitor.run();
-							break;
+							try
+							{
+								if (uuid != null) service.closeTransfer(uuid);
+							}
+							catch (final RemoteException ignore)
+							{
+							}
+							try
+							{
+								if (os != null) os.close();
+							}
+							catch (final IOException ignore)
+							{
+							}
+							if (function != null && !progressMonitor.js_isCanceled())
+							{
+								function.execute(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex }, true);
+							}
+							if (progressMonitor.js_isCanceled())
+							{
+								file.delete();
+								progressMonitor.run();
+								break;
+							}
 						}
 					}
 				}
@@ -2083,101 +2096,108 @@ public class FileProvider implements IScriptObject
 				for (int i = 0; i < files.length; i++)
 				{
 					final File file = files[i];
-					// the serverName can be derived from an Array of String, at the same index as the file
-					String serverFileName = null;
-					if (serverFiles != null && i < serverFiles.length)
+					if (file != null)
 					{
-						if (serverFiles[i] instanceof JSFile)
+						// the serverName can be derived from an Array of String, at the same index as the file
+						String serverFileName = null;
+						if (serverFiles != null && i < serverFiles.length)
 						{
-							JSFile jsFile = (JSFile)serverFiles[i];
-							IAbstractFile abstractFile = jsFile.getAbstractFile();
-							if (abstractFile instanceof RemoteFile)
+							if (serverFiles[i] instanceof JSFile)
 							{
-								serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+								JSFile jsFile = (JSFile)serverFiles[i];
+								IAbstractFile abstractFile = jsFile.getAbstractFile();
+								if (abstractFile instanceof RemoteFile)
+								{
+									serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+								}
+								else
+								{
+									serverFileName = abstractFile.getName();
+								}
 							}
 							else
 							{
-								serverFileName = abstractFile.getName();
+								serverFileName = serverFiles[i].toString();
 							}
 						}
 						else
 						{
-							serverFileName = serverFiles[i].toString();
+							serverFileName = "/" + file.getName(); //$NON-NLS-1$
 						}
-					}
 
-					long currentTransferred = 0L;
-					progressMonitor.setCurrentFileName(file.getAbsolutePath());
-					progressMonitor.setCurrentBytes(file.length());
-					progressMonitor.setCurrentFileIndex(i + 1);
-					progressMonitor.setCurrentTransferred(0L);
+						long currentTransferred = 0L;
+						progressMonitor.setCurrentFileName(file.getAbsolutePath());
+						progressMonitor.setCurrentBytes(file.length());
+						progressMonitor.setCurrentFileIndex(i + 1);
+						progressMonitor.setCurrentTransferred(0L);
 
-					final String clientId = plugin.getClientPluginAccess().getClientID();
-					UUID uuid = null;
-					RemoteFileData remoteFile = null;
-					InputStream is = null;
-					Exception ex = null;
-					try
-					{
-						is = new FileInputStream(file);
-						uuid = service.openTransfer(clientId, serverFileName);
-						if (uuid != null)
+						final String clientId = plugin.getClientPluginAccess().getClientID();
+						UUID uuid = null;
+						RemoteFileData remoteFile = null;
+						InputStream is = null;
+						Exception ex = null;
+						try
 						{
-							byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
-							int read = is.read(buffer);
-							while (read > -1 && !progressMonitor.js_isCanceled())
+							is = new FileInputStream(file);
+							uuid = service.openTransfer(clientId, serverFileName);
+							if (uuid != null)
 							{
-								service.writeBytes(uuid, buffer, 0, read);
-								totalTransfered += read;
-								currentTransferred += read;
-								progressMonitor.setTotalTransferred(totalTransfered);
-								progressMonitor.setCurrentTransferred(currentTransferred);
-
-								if (progressMonitor.getDelay() > 0)
+								byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
+								int read = is.read(buffer);
+								while (read > -1 && !progressMonitor.js_isCanceled())
 								{
-									Thread.sleep(progressMonitor.getDelay()); // to test the process
-								}
+									service.writeBytes(uuid, buffer, 0, read);
+									totalTransfered += read;
+									currentTransferred += read;
+									progressMonitor.setTotalTransferred(totalTransfered);
+									progressMonitor.setCurrentTransferred(currentTransferred);
 
-								read = is.read(buffer);
+									if (progressMonitor.getDelay() > 0)
+									{
+										Thread.sleep(progressMonitor.getDelay()); // to test the process
+									}
+
+									read = is.read(buffer);
+								}
 							}
 						}
-					}
-					catch (final Exception e)
-					{
-						Debug.error(e);
-						ex = e;
-					}
-					finally
-					{
-						try
+						catch (final Exception e)
 						{
-							if (uuid != null) remoteFile = (RemoteFileData)service.closeTransfer(uuid);
+							Debug.error(e);
+							ex = e;
 						}
-						catch (final RemoteException ignore)
-						{
-						}
-						try
-						{
-							if (is != null) is.close();
-						}
-						catch (final IOException ignore)
-						{
-						}
-						if (function != null && !progressMonitor.js_isCanceled())
-						{
-							final JSFile returnedFile = (remoteFile == null) ? null : new JSFile(new RemoteFile(remoteFile, service, clientId));
-							function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
-						}
-						if (progressMonitor.js_isCanceled())
+						finally
 						{
 							try
 							{
-								service.delete(clientId, remoteFile.getAbsolutePath());
-								progressMonitor.run();
-								break;
+								if (uuid != null) remoteFile = (RemoteFileData)service.closeTransfer(uuid);
+							}
+							catch (final RemoteException ignore)
+							{
+							}
+							try
+							{
+								if (is != null) is.close();
 							}
 							catch (final IOException ignore)
 							{
+							}
+							if (function != null && !progressMonitor.js_isCanceled())
+							{
+								final JSFile returnedFile = (remoteFile == null) ? null : new JSFile(new RemoteFile(remoteFile, service, clientId));
+								function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
+							}
+							if (progressMonitor.js_isCanceled())
+							{
+								try
+								{
+									service.delete(clientId, remoteFile.getAbsolutePath());
+									progressMonitor.run();
+									break;
+								}
+								catch (final IOException ignore)
+								{
+								}
 							}
 						}
 					}
