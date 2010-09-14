@@ -20,6 +20,7 @@ package com.servoy.extensions.plugins.file;
 import java.io.File;
 
 import com.servoy.j2db.plugins.IUploadData;
+import com.servoy.j2db.util.ImageLoader;
 
 /**
  * Implementation of an {@link IAbstractFile} for web accessible file<br/>
@@ -56,6 +57,8 @@ public class UploadData extends AbstractFile
 	@Override
 	public String getContentType()
 	{
+		String contentType = ImageLoader.getContentType(getBytes(), getName());
+		if (contentType != null) return contentType;
 		return upload.getContentType();
 	}
 
