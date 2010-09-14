@@ -17,8 +17,11 @@
 
 package com.servoy.extensions.plugins.file;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.servoy.j2db.util.FileChooserUtils;
 
@@ -204,6 +207,16 @@ public class LocalFile implements IAbstractFile
 	public String toString()
 	{
 		return file.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.plugins.IUploadData#getInputStream()
+	 */
+	public InputStream getInputStream() throws IOException
+	{
+		return new BufferedInputStream(new FileInputStream(file));
 	}
 
 }

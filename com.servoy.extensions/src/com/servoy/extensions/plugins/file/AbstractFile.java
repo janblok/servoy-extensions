@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.FileChooserUtils;
@@ -190,6 +191,17 @@ public abstract class AbstractFile implements IAbstractFile
 				Debug.error("Error reading the file " + file.getName() + "for getting the content type", e); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.plugins.IUploadData#getInputStream()
+	 */
+	public InputStream getInputStream() throws IOException
+	{
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

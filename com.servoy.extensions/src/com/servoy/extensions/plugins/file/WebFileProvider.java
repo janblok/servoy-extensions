@@ -16,13 +16,20 @@
  */
 package com.servoy.extensions.plugins.file;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.mozilla.javascript.Function;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ImageLoader;
@@ -30,6 +37,7 @@ import com.servoy.j2db.util.ImageLoader;
 /**
  * Web plugin provider implementation
  * @author jcompagner
+ * @author Servoy Stuff
  */
 public class WebFileProvider extends FileProvider
 {
@@ -138,6 +146,140 @@ public class WebFileProvider extends FileProvider
 			return false;
 		}
 		return super.writeTXT(f, data, encoding, contentType);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.FileProvider#js_streamFilesToServer(java.lang.Object, java.lang.Object, org.mozilla.javascript.Function)
+	 */
+	@SuppressWarnings("nls")
+	@Override
+	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object s, final Function callback)
+	{
+		if (f != null)
+		{
+			// first get the default upload location (canonical path on the server):
+			final String defaultLocation = getDefaultUploadLocation();
+			if (defaultLocation != null)
+			{
+				final File serverFolder = new File(defaultLocation);
+				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
+
+				final Object[] fileObjects = unwrap(f);
+				final Object[] serverFiles = unwrap(s);
+
+				if (fileObjects != null)
+				{
+					for (int i = 0; i < fileObjects.length; i++)
+					{
+
+						InputStream is = null;
+						OutputStream os = null;
+						Exception ex = null;
+						File dest = null;
+						try
+						{
+							// tries to retrieve an inputStream from the IUploadData:
+							is = ((JSFile)fileObjects[i]).getAbstractFile().getInputStream();
+							if (is != null)
+							{
+								String serverFileName = null;
+								if (serverFiles != null && i < serverFiles.length)
+								{
+									if (serverFiles[i] instanceof JSFile)
+									{
+										JSFile jsFile = (JSFile)serverFiles[i];
+										IAbstractFile abstractFile = jsFile.getAbstractFile();
+										if (abstractFile instanceof RemoteFile)
+										{
+											serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+										}
+										else
+										{
+											serverFileName = abstractFile.getName();
+										}
+									}
+									else
+									{
+										serverFileName = serverFiles[i].toString();
+										FilePluginUtils.filePathCheck(serverFileName);
+									}
+								}
+								else
+								{
+									// no server file or server file name was provided, so create a default one:
+									serverFileName = "/" + ((JSFile)fileObjects[i]).getAbstractFile().getName();
+								}
+
+								dest = new File(serverFolder, serverFileName);
+								if (!FilePluginUtils.checkParentFile(dest, serverFolder))
+								{
+									// prevents case where serverFileName contains "../" in its path
+									throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
+								}
+								if ((dest.exists() && dest.canWrite()) || dest.createNewFile())
+								{
+									os = new BufferedOutputStream(new FileOutputStream(dest));
+
+									final byte[] buffer = new byte[CHUNK_BUFFER_SIZE];
+									int read;
+									while ((read = is.read(buffer)) != -1)
+									{
+										os.write(buffer, 0, read);
+									}
+									os.flush();
+								}
+							}
+						}
+						catch (final IOException e)
+						{
+							Debug.error(e);
+							ex = e;
+						}
+						finally
+						{
+							if (is != null)
+							{
+								try
+								{
+									is.close();
+								}
+								catch (final IOException e)
+								{
+								}
+							}
+							if (os != null)
+							{
+								try
+								{
+									os.close();
+								}
+								catch (final IOException e)
+								{
+								}
+							}
+							if (function != null)
+							{
+								try
+								{
+									IFileService service = getFileService();
+									RemoteFileData remoteFile = new RemoteFileData(dest, FilePluginUtils.constructHierarchy(dest, serverFolder));
+									final JSFile returnedFile = (dest == null) ? null : new JSFile(new RemoteFile(remoteFile, service,
+										plugin.getClientPluginAccess().getClientID()));
+									function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
+								}
+								catch (final Exception e)
+								{
+									Debug.error(e);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return null; // no JSProgressMonitor since there will be no Thread
 	}
 
 }

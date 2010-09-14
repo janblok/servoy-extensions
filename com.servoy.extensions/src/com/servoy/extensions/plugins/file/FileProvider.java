@@ -81,7 +81,7 @@ public class FileProvider implements IScriptObject
 	 * Size of the buffer used to stream files to the server
 	 * @since Servoy 5.2
 	 */
-	private static final int CHUNK_BUFFER_SIZE = 64 * 1024;
+	protected static final int CHUNK_BUFFER_SIZE = 64 * 1024;
 
 	public FileProvider(FilePlugin plugin)
 	{
@@ -1877,7 +1877,7 @@ public class FileProvider implements IScriptObject
 	 * 
 	 * @return the service
 	 */
-	private IFileService getFileService() throws Exception
+	protected IFileService getFileService() throws Exception
 	{
 		return (IFileService)plugin.getClientPluginAccess().getServerService(IFileService.SERVICE_NAME);
 	}
@@ -1889,7 +1889,7 @@ public class FileProvider implements IScriptObject
 	 * @param f The object to unwrap
 	 * @return The Object[] array
 	 */
-	private Object[] unwrap(Object f)
+	protected Object[] unwrap(Object f)
 	{
 		Object[] files = null;
 		if (f != null)
@@ -1937,6 +1937,25 @@ public class FileProvider implements IScriptObject
 			function.execute(plugin.getClientPluginAccess(), new Object[] { monitor }, true);
 		}
 	}
+
+	/**
+	 * Retrieves the server default upload location on the server
+	 * @return the location as canonical path
+	 */
+	protected String getDefaultUploadLocation()
+	{
+		try
+		{
+			final IFileService service = getFileService();
+			return service.getDefaultFolderLocation();
+		}
+		catch (final Exception ex)
+		{
+			Debug.error(ex);
+		}
+		return null;
+	}
+
 
 	private final class FromServerWorker implements Runnable
 	{
