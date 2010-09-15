@@ -145,11 +145,6 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		}
 	}
 
-	public File getDefaultFolder()
-	{
-		return defaultFolder;
-	}
-
 	@SuppressWarnings("nls")
 	public Properties getProperties()
 	{
@@ -188,11 +183,11 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	{
 		securityCheck(clientId, filePath);
 		final File f = new File(defaultFolder, filePath);
-		if (!checkParentFile(f.getCanonicalFile()))
+		if (!FilePluginUtils.checkParentFile(f.getCanonicalFile(), defaultFolder))
 		{
 			throw new SecurityException("Saving  on the server out of the defaultFolder is not allowed");
 		}
-		final RemoteFileData parent = constructHierarchy(f);
+		final RemoteFileData parent = FilePluginUtils.constructHierarchy(f, defaultFolder);
 		final RemoteFileData fileData = new RemoteFileData(f, parent);
 		final ITransferObject to = new ToFileTransferObject(f, fileData);
 		final UUID id = UUID.randomUUID();
@@ -211,11 +206,11 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	{
 		securityCheck(clientId, path);
 		final File f = new File(defaultFolder, path);
-		if (!checkParentFile(f.getCanonicalFile()))
+		if (!FilePluginUtils.checkParentFile(f.getCanonicalFile(), defaultFolder))
 		{
 			throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
 		}
-		final RemoteFileData parent = constructHierarchy(f);
+		final RemoteFileData parent = FilePluginUtils.constructHierarchy(f, defaultFolder);
 		if (f.isDirectory())
 		{
 			final List<RemoteFileData> list = new ArrayList<RemoteFileData>();
@@ -292,11 +287,11 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	{
 		securityCheck(clientId, path);
 		final File f = new File(defaultFolder, path);
-		if (!checkParentFile(f.getCanonicalFile()))
+		if (!FilePluginUtils.checkParentFile(f.getCanonicalFile(), defaultFolder))
 		{
 			throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
 		}
-		final RemoteFileData parent = constructHierarchy(f);
+		final RemoteFileData parent = FilePluginUtils.constructHierarchy(f, defaultFolder);
 		if (f.isDirectory())
 		{
 			return parent;
@@ -327,55 +322,6 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	}
 
 	/**
-	 * Create a hierarchy of RemoteFileData recursively
-	 * 
-	 * @param f The file to construct the hierarchy for
-	 * @return the parent of the hierarchy
-	 */
-	private RemoteFileData constructHierarchy(final File f)
-	{
-		if (f == null) return null;
-		if (defaultFolder.equals(f))
-		{
-			return new RemoteFileData(defaultFolder, null, null);
-		}
-		else
-		{
-			RemoteFileData parent = constructHierarchy(f.getParentFile());
-			if (f.isDirectory())
-			{
-				RemoteFileData data = new RemoteFileData(f, parent);
-				return data;
-			}
-			else
-			{
-				return parent;
-			}
-		}
-	}
-
-	/**
-	 * Checks that the parent of the file provided is the defaultFolder<br/>
-	 * Added for security check (to prevent traversing the hierarchy of the server up from the defaultFolder).
-	 * 
-	 * @param f the file to check for parents
-	 * 
-	 * @return true if parent is defaultFolder
-	 */
-	private boolean checkParentFile(final File f)
-	{
-		if (f == null) return false;
-		if (defaultFolder.equals(f) || defaultFolder.equals(f.getParentFile()))
-		{
-			return true;
-		}
-		else
-		{
-			return checkParentFile(f.getParentFile());
-		}
-	}
-
-	/**
 	 * Security check to avoid hacking of the transfer capabilities of the plugin
 	 * 
 	 * @param clientId the id of a client
@@ -395,23 +341,8 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		{
 			throw new SecurityException("Rejected unauthenticated access");
 		}
-		filePathCheck(filePath);
+		FilePluginUtils.filePathCheck(filePath);
 	}
-
-	/**
-	 * Check that the path is 'absolute' on the server
-	 * 
-	 * @param filePath the file path to check - must start with '/'
-	 * @throws IllegalArgumentException if the path doesn't start with '/'
-	 */
-	private void filePathCheck(final String filePath)
-	{
-		if (filePath.charAt(0) != '/')
-		{
-			throw new IllegalArgumentException("Remote path should start with '/'"); //$NON-NLS-1$
-		}
-	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -461,8 +392,8 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	public boolean delete(final String clientId, final String filePath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, filePath);
-		final File f = new File(getDefaultFolder(), filePath);
-		if (!checkParentFile(f.getCanonicalFile()))
+		final File f = new File(defaultFolder, filePath);
+		if (!FilePluginUtils.checkParentFile(f.getCanonicalFile(), defaultFolder))
 		{
 			throw new SecurityException("Delete  on the server out of the defaultFolder is not allowed");
 		}
@@ -478,8 +409,8 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	public String getContentType(final String clientId, final String filePath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, filePath);
-		final File f = new File(getDefaultFolder(), filePath);
-		if (!checkParentFile(f.getCanonicalFile()))
+		final File f = new File(defaultFolder, filePath);
+		if (!FilePluginUtils.checkParentFile(f.getCanonicalFile(), defaultFolder))
 		{
 			throw new SecurityException("Cannot get the contentType of a file on the server out of the defaultFolder");
 		}
@@ -495,15 +426,15 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	public RemoteFileData renameTo(final String clientId, final String srcPath, final String destPath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, srcPath);
-		filePathCheck(destPath);
+		FilePluginUtils.filePathCheck(destPath);
 		// extra check: we don't want the destPath to be '/'
 		if (destPath.equals("/"))
 		{
 			throw new SecurityException("Cannot rename a file/folder to the defaultFolder path");
 		}
-		final File src = new File(getDefaultFolder(), srcPath);
-		final File dest = new File(getDefaultFolder(), destPath);
-		if (!checkParentFile(src.getCanonicalFile()) || !checkParentFile(dest.getCanonicalFile()))
+		final File src = new File(defaultFolder, srcPath);
+		final File dest = new File(defaultFolder, destPath);
+		if (!FilePluginUtils.checkParentFile(src.getCanonicalFile(), defaultFolder) || !FilePluginUtils.checkParentFile(dest.getCanonicalFile(), defaultFolder))
 		{
 			throw new SecurityException("Cannot rename a file/folder out of the defaultFolder");
 		}
@@ -515,10 +446,29 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		}
 		if (result)
 		{
-			final RemoteFileData parent = constructHierarchy(dest.getParentFile());
+			final RemoteFileData parent = FilePluginUtils.constructHierarchy(dest.getParentFile(), defaultFolder);
 			return new RemoteFileData(dest, parent);
 		}
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IFileService#getDefaultFolderLocation()
+	 */
+	public String getDefaultFolderLocation() throws RemoteException
+	{
+		String location = null;
+		try
+		{
+			location = (defaultFolder == null) ? null : defaultFolder.getCanonicalPath();
+		}
+		catch (IOException ignore)
+		{
+		}
+		return location;
+
 	}
 
 }

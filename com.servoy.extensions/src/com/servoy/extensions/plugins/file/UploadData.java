@@ -18,6 +18,8 @@
 package com.servoy.extensions.plugins.file;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import com.servoy.j2db.plugins.IUploadData;
 
@@ -76,6 +78,17 @@ public class UploadData extends AbstractFile
 	public String toString()
 	{
 		return "UploadData[name:" + getName() + ",contenttype:" + getContentType() + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.plugins.IUploadData#getInputStream()
+	 */
+	@Override
+	public InputStream getInputStream() throws IOException
+	{
+		return upload.getInputStream();
 	}
 
 }

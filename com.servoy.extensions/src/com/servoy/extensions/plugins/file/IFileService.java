@@ -160,4 +160,12 @@ public interface IFileService extends Remote
 	 * @throws IOException  if an IOException occurs
 	 */
 	public String getContentType(final String clientId, final String filePath) throws RemoteException, IOException;
+
+
+	/**
+	 * Returns the defaultFolder location as a String (canonical representation of the folder)
+	 * @return the defaultFolder
+	 */
+	public String getDefaultFolderLocation() throws RemoteException;
+
 }
