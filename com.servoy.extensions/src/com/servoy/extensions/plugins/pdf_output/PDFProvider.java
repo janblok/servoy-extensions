@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.pdf_output;
 
 import java.awt.print.PrinterJob;
@@ -321,7 +321,7 @@ public class PDFProvider implements IScriptObject
 	{
 		if ("getPDFPrinter".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "filename" };
+			return new String[] { "[filename]" };
 		}
 		else if ("combinePDFDocuments".equals(methodName)) //$NON-NLS-1$
 		{
