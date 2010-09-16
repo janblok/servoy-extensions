@@ -1307,15 +1307,15 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("writeFile".equals(methodName))
 		{
-			return "Writes data into a binary file. (Web Enabled)";
+			return "Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)";
 		}
 		else if ("writeTXTFile".equals(methodName))
 		{
-			return "Writes data into a text file. (Web Enabled)";
+			return "Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)";
 		}
 		else if ("writeXMLFile".equals(methodName))
 		{
-			return "Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled)";
+			return "Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)";
 		}
 		else if ("streamFilesToServer".equals(methodName))
 		{
