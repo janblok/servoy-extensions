@@ -45,7 +45,6 @@ public class PDFProvider implements IScriptObject
 {
 	private final PDFPlugin plugin;
 	private PDFPrinterJob metaPrintJob;
-	private OutputStream os = null;
 	private File pdfFile = null;
 
 	public PDFProvider(PDFPlugin plugin)
@@ -63,7 +62,7 @@ public class PDFProvider implements IScriptObject
 				File f = new File(varargs[0].toString());
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				pdfFile = FileChooserUtils.getAWriteFile(access.getCurrentWindow(), f, false);
-				os = new FileOutputStream(pdfFile);
+				FileOutputStream os = new FileOutputStream(pdfFile);
 				return new PDFPrinterJob(os, false);
 			}
 			else
@@ -83,6 +82,7 @@ public class PDFProvider implements IScriptObject
 	{
 		try
 		{
+			OutputStream os = null;
 			if (varargs != null && varargs.length != 0 && varargs[0] != null)
 			{
 				File f = new File(varargs[0].toString());
@@ -111,25 +111,18 @@ public class PDFProvider implements IScriptObject
 
 	public byte[] js_endMetaPrintJob()
 	{
-		boolean deletePdfFile = false;
+		byte[] retval = null;
 		if (metaPrintJob != null)
 		{
-			if (pdfFile != null) if (metaPrintJob.getTotalPagesPrinted() == 0) deletePdfFile = true;
-			metaPrintJob.close();
+			retval = metaPrintJob.close();
+			if (pdfFile != null && metaPrintJob.getTotalPagesPrinted() == 0)
+			{
+				pdfFile.delete();//zero byte files makes no sense to leave
+			}
 			metaPrintJob = null;
 		}
-		if (os instanceof ByteArrayOutputStream)
-		{
-			byte[] array = ((ByteArrayOutputStream)os).toByteArray();
-			os = null;
-			return array;
-		}
-		if (deletePdfFile)
-		{
-			pdfFile.delete();
-			pdfFile = null;
-		}
-		return null;
+		pdfFile = null;
+		return retval;
 	}
 
 	public int js_insertFontDirectory(String path)

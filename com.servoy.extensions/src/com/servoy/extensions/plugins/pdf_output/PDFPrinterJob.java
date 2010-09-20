@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.pdf_output;
 
 import java.awt.Graphics2D;
@@ -22,6 +22,7 @@ import java.awt.print.Pageable;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 
 import com.lowagie.text.Document;
@@ -30,6 +31,8 @@ import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.DefaultFontMapper;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
+import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Utils;
 
 /**
  * @author jblok
@@ -198,13 +201,14 @@ public class PDFPrinterJob extends PrinterJob
 			}
 			catch (Exception e)
 			{
-				System.err.println(e);
+				Debug.error(e);
 			}
 		}
 	}
 
-	void close()
+	byte[] close()
 	{
+		byte[] retval = null;
 		try
 		{
 			if (document != null)
@@ -218,21 +222,21 @@ public class PDFPrinterJob extends PrinterJob
 		}
 		catch (Exception e)
 		{
-			System.err.println(e);
+			Debug.error(e);
 		}
 		try
 		{
-			if (os != null)
+			if (os instanceof ByteArrayOutputStream)
 			{
-				os.close();
-				os = null;
+				retval = ((ByteArrayOutputStream)os).toByteArray();
 			}
+			os = Utils.closeOutputStream(os);
 		}
 		catch (Exception e)
 		{
-			System.err.println(e);
+			Debug.error(e);
 		}
-
+		return retval;
 	}
 
 	@Override
