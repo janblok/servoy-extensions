@@ -157,6 +157,10 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		{
 			return new String[] { "rowHeight" };
 		}
+		else if ("setOnDrag".equals(methodName) || "setOnDragEnd".equals(methodName) || "setOnDragOver".equals(methodName) || "setOnDrop".equals(methodName))
+		{
+			return new String[] { "callback" };
+		}
 
 		return null;
 	}
@@ -297,6 +301,15 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 			retval.append("%%elementName%%.setRowHeight(40);\n");
 			return retval.toString();
 		}
+		else if ("setOnDrag".equals(methodName) || "setOnDragEnd".equals(methodName) || "setOnDragOver".equals(methodName) || "setOnDrop".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.").append(methodName).append("(on").append(methodName.substring(5)).append(");");
+			return retval.toString();
+		}
 
 		return null;
 	}
@@ -354,6 +367,22 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		else if ("setRowHeight".equals(methodName))
 		{
 			return "Set row height";
+		}
+		else if ("setOnDrag".equals(methodName))
+		{
+			return "Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form";
+		}
+		else if ("setOnDragEnd".equals(methodName))
+		{
+			return "Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form";
+		}
+		else if ("setOnDragOver".equals(methodName))
+		{
+			return "Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form";
+		}
+		else if ("setOnDrop".equals(methodName))
+		{
+			return "Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form";
 		}
 
 		return null;
