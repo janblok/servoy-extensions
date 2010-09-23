@@ -35,6 +35,7 @@ import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Utils;
 
 /**
  * The server plugin, also {@link IFileService} implementation
@@ -110,8 +111,17 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		}
 		else
 		{
-			// try to find the Tomcat ROOT context:
-			File parent = new File("../application_server/server/webapps/ROOT");
+			// try to find the Tomcat ROOT context
+
+			// on Mac OS the executable path is actually /developer/Servoy.app/Contents/MacOS/
+			final String relativePath = Utils.isAppleMacOS() ? "../../../../application_server/server/webapps/ROOT"
+				: "../application_server/server/webapps/ROOT";
+			File parent = new File(relativePath);
+			if (!parent.exists() || !parent.isDirectory())
+			{
+				// if we are here, it is because the executable is not developer, so try:
+				parent = new File("server/webapps/ROOT");
+			}
 			if (!parent.exists() || !parent.isDirectory())
 			{
 				// fall back to home directory
