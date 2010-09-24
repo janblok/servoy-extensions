@@ -716,4 +716,24 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		// TODO Auto-generated method stub
 
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setStyleClass(java.lang.String)
+	 */
+	public void setStyleClass(String styleClass)
+	{
+		// ignore
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getStyleClass()
+	 */
+	public String getStyleClass()
+	{
+		return null;
+	}
 }

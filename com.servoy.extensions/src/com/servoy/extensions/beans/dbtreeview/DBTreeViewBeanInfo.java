@@ -19,6 +19,9 @@ package com.servoy.extensions.beans.dbtreeview;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
 
+import com.servoy.j2db.dataui.PropertyEditorClass;
+import com.servoy.j2db.dataui.PropertyEditorHint;
+import com.servoy.j2db.dataui.PropertyEditorOption;
 import com.servoy.j2db.util.Debug;
 
 
@@ -42,8 +45,11 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 			PropertyDescriptor font = new PropertyDescriptor("font", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor loc = new PropertyDescriptor("location", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor size = new PropertyDescriptor("size", DBTreeView.class); //$NON-NLS-1$
-//			pd.setPropertyEditorClass(MoleculeNameEditor.class);
-			PropertyDescriptor result[] = { name, border, foreground, background, opaque, font, loc, size };
+			PropertyDescriptor styleClass = new PropertyDescriptor("styleClass", DBTreeView.class); //$NON-NLS-1$
+			PropertyEditorHint styleClassEditorHint = new PropertyEditorHint(PropertyEditorClass.styleclass);
+			styleClassEditorHint.setOption(PropertyEditorOption.styleLookupName, DBTreeView.ELEMENT_TYPE.toLowerCase());
+			styleClass.setValue(PropertyEditorHint.PROPERTY_EDITOR_HINT, styleClassEditorHint);
+			PropertyDescriptor result[] = { name, border, foreground, background, opaque, font, loc, size, styleClass };
 			return result;
 		}
 		catch (Exception ex)

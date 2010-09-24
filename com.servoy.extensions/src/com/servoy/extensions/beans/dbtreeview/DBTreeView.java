@@ -24,14 +24,15 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import javax.swing.border.Border;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.html.CSS;
 
 import com.servoy.j2db.IApplication;
 import com.servoy.j2db.IServoyBeanFactory;
 import com.servoy.j2db.plugins.IClientPluginAccess;
-import com.servoy.j2db.server.headlessclient.dataui.ChangesRecorder;
 import com.servoy.j2db.ui.IComponent;
-import com.servoy.j2db.util.ComponentFactoryHelper;
-import com.servoy.j2db.util.PersistHelper;
+import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.IStyleSheet;
 
 /**
  * DB Tree View bean main class
@@ -41,6 +42,7 @@ import com.servoy.j2db.util.PersistHelper;
 public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 {
 	private static final long serialVersionUID = 1L;
+	public static final String ELEMENT_TYPE = "DBTREEVIEW";
 
 	private String name;
 	private Border border;
@@ -50,6 +52,8 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	private Font font;
 	private Point location;
 	private Dimension size;
+	private String styleSheet;
+	private String styleClass;
 
 	public DBTreeView()
 	{
@@ -60,35 +64,23 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		IComponent t = null;
 		if (servoy_application_type == IApplication.WEB_CLIENT || servoy_application_type == IApplication.HEADLESS_CLIENT)
 		{
-			t = createWicketTree(cargs, application);
+			t = getWicketDBTreeView(cargs, application);
 		}
 		else
 		{
-			t = createSwingTree(cargs, application);
+			t = getSwingDBTreeView(cargs, application);
 		}
-
+		styleSheet = (String)cargs[2];
 		t.setName(name);
+		applyStyleSheet(t, application.getStyleSheet(styleSheet), styleClass);
+		if (font != null) t.setFont(font);
+		if (background != null) t.setBackground(background);
+		if (foreground != null) t.setForeground(foreground);
+		if (border != null) t.setBorder(border);
+		t.setOpaque(opaque);
 		if (location != null) t.setLocation(location);
 		if (size != null) t.setSize(size);
 		return t;
-	}
-
-	//factory method
-	private IComponent createWicketTree(Object[] cargs, IClientPluginAccess application)
-	{
-		IWicketTree tv = getWicketDBTreeView(cargs, application);
-
-		ChangesRecorder recorder = (ChangesRecorder)tv.getStylePropertyChanges();
-		if (font != null) recorder.setFont(PersistHelper.createFontString(font));
-		if (background != null) recorder.setBgcolor(PersistHelper.createColorString(background));
-		if (foreground != null) recorder.setFgcolor(PersistHelper.createColorString(foreground));
-		recorder.setTransparent(!opaque);
-		if (border != null)
-		{
-			ComponentFactoryHelper.createBorderCSSProperties(ComponentFactoryHelper.createBorderString(border), recorder.getChanges());
-		}
-		tv.setOpaque(opaque);
-		return tv;
 	}
 
 	protected IWicketTree getWicketDBTreeView(Object[] cargs, IClientPluginAccess application)
@@ -97,20 +89,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	}
 
 	private SwingDBTreeView swingDBTreeView;
-
-	//factory method
-	private IComponent createSwingTree(Object[] cargs, IClientPluginAccess application)
-	{
-		swingDBTreeView = getSwingDBTreeView(cargs, application);
-
-		swingDBTreeView.setFont(font);
-		swingDBTreeView.setBackground(background);
-		swingDBTreeView.setForeground(foreground);
-		swingDBTreeView.setBorder(border);
-		swingDBTreeView.setOpaque(opaque);
-
-		return swingDBTreeView;
-	}
 
 	protected SwingDBTreeView getSwingDBTreeView(Object[] cargs, IClientPluginAccess application)
 	{
@@ -437,7 +415,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setName(String name)
 	{
 		this.name = name;
-		if (swingDBTreeView != null) swingDBTreeView.setName(name);
 	}
 
 	public Border getBorder()
@@ -448,7 +425,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setBorder(Border border)
 	{
 		this.border = border;
-		if (swingDBTreeView != null) swingDBTreeView.setBorder(border);
 	}
 
 	public Color getForeground()
@@ -459,7 +435,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setForeground(Color foreground)
 	{
 		this.foreground = foreground;
-		if (swingDBTreeView != null) swingDBTreeView.setForeground(foreground);
 	}
 
 	public Color getBackground()
@@ -470,7 +445,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setBackground(Color background)
 	{
 		this.background = background;
-		if (swingDBTreeView != null) swingDBTreeView.setBackground(background);
 	}
 
 	public boolean isOpaque()
@@ -481,7 +455,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setOpaque(boolean opaque)
 	{
 		this.opaque = opaque;
-		if (swingDBTreeView != null) swingDBTreeView.setOpaque(opaque);
 	}
 
 	public Font getFont()
@@ -492,7 +465,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setFont(Font font)
 	{
 		this.font = font;
-		if (swingDBTreeView != null) swingDBTreeView.setFont(font);
 	}
 
 	public Point getLocation()
@@ -503,7 +475,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setLocation(Point location)
 	{
 		this.location = location;
-		if (swingDBTreeView != null) swingDBTreeView.setLocation(location);
 	}
 
 	public Dimension getSize()
@@ -514,12 +485,82 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	public void setSize(Dimension size)
 	{
 		this.size = size;
-		if (swingDBTreeView != null) swingDBTreeView.setSize(size);
 	}
 
 	public void setBounds(Rectangle r)
 	{
 		setLocation(r.getLocation());
 		setSize(r.getSize());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setStyleClass(java.lang.String)
+	 */
+	public void setStyleClass(String styleClass)
+	{
+		this.styleClass = styleClass;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getStyleClass()
+	 */
+	public String getStyleClass()
+	{
+		return styleClass;
+	}
+
+	public static void applyStyleSheet(IComponent component, IStyleSheet ss, String rule)
+	{
+		if (ss != null)
+		{
+			try
+			{
+				String treeViewRule = DBTreeView.ELEMENT_TYPE.toLowerCase();
+				if (rule != null) treeViewRule = new StringBuffer(treeViewRule).append('.').append(rule).toString();
+				AttributeSet style = ss.getRule(treeViewRule);
+				if (style != null)
+				{
+					if (style.getAttribute(CSS.Attribute.COLOR) != null)
+					{
+						Color cfg = ss.getForeground(style);
+						if (cfg != null) component.setForeground(cfg);
+					}
+					Object sbackground_color = style.getAttribute(CSS.Attribute.BACKGROUND_COLOR);
+					if (sbackground_color != null)
+					{
+						if ("transparent".equals(sbackground_color.toString()))
+						{
+							component.setOpaque(false);
+						}
+						else
+						{
+							Color cbg = ss.getBackground(style);
+							if (cbg != null) component.setBackground(cbg);
+						}
+					}
+					if (ss.hasFont(style))
+					{
+						Font f = ss.getFont(style);
+						if (f != null) component.setFont(f);
+					}
+					if (ss.hasBorder(style))
+					{
+						Border b = ss.getBorder(style);
+						if (b != null)
+						{
+							component.setBorder(b);
+						}
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.error(e);//parsing can fail in java 1.5
+			}
+		}
 	}
 }

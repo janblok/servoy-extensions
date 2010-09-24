@@ -1069,4 +1069,24 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		this.fOnDrop = new FunctionDefinition(fOnDrop);
 		dragEnabled = true;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setStyleClass(java.lang.String)
+	 */
+	public void setStyleClass(String styleClass)
+	{
+		// ignore
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getStyleClass()
+	 */
+	public String getStyleClass()
+	{
+		return null;
+	}
 }

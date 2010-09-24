@@ -48,6 +48,7 @@ import com.servoy.j2db.server.headlessclient.dataui.ChangesRecorder;
 import com.servoy.j2db.server.headlessclient.dataui.TemplateGenerator;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.ISupportWebBounds;
+import com.servoy.j2db.util.ComponentFactoryHelper;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HtmlUtils;
 import com.servoy.j2db.util.PersistHelper;
@@ -511,11 +512,16 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	public void setBackground(Color background)
 	{
 		this.background = background;
+		if (background != null) jsChangeRecorder.setBgcolor(PersistHelper.createColorString(background));
 	}
 
 	public void setBorder(Border border)
 	{
 		this.border = border;
+		if (border != null)
+		{
+			ComponentFactoryHelper.createBorderCSSProperties(ComponentFactoryHelper.createBorderString(border), jsChangeRecorder.getChanges());
+		}
 	}
 
 	public void setComponentEnabled(boolean enabled)
@@ -530,11 +536,13 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	public void setFont(Font font)
 	{
 		this.font = font;
+		if (font != null) jsChangeRecorder.setFont(PersistHelper.createFontString(font));
 	}
 
 	public void setForeground(Color foreground)
 	{
 		this.foreground = foreground;
+		if (foreground != null) jsChangeRecorder.setFgcolor(PersistHelper.createColorString(foreground));
 	}
 
 	public void setLocation(Point location)
@@ -545,6 +553,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	public void setOpaque(boolean opaque)
 	{
 		this.opaque = opaque;
+		jsChangeRecorder.setTransparent(!opaque);
 	}
 
 	public void setSize(Dimension size)
@@ -901,5 +910,25 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	{
 		// TODO Auto-generated method stub
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setStyleClass(java.lang.String)
+	 */
+	public void setStyleClass(String styleClass)
+	{
+		// ignore
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getStyleClass()
+	 */
+	public String getStyleClass()
+	{
+		return null;
 	}
 }

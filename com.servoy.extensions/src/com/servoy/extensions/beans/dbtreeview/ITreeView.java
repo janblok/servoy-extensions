@@ -57,4 +57,8 @@ public interface ITreeView
 	public Dimension getSize();
 
 	public void setSize(Dimension size);
+
+	public void setStyleClass(String styleClass);
+
+	public String getStyleClass();
 }

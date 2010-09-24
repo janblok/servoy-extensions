@@ -1144,4 +1144,24 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	{
 		tree.setOnDropCallback(fOnDrop);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setStyleClass(java.lang.String)
+	 */
+	public void setStyleClass(String styleClass)
+	{
+		// ignore
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getStyleClass()
+	 */
+	public String getStyleClass()
+	{
+		return null;
+	}
 }
