@@ -416,6 +416,12 @@ public abstract class AbstractMenuItem implements IScriptObject
 			sample.append(getToolTip("setMethod")); //$NON-NLS-1$ 
 			sample.append("\nmenu.setMethod(callback);\n// "); //$NON-NLS-1$ 
 			sample.append(getToolTip("methodArguments")).append(" - array elements will be passed as arguments 5, 6 and so on to the callback method\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			sample.append("//The first 5 arguments are fixed: \n"); //$NON-NLS-1$ 
+			sample.append("//\t[0] item index\n"); //$NON-NLS-1$ 
+			sample.append("//\t[1] parent item index\n"); //$NON-NLS-1$ 
+			sample.append("//\t[2] isSelected boolean\n"); //$NON-NLS-1$ 
+			sample.append("//\t[3] parent menu text\n"); //$NON-NLS-1$ 
+			sample.append("//\t[4] menu text\n"); //$NON-NLS-1$ 
 			sample.append("menu.methodArguments = [\"a\",\"b\"];\n// "); //$NON-NLS-1$ 
 			sample.append(getToolTip("setIcon")); //$NON-NLS-1$ 
 			sample.append("\nmenu.setIcon(\"media:///TipOfTheDay16.gif\");\n// "); //$NON-NLS-1$ 
