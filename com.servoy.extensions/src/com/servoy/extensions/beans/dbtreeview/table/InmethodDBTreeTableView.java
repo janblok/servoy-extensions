@@ -33,6 +33,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.resources.CompressedResourceReference;
 import org.apache.wicket.model.Model;
@@ -44,14 +45,21 @@ import com.inmethod.grid.treegrid.TreeGrid;
 import com.servoy.extensions.beans.dbtreeview.Binding;
 import com.servoy.extensions.beans.dbtreeview.BindingInfo;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.extensions.beans.dbtreeview.IWicketTree;
 import com.servoy.extensions.beans.dbtreeview.RelationInfo;
 import com.servoy.extensions.beans.dbtreeview.WicketTree;
 import com.servoy.j2db.dataprocessing.IRecord;
+import com.servoy.j2db.dataprocessing.Record;
+import com.servoy.j2db.dnd.DRAGNDROP;
+import com.servoy.j2db.dnd.ICompositeDragNDrop;
+import com.servoy.j2db.dnd.JSDNDEvent;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
+import com.servoy.j2db.scripting.JSEvent.EventType;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.dataui.StyleAttributeModifierModel;
+import com.servoy.j2db.server.headlessclient.dataui.drag.DraggableBehavior;
 import com.servoy.j2db.ui.IStylePropertyChanges;
 import com.servoy.j2db.util.DataSourceUtils;
 
@@ -61,7 +69,7 @@ import com.servoy.j2db.util.DataSourceUtils;
  * 
  * @author gboros
  */
-public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, ITreeTableScriptMethods
+public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, ITreeTableScriptMethods, ICompositeDragNDrop
 {
 	private static final long serialVersionUID = 1L;
 
@@ -74,6 +82,12 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	private final DBTreeTableTreeColumn dbTreeTableTreeColumn;
 
 	private final List columns;
+
+	private FunctionDefinition fOnDrag;
+	private FunctionDefinition fOnDragEnd;
+	private FunctionDefinition fOnDragOver;
+	private FunctionDefinition fOnDrop;
+	private boolean dragEnabled;
 
 	public InmethodDBTreeTableView(String id, IClientPluginAccess application, List columns, DBTreeTableView dbTreeTableView)
 	{
@@ -143,6 +157,13 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			if (application instanceof IWebClientPluginAccess) ((IWebClientPluginAccess)application).generateAjaxResponse(target);
 			if (isChanged) wicketTree.jsChangeRecorder.setChanged();
 		}
+	}
+
+	@Override
+	protected void onRowPopulated(final WebMarkupContainer rowComponent)
+	{
+		super.onRowPopulated(rowComponent);
+		if (dragEnabled) addDragNDropBehavior(rowComponent);
 	}
 
 	protected void onNodeLinkClicked(AjaxRequestTarget target, TreeNode tn)
@@ -680,8 +701,8 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	 */
 	public void js_setOnDrag(Function fOnDrag)
 	{
-		// TODO Auto-generated method stub
-
+		this.fOnDrag = new FunctionDefinition(fOnDrag);
+		dragEnabled = true;
 	}
 
 	/*
@@ -691,8 +712,8 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	 */
 	public void js_setOnDragEnd(Function fOnDragEnd)
 	{
-		// TODO Auto-generated method stub
-
+		this.fOnDragEnd = new FunctionDefinition(fOnDragEnd);
+		dragEnabled = true;
 	}
 
 	/*
@@ -702,8 +723,8 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	 */
 	public void js_setOnDragOver(Function fOnDragOver)
 	{
-		// TODO Auto-generated method stub
-
+		this.fOnDragOver = new FunctionDefinition(fOnDragOver);
+		dragEnabled = true;
 	}
 
 	/*
@@ -713,8 +734,8 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	 */
 	public void js_setOnDrop(Function fOnDrop)
 	{
-		// TODO Auto-generated method stub
-
+		this.fOnDrop = new FunctionDefinition(fOnDrop);
+		dragEnabled = true;
 	}
 
 	/*
@@ -735,5 +756,155 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	public String getStyleClass()
 	{
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDrag(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public int onDrag(JSDNDEvent event)
+	{
+		if (fOnDrag != null)
+		{
+			Object dragReturn = fOnDrag.executeSync(application, new Object[] { event });
+			if (dragReturn instanceof Number) return ((Number)dragReturn).intValue();
+		}
+
+		return DRAGNDROP.NONE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDragOver(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public boolean onDragOver(JSDNDEvent event)
+	{
+		if (fOnDragOver != null)
+		{
+			Object dragOverReturn = fOnDragOver.executeSync(application, new Object[] { event });
+			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
+		}
+
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDrop(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public boolean onDrop(JSDNDEvent event)
+	{
+		if (fOnDrop != null)
+		{
+			Object dropHappened = fOnDrop.executeSync(application, new Object[] { event });
+			if (dropHappened instanceof Boolean) return ((Boolean)dropHappened).booleanValue();
+		}
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#onDragEnd(com.servoy.j2db.dnd.JSDNDEvent)
+	 */
+	public void onDragEnd(JSDNDEvent event)
+	{
+		if (fOnDragEnd != null)
+		{
+			fOnDragEnd.executeSync(application, new Object[] { event });
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.dnd.ICompositeDragNDrop#getDragSource(java.awt.Point)
+	 */
+	public Object getDragSource(Point xy)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private JSDNDEvent createScriptEvent(EventType type, Point xy, WebMarkupContainer row)
+	{
+		JSDNDEvent jsEvent = new JSDNDEvent();
+		jsEvent.setType(type);
+		//jsEvent.setFormName(getDragFormName());
+		//IRecordInternal dragRecord = getDragRecord(xy);
+		//if (dragRecord instanceof Record) jsEvent.setRecord((Record)dragRecord);
+
+		jsEvent.setSource(this);
+		String dragSourceName = getName();
+		if (dragSourceName == null) dragSourceName = getId();
+		jsEvent.setElementName(dragSourceName);
+
+		if (xy != null) jsEvent.setLocation(xy);
+
+		Object rowSource = row.getDefaultModelObject();
+		if (rowSource instanceof UserNode)
+		{
+			IRecord dragRecord = ((UserNode)rowSource).getRecord();
+			if (dragRecord instanceof Record) jsEvent.setRecord((Record)dragRecord);
+		}
+
+		return jsEvent;
+	}
+
+	private void addDragNDropBehavior(final WebMarkupContainer row)
+	{
+		DraggableBehavior dragBehavior = new DraggableBehavior()
+		{
+			@Override
+			protected void onDragEnd(String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			{
+				JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragEnd, null, row);
+				event.setData(getDragData());
+				event.setDataMimeType(getDragDataMimeType());
+				event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
+				InmethodDBTreeTableView.this.onDragEnd(event);
+
+				super.onDragEnd(id, x, y, ajaxRequestTarget);
+			}
+
+			@Override
+			protected void onDragStart(final String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			{
+				JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrag, new Point(x, y), row);
+				setDropResult(false);
+				setCurrentDragOperation(InmethodDBTreeTableView.this.onDrag(event));
+				setDragData(event.getData(), event.getDataMimeType());
+			}
+
+			@Override
+			protected void onDrop(String id, final String targetid, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			{
+				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				{
+					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrop, new Point(x, y), row);
+					event.setData(getDragData());
+					event.setDataMimeType(getDragDataMimeType());
+					setDropResult(InmethodDBTreeTableView.this.onDrop(event));
+				}
+			}
+
+			@Override
+			protected void onDropHover(String id, final String targetid, AjaxRequestTarget ajaxRequestTarget)
+			{
+				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				{
+					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragOver, null, row);
+					event.setData(getDragData());
+					event.setDataMimeType(getDragDataMimeType());
+					InmethodDBTreeTableView.this.onDragOver(event);
+				}
+			}
+
+		};
+		dragBehavior.setUseProxy(true);
+		row.add(dragBehavior);
 	}
 }

@@ -21,16 +21,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
-import javax.swing.LookAndFeel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -56,88 +53,6 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableScriptMethods
 {
 	private static final long serialVersionUID = 1L;
-
-	private final JTable treeTable = new JTable()
-	{
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed)
-		{
-			TreePath selectedPath;
-
-			switch (e.getKeyCode())
-			{
-				case KeyEvent.VK_LEFT :
-					selectedPath = SwingDBTreeTableView.this.tree.getSelectionPath();
-					if (selectedPath != null)
-					{
-						SwingDBTreeTableView.this.tree.collapsePath(selectedPath);
-						SwingDBTreeTableView.this.repaint();
-					}
-					return true;
-				case KeyEvent.VK_RIGHT :
-					selectedPath = SwingDBTreeTableView.this.tree.getSelectionPath();
-					if (selectedPath != null)
-					{
-						int selectedRow = getSelectedRow();
-						SwingDBTreeTableView.this.tree.expandPath(selectedPath);
-						resizeAndRepaint();
-						if (selectedRow != -1)
-						{
-							SwingDBTreeTableView.this.tree.setSelectionRow(selectedRow);
-						}
-					}
-					return true;
-				case KeyEvent.VK_ENTER :
-					return true;
-				default :
-					return super.processKeyBinding(ks, e, condition, pressed);
-			}
-		}
-
-		/**
-		 * Overridden to message super and forward the method to the tree. Since the tree is not actually in the component hieachy it will never receive this
-		 * unless we forward it in this manner.
-		 */
-		@Override
-		public void updateUI()
-		{
-			super.updateUI();
-			if (tree != null)
-			{
-				tree.updateUI();
-			}
-			// Use the tree's default foreground and background colors in the
-			// table.
-			LookAndFeel.installColorsAndFont(this, "Tree.background", "Tree.foreground", "Tree.font");
-		}
-
-
-		/*
-		 * Workaround for BasicTableUI anomaly. Make sure the UI never tries to paint the editor. The UI currently uses different techniques to paint the
-		 * renderers and editors and overriding setBounds() below is not the right thing to do for an editor. Returning -1 for the editing row in this case,
-		 * ensures the editor is never painted.
-		 */
-		@Override
-		public int getEditingRow()
-		{
-			return (getColumnClass(editingColumn) == SwingDBTree.class) ? -1 : editingRow;
-		}
-
-		/**
-		 * Overridden to pass the new rowHeight to the tree.
-		 */
-		@Override
-		public void setRowHeight(int rowHeight)
-		{
-			super.setRowHeight(rowHeight);
-			if (tree != null && tree.getRowHeight() != rowHeight)
-			{
-				tree.setRowHeight(getRowHeight());
-			}
-		}
-	};
 
 	private final AbstractTableModel treeTableModel = new AbstractTableModel()
 	{
@@ -232,6 +147,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 
 
 	private final DBTreeTableView dbTreeTableView;
+	private SwingDBTreeTable treeTable;
 
 	public SwingDBTreeTableView()
 	{
@@ -243,7 +159,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		super(application);
 		this.dbTreeTableView = dbTreeTableView;
 		// set the viewport to table		
-		setViewportView(treeTable);
+		setViewportView(treeTable = new SwingDBTreeTable(this, application));
 
 		tree.setOpaque(false);
 		tree.setTable(treeTable);
@@ -470,6 +386,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	@Override
 	public void js_setOnDrag(Function fOnDrag)
 	{
+		treeTable.setOnDragCallback(fOnDrag);
 	}
 
 	/*
@@ -480,6 +397,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	@Override
 	public void js_setOnDragEnd(Function fOnDragEnd)
 	{
+		treeTable.setOnDragEndCallback(fOnDragEnd);
 	}
 
 	/*
@@ -490,6 +408,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	@Override
 	public void js_setOnDragOver(Function fOnDragOver)
 	{
+		treeTable.setOnDragOverCallback(fOnDragOver);
 	}
 
 	/*
@@ -500,6 +419,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	@Override
 	public void js_setOnDrop(Function fOnDrop)
 	{
+		treeTable.setOnDropCallback(fOnDrop);
 	}
 }
 
