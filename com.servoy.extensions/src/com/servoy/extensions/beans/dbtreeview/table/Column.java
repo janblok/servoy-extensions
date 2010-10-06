@@ -53,13 +53,9 @@ public class Column implements IScriptObject
 		return dataprovider;
 	}
 
-	public void setDataprovider(String fieldName)
-	{
-		this.dataprovider = fieldName;
-	}
-
 	public void js_setDataprovider(String fieldName)
 	{
+		this.dataprovider = fieldName;
 	}
 
 	public String getHeader()
@@ -67,14 +63,10 @@ public class Column implements IScriptObject
 		return header;
 	}
 
-	public void setHeader(String header)
+	public void js_setHeader(String header)
 	{
 		this.header = header;
 		if (dbTreeTableView != null) dbTreeTableView.flagColumnsChanged();
-	}
-
-	public void js_setHeader(String header)
-	{
 	}
 
 	public String getServerName()

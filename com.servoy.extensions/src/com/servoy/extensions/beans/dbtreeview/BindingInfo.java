@@ -734,9 +734,9 @@ public class BindingInfo
 								RelationInfo relationInfo = new RelationInfo();
 
 								value = nArrayObject.get(ATT_RELATION_INFO_LABEL, nArrayObject);
-								if (value != Scriptable.NOT_FOUND) relationInfo.setLabel(value.toString());
+								if (value != Scriptable.NOT_FOUND) relationInfo.js_setLabel(value.toString());
 								value = nArrayObject.get(ATT_RELATION_INFO_N_RELATION, nArrayObject);
-								if (value != Scriptable.NOT_FOUND) relationInfo.setNRelationName(value.toString());
+								if (value != Scriptable.NOT_FOUND) relationInfo.js_setNRelationName(value.toString());
 
 								nRelationInfosFromDataprovider[i] = relationInfo;
 							}

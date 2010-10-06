@@ -205,9 +205,9 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 
 			defaultBinding.setDataSource(fs.getDataSource());
 			bindingInfo.addBinding(defaultBinding);
-			defaultBinding.setTextDataprovider(((vargs.length >= 2 && vargs[1] != null) ? vargs[1].toString() : null));
-			defaultBinding.setNRelationName(((vargs.length >= 3 && vargs[2] != null) ? vargs[2].toString() : defaultBinding.getNRelationName()));
-			defaultBinding.setMRelationName(((vargs.length >= 4 && vargs[3] != null) ? vargs[3].toString() : defaultBinding.getMRelationName()));
+			defaultBinding.js_setTextDataprovider(((vargs.length >= 2 && vargs[1] != null) ? vargs[1].toString() : null));
+			defaultBinding.js_setNRelationName(((vargs.length >= 3 && vargs[2] != null) ? vargs[2].toString() : defaultBinding.getNRelationName()));
+			defaultBinding.js_setMRelationName(((vargs.length >= 4 && vargs[3] != null) ? vargs[3].toString() : defaultBinding.getMRelationName()));
 
 			try
 			{
@@ -224,43 +224,43 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 
 	public void js_setCallBackInfo(Function methodToCallOnClick, String returndp)//can be related dp, when clicked and passed as argument to method
 	{
-		defaultBinding.setMethodToCallOnClick(methodToCallOnClick, returndp);
+		defaultBinding.js_setMethodToCallOnClick(methodToCallOnClick, returndp);
 	}
 
 
 	public void js_bindNodeTooltipTextDataProvider(String dp)//can be related dp
 	{
-		defaultBinding.setToolTipTextDataprovider(dp);
+		defaultBinding.js_setToolTipTextDataprovider(dp);
 	}
 
 	public void js_bindNodeChildSortDataProvider(String dp)//can be related dp
 	{
-		defaultBinding.setChildSortDataprovider(dp);
+		defaultBinding.js_setChildSortDataprovider(dp);
 	}
 
 	public void js_bindNodeFontTypeDataProvider(String dp)//can be related dp
 	{
-		defaultBinding.setFontTypeDataprovider(dp);
+		defaultBinding.js_setFontTypeDataprovider(dp);
 	}
 
 	public void js_bindNodeImageURLDataProvider(String dp)//can be related dp
 	{
-		defaultBinding.setImageURLDataprovider(dp);
+		defaultBinding.js_setImageURLDataprovider(dp);
 	}
 
 	public void js_bindNodeImageMediaDataProvider(String dp)//can be related dp
 	{
-		defaultBinding.setImageMediaDataprovider(dp);
+		defaultBinding.js_setImageMediaDataprovider(dp);
 	}
 
 	public void js_setNRelationName(String n_relationName)//normally self join
 	{
-		defaultBinding.setNRelationName(n_relationName);
+		defaultBinding.js_setNRelationName(n_relationName);
 	}
 
 	public void js_setMRelationName(String m_relationName)//incase of n-m inbetween table
 	{
-		defaultBinding.setMRelationName(m_relationName);
+		defaultBinding.js_setMRelationName(m_relationName);
 	}
 
 

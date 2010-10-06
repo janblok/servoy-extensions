@@ -120,27 +120,27 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 
 	public void js_bindNodeChildSortDataProvider(String dp)
 	{
-		defaultBinding.setChildSortDataprovider(dp);
+		defaultBinding.js_setChildSortDataprovider(dp);
 	}
 
 	public void js_bindNodeFontTypeDataProvider(String dp)
 	{
-		defaultBinding.setFontTypeDataprovider(dp);
+		defaultBinding.js_setFontTypeDataprovider(dp);
 	}
 
 	public void js_bindNodeImageMediaDataProvider(String dp)
 	{
-		defaultBinding.setImageMediaDataprovider(dp);
+		defaultBinding.js_setImageMediaDataprovider(dp);
 	}
 
 	public void js_bindNodeImageURLDataProvider(String dp)
 	{
-		defaultBinding.setImageURLDataprovider(dp);
+		defaultBinding.js_setImageURLDataprovider(dp);
 	}
 
 	public void js_bindNodeTooltipTextDataProvider(String dp)
 	{
-		defaultBinding.setToolTipTextDataprovider(dp);
+		defaultBinding.js_setToolTipTextDataprovider(dp);
 	}
 
 	public String js_getBgcolor()
@@ -280,7 +280,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 
 	public void js_setCallBackInfo(Function f, String returndp)
 	{
-		defaultBinding.setMethodToCallOnClick(f, returndp);
+		defaultBinding.js_setMethodToCallOnClick(f, returndp);
 	}
 
 
@@ -336,12 +336,12 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 
 	public void js_setMRelationName(String m_relationName)
 	{
-		defaultBinding.setMRelationName(m_relationName);
+		defaultBinding.js_setMRelationName(m_relationName);
 	}
 
 	public void js_setNRelationName(String n_relationName)
 	{
-		defaultBinding.setNRelationName(n_relationName);
+		defaultBinding.js_setNRelationName(n_relationName);
 	}
 
 	public void js_setNodeLevelVisible(int level, boolean visible)
@@ -362,9 +362,9 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 			bindingInfo.addRoots(fs);
 			defaultBinding.setDataSource(fs.getDataSource());
 			bindingInfo.addBinding(defaultBinding);
-			defaultBinding.setTextDataprovider(((vargs.length >= 2 && vargs[1] != null) ? vargs[1].toString() : null));
-			defaultBinding.setNRelationName(((vargs.length >= 3 && vargs[2] != null) ? vargs[2].toString() : defaultBinding.getNRelationName()));
-			defaultBinding.setMRelationName(((vargs.length >= 4 && vargs[3] != null) ? vargs[3].toString() : defaultBinding.getMRelationName()));
+			defaultBinding.js_setTextDataprovider(((vargs.length >= 2 && vargs[1] != null) ? vargs[1].toString() : null));
+			defaultBinding.js_setNRelationName(((vargs.length >= 3 && vargs[2] != null) ? vargs[2].toString() : defaultBinding.getNRelationName()));
+			defaultBinding.js_setMRelationName(((vargs.length >= 4 && vargs[3] != null) ? vargs[3].toString() : defaultBinding.getMRelationName()));
 
 			try
 			{

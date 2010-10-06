@@ -63,13 +63,9 @@ public class Binding implements IScriptObject
 		return configurationDataprovider;
 	}
 
-	public void setConfigurationDataprovider(String configurationDataprovider)
-	{
-		this.configurationDataprovider = configurationDataprovider;
-	}
-
 	public void js_setConfigurationDataprovider(String configurationDataprovider)
 	{
+		this.configurationDataprovider = configurationDataprovider;
 	}
 
 	public String getHasCheckBoxDataprovider()
@@ -77,13 +73,9 @@ public class Binding implements IScriptObject
 		return hasCheckBoxDataprovider;
 	}
 
-	public void setHasCheckBoxDataprovider(String hasCheckBoxDataprovider)
-	{
-		this.hasCheckBoxDataprovider = hasCheckBoxDataprovider;
-	}
-
 	public void js_setHasCheckBoxDataprovider(String hasCheckBoxDataprovider)
 	{
+		this.hasCheckBoxDataprovider = hasCheckBoxDataprovider;
 	}
 
 	public String getCheckBoxValueDataprovider()
@@ -91,13 +83,9 @@ public class Binding implements IScriptObject
 		return checkBoxValueDataprovider;
 	}
 
-	public void setCheckBoxValueDataprovider(String checkBoxValueDataprovider)
-	{
-		this.checkBoxValueDataprovider = checkBoxValueDataprovider;
-	}
-
 	public void js_setCheckBoxValueDataprovider(String checkBoxValueDataprovider)
 	{
+		this.checkBoxValueDataprovider = checkBoxValueDataprovider;
 	}
 
 	public String getChildSortDataprovider()
@@ -105,13 +93,9 @@ public class Binding implements IScriptObject
 		return childSortDataprovider;
 	}
 
-	public void setChildSortDataprovider(String childSortDataprovider)
-	{
-		this.childSortDataprovider = childSortDataprovider;
-	}
-
 	public void js_setChildSortDataprovider(String childSortDataprovider)
 	{
+		this.childSortDataprovider = childSortDataprovider;
 	}
 
 	public String getFontTypeDataprovider()
@@ -119,13 +103,9 @@ public class Binding implements IScriptObject
 		return fontTypeDataprovider;
 	}
 
-	public void setFontTypeDataprovider(String fontTypeDataprovider)
-	{
-		this.fontTypeDataprovider = fontTypeDataprovider;
-	}
-
 	public void js_setFontTypeDataprovider(String fontTypeDataprovider)
 	{
+		this.fontTypeDataprovider = fontTypeDataprovider;
 	}
 
 	public String getImageMediaDataprovider()
@@ -133,13 +113,9 @@ public class Binding implements IScriptObject
 		return imageMediaDataprovider;
 	}
 
-	public void setImageMediaDataprovider(String imageMediaDataprovider)
-	{
-		this.imageMediaDataprovider = imageMediaDataprovider;
-	}
-
 	public void js_setImageMediaDataprovider(String imageMediaDataprovider)
 	{
+		this.imageMediaDataprovider = imageMediaDataprovider;
 	}
 
 	public String getImageURLDataprovider()
@@ -147,13 +123,9 @@ public class Binding implements IScriptObject
 		return imageURLDataprovider;
 	}
 
-	public void setImageURLDataprovider(String imageURLDataprovider)
-	{
-		this.imageURLDataprovider = imageURLDataprovider;
-	}
-
 	public void js_setImageURLDataprovider(String imageURLDataprovider)
 	{
+		this.imageURLDataprovider = imageURLDataprovider;
 	}
 
 	public String getMRelationName()
@@ -161,13 +133,9 @@ public class Binding implements IScriptObject
 		return mRelationName;
 	}
 
-	public void setMRelationName(String name)
-	{
-		mRelationName = name;
-	}
-
 	public void js_setMRelationName(String name)
 	{
+		mRelationName = name;
 	}
 
 	public String getNRelationName()
@@ -175,13 +143,9 @@ public class Binding implements IScriptObject
 		return nRelationName;
 	}
 
-	public void setNRelationName(String name)
-	{
-		nRelationName = name;
-	}
-
 	public void js_setNRelationName(String name)
 	{
+		nRelationName = name;
 	}
 
 	public Object[] getNRelationInfos()
@@ -189,13 +153,9 @@ public class Binding implements IScriptObject
 		return nRelationInfos;
 	}
 
-	public void setNRelationInfos(Object[] relationInfos)
-	{
-		nRelationInfos = relationInfos;
-	}
-
 	public void js_setNRelationInfos(Object[] relationInfos)
 	{
+		nRelationInfos = relationInfos;
 	}
 
 	public String getReturnDataprovider()
@@ -245,13 +205,9 @@ public class Binding implements IScriptObject
 		return textDataprovider;
 	}
 
-	public void setTextDataprovider(String textDataprovider)
-	{
-		this.textDataprovider = textDataprovider;
-	}
-
 	public void js_setTextDataprovider(String textDataprovider)
 	{
+		this.textDataprovider = textDataprovider;
 	}
 
 	public String getToolTipTextDataprovider()
@@ -259,13 +215,9 @@ public class Binding implements IScriptObject
 		return toolTipTextDataprovider;
 	}
 
-	public void setToolTipTextDataprovider(String toolTipTextDataprovider)
-	{
-		this.toolTipTextDataprovider = toolTipTextDataprovider;
-	}
-
 	public void js_setToolTipTextDataprovider(String toolTipTextDataprovider)
 	{
+		this.toolTipTextDataprovider = toolTipTextDataprovider;
 	}
 
 	public FunctionDefinition getMethodToCallOnCheckBoxChange()
@@ -273,17 +225,13 @@ public class Binding implements IScriptObject
 		return methodToCallOnCheckBoxChange;
 	}
 
-	public void setMethodToCallOnCheckBoxChange(Function methodToCallOnCheckBoxChange, String returnDataproviderOnCheckBoxChange)
+	public void js_setMethodToCallOnCheckBoxChange(Function methodToCallOnCheckBoxChange, String returnDataproviderOnCheckBoxChange)
 	{
 		if (methodToCallOnCheckBoxChange != null)
 		{
 			this.methodToCallOnCheckBoxChange = new FunctionDefinition(methodToCallOnCheckBoxChange);
 			this.returnDataproviderOnCheckBoxChange = returnDataproviderOnCheckBoxChange;
 		}
-	}
-
-	public void js_setMethodToCallOnCheckBoxChange(Function methodToCallOnCheckBoxChange, String returnDataproviderOnCheckBoxChange)
-	{
 	}
 
 	public FunctionDefinition getCallBack()
@@ -297,22 +245,12 @@ public class Binding implements IScriptObject
 	 * @deprecated
 	 */
 	@Deprecated
-	public void setMethodToCallOnClick(Function methodToCallOnClick, String returnDataprovider)
-	{
-		setCallBackInfo(methodToCallOnClick, returnDataprovider);
-	}
-
-	/**
-	 * for compatibility
-	 * 
-	 * @deprecated
-	 */
-	@Deprecated
 	public void js_setMethodToCallOnClick(Function methodToCallOnClick, String returnDataprovider)
 	{
+		js_setCallBackInfo(methodToCallOnClick, returnDataprovider);
 	}
 
-	public void setCallBackInfo(Function f, String returnDataprovider)
+	public void js_setCallBackInfo(Function f, String returnDataprovider)
 	{
 		if (f != null)
 		{
@@ -321,24 +259,15 @@ public class Binding implements IScriptObject
 		}
 	}
 
-	public void js_setCallBackInfo(Function f, String returnDataprovider)
-	{
-
-	}
-
 
 	public String getMRelationDataprovider()
 	{
 		return mRelationDataprovider;
 	}
 
-	public void setMRelationDataprovider(String dataprovider)
-	{
-		mRelationDataprovider = dataprovider;
-	}
-
 	public void js_setMRelationDataprovider(String dataprovider)
 	{
+		mRelationDataprovider = dataprovider;
 	}
 
 	public String getNRelationDataprovider()
@@ -346,13 +275,9 @@ public class Binding implements IScriptObject
 		return nRelationDataprovider;
 	}
 
-	public void setNRelationDataprovider(String dataprovider)
-	{
-		nRelationDataprovider = dataprovider;
-	}
-
 	public void js_setNRelationDataprovider(String dataprovider)
 	{
+		nRelationDataprovider = dataprovider;
 	}
 
 	public Class[] getAllReturnedTypes()

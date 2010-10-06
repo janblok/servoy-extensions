@@ -361,8 +361,8 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		column.setDBTreeTableView(dbTreeTableView);
 		column.setServerName(servername);
 		column.setTableName(tablename);
-		column.setHeader(header);
-		column.setDataprovider(fieldname);
+		column.js_setHeader(header);
+		column.js_setDataprovider(fieldname);
 
 		dbTreeTableView.addColumn(column);
 		treeTableModel.fireTableStructureChanged();

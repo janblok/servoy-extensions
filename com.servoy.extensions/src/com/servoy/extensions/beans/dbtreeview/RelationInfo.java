@@ -27,8 +27,6 @@ public class RelationInfo implements IScriptObject
 {
 	private String label;
 	private String nRelationName;
-	private String tooltip;
-	private String imageURL;
 
 	public RelationInfo()
 	{
@@ -41,10 +39,6 @@ public class RelationInfo implements IScriptObject
 
 	public void js_setLabel(String label)
 	{
-	}
-
-	public void setLabel(String label)
-	{
 		this.label = label;
 	}
 
@@ -53,11 +47,7 @@ public class RelationInfo implements IScriptObject
 		return nRelationName;
 	}
 
-	public void js_setNRelationName(String label)
-	{
-	}
-
-	public void setNRelationName(String relationName)
+	public void js_setNRelationName(String relationName)
 	{
 		nRelationName = relationName;
 	}
