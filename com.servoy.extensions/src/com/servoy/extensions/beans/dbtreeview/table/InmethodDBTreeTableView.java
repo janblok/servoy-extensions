@@ -905,6 +905,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 
 		};
 		dragBehavior.setUseProxy(true);
+		dragBehavior.setRenderOnHead(false);
 		row.add(dragBehavior);
 	}
 }
