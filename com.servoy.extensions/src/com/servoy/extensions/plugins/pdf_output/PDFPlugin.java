@@ -13,12 +13,13 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.pdf_output;
 
 import java.beans.PropertyChangeEvent;
 import java.util.Properties;
 
+import javax.print.PrintServiceLookup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -50,6 +51,7 @@ public class PDFPlugin implements IClientPlugin
 	public void initialize(IClientPluginAccess app) throws PluginException
 	{
 		access = app;
+		PrintServiceLookup.registerService(new PDFPrintService(access));
 	}
 
 	/*
