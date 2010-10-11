@@ -41,8 +41,12 @@ import com.servoy.j2db.util.Debug;
  */
 public class PDFPrintService implements PrintService
 {
+	private static final String OUTPUT_FILE_NAME = "out"; //$NON-NLS-1$
+	private static final String OUTPUT_FILE_EXTENSION = ".pdf"; //$NON-NLS-1$
+
 	private final IClientPluginAccess access;
 	private final JFileChooser outputFolderChooser;
+	private int outputFileNameCounter;
 
 	public PDFPrintService(IClientPluginAccess access)
 	{
@@ -50,7 +54,6 @@ public class PDFPrintService implements PrintService
 		outputFolderChooser = new JFileChooser();
 		outputFolderChooser.setDialogTitle("Save PDF output");
 		outputFolderChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		outputFolderChooser.setSelectedFile(new File(System.getProperty("user.home"), "out.pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 		outputFolderChooser.setFileFilter(new FileFilter()
 		{
 
@@ -83,13 +86,17 @@ public class PDFPrintService implements PrintService
 	public DocPrintJob createPrintJob()
 	{
 		DocPrintJob docPrintJob = null;
-
+		StringBuffer outputFileName = new StringBuffer(OUTPUT_FILE_NAME);
+		if (outputFileNameCounter > 0) outputFileName.append(outputFileNameCounter);
+		outputFileName.append(OUTPUT_FILE_EXTENSION);
+		outputFolderChooser.setSelectedFile(new File(System.getProperty("user.home"), outputFileName.toString())); //$NON-NLS-1$
 		if (outputFolderChooser.showSaveDialog(access.getCurrentWindow()) == JFileChooser.APPROVE_OPTION)
 		{
 			try
 			{
 				PDFStreamPrintService sps = new PDFStreamPrintService(new FileOutputStream(outputFolderChooser.getSelectedFile()));
 				docPrintJob = sps.createPrintJob();
+				outputFileNameCounter++;
 			}
 			catch (Exception ex)
 			{
@@ -159,7 +166,6 @@ public class PDFPrintService implements PrintService
 	 */
 	public Class< ? >[] getSupportedAttributeCategories()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
