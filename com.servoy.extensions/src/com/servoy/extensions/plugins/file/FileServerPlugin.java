@@ -104,10 +104,6 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 					throw new RuntimeException("Cant set the default folder for the File plugin to '" + folder + "' can't create the directory");
 				}
 			}
-			if (defaultFolder.canWrite())
-			{
-				throw new RuntimeException("Cant set the default folder for the File plugin to '" + folder + "' can't write into the directory");
-			}
 		}
 		else
 		{
@@ -378,7 +374,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	{
 		if (defaultFolder == null) throw new IOException("File Plugin is unloaded");
 		final ITransferObject to = transferMap.get(uuid);
-		if (to == null) throw new IOException("Unkown uuid for writeBytes");
+		if (to == null) throw new IOException("Unkown uuid for readBytes");
 		return to.read(length);
 	}
 
