@@ -177,6 +177,10 @@ public class DialogProvider implements IScriptObject
 		{
 			return new String[] { "dialog_title", "msg", "optionArray/option1", "[option2]", "[optionN]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		}
+		else if ("showDialog".equals(methodName)) //$NON-NLS-1$
+		{
+			return new String[] { "[dialog_title]", "[msg]", "[initialValue]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
 		return null;
 	}
 
