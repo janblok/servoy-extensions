@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.http;
 
 import com.servoy.j2db.scripting.IScriptObject;
@@ -26,18 +26,18 @@ import com.servoy.j2db.scripting.IScriptObject;
 public class Cookie implements IScriptObject
 {
 
-	private org.apache.commons.httpclient.Cookie cookie;
+	private org.apache.http.cookie.Cookie cookie;
 
 	public Cookie()
 	{
 	}
 
-	public void setCookie(org.apache.commons.httpclient.Cookie cookie)
+	public void setCookie(org.apache.http.cookie.Cookie cookie)
 	{
 		this.cookie = cookie;
 	}
 
-	public Cookie(org.apache.commons.httpclient.Cookie cookie)
+	public Cookie(org.apache.http.cookie.Cookie cookie)
 	{
 		this.cookie = cookie;
 	}
@@ -104,7 +104,7 @@ public class Cookie implements IScriptObject
 	public boolean js_getSecure()
 	{
 		if (cookie == null) return false;
-		return cookie.getSecure();
+		return cookie.isSecure();
 	}
 
 	/**

@@ -13,25 +13,37 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.http;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.FilePart;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.Part;
-import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.ExecutionContext;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
@@ -42,30 +54,32 @@ import com.servoy.j2db.util.Pair;
  */
 public class Poster implements IScriptObject
 {
-	private HttpClient client;
-	private PostMethod post;
-	private Map params;
-	private Map files;
+	private DefaultHttpClient client;
+	private String url;
+	private HttpContext context;
+	private List<NameValuePair> params;
+	private Map<Pair<String, String>, File> files;
 	private Map<String, String> headers;
-	private String charset = null;
+	private String charset = HTTP.UTF_8;
+	private String content;
 
 	public Poster()
 	{
 	}//only used by script engine
 
-	public Poster(String a_url, HttpClient hc)
+	public Poster(String a_url, DefaultHttpClient hc)
 	{
+		url = a_url;
 		if (hc == null)
 		{
-			client = new HttpClient();
+			client = new DefaultHttpClient();
 		}
 		else
 		{
 			client = hc;
 		}
-		post = new PostMethod(a_url);
-		params = new HashMap();
-		files = new HashMap();
+		params = new ArrayList<NameValuePair>();
+		files = new HashMap<Pair<String, String>, File>();
 		headers = new HashMap<String, String>();
 	}
 
@@ -82,10 +96,14 @@ public class Poster implements IScriptObject
 	 */
 	public boolean js_addParameter(String name, String value)
 	{
-		if (value != null)
+		if (name != null)
 		{
-			params.put(name, value);
+			params.add(new BasicNameValuePair(name, value));
 			return true;
+		}
+		else if (value != null)
+		{
+			content = value;
 		}
 		return false;
 	}
@@ -110,7 +128,7 @@ public class Poster implements IScriptObject
 			File f = new File(fileLocation);
 			if (f.exists())
 			{
-				files.put(new Pair(parameterName, fileName), f);
+				files.put(new Pair<String, String>(parameterName, fileName), f);
 				return true;
 			}
 		}
@@ -184,6 +202,8 @@ public class Poster implements IScriptObject
 	 */
 	public int js_doPost(Object[] args)
 	{
+		HttpPost post = new HttpPost(url);
+
 		String username = null;
 		String password = null;
 		if (args.length == 2)
@@ -195,91 +215,66 @@ public class Poster implements IScriptObject
 		{
 			if (files.size() == 0)
 			{
-				Iterator it = params.keySet().iterator();
-				while (it.hasNext())
+				if (params.size() > 0)
 				{
-					String name = (String)it.next();
-					String value = (String)params.get(name);
-					if (name != null)
-					{
-						post.addParameter(name, value);
-					}
-					else
-					{
-						post.setRequestEntity(new StringRequestEntity(value));
-					}
+					post.setEntity(new UrlEncodedFormEntity(params, charset));
 				}
+				else
+				{
+					post.setEntity(new StringEntity(content));
+					content = null;
+				}
+			}
+			else if (files.size() == 1 && params.size() == 0)
+			{
+				File f = files.values().iterator().next();
+				post.setEntity(new FileEntity(f, "binary/octet-stream"));
 			}
 			else
 			{
-				Part[] parts = new Part[files.size() + params.size()];
-				int i = 0;
-				boolean multiPartRequest = true;
+				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-				// add the files
-				for (Iterator it = files.keySet().iterator(); it.hasNext(); i++)
+				// For File parameters
+				Iterator<Pair<String, String>> itf = files.keySet().iterator();
+				while (itf.hasNext())
 				{
-					Pair p = (Pair)it.next();
-					File f = (File)files.get(p);
-					String fname = (String)p.getRight();
-					if (p.getLeft() != null)
-					{
-						if (fname != null)
-						{
-							parts[i] = new FilePart((String)p.getLeft(), fname, f);
-						}
-						else
-						{
-							parts[i] = new FilePart((String)p.getLeft(), f);
-						}
-					}
-					else
-					{
-						multiPartRequest = false;
-						post.setRequestEntity(new InputStreamRequestEntity(new FileInputStream(f), -1));
-					}
+					Pair<String, String> p = itf.next();
+					File f = files.get(p);
+					String paramName = p.getLeft();
+					String fname = p.getRight();
+					entity.addPart(paramName, new FileBody(f));
 				}
 
 				// add the parameters
-				for (Iterator it = params.keySet().iterator(); it.hasNext(); i++)
+				Iterator<NameValuePair> it = params.iterator();
+				while (it.hasNext())
 				{
-					String name = (String)it.next();
-					String value = (String)params.get(name);
-					if (name != null)
-					{
-						parts[i] = new StringPart(name, value);
-					}
-					else
-					{
-						multiPartRequest = false;
-						post.setRequestEntity(new StringRequestEntity(value));
-					}
+					NameValuePair nvp = it.next();
+					// For usual String parameters
+					entity.addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
 				}
 
-				if (multiPartRequest) post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
+				post.setEntity(entity);
 			}
-
-			// choose encoding to use
-			String charsetToUse = charset;
-			if (charsetToUse == null)
-			{
-				charsetToUse = "UTF-8";
-			}
-			post.getParams().setContentCharset(charsetToUse);
-			post.getParams().setCredentialCharset(charsetToUse);
-			post.getParams().setHttpElementCharset(charsetToUse);
 
 			Iterator<String> it = headers.keySet().iterator();
 			while (it.hasNext())
 			{
 				String name = it.next();
 				String value = headers.get(name);
-				post.addRequestHeader(name, value);
+				post.addHeader(name, value);
 			}
 
 			// post
-			if (args.length == 2) client.getState().setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
-			int status = client.executeMethod(post);
+			if (args.length == 2)
+			{
+				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+				URL _url = new URL(url);
+				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
+				client.setCredentialsProvider(bcp);
+			}
+			HttpResponse res = client.execute(post, context);
+			int status = res.getStatusLine().getStatusCode();
 			return status;
 		}
 		catch (Exception ex)
@@ -298,15 +293,12 @@ public class Poster implements IScriptObject
 	{
 		try
 		{
-			return post.getResponseBodyAsString();
+			HttpResponse response = (HttpResponse)context.getAttribute(ExecutionContext.HTTP_RESPONSE);
+			return EntityUtils.toString(response.getEntity());
 		}
 		catch (Exception e)
 		{
 			Debug.error(e);
-		}
-		finally
-		{
-			post.releaseConnection();
 		}
 		return ""; //$NON-NLS-1$
 	}

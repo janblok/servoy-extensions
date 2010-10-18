@@ -20,19 +20,17 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,17 +38,23 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
-import org.apache.commons.httpclient.methods.PutMethod;
-import org.apache.commons.httpclient.params.HttpClientParams;
+import org.apache.http.Header;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
@@ -104,14 +108,18 @@ public class HttpProvider implements IScriptObject
 		if (vargs.length >= 4) password = "" + vargs[3];
 		try
 		{
-			HttpClient client = getOrCreateHTTPclient(clientname, a_url);
-			client.getParams().setBooleanParameter(HttpClientParams.ALLOW_CIRCULAR_REDIRECTS, true);
-			GetMethod get = new GetMethod(a_url);
-			get.setFollowRedirects(true);
-			if (vargs.length == 4) client.getState().setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
-			client.executeMethod(get); // you can get the status from here... (return code)
-			lastPageEncoding = get.getResponseCharSet();
-			return get.getResponseBodyAsString();
+			DefaultHttpClient client = getOrCreateHTTPclient(clientname, a_url);
+			HttpGet get = new HttpGet(a_url);
+			URL _url = new URL(a_url);
+			if (vargs.length == 4)
+			{
+				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
+				client.setCredentialsProvider(bcp);
+			}
+			HttpResponse res = client.execute(get); // you can get the status from here... (return code)
+			lastPageEncoding = EntityUtils.getContentCharSet(res.getEntity());
+			return EntityUtils.toString(res.getEntity());
 		}
 		catch (Exception e)
 		{
@@ -162,19 +170,27 @@ public class HttpProvider implements IScriptObject
 		return sb.toString();
 	}
 
-	private HttpClient getOrCreateHTTPclient(String name, String url)
+	private DefaultHttpClient getOrCreateHTTPclient(String name, String url)
 	{
-		HttpClient client = httpClients.get(name);
+		DefaultHttpClient client = httpClients.get(name);
 		if (client == null)
 		{
-			client = new HttpClient();
+			client = new DefaultHttpClient();
+			client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
+
+			if (name != null)
+			{
+				httpClients.put(name, client);
+			}
+			if (url != null)
+			{
+				setHttpClientProxy(client, url);
+			}
 		}
-		if (name != null) httpClients.put(name, client);
-		if (url != null) setHttpClientProxy(client, url);
 		return client;
 	}
 
-	private void setHttpClientProxy(HttpClient client, String url)
+	private void setHttpClientProxy(DefaultHttpClient client, String url)
 	{
 		String proxyHost = null;
 		int proxyPort = 8080;
@@ -191,8 +207,8 @@ public class HttpProvider implements IScriptObject
 					{
 						InetSocketAddress address = (InetSocketAddress)proxy.address();
 						proxyHost = address.getHostName();
-						client.getHostConfiguration().setProxy(address.getHostName(), address.getPort());
-						// no proxy credentials ? seems not
+						HttpHost host = new HttpHost(address.getHostName(), address.getPort());
+						client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
 						break;
 					}
 				}
@@ -202,6 +218,7 @@ public class HttpProvider implements IScriptObject
 		{
 			Debug.log(ex);
 		}
+
 		if (proxyHost == null && System.getProperty("http.proxyHost") != null && !"".equals(System.getProperty("http.proxyHost")))
 		{
 			proxyHost = System.getProperty("http.proxyHost");
@@ -213,11 +230,16 @@ public class HttpProvider implements IScriptObject
 			{
 				//ignore
 			}
-			client.getHostConfiguration().setProxy(proxyHost, proxyPort);
-
+			HttpHost host = new HttpHost(proxyHost, proxyPort);
+			client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, host);
 		}
-		if (proxyUser != null) client.getState().setProxyCredentials(AuthScope.ANY, new UsernamePasswordCredentials(proxyUser, proxyPassword));
 
+		if (proxyUser != null)
+		{
+			BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+			bcp.setCredentials(new AuthScope(proxyHost, proxyPort), new UsernamePasswordCredentials(proxyUser, proxyPassword));
+			client.setCredentialsProvider(bcp);
+		}
 	}
 
 	/**
@@ -292,7 +314,7 @@ public class HttpProvider implements IScriptObject
 		else
 		{
 			String clientName = "" + args[1]; //$NON-NLS-1$
-			HttpClient client = httpClients.get(clientName);
+			DefaultHttpClient client = httpClients.get(clientName);
 			if (client == null)
 			{
 				return null;
@@ -300,25 +322,26 @@ public class HttpProvider implements IScriptObject
 			try
 			{
 				setHttpClientProxy(client, input);
+
 				URL url = new URL(input);
-				GetMethod method = new GetMethod(input);
+				HttpGet method = new HttpGet(input);
 
 				//for some proxies
-				method.addRequestHeader("Cache-control", "no-cache");
-				method.addRequestHeader("Pragma", "no-cache");
+				method.addHeader("Cache-control", "no-cache");
+				method.addHeader("Pragma", "no-cache");
 				//maybe mod_deflate set and wrong configured
-				method.addRequestHeader("Accept-Encoding", "gzip");
-				int statusCode = client.executeMethod(method);
+				method.addHeader("Accept-Encoding", "gzip");
+				HttpResponse res = client.execute(method);
+				int statusCode = res.getStatusLine().getStatusCode();
 				if (statusCode != HttpStatus.SC_OK)
 				{
-					String statusText = HttpStatus.getStatusText(statusCode);
 					return null;
 				}
 
 				InputStream is = null;
-				Header contentEncoding = method.getResponseHeader("Content-Encoding");
+				Header contentEncoding = res.getFirstHeader("Content-Encoding");
 				boolean gziped = contentEncoding == null ? false : "gzip".equalsIgnoreCase(contentEncoding.getValue());
-				is = method.getResponseBodyAsStream();
+				is = res.getEntity().getContent();
 				if (gziped)
 				{
 					is = new GZIPInputStream(is);
@@ -327,10 +350,6 @@ public class HttpProvider implements IScriptObject
 				Utils.streamCopy(bis, sb);
 				bis.close();
 				is.close();
-			}
-			catch (HttpException e)
-			{
-				Debug.error(e);
 			}
 			catch (IOException e)
 			{
@@ -369,58 +388,36 @@ public class HttpProvider implements IScriptObject
 
 		if ("".equals(clientName.trim())) return false;
 
+		int status = 0;
 		try
 		{
 			URL _url = new URL(url);
-		}
-		catch (MalformedURLException e)
-		{
-			return false;
-		}
-		PutMethod method = new PutMethod(url + "/" + fileName);
-		HttpClient client = getOrCreateHTTPclient(clientName, url);
-		File file = new File(path);
+			HttpPut method = new HttpPut(url + "/" + fileName);
+			DefaultHttpClient client = getOrCreateHTTPclient(clientName, url);
+			File file = new File(path);
 
-		if (!"".equals(username.trim()))
-		{
-			client.getState().setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
-		}
-		int statusCode = 0, attempt = 0;
-
-		if (file == null)
-		{
-			return false;
-		}
-		InputStream content = null;
-		try
-		{
-			content = new FileInputStream(file);
-		}
-		catch (FileNotFoundException e)
-		{
-			Debug.error(e);
-		}
-		if (content == null)
-		{
-			return false;
-		}
-		method.setRequestEntity(new InputStreamRequestEntity(content));
-
-		while (statusCode != HttpStatus.SC_OK && attempt++ < 10)
-		{
-			try
+			if (!"".equals(username.trim()))
 			{
-				statusCode = client.executeMethod(method);
+				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
+				client.setCredentialsProvider(bcp);
 			}
-			catch (Exception e)
+			int statusCode = 0, attempt = 0;
+
+			if (file == null || !file.exists())
 			{
-				if (attempt == 10)
-				{
-					return false;
-				}
+				return false;
 			}
+			method.setEntity(new FileEntity(file, "binary/octet-stream"));
+			HttpResponse res = client.execute(method);
+			status = res.getStatusLine().getStatusCode();
 		}
-		return true;
+		catch (IOException e)
+		{
+			return false;
+		}
+
+		return (status == HttpStatus.SC_OK);
 	}
 
 	/**
@@ -453,7 +450,7 @@ public class HttpProvider implements IScriptObject
 
 		if (vargs.length >= 1) clientName = (String)vargs[0];
 		if (clientName == null || "".equals(clientName.trim())) return false;
-		HttpClient client = httpClients.get(clientName);
+		DefaultHttpClient client = httpClients.get(clientName);
 		if (client == null) return false;
 
 		if (vargs.length >= 2) cookieName = (String)vargs[1];
@@ -471,11 +468,16 @@ public class HttpProvider implements IScriptObject
 		if (cookieName == null || "".equals(cookieName.trim())) return false;
 		if (cookieValue == null || "".equals(cookieValue.trim())) return false;
 
-		org.apache.commons.httpclient.Cookie cookie;
-		if (vargs.length == 3) cookie = new org.apache.commons.httpclient.Cookie(domain, cookieName, cookieValue);
-		else cookie = new org.apache.commons.httpclient.Cookie(domain, cookieName, cookieValue, path, maxAge, secure);
-		HttpState state = client.getState();
-		state.addCookie(cookie);
+		BasicClientCookie cookie;
+		cookie = new BasicClientCookie(cookieName, cookieValue);
+		if (vargs.length > 3)
+		{
+			cookie.setPath(path);
+			cookie.setExpiryDate(new Date(System.currentTimeMillis() + maxAge));
+			cookie.setSecure(secure);
+		}
+		cookie.setDomain(domain);
+		client.getCookieStore().addCookie(cookie);
 		return true;
 	}
 
@@ -486,22 +488,22 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param clientName 
 	 */
-	public com.servoy.extensions.plugins.http.Cookie[] js_getHttpClientCookies(String httpClientName)
+	public Cookie[] js_getHttpClientCookies(String httpClientName)
 	{
 		if (httpClientName == null || "".equals(httpClientName.trim()))
 		{
 			return new Cookie[] { };
 		}
-		HttpClient httpClient = httpClients.get(httpClientName);
+		DefaultHttpClient httpClient = httpClients.get(httpClientName);
 		if (httpClient == null)
 		{
 			return new Cookie[] { };
 		}
-		org.apache.commons.httpclient.Cookie[] cookies = httpClient.getState().getCookies();
-		com.servoy.extensions.plugins.http.Cookie[] cookieObjects = new com.servoy.extensions.plugins.http.Cookie[cookies.length];
-		for (int i = 0; i < cookies.length; i++)
+		List<org.apache.http.cookie.Cookie> cookies = httpClient.getCookieStore().getCookies();
+		Cookie[] cookieObjects = new Cookie[cookies.size()];
+		for (int i = 0; i < cookies.size(); i++)
 		{
-			cookieObjects[i] = new com.servoy.extensions.plugins.http.Cookie(cookies[i]);
+			cookieObjects[i] = new Cookie(cookies.get(i));
 		}
 		return cookieObjects;
 	}
@@ -524,13 +526,12 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param cookieName 
 	 */
-	public com.servoy.extensions.plugins.http.Cookie js_getHttpClientCookie(String clientName, String cookieName)
+	public Cookie js_getHttpClientCookie(String clientName, String cookieName)
 	{
-		HttpClient client = httpClients.get(clientName);
+		DefaultHttpClient client = httpClients.get(clientName);
 		if (client == null) return null;
-		HttpState state = client.getState();
-		org.apache.commons.httpclient.Cookie[] cookies = state.getCookies();
-		for (org.apache.commons.httpclient.Cookie element : cookies)
+		List<org.apache.http.cookie.Cookie> cookies = client.getCookieStore().getCookies();
+		for (org.apache.http.cookie.Cookie element : cookies)
 		{
 			if (element.getName().equals(cookieName)) return new com.servoy.extensions.plugins.http.Cookie(element);
 		}
@@ -558,7 +559,7 @@ public class HttpProvider implements IScriptObject
 		String clientname = null;
 		if (vargs.length >= 1) a_url = (String)vargs[0];
 		if (vargs.length >= 2) clientname = (String)vargs[1];
-		HttpClient client = null;
+		DefaultHttpClient client = null;
 		if (clientname != null)
 		{
 			client = getOrCreateHTTPclient(clientname, a_url);
@@ -566,7 +567,7 @@ public class HttpProvider implements IScriptObject
 		return new Poster(a_url, client);
 	}
 
-	private final Map<String, HttpClient> httpClients = new HashMap<String, HttpClient>();
+	private final Map<String, DefaultHttpClient> httpClients = new HashMap<String, DefaultHttpClient>();
 
 	/**
 	 * Create a named http client (like a web browser with session binding) usable todo multiple request/posts in same server session
@@ -579,9 +580,7 @@ public class HttpProvider implements IScriptObject
 	 */
 	public void js_createHttpClient(String name)
 	{
-		HttpClient client = getOrCreateHTTPclient(name, null);
-		client.getParams().setBooleanParameter(HttpClientParams.ALLOW_CIRCULAR_REDIRECTS, true);
-		httpClients.put(name, client);
+		getOrCreateHTTPclient(name, null);
 	}
 
 	/**
@@ -607,10 +606,12 @@ public class HttpProvider implements IScriptObject
 		}
 		else
 		{
-			HttpClient client = getOrCreateHTTPclient(name, null);
+			DefaultHttpClient client = getOrCreateHTTPclient(name, null);
 			if (client != null)
 			{
-				client.setTimeout(timeout);
+				HttpParams params = client.getParams();
+				HttpConnectionParams.setConnectionTimeout(params, timeout);
+				HttpConnectionParams.setSoTimeout(params, timeout);
 			}
 		}
 	}
@@ -944,11 +945,12 @@ public class HttpProvider implements IScriptObject
 				}
 			}
 
-			HttpClient client = new HttpClient();
-			client.getParams().setBooleanParameter(HttpClientParams.ALLOW_CIRCULAR_REDIRECTS, true);
-			GetMethod main = new GetMethod(args[0]);
-			main.setFollowRedirects(true);
-			int main_rs = client.executeMethod(main);
+			DefaultHttpClient client = new DefaultHttpClient();
+			client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
+			HttpGet main = new HttpGet(args[0]);
+			HttpResponse res = client.execute(main);
+			;
+			int main_rs = res.getStatusLine().getStatusCode();
 			if (main_rs != 200)
 			{
 				System.out.println("main page retrieval failed " + main_rs); //$NON-NLS-1$
@@ -1006,14 +1008,14 @@ public class HttpProvider implements IScriptObject
 						System.out.println("write file " + file.getAbsolutePath()); //$NON-NLS-1$
 
 //						URL iurl = new URL(surl.toString());
-						GetMethod get = new GetMethod(surl.toString());
-						get.setFollowRedirects(true);
+						HttpGet get = new HttpGet(surl.toString());
 
-						int result = client.executeMethod(get);
+						HttpResponse response = client.execute(get);
+						int result = response.getStatusLine().getStatusCode();
 						System.out.println("page http result " + result); //$NON-NLS-1$
 						if (result == 200)
 						{
-							InputStream is = get.getResponseBodyAsStream();//iurl.openStream();
+							InputStream is = response.getEntity().getContent();
 							FileOutputStream fos = new FileOutputStream(file);
 							Utils.streamCopy(is, fos);
 							fos.close();

@@ -9,9 +9,12 @@
    </information>
    <resources>
       <jar href="/plugins/http.jar" download="eager" part="http" version="%%version%%"/>
-      <jar href="/lib/commons-httpclient.jar" download="%%loadmethod%%" part="httpclient" version="3.0"/>
-      <jar href="/lib/commons-codec.jar" download="%%loadmethod%%" part="codec" version="1.3"/>
-      <package name="org.apache.commons.httpclient.*" part="httpclient" recursive="true"/>      
+      <jar href="/lib/httpclient.jar" download="%%loadmethod%%" part="httpclient" version="%%version%%"/>
+      <jar href="/lib/httpcore.jar" download="%%loadmethod%%" part="httpclient" version="%%version%%"/>
+      <jar href="/lib/httpmime.jar" download="%%loadmethod%%" part="httpclient" version="%%version%%"/>
+      <jar href="/lib/apache-mime4j.jar" download="%%loadmethod%%" part="httpclient" version="%%version%%"/>
+      <jar href="/lib/commons-codec.jar" download="%%loadmethod%%" part="codec" version="%%version%%"/>
+      <package name="org.apache.http.*" part="httpclient" recursive="true"/>      
       <package name="org.apache.commons.codec.*" part="codec" recursive="true"/>      
    </resources>
    <component-desc/>
