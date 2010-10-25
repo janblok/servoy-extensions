@@ -218,6 +218,20 @@ public class WebFileProvider extends FileProvider
 									// prevents case where serverFileName contains "../" in its path
 									throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
 								}
+								// the serverFileName given can be a directory, so we need to extract the file name from the JSFile
+								if (dest.isDirectory() && (dest.exists() || dest.mkdirs()))
+								{
+									// UploadData getName() returns absolute path and not a name
+									// but I won't change it since it is widely called elsewhere
+									// So we extract from the path:
+									String clientFileName = ((JSFile)fileObjects[i]).getAbstractFile().getName();
+									while (clientFileName.indexOf('\\') != -1)
+									{
+										clientFileName = clientFileName.replace('\\', '/');
+									}
+									String[] tokens = clientFileName.split("/");
+									dest = new File(dest.getAbsolutePath(), tokens[tokens.length - 1]);
+								}
 								if ((dest.exists() && dest.canWrite()) || dest.createNewFile())
 								{
 									os = new BufferedOutputStream(new FileOutputStream(dest));
