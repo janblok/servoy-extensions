@@ -62,8 +62,10 @@ public class JSClient implements IScriptObject, IConstantsObject
 
 	/**
 	 * Queues a method call on the remote server. The callback method will be called when the method is executed on the server
-	 * and the return value is given as the first argument. If an exception is thrown somewhere then the callback method will be called with
-	 * the exception as the second argument.
+	 * and the return value is given as the JSEvent.data object with the JSEvent.getType() value of JSClient.CALLBACK_EVENT. 
+	 * If an exception is thrown somewhere then the callback method will be called with
+	 * the exception as the JSEvent data object with the JSEvent.getType() value of JSClient.CALLBACK_EXCEPTION_EVENT
+	 * The second argument that is give back is the JSClient instance that did the call.
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
 	 * @param methodName The method name
@@ -99,7 +101,7 @@ public class JSClient implements IScriptObject, IConstantsObject
 						event.setType(CALLBACK_EVENT);
 						event.setData(retval);
 						// function def will not throw an exception.
-						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event });
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this  });
 					}
 					catch (Exception ex)
 					{
@@ -117,7 +119,7 @@ public class JSClient implements IScriptObject, IConstantsObject
 							Debug.error(e);
 						}
 						event.setData(data);
-						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event });
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this  });
 					}
 				}
 				finally
@@ -357,7 +359,7 @@ public class JSClient implements IScriptObject, IConstantsObject
 		}
 		if ("queueMethod".equals(methodName))
 		{
-			return "queue a method on the client";
+			return "queue a method on the client, calling the method name specified on the context, the callback method will get a JSEvent as the first and a JSClient (the this of the client that did the call) as the second parameter ";
 		}
 		if ("shutDown".equals(methodName))
 		{
