@@ -193,11 +193,11 @@ public class WebFileProvider extends FileProvider
 										IAbstractFile abstractFile = jsFile.getAbstractFile();
 										if (abstractFile instanceof RemoteFile)
 										{
-											serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
+											serverFileName = extractName(((RemoteFile)abstractFile).getAbsolutePath());
 										}
 										else
 										{
-											serverFileName = abstractFile.getName();
+											serverFileName = extractName(abstractFile.getName());
 										}
 									}
 									else
@@ -209,14 +209,28 @@ public class WebFileProvider extends FileProvider
 								else
 								{
 									// no server file or server file name was provided, so create a default one:
-									serverFileName = "/" + ((JSFile)fileObjects[i]).getAbstractFile().getName();
+									serverFileName = "/" + extractName(((JSFile)fileObjects[i]).getAbstractFile().getName());
 								}
-
+								// serverFileName can point to a folder or a file:
+								String clientFileName = extractName(serverFileName);
+								if (clientFileName.indexOf('.') < 0)
+								{ // no extension, we assume it's a folder:
+									if (serverFileName.charAt(serverFileName.length() - 1) != '/')
+									{
+										serverFileName += "/";
+									}
+									serverFileName += extractName(((JSFile)fileObjects[i]).getAbstractFile().getName());
+								}
 								dest = new File(serverFolder, serverFileName);
 								if (!FilePluginUtils.checkParentFile(dest, serverFolder))
 								{
 									// prevents case where serverFileName contains "../" in its path
 									throw new SecurityException("Browsing on the server out of the defaultFolder is not allowed");
+								}
+								if (!dest.exists())
+								{
+									// doesn't exist? try creating the folder hierarchy:
+									dest.getParentFile().mkdirs();
 								}
 								if ((dest.exists() && dest.canWrite()) || dest.createNewFile())
 								{
@@ -282,4 +296,25 @@ public class WebFileProvider extends FileProvider
 		return null; // no JSProgressMonitor since there will be no Thread
 	}
 
+
+	/**
+	 * Utility method to extract the name of a path (last part of a path)
+	 * 
+	 * @param path the path that we want to extract the name from
+	 * @return the extracted name
+	 */
+	private String extractName(String path)
+	{
+		String out = path;
+		if (out != null)
+		{
+			while (out.indexOf('\\') != -1)
+			{
+				out = out.replace('\\', '/');
+			}
+			String[] tokens = out.split("/"); //$NON-NLS-1$
+			out = tokens[tokens.length - 1];
+		}
+		return out;
+	}
 }
