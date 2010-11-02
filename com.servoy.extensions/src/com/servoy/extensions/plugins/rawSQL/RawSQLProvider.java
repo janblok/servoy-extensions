@@ -307,9 +307,9 @@ public class RawSQLProvider implements IScriptObject
 	 * // real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 	 * // ****************************************************************************
 	 * //Notify clients about changes in records, based on pk(s), use with extreme care, its effecting the performance of clients!
-	 * var action = 1 //pks deleted
-	 * //var action = 2 //pks inserted
-	 * //var action = 3 //pks updates
+	 * var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
+	 * //var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted
+	 * //var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates
 	 * var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))
 	 * var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees',pksdataset,action)
 	 *
@@ -437,9 +437,9 @@ public class RawSQLProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var action = 1 //pks deleted\n"); //$NON-NLS-1$
-			retval.append("//var action = 2 //pks inserted\n"); //$NON-NLS-1$
-			retval.append("//var action = 3 //pks updates\n"); //$NON-NLS-1$
+			retval.append("var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted\n"); //$NON-NLS-1$
+			retval.append("//var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted\n"); //$NON-NLS-1$
+			retval.append("//var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates\n"); //$NON-NLS-1$
 			retval.append("var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))\n"); //$NON-NLS-1$
 			retval.append("var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees',pksdataset,action)\n"); //$NON-NLS-1$
 			return retval.toString();
