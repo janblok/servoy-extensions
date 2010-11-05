@@ -19,16 +19,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.text.JTextComponent;
 
-import com.servoy.extensions.plugins.spellcheck2.GoogleSpellUtils;
-import com.servoy.extensions.plugins.spellcheck2.ResponseSAXParser;
-import com.servoy.extensions.plugins.spellcheck2.ServiceHandler;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckClientProvider;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckEvent;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckServerPlugin;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerGUI;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerPreferencePanel;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerUtils;
-import com.servoy.extensions.plugins.spellcheck2.SpellResult;
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;

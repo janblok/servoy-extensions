@@ -20,10 +20,8 @@ package com.servoy.extensions.plugins.spellcheck;
 import java.util.Arrays;
 import java.util.List;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerUtils;
-
 /**
- * @author andrei
+ * @author acostache
  *
  */
 public class GoogleSpellUtils

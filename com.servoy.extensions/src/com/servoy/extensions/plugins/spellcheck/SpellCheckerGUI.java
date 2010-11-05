@@ -10,9 +10,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckClientPlugin;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckEvent;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerForm;
 import com.servoy.j2db.util.JEscapeDialog;
 
 public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, WindowListener

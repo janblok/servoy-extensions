@@ -2,8 +2,6 @@ package com.servoy.extensions.plugins.spellcheck;
 
 import java.util.List;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellCorrection;
-
 public class SpellCheckEvent
 {
 	/** Field indicating that the incorrect word should be ignored*/

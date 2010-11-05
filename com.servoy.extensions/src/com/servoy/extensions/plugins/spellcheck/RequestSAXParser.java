@@ -12,8 +12,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellRequest;
-
 
 //TODO Remove unnecessary prints
 public class RequestSAXParser

@@ -12,10 +12,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.servoy.extensions.plugins.spellcheck2.ResponseSAXParser;
-import com.servoy.extensions.plugins.spellcheck2.SpellCorrection;
-import com.servoy.extensions.plugins.spellcheck2.SpellResult;
-
 public class ResponseSAXParser
 {
 	private static SpellResult spellResponse;

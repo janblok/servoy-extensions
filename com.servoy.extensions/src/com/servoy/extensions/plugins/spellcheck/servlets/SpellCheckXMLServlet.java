@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.servoy.extensions.plugins.spellcheck.SpellCheckServerPlugin;
 
-
 public class SpellCheckXMLServlet extends HttpServlet
 {
 	private final SpellCheckServerPlugin spellCheckServerPlugin;

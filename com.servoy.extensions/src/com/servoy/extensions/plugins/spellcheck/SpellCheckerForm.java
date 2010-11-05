@@ -25,10 +25,6 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckEvent;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerGUI;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerUtils;
-import com.servoy.extensions.plugins.spellcheck2.SpellCorrection;
 import com.servoy.j2db.smart.J2DBClient;
 
 /*

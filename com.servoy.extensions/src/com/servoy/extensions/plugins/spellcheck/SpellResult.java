@@ -2,8 +2,6 @@ package com.servoy.extensions.plugins.spellcheck;
 
 import java.util.ArrayList;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellCorrection;
-
 public class SpellResult
 {
 	private int errorNumber = 0;

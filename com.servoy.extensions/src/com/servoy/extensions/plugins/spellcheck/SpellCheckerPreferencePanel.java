@@ -26,9 +26,6 @@ import javax.swing.JComboBox;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.servoy.extensions.plugins.spellcheck2.GoogleSpellUtils;
-import com.servoy.extensions.plugins.spellcheck2.RapidSpellUtils;
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckerUtils;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.preference.PreferencePanel;
 

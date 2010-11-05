@@ -2,7 +2,6 @@ package com.servoy.extensions.plugins.spellcheck;
 
 import java.awt.Component;
 
-import com.servoy.extensions.plugins.spellcheck2.SpellCheckClientPlugin;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.IDelegate;

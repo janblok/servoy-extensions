@@ -1,7 +1,5 @@
 package com.servoy.extensions.plugins.spellcheck;
 
-
-
 public class SpellCheckerUtils
 {
 	// Dialog title
