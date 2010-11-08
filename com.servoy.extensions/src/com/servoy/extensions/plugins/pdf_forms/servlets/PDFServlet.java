@@ -16,10 +16,10 @@
  */
 package com.servoy.extensions.plugins.pdf_forms.servlets;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.rmi.RemoteException;
@@ -34,13 +34,23 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.adobe.fdf.FDFDoc;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.XfaForm;
 import com.servoy.j2db.dataprocessing.IDataServer;
 import com.servoy.j2db.dataprocessing.IDataSet;
+import com.servoy.j2db.dataprocessing.ISQLActionTypes;
 import com.servoy.j2db.dataprocessing.ISQLStatement;
 import com.servoy.j2db.persistence.IServer;
 import com.servoy.j2db.persistence.ITable;
@@ -90,7 +100,7 @@ public class PDFServlet extends HttpServlet
 		String path = request.getPathInfo(); //without servlet name
 
 		Connection conn = null;
-		OutputStream out = null;
+		ServletOutputStream out = null;
 		try
 		{
 			// Determine target page.
@@ -126,12 +136,26 @@ public class PDFServlet extends HttpServlet
 
 						if (closed == 0)
 						{
-							FDFDoc outputFDF = new FDFDoc();
+							Map<String, String> values = new HashMap<String, String>();
+							byte[] pdfContent = null;
+							Statement stContent = conn.createStatement();
+							ResultSet rsContent = stContent.executeQuery("select actual_pdf_form from pdf_templates where template_id = " + template_id); //$NON-NLS-1$
+							if (rsContent.next())
+							{
+								pdfContent = rsContent.getBytes(1);
+							}
+							PdfReader reader = new PdfReader(pdfContent);
+							XfaForm xfa = new XfaForm(reader);
+							FDFDoc outputFDF = null;
+							if (!xfa.isXfaPresent())
+							{
+								outputFDF = new FDFDoc();
+							}
 
 							String sub = uri.substring(0, uri.length() - path.length());
 							String url = base + sub + "/pdf_forms/pdf_process_data"; //$NON-NLS-1$
-							outputFDF.SetValue(ACTION_PROPERTY, Integer.toString(action_id));//add action_id property
-							outputFDF.SetValue(URL_PROPERTY, url);//add url property
+							values.put(ACTION_PROPERTY, Integer.toString(action_id));
+							values.put(URL_PROPERTY, url);
 
 							//fill
 							Statement st1 = conn.createStatement();
@@ -140,7 +164,7 @@ public class PDFServlet extends HttpServlet
 							{
 								String name = rs1.getString(1);
 								String val = rs1.getString(2);
-								if (val != null) outputFDF.SetValue(name, val);
+								if (val != null) values.put(name, val);
 							}
 							rs1.close();
 							st1.close();
@@ -158,70 +182,101 @@ public class PDFServlet extends HttpServlet
 							rs2.close();
 							st2.close();
 
-							String overrideTemplateLocation = request.getParameter("overrideTemplateLocation"); //$NON-NLS-1$
-							if (overrideTemplateLocation == null)
+							String templateLocation = request.getParameter("overrideTemplateLocation"); //$NON-NLS-1$;
+							if (templateLocation == null)
 							{
-								outputFDF.SetFile(base + sub + "/pdf_forms/pdf_template/" + filename + "?template_id=" + template_id + "&rnd=" + rnd.nextInt());
+								templateLocation = base + sub + "/pdf_forms/pdf_template/" + filename + "?template_id=" + template_id + "&rnd=" + rnd.nextInt();
 							}
-							else
+							if (outputFDF != null)
 							{
-								outputFDF.SetFile(overrideTemplateLocation);
-							}
+								outputFDF.SetFile(templateLocation);
 
-							StringBuffer sb = new StringBuffer();
-							if (action_type == EDIT)
-							{
-								if (!skipButton)
+								StringBuffer sb = new StringBuffer();
+								if (action_type == EDIT)
 								{
-									sb.append("var inch = 72;\n"); //$NON-NLS-1$
-									sb.append("var aRect = this.getPageBox( {nPage: 0} );\n");
-									sb.append("aRect[0] = 1;\n");//.5*inch; // position rectangle (.5 inch, .5 inch) 
-									sb.append("aRect[2] = aRect[0]+.5*inch;\n"); // from upper left hand corner of page. 
-									sb.append("aRect[1] -= 1;//.5*inch;\n"); // Make it .5 inch wide 
-									sb.append("aRect[3] = aRect[1] - 24;\n");// and 24 points high 
-									//							sb.append("var aRect2 = this.getPageBox( {nPage: 0} );\n");
-									//							sb.append("aRect2[0] = .5*inch; // position rectangle (.5 inch, .5 inch)\n");
-									//							sb.append("aRect2[2] = aRect2[0]+.5*inch; // from upper left hand corner of page.\n");
-									//							sb.append("aRect2[1] -= .5*inch; // Make it .5 inch wide\n");
-									//							sb.append("aRect2[3] = aRect2[1] - 24; // and 24 points high\n");
-									sb.append("var f = this.addField('servoySubmit', 'button', 0, aRect )\n");
-									sb.append("f.setAction('MouseUp', 'this.submitForm(\"" + url + "?action_id=" + action_id + "\")');\n");
-									sb.append("f.display = display.noPrint;\n");
-									sb.append("f.borderStyle = border.b;\n");
-									sb.append("f.highlight = 'push';\n");
-									sb.append("f.textSize = 0; // auto sized\n");
-									sb.append("f.textColor = color.blue;\n");
-									sb.append("f.fillColor = color.green;//ltGray;\n");
-									sb.append("f.print = false;\n");
-									// sb.append("f.textFont = font.ZapfD\n");
-									sb.append("f.buttonSetCaption('Submit')\n");
-									sb.append("f.delay = false;\n");
-									//							sb.append("var h = this.addField('pdmSubmitAction', 'text', 0, aRect2 )\n");
-									//							sb.append("h.visible = display.hidden;\n");
-									//							sb.append("h.defaultValue = '"+action_id+"';\n");
-									//							sb.append("h.readonly = true;\n");
+									if (!skipButton)
+									{
+										sb.append("var inch = 72;\n"); //$NON-NLS-1$
+										sb.append("var aRect = this.getPageBox( {nPage: 0} );\n");
+										sb.append("aRect[0] = 1;\n");//.5*inch; // position rectangle (.5 inch, .5 inch) 
+										sb.append("aRect[2] = aRect[0]+.5*inch;\n"); // from upper left hand corner of page. 
+										sb.append("aRect[1] -= 1;//.5*inch;\n"); // Make it .5 inch wide 
+										sb.append("aRect[3] = aRect[1] - 24;\n");// and 24 points high 
+										//							sb.append("var aRect2 = this.getPageBox( {nPage: 0} );\n");
+										//							sb.append("aRect2[0] = .5*inch; // position rectangle (.5 inch, .5 inch)\n");
+										//							sb.append("aRect2[2] = aRect2[0]+.5*inch; // from upper left hand corner of page.\n");
+										//							sb.append("aRect2[1] -= .5*inch; // Make it .5 inch wide\n");
+										//							sb.append("aRect2[3] = aRect2[1] - 24; // and 24 points high\n");
+										sb.append("var f = this.addField('servoySubmit', 'button', 0, aRect )\n");
+										sb.append("f.setAction('MouseUp', 'this.submitForm(\"" + url + "?action_id=" + action_id + "\")');\n");
+										sb.append("f.display = display.noPrint;\n");
+										sb.append("f.borderStyle = border.b;\n");
+										sb.append("f.highlight = 'push';\n");
+										sb.append("f.textSize = 0; // auto sized\n");
+										sb.append("f.textColor = color.blue;\n");
+										sb.append("f.fillColor = color.green;//ltGray;\n");
+										sb.append("f.print = false;\n");
+										// sb.append("f.textFont = font.ZapfD\n");
+										sb.append("f.buttonSetCaption('Submit')\n");
+										sb.append("f.delay = false;\n");
+										//							sb.append("var h = this.addField('pdmSubmitAction', 'text', 0, aRect2 )\n");
+										//							sb.append("h.visible = display.hidden;\n");
+										//							sb.append("h.defaultValue = '"+action_id+"';\n");
+										//							sb.append("h.readonly = true;\n");
+									}
+								}
+								else
+								{
+									sb.append("for (var i = 0; i < this.numFields; i++)\n"); //$NON-NLS-1$
+									sb.append("{\n");
+									sb.append("    var fname = this.getNthFieldName(i);\n");
+									sb.append("    if (fname != 'pdmSubmitAction')\n");
+									sb.append("    {\n");
+									sb.append("        var ef = this.getField(fname);\n");
+									sb.append("        ef.readonly = true;\n");
+									sb.append("    }\n");
+									sb.append("}\n");
+								}
+
+								if (sb.length() != 0) outputFDF.SetOnImportJavaScript(sb.toString(), false);
+
+								Iterator<String> it = values.keySet().iterator();
+								while (it.hasNext())
+								{
+									String name = it.next();
+									outputFDF.SetValue(name, values.get(name));
 								}
 							}
+							out = response.getOutputStream();
+							if (outputFDF != null)
+							{
+								response.setContentType("application/vnd.fdf");
+								outputFDF.Save(out);
+							}
 							else
 							{
-								sb.append("for (var i = 0; i < this.numFields; i++)\n"); //$NON-NLS-1$
-								sb.append("{\n");
-								sb.append("    var fname = this.getNthFieldName(i);\n");
-								sb.append("    if (fname != 'pdmSubmitAction')\n");
-								sb.append("    {\n");
-								sb.append("        var ef = this.getField(fname);\n");
-								sb.append("        ef.readonly = true;\n");
-								sb.append("    }\n");
-								sb.append("}\n");
+								response.setContentType("application/vnd.adobe.xdp+xml");
+								StringBuffer buffer = new StringBuffer();
+								buffer.append("<?xml version='1.0' encoding='UTF-8'?>\n");
+								buffer.append("<?xfa generator='AdobeDesigner_V7.0' APIVersion='2.2.4333.0'?>\n");
+								buffer.append("<xdp:xdp xmlns:xdp=\"http://ns.adobe.com/xdp/\">\n");
+								buffer.append("<xfa:datasets xmlns:xfa=\"http://www.xfa.org/schema/xfa-data/1.0/\">\n");
+								buffer.append("<xfa:data>\n");
+								buffer.append("<form>\n");
+								Iterator<String> it = values.keySet().iterator();
+								while (it.hasNext())
+								{
+									String name = it.next();
+									buffer.append("<" + name + ">" + values.get(name) + "</" + name + ">\n");
+								}
+								buffer.append("</form>\n");
+								buffer.append("</xfa:data>\n");
+								buffer.append("</xfa:datasets>\n");
+								buffer.append("<pdf href=\"" + templateLocation.replace("&", "&amp;") + "\" xmlns=\"http://ns.adobe.com/xdp/pdf/\">\n");
+								buffer.append("</pdf>\n");
+								buffer.append("</xdp:xdp>");
+								out.print(buffer.toString());
 							}
-
-							if (sb.length() != 0) outputFDF.SetOnImportJavaScript(sb.toString(), false);
-
-							response.setContentType("application/vnd.fdf");
-
-							out = response.getOutputStream();
-
-							outputFDF.Save(out);
 						}
 						else
 						{
@@ -325,7 +380,15 @@ public class PDFServlet extends HttpServlet
 				Utils.streamCopy(is, baos);
 
 				// create FDFDoc from data
-				FDFDoc FdfInput = new FDFDoc(baos.toByteArray());
+				FDFDoc FdfInput = null;
+				try
+				{
+					FdfInput = new FDFDoc(baos.toByteArray());
+				}
+				catch (Exception ex)
+				{
+					// ignore, we received an xml
+				}
 
 //				Iterator itt = FdfInput.GetFieldNameIterator();
 //				while (itt.hasNext())
@@ -376,21 +439,44 @@ public class PDFServlet extends HttpServlet
 								currentValues.put(row1[0], row1[1]);
 							}
 
-							Iterator it = FdfInput.GetFieldNameIterator();
+							Map<String, String> values = new HashMap<String, String>();
+							if (FdfInput == null)
+							{
+								DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+								DocumentBuilder db = dbf.newDocumentBuilder();
+								Document dom = db.parse(new ByteArrayInputStream(baos.toByteArray()));
+								NodeList nodeList = dom.getChildNodes();
+								for (int i = 0; i < nodeList.getLength(); i++)
+								{
+									parseNodes(nodeList.item(i), values);
+								}
+							}
+							else
+							{
+								Iterator it = FdfInput.GetFieldNameIterator();
+								while (it.hasNext())
+								{
+									String name = (String)it.next();
+									String val = ""; //$NON-NLS-1$
+									try
+									{
+										val = FdfInput.GetValue(name);
+									}
+									catch (Exception e1)
+									{
+										//FDFNoValueException is thrown sometimes,ignore
+										continue;
+									}
+									values.put(name, val);
+								}
+							}
+
+							Iterator it = values.keySet().iterator();
 							while (it.hasNext())
 							{
 								String name = (String)it.next();
 								if (name.equals(ACTION_PROPERTY) || name.equals(URL_PROPERTY)) continue;
-								String val = ""; //$NON-NLS-1$
-								try
-								{
-									val = FdfInput.GetValue(name);
-								}
-								catch (Exception e1)
-								{
-									//FDFNoValueException is thrown sometimes,ignore
-									continue;
-								}
+								String val = values.get(name);
 
 								ISQLStatement ps = null;
 								if (!currentValues.containsKey(name))
@@ -423,7 +509,7 @@ public class PDFServlet extends HttpServlet
 
 										sql2 = "insert into pdf_form_values (" + valuesColumnInsertString + ") values (?,?,?,?)";
 									}
-									ps = ds.createSQLStatement(ISQLStatement.INSERT_ACTION, PDF_SERVER, "pdf_form_values", pkData, null, sql2, questionData);
+									ps = ds.createSQLStatement(ISQLActionTypes.INSERT_ACTION, PDF_SERVER, "pdf_form_values", pkData, null, sql2, questionData);
 								}
 								else
 								{
@@ -431,7 +517,7 @@ public class PDFServlet extends HttpServlet
 									Object[] pkData = new Object[] { fval_id };
 									Object[] questionData = new Object[] { val, fval_id };
 									String sql2 = "update pdf_form_values set field_value = ? where fval_id = ?"; //$NON-NLS-1$
-									ps = ds.createSQLStatement(ISQLStatement.UPDATE_ACTION, PDF_SERVER, "pdf_form_values", pkData, null, sql2, questionData);
+									ps = ds.createSQLStatement(ISQLActionTypes.UPDATE_ACTION, PDF_SERVER, "pdf_form_values", pkData, null, sql2, questionData);
 
 									currentValues.remove(name);
 								}
@@ -446,7 +532,7 @@ public class PDFServlet extends HttpServlet
 								Object fval_id = it2.next();
 								Object[] pkData = new Object[] { fval_id };
 								Object[] questionData = new Object[] { fval_id };
-								ISQLStatement ps = ds.createSQLStatement(ISQLStatement.DELETE_ACTION, PDF_SERVER,
+								ISQLStatement ps = ds.createSQLStatement(ISQLActionTypes.DELETE_ACTION, PDF_SERVER,
 									"pdf_form_values", pkData, null, "delete from pdf_form_values where fval_id = ?", questionData); //$NON-NLS-1$
 								delList.add(ps);
 							}
@@ -457,7 +543,7 @@ public class PDFServlet extends HttpServlet
 							Object[] questionData = new Object[] { new Integer(action_id) };
 							String sql5 = "update pdf_actions set closed = 1 where action_id = ?"; //$NON-NLS-1$
 							ds.performUpdates(ApplicationServerSingleton.get().getClientId(), new ISQLStatement[] { ds.createSQLStatement(
-								ISQLStatement.UPDATE_ACTION, PDF_SERVER, "pdf_actions", pkData, null, sql5, questionData) });
+								ISQLActionTypes.UPDATE_ACTION, PDF_SERVER, "pdf_actions", pkData, null, sql5, questionData) });
 						}
 						else
 						{
@@ -476,10 +562,6 @@ public class PDFServlet extends HttpServlet
 						response.setContentType("text/html");
 						out = response.getWriter();
 						String msg = "<html><head><title></title></head><body>\n" + //$NON-NLS-1$
-							"<script language=\"JavaScript\" type=\"text/javascript\">\n" + //$NON-NLS-1$
-							"window.opener = self;\n" + //$NON-NLS-1$
-							"setTimeout('window.opener.close()',0);\n" + //$NON-NLS-1$
-							"</script>\n" + //$NON-NLS-1$
 							"Data successfully stored,close this window</body></html>"; //$NON-NLS-1$
 						out.println(msg);
 					}
@@ -579,4 +661,18 @@ public class PDFServlet extends HttpServlet
 		}
 	}
 
+	private void parseNodes(Node node, Map<String, String> values)
+	{
+		if (node.hasChildNodes())
+		{
+			for (int i = 0; i < node.getChildNodes().getLength(); i++)
+			{
+				parseNodes(node.getChildNodes().item(i), values);
+			}
+		}
+		else if (node.getNodeType() == Node.TEXT_NODE)
+		{
+			values.put(node.getParentNode().getNodeName(), node.getNodeValue());
+		}
+	}
 }
