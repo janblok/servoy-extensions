@@ -588,9 +588,6 @@
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
 		/>
-		<copy overwrite="true" todir="${plugins.dir}">
-			<fileset file="resources/spellcheck/spellcheck.jar.jnlp"/>
-		</copy>
 		<copy overwrite="true" todir="${plugins.dir}/spellcheck">
 			<fileset file="lib/RapidSpell*.jar"/>
 		</copy>
