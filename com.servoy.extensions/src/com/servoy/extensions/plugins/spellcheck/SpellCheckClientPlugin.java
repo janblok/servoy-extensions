@@ -154,7 +154,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 				//NOTE: if we put this code before the check, the GUI unnecessarily shows up (has no real thing to display)
 				if (gui.hasAtLeastOneSpellEvent())
 				{
-					if (!checkedComponent.isFocusOwner()) checkedComponent.requestFocusInWindow(); // to make sure servoy sees the new values
+					checkedComponent.requestFocus(); // to make sure servoy sees the new values
 					gui.toFront();
 					gui.setVisible(true);
 				}
@@ -230,7 +230,6 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 				//replace all occurences of word, that is why we start from the begining of the text
 				checkedComponent.replaceSelection(event.getReplaceWord());
 				t = checkedComponent.getText();
-
 				int start = 0;
 				int end = word.length();
 				while ((start = t.indexOf(word)) >= 0)
@@ -243,12 +242,11 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 					t = checkedComponent.getText();
 				}
 				if (checkedComponent.getCaretPosition() >= t.length() - 1) checkedComponent.setCaretPosition(0);
-
 				break;
 			case SpellCheckEvent.ADDTODICT :
 				break;
 			case SpellCheckEvent.CANCEL :
-				return true;
+				break;
 			default :
 				throw new IllegalArgumentException("Unhandled case."); //$NON-NLS-1$
 		}
