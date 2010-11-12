@@ -136,13 +136,13 @@ public class SpellCheckerPreferencePanel extends PreferencePanel implements Acti
 		String serviceProvider = (String)cb.getSelectedItem();
 		if (serviceProvider.equals(SpellCheckerUtils.GOOGLE_SPELL))
 		{
-			application.getSettings().setProperty("plugin.spellcheck2.googleServiceProvider", "true"); //$NON-NLS-1$ //$NON-NLS-2$
+			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "true"); //$NON-NLS-1$ //$NON-NLS-2$
 			populateLanguageBox(GoogleSpellUtils.getAvailableDictionaries());
 			setDesiredLanguage(SpellCheckerUtils.DEFAULT);
 		}
 		else
 		{
-			application.getSettings().setProperty("plugin.spellcheck2.googleServiceProvider", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 			populateLanguageBox(RapidSpellUtils.getAvailableDictionaries());
 			setDesiredLanguage(SpellCheckerUtils.DEFAULT);
 		}

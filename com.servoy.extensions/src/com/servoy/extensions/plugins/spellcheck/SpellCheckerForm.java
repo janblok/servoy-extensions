@@ -313,4 +313,19 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 	{
 		this.spellEvent = se;
 	}
+
+	public void clearWrongWordLabel()
+	{
+		this.wrongWordLabel.setText(null);
+	}
+
+	public void clearSuggestionsList()
+	{
+		this.suggestList.removeAll();
+	}
+
+	public void clearCheckedText()
+	{
+		this.checkText.setText(null);
+	}
 }

@@ -49,16 +49,23 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 			@Override
 			public void windowGainedFocus(WindowEvent e)
 			{
-				//to highlight the word which was highlighted before the window lost focus
 				highlightInvalidWordFromPosition(currentInvalidWordBeginingPosition, currentInvalidWordEndingPosition);
 			}
 
 			@Override
 			public void windowLostFocus(WindowEvent e)
 			{
-				currentInvalidWordEndingPosition = plugin.getCheckedComponent().getCaretPosition();
-				currentInvalidWordBeginingPosition = currentInvalidWordEndingPosition - spellEvent.getInvalidWord().length();
-				highlighted = false; //"highlighted" will become false twice for a SKIP/IGNORE or CANCEL (not good!!!)
+				if (spellEvent == null)
+				{
+					//for the case when we exit the DSC and have no spell events
+					currentInvalidWordEndingPosition = currentInvalidWordBeginingPosition = -1;
+				}
+				else
+				{
+					if (plugin.getCheckedComponent().getCaretPosition() > 0) currentInvalidWordEndingPosition = plugin.getCheckedComponent().getCaretPosition();
+					currentInvalidWordBeginingPosition = currentInvalidWordEndingPosition - spellEvent.getInvalidWord().length();
+					highlighted = false; //"highlighted" will become false twice for a SKIP/IGNORE or CANCEL (not good!!!)
+				}
 			}
 		});
 		highlighted = false;
@@ -99,9 +106,8 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 			int start = checkedText.indexOf(invalidWord, currentCaretPosition);
 			int end = spellEvent.getInvalidWord().length() + start;
 
-//		if (start + end >= checkedText.length() - 1) plugin.getCheckedComponent().setCaretPosition(0);
-//		else plugin.getCheckedComponent().setCaretPosition(start + end);
-
+//			if (start + end >= checkedText.length() - 1) plugin.getCheckedComponent().setCaretPosition(0);
+//			else plugin.getCheckedComponent().setCaretPosition(start + end);
 			plugin.getCheckedComponent().setSelectionStart(start);
 			plugin.getCheckedComponent().setSelectionEnd(end);
 			currentInvalidWordBeginingPosition = start;
@@ -112,11 +118,15 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 
 	public void highlightInvalidWordFromPosition(int begin, int end)
 	{
-		if (begin < end && !highlighted)
+		if ((begin >= 0) && (end >= 0))
 		{
-			highlighted = true;
-			plugin.getCheckedComponent().setSelectionStart(begin);
-			plugin.getCheckedComponent().setSelectionEnd(end);
+			if (begin < end && !highlighted)
+			{
+				highlighted = true;
+				plugin.getCheckedComponent().setSelectionStart(begin);
+				plugin.getCheckedComponent().setSelectionEnd(end);
+
+			}
 		}
 	}
 
@@ -142,15 +152,48 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 		}
 	}
 
-	public void emptySpellCheckEvents()
+	public boolean hasAtLeastOneSpellEvent()
+	{
+		if (spellCheckerForm.getSpellEventsList().size() > 0) return true;
+		return false;
+	}
+
+	private void emptySpellCheckEvents()
 	{
 		spellCheckerForm.getSpellEventsList().clear();
 	}
 
-	public void emptyCurrentSpellCheckEventIfAny()
+	private void emptyCurrentSpellCheckEventIfAny()
 	{
 		spellCheckerForm.setCurrentSpellCheckEvent(null);
 	}
+
+	private void resetCurrentInvalidWordPosition()
+	{
+		currentInvalidWordBeginingPosition = -1;
+		currentInvalidWordEndingPosition = -1;
+	}
+
+	private void clearTheGUIForm()
+	{
+		spellCheckerForm.clearWrongWordLabel();
+		spellCheckerForm.clearSuggestionsList();
+		spellCheckerForm.clearCheckedText();
+	}
+
+	public void removeEventsAndGuiForm()
+	{
+		//clear events 
+		emptySpellCheckEvents();
+		emptyCurrentSpellCheckEventIfAny();
+
+		//clear any highlight positions
+		resetCurrentInvalidWordPosition();
+
+		//clear entire gui spellcheck form
+		clearTheGUIForm();
+	}
+
 
 	@Override
 	protected void cancel()
@@ -182,6 +225,7 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 			//we do not want the message to show up if we clicked "Cancel"
 			if (spellEvent.getAction() != SpellCheckEvent.CANCEL) JOptionPane.showMessageDialog(this,
 				"The spelling check is complete.", "Spelling", JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$//$NON-NLS-2$
+			unhighlight();
 		}
 	}
 

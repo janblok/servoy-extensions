@@ -62,7 +62,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			Toolbar textToolBar = tbp.getToolBar("text"); //$NON-NLS-1$
 			if (textToolBar == null)
 			{
-				toolBar = tbp.createToolbar("spellcheck2", "spellcheck"); //$NON-NLS-1$ //$NON-NLS-2$
+				toolBar = tbp.createToolbar("spellcheck", "spellcheck"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			else
 			//else add to text toolbar if possible
@@ -79,7 +79,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 				toolBar.add(check);
 				check.setEnabled(false);
 			}
-			application.getSettings().setProperty("plugin.spellcheck2.googleServiceProvider", "false"); //$NON-NLS-1$//$NON-NLS-2$
+			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "false"); //$NON-NLS-1$//$NON-NLS-2$
 			SpellCheckerPreferencePanel.setDesiredLanguage(SpellCheckerUtils.DEFAULT);
 		}
 	}
@@ -98,6 +98,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			gui = null;
 		}
 	}
+
 
 	public void actionPerformed(ActionEvent e)
 	{
@@ -119,11 +120,11 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 					if (gui != null) gui.dispose();
 					if (w instanceof JDialog)
 					{
-						gui = new SpellCheckerGUI(this, (JDialog)w, false);
+						gui = new SpellCheckerGUI(this, (JDialog)w, true);
 					}
 					else if (w instanceof JFrame)
 					{
-						gui = new SpellCheckerGUI(this, (JFrame)w, false);
+						gui = new SpellCheckerGUI(this, (JFrame)w, true);
 					}
 					else
 					{
@@ -146,20 +147,25 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 						}
 					});
 				}
-				gui.toFront();
-				gui.setVisible(true);
+
 				checkedComponent = (JTextComponent)c;
 				this.check(checkedComponent);
-				c.requestFocus(); // to make sure servoy sees the new values
+				//if we don't have to check we don't pop-up at all
+				//NOTE: if we put this code before the check, the GUI unnecessarily shows up (has no real thing to display)
+				if (gui.hasAtLeastOneSpellEvent())
+				{
+					if (!checkedComponent.isFocusOwner()) checkedComponent.requestFocusInWindow(); // to make sure servoy sees the new values
+					gui.toFront();
+					gui.setVisible(true);
+				}
 			}
 		}
 	}
 
 	public void check(JTextComponent c)
 	{
-		//reset events
-		gui.emptySpellCheckEvents();
-		gui.emptyCurrentSpellCheckEventIfAny();
+		gui.removeEventsAndGuiForm();
+
 		//reset caret position
 		checkedComponent.setCaretPosition(0);
 
@@ -167,7 +173,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		String strUrl = null;
 		try
 		{
-			if (Utils.getAsBoolean(application.getSettings().getProperty("plugin.spellcheck2.googleServiceProvider"))) //$NON-NLS-1$ 
+			if (Utils.getAsBoolean(application.getSettings().getProperty("plugin.spellcheck.googleServiceProvider"))) //$NON-NLS-1$ 
 			{
 				String selected = SpellCheckerPreferencePanel.getDesiredLanguage();
 				String language = GoogleSpellUtils.getBasicLanguageName(selected);
@@ -274,7 +280,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	 */
 	public String getName()
 	{
-		return "spellcheck2"; //$NON-NLS-1$
+		return "spellcheck"; //$NON-NLS-1$
 	}
 
 	/*
@@ -315,4 +321,5 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	{
 		return checkedComponent;
 	}
+
 }
