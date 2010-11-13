@@ -17,10 +17,10 @@
 package com.servoy.extensions.plugins.validators;
 
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import com.servoy.j2db.dataprocessing.IColumnValidator;
 import com.servoy.j2db.persistence.IColumnTypes;
+import com.servoy.j2db.util.Utils;
 
 public class EmailValidator implements IColumnValidator
 {
@@ -43,7 +43,7 @@ public class EmailValidator implements IColumnValidator
 	{
 		if (arg == null || arg.toString().trim().length() == 0) return;
 
-		if (!Pattern.compile("^[_a-z0-9-+]+(\\.[_a-z0-9-+]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$", Pattern.CASE_INSENSITIVE).matcher(arg.toString()).matches())
+		if (!Utils.isValidEmailAdress(arg.toString()))
 		{
 			throw new IllegalArgumentException();
 		}
