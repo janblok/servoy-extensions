@@ -160,7 +160,7 @@ public class WebFileProvider extends FileProvider
 		if (f != null)
 		{
 			// first get the default upload location (canonical path on the server):
-			final String defaultLocation = getDefaultUploadLocation();
+			final String defaultLocation = js_getDefaultUploadLocation();
 			if (defaultLocation != null)
 			{
 				final File serverFolder = new File(defaultLocation);

@@ -1219,6 +1219,13 @@ public class FileProvider implements IScriptObject
 			sb.append("\tvar ok = %%elementName%%.appendToTXTFile('myTextFile.txt', '\\nMy fantastic new line of text\\n');\n");
 			return sb.toString();
 		}
+		else if ("getDefaultUploadLocation".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("// get the (server-side) default upload location path:\n");
+			sb.append("\tvar serverPath = %%elementName%%.getDefaultUploadLocation();\n");
+			return sb.toString();
+		}
 		return null;
 	}
 
@@ -1336,6 +1343,10 @@ public class FileProvider implements IScriptObject
 		else if ("appendToTXTFile".equals(methodName))
 		{
 			return "Appends data into a text file.";
+		}
+		else if ("getDefaultUploadLocation".equals(methodName))
+		{
+			return "Returns the default upload location path of the server";
 		}
 		return null;
 	}
@@ -1942,7 +1953,7 @@ public class FileProvider implements IScriptObject
 	 * Retrieves the server default upload location on the server
 	 * @return the location as canonical path
 	 */
-	protected String getDefaultUploadLocation()
+	public String js_getDefaultUploadLocation()
 	{
 		try
 		{
