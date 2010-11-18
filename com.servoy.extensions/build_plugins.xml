@@ -591,6 +591,9 @@
 		<copy overwrite="true" todir="${plugins.dir}/spellcheck">
 			<fileset file="lib/RapidSpell*.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${plugins.dir}/spellcheck">
+			<fileset file="resources/spellcheck/*.dict"/>
+		</copy>
 		<delete dir="${tempForJar.dir}"/>
 	</target>
 
