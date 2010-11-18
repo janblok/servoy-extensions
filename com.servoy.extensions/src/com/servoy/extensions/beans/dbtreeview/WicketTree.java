@@ -783,7 +783,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 
 	public boolean isVisible()
 	{
-		return abstractTree.isEnabled();
+		return abstractTree.isVisible();
 	}
 
 	public void setComponentVisible(boolean visible)
