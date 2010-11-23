@@ -115,7 +115,7 @@ public class MailProvider implements IScriptObject
 		return retval.toArray(new String[retval.size()]);
 	}
 
-	public boolean js_isValidString(String email)
+	public boolean js_isValidEmailAdress(String email)
 	{
 		return Utils.isValidEmailAdress(email);
 	}
