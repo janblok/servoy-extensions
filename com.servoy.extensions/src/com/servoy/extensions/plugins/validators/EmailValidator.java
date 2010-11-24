@@ -43,7 +43,7 @@ public class EmailValidator implements IColumnValidator
 	{
 		if (arg == null || arg.toString().trim().length() == 0) return;
 
-		if (!Utils.isValidEmailAdress(arg.toString()))
+		if (!Utils.isValidEmailAddress(arg.toString()))
 		{
 			throw new IllegalArgumentException();
 		}
