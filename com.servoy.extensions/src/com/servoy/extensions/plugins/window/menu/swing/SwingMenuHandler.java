@@ -23,6 +23,8 @@ import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -43,6 +45,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.ui.IComponent;
+import com.servoy.j2db.util.Utils;
 
 /**
  * Handle menu actions for smart client (Swing).
@@ -54,6 +57,7 @@ public class SwingMenuHandler implements IMenuHandler
 {
 
 	private final IClientPluginAccess clientPluginAccess;
+	private final Map<String, InitialMenuState> hiddenMenubarStates = new HashMap<String, InitialMenuState>();
 
 	public SwingMenuHandler(IClientPluginAccess iClientPluginAccess)
 	{
@@ -277,60 +281,65 @@ public class SwingMenuHandler implements IMenuHandler
 
 	public Object initializeMenuBar(String windowName)
 	{
-		JMenuBar menubar = getJMenuBar(windowName, false);
-		if (menubar != null)
+		return getMenubarState(getJMenuBar(windowName, false));
+	}
+
+	/**
+	 * @param menubar
+	 * @return
+	 */
+	private InitialMenuState getMenubarState(JMenuBar menubar)
+	{
+		if (menubar == null)
 		{
-			MenuElement[] initialMenuObjects = menubar.getSubElements().clone();
-			JMenuItem[][] initialItemObjects = new JMenuItem[menubar.getComponentCount()][];
-
-			MenuElement[] element = initialMenuObjects;
-
-			for (int i = 0; i < menubar.getComponentCount(); i++)
-			{
-				JMenu menu = (JMenu)element[i];
-				JMenuItem[] item = new JMenuItem[menu.getItemCount()];
-				for (int ii = 0; ii < menu.getItemCount(); ii++)
-				{
-					item[ii] = menu.getItem(ii);
-				}
-
-				initialItemObjects[i] = item;
-			}
-			return new InitialMenuState(initialMenuObjects, initialItemObjects);
+			return null;
 		}
-		return null;
+		MenuElement[] initialMenuObjects = menubar.getSubElements().clone();
+		JMenuItem[][] initialItemObjects = new JMenuItem[menubar.getComponentCount()][];
+
+		MenuElement[] element = initialMenuObjects;
+
+		for (int i = 0; i < menubar.getComponentCount(); i++)
+		{
+			JMenu menu = (JMenu)element[i];
+			JMenuItem[] item = new JMenuItem[menu.getItemCount()];
+			for (int ii = 0; ii < menu.getItemCount(); ii++)
+			{
+				item[ii] = menu.getItem(ii);
+			}
+
+			initialItemObjects[i] = item;
+		}
+		return new InitialMenuState(initialMenuObjects, initialItemObjects);
 	}
 
 	public void resetMenuBar(String windowName, Object initializeMenuBarResult)
 	{
 		JMenuBar menubar = getJMenuBar(windowName, false);
-		if (menubar != null)
+		if (menubar != null && initializeMenuBarResult instanceof InitialMenuState)
 		{
 			menubar.invalidate();
 			menubar.removeAll();
 
-			if (initializeMenuBarResult instanceof InitialMenuState)
+			MenuElement[] element = ((InitialMenuState)initializeMenuBarResult).initialMenuObjects;
+
+			for (int i = 0; i < element.length; i++)
 			{
-				MenuElement[] element = ((InitialMenuState)initializeMenuBarResult).initialMenuObjects;
+				JMenu menu = (JMenu)element[i];
+				Component[] item = ((InitialMenuState)initializeMenuBarResult).initialItemObjects[i];
 
-				for (int i = 0; i < element.length; i++)
+				menubar.add(menu);
+				menu.removeAll();
+
+				for (Component element2 : item)
 				{
-					JMenu menu = (JMenu)element[i];
-					Component[] item = ((InitialMenuState)initializeMenuBarResult).initialItemObjects[i];
-
-					menubar.add(menu);
-					menu.removeAll();
-
-					for (Component element2 : item)
+					if (element2 instanceof JMenuItem)
 					{
-						if (element2 instanceof JMenuItem)
-						{
-							menu.add(element2);
-						}
-						else
-						{
-							menu.addSeparator();
-						}
+						menu.add(element2);
+					}
+					else
+					{
+						menu.addSeparator();
 					}
 				}
 			}
@@ -415,9 +424,22 @@ public class SwingMenuHandler implements IMenuHandler
 	public void setMenubarVisible(String windowName, boolean visible)
 	{
 		JMenuBar jMenuBar = getJMenuBar(windowName, visible);
-		if (jMenuBar != null)
+		if (jMenuBar != null && jMenuBar.isVisible() != visible)
 		{
 			jMenuBar.setVisible(visible);
+			if (Utils.isAppleMacOS())
+			{
+				// menubar does not want to go on mac, so remove all items
+				if (visible)
+				{
+					resetMenuBar(windowName, hiddenMenubarStates.remove(windowName));
+				}
+				else
+				{
+					hiddenMenubarStates.put(windowName, getMenubarState(jMenuBar));
+					jMenuBar.removeAll();
+				}
+			}
 		}
 	}
 
