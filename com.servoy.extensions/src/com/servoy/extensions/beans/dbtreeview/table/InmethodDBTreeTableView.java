@@ -45,10 +45,10 @@ import com.inmethod.grid.treegrid.TreeGrid;
 import com.servoy.extensions.beans.dbtreeview.Binding;
 import com.servoy.extensions.beans.dbtreeview.BindingInfo;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
-import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.extensions.beans.dbtreeview.IWicketTree;
 import com.servoy.extensions.beans.dbtreeview.RelationInfo;
 import com.servoy.extensions.beans.dbtreeview.WicketTree;
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.dataprocessing.Record;
 import com.servoy.j2db.dnd.DRAGNDROP;
@@ -58,6 +58,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.JSEvent.EventType;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.dataui.StyleAppendingModifier;
 import com.servoy.j2db.server.headlessclient.dataui.StyleAttributeModifierModel;
 import com.servoy.j2db.server.headlessclient.dataui.drag.DraggableBehavior;
 import com.servoy.j2db.ui.IStylePropertyChanges;
@@ -108,6 +109,12 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		wicketTree = new WicketTree(getTree(), bindingInfo, application);
 
 		add(StyleAttributeModifierModel.INSTANCE);
+
+		WebMarkupContainer bodyContainer = (WebMarkupContainer)get("form:bodyContainer"); //$NON-NLS-1$
+		if (bodyContainer != null)
+		{
+			bodyContainer.add(new StyleAppendingModifier(new Model<String>("height: 100%;"))); //$NON-NLS-1$
+		}
 	}
 
 	/**
