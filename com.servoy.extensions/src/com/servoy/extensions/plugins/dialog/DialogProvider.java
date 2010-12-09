@@ -172,7 +172,7 @@ public class DialogProvider implements IScriptObject
 	{
 		if ("showErrorDialog".equals(methodName) || "showInfoDialog".equals(methodName) || "showWarningDialog".equals(methodName) || "showQuestionDialog".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		{
-			return new String[] { "dialog_title", "msg", "[button1]", "[button2]", "[buttonN]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			return new String[] { "dialog_title", "msg", "[...button]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
 		}
 		else if ("showInputDialog".equals(methodName)) //$NON-NLS-1$
 		{
@@ -180,7 +180,7 @@ public class DialogProvider implements IScriptObject
 		}
 		else if ("showSelectDialog".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "dialog_title", "msg", "optionArray/option1", "[option2]", "[optionN]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			return new String[] { "dialog_title", "msg", "optionArray/option1", "[...option]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
 		}
 		else if ("showDialog".equals(methodName)) //$NON-NLS-1$
 		{
