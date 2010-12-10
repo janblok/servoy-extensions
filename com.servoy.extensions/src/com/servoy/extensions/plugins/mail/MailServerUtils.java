@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.mail;
 
 import java.io.BufferedReader;
@@ -153,22 +153,28 @@ public class MailServerUtils
 		String charset = getCharsetFromContentType(contentType);
 		if (contentType.startsWith("text/plain")) //$NON-NLS-1$
 		{
-			mm.plainMsg = createText(messagePart, charset);
+			if (messagePart.getFileName() == null)
+			{
+				mm.plainMsg = createText(messagePart, charset);
+				return;
+			}
 		}
 		else if (contentType.startsWith("text/html")) //$NON-NLS-1$
 		{
-			mm.htmlMsg = createText(messagePart, charset);
+			if (messagePart.getFileName() == null)
+			{
+				mm.htmlMsg = createText(messagePart, charset);
+				return;
+			}
 		}
 		else if (contentType.startsWith("multipart")) //$NON-NLS-1$
 		{
 			handleContent(mm, messagePart.getContent(), recieveMode);
+			return;
 		}
-		else
+		if (recieveMode != IMailService.NO_ATTACHMENTS)
 		{
-			if (recieveMode != IMailService.NO_ATTACHMENTS)
-			{
-				mm.addAttachment(createAttachment(messagePart));
-			}
+			mm.addAttachment(createAttachment(messagePart));
 		}
 	}
 
