@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.mail;
 
 import java.io.BufferedReader;
@@ -41,7 +41,7 @@ import com.servoy.j2db.util.Utils;
  */
 public class MailServerUtils
 {
-	public static MailMessage createMailMessage(Message m, int recieveMode) throws MessagingException, IOException
+	public static MailMessage createMailMessage(Message m, int receiveMode) throws MessagingException, IOException
 	{
 		MailMessage mm = new MailMessage();
 		if (m != null)
@@ -111,11 +111,11 @@ public class MailServerUtils
 				Debug.error(e);
 			}
 
-			if (recieveMode != IMailService.HEADERS_ONLY)
+			if (receiveMode != IMailService.HEADERS_ONLY)
 			{
 				try
 				{
-					handlePart(mm, m, recieveMode);
+					handlePart(mm, m, receiveMode);
 				}
 				catch (Exception e)
 				{
@@ -126,19 +126,19 @@ public class MailServerUtils
 		return mm;
 	}
 
-	private static void handleContent(MailMessage mm, Object content, int recieveMode) throws MessagingException, IOException
+	private static void handleContent(MailMessage mm, Object content, int receiveMode) throws MessagingException, IOException
 	{
 		if (content instanceof Multipart)
 		{
 			Multipart multi = (Multipart)content;
 			for (int i = 0; i < multi.getCount(); i++)
 			{
-				handlePart(mm, multi.getBodyPart(i), recieveMode);
+				handlePart(mm, multi.getBodyPart(i), receiveMode);
 			}
 		}
 		else if (content instanceof BodyPart)
 		{
-			handlePart(mm, (Part)content, recieveMode);
+			handlePart(mm, (Part)content, receiveMode);
 		}
 		else
 		{
@@ -146,29 +146,35 @@ public class MailServerUtils
 		}
 	}
 
-	private static void handlePart(MailMessage mm, Part messagePart, int recieveMode) throws MessagingException, IOException
+	private static void handlePart(MailMessage mm, Part messagePart, int receiveMode) throws MessagingException, IOException
 	{
 		// -- Get the content type --
 		String contentType = messagePart.getContentType();
 		String charset = getCharsetFromContentType(contentType);
 		if (contentType.startsWith("text/plain")) //$NON-NLS-1$
 		{
-			mm.plainMsg = createText(messagePart, charset);
+			if (messagePart.getFileName() == null)
+			{
+				mm.plainMsg = createText(messagePart, charset);
+				return;
+			}
 		}
 		else if (contentType.startsWith("text/html")) //$NON-NLS-1$
 		{
-			mm.htmlMsg = createText(messagePart, charset);
+			if (messagePart.getFileName() == null)
+			{
+				mm.htmlMsg = createText(messagePart, charset);
+				return;
+			}
 		}
 		else if (contentType.startsWith("multipart")) //$NON-NLS-1$
 		{
-			handleContent(mm, messagePart.getContent(), recieveMode);
+			handleContent(mm, messagePart.getContent(), receiveMode);
+			return;
 		}
-		else
+		if (receiveMode != IMailService.NO_ATTACHMENTS)
 		{
-			if (recieveMode != IMailService.NO_ATTACHMENTS)
-			{
-				mm.addAttachment(createAttachment(messagePart));
-			}
+			mm.addAttachment(createAttachment(messagePart));
 		}
 	}
 
