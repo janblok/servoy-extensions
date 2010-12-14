@@ -39,6 +39,7 @@ import com.servoy.j2db.util.IStyleSheet;
  * 
  * @author jblok
  */
+@SuppressWarnings("nls")
 public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 {
 	private static final long serialVersionUID = 1L;
@@ -87,8 +88,6 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	{
 		return new WicketDBTreeView(cargs[0].toString(), application);
 	}
-
-	private SwingDBTreeView swingDBTreeView;
 
 	protected SwingDBTreeView getSwingDBTreeView(Object[] cargs, IClientPluginAccess application)
 	{
