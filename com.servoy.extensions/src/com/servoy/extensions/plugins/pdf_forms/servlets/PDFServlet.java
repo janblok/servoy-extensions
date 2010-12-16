@@ -154,9 +154,12 @@ public class PDFServlet extends HttpServlet
 
 							String sub = uri.substring(0, uri.length() - path.length());
 							String url = base + sub + "/pdf_forms/pdf_process_data"; //$NON-NLS-1$
-							values.put(ACTION_PROPERTY, Integer.toString(action_id));
-							values.put(URL_PROPERTY, url);
 
+							if (action_type == EDIT || !xfa.isXfaPresent())
+							{
+								values.put(ACTION_PROPERTY, Integer.toString(action_id));
+								values.put(URL_PROPERTY, url);
+							}
 							//fill
 							Statement st1 = conn.createStatement();
 							ResultSet rs1 = st1.executeQuery("select value_name,field_value from pdf_form_values where form_id = " + form_id); //$NON-NLS-1$
