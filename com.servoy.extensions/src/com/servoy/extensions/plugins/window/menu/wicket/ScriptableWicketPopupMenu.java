@@ -20,18 +20,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.Component.IVisitor;
-import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.Page;
-import org.apache.wicket.RequestCycle;
 
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.menu.IPopupMenu;
-import com.servoy.j2db.IForm;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.ui.IComponent;
-import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -117,36 +111,6 @@ public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements I
 	{
 		// Not implemented in webclient
 		// TODO
-	}
-
-	private IForm getComponentForm(final IComponent component)
-	{
-		Page requestPage = RequestCycle.get().getRequest().getPage();
-		Component formComp = (Component)requestPage.visitChildren(Component.class, new IVisitor<Component>()
-		{
-			public Object component(Component c)
-			{
-				String cID = c.getId();
-				if (cID != null && cID.endsWith(component.getId())) return c;
-				else return IVisitor.CONTINUE_TRAVERSAL;
-			}
-		});
-
-		if (formComp != null)
-		{
-			MarkupContainer parentForm;
-			while ((parentForm = formComp.getParent()) != null)
-			{
-				if (parentForm instanceof IFormUI)
-				{
-					String formName = ((IFormUI)parentForm).getController().getName();
-					return app.getFormManager().getForm(formName);
-				}
-				formComp = parentForm;
-			}
-		}
-
-		return app.getFormManager().getCurrentForm();
 	}
 
 	CharSequence getCallBackUrl(IMenuItem item)
