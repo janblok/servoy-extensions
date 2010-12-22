@@ -58,6 +58,7 @@ public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements I
 			if (pc != null)
 			{
 				String jsComp = null;
+				String jsComp2 = null;
 				if (comp instanceof IComponent)
 				{
 					IComponent c = (IComponent)comp;
@@ -73,7 +74,8 @@ public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements I
 					else
 					// if(viewType == IForm.LIST_VIEW || IForm.TABLE_VIEW)
 					{
-						jsComp = "document.getElementById('" + componentForm.getFoundSet().getSelectedIndex() + ":" + c.getId() + "')"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+						jsComp = "document.getElementById('" + componentForm.getFoundSet().getSelectedIndex() + ":" + c.getId() + "')"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						jsComp2 = "document.getElementById('" + c.getId() + "')"; //$NON-NLS-1$ //$NON-NLS-2$ 
 					}
 
 				}
@@ -87,6 +89,11 @@ public class ScriptableWicketPopupMenu extends ScriptableWicketMenu implements I
 				if (jsComp != null)
 				{
 					js.append("var jsComp = ").append(jsComp).append(";"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					if (jsComp2 != null)
+					{
+						// for tableview id depends whether component is in body or other part
+						js.append("if (jsComp == null) jsComp = ").append(jsComp2).append(";"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					}
 					js.append("var parentReg = YAHOO.util.Dom.getRegion(jsComp.offsetParent);"); //$NON-NLS-1$ 
 					js.append("var jsCompReg = YAHOO.util.Dom.getRegion(jsComp);"); //$NON-NLS-1$
 					js.append("oMenu.render(document.body);"); //$NON-NLS-1$
