@@ -40,6 +40,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
@@ -273,6 +274,7 @@ public class Poster implements IScriptObject
 				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
 				client.setCredentialsProvider(bcp);
 			}
+			context = new BasicHttpContext();
 			HttpResponse res = client.execute(post, context);
 			int status = res.getStatusLine().getStatusCode();
 			return status;
@@ -296,6 +298,7 @@ public class Poster implements IScriptObject
 			if (context != null)
 			{
 				HttpResponse response = (HttpResponse)context.getAttribute(ExecutionContext.HTTP_RESPONSE);
+				context = null;
 				return EntityUtils.toString(response.getEntity());
 			}
 		}
