@@ -293,8 +293,11 @@ public class Poster implements IScriptObject
 	{
 		try
 		{
-			HttpResponse response = (HttpResponse)context.getAttribute(ExecutionContext.HTTP_RESPONSE);
-			return EntityUtils.toString(response.getEntity());
+			if (context != null)
+			{
+				HttpResponse response = (HttpResponse)context.getAttribute(ExecutionContext.HTTP_RESPONSE);
+				return EntityUtils.toString(response.getEntity());
+			}
 		}
 		catch (Exception e)
 		{
