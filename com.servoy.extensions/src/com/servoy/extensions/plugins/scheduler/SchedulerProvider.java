@@ -99,11 +99,11 @@ public class SchedulerProvider implements IScriptObject
 			StringBuffer sb = new StringBuffer();
 			sb.append("// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info\n"); //$NON-NLS-1$
 			sb.append("// add a job that runs every 20 minutes after the hour (0,20,40)\n"); //$NON-NLS-1$
-			sb.append("plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',globalMethod)\n"); //$NON-NLS-1$
+			sb.append("plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',method)\n"); //$NON-NLS-1$
 			sb.append("// add a job that runs every day at 23:30 between now and 5 days from now\n"); //$NON-NLS-1$
 			sb.append("var dateNow = new Date();\n"); //$NON-NLS-1$
 			sb.append("var date5Days = new Date(dateNow.getTime()+5*24*60*60*1000);\n"); //$NON-NLS-1$
-			sb.append("plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',globalMethod,dateNow,date5Days)\n"); //$NON-NLS-1$
+			sb.append("plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)\n"); //$NON-NLS-1$
 			return sb.toString();
 		}
 		else if (methodName.equals("addJob")) //$NON-NLS-1$
@@ -114,7 +114,7 @@ public class SchedulerProvider implements IScriptObject
 			sb.append("var startDate = new Date();\n"); //$NON-NLS-1$
 			sb.append("startDate.setTime(startDate.getTime()+20000);\n"); //$NON-NLS-1$
 			sb.append("var endDate = new Date(startDate.getTime()+100000);\n"); //$NON-NLS-1$
-			sb.append("plugins.scheduler.addJob('in20seconds',startDate,globalMethod,20000,40,endDate)\n"); //$NON-NLS-1$
+			sb.append("plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)\n"); //$NON-NLS-1$
 
 			return sb.toString();
 		}
@@ -160,11 +160,11 @@ public class SchedulerProvider implements IScriptObject
 	{
 		if (methodName.equals("addCronJob")) //$NON-NLS-1$
 		{
-			return new String[] { "jobname", "cronTimings", "globalMethod", "[startDate]", "[endDate]", "[arguments]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			return new String[] { "jobname", "cronTimings", "method", "[startDate]", "[endDate]", "[arguments]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 		}
 		else if (methodName.equals("addJob")) //$NON-NLS-1$
 		{
-			return new String[] { "jobname", "startDate", "globalMethod", "[repeatInterval(ms)]", "[repeatCount]", "[endDate]", "[arguments]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			return new String[] { "jobname", "startDate", "method", "[repeatInterval(ms)]", "[repeatCount]", "[endDate]", "[arguments]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		}
 		else if (methodName.equals("removeJob")) //$NON-NLS-1$
 		{
@@ -204,7 +204,7 @@ public class SchedulerProvider implements IScriptObject
 	}
 
 	/**
-	 * Adds a job to the scheduler (parameters: jobname,triggerDate,globalMethod,[repeatInterval(ms),repeatCount,endDate,arguments]/[arguments])
+	 * Adds a job to the scheduler (parameters: jobname,triggerDate,method,[repeatInterval(ms),repeatCount,endDate,arguments]/[arguments])
 	 *
 	 * @sample
 	 * // add a job that runs at the given date (20 seconds in the future)
@@ -212,13 +212,13 @@ public class SchedulerProvider implements IScriptObject
 	 * var startDate = new Date();
 	 * startDate.setTime(startDate.getTime()+20000);
 	 * var endDate = new Date(startDate.getTime()+100000);
-	 * plugins.scheduler.addJob('in20seconds',startDate,globalMethod,20000,40,endDate)
+	 * plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)
 	 *
 	 * @param jobname 
 	 *
 	 * @param startDate 
 	 *
-	 * @param globalMethod 
+	 * @param method 
 	 *
 	 * @param repeatInterval(ms) optional 
 	 *
@@ -314,21 +314,21 @@ public class SchedulerProvider implements IScriptObject
 	}
 
 	/**
-	 * Adds a cron job to the scheduler (parameter: jobname,cronTiming (s m h D/M M D/W),globalMethod,[startDate],[endDate])
+	 * Adds a cron job to the scheduler (parameter: jobname,cronTiming (s m h D/M M D/W),method,[startDate],[endDate])
 	 *
 	 * @sample
 	 * // add a job that runs every 20 minutes after the hour (0,20,40)
-	 * plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',globalMethod)
+	 * plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',method)
 	 * // add a job that runs every day at 23:30 between now and 5 days from now
 	 * var dateNow = new Date();
 	 * var date5Days = new Date(dateNow.getTime()+5*24*60*60*1000);
-	 * plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',globalMethod,dateNow,date5Days)
+	 * plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)
 	 *
 	 * @param jobname 
 	 *
 	 * @param cronTimings 
 	 *
-	 * @param globalMethod 
+	 * @param method 
 	 *
 	 * @param [startDate] optional 
 	 *
