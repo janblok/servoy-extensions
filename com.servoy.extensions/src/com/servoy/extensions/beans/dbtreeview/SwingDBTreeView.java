@@ -45,6 +45,7 @@ import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeWillExpandListener;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -275,19 +276,14 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		setFont(f);
 	}
 
-	private Font font;
-
 	@Override
 	public void setFont(Font f)
 	{
-		font = f;
-		if (tree != null) tree.setFont(f);
-	}
+		// if we have FontUIResource, create Font from it, else the default cell renderer will consider the font null
+		Font font = f instanceof FontUIResource ? new Font(f.getName(), f.getStyle(), f.getSize()) : f;
 
-	@Override
-	public Font getFont()
-	{
-		return font != null ? font : super.getFont();
+		super.setFont(font);
+		if (tree != null) tree.setFont(font);
 	}
 
 
