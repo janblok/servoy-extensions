@@ -275,11 +275,19 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		setFont(f);
 	}
 
+	private Font font;
+
 	@Override
 	public void setFont(Font f)
 	{
-		super.setFont(f);
+		font = f;
 		if (tree != null) tree.setFont(f);
+	}
+
+	@Override
+	public Font getFont()
+	{
+		return font != null ? font : super.getFont();
 	}
 
 
