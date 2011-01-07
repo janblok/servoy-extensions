@@ -684,10 +684,25 @@ public class WindowProvider implements IScriptObject
 		return true;
 	}
 
-
+	/**
+	 * Cleanup this plugin for reuse in another solution.
+	 */
 	public void cleanup()
 	{
 		cleanupShortcuts();
+		// reset main menubar
+		MenuBar mainMenubar = menuBars.get(null);
+		if (mainMenubar != null)
+		{
+			mainMenubar.js_reset();
+		}
+		menuBars.clear();
+	}
+
+	public void unload()
+	{
+		shortcuts = null;
+		shortcutHandler = null;
 		menuBars.clear();
 	}
 
