@@ -46,10 +46,10 @@ public class DialogProvider implements IScriptObject
 
 	public String js_showWarningDialog(Object[] array)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && array.length == 3)
+		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[1]));
-			return String.valueOf(array[2]);
+			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
 		}
 		return js_showDialogEx(array, JOptionPane.WARNING_MESSAGE);
 	}
