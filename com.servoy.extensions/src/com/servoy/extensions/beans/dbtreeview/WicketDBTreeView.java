@@ -979,11 +979,14 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			@Override
 			protected void onDragEnd(String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
 			{
-				JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragEnd, null, node);
-				event.setData(getDragData());
-				event.setDataMimeType(getDragDataMimeType());
-				event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
-				WicketDBTreeView.this.onDragEnd(event);
+				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				{
+					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragEnd, null, node);
+					event.setData(getDragData());
+					event.setDataMimeType(getDragDataMimeType());
+					event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
+					WicketDBTreeView.this.onDragEnd(event);
+				}
 
 				super.onDragEnd(id, x, y, ajaxRequestTarget);
 			}

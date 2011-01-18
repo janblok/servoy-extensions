@@ -45,10 +45,10 @@ import com.inmethod.grid.treegrid.TreeGrid;
 import com.servoy.extensions.beans.dbtreeview.Binding;
 import com.servoy.extensions.beans.dbtreeview.BindingInfo;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.extensions.beans.dbtreeview.IWicketTree;
 import com.servoy.extensions.beans.dbtreeview.RelationInfo;
 import com.servoy.extensions.beans.dbtreeview.WicketTree;
-import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.dataprocessing.Record;
 import com.servoy.j2db.dnd.DRAGNDROP;
@@ -868,11 +868,14 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			@Override
 			protected void onDragEnd(String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
 			{
-				JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragEnd, null, row);
-				event.setData(getDragData());
-				event.setDataMimeType(getDragDataMimeType());
-				event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
-				InmethodDBTreeTableView.this.onDragEnd(event);
+				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				{
+					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragEnd, null, row);
+					event.setData(getDragData());
+					event.setDataMimeType(getDragDataMimeType());
+					event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
+					InmethodDBTreeTableView.this.onDragEnd(event);
+				}
 
 				super.onDragEnd(id, x, y, ajaxRequestTarget);
 			}
