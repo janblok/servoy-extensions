@@ -33,9 +33,9 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.html.tree.AbstractTree;
 import org.apache.wicket.markup.html.tree.BaseTree;
-import org.apache.wicket.markup.html.tree.LabelIconPanel;
 import org.apache.wicket.markup.html.tree.BaseTree.ILinkCallback;
 import org.apache.wicket.markup.html.tree.BaseTree.LinkType;
+import org.apache.wicket.markup.html.tree.LabelIconPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
@@ -120,7 +120,7 @@ public abstract class DBTreeTableTreeNode extends Panel
 		}
 
 		nodeLabel = new Label(componentId, model);
-
+		nodeLabel.setEscapeModelStrings(false);
 		return nodeLabel;
 	}
 

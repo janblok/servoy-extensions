@@ -158,7 +158,7 @@ public abstract class WicketDBTreeViewNode extends LinkIconPanel implements Wick
 		}
 
 		nodeLabel = (Label)super.newContentComponent(componentId, tree, model);
-
+		nodeLabel.setEscapeModelStrings(false);
 		return nodeLabel;
 	}
 
