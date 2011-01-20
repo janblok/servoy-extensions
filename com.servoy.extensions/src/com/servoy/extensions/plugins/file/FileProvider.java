@@ -575,6 +575,10 @@ public class FileProvider implements IScriptObject
 
 	public boolean js_deleteFile(Object destination)
 	{
+		if (destination instanceof JSFile && ((JSFile)destination).getAbstractFile() instanceof RemoteFile)
+		{
+			return ((JSFile)destination).js_deleteFile();
+		}
 		return js_deleteFolder(destination, true);
 	}
 
