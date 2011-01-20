@@ -881,12 +881,15 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			}
 
 			@Override
-			protected void onDragStart(final String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected boolean onDragStart(final String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
 			{
 				JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrag, new Point(x, y), row);
 				setDropResult(false);
-				setCurrentDragOperation(InmethodDBTreeTableView.this.onDrag(event));
+				int dragOp = InmethodDBTreeTableView.this.onDrag(event);
+				if (dragOp == DRAGNDROP.NONE) return false;
+				setCurrentDragOperation(dragOp);
 				setDragData(event.getData(), event.getDataMimeType());
+				return true;
 			}
 
 			@Override
