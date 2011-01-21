@@ -62,7 +62,9 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		final Map<String, String> req = new HashMap<String, String>();
-		req.put(IFileService.DEFAULT_FOLDER_PROPERTY, "Set the default folder path to save files sent by client (will default to /uploads/)");
+		req.put(
+			IFileService.DEFAULT_FOLDER_PROPERTY,
+			"Set the default folder path (absolute path on the server) to save files sent by clients (will default to $ServoyInstallationDirectory$/server/webapps/ROOT/uploads/)");
 		return req;
 	}
 
@@ -93,40 +95,12 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	@SuppressWarnings("nls")
 	private void setDefaultFolder(final String folder)
 	{
-		if (folder != null)
+		try
 		{
-			// try to use the supplied path:
-			defaultFolder = new File(folder.trim());
-			if (!defaultFolder.exists())
+			if (folder != null)
 			{
-				if (!defaultFolder.mkdirs())
-				{
-					throw new RuntimeException("Cant set the default folder for the File plugin to '" + folder + "' can't create the directory");
-				}
-			}
-		}
-		else
-		{
-			// try to find the Tomcat ROOT context
-
-			// on Mac OS the executable path is actually /developer/Servoy.app/Contents/MacOS/
-			final String relativePath = Utils.isAppleMacOS() ? "../../../../application_server/server/webapps/ROOT"
-				: "../application_server/server/webapps/ROOT";
-			File parent = new File(relativePath);
-			if (!parent.exists() || !parent.isDirectory())
-			{
-				// if we are here, it is because the executable is not developer, so try:
-				parent = new File("server/webapps/ROOT");
-			}
-			if (!parent.exists() || !parent.isDirectory())
-			{
-				// fall back to home directory
-				parent = FileSystemView.getFileSystemView().getHomeDirectory();
-			}
-			// then tries to locate (or create) an 'uploads" folder.
-			if (parent != null && parent.exists() && parent.isDirectory())
-			{
-				defaultFolder = new File(parent.getAbsolutePath() + File.separator + "uploads");
+				// try to use the supplied path:
+				defaultFolder = new File(folder.trim());
 				if (!defaultFolder.exists())
 				{
 					if (!defaultFolder.mkdirs())
@@ -135,19 +109,58 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 					}
 				}
 			}
-		}
-		if (defaultFolder == null)
-		{
-			throw new RuntimeException("Default folder couldnt be resolved");
-		}
-		try
-		{
+			else
+			{
+				// try to find the Tomcat ROOT context
+
+				// on Mac OS the executable path is actually /developer/Servoy.app/Contents/MacOS/
+				final String relativePath = Utils.isAppleMacOS() ? "../../../../application_server/server/webapps/ROOT"
+					: "../application_server/server/webapps/ROOT";
+				File parent = new File(relativePath);
+				if (!parent.exists() || !parent.isDirectory())
+				{
+					// if we are here, it is because the executable is not developer, 
+					// it might have been launched from the command line in /application_server, 
+					// thus try:
+					parent = new File("server/webapps/ROOT");
+				}
+				if (!parent.exists() || !parent.isDirectory())
+				{
+					// try from the /service sub-folder location
+					parent = new File("../../application_server/server/webapps/ROOT");
+				}
+				if (!parent.exists() || !parent.isDirectory())
+				{
+					// fall back to home directory
+					parent = FileSystemView.getFileSystemView().getHomeDirectory();
+				}
+				// then tries to locate (or create) an 'uploads" folder.
+				if (parent != null && parent.exists() && parent.isDirectory())
+				{
+					defaultFolder = new File(parent.getAbsolutePath() + File.separator + "uploads");
+					if (!defaultFolder.exists())
+					{
+						if (!defaultFolder.mkdirs())
+						{
+							throw new RuntimeException("Cant set the default folder for the File plugin to '" + folder + "' can't create the directory");
+						}
+					}
+				}
+			}
+			// if we made it so far and still haven't found a default folder, then we have a problem!
+			if (defaultFolder == null)
+			{
+				throw new RuntimeException("Default folder couldnt be resolved");
+			}
+
 			// ensures that we have a canonical representation of the default folder (to help security checks):
 			defaultFolder = defaultFolder.getCanonicalFile();
+
 			Debug.log("Default upload folder location was set to " + defaultFolder.getCanonicalPath());
 		}
-		catch (IOException ex)
+		catch (final Exception ex)
 		{
+			Debug.error("File plugin error trying to setup the default upload folder", ex);
 		}
 	}
 
