@@ -160,6 +160,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		}
 		catch (final Exception ex)
 		{
+			defaultFolder = null;
 			Debug.error("File plugin error trying to setup the default upload folder", ex);
 		}
 	}
