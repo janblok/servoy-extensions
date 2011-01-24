@@ -36,6 +36,7 @@ public class RemoteFileData implements Serializable
 	private final long length;
 	private final boolean directory;
 	private final boolean file;
+	private final boolean exists;
 	private final boolean canRead;
 	private final boolean canWrite;
 	private final boolean hidden;
@@ -60,6 +61,7 @@ public class RemoteFileData implements Serializable
 		this.canWrite = file.canWrite();
 		this.hidden = file.isHidden();
 		this.hash = file.hashCode();
+		this.exists = file.exists();
 	}
 
 
@@ -157,6 +159,11 @@ public class RemoteFileData implements Serializable
 	public boolean isHidden()
 	{
 		return hidden;
+	}
+
+	public boolean exists()
+	{
+		return exists;
 	}
 
 	/**

@@ -28,6 +28,7 @@ import com.servoy.j2db.util.ImageLoader;
  * Implementation of an {@link IAbstractFile} for web accessible file<br/>
 
  * @author jcompagner
+ * @author Servoy Stuff
  * @since Servoy 5.2
  */
 public class UploadData extends AbstractFile
@@ -93,5 +94,16 @@ public class UploadData extends AbstractFile
 	{
 		return upload.getInputStream();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[], boolean)
+	 */
+	public boolean setBytes(byte[] bytes, boolean createFile)
+	{
+		throw new UnsupportedMethodException("JSFile.setBytes() is not web compatible"); //$NON-NLS-1$
+	}
+
 
 }

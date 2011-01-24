@@ -201,7 +201,18 @@ public abstract class AbstractFile implements IAbstractFile
 	 */
 	public InputStream getInputStream() throws IOException
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[])
+	 */
+	public boolean setBytes(byte[] bytes)
+	{
+		return setBytes(bytes, false);
+	}
+
+
 }

@@ -27,6 +27,7 @@ import com.servoy.j2db.plugins.IUploadData;
  * Emulates the {@link File} class
  * 
  * @author jcompagner
+ * @author Servoy Stuff
  * @since Servoy 5.2
  */
 public interface IAbstractFile extends IUploadData
@@ -158,5 +159,23 @@ public interface IAbstractFile extends IUploadData
 	 * @return true if the operation succeeded
 	 */
 	boolean setReadOnly();
+
+	/**
+	 * Save data into the {@link File} represented by this object
+	 * @param bytes the data
+	 * @return true if the bytes were written
+	 * @since 5.2.5
+	 */
+	boolean setBytes(byte[] bytes);
+
+
+	/**
+	 * Save data into the {@link File} represented by this object
+	 * @param bytes the data
+	 * @param createFile true to create a file if not existing
+	 * @return true if the bytes were written
+	 * @since 5.2.5
+	 */
+	boolean setBytes(byte[] bytes, boolean createFile);
 
 }
