@@ -18,11 +18,15 @@
 package com.servoy.extensions.plugins.file;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.FileChooserUtils;
 
 /**
@@ -217,6 +221,58 @@ public class LocalFile implements IAbstractFile
 	public InputStream getInputStream() throws IOException
 	{
 		return new BufferedInputStream(new FileInputStream(file));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[])
+	 */
+	public boolean setBytes(byte[] bytes)
+	{
+		return setBytes(bytes, false);
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[], boolean)
+	 */
+	public boolean setBytes(byte[] bytes, boolean createFile)
+	{
+		if (bytes != null)
+		{
+			OutputStream out = null;
+			try
+			{
+				if (exists() || createFile && file.createNewFile())
+				{
+					out = new BufferedOutputStream(new FileOutputStream(file));
+					out.write(bytes);
+					out.flush();
+					return true;
+				}
+			}
+			catch (IOException ex)
+			{
+				Debug.error("Error transferring data using setBytes on local JSFile " + getAbsolutePath(), ex); //$NON-NLS-1$
+			}
+			finally
+			{
+				if (out != null)
+				{
+					try
+					{
+						out.close();
+					}
+					catch (IOException ignore)
+					{
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 }

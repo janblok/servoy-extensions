@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.UUID;
 
+import com.servoy.j2db.util.Debug;
+
 /**
  * Implementation of an {@link IAbstractFile} for remote (server-side) files<br/>
  * 
@@ -336,6 +338,53 @@ public class RemoteFile extends AbstractFile
 	public String toString()
 	{
 		return data.toString();
+	}
+
+	@Override
+	public boolean exists()
+	{
+		return data.exists();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[], boolean)
+	 */
+	public boolean setBytes(byte[] bytes, boolean createFile)
+	{
+		if (bytes != null && (exists() || createFile))
+		{
+			UUID uuid = null;
+			try
+			{
+				uuid = service.openTransfer(clientId, data.getAbsolutePath());
+				int start = 0;
+				while (start < bytes.length)
+				{
+					int length = Math.min(bytes.length - start, FileProvider.CHUNK_BUFFER_SIZE);
+					service.writeBytes(uuid, bytes, start, length);
+					start += length;
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Debug.error("Error transferring data using setBytes on remote JSFile " + getAbsolutePath(), ex); //$NON-NLS-1$
+			}
+			finally
+			{
+				try
+				{
+					if (uuid != null) data = (RemoteFileData)service.closeTransfer(uuid);
+				}
+				catch (RemoteException ex)
+				{
+
+				}
+			}
+		}
+		return false;
 	}
 
 

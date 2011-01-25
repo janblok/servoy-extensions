@@ -81,7 +81,7 @@ public class FileProvider implements IScriptObject
 	 * Size of the buffer used to stream files to the server
 	 * @since Servoy 5.2
 	 */
-	protected static final int CHUNK_BUFFER_SIZE = 64 * 1024;
+	public static final int CHUNK_BUFFER_SIZE = 64 * 1024;
 
 	public FileProvider(FilePlugin plugin)
 	{
@@ -1151,7 +1151,7 @@ public class FileProvider implements IScriptObject
 			sb.append("\t\tapplication.output('Failed to write the file.');\n");
 			sb.append("\t// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'\n"); //$NON-NLS-1$
 			sb.append("\tvar mimeType = 'application/vnd.ms-excel'\n"); //$NON-NLS-1$
-			sb.append("\tif (!plugins.file.writeFile(f, bytes, mimeType))\n"); //$NON-NLS-1$
+			sb.append("\tif (!%%elementName%%.writeFile(f, bytes, mimeType))\n"); //$NON-NLS-1$
 			sb.append("\t\tapplication.output('Failed to write the file.');\n");
 			return sb.toString();
 		}
@@ -1197,11 +1197,11 @@ public class FileProvider implements IScriptObject
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("// transfer all the files of a chosen server folder to a directory on the client\n");
-			sb.append("\tvar dir = plugins.file.showDirectorySelectDialog();\n");
+			sb.append("\tvar dir = %%elementName%%.showDirectorySelectDialog();\n");
 			sb.append("\tif (dir) {\n");
-			sb.append("\t\tvar list = plugins.file.getRemoteFolderContents('/images/user1/', null, 1);\n");
+			sb.append("\t\tvar list = %%elementName%%.getRemoteFolderContents('/images/user1/', null, 1);\n");
 			sb.append("\t\tif (list) {\n");
-			sb.append("\t\t\tvar monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);\n");
+			sb.append("\t\t\tvar monitor = %%elementName%%.streamFilesFromServer(dir, list, callbackFunction);\n");
 			sb.append("\t\t}\n");
 			sb.append("\t}\n");
 			return sb.toString();

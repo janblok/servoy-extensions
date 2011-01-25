@@ -372,6 +372,34 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		return file.getContentType();
 	}
 
+	/**
+	 * Set the content of the file (local or remote) to the bytes provided<br/>
+	 * Will not create a new file if one doesn't exist
+	 * 
+	 * @param bytes the data
+	 * 
+	 * @return true if the operation worked
+	 * @since 5.2.5
+	 */
+	public boolean js_setBytes(byte[] bytes)
+	{
+		return js_setBytes(bytes, false);
+	}
+
+	/**
+	 * Set the content of the file (local or remote) to the bytes provided
+	 * 
+	 * @param bytes the data
+	 * @param createFile true to create a file if it doesn't exist
+	 * 
+	 * @return true if the operation worked
+	 * @since 5.2.5
+	 */
+	public boolean js_setBytes(byte[] bytes, boolean createFile)
+	{
+		return file.setBytes(bytes, createFile);
+	}
+
 	@Override
 	public String toString()
 	{
@@ -393,7 +421,7 @@ public class JSFile implements IScriptObject, IJavaScriptType
 			"size".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('./big.jpg');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('./big.jpg');\n");
 			sb.append("// or for a remote file:\n");
 			sb.append("// var f = plugins.convertToRemoteJSFile('/images/big.jpg');\n");
 			sb.append("if (f && f.exists()) {\n");
@@ -418,7 +446,7 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("createNewFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
 			sb.append("if (!f.exists())\n");
 			sb.append("\tf.createNewFile();\n");
 			return sb.toString();
@@ -426,7 +454,7 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("deleteFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
 			sb.append("// or for a remote file:\n");
 			sb.append("// var f = plugins.convertToRemoteJSFile('/story.txt');\n");
 			sb.append("if (f && f.exists())\n");
@@ -436,15 +464,15 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("setReadOnly".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('invoice.txt');\n");
-			sb.append("plugins.file.writeTXTFile(f, 'important data that should not be changed');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('invoice.txt');\n");
+			sb.append("%%elementName%%.writeTXTFile(f, 'important data that should not be changed');\n");
 			sb.append("f.setReadOnly();\n");
 			return sb.toString();
 		}
 		else if ("setLastModified".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
 			sb.append("f.createNewFile();\n");
 			sb.append("// Make the file look old.\n");
 			sb.append("f.setLastModified(new Date(1999, 5, 21));\n");
@@ -453,7 +481,7 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("renameTo".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
 			sb.append("f.renameTo('otherstory.txt');\n");
 			sb.append("// or for a remote file:\n");
 			sb.append("// var f = plugins.convertToRemoteJSFile('/story.txt');\n");
@@ -463,16 +491,16 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("mkdir".equals(methodName) || "mkdirs".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('one/two/three/four');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('one/two/three/four');\n");
 			sb.append("f.mkdirs(); // Create all four levels of folders in one step.\n");
-			sb.append("var g = plugins.file.convertToJSFile('one/two/three/four/five');\n");
+			sb.append("var g = %%elementName%%.convertToJSFile('one/two/three/four/five');\n");
 			sb.append("g.mkdir(); // This will work because all parent folders are already created.\n");
 			return sb.toString();
 		}
 		else if ("list".equals(methodName) || "listFiles".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var d = plugins.file.convertToJSFile('plugins');\n");
+			sb.append("var d = %%elementName%%.convertToJSFile('plugins');\n");
 			sb.append("// or for a remote file:\n");
 			sb.append("// var d = plugins.convertToRemoteJSFile('/plugins');\n");
 			sb.append("var names = d.list();\n");
@@ -488,11 +516,20 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("getAbsoluteFile".equals(methodName) || "getParent".equals(methodName) || "getParentFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("var f = plugins.file.convertToJSFile('story.txt');\n");
+			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
 			sb.append("// or for a remote file:\n");
-			sb.append("// var f = plugins.convertToRemoteJSFile('/story.txt');\n");
+			sb.append("// var f = %%elementName%%.convertToRemoteJSFile('/story.txt');\n");
 			sb.append("application.output('parent folder: ' + f.getAbsoluteFile().getParent());\n");
 			sb.append("application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');\n");
+			return sb.toString();
+		}
+		else if ("setBytes".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("var file = %%elementName%%.convertToJSFile('/pathTo/file.jpg');\n");
+			sb.append("// or for a remote file:\n");
+			sb.append("// var file = %%elementName%%.convertToRemoteJSFile('/remotePathTo/file.jpg');\n");
+			sb.append("var success = file.setBytes(blobDataProvider, true);");
 			return sb.toString();
 		}
 		return null;
@@ -606,6 +643,10 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		{
 			return "Returns the size in bytes of the file. Returns 0 if the file does not exist on disk - works on remote files too.";
 		}
+		else if ("setBytes".equals(methodName))
+		{
+			return "Sets the byte[] content of a JSFile to the byte array provided, creating a file if none exists when the createFile parameter is true (default = false). Returns true if the content was set - works on local and remote files.";
+		}
 
 		return null;
 	}
@@ -625,6 +666,10 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if (methodName.equals("setLastModified"))
 		{
 			return new String[] { "date" };
+		}
+		else if (methodName.equals("setBytes"))
+		{
+			return new String[] { "bytes", "[createFile]" };
 		}
 		return null;
 	}
