@@ -60,7 +60,7 @@ import com.servoy.j2db.scripting.JSEvent.EventType;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.dataui.StyleAppendingModifier;
 import com.servoy.j2db.server.headlessclient.dataui.StyleAttributeModifierModel;
-import com.servoy.j2db.server.headlessclient.dataui.drag.DraggableBehavior;
+import com.servoy.j2db.server.headlessclient.dnd.DraggableBehavior;
 import com.servoy.j2db.ui.IStylePropertyChanges;
 import com.servoy.j2db.util.DataSourceUtils;
 
