@@ -34,8 +34,8 @@ import javax.swing.filechooser.FileSystemView;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
+import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.Utils;
 
 /**
  * The server plugin, also {@link IFileService} implementation
@@ -113,24 +113,10 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 			{
 				// try to find the Tomcat ROOT context
 
-				// on Mac OS the executable path is actually /developer/Servoy.app/Contents/MacOS/
-				final String relativePath = Utils.isAppleMacOS() ? "../../../../application_server/server/webapps/ROOT"
-					: "../application_server/server/webapps/ROOT";
-				File parent = new File(relativePath);
+				File parent = new File(ApplicationServerSingleton.get().getServoyApplicationServerDirectory());
 				if (!parent.exists() || !parent.isDirectory())
 				{
-					// if we are here, it is because the executable is not developer, 
-					// it might have been launched from the command line in /application_server, 
-					// thus try:
-					parent = new File("server/webapps/ROOT");
-				}
-				if (!parent.exists() || !parent.isDirectory())
-				{
-					// try from the /service sub-folder location
-					parent = new File("../../application_server/server/webapps/ROOT");
-				}
-				if (!parent.exists() || !parent.isDirectory())
-				{
+					Debug.log("Servoy application server directory '" + parent + "' not found -- falling back to home directory");
 					// fall back to home directory
 					parent = FileSystemView.getFileSystemView().getHomeDirectory();
 				}
