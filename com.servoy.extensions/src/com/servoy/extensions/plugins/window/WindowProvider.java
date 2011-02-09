@@ -1082,6 +1082,8 @@ public class WindowProvider implements IScriptObject
 		sb.append("var menuitem4 = popupmenu.addSeparator()\n");
 		sb.append("var menuitem5 = popupmenu.addMenuItem('<html><b>Hello</b></html>',myMethod)\n");
 		sb.append("var menuitem6 = popupmenu.addMenuItem('G', globals.myGlobalMethod)\n");
+		sb.append("//add arguments to the method call\n");
+		sb.append("menuitem6.methodArguments = ['arg1', 'another argument']\n");
 
 		sb.append("\nvar submenu = popupmenu.addMenu('SubMenu')\n");
 		sb.append("var subitem1 = submenu.addCheckBox('i18n:bla_bla',myMethod)\n");
