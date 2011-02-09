@@ -232,6 +232,7 @@
 		/>
 		<copy overwrite="true" todir="${plugins.dir}/openid">
 			<fileset file="lib/openid4java.jar"/>
+			<fileset file="lib/guice-2.0.jar"/>
 		</copy>
 		<delete dir="${tempForJar.dir}"/>
 	</target>
