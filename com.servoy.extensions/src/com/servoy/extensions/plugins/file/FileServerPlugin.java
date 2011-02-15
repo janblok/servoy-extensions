@@ -113,10 +113,10 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 			{
 				// try to find the Tomcat ROOT context
 
-				File parent = new File(ApplicationServerSingleton.get().getServoyApplicationServerDirectory());
+				File parent = new File(ApplicationServerSingleton.get().getServoyApplicationServerDirectory(), "server/webapps/ROOT");
 				if (!parent.exists() || !parent.isDirectory())
 				{
-					Debug.log("Servoy application server directory '" + parent + "' not found -- falling back to home directory");
+					Debug.log("Servoy root webapps directory '" + parent + "' not found -- falling back to home directory");
 					// fall back to home directory
 					parent = FileSystemView.getFileSystemView().getHomeDirectory();
 				}
