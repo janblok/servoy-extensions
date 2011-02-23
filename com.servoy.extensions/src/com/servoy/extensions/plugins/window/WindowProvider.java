@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.window;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
 import java.awt.Window;
@@ -851,7 +852,10 @@ public class WindowProvider implements IScriptObject
 		{
 			return new String[] { "[windowName]" };
 		}
-
+		if ("maximize".equals(methodName))
+		{
+			return new String[] { "[windowName]" };
+		}
 		return null;
 	}
 
@@ -1062,7 +1066,13 @@ public class WindowProvider implements IScriptObject
 			sb.append("var myWindowMenubar = %%elementName%%.getMenuBar('mywindow');\n");
 		}
 
-
+		else if ("maximize".equals(methodName))
+		{
+			sb.append("// maximize the main window:\n");
+			sb.append("%%elementName%%.maximize();\n");
+			sb.append("// or a window constructed with the name 'test':\n");
+			sb.append("%%elementName%%.maximize('test');\n");
+		}
 		// undocumented?
 		else
 		{
@@ -1145,6 +1155,11 @@ public class WindowProvider implements IScriptObject
 			return "Get the menubar of a window.";
 		}
 
+		if ("maximize".equals(methodName))
+		{
+			return "Maximize the current window or the window with the name provided (Smart client only)";
+		}
+
 		return null;
 	}
 
@@ -1156,5 +1171,25 @@ public class WindowProvider implements IScriptObject
 	{
 		return new Class[] { Menu.class, RadioButton.class, CheckBox.class, MenuItem.class, JSMenuItem.class/* deprecated */, Popup.class, ToolBar.class, MenuBar.class };
 	}
+
+	public void js_maximize()
+	{
+		js_maximize(null);
+	}
+
+	public void js_maximize(final String windowName)
+	{
+		if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+		{
+			Window window = getClientPluginAccess().getWindow(windowName);
+			if (window != null && window instanceof JFrame)
+			{
+				JFrame frame = (JFrame)window;
+				frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
+				frame.repaint();
+			}
+		}
+	}
+
 
 }
