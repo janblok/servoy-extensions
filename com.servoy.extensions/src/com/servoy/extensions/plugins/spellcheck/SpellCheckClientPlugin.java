@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.Properties;
 
 import javax.swing.Icon;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.JTextComponent;
 
 import com.servoy.j2db.plugins.IClientPlugin;
@@ -24,6 +26,8 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.smart.dataui.DataField;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Settings;
 import com.servoy.j2db.util.Utils;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
@@ -164,6 +168,8 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 
 	public void check(JTextComponent c)
 	{
+		setTheEditFormatter();
+
 		gui.removeEventsAndGuiForm();
 
 		//reset caret position
@@ -200,9 +206,9 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			}
 			gui.setTheFirstSpellEvent();
 		}
-		catch (MalformedURLException e1)
+		catch (MalformedURLException err)
 		{
-			e1.printStackTrace();
+			Debug.error(err.getMessage());
 		}
 
 	}
@@ -212,6 +218,9 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		//fireSpellCheckEvent(event);
 		String word = event.getInvalidWord();
 		String t = checkedComponent.getText();
+		DataField df = null;
+
+		if (checkedComponent instanceof DataField) df = (DataField)checkedComponent;
 
 		//Work out what to do in response to the event.
 		switch (event.getAction())
@@ -250,6 +259,16 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			default :
 				throw new IllegalArgumentException("Unhandled case."); //$NON-NLS-1$
 		}
+
+		if (df != null) try
+		{
+			df.commitEdit();
+		}
+		catch (ParseException parseErr)
+		{
+			Debug.error(parseErr.getMessage());
+		}
+
 		return false;
 	}
 
@@ -318,6 +337,32 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	public JTextComponent getCheckedComponent()
 	{
 		return checkedComponent;
+	}
+
+	public void setTheEditFormatter()
+	{
+		if (checkedComponent instanceof DataField)
+		{
+			DataField df = (DataField)checkedComponent;
+			DefaultFormatterFactory dff = (DefaultFormatterFactory)df.getFormatterFactory();
+			if ((df.getFormatter()).equals(dff.getDisplayFormatter()))
+			{
+				df.setTheFormatter(dff.getEditFormatter());
+			}
+		}
+	}
+
+	public void unsetTheEditFormatter()
+	{
+		if (checkedComponent instanceof DataField)
+		{
+			DataField df = (DataField)checkedComponent;
+			DefaultFormatterFactory dff = (DefaultFormatterFactory)df.getFormatterFactory();
+			if ((df.getFormatter()).equals(dff.getEditFormatter()))
+			{
+				df.setTheFormatter(dff.getDisplayFormatter());
+			}
+		}
 	}
 
 }

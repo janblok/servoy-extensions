@@ -96,6 +96,7 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 			//nothing to spell check - the text is correct.
 			this.setVisible(false);
 			JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling", JOptionPane.INFORMATION_MESSAGE);//$NON-NLS-1$//$NON-NLS-2$
+			plugin.unsetTheEditFormatter();
 		}
 	}
 
@@ -160,8 +161,9 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 			//no more spell events, therefore the spell check is complete
 			this.setVisible(false);
 			//we do not want the message to show up if we clicked "Cancel"
-			if (spellEvent.getAction() != SpellCheckEvent.CANCEL) JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling",
+			if (spellEvent.getAction() != SpellCheckEvent.CANCEL) JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling", //$NON-NLS-1$//$NON-NLS-2$
 				JOptionPane.INFORMATION_MESSAGE);
+			plugin.unsetTheEditFormatter();
 			unhighlight();
 		}
 	}
