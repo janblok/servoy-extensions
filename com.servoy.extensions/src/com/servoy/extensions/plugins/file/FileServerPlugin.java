@@ -114,7 +114,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 				// try to find the Tomcat ROOT context
 
 				File parent = null;
-				if (ApplicationServerSingleton.get() != null) new File(ApplicationServerSingleton.get().getServoyApplicationServerDirectory(),
+				if (ApplicationServerSingleton.get() != null) parent = new File(ApplicationServerSingleton.get().getServoyApplicationServerDirectory(),
 					"server/webapps/ROOT");
 				if (parent == null || !parent.exists() || !parent.isDirectory())
 				{
