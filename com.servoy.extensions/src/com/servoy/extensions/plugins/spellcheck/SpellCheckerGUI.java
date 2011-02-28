@@ -80,6 +80,7 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 
 	public void unhighlight()
 	{
+		//we unhighlight (or put the caret to position zero) 
 		plugin.getCheckedComponent().setCaretPosition(0);
 	}
 
@@ -143,6 +144,7 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 
 	public void actionPerformed(ActionEvent e)
 	{
+		//TODO check the status below and act accordingly
 		plugin.fireAndHandleEvent(spellEvent);
 
 		// remove former spell check event(s) (which have been consumed)
@@ -174,13 +176,13 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 
 	public void windowClosed(WindowEvent e)
 	{
-		//we unhighlight (or put the caret to position zero) 
 		unhighlight();
 	}
 
+	//called when the Spellchecker window is closed via X-button
 	public void windowClosing(WindowEvent e)
 	{
-		//we unhighlight (or put the caret to position zero)
+		plugin.unsetTheEditFormatter();
 		unhighlight();
 	}
 

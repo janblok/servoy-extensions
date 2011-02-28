@@ -17,6 +17,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.JTextComponent;
@@ -267,9 +268,10 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		catch (ParseException parseErr)
 		{
 			Debug.error(parseErr.getMessage());
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	public SpellResult getSpellResponse()
@@ -339,13 +341,16 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		return checkedComponent;
 	}
 
+	private AbstractFormatter initialFormatter;
+
 	public void setTheEditFormatter()
 	{
 		if (checkedComponent instanceof DataField)
 		{
 			DataField df = (DataField)checkedComponent;
+			initialFormatter = df.getFormatter();
 			DefaultFormatterFactory dff = (DefaultFormatterFactory)df.getFormatterFactory();
-			if ((df.getFormatter()).equals(dff.getDisplayFormatter()))
+			if (!(initialFormatter.equals(dff.getEditFormatter())))
 			{
 				df.setTheFormatter(dff.getEditFormatter());
 			}
@@ -357,11 +362,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		if (checkedComponent instanceof DataField)
 		{
 			DataField df = (DataField)checkedComponent;
-			DefaultFormatterFactory dff = (DefaultFormatterFactory)df.getFormatterFactory();
-			if ((df.getFormatter()).equals(dff.getEditFormatter()))
-			{
-				df.setTheFormatter(dff.getDisplayFormatter());
-			}
+			if (!(df.getFormatter().equals(initialFormatter))) df.setTheFormatter(initialFormatter);
 		}
 	}
 
