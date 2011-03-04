@@ -378,7 +378,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 
 				IFoundSet nfs = parentRecord.getRelatedFoundSet(((RelationInfo)un.getUserObject()).getNRelationName(), null);
 
-				if (nfs != null && nfs.getSize() == 0)
+				if (nfs != null && nfs.getSize() > 0)
 				{
 					for (int i = 0; i < nfs.getSize(); i++)
 					{
