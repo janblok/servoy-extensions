@@ -352,7 +352,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			DefaultFormatterFactory dff = (DefaultFormatterFactory)df.getFormatterFactory();
 			if (!(initialFormatter.equals(dff.getEditFormatter())))
 			{
-				df.setTheFormatter(dff.getEditFormatter());
+				df.setFormatter(dff.getEditFormatter());
 			}
 		}
 	}
@@ -362,7 +362,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		if (checkedComponent instanceof DataField)
 		{
 			DataField df = (DataField)checkedComponent;
-			if (!(df.getFormatter().equals(initialFormatter))) df.setTheFormatter(initialFormatter);
+			if (!(df.getFormatter().equals(initialFormatter))) df.setFormatter(initialFormatter);
 		}
 	}
 
