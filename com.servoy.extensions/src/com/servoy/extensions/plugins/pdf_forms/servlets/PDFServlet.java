@@ -46,8 +46,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.adobe.fdf.FDFDoc;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.XfaForm;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.XfaForm;
 import com.servoy.j2db.dataprocessing.IDataServer;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.ISQLActionTypes;
