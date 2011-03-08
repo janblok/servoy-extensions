@@ -65,6 +65,7 @@ import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
+import com.servoy.j2db.ui.IContainer;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -186,7 +187,7 @@ public class WindowProvider implements IScriptObject
 		ShortcutCallData formHandler = formName == null ? null : shortcutMap.get(formName);
 
 		JSEvent event = new JSEvent();
-		if (component != null && !(component instanceof IFormUI))
+		if (component != null && !(component instanceof IFormUI) && !(component instanceof IContainer))
 		{
 			// only use the component when it is really an element
 			event.setSource(component);
