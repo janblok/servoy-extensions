@@ -28,10 +28,8 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
-import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.RootPaneContainer;
-import javax.swing.table.TableCellEditor;
 
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
@@ -122,13 +120,6 @@ public class SwingShortcutHandler implements IShortcutHandler
 		List<Component> lst = null;
 		for (Component comp = component; true; comp = (lst == null || lst.size() == 0) ? null : lst.remove(0))
 		{
-			if (comp instanceof JTable)
-			{
-				int selectedColumn = ((JTable)comp).getSelectedColumn();
-				int selectedRow = ((JTable)comp).getSelectedRow();
-				TableCellEditor cellEditor = ((JTable)comp).getCellEditor(selectedRow, selectedColumn);
-				comp = cellEditor.getTableCellEditorComponent((JTable)comp, null, false, selectedRow, selectedColumn);
-			}
 			if (comp == null || comp instanceof IComponent)
 			{
 				return comp;
