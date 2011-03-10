@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.amortization;
 
 import java.text.DateFormat;
@@ -174,101 +174,349 @@ public class AmortizationCalculation implements IScriptObject
 			new SafeArrayList());
 	}
 
+	/**
+	 * Adds a compound period change.
+	 * 
+	 * @sample
+	 * var c = plugins.amortization.newCalculation();
+	 * c.addRateChange(r, new Date(2005, 0, 1));
+	 * c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
+	 * c.addLoan(2000, new Date(2005, 0, 1));
+	 * c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);
+	 * 
+	 * @param newPeriod the new compounding period
+	 * @param date the specified date of the compound period change
+	 * 
+	 * @return true if the adding succeded, false otherwise
+	 * 
+	 */
 	public boolean js_addCompoundPeriodChange(int newPeriod, Date date)
 	{
 		return addCompoundPeriodChange(newPeriod, date);
 	}
 
+	/**
+	 * Adds a loan.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the loan
+	 * @param firstDate the specified date of the first loan
+	 * @param lastDate the specified date of the last loan; null if there is no last date
+	 * @param period the specified valid period of the loans
+	 * @param number the specified number of loans; -1 if the number is unlimited
+	 * @param startday the specified start day
+	 * 
+	 * @return true if the call succeeds or false if the parameters are incorrect or inconsistent.
+	 * 
+	 */
 	public boolean js_addLoan(double amount, Date firstDate, Date lastDate, int period, int number, int startday)
 	{
 		return addLoan(amount, firstDate, lastDate, period, number, startday);
 	}
 
+	/**
+	 * Adds a loan.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the loan
+	 * @param firstDate the specified date of the first loan
+	 * @param lastDate the specified date of the last loan; null if there is no last date
+	 * @param period the specified valid period of the loans
+	 * @param number the specified number of loans; -1 if the number is unlimited
+	 * 
+	 * @return true if the call succeeds or false if the parameters are incorrect or inconsistent.
+	 * 
+	 */
 	public boolean js_addLoan(double amount, Date firstDate, Date lastDate, int period, int number)
 	{
 		return addLoan(amount, firstDate, lastDate, period, number);
 	}
 
+	/**
+	 * Adds a loan.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the loan
+	 * @param firstDate the specified date of the first loan
+	 * @param lastDate the specified date of the last loan; null if there is no last date
+	 * @param period the specified valid period of the loans
+	 * 
+	 * @return true if the call succeeds or false if the parameters are incorrect or inconsistent.
+	 * 
+	 */
 	public boolean js_addLoan(double amount, Date firstDate, Date lastDate, int period)
 	{
 		return addLoan(amount, firstDate, lastDate, period);
 	}
 
+	/**
+	 * Adds a loan.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the loan
+	 * @param firstDate the specified date of the first loan
+	 * 
+	 * @return true if the call succeeds or false if the parameters are incorrect or inconsistent.
+	 * 
+	 */
 	public boolean js_addLoan(double amount, Date date)
 	{
 		return addLoan(amount, date);
 	}
 
+	/**
+	 * Adds a payment.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the payment
+	 * @param firstDate the specified date of the first payment
+	 * @param lastDate the specified date of the last payment; null if there is no last date
+	 * @param period the specified valid period of the payments
+	 * @param number the specified number of payments; -1 if the number is unlimited
+	 * @param startday the specified start day
+	 * 
+	 * @return true if successful or false if the parameters are incorrect or inconsistent
+	 * 
+	 */
 	public boolean js_addPayment(double amount, Date firstDate, Date lastDate, int period, int number, int startday)
 	{
 		return addPayment(amount, firstDate, lastDate, period, number, startday);
 	}
 
+	/**
+	 * Adds a payment.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the payment
+	 * @param firstDate the specified date of the first payment
+	 * @param lastDate the specified date of the last payment; null if there is no last date
+	 * @param period the specified valid period of the payments
+	 * @param number the specified number of payments; -1 if the number is unlimited
+	 * 
+	 * @return true if successful or false if the parameters are incorrect or inconsistent
+	 * 
+	 */
 	public boolean js_addPayment(double amount, Date firstDate, Date lastDate, int period, int number)
 	{
 		return addPayment(amount, firstDate, lastDate, period, number);
 	}
 
+	/**
+	 * Adds a payment.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the payment
+	 * @param firstDate the specified date of the first payment
+	 * @param lastDate the specified date of the last payment; null if there is no last date
+	 * @param period the specified valid period of the payments
+	 * 
+	 * @return true if successful or false if the parameters are incorrect or inconsistent
+	 * 
+	 */
 	public boolean js_addPayment(double amount, Date firstDate, Date lastDate, int period)
 	{
 		return addPayment(amount, firstDate, lastDate, period);
 	}
 
+	/**
+	 * Adds a payment.
+	 * 
+	 * @sampleas js_addCompoundPeriodChange()
+	 * 
+	 * @param amount the specified amount of the payment
+	 * @param date the specified date of the first payment
+	 * 
+	 * @return true if successful or false if the parameters are incorrect or inconsistent
+	 * 
+	 */
 	public boolean js_addPayment(double amount, Date date)
 	{
 		return addPayment(amount, date);
 	}
 
+	/**
+	 * Sets a new interest rate.
+	 * 
+	 * @sample
+	 * var c = plugins.amortization.newCalculation(); 
+	 * c.addRateChange(-1, new Date(2005, 0, 1)); 
+	 * c.addCompoundPeriodChange(12, new Date(2005, 0, 1)); 
+	 * c.addLoan(2000, new Date(2005, 0, 1)); 
+	 * c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);
+	 * 
+	 * @param newRate the new interest rate; or -1 for unknown
+	 * @param date the specified date of the interest rate change
+	 * 
+	 * @return true if successful or false if the parameters are incorrect or inconsistent
+	 * 
+	 */
 	public boolean js_addRateChange(double newRate, Date date)
 	{
 		return addRateChange(newRate, date);
 	}
 
+	/**
+	 * Calculates the amortization schedule.
+	 * 
+	 * @sample
+	 * plugins.amortization.calculateAmortizationSchedule();
+	 * 
+	 * @return true if successful or false if the schedule calculation failed
+	 * 
+	 */
 	public boolean js_calculateAmortizationSchedule()
 	{
 		return this.calculateAmortizationSchedule();
 	}
 
+	/**
+	 * Gets the amortization schedule as a JSDataSet.
+	 * 
+	 * @sample
+	 * plugins.amortization.getAmortizationSchedule();
+	 * 
+	 * @return the amortization schedule
+	 * 
+	 */
 	public JSDataSet js_getAmortizationSchedule()
 	{
 		return getAmortizationSchedule();
 	}
 
+	/**
+	 * Returns the error that remains when solving for the unknown. 
+	 * Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.
+	 * 
+	 * @sample
+	 * var c = plugins.amortization.newCalculation();
+	 * // sets the rate to -1 for unknown.
+	 * c.addRateChange(-1, new Date(2005, 0, 1));
+	 * c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
+	 * c.addLoan(2000, new Date(2005, 0, 1));
+	 * var lastDate = null;
+	 * var period = 12;
+	 * var number_count = 5;
+	 * var startday = 31;
+	 * c.addPayment(500, new Date(2005, 1, 28), lastDate, period,number_count, startday);
+	 * // solves for the interest rate.
+	 * c.solveForUnknown();
+	 * // gets the interest rate and the error in the calculation.
+	 * // which should be small (otherwise the calculation did
+	 * // not converge for some reason.
+	 * var r = c.getUnknown();
+	 * var e = c.getError();
+	 * 
+	 * @return the error that remains when solving for the unknown
+	 * 
+	 */
 	public double js_getError()
 	{
 		return getError();
 	}
 
+	/**
+	 * Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.
+	 * 
+	 * @sample
+	 * plugins.amortization.getEvents();
+	 * 
+	 * @return all the amortization events
+	 * 
+	 */
 	public JSDataSet js_getEvents()
 	{
 		return getEvents();
 	}
 
+	/**
+	 * Gets the rest balance after the amortization schedule.
+	 * 
+	 * @sample
+	 * var rb = plugins.amortization.getRestBalance();
+	 * 
+	 * @return the rest balance (after the amortization schedule)
+	 * 
+	 */
 	public double js_getRestBalance()
 	{
 		return getRestBalance();
 	}
 
+	/**
+	 * Returns the solveForUnknown value.
+	 * 
+	 * @sample
+	 * plugins.amortization.getUnknown();
+	 * 
+	 * @return the solveForUnknown value
+	 * 
+	 */
 	public double js_getUnknown()
 	{
 		return getUnknown();
 	}
 
+	/**
+	 * Returns true if the period is valid, or false if the period is not valid.
+	 * 
+	 * @sample
+	 * var v_period = plugins.amortization.isValidPeriod(12);
+	 * 
+	 * @param period the specified period
+	 * 
+	 * @return true if the period is valid, or false if the period is not valid
+	 * 
+	 */
 	public boolean js_isValidPeriod(int period)
 	{
 		return isValidPeriod(period);
 	}
 
+	/**
+	 * Rounds a number up to the nearest cents.
+	 * 
+	 * @sample
+	 * //rounds the number up to 34.35
+	 * var rm = plugins.amortization.roundMoney(34.349384);
+	 * 
+	 * @param amount the specified amount to round
+	 * 
+	 * @return the number up to the nearest cents
+	 * 
+	 */
 	public double js_roundMoney(double amount)
 	{
 		return roundMoney(amount);
 	}
 
+	/**
+	 * Returns true if successful or false if the call failed.
+	 * 
+	 * @sample
+	 * plugins.amortization.solveForUnknown();
+	 * 
+	 * @return true if successful or false if the call failed
+	 * 
+	 */
 	public boolean js_solveForUnknown()
 	{
 		return solveForUnknown();
 	}
 
+	/**
+	 * Sorts the amortization events ascending by date.
+	 * 
+	 * @sample
+	 * plugins.amortization.sortEvents();
+	 * 
+	 */
 	public void js_sortEvents()
 	{
 		sortEvents();
@@ -692,8 +940,8 @@ public class AmortizationCalculation implements IScriptObject
 			case PERIOD_TWO_MONTHLY :
 			case PERIOD_MONTHLY :
 				next.add(Calendar.MONTH, 12 / period);
-				if (next.get(Calendar.DAY_OF_MONTH) != startDay) next.set(Calendar.DAY_OF_MONTH, Math.min(next.getActualMaximum(Calendar.DAY_OF_MONTH),
-					startDay));
+				if (next.get(Calendar.DAY_OF_MONTH) != startDay) next.set(Calendar.DAY_OF_MONTH,
+					Math.min(next.getActualMaximum(Calendar.DAY_OF_MONTH), startDay));
 				break;
 			case PERIOD_FOUR_WEEKLY :
 			case PERIOD_TWO_WEEKLY :

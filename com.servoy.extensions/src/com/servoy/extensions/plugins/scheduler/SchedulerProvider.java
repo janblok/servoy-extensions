@@ -265,6 +265,14 @@ public class SchedulerProvider implements IScriptObject
 		return lastRunned;
 	}
 
+	/**
+	 * Returns the last job run from the scheduler.
+	 * 
+	 * @sample
+	 * plugins.scheduler.getLastRunJobName();
+	 * 
+	 * @return the last job run from the scheduler
+	 */
 	public String js_getLastRunJobName()
 	{
 		return lastRunned;

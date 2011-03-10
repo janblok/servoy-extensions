@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.xmlreader;
 
 import java.io.File;
@@ -80,11 +80,47 @@ public class XmlReaderProvider implements IScriptObject
 		return new Class[] { XmlNode.class };
 	}
 
+	/**
+	 * Reads an XML document from a file.
+	 * 
+	 * @sample
+	 * // specifies a reference to a file containing valid XML
+	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile('c:/test.xml');
+	 * var childNodes = xmlNodes[0].getChildNodes();
+	 * // shows a dialog to open an xml file, then reads the file
+	 * var xmlFile = plugins.file.showFileOpenDialog(1);
+	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile(xmlFile);
+	 * var childNodes = xmlNodes[0].getChildNodes();
+	 * 
+	 * @param argument the specified file object
+	 * 
+	 * @return an xml document
+	 * 
+	 */
 	public XmlNode[] js_readXmlDocumentFromFile(Object argument)
 	{
 		return js_readXmlDocument(argument);
 	}
 
+	/**
+	 * Reads an XML document from a string.
+	 * 
+	 * @sample
+	 * var xmlString = '<books><book price="44.95">
+	 * <title>Core Java 1.5</title>
+	 * <author>Piet Klerksen</author>
+	 * <nrPages>1487</nrPages>
+	 * </book>
+	 * <book price="59.95">
+	 * <title>Developing with Servoy</title>
+	 * <author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
+	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromString(xmlString);
+	 * 
+	 * @param argument the specified string object	
+	 * 
+	 * @return an xml document
+	 * 
+	 */
 	public XmlNode[] js_readXmlDocumentFromString(String argument)
 	{
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();

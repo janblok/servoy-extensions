@@ -178,6 +178,15 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		return file.isDirectory();
 	}
 
+	/**
+	 * Gets the contents (bytes) for the file data.
+	 * 
+	 * @sample
+	 * var theFile = plugins.file.showFileOpenDialog();
+	 * application.output("The file size in bytes: " + theFile.getBytes());
+	 * 
+	 * @return the bytes representing the file data
+	 */
 	public byte[] js_getBytes()
 	{
 		return file.getBytes();

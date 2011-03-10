@@ -40,7 +40,14 @@ public class CheckBox extends AbstractMenuItem
 	}
 
 	/**
-	 * @param a The align to set.
+	 * Sets the alignment of the check box.
+	 * 
+	 * @sample
+	 * var align = checkBox.setAlign(true);
+	 * 
+	 * @param a the align to set (true = aligned; false = not aligned)
+	 * 
+	 * @return a check box with the requested alignment
 	 */
 	public CheckBox js_setAlign(boolean a)
 	{

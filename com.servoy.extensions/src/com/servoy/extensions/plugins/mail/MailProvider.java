@@ -115,6 +115,16 @@ public class MailProvider implements IScriptObject
 		return retval.toArray(new String[retval.size()]);
 	}
 
+	/**
+	 * Checks whether the given e-mail address is valid or not.
+	 * 
+	 * @sample
+	 * plugins.mail.isValidEmailAddress("me@example.com");
+	 * 
+	 * @param email a string representing an e-mail address
+	 * 
+	 * @return true if the specified address is true, false otherwise
+	 */
 	public boolean js_isValidEmailAddress(String email)
 	{
 		return Utils.isValidEmailAddress(email);

@@ -102,6 +102,15 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * Sets the alignment of the radio button.
+	 * 
+	 * @sample
+	 * var align = radioButton.setAlign(true);
+	 * 
+	 * @param a the alignment of the radio button (boolean - true = aligned; false = not aligned)
+	 * 
+	 */
 	public void js_setAlign(boolean a)
 	{
 		this.align = a;
