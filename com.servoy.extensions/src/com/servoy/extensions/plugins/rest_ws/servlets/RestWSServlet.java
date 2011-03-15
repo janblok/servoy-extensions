@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.XML;
+import org.mozilla.javascript.xml.XMLObject;
 
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NoClientsException;
@@ -418,7 +419,8 @@ public class RestWSServlet extends HttpServlet
 	{
 		int contentType = getContentType(request, "Accept", null, defaultContentType); //$NON-NLS-1$
 
-		Object json = plugin.getJSONSerializer().toJSON(result);
+		boolean isXML = (result instanceof XMLObject);
+		Object json = (isXML) ? XML.toJSONObject(result.toString()) : plugin.getJSONSerializer().toJSON(result);
 		String content;
 		String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT)); //$NON-NLS-1$ //$NON-NLS-2$
 		switch (contentType)
@@ -436,7 +438,7 @@ public class RestWSServlet extends HttpServlet
 				break;
 
 			case CONTENT_XML :
-				content = "<?xml version=\"1.0\" encoding='" + charset + "'?>\n" + XML.toString(json, null); //$NON-NLS-1$ //$NON-NLS-2$
+				content = "<?xml version=\"1.0\" encoding='" + charset + "'?>\n" + ((isXML) ? result.toString() : XML.toString(json, null)); //$NON-NLS-1$ //$NON-NLS-2$
 				break;
 
 			default :
