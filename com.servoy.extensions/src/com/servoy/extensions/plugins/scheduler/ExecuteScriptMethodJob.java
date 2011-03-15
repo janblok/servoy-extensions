@@ -13,28 +13,33 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.scheduler;
 
+import java.util.Arrays;
+
+import org.quartz.CronTrigger;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.StatefulJob;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.util.Debug;
 
 /**
  * @author jcompagner
  */
 public class ExecuteScriptMethodJob implements StatefulJob
 {
+	@SuppressWarnings("nls")
 	public void execute(JobExecutionContext jobContext) throws JobExecutionException
 	{
 		final String name = jobContext.getJobDetail().getName();
 		JobDataMap jdm = jobContext.getJobDetail().getJobDataMap();
 		Object o = jdm.get("formname"); //$NON-NLS-1$
 		final String formname;
-		if(o instanceof String)
+		if (o instanceof String)
 		{
 			formname = (String)o;
 		}
@@ -42,18 +47,32 @@ public class ExecuteScriptMethodJob implements StatefulJob
 		{
 			formname = null;
 		}
-		final String methodname = (String) jdm.get("methodname"); //$NON-NLS-1$
-		final Object[] args = (Object[]) jdm.get("args"); //$NON-NLS-1$
-		final IClientPluginAccess access = (IClientPluginAccess) jdm.get("access"); //$NON-NLS-1$
-		final SchedulerProvider provider = (SchedulerProvider) jdm.get("scheduler"); //$NON-NLS-1$
-		
+		final String methodname = (String)jdm.get("methodname");
+		final Object[] args = (Object[])jdm.get("args");
+		final IClientPluginAccess access = (IClientPluginAccess)jdm.get("access");
+		final SchedulerProvider provider = (SchedulerProvider)jdm.get("scheduler");
+
 		provider.setLastRunJobName(name);
+		if (Debug.tracing())
+		{
+			String trigger;
+			if (jobContext.getTrigger() instanceof CronTrigger)
+			{
+				trigger = " cron trigger: " + ((CronTrigger)jobContext.getTrigger()).getCronExpression() + " (" + jobContext.getTrigger() + ')';
+			}
+			else
+			{
+				trigger = " trigger: " + jobContext.getTrigger();
+			}
+			Debug.trace("Executing job: " + name + " scheduled method: " + methodname + " of form: " + formname + " args: " + Arrays.toString(args) + trigger);
+		}
 		try
 		{
-			access.executeMethod(formname, methodname, args,true);
+			access.executeMethod(formname, methodname, args, true);
 		}
 		catch (Exception e1)
 		{
+			Debug.error("Error executing scheduled method: " + methodname + " of form: " + formname, e1);
 			access.handleException(null, e1);
 		}
 	}
