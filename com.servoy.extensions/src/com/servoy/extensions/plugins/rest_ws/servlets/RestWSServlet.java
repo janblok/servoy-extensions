@@ -438,7 +438,7 @@ public class RestWSServlet extends HttpServlet
 				break;
 
 			case CONTENT_XML :
-				content = "<?xml version=\"1.0\" encoding='" + charset + "'?>\n" + ((isXML) ? result.toString() : XML.toString(json, null)); //$NON-NLS-1$ //$NON-NLS-2$
+				content = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\n" + ((isXML) ? result.toString() : XML.toString(json, null)); //$NON-NLS-1$ //$NON-NLS-2$
 				break;
 
 			default :
