@@ -674,7 +674,8 @@ public class FileProvider implements IScriptObject
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
+	String contentType)
 	{
 		try
 		{
@@ -775,7 +776,8 @@ public class FileProvider implements IScriptObject
 		return js_writeFile(f, data, null);
 	}
 
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -1315,7 +1317,7 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("showFileOpenDialog".equals(methodName))
 		{
-			return "Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled)";
+			return "Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)";
 		}
 		else if ("showFileSaveDialog".equals(methodName))
 		{
