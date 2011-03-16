@@ -79,7 +79,7 @@ public interface ITreeViewScriptMethods extends IScriptObject, ITreeView
 
 	public void js_refresh();
 
-	public void js_addRoots(Object foundSet);
+	public int js_addRoots(Object foundSet);
 
 	public void js_removeAllRoots();
 

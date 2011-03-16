@@ -199,7 +199,7 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("%%elementName%%.addRoots(foundset);\n"); //$NON-NLS-1$
+			retval.append("var addedRootNodes = %%elementName%%.addRoots(foundset);\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		else if (methodName.endsWith("removeAllRoots"))
@@ -315,7 +315,7 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		}
 		else if (methodName.endsWith("addRoots"))
 		{
-			return "Add foundset to the list of foundsets used to create the tree's root nodes";
+			return "Add foundset to the list of foundsets used to create the tree's root nodes.\nReturns the number of added root nodes";
 		}
 		else if (methodName.endsWith("removeAllRoots"))
 		{

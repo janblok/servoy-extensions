@@ -81,4 +81,10 @@ public class RelationInfo implements IScriptObject
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString()
+	{
+		return new StringBuilder("RelationInfo { relationName : ").append(nRelationName).append(" }").toString();
+	}
 }

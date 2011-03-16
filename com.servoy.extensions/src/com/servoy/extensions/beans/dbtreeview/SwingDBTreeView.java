@@ -1093,10 +1093,16 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 //		// TODO Auto-generated method stub
 //	}
 
-	public void js_addRoots(Object foundSet)
+	public int js_addRoots(Object foundSet)
 	{
-		bindingInfo.addRoots((IFoundSet)foundSet);
-		js_refresh();
+		int addedRootNodes = 0;
+		if (foundSet instanceof IFoundSet)
+		{
+			bindingInfo.addRoots((IFoundSet)foundSet);
+			js_refresh();
+			addedRootNodes = ((IFoundSet)foundSet).getSize();
+		}
+		return addedRootNodes;
 	}
 
 	public void js_removeAllRoots()

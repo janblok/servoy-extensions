@@ -447,4 +447,10 @@ public class Binding implements IScriptObject
 	{
 		return "setMethodToCallOnClick".equals(methodName);
 	}
+
+	@Override
+	public String toString()
+	{
+		return new StringBuilder("Binding { dataSource : ").append(dataSource).append(" }").toString();
+	}
 }

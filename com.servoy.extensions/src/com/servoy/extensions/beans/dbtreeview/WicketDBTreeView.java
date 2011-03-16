@@ -806,9 +806,9 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 	}
 
 
-	public void js_addRoots(Object foundSet)
+	public int js_addRoots(Object foundSet)
 	{
-		wicketTree.js_addRoots(foundSet);
+		return wicketTree.js_addRoots(foundSet);
 	}
 
 	public void js_removeAllRoots()

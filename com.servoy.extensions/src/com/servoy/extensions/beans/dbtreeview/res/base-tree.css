@@ -104,24 +104,19 @@ table.wicket-tree-content table.icon-panel img {
 	margin-top: -1px;
 }
 
-table.wicket-tree-content.selected {
-	font-weight: bold;	
-}
-
 table.wicket-tree-content.selected .content {
-	background-color: #E0E8FF;
-	font-weight: bold;	
+	background-color: #E0E8FF;	
 }
 
 
 table.wicket-tree-content table.icon-panel a {
 	text-decoration: none;
-	color: #3311aa;
+	color: #000000;
 }
 
 table.wicket-tree-content table.icon-panel a:hover {
 	text-decoration: none;
-	color: #3311aa;
+	color: #000000;
 }
 
 table.wicket-tree-content table.icon-panel img.icon {
