@@ -1337,11 +1337,11 @@ public class FileProvider implements IScriptObject
 		}
 		else if ("streamFilesToServer".equals(methodName))
 		{
-			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object.";
+			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object. Note: This only streams files for the smart client, in the webclient the streaming from the browser to the server is done by the browser";
 		}
 		else if ("streamFilesFromServer".equals(methodName))
 		{
-			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object.";
+			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object. Note: This only streams files for the smart client, in the webclient the streaming from the server to the browser is done by the browser";
 		}
 		else if ("getRemoteFolderContents".equals(methodName))
 		{
