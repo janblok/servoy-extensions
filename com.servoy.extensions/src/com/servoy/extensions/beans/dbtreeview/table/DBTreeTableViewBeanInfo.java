@@ -58,4 +58,11 @@ public class DBTreeTableViewBeanInfo extends DBTreeViewBeanInfo
 			return null;
 		}
 	}
+
+	@Override
+	protected void loadIcons()
+	{
+		icon16 = loadImage("res/icon/DBTreeTableView16.gif"); //$NON-NLS-1$
+		icon32 = loadImage("res/icon/DBTreeTableView32.gif"); //$NON-NLS-1$
+	}
 }
