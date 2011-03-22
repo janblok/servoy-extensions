@@ -17,11 +17,13 @@
 package com.servoy.extensions.plugins.window.menu.swing;
 
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -132,7 +134,16 @@ public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 
 	public void showPopup(Object comp, int x, int y)
 	{
-		show((Component)comp, x, y);
+		int xc = x;
+		int yc = y;
+		if (comp instanceof JComponent)
+		{
+			Rectangle visibleRect = ((JComponent)comp).getVisibleRect();
+			if (xc > visibleRect.width) xc = visibleRect.width;
+			if (yc > visibleRect.height) yc = visibleRect.height;
+		}
+
+		show((Component)comp, xc, yc);
 		SwingUtilities.invokeLater(new Runnable()
 		{
 			public void run()
