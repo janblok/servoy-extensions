@@ -49,7 +49,7 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 			PropertyDescriptor border = new PropertyDescriptor("border", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor foreground = new PropertyDescriptor("foreground", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor background = new PropertyDescriptor("background", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor opaque = new PropertyDescriptor("opaque", DBTreeView.class); //$NON-NLS-1$
+			PropertyDescriptor transparent = new PropertyDescriptor("transparent", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor font = new PropertyDescriptor("font", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor loc = new PropertyDescriptor("location", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor size = new PropertyDescriptor("size", DBTreeView.class); //$NON-NLS-1$
@@ -57,7 +57,7 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 			PropertyEditorHint styleClassEditorHint = new PropertyEditorHint(PropertyEditorClass.styleclass);
 			styleClassEditorHint.setOption(PropertyEditorOption.styleLookupName, DBTreeView.ELEMENT_TYPE.toLowerCase());
 			styleClass.setValue(PropertyEditorHint.PROPERTY_EDITOR_HINT, styleClassEditorHint);
-			PropertyDescriptor result[] = { name, border, foreground, background, opaque, font, loc, size, styleClass };
+			PropertyDescriptor result[] = { name, border, foreground, background, transparent, font, loc, size, styleClass };
 			return result;
 		}
 		catch (Exception ex)

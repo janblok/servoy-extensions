@@ -937,4 +937,24 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	{
 		return null;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#isTransparent()
+	 */
+	public boolean isTransparent()
+	{
+		return !isOpaque();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setTransparent(boolean)
+	 */
+	public void setTransparent(boolean transparent)
+	{
+		setOpaque(!transparent);
+	}
 }

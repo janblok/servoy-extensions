@@ -562,4 +562,24 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 			}
 		}
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#isTransparent()
+	 */
+	public boolean isTransparent()
+	{
+		return !isOpaque();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setTransparent(boolean)
+	 */
+	public void setTransparent(boolean transparent)
+	{
+		setOpaque(!transparent);
+	}
 }

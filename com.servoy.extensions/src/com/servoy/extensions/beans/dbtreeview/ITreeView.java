@@ -61,4 +61,8 @@ public interface ITreeView
 	public void setStyleClass(String styleClass);
 
 	public String getStyleClass();
+
+	public boolean isTransparent();
+
+	public void setTransparent(boolean transparent);
 }

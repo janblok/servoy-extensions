@@ -1174,4 +1174,24 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	{
 		return null;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#isTransparent()
+	 */
+	public boolean isTransparent()
+	{
+		return !isOpaque();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setTransparent(boolean)
+	 */
+	public void setTransparent(boolean transparent)
+	{
+		setOpaque(!transparent);
+	}
 }
