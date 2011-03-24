@@ -65,4 +65,8 @@ public interface ITreeView
 	public boolean isTransparent();
 
 	public void setTransparent(boolean transparent);
+
+	public Border getBorderType();
+
+	public void setBorderType(Border border);
 }

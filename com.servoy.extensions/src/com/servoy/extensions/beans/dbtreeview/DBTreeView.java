@@ -582,4 +582,24 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 	{
 		setOpaque(!transparent);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getBorderType()
+	 */
+	public Border getBorderType()
+	{
+		return getBorder();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setBorderType(javax.swing.border.Border)
+	 */
+	public void setBorderType(Border border)
+	{
+		setBorder(border);
+	}
 }

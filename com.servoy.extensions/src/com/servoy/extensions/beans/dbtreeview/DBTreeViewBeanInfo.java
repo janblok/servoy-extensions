@@ -46,7 +46,7 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 		try
 		{
 			PropertyDescriptor name = new PropertyDescriptor("name", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor border = new PropertyDescriptor("border", DBTreeView.class); //$NON-NLS-1$
+			PropertyDescriptor border = new PropertyDescriptor("borderType", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor foreground = new PropertyDescriptor("foreground", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor background = new PropertyDescriptor("background", DBTreeView.class); //$NON-NLS-1$
 			PropertyDescriptor transparent = new PropertyDescriptor("transparent", DBTreeView.class); //$NON-NLS-1$

@@ -38,6 +38,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.ToolTipManager;
+import javax.swing.border.Border;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.event.TreeExpansionEvent;
@@ -1193,5 +1194,25 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	public void setTransparent(boolean transparent)
 	{
 		setOpaque(!transparent);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#getBorderType()
+	 */
+	public Border getBorderType()
+	{
+		return getBorder();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.beans.dbtreeview.ITreeView#setBorderType(javax.swing.border.Border)
+	 */
+	public void setBorderType(Border border)
+	{
+		setBorder(border);
 	}
 }
