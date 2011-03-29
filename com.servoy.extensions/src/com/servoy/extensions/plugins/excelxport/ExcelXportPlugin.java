@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.excelxport;
 
 import java.awt.event.ActionEvent;
@@ -33,6 +33,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.smart.ISmartClientPluginAccess;
 
 /**
  * @author jblok
@@ -56,26 +57,29 @@ public class ExcelXportPlugin implements IClientPlugin, ActionListener
 	{
 		application = ((ClientPluginAccessProvider)app).getApplication();
 
-		JMenu export_Menu = application.getExportMenu();
-		JMenuItem exp = null;
-		if (export_Menu != null)
+		if (app instanceof ISmartClientPluginAccess)
 		{
-			exp = new JMenuItem(Messages.getString("servoy.plugin.excel.toExcel")); //$NON-NLS-1$
-			exp.addActionListener(this);
-			exp.setActionCommand("export_excel_file"); //$NON-NLS-1$
-			export_Menu.add(exp);
+			JMenu export_Menu = ((ISmartClientPluginAccess)app).getExportMenu();
+			JMenuItem exp = null;
+			if (export_Menu != null)
+			{
+				exp = new JMenuItem(Messages.getString("servoy.plugin.excel.toExcel")); //$NON-NLS-1$
+				exp.addActionListener(this);
+				exp.setActionCommand("export_excel_file"); //$NON-NLS-1$
+				export_Menu.add(exp);
+			}
+	
+			JMenu import_Menu = ((ISmartClientPluginAccess)app).getImportMenu();
+			JMenuItem imp = null;
+			if (import_Menu != null)
+			{
+				imp = new JMenuItem(Messages.getString("servoy.plugin.excel.fromExcel")); //$NON-NLS-1$
+				imp.setActionCommand("import_excel_file"); //$NON-NLS-1$
+				imp.addActionListener(this);
+				import_Menu.add(imp);
+			}
+			en = new Enabler(imp, exp);
 		}
-
-		JMenu import_Menu = application.getImportMenu();
-		JMenuItem imp = null;
-		if (import_Menu != null)
-		{
-			imp = new JMenuItem(Messages.getString("servoy.plugin.excel.fromExcel")); //$NON-NLS-1$
-			imp.setActionCommand("import_excel_file"); //$NON-NLS-1$
-			imp.addActionListener(this);
-			import_Menu.add(imp);
-		}
-		en = new Enabler(imp, exp);
 	}
 
 	public Properties getProperties()
