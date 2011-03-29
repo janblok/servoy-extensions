@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IScriptObject;
-import com.servoy.j2db.util.SnapShot;
+import com.servoy.j2db.util.gui.SnapShot;
 
 /**
  * @author jcompagner

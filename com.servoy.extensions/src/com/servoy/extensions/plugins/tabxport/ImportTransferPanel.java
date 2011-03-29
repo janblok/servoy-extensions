@@ -48,7 +48,7 @@ import com.servoy.j2db.persistence.Column;
 import com.servoy.j2db.persistence.IColumnTypes;
 import com.servoy.j2db.persistence.IDataProvider;
 import com.servoy.j2db.persistence.Table;
-import com.servoy.j2db.util.SeparatedASCIIImportTableModel;
+import com.servoy.j2db.util.model.SeparatedASCIIImportTableModel;
 import com.servoy.j2db.util.wizard.IWizard;
 import com.servoy.j2db.util.wizard.IWizardPanel;
 import com.servoy.j2db.util.wizard.IWizardState;

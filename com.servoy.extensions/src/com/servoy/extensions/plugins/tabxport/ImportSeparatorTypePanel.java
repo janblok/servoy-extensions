@@ -38,7 +38,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
 
 import com.servoy.j2db.Messages;
-import com.servoy.j2db.util.SeparatedASCIIImportTableModel;
+import com.servoy.j2db.util.model.SeparatedASCIIImportTableModel;
 import com.servoy.j2db.util.wizard.IWizard;
 import com.servoy.j2db.util.wizard.IWizardPanel;
 import com.servoy.j2db.util.wizard.IWizardState;
