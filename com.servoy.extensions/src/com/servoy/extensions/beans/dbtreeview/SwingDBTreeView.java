@@ -68,9 +68,9 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.DataSourceUtils;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.EnableScrollPanel;
 import com.servoy.j2db.util.PersistHelper;
 import com.servoy.j2db.util.Utils;
-import com.servoy.j2db.util.gui.EnableScrollPanel;
 
 /**
  * Class representing the smart client db tree view
