@@ -19,6 +19,9 @@ package com.servoy.extensions.plugins.rest_ws.servlets;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -27,13 +30,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.XML;
+import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.xml.XMLObject;
 
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NoClientsException;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedException;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
+import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.scripting.FunctionDefinition;
+import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
 import com.servoy.j2db.util.Utils;
 
@@ -129,6 +137,23 @@ public class RestWSServlet extends HttpServlet
 			plugin.log.info("Could not parse path '" + e.getMessage() + '\''); //$NON-NLS-1$
 			error = HttpServletResponse.SC_BAD_REQUEST;
 		}
+		else if (e instanceof WebServiceException)
+		{
+			plugin.log.info(request.getRequestURI(), e);
+			error = ((WebServiceException)e).httpResponseCode;
+		}
+		else if (e instanceof JavaScriptException)
+		{
+			plugin.log.info("ws_ method threw an exception '" + e.getMessage() + '\''); //$NON-NLS-1$
+			if (((JavaScriptException)e).getValue() instanceof Double)
+			{
+				error = ((Double)((JavaScriptException)e).getValue()).intValue();
+			}
+			else
+			{
+				error = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+			}
+		}
 		else
 		{
 			plugin.log.error(request.getRequestURI(), e);
@@ -216,6 +241,77 @@ public class RestWSServlet extends HttpServlet
 		}
 	}
 
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		IHeadlessClient client = null;
+		WsRequest wsRequest = null;
+		try
+		{
+			plugin.log.trace("OPTIONS"); //$NON-NLS-1$ 
+			wsRequest = parsePath(request);
+
+			client = plugin.getClient(wsRequest.solutionName);
+			checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
+
+			String retval = "TRACE, OPTIONS"; //$NON-NLS-1$
+			if ((new FunctionDefinition(wsRequest.formName, "ws_read")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			{
+				retval += ", GET"; //$NON-NLS-1$
+			}
+			//TODO: implement HEAD?
+			retval += ", HEAD"; //$NON-NLS-1$
+			if ((new FunctionDefinition(wsRequest.formName, "ws_create")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			{
+				retval += ", POST"; //$NON-NLS-1$
+			}
+			if ((new FunctionDefinition(wsRequest.formName, "ws_update")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			{
+				retval += ", PUT"; //$NON-NLS-1$
+			}
+			if ((new FunctionDefinition(wsRequest.formName, "ws_delete")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			{
+				retval += ", DELETE"; //$NON-NLS-1$
+			}
+
+			response.setHeader("Allow", retval); //$NON-NLS-1$
+		}
+		catch (Exception e)
+		{
+			handleException(e, request, response);
+		}
+		finally
+		{
+			if (client != null)
+			{
+				try
+				{
+					plugin.releaseClient(wsRequest.solutionName, client);
+				}
+				catch (Exception e)
+				{
+					Debug.error(e);
+				}
+			}
+		}
+	}
+
+	public WsRequest parsePath(HttpServletRequest request)
+	{
+		String path = request.getPathInfo(); //without servlet name
+
+		plugin.log.debug("Request '" + path + '\''); //$NON-NLS-1$
+
+		// parse the path: /webServiceName/mysolution/myform/arg1/arg2/...
+		String[] segments = path == null ? null : path.split("/"); //$NON-NLS-1$
+		if (segments == null || segments.length < 4 || !webServiceName.equals(segments[1]))
+		{
+			throw new IllegalArgumentException(path);
+		}
+
+		return new WsRequest(segments[2], segments[3], Utils.arraySub(segments, 4, segments.length));
+	}
+
 	/**
 	 * call the service method.
 	 * Throws {@link NoClientsException} when no license is available
@@ -232,74 +328,148 @@ public class RestWSServlet extends HttpServlet
 
 		plugin.log.debug("Request '" + path + '\''); //$NON-NLS-1$
 
-		// parse the path: /webServiceName/mysolution/myform/arg1/arg2/...
-		String[] segments = path == null ? null : path.split("/"); //$NON-NLS-1$
-		if (segments == null || segments.length < 4 || !webServiceName.equals(segments[1]))
-		{
-			throw new IllegalArgumentException(path);
-		}
-
-		String solutionName = segments[2];
-		checkAuthorization(request, solutionName);
-
-		String formName = segments[3];
-		Object[] args = null;
-		if (fixedArgs != null || segments.length > 4)
-		{
-			args = new Object[(fixedArgs == null ? 0 : fixedArgs.length) + segments.length - 4];
-			if (fixedArgs != null)
-			{
-				System.arraycopy(fixedArgs, 0, args, 0, fixedArgs.length);
-			}
-			System.arraycopy(segments, 4, args, args.length - segments.length + 4, segments.length - 4);
-		}
-
-		IHeadlessClient client = plugin.getClient(solutionName);
+		WsRequest wsRequest = parsePath(request);
+		IHeadlessClient client = null;
 		try
 		{
-			plugin.log.debug("executeMethod('" + formName + "', '" + methodName + "', <args>)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			Object result = client.getPluginAccess().executeMethod(formName, methodName, args, false);
+			client = plugin.getClient(wsRequest.solutionName);
+			checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
+
+			FunctionDefinition fd = new FunctionDefinition(wsRequest.formName, methodName);
+			Exist functionExists = fd.exists(client.getPluginAccess());
+			if (functionExists == FunctionDefinition.Exist.NO_SOLUTION)
+			{
+				throw new WebServiceException("Solution " + wsRequest.solutionName + "not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			if (functionExists == FunctionDefinition.Exist.FORM_NOT_FOUND)
+			{
+				throw new WebServiceException("Form " + wsRequest.formName + " not found", HttpServletResponse.SC_NOT_FOUND); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			if (functionExists != FunctionDefinition.Exist.METHOD_FOUND)
+			{
+				throw new WebServiceException(
+					"Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""), HttpServletResponse.SC_METHOD_NOT_ALLOWED); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
+
+			Object[] args = null;
+			if (fixedArgs != null || wsRequest.args.length > 0 || request.getParameterMap().size() > 0)
+			{
+				args = new Object[((fixedArgs == null) ? 0 : fixedArgs.length) + wsRequest.args.length + (request.getParameterMap().size() > 0 ? 1 : 0)];
+				int idx = 0;
+				if (fixedArgs != null)
+				{
+					System.arraycopy(fixedArgs, 0, args, 0, fixedArgs.length);
+					idx += fixedArgs.length;
+				}
+				if (wsRequest.args.length > 0)
+				{
+					System.arraycopy(wsRequest.args, 0, args, idx, wsRequest.args.length);
+					idx += wsRequest.args.length;
+				}
+				if (request.getParameterMap().size() > 0)
+				{
+					JSMap jsMap = new JSMap();
+					Iterator<Entry<String, Object>> parameters = request.getParameterMap().entrySet().iterator();
+					while (parameters.hasNext())
+					{
+						Entry<String, Object> entry = parameters.next();
+						if (entry.getValue() instanceof String)
+						{
+							jsMap.put(entry.getKey(), new String[] { (String)entry.getValue() });
+						}
+						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
+						{
+							jsMap.put(entry.getKey(), (String[])entry.getValue());
+						}
+					}
+
+					args[idx++] = jsMap;
+				}
+			}
+
+			plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
 			plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\''))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			return result;
 		}
 		finally
 		{
-			plugin.releaseClient(solutionName, client);
+			if (client != null)
+			{
+				try
+				{
+					plugin.releaseClient(wsRequest.solutionName, client);
+				}
+				catch (Exception e)
+				{
+					Debug.error(e);
+				}
+			}
 		}
 	}
 
-	private void checkAuthorization(HttpServletRequest request, String solutionName) throws Exception
+	private void checkAuthorization(HttpServletRequest request, IClientPluginAccess client, String solutionName, String formName) throws Exception
 	{
 		String[] authorizedGroups = plugin.getAuthorizedGroups();
-		if (authorizedGroups == null)
+		FunctionDefinition fd = new FunctionDefinition(formName, "ws_authenticate"); //$NON-NLS-1$
+		Exist authMethodExists = fd.exists(client);
+		if (authorizedGroups == null && authMethodExists != FunctionDefinition.Exist.METHOD_FOUND)
 		{
 			plugin.log.debug("No authorization to check, allow all access"); //$NON-NLS-1$
 			return;
 		}
 
+		//Process authentication Header
 		String authorizationHeader = request.getHeader("Authorization"); //$NON-NLS-1$
-		String userUid = null;
 		String user = null;
-		if (authorizationHeader != null && authorizationHeader.toLowerCase().startsWith("basic ")) //$NON-NLS-1$
+		String password = null;
+		if (authorizationHeader != null)
 		{
-			String authorization = authorizationHeader.substring(6);
-			authorization = new String(Utils.decodeBASE64(authorization));
-			int index = authorization.indexOf(':');
-			if (index > 0)
+			if (authorizationHeader.toLowerCase().startsWith("basic ")) //$NON-NLS-1$
 			{
-				user = authorization.substring(0, index);
-				String password = authorization.substring(index + 1);
-				userUid = plugin.getServerAccess().checkPasswordForUserName(user, password);
+				String authorization = authorizationHeader.substring(6);
+				authorization = new String(Utils.decodeBASE64(authorization));
+				int index = authorization.indexOf(':');
+				if (index > 0)
+				{
+					user = authorization.substring(0, index);
+					password = authorization.substring(index + 1);
+				}
+			}
+			else
+			{
+				plugin.log.debug("No or unsupported Authorization header"); //$NON-NLS-1$
 			}
 		}
 		else
 		{
-			plugin.log.debug("No or unsupported Authorization header"); //$NON-NLS-1$
+			plugin.log.debug("No Authorization header"); //$NON-NLS-1$
 		}
-		if (userUid == null)
+
+		if (user == null || password == null || user.trim().length() == 0 || password.trim().length() == 0)
 		{
+			plugin.log.debug("No credentials to proceed with authentication"); //$NON-NLS-1$
 			throw new NotAuthenticatedException(solutionName);
 		}
+
+		//Process the Authentication Header values
+		if (authMethodExists == FunctionDefinition.Exist.METHOD_FOUND)
+		{
+			if (Boolean.TRUE.equals(fd.executeSync(client, (new String[] { user, password }))))
+			{
+				return;
+			}
+			plugin.log.debug("Authentication method ws_authenticate denied autentication"); //$NON-NLS-1$
+			throw new NotAuthenticatedException(solutionName);
+		}
+
+		String userUid = plugin.getServerAccess().checkPasswordForUserName(user, password);
+		if (userUid == null)
+		{
+			plugin.log.debug("Supplied credentails not valid"); //$NON-NLS-1$
+			throw new NotAuthenticatedException(user);
+		}
+
 
 		String[] userGroups = plugin.getServerAccess().getUserGroups(userUid);
 		// find a match in groups
@@ -320,9 +490,8 @@ public class RestWSServlet extends HttpServlet
 				}
 			}
 		}
-
 		// no match
-		throw new NotAuthorizedException(user);
+		throw new NotAuthorizedException("User not authorized");
 	}
 
 	protected String getBody(HttpServletRequest request) throws IOException
@@ -398,7 +567,6 @@ public class RestWSServlet extends HttpServlet
 		return defaultCharset;
 	}
 
-
 	private Object decodeRequest(int contentType, String contents) throws Exception
 	{
 		switch (contentType)
@@ -446,7 +614,6 @@ public class RestWSServlet extends HttpServlet
 				throw new IllegalStateException();
 		}
 
-
 		String resultContentType;
 		switch (contentType)
 		{
@@ -484,11 +651,39 @@ public class RestWSServlet extends HttpServlet
 		response.setContentLength(bytes.length);
 	}
 
-//	public static void setNoCacheHeaders(HttpServletResponse response)
-//	{
-//		response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1 //$NON-NLS-1$ //$NON-NLS-2$
-//
-//		response.setHeader("Pragma", "no-cache"); //HTTP 1.0 //$NON-NLS-1$ //$NON-NLS-2$
-//		response.setHeader("Proxy", "no-cache"); //$NON-NLS-1$//$NON-NLS-2$
-//	}
+	public static class WsRequest
+	{
+		public final String solutionName;
+		public final String formName;
+		public final String[] args;
+
+		/**
+		 * @param solutionName
+		 * @param formName
+		 * @param args
+		 */
+		public WsRequest(String solutionName, String formName, String[] args)
+		{
+			this.solutionName = solutionName;
+			this.formName = formName;
+			this.args = args;
+		}
+
+		@Override
+		public String toString()
+		{
+			return "WsRequest [solutionName=" + solutionName + ", formName=" + formName + ", args=" + Arrays.toString(args) + "]";
+		}
+	}
+
+	public static class WebServiceException extends Exception
+	{
+		public final int httpResponseCode;
+
+		public WebServiceException(String message, int httpResponseCode)
+		{
+			super(message);
+			this.httpResponseCode = httpResponseCode;
+		}
+	}
 }
