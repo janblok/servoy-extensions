@@ -315,7 +315,7 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		}
 		else if (methodName.endsWith("addRoots"))
 		{
-			return "Add foundset to the list of foundsets used to create the tree's root nodes.\nReturns the number of added root nodes";
+			return "Add foundset to the list of foundsets used to create the tree's root nodes.\nReturns the number of added root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.";
 		}
 		else if (methodName.endsWith("removeAllRoots"))
 		{
