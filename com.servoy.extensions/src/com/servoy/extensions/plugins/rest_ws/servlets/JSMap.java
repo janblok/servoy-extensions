@@ -22,7 +22,8 @@ import java.util.HashMap;
 import com.servoy.j2db.scripting.JSConvertedMap;
 
 /**
- * RAGTEST
+ * HashMap extension to implement JSConvertedMap.
+ * This instructs the Servoy engine how to convert data to scriptable objects before returning it to the scripting engine.
  * 
  * @author pbakker
  *
