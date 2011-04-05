@@ -115,16 +115,6 @@ public class MailProvider implements IScriptObject
 		return retval.toArray(new String[retval.size()]);
 	}
 
-	/**
-	 * Checks whether the given e-mail address is valid or not.
-	 * 
-	 * @sample
-	 * plugins.mail.isValidEmailAddress("me@example.com");
-	 * 
-	 * @param email a string representing an e-mail address
-	 * 
-	 * @return true if the specified address is true, false otherwise
-	 */
 	public boolean js_isValidEmailAddress(String email)
 	{
 		return Utils.isValidEmailAddress(email);
@@ -339,6 +329,10 @@ public class MailProvider implements IScriptObject
 		{
 			return new String[] { "addressesString" }; //$NON-NLS-1$ 
 		}
+		else if ("isValidEmailAddress".equals(methodName)) //$NON-NLS-1$
+		{
+			return new String[] { "email" }; //$NON-NLS-1$
+		}
 		return null;
 	}
 
@@ -473,6 +467,15 @@ public class MailProvider implements IScriptObject
 			retval.append("//var msgs = %%elementName%%.receiveMail('me', 'test', true , 0 , null, properties);\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
+		else if ("isValidEmailAddress".equals(methodName)) //$NON-NLS-1$
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\n"); //$NON-NLS-1$
+			retval.append("plugins.mail.isValidEmailAddress(\"me@example.com\");\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
 		return null;
 	}
 
@@ -510,6 +513,10 @@ public class MailProvider implements IScriptObject
 		else if ("getLastSendMailExceptionMsg".equals(methodName)) //$NON-NLS-1$
 		{
 			return "Get the exception that occurred in the last sendMail attempt (null if no exception occurred)."; //$NON-NLS-1$
+		}
+		else if ("isValidEmailAddress".equals(methodName)) //$NON-NLS-1$
+		{
+			return "Checks whether the given e-mail address is valid or not."; //$NON-NLS-1$
 		}
 		return null;
 	}

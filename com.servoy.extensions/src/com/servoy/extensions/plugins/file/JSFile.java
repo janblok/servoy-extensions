@@ -178,15 +178,6 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		return file.isDirectory();
 	}
 
-	/**
-	 * Gets the contents (bytes) for the file data.
-	 * 
-	 * @sample
-	 * var theFile = plugins.file.showFileOpenDialog();
-	 * application.output("The file size in bytes: " + theFile.getBytes());
-	 * 
-	 * @return the bytes representing the file data
-	 */
 	public byte[] js_getBytes()
 	{
 		return file.getBytes();
@@ -541,6 +532,13 @@ public class JSFile implements IScriptObject, IJavaScriptType
 			sb.append("var success = file.setBytes(blobDataProvider, true);");
 			return sb.toString();
 		}
+		else if ("getBytes".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("var theFile = plugins.file.showFileOpenDialog();\n");
+			sb.append("application.output('The file size in bytes: ' + theFile.getBytes());\n");
+			return sb.toString();
+		}
 		return null;
 	}
 
@@ -655,6 +653,10 @@ public class JSFile implements IScriptObject, IJavaScriptType
 		else if ("setBytes".equals(methodName))
 		{
 			return "Sets the byte[] content of a JSFile to the byte array provided, creating a file if none exists when the createFile parameter is true (default = false). Returns true if the content was set - works on local and remote files.";
+		}
+		else if ("getBytes".equals(methodName))
+		{
+			return "Gets the contents (bytes) for the file data.";
 		}
 
 		return null;

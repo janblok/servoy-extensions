@@ -102,15 +102,6 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
-	/**
-	 * Sets the alignment of the radio button.
-	 * 
-	 * @sample
-	 * var align = radioButton.setAlign(true);
-	 * 
-	 * @param a the alignment of the radio button (boolean - true = aligned; false = not aligned)
-	 * 
-	 */
 	public void js_setAlign(boolean a)
 	{
 		this.align = a;
@@ -178,5 +169,30 @@ public class RadioButton extends AbstractMenuItem
 			return new String[] { "boolean" }; //$NON-NLS-1$ 
 		}
 		return super.getParameterNames(methodName);
+	}
+
+	@Override
+	public String getSample(String methodName)
+	{
+		if ("setAlign".equals(methodName)) //$NON-NLS-1$ 
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$ 
+			retval.append(getToolTip(methodName));
+			retval.append("\n"); //$NON-NLS-1$ 
+			retval.append("var align = radioButton.setAlign(true);\n"); //$NON-NLS-1$ 
+			return retval.toString();
+		}
+		return super.getSample(methodName);
+	}
+
+	@Override
+	public String getToolTip(String methodName)
+	{
+		if ("setAlign".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return "Sets the alignment of the radio button."; //$NON-NLS-1$ 
+		}
+		return super.getToolTip(methodName);
 	}
 }

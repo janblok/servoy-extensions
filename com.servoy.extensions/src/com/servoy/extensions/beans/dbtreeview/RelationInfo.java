@@ -58,21 +58,51 @@ public class RelationInfo implements IScriptObject
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String[] getParameterNames(String methodName)
 	{
-		// TODO Auto-generated method stub
+		if ("setLabel".equals(methodName))
+		{
+			return new String[] { "label" };
+		}
+		else if ("setNRelationName".equals(methodName))
+		{
+			return new String[] { "relationName" };
+		}
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String getSample(String methodName)
 	{
-		// TODO Auto-generated method stub
+		if ("setLabel".equals(methodName) || "setNRelationName".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');\n");
+			retval.append("var company_relations = new Array();\n");
+			retval.append("company_relations[0] = elements.myDbTreeView.createRelationInfo();\n");
+			retval.append("company_relations[0].setLabel('Employees');\n");
+			retval.append("company_relations[0].setNRelationName('companies_to_employees');\n");
+			retval.append("companies_binding.setNRelationInfos(company_relations);\n");
+			return retval.toString();
+		}
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String getToolTip(String methodName)
 	{
-		// TODO Auto-generated method stub
+		if ("setLabel".equals(methodName))
+		{
+			return "Sets the label of a relation info object used to set multiple child relations for a tree node.";
+		}
+		else if ("setNRelationName".equals(methodName))
+		{
+			return "Sets the name of a relation info object used to set multiple child relations for a tree node.";
+		}
 		return null;
 	}
 

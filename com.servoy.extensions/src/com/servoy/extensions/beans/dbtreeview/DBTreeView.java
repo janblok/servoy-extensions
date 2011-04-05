@@ -138,7 +138,18 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		{
 			return new String[] { "callback" };
 		}
-
+		else if ("setFont".equals(methodName))
+		{
+			return new String[] { "spec" };
+		}
+		else if ("setLocation".equals(methodName))
+		{
+			return new String[] { "x", "y" };
+		}
+		else if ("setSize".equals(methodName))
+		{
+			return new String[] { "x", "y" };
+		}
 		return null;
 	}
 
@@ -287,7 +298,78 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 			retval.append("%%elementName%%.").append(methodName).append("(on").append(methodName.substring(5)).append(");");
 			return retval.toString();
 		}
-
+		else if ("getHeight".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.getHeight();\n");
+			return retval.toString();
+		}
+		else if ("getLocationX".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.getLocationX();\n");
+			return retval.toString();
+		}
+		else if ("getLocationY".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.getLocationY();\n");
+			return retval.toString();
+		}
+		else if ("getName".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.getName();\n");
+			return retval.toString();
+		}
+		else if ("getWidth".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.getWidth();\n");
+			return retval.toString();
+		}
+		else if ("setFont".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.setFont('Times New Roman, 1, 22');\n");
+			return retval.toString();
+		}
+		else if ("setLocation".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.setLocation(120,80);\n");
+			return retval.toString();
+		}
+		else if ("setSize".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.setSize(400,300);\n");
+			return retval.toString();
+		}
 		return null;
 	}
 
@@ -361,7 +443,38 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		{
 			return "Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form";
 		}
-
+		else if ("getHeight".equals(methodName))
+		{
+			return "Returns the height of the tree.";
+		}
+		else if ("getLocationX".equals(methodName))
+		{
+			return "Get the x coordinate of the location of the tree.";
+		}
+		else if ("getLocationY".equals(methodName))
+		{
+			return "Get the y coordinate of the location of the tree.";
+		}
+		else if ("getName".equals(methodName))
+		{
+			return "Returns the name of the tree.";
+		}
+		else if ("getWidth".equals(methodName))
+		{
+			return "Returns the width of the tree.";
+		}
+		else if ("setFont".equals(methodName))
+		{
+			return "Sets the specified font as the font of the tree.";
+		}
+		else if ("setLocation".equals(methodName))
+		{
+			return "Sets the location of the tree.";
+		}
+		else if ("setSize".equals(methodName))
+		{
+			return "Sets the size of the tree.";
+		}
 		return null;
 	}
 

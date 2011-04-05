@@ -132,6 +132,13 @@ public class SchedulerProvider implements IScriptObject
 			sb.append("plugins.scheduler.getCurrentJobNames()\n"); //$NON-NLS-1$
 			return sb.toString();
 		}
+		else if ("getLastRunJobName".equals(methodName)) //$NON-NLS-1$
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("// Returns the last job run from the scheduler\n"); //$NON-NLS-1$
+			sb.append("plugins.scheduler.getLastRunJobName();\n"); //$NON-NLS-1$
+			return sb.toString();
+		}
 		return null;
 	}
 
@@ -152,6 +159,10 @@ public class SchedulerProvider implements IScriptObject
 		else if ("getCurrentJobNames".equals(methodName)) //$NON-NLS-1$
 		{
 			return "Returns an array with the current jobs."; //$NON-NLS-1$
+		}
+		else if ("getLastRunJobName".equals(methodName)) //$NON-NLS-1$
+		{
+			return "Returns the last job run from the scheduler."; //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -265,14 +276,6 @@ public class SchedulerProvider implements IScriptObject
 		return lastRunned;
 	}
 
-	/**
-	 * Returns the last job run from the scheduler.
-	 * 
-	 * @sample
-	 * plugins.scheduler.getLastRunJobName();
-	 * 
-	 * @return the last job run from the scheduler
-	 */
 	public String js_getLastRunJobName()
 	{
 		return lastRunned;

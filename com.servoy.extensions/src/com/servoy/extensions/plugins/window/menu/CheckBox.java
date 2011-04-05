@@ -39,16 +39,6 @@ public class CheckBox extends AbstractMenuItem
 		super(pluginAccess, menuHandler, menuItem);
 	}
 
-	/**
-	 * Sets the alignment of the check box.
-	 * 
-	 * @sample
-	 * var align = checkBox.setAlign(true);
-	 * 
-	 * @param a the align to set (true = aligned; false = not aligned)
-	 * 
-	 * @return a check box with the requested alignment
-	 */
 	public CheckBox js_setAlign(boolean a)
 	{
 		this.align = a;
@@ -169,12 +159,40 @@ public class CheckBox extends AbstractMenuItem
 	}
 
 	@Override
+	@SuppressWarnings("nls")
 	public String[] getParameterNames(String methodName)
 	{
-		if ("setAlign".equals(methodName)) //$NON-NLS-1$ 
+		if ("setAlign".equals(methodName))
 		{
-			return new String[] { "boolean" }; //$NON-NLS-1$ 
+			return new String[] { "boolean" };
 		}
 		return super.getParameterNames(methodName);
+	}
+
+	@Override
+	@SuppressWarnings("nls")
+	public String getSample(String methodName)
+	{
+		if ("setAlign".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("var align = checkBox.setAlign(true);\n");
+			return retval.toString();
+		}
+		return super.getSample(methodName);
+	}
+
+	@Override
+	@SuppressWarnings("nls")
+	public String getToolTip(String methodName)
+	{
+		if ("setAlign".equals(methodName))
+		{
+			return "Sets the alignment of the check box.";
+		}
+		return super.getToolTip(methodName);
 	}
 }
