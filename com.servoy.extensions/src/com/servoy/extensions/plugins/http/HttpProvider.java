@@ -32,6 +32,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,10 +66,12 @@ import com.servoy.j2db.util.Utils;
  */
 public class HttpProvider implements IScriptObject
 {
-	private String lastPageEncoding = null;
 	private String proxyUser = null;
 	private String proxyPassword = null;
 	private int timeout = -1;
+
+	@Deprecated
+	private String lastPageEncoding = null;
 
 	public HttpProvider(HttpPlugin plugin)
 	{
@@ -184,13 +187,13 @@ public class HttpProvider implements IScriptObject
 			}
 			if (url != null)
 			{
-				setHttpClientProxy(client, url);
+				setHttpClientProxy(client, url, proxyUser, proxyPassword);
 			}
 		}
 		return client;
 	}
 
-	private void setHttpClientProxy(DefaultHttpClient client, String url)
+	public static void setHttpClientProxy(DefaultHttpClient client, String url, String proxyUser, String proxyPassword)
 	{
 		String proxyHost = null;
 		int proxyPort = 8080;
@@ -242,22 +245,31 @@ public class HttpProvider implements IScriptObject
 		}
 	}
 
+	@Deprecated
+	public void js_setClientProxyUserNamePassword(String userName, String password)
+	{
+		js_setClientProxyCredentials(userName, password);
+	}
+
 	/**
-	 * Set the proxy username and password. Used for named http clients ( else use implicit java data).
+	 * Set the proxy username and password. Used for named http clients (else use implicit java data).
 	 *
-	 * @sample plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');
+	 * @sample plugins.http.setClientProxyCredentials('my_proxy_username','my_proxy_password');
 	 *
 	 * @param username 
 	 *
 	 * @param password 
 	 */
-	public void js_setClientProxyUserNamePassword(Object[] args)
+	public void js_setClientProxyCredentials(String userName, String password)
 	{
-		if (args == null || args.length != 2) return;
-		this.proxyUser = (String)args[0];
-		this.proxyPassword = (String)args[1];
+		if (!Utils.stringIsEmpty(userName))
+		{
+			this.proxyUser = userName;
+			this.proxyPassword = password;
+		}
 	}
 
+	@Deprecated
 	public String js_getLastPageEncoding()
 	{
 		return lastPageEncoding;
@@ -272,6 +284,7 @@ public class HttpProvider implements IScriptObject
 	 * var success = plugins.file.writeTXTFile('someFilePath', a, charset);
 	 * if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file', 'OK');
 	 */
+	@Deprecated
 	public String js_getLastPageCharset()
 	{
 		return lastPageEncoding;
@@ -321,7 +334,7 @@ public class HttpProvider implements IScriptObject
 			}
 			try
 			{
-				setHttpClientProxy(client, input);
+				setHttpClientProxy(client, input, proxyUser, proxyPassword);
 
 				URL url = new URL(input);
 				HttpGet method = new HttpGet(input);
@@ -359,23 +372,6 @@ public class HttpProvider implements IScriptObject
 		return sb.toByteArray();
 	}
 
-	/**
-	 * put a file at the specified URL
-	 *
-	 * @sample var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')
-	 *
-	 * @param clientName 
-	 *
-	 * @param url 
-	 *
-	 * @param fileName 
-	 *
-	 * @param filePath 
-	 *
-	 * @param [username] optional 
-	 *
-	 * @param [password] optional 
-	 */
 	public boolean js_put(Object[] vargs)
 	{
 		String clientName = "", url = "", fileName = "", path = "", username = "", password = "";
@@ -442,6 +438,7 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param [secure] optional 
 	 */
+	@Deprecated
 	public boolean js_setHttpClientCookie(Object[] vargs)
 	{
 		String clientName = "", cookieName = "", cookieValue = "", domain = "", path = "";
@@ -488,6 +485,7 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param clientName 
 	 */
+	@Deprecated
 	public Cookie[] js_getHttpClientCookies(String httpClientName)
 	{
 		if (httpClientName == null || "".equals(httpClientName.trim()))
@@ -526,6 +524,7 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param cookieName 
 	 */
+	@Deprecated
 	public Cookie js_getHttpClientCookie(String clientName, String cookieName)
 	{
 		DefaultHttpClient client = httpClients.get(clientName);
@@ -553,7 +552,8 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param [http_clientname] optional 
 	 */
-	public Poster js_getPoster(Object[] vargs)//http://jakarta.apache.org/commons/httpclient/apidocs/index.html
+	@Deprecated
+	public PostRequest js_getPoster(Object[] vargs)//http://jakarta.apache.org/commons/httpclient/apidocs/index.html
 	{
 		String a_url = null;
 		String clientname = null;
@@ -564,23 +564,21 @@ public class HttpProvider implements IScriptObject
 		{
 			client = getOrCreateHTTPclient(clientname, a_url);
 		}
-		return new Poster(a_url, client);
+		return new PostRequest(a_url, client);
 	}
 
+	@Deprecated
 	private final Map<String, DefaultHttpClient> httpClients = new HashMap<String, DefaultHttpClient>();
 
-	/**
-	 * Create a named http client (like a web browser with session binding) usable todo multiple request/posts in same server session
-	 *
-	 * @sample
-	 * plugins.http.createHttpClient('mybrowser');
-	 * var pageData = plugins.http.getPageData('http://www.cnn.com','mybrowser','username','mypassword');
-	 *
-	 * @param http_clientname 
-	 */
+	@Deprecated
 	public void js_createHttpClient(String name)
 	{
 		getOrCreateHTTPclient(name, null);
+	}
+
+	public HttpClient js_createNewHttpClient()
+	{
+		return new HttpClient();
 	}
 
 	/**
@@ -590,11 +588,13 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @param http_clientname 
 	 */
+	@Deprecated
 	public void js_deleteHttpClient(String name)
 	{
 		httpClients.remove(name);
 	}
 
+	@Deprecated
 	public void js_setTimeout(Object[] args)
 	{
 		if (args == null || args.length == 0 || args.length > 2) return;
@@ -618,7 +618,9 @@ public class HttpProvider implements IScriptObject
 
 	public boolean isDeprecated(String methodName)
 	{
-		if ("getLastPageEncoding".equals(methodName))
+		String[] sa = new String[] { "setClientProxyUserNamePassword", "setClientProxyCredentials", "getPoster", "getLastPageEncoding", "getLastPageCharset", "deleteHttpClient", "setHttpClientCookie", "getHttpClientCookie", "getHttpClientCookies", "setTimeout", "put", "createHttpClient" };
+		List<String> hs = Arrays.asList(sa);
+		if (hs.contains(methodName))
 		{
 			return true;
 		}
@@ -629,7 +631,7 @@ public class HttpProvider implements IScriptObject
 	{
 		if ("getPageData".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "url", "[http_clientname]", "[username", "password]" };
+			return new String[] { "url" };
 		}
 		else if ("getLastPageCharset".equals(methodName)) //$NON-NLS-1$
 		{
@@ -641,7 +643,7 @@ public class HttpProvider implements IScriptObject
 		}
 		else if ("getMediaData".equals(methodName))
 		{
-			return new String[] { "url", "[http_clientname]" };
+			return new String[] { "url" };
 		}
 		else if ("getPoster".equals(methodName)) //$NON-NLS-1$
 		{
@@ -649,7 +651,11 @@ public class HttpProvider implements IScriptObject
 		}
 		else if ("createHttpClient".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "http_clientname" };
+			return new String[] { "name" };
+		}
+		else if ("createNewHttpClient".equals(methodName)) //$NON-NLS-1$
+		{
+			return new String[] { };
 		}
 		else if ("deleteHttpClient".equals(methodName)) //$NON-NLS-1$
 		{
@@ -689,9 +695,6 @@ public class HttpProvider implements IScriptObject
 			retval.append("// get data using a default connection");
 			retval.append("\n"); //$NON-NLS-1$
 			retval.append("var pageData = plugins.http.getPageData('http://www.cnn.com');\n"); //$NON-NLS-1$
-			retval.append("// create an http client and use it to get the data");
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("setClientProxyUserNamePassword".equals(methodName)) //$NON-NLS-1$
@@ -716,8 +719,16 @@ public class HttpProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.http.createHttpClient('mybrowser');\n"); //$NON-NLS-1$
-			retval.append("var pageData = plugins.http.getPageData('http://www.cnn.com','mybrowser','username','mypassword');\n"); //$NON-NLS-1$
+			retval.append("var client = plugins.http.createHttpClient();\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
+		else if ("createHttpClient".equals(methodName)) //$NON-NLS-1$
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\n"); //$NON-NLS-1$
+			retval.append("var client = plugins.http.createNewHttpClient();\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("deleteHttpClient".equals(methodName)) //$NON-NLS-1$
@@ -736,7 +747,6 @@ public class HttpProvider implements IScriptObject
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
 			retval.append("var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');\n"); //$NON-NLS-1$
-			retval.append("var image_byte_array2 = plugins.http.getMediaData('http://www.cnn.com/cnn.gif', 'clientName');\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("getPoster".equals(methodName)) //$NON-NLS-1$
@@ -830,6 +840,10 @@ public class HttpProvider implements IScriptObject
 		}
 		else if ("createHttpClient".equals(methodName)) //$NON-NLS-1$
 		{
+			return "Get or create an http client."; //$NON-NLS-1$
+		}
+		else if ("createNewHttpClient".equals(methodName)) //$NON-NLS-1$
+		{
 			return "Create a named http client (like a web browser with session binding) usable todo multiple request/posts in same server session."; //$NON-NLS-1$
 		}
 		else if ("deleteHttpClient".equals(methodName)) //$NON-NLS-1$
@@ -873,9 +887,9 @@ public class HttpProvider implements IScriptObject
 	/**
 	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
 	 */
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
-		return new Class[] { Poster.class, Cookie.class };
+		return new Class[] { PostRequest.class, PutRequest.class, GetRequest.class, DeleteRequest.class, OptionsRequest.class, HeadRequest.class, TraceRequest.class, Cookie.class, Response.class, HttpClient.class, HTTP_STATUS.class };
 	}
 
 	//old test method

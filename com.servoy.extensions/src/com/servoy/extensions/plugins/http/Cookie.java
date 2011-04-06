@@ -42,78 +42,36 @@ public class Cookie implements IScriptObject
 		this.cookie = cookie;
 	}
 
-	/**
-	 * returns the cookie name
-	 *
-	 * @sample
-	 * var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')
-	 * var name = cookie.getName();
-	 */
 	public String js_getName()
 	{
 		if (cookie == null) return ""; //$NON-NLS-1$
 		return cookie.getName();
 	}
 
-	/**
-	 * returns the cookie value
-	 *
-	 * @sample
-	 * var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')
-	 * var value = cookie.getValue();
-	 */
 	public String js_getValue()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getValue();
 	}
 
-	/**
-	 * returns the cookie domain
-	 *
-	 * @sample
-	 * var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')
-	 * var domain = cookie.getDomain();
-	 */
 	public String js_getDomain()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getDomain();
 	}
 
-	/**
-	 * returns the cookie path
-	 *
-	 * @sample
-	 * var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')
-	 * var path = cookie.getPath();
-	 */
 	public String js_getPath()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getPath();
 	}
 
-	/**
-	 * returns the cookie secure attribute
-	 *
-	 * @sample
-	 * var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')
-	 * var path = cookie.getSecure();
-	 */
 	public boolean js_getSecure()
 	{
 		if (cookie == null) return false;
 		return cookie.isSecure();
 	}
 
-	/**
-	 * returns the cookie comment
-	 *
-	 * @sample
-	 * var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')
-	 * var path = cookie.getComment();
-	 */
 	public String js_getComment()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
@@ -130,9 +88,6 @@ public class Cookie implements IScriptObject
 		return new String[] { "" };//$NON-NLS-1$
 	}
 
-	/**
-	 * methods from the interface
-	 */
 	public String getSample(String methodName)
 	{
 		StringBuffer retval = new StringBuffer();
@@ -145,37 +100,37 @@ public class Cookie implements IScriptObject
 
 		if ("getName".equals(methodName))//$NON-NLS-1$
 		{
-			retval.append("var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')\n");//$NON-NLS-1$
+			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
 			retval.append("var name = cookie.getName();\n");//$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("getValue".equals(methodName))//$NON-NLS-1$
 		{
-			retval.append("var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')\n");//$NON-NLS-1$
+			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
 			retval.append("var value = cookie.getValue();\n");//$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("getDomain".equals(methodName))//$NON-NLS-1$
 		{
-			retval.append("var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')\n");//$NON-NLS-1$
+			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
 			retval.append("var domain = cookie.getDomain();\n");//$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("getPath".equals(methodName))//$NON-NLS-1$
 		{
-			retval.append("var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')\n");//$NON-NLS-1$
+			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
 			retval.append("var path = cookie.getPath();\n");//$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("getSecure".equals(methodName))//$NON-NLS-1$
 		{
-			retval.append("var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')\n");//$NON-NLS-1$
+			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
 			retval.append("var path = cookie.getSecure();\n");//$NON-NLS-1$
 			return retval.toString();
 		}
 		else if ("getComment".equals(methodName))//$NON-NLS-1$
 		{
-			retval.append("var cookie = plugins.http.getHttpClientCookie('clientName', 'cookieName')\n");//$NON-NLS-1$
+			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
 			retval.append("var path = cookie.getComment();\n");//$NON-NLS-1$
 			return retval.toString();
 		}
