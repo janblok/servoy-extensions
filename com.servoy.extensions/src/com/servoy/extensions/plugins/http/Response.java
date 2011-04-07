@@ -21,7 +21,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
@@ -34,6 +33,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
@@ -119,12 +119,12 @@ public class Response implements IScriptObject, IJavaScriptType
 		return null;
 	}
 
-	public HashMap<String, String> js_getResponseHeaders()
+	public JSMap js_getResponseHeaders()
 	{
 		return js_getResponseHeaders(null);
 	}
 
-	public HashMap<String, String> js_getResponseHeaders(String name)
+	public JSMap js_getResponseHeaders(String name)
 	{
 		try
 		{
@@ -137,10 +137,21 @@ public class Response implements IScriptObject, IJavaScriptType
 			{
 				ha = res.getHeaders(name);
 			}
-			HashMap<String, String> sa = new HashMap<String, String>();
+			JSMap sa = new JSMap();
 			for (Header element : ha)
 			{
-				sa.put(element.getName(), element.getValue());
+				if (sa.containsKey(element.getName()))
+				{
+					String[] values = sa.get(element.getName());
+					String[] newValues = new String[values.length + 1];
+					System.arraycopy(values, 0, newValues, 0, values.length);
+					newValues[values.length] = element.getValue();
+					sa.put(element.getName(), newValues);
+				}
+				else
+				{
+					sa.put(element.getName(), new String[] { element.getValue() });
+				}
 			}
 			return sa;
 		}

@@ -20,7 +20,9 @@ package com.servoy.extensions.plugins.http;
 import java.sql.Date;
 import java.util.List;
 
+import org.apache.http.client.params.AuthPolicy;
 import org.apache.http.client.params.ClientPNames;
+import org.apache.http.impl.auth.NTLMSchemeFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.HttpConnectionParams;
@@ -40,7 +42,8 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 	public HttpClient()
 	{
 		client = new DefaultHttpClient();
-		client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
+		client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, Boolean.TRUE);
+		client.getAuthSchemes().register(AuthPolicy.NTLM, new NTLMSchemeFactory());
 	}
 
 	public void js_setTimeout(int timeout)

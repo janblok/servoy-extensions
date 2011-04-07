@@ -166,8 +166,11 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			while (it.hasNext())
 			{
 				String name = it.next();
-				String value = headers.get(name);
-				post.addHeader(name, value);
+				String[] values = headers.get(name);
+				for (String value : values)
+				{
+					post.addHeader(name, value);
+				}
 			}
 
 			// post

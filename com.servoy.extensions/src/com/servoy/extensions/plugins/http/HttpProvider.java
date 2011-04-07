@@ -828,7 +828,7 @@ public class HttpProvider implements IScriptObject
 	{
 		if ("getPageData".equals(methodName)) //$NON-NLS-1$
 		{
-			return "Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used."; //$NON-NLS-1$
+			return "Get all page html in a variable."; //$NON-NLS-1$
 		}
 		else if ("setClientProxyUserNamePassword".equals(methodName)) //$NON-NLS-1$
 		{

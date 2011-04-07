@@ -44,7 +44,7 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 	protected HttpRequestBase method;
 	protected String url;
 	protected HttpContext context;
-	protected Map<String, String> headers;
+	protected Map<String, String[]> headers;
 
 	public BaseRequest()
 	{
@@ -61,14 +61,25 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 		{
 			client = hc;
 		}
-		headers = new HashMap<String, String>();
+		headers = new HashMap<String, String[]>();
 	}
 
 	public boolean js_addHeader(String headerName, String value)
 	{
 		if (headerName != null)
 		{
-			headers.put(headerName, value);
+			if (headers.containsKey(headerName))
+			{
+				String[] values = headers.get(headerName);
+				String[] newValues = new String[values.length + 1];
+				System.arraycopy(values, 0, newValues, 0, values.length);
+				newValues[values.length] = value;
+				headers.put(headerName, newValues);
+			}
+			else
+			{
+				headers.put(headerName, new String[] { value });
+			}
 			return true;
 		}
 		return false;
@@ -87,8 +98,11 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 			while (it.hasNext())
 			{
 				String name = it.next();
-				String value = headers.get(name);
-				method.addHeader(name, value);
+				String[] values = headers.get(name);
+				for (String value : values)
+				{
+					method.addHeader(name, value);
+				}
 			}
 
 			if (!Utils.stringIsEmpty(userName))
