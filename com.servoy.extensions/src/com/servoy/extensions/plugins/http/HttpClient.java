@@ -175,7 +175,7 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 	{
 		if ("setClientProxyCredentials".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "url" };
+			return new String[] { "userName", "password" };
 		}
 		else if ("getCookie".equals(methodName))
 		{

@@ -844,7 +844,7 @@ public class HttpProvider implements IScriptObject
 		}
 		else if ("createNewHttpClient".equals(methodName)) //$NON-NLS-1$
 		{
-			return "Create a named http client (like a web browser with session binding) usable todo multiple request/posts in same server session."; //$NON-NLS-1$
+			return "Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session."; //$NON-NLS-1$
 		}
 		else if ("deleteHttpClient".equals(methodName)) //$NON-NLS-1$
 		{
