@@ -142,11 +142,7 @@ public class Response implements IScriptObject, IJavaScriptType
 			{
 				if (sa.containsKey(element.getName()))
 				{
-					String[] values = sa.get(element.getName());
-					String[] newValues = new String[values.length + 1];
-					System.arraycopy(values, 0, newValues, 0, values.length);
-					newValues[values.length] = element.getValue();
-					sa.put(element.getName(), newValues);
+					sa.put(element.getName(), Utils.arrayAdd((String[])sa.get(element.getName()), element.getValue(), true));
 				}
 				else
 				{
