@@ -129,7 +129,7 @@ public class RestWSPlugin implements IServerPlugin
 	{
 		if (serializerWrapper == null)
 		{
-			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(false, false));
+			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(false, false, true), true);
 		}
 		return serializerWrapper;
 	}
