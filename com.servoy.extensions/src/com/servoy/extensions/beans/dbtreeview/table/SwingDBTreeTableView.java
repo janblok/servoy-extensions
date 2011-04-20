@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -293,6 +294,18 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 				int clickedColumnIdx = treeTable.getColumnModel().getColumnIndexAtX(e.getX());
 				if (clickedColumnIdx == 0) SwingDBTreeTableView.this.mouseClicked(e); // it is the tree column
 			}
+
+			@Override
+			public void mousePressed(MouseEvent e)
+			{
+				if (e.isPopupTrigger()) SwingDBTreeTableView.this.mouseRightClick(e);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e)
+			{
+				if (e.isPopupTrigger()) SwingDBTreeTableView.this.mouseRightClick(e);
+			}
 		});
 	}
 
@@ -445,6 +458,22 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		repaint();
 	}
 
+	@Override
+	protected void mouseRightClick(MouseEvent e)
+	{
+		TreePath selectedPath = tree.getPathForRow(treeTable.rowAtPoint(e.getPoint()));
+		if (selectedPath != null)
+		{
+			DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
+			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			Point treeTableLocation = treeTable.getLocationOnScreen();
+			Point treeTableLocationToWindow = new Point((int)(treeTableLocation.getX() - windowLocation.getX()),
+				(int)(treeTableLocation.getY() - windowLocation.getY()));
+
+			callMethodOnRightClick(tn, treeTableLocationToWindow.x + e.getX(), treeTableLocationToWindow.y + e.getY(),
+				Integer.valueOf(treeTable.columnAtPoint(e.getPoint())));
+		}
+	}
 }
 
 class SwingDBTreeTableEditor extends AbstractCellEditor implements TableCellEditor
