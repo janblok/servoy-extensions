@@ -637,6 +637,34 @@ public class BindingInfo
 		}
 	}
 
+	public FunctionDefinition getMethodToCallOnRightClick(FoundSetTreeModel.UserNode tn)
+	{
+		Binding tbi = getBinding(tn);
+
+		if (tbi != null)
+		{
+			return tbi.getMethodToCallOnRightClick();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public String getReturnDataproviderOnRightClick(FoundSetTreeModel.UserNode tn)
+	{
+		Binding tbi = getBinding(tn);
+
+		if (tbi != null)
+		{
+			return tbi.getReturnDataproviderOnRightClick();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 
 	public void addBinding(Binding b)
 	{

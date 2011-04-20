@@ -50,7 +50,8 @@ public class Binding implements IScriptObject
 	private String returnDataprovider;
 	private FunctionDefinition methodToCallOnCheckBoxChange;
 	private String returnDataproviderOnCheckBoxChange;
-
+	private FunctionDefinition methodToCallOnRightClick;
+	private String returnDataproviderOnRightClick;
 
 	private Object[] nRelationInfos;
 
@@ -163,6 +164,11 @@ public class Binding implements IScriptObject
 		return returnDataprovider;
 	}
 
+	public String getReturnDataproviderOnRightClick()
+	{
+		return returnDataproviderOnRightClick;
+	}
+
 	public String getReturnDataproviderOnCheckBoxChange()
 	{
 		return returnDataproviderOnCheckBoxChange;
@@ -218,6 +224,24 @@ public class Binding implements IScriptObject
 	public void js_setToolTipTextDataprovider(String toolTipTextDataprovider)
 	{
 		this.toolTipTextDataprovider = toolTipTextDataprovider;
+	}
+
+	public FunctionDefinition getMethodToCallOnRightClick()
+	{
+		return methodToCallOnRightClick;
+	}
+
+	public void setMethodToCallOnRightClick(Function methodToCallOnRightClick, String returnDataproviderOnRightClick)
+	{
+		if (methodToCallOnRightClick != null)
+		{
+			this.methodToCallOnRightClick = new FunctionDefinition(methodToCallOnRightClick);
+			this.returnDataproviderOnRightClick = returnDataproviderOnRightClick;
+		}
+	}
+
+	public void js_setMethodToCallOnRightClick(Function methodToCallOnRightClick, String returnDataproviderOnRightClick)
+	{
 	}
 
 	public FunctionDefinition getMethodToCallOnCheckBoxChange()
@@ -417,6 +441,10 @@ public class Binding implements IScriptObject
 		else if (methodName.endsWith("CallBackInfo"))
 		{
 			return "Set callback method for node selection and double click";
+		}
+		else if (methodName.endsWith("MethodToCallOnRightClick"))
+		{
+			return "Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
 		}
 		else if (methodName.endsWith("ConfigurationDataprovider"))
 		{

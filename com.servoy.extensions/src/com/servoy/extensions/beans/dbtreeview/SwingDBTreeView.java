@@ -19,6 +19,7 @@ package com.servoy.extensions.beans.dbtreeview;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -90,7 +91,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	protected Binding defaultBinding = new Binding();
 	private final boolean accessible = true;
 
-	private final IClientPluginAccess application;
+	protected final IClientPluginAccess application;
 
 	public SwingDBTreeView()
 	{
@@ -123,6 +124,19 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			{
 				SwingDBTreeView.this.mouseClicked(e);
 			}
+
+			@Override
+			public void mousePressed(MouseEvent e)
+			{
+				if (e.isPopupTrigger()) SwingDBTreeView.this.mouseRightClick(e);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e)
+			{
+				if (e.isPopupTrigger()) SwingDBTreeView.this.mouseRightClick(e);
+			}
+
 		});
 
 		tree.addTreeWillExpandListener(new TreeWillExpandListener()
@@ -849,6 +863,19 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		}
 	}
 
+	protected void mouseRightClick(MouseEvent e)
+	{
+		TreePath selectedPath = tree.getPathForLocation(e.getX(), e.getY());
+		if (selectedPath != null)
+		{
+			DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
+			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			Point treeLocation = tree.getLocationOnScreen();
+			Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
+			callMethodOnRightClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(), null);
+		}
+	}
+
 	public void treeCollapsed(TreeExpansionEvent event)
 	{
 	}
@@ -913,6 +940,28 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 				if (f != null)
 				{
 					f.executeAsync(application, args);
+				}
+			}
+		}
+	}
+
+	protected void callMethodOnRightClick(DefaultMutableTreeNode tn, int x, int y, Object arg)
+	{
+		if (tn instanceof FoundSetTreeModel.UserNode)
+		{
+			FoundSetTreeModel.UserNode un = (FoundSetTreeModel.UserNode)tn;
+			IRecord r = un.getRecord();
+			if (r != null)
+			{
+				String returnProvider = bindingInfo.getReturnDataproviderOnRightClick(un);
+
+				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
+				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]), Integer.valueOf(x), Integer.valueOf(y), arg };
+
+				FunctionDefinition f = bindingInfo.getMethodToCallOnRightClick((FoundSetTreeModel.UserNode)tn);
+				if (f != null)
+				{
+					f.execute(application, args, true);
 				}
 			}
 		}

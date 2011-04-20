@@ -30,7 +30,10 @@ import javax.swing.border.Border;
 import javax.swing.tree.TreeNode;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.IAjaxCallDecorator;
+import org.apache.wicket.ajax.calldecorator.CancelEventIfNoAjaxDecorator;
 import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -164,13 +167,6 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			if (application instanceof IWebClientPluginAccess) ((IWebClientPluginAccess)application).generateAjaxResponse(target);
 			if (isChanged) wicketTree.jsChangeRecorder.setChanged();
 		}
-	}
-
-	@Override
-	protected void onRowPopulated(final WebMarkupContainer rowComponent)
-	{
-		super.onRowPopulated(rowComponent);
-		if (dragEnabled) addDragNDropBehavior(rowComponent);
 	}
 
 	protected void onNodeLinkClicked(AjaxRequestTarget target, TreeNode tn)
@@ -960,5 +956,72 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	public void setBorderType(Border border)
 	{
 		setBorder(border);
+	}
+
+	@Override
+	protected void onRowPopulated(final WebMarkupContainer rowComponent)
+	{
+		super.onRowPopulated(rowComponent);
+		if (dragEnabled) addDragNDropBehavior(rowComponent);
+		rowComponent.add(new AjaxEventBehavior("oncontextmenu")
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onEvent(AjaxRequestTarget target)
+			{
+				String mx = getComponent().getRequest().getParameter("mx");
+				String my = getComponent().getRequest().getParameter("my");
+				onNodeRightClick(target, rowComponent.getDefaultModelObject(), Integer.parseInt(mx), Integer.parseInt(my), null);
+			}
+
+			@Override
+			protected IAjaxCallDecorator getAjaxCallDecorator()
+			{
+				return new CancelEventIfNoAjaxDecorator();
+			}
+
+			@Override
+			public CharSequence getCallbackUrl(final boolean onlyTargetActivePage)
+			{
+				CharSequence callbackURL = super.getCallbackUrl(onlyTargetActivePage);
+				return callbackURL.toString() +
+					"&mx=' + (event.pageX ? event.pageX : event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft) + '&my=' + (event.pageY ? event.pageY : event.clientY + document.body.scrollLeft + document.documentElement.scrollLeft) + '";
+			}
+
+			@Override
+			protected CharSequence getCallbackScript()
+			{
+				return getCallbackScript(true);
+			}
+		});
+
+	}
+
+	protected void onNodeRightClick(AjaxRequestTarget target, Object tn, int x, int y, Object arg)
+	{
+		if (tn instanceof FoundSetTreeModel.UserNode)
+		{
+			FoundSetTreeModel.UserNode un = (FoundSetTreeModel.UserNode)tn;
+			IRecord r = un.getRecord();
+			if (r != null)
+			{
+				String returnProvider = bindingInfo.getReturnDataproviderOnRightClick(un);
+				if (returnProvider == null)
+				{
+					returnProvider = wicketTree.bindingInfo.getReturnDataproviderOnRightClick((FoundSetTreeModel.UserNode)tn);
+				}
+
+				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
+				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]), Integer.valueOf(x), Integer.valueOf(y), arg };
+
+				FunctionDefinition f = wicketTree.bindingInfo.getMethodToCallOnRightClick((FoundSetTreeModel.UserNode)tn);
+				if (f != null)
+				{
+					f.execute(application, args, false);
+					generateAjaxResponse(target);
+				}
+			}
+		}
 	}
 }
