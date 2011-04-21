@@ -64,7 +64,7 @@ public class WebFileProvider extends FileProvider
 			IClientPluginAccess access = plugin.getClientPluginAccess();
 			String type = (mimeType == null) ? ImageLoader.getContentType(data, name) : mimeType.trim();
 			String url = ((IWebClientPluginAccess)access).serveResource(name, data, type);
-			((IWebClientPluginAccess)access).showURL(url, "_self", null, 0);
+			((IWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
 			return true;
 		}
 		else
@@ -135,7 +135,7 @@ public class WebFileProvider extends FileProvider
 					String name = f == null ? "file.txt" : f instanceof JSFile ? ((JSFile)f).js_getName() : f.toString();
 					IClientPluginAccess access = plugin.getClientPluginAccess();
 					String url = ((IWebClientPluginAccess)access).serveResource(name, baos.toByteArray(), mimeType);
-					((IWebClientPluginAccess)access).showURL(url, "_self", null, 0);
+					((IWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
 					return true;
 				}
 			}
