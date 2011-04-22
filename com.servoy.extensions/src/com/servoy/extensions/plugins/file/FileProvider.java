@@ -674,8 +674,7 @@ public class FileProvider implements IScriptObject
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
-	String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
 	{
 		try
 		{
@@ -776,8 +775,7 @@ public class FileProvider implements IScriptObject
 		return js_writeFile(f, data, null);
 	}
 
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
-	String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -2211,7 +2209,11 @@ public class FileProvider implements IScriptObject
 						{
 							try
 							{
-								if (uuid != null) remoteFile = (RemoteFileData)service.closeTransfer(uuid);
+								if (uuid != null)
+								{
+									remoteFile = (RemoteFileData)service.closeTransfer(uuid);
+									if (remoteFile != null) remoteFile.refreshSize();
+								}
 							}
 							catch (final RemoteException ignore)
 							{
