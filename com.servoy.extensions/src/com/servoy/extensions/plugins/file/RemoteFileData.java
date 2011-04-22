@@ -33,7 +33,7 @@ public class RemoteFileData implements Serializable
 	private final String name;
 	private final RemoteFileData parent;
 	private final long lastModified;
-	private final long length;
+	private long length;
 	private final boolean directory;
 	private final boolean file;
 	private final boolean exists;
@@ -41,6 +41,8 @@ public class RemoteFileData implements Serializable
 	private final boolean canWrite;
 	private final boolean hidden;
 	private final int hash;
+
+	private transient File fileObj;
 
 	/**
 	 * Main Constructor, set up all the final properties
@@ -51,6 +53,7 @@ public class RemoteFileData implements Serializable
 	 */
 	public RemoteFileData(File file, String name, RemoteFileData parent)
 	{
+		this.fileObj = file;
 		this.name = name;
 		this.parent = parent;
 		this.lastModified = file.lastModified();
@@ -129,6 +132,11 @@ public class RemoteFileData implements Serializable
 	public long size()
 	{
 		return length;
+	}
+
+	public void refreshSize()
+	{
+		if (fileObj != null) length = fileObj.length();
 	}
 
 	public long lastModified()
