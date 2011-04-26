@@ -2207,7 +2207,6 @@ public class FileProvider implements IScriptObject
 								if (uuid != null)
 								{
 									remoteFile = (RemoteFileData)service.closeTransfer(uuid);
-									if (remoteFile != null) remoteFile.refreshSize();
 								}
 							}
 							catch (final RemoteException ignore)

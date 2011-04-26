@@ -130,6 +130,7 @@ public class ToFileTransferObject implements ITransferObject
 		catch (IOException ignore)
 		{
 		}
+		fileData.refreshSize();
 		return fileData;
 	}
 
