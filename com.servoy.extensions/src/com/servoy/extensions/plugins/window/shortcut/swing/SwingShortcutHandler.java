@@ -124,6 +124,10 @@ public class SwingShortcutHandler implements IShortcutHandler
 			{
 				return comp;
 			}
+
+			Component parentIComponent = getParentIComponent(comp);
+			if (parentIComponent != null) return parentIComponent;
+
 			if (comp instanceof Container)
 			{
 				if (lst == null)
@@ -136,6 +140,17 @@ public class SwingShortcutHandler implements IShortcutHandler
 				}
 			}
 		}
+	}
+
+	private static Component getParentIComponent(Component component)
+	{
+		Component parent = component;
+		while (parent != null && !(parent instanceof IComponent))
+		{
+			parent = parent.getParent();
+		}
+
+		return parent;
 	}
 
 	public boolean removeShortcut(KeyStroke key)
