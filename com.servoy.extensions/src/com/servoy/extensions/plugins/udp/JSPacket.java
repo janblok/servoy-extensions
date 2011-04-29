@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.udp;
 
 import java.io.UTFDataFormatException;
@@ -21,7 +21,6 @@ import java.net.DatagramPacket;
 
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.Utils;
 
 public class JSPacket implements IScriptObject
 {
@@ -86,10 +85,16 @@ public class JSPacket implements IScriptObject
 		return readShort();
 	}
 
-	public String js_readUTF(Object[] vargs)
+	public String js_readUTF(int length)
 	{
-		return readUTF(vargs);
+		return readUTF(Integer.valueOf(length));
 	}
+
+	public String js_readUTF()
+	{
+		return readUTF(null);
+	}
+
 
 	public void js_writeByte(int v)
 	{
@@ -237,18 +242,18 @@ public class JSPacket implements IScriptObject
 		return utflen + 2;
 	}
 
-	public String readUTF(Object[] vargs)
+	public String readUTF(Integer length)
 	{
 		try
 		{
 			int utflen = 0;
-			if (vargs != null && vargs.length != 0 && vargs[0] != null)
+			if (length == null)
 			{
-				utflen = Utils.getAsInteger(vargs[0]);
+				utflen = readInt();//in.readUnsignedShort();
 			}
 			else
 			{
-				utflen = readInt();//in.readUnsignedShort();
+				utflen = length.intValue();
 			}
 
 			if (utflen > 0 && utflen < enclosed.getLength())
@@ -366,11 +371,12 @@ public class JSPacket implements IScriptObject
 		System.out.println(p.index);
 	}
 
+	@SuppressWarnings("nls")
 	public String[] getParameterNames(String methodName)
 	{
 		if ("readUTF".equals(methodName))
 		{
-			return new String[] { "length" };
+			return new String[] { "[length]" };
 		}
 		else if ("writeByte".equals(methodName))
 		{
@@ -395,6 +401,7 @@ public class JSPacket implements IScriptObject
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String getSample(String methodName)
 	{
 		if ("getLength".equals(methodName) || "getHost".equals(methodName) || "getPort".equals(methodName) || "readUTF".equals(methodName))
@@ -481,6 +488,7 @@ public class JSPacket implements IScriptObject
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String getToolTip(String methodName)
 	{
 		if ("index".equals(methodName))
