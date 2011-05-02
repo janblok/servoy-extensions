@@ -96,6 +96,21 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 		int groupCount = 1;
 		for (IMenuItem elem : menuItems)
 		{
+			String imageIcon = null;
+			if (elem instanceof ScriptableWicketMenuItem)
+			{
+				String iconURL = ((ScriptableWicketMenuItem)elem).getIconURL();
+				if (iconURL != null)
+				{
+					if (iconURL.startsWith("media:///")) //$NON-NLS-1$ 
+					{
+						String mediaUrl = RequestCycle.get().urlFor(new ResourceReference("media")).toString(); //$NON-NLS-1$ 
+						imageIcon = mediaUrl + "?s=" + app.getSolutionName() + "&id=" + iconURL.substring(9); //$NON-NLS-1$ //$NON-NLS-2$ 
+					}
+					else imageIcon = iconURL;
+				}
+			}
+
 			if (elem == null)
 			{
 				groupCount++; // separator
@@ -107,7 +122,16 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				js.append("var menu" + currentMenuNr + " = new YAHOO.widget.Menu('menu" + currentMenuNr + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				js.append(((ScriptableWicketMenu)elem).generateMenuJS(popupMenu, "menu" + currentMenuNr)); //$NON-NLS-1$ 
 
-				js.append("var m" + currentMenuNr + " = new YAHOO.widget.MenuItem('" + elem.getText() + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				String text = elem.getText();
+				if (imageIcon != null)
+				{
+					StringBuilder labelText = new StringBuilder("<html><table><tr>"); //$NON-NLS-1$ 
+					if (imageIcon != null) labelText.append("<td><img src=\"" + imageIcon + "\" style=\"border:none\"/></td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					labelText.append("<td>" + text + "</td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					labelText.append("</tr></table></html>"); //$NON-NLS-1$ 
+					text = labelText.toString();
+				}
+				js.append("var m" + currentMenuNr + " = new YAHOO.widget.MenuItem('" + text + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if (((ScriptableWicketMenu)elem).getBackgroundColor() != null)
 				{
 					js.append("YAHOO.util.Dom.setStyle(m").append(currentMenuNr).append(".element, 'background-color', '").append(((ScriptableWicketMenu)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -127,7 +151,6 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 			}
 			else
 			{
-				String imageIcon = null;
 				String controlClass = null;
 
 				if (elem instanceof ScriptableWicketCheckBoxMenuItem && ((ScriptableWicketCheckBoxMenuItem)elem).isSelected())
@@ -137,20 +160,6 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				else if (elem instanceof ScriptableWicketRadioButtonMenuItem)
 				{
 					controlClass = ((ScriptableWicketRadioButtonMenuItem)elem).isSelected() ? "img_radio_on" : "img_radio_off"; //$NON-NLS-1$ //$NON-NLS-2$ 
-				}
-
-				if (elem instanceof ScriptableWicketMenuItem)
-				{
-					String iconURL = ((ScriptableWicketMenuItem)elem).getIconURL();
-					if (iconURL != null)
-					{
-						if (iconURL.startsWith("media:///")) //$NON-NLS-1$ 
-						{
-							String mediaUrl = RequestCycle.get().urlFor(new ResourceReference("media")).toString(); //$NON-NLS-1$ 
-							imageIcon = mediaUrl + "?s=" + app.getSolutionName() + "&id=" + iconURL.substring(9); //$NON-NLS-1$ //$NON-NLS-2$ 
-						}
-						else imageIcon = iconURL;
-					}
 				}
 
 				String text = elem.getText();

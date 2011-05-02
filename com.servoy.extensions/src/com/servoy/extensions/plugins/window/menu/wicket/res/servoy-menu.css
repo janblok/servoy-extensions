@@ -14,6 +14,12 @@
 	padding:5px 0;
 }
 
+.yuimenuitem-hassubmenu {
+	background-image:url('menuindicator.png');
+	background-position:right center;
+	background-repeat:no-repeat;
+}
+
 .img_checkbox {
 	background-image: url('checkbox.png');
 	background-repeat: no-repeat; 	
