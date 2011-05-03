@@ -313,6 +313,16 @@ public abstract class AbstractMenu implements IScriptObject
 		}
 	}
 
+	public void js_putClientProperty(Object key, Object value)
+	{
+		menu.putClientProperty(key, value);
+	}
+
+	public Object js_getClientProperty(Object key)
+	{
+		return menu.getClientProperty(key);
+	}
+
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
@@ -361,7 +371,14 @@ public abstract class AbstractMenu implements IScriptObject
 		{
 			return new String[] { "name" }; //$NON-NLS-1$ 
 		}
-
+		if ("putClientProperty".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return new String[] { "key", "value" }; //$NON-NLS-1$ 
+		}
+		if ("getClientProperty".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return new String[] { "key" }; //$NON-NLS-1$ 
+		}
 		return null;
 	}
 
@@ -705,6 +722,18 @@ public abstract class AbstractMenu implements IScriptObject
 			sample.append("\n");
 			sample.append("checkbox.setText(\"Changed menu item\");\n");
 		}
+		else if ("putClientProperty".equals(methodName))
+		{
+			sample.append("// " + getToolTip(methodName) + "\n");
+			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n");
+			sample.append("plugins.window.putClientProperty('ToolTipText','some text');\n");
+		}
+		else if ("getClientProperty".equals(methodName))
+		{
+			sample.append("// " + getToolTip(methodName) + "\n");
+			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n");
+			sample.append("var property = plugins.window.getClientProperty('ToolTipText');\n");
+		}
 		else
 		{
 			return null;
@@ -770,6 +799,14 @@ public abstract class AbstractMenu implements IScriptObject
 		if ("getItemIndexByText".equals(methodName))
 		{
 			return "Retrieve the index of the item by text.";
+		}
+		if ("putClientProperty".equals(methodName))
+		{
+			return "Sets the value for the specified element client property key.";
+		}
+		if ("getClientProperty".equals(methodName))
+		{
+			return "Gets the specified client property for the element based on a key.";
 		}
 		return null;
 	}

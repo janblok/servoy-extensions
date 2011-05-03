@@ -17,6 +17,8 @@
 package com.servoy.extensions.plugins.window.menu.wicket;
 
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Icon;
 import javax.swing.KeyStroke;
@@ -176,5 +178,22 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	public String getForegroundColor()
 	{
 		return fgColor;
+	}
+
+	public void putClientProperty(Object key, Object value)
+	{
+		if (clientProperties == null)
+		{
+			clientProperties = new HashMap<Object, Object>();
+		}
+		clientProperties.put(key, value);
+	}
+
+	private Map<Object, Object> clientProperties;
+
+	public Object getClientProperty(Object key)
+	{
+		if (clientProperties == null) return null;
+		return clientProperties.get(key);
 	}
 }

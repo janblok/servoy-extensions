@@ -315,6 +315,16 @@ public abstract class AbstractMenuItem implements IScriptObject
 		menuItem.setForegroundColor(fgColor);
 	}
 
+	public void js_putClientProperty(Object key, Object value)
+	{
+		menuItem.putClientProperty(key, value);
+	}
+
+	public Object js_getClientProperty(Object key)
+	{
+		return menuItem.getClientProperty(key);
+	}
+
 	public static AbstractMenuItem createmenuItem(IClientPluginAccess pluginAccess, IMenuHandler menuHandler, IMenuItem menuItem, MenuItemArgs menuItemArgs,
 		boolean legacyMenubarArguments)
 	{
@@ -417,16 +427,25 @@ public abstract class AbstractMenuItem implements IScriptObject
 		{
 			return new String[] { "foregroundColor" }; //$NON-NLS-1$
 		}
+		if ("putClientProperty".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return new String[] { "key", "value" }; //$NON-NLS-1$ //$NON-NLS-2$ 
+		}
+		if ("getClientProperty".equals(methodName)) //$NON-NLS-1$ 
+		{
+			return new String[] { "key" }; //$NON-NLS-1$ 
+		}
 		return null;
 	}
 
 	public String getSample(String methodName)
 	{
+		StringBuilder sample = new StringBuilder();
+
 		if ("setAccelerator".equals(methodName) || "setMethod".equals(methodName) || "methodArguments".equals(methodName) || "setEnabled".equals(methodName) || //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			"setIcon".equals(methodName) || "setMethod".equals(methodName) || "setMnemonic".equals(methodName) || "setText".equals(methodName) || //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			"setVisible".equals(methodName) || "setBackgroundColor".equals(methodName) || "setForegroundColor".equals(methodName)) //$NON-NLS-1$  //$NON-NLS-2$ //$NON-NLS-3$
 		{
-			StringBuilder sample = new StringBuilder();
 			sample.append("var menu = plugins.window.getMenu(2).getItem(0);\n// "); //$NON-NLS-1$ 
 			sample.append(getToolTip("setText")); //$NON-NLS-1$ 
 			sample.append("\nmenu.setText(\"Servoy\");\n// "); //$NON-NLS-1$ 
@@ -452,17 +471,30 @@ public abstract class AbstractMenuItem implements IScriptObject
 			sample.append("\nmenu.setVisible(true);\n"); //$NON-NLS-1$ 
 			sample.append("\nmenu.setBackgroundColor('#ff0000');\n"); //$NON-NLS-1$
 			sample.append("\nmenu.setForegroundColor('#0000ff');\n"); //$NON-NLS-1$
-			return sample.toString();
 		}
 		else if ("doClick".equals(methodName)) //$NON-NLS-1$ 
 		{
-			StringBuilder sample = new StringBuilder("// "); //$NON-NLS-1$
-			sample.append(getToolTip(methodName));
+			sample.append("// ").append(getToolTip(methodName)); //$NON-NLS-1$
 			sample.append("\n// Clicking a separator will throw an error!\n"); //$NON-NLS-1$ 
 			sample.append("plugins.window.getMenu(2).getItem(0).doClick();\n"); //$NON-NLS-1$ 
-			return sample.toString();
 		}
-		return null;
+		else if ("putClientProperty".equals(methodName)) //$NON-NLS-1$
+		{
+			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n"); //$NON-NLS-1$
+			sample.append("plugins.window.putClientProperty('ToolTipText','some text');\n"); //$NON-NLS-1$
+		}
+		else if ("getClientProperty".equals(methodName)) //$NON-NLS-1$
+		{
+			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n"); //$NON-NLS-1$
+			sample.append("var property = plugins.window.getClientProperty('ToolTipText');\n"); //$NON-NLS-1$
+		}
+		else
+		{
+			return null;
+		}
+		return sample.toString();
 	}
 
 	public String getToolTip(String methodName)
@@ -514,6 +546,14 @@ public abstract class AbstractMenuItem implements IScriptObject
 		if ("setForegroundColor".equals(methodName)) //$NON-NLS-1$ 
 		{
 			return "Set the foreground color of the item."; //$NON-NLS-1$ 
+		}
+		if ("putClientProperty".equals(methodName)) //$NON-NLS-1$
+		{
+			return "Sets the value for the specified element client property key."; //$NON-NLS-1$
+		}
+		if ("getClientProperty".equals(methodName)) //$NON-NLS-1$
+		{
+			return "Gets the specified client property for the element based on a key."; //$NON-NLS-1$
 		}
 		return null;
 	}

@@ -78,4 +78,9 @@ public interface IMenuItem
 	public void setBackgroundColor(String bgColor);
 
 	public void setForegroundColor(String fgColor);
+
+	public void putClientProperty(Object key, Object value);
+
+	public Object getClientProperty(Object key);
+
 }

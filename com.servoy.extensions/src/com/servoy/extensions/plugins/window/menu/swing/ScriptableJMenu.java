@@ -341,4 +341,14 @@ public class ScriptableJMenu implements IMenu
 	{
 		jmenu.setForeground(Utilities.createColor(fgColor));
 	}
+
+	public void putClientProperty(Object key, Object value)
+	{
+		jmenu.putClientProperty(key, value);
+	}
+
+	public Object getClientProperty(Object key)
+	{
+		return jmenu.getClientProperty(key);
+	}
 }

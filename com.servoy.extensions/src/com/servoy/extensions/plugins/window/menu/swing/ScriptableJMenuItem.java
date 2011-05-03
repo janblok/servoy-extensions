@@ -167,4 +167,14 @@ public class ScriptableJMenuItem implements IMenuItem
 	{
 		jMenuItem.setForeground(Utilities.createColor(fgColor));
 	}
+
+	public void putClientProperty(Object key, Object value)
+	{
+		jMenuItem.putClientProperty(key, value);
+	}
+
+	public Object getClientProperty(Object key)
+	{
+		return jMenuItem.getClientProperty(key);
+	}
 }
