@@ -1101,9 +1101,9 @@ public class WindowProvider implements IScriptObject
 		sb.append("var subitem2 = submenu.addCheckBox('he' , globals.myOtherGlobalMethod , 'media:///day_obj.gif')\n");
 		sb.append("var subitem3 = submenu.addCheckBox('more' , globals.myOtherGlobalMethod ,null, 'm') //last parameter is mnemonic-key\n");
 
-		sb.append("\nmenuitem2.setSelected(true);\n");
-		sb.append("menuitem6.setEnabled(false)\n");
-		sb.append("subitem2.setSelected(true);\n");
+		sb.append("\nmenuitem2.selected = true;\n");
+		sb.append("menuitem6.enabled = false\n");
+		sb.append("subitem2.selected = true;\n");
 
 		sb.append("\nvar source = event.getSource()\n");
 		sb.append("if (source != null)\n");
