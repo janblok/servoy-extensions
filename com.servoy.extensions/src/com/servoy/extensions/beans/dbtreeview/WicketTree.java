@@ -34,6 +34,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.tree.AbstractTree;
 import org.apache.wicket.markup.html.tree.ITreeState;
 import org.apache.wicket.model.Model;
@@ -867,6 +868,11 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	public ITreeState getTreeState()
 	{
 		return abstractTree.getTreeState();
+	}
+
+	public void updateTree(AjaxRequestTarget target)
+	{
+		abstractTree.updateTree(target);
 	}
 
 	public RelationInfo js_createRelationInfo()
