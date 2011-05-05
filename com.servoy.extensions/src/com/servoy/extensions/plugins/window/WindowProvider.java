@@ -65,7 +65,6 @@ import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
-import com.servoy.j2db.ui.IComponentProvider;
 import com.servoy.j2db.ui.IContainer;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
@@ -463,9 +462,8 @@ public class WindowProvider implements IScriptObject
 				pop.showPopup(comp, loc.x, loc.y);
 			}
 		}
-		else if (vargs.length >= 2 && (vargs[0] instanceof IComponent || vargs[0] instanceof IComponentProvider) && vargs[1] instanceof Object[])
+		else if (vargs.length >= 2 && vargs[0] instanceof IComponent && vargs[1] instanceof Object[])
 		{
-			if (vargs[0] instanceof IComponentProvider) vargs[0] = ((IComponentProvider)vargs[0]).getComponent();
 			IComponent comp = (IComponent)vargs[0];
 			Object[] items = (Object[])vargs[1];
 			if (comp != null && items != null)
@@ -657,13 +655,6 @@ public class WindowProvider implements IScriptObject
 		{
 			int x, y;
 			int length = args.length;
-			for (int i = 0; i < length; i++)
-			{
-				if (args[i] instanceof IComponentProvider)
-				{
-					args[i] = ((IComponentProvider)args[i]).getComponent();
-				}
-			}
 			if (length == 1 || (length > 1 && (args[length - 1] instanceof IComponent) && (args[length - 2] instanceof IComponent)))
 			{
 				x = 0;
