@@ -23,6 +23,7 @@ import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.ui.IComponent;
+import com.servoy.j2db.ui.IComponentProvider;
 
 /**
  * Popup menu scriptable.
@@ -47,16 +48,24 @@ public class Popup extends AbstractMenu
 		return (IPopupMenu)super.getMenu();
 	}
 
-	public void js_show(IComponent component) throws PluginException
+	public void js_show(Object component) throws PluginException
 	{
-		if (component != null)
+		if (component instanceof IComponent || component instanceof IComponentProvider)
 		{
-			getMenuHandler().showPopup(getMenu(), component, 0, component.getSize().height);
+			if (component instanceof IComponentProvider)
+			{
+				component = ((IComponentProvider)component).getComponent();
+			}
+			getMenuHandler().showPopup(getMenu(), component, 0, ((IComponent)component).getSize().height);
 		}
 	}
 
-	public void js_show(IComponent component, int x, int y) throws PluginException
+	public void js_show(Object component, int x, int y) throws PluginException
 	{
+		if (component instanceof IComponentProvider)
+		{
+			component = ((IComponentProvider)component).getComponent();
+		}
 		getMenuHandler().showPopup(getMenu(), component, x, y);
 	}
 

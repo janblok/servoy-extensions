@@ -3,6 +3,7 @@ package com.servoy.extensions.plugins.spellcheck;
 import java.awt.Component;
 
 import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.ui.IComponentProvider;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.IDelegate;
 
@@ -26,6 +27,10 @@ public class SpellCheckClientProvider implements IScriptObject
 	{
 		try
 		{
+			if (c instanceof IComponentProvider)
+			{
+				c = ((IComponentProvider)c).getComponent();
+			}
 			if (c instanceof IDelegate)
 			{
 				c = ((IDelegate)c).getDelegate();
