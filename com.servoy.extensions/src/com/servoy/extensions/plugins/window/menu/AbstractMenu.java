@@ -393,7 +393,7 @@ public abstract class AbstractMenu implements IScriptObject
 			sample.append("// REMARK: this is especially important when getting items by the index\n"); //$NON-NLS-1$ 
 			sample.append("application.output(plugins.window.getMenu(0).getItemCount());\n"); //$NON-NLS-1$ 
 		}
-		else if ("addMenuItem".equals(methodName)) //$NON-NLS-1$ 
+		else if ("addMenuItem".equals(methodName) || "setIcon".equals(methodName)) //$NON-NLS-1$ 
 		{
 			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ 
 			sample.append("// get the menu at the last index\n"); //$NON-NLS-1$ 

@@ -722,7 +722,7 @@ public class HttpProvider implements IScriptObject
 			retval.append("var client = plugins.http.createHttpClient();\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else if ("createHttpClient".equals(methodName)) //$NON-NLS-1$
+		else if ("createNewHttpClient".equals(methodName)) //$NON-NLS-1$
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//"); //$NON-NLS-1$

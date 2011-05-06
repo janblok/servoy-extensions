@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -48,7 +48,7 @@ public class HeadlessClientProvider implements IScriptObject
 
 	/**
 	 * Creates a headless client on the server that will open the given solution
-	 *  
+	 * 
 	 * @param solutionname The solution to load
 	 * @param username The user name that is used to login to the solution
 	 * @param password The password for the user
@@ -109,10 +109,34 @@ public class HeadlessClientProvider implements IScriptObject
 		return null;
 	}
 
+	@SuppressWarnings("nls")
 	public String getSample(String methodName)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sample = new StringBuilder();
+		if ("createClient".equals(methodName))
+		{
+			sample.append("// " + getToolTip(methodName) + "\n");
+			sample.append("var headlessClient = plugins.headlessclient.createClient(\"someSolution\", \"user\", \"pass\", null);\n");
+			sample.append("if (headlessClient != null && headlessClient.isValid()) { \n");
+			sample.append("\t var x = new Object();\n");
+			sample.append("\t x.name = 'remote1';\n");
+			sample.append("\t x.number = 10;\n");
+			sample.append("headlessClient.queueMethod(null, \"remoteMethod\", [x], callback);\n");
+			sample.append("}\n");
+		}
+		else if ("getClient".equals(methodName))
+		{
+			sample.append("// " + getToolTip(methodName) + "\n");
+			sample.append("var headlessClient = plugins.headlessclient.getClient(\"clientID\");\n");
+			sample.append("if (headlessClient != null && headlessClient.isValid()) {\n");
+			sample.append("\t headlessClient.queueMethod(null, \"someRemoteMethod\", null, callback);\n");
+			sample.append("}\n");
+		}
+		else
+		{
+			return null;
+		}
+		return sample.toString();
 	}
 
 	@SuppressWarnings("nls")
@@ -120,11 +144,11 @@ public class HeadlessClientProvider implements IScriptObject
 	{
 		if ("createClient".equals(methodName))
 		{
-			return "creates a headless client that will open the given solution";
+			return "Creates a headless client that will open the given solution.";
 		}
 		if ("getClient".equals(methodName))
 		{
-			return "gets an existing headless client for the given client uuid";
+			return "Gets an existing headless client for the given client uuid.";
 		}
 		return null;
 	}

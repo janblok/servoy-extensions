@@ -231,7 +231,7 @@ public class RawSQLProvider implements IScriptObject
 
 		retval.append("\n// ").append(getToolTip(methodName)).append('\n'); //$NON-NLS-1$
 
-		if ("executeSQL".equals(methodName) || "flushAllClientsCache".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$
+		if ("executeSQL".equals(methodName) || "flushAllClientsCache".equals(methodName) || "getException".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		{
 			retval.append("var country = 'NL'\n"); //$NON-NLS-1$
 			retval.append("var done = plugins.rawSQL.executeSQL(\"example_data\",\"employees\",\"update employees set country = ?\", [country])\n"); //$NON-NLS-1$

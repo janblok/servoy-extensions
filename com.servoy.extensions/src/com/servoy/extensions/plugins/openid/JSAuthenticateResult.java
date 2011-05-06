@@ -79,13 +79,16 @@ public class JSAuthenticateResult implements IJavaScriptType, IScriptObject
 			retval.append("var email = authenticateResult.getAttributeValue('email')\n");
 			return retval.toString();
 		}
-		else if ("getAttributeValue".equals(methodName))
+		else if ("getAttributeValues".equals(methodName))
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//");
 			retval.append(getToolTip(methodName));
 			retval.append("\n");
 			retval.append("var namesArray = authenticateResult.getAttributeValues('names')\n");
+			retval.append("for (var i = 0; i < namesArray.length; i++) { \n");
+			retval.append("	application.output(namesArray[i]); \n");
+			retval.append("} \n");
 			return retval.toString();
 		}
 		return null;
