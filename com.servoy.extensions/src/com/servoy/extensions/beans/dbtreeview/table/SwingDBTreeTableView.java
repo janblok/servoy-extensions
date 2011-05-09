@@ -36,6 +36,7 @@ import javax.swing.event.TreeExpansionEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumnModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
@@ -286,12 +287,20 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname)
 	{
+		return js_createColumn(servername, tablename, header, fieldname, -1);
+	}
+
+	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth)
+	{
 		Column column = new Column();
 		column.setDBTreeTableView(dbTreeTableView);
 		column.setServerName(servername);
 		column.setTableName(tablename);
+		column.setPreferredWidth(preferredWidth);
 		column.js_setHeader(header);
 		column.js_setDataprovider(fieldname);
+
+		if (preferredWidth != -1) treeTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 		dbTreeTableView.addColumn(column);
 		treeTableModel.fireTableStructureChanged();
@@ -383,6 +392,13 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		treeTableModel.fireTableStructureChanged();
 	}
 
+	public void js_setTreeColumnPreferredWidth(int preferredWidth)
+	{
+		dbTreeTableView.setTreeColumnPreferredWidth(preferredWidth);
+		treeTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		treeTableModel.fireTableStructureChanged();
+	}
+
 	@Override
 	public void tableChanged(TableModelEvent e)
 	{
@@ -448,6 +464,26 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 
 			callMethodOnRightClick(tn, treeTableLocationToWindow.x + e.getX(), treeTableLocationToWindow.y + e.getY(),
 				Integer.valueOf(treeTable.columnAtPoint(e.getPoint())));
+		}
+	}
+
+	public void updateColumnsWidth()
+	{
+		if (dbTreeTableView != null)
+		{
+			TableColumnModel tcm = treeTable.getColumnModel();
+			int columnCount = tcm.getColumnCount();
+			int preferredWidth = dbTreeTableView.getTreeColumnPreferredWidth();
+			if (columnCount > 0) tcm.getColumn(0).setPreferredWidth(preferredWidth);
+
+
+			ArrayList<ArrayList<Column>> columns = dbTreeTableView.getColumns();
+			int columnIdx = 1;
+			for (ArrayList<Column> sameHeaderColumns : columns)
+			{
+				preferredWidth = sameHeaderColumns.get(0).getPreferredWidth();
+				if (columnIdx < columnCount) tcm.getColumn(columnIdx++).setPreferredWidth(preferredWidth);
+			}
 		}
 	}
 }

@@ -112,4 +112,16 @@ public class DBTreeTableView extends DBTreeView
 	{
 		columnsChanged = true;
 	}
+
+	private int treeColumnPreferredWidth;
+
+	public void setTreeColumnPreferredWidth(int preferredWidth)
+	{
+		this.treeColumnPreferredWidth = preferredWidth;
+	}
+
+	public int getTreeColumnPreferredWidth()
+	{
+		return treeColumnPreferredWidth;
+	}
 }

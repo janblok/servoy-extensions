@@ -47,6 +47,9 @@ public class DBTreeTableColumn extends AbstractLightWeightColumn
 
 		this.bindingInfo = bindingInfo;
 		this.columns = columns;
+
+		int preferredWidth = columns.get(0).getPreferredWidth();
+		if (preferredWidth != -1) setInitialSize(preferredWidth);
 	}
 
 	public String getNodeValue(TreeNode node)

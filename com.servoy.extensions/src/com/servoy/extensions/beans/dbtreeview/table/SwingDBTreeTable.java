@@ -252,4 +252,11 @@ public class SwingDBTreeTable extends JTable implements ICompositeDragNDrop
 			dragEnabled = true;
 		}
 	}
+
+	@Override
+	public void createDefaultColumnsFromModel()
+	{
+		super.createDefaultColumnsFromModel();
+		if (parent != null) parent.updateColumnsWidth();
+	}
 }

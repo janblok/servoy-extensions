@@ -126,9 +126,13 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		{
 			return new String[] { "treeColumnHeader" };
 		}
+		else if ("setTreeColumnPreferredWidth".equals(methodName))
+		{
+			return new String[] { "treeColumnPreferredWidth" };
+		}
 		else if ("createColumn".equals(methodName))
 		{
-			return new String[] { "servername", "tablename", "header", "fieldname" };
+			return new String[] { "servername", "tablename", "header", "fieldname", "[preferredWidth]" };
 		}
 		else if ("setRowHeight".equals(methodName))
 		{
@@ -262,13 +266,22 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 			retval.append("%%elementName%%.setTreeColumnHeader('Tree Column Header');\n");
 			return retval.toString();
 		}
+		else if ("setTreeColumnPreferredWidth".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//");
+			retval.append(getToolTip(methodName));
+			retval.append("\n");
+			retval.append("%%elementName%%.setTreeColumnPreferredWidth(200);\n");
+			return retval.toString();
+		}
 		else if ("createColumn".equals(methodName))
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//");
 			retval.append(getToolTip(methodName));
 			retval.append("\n");
-			retval.append("%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname');\n");
+			retval.append("%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);\n");
 			return retval.toString();
 		}
 		else if ("removeAllColumns".equals(methodName))
@@ -414,6 +427,10 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 		else if ("setTreeColumnHeader".equals(methodName))
 		{
 			return "Set the header text for the tree column";
+		}
+		else if ("setTreeColumnPreferredWidth".equals(methodName))
+		{
+			return "Set the preferred width in pixels for the tree column";
 		}
 		else if ("createColumn".equals(methodName))
 		{

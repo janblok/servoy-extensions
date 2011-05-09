@@ -649,10 +649,16 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname)
 	{
+		return js_createColumn(servername, tablename, header, fieldname, -1);
+	}
+
+	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth)
+	{
 		Column column = new Column();
 		column.setDBTreeTableView(dbTreeTableView);
 		column.setServerName(servername);
 		column.setTableName(tablename);
+		column.setPreferredWidth(preferredWidth);
 		column.js_setHeader(header);
 		column.js_setDataprovider(fieldname);
 
@@ -682,6 +688,12 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	{
 		dbTreeTableView.setTreeColumnHeader(treeColumnHeader);
 		dbTreeTableTreeColumnHeaderModel.setObject(treeColumnHeader);
+	}
+
+	public void js_setTreeColumnPreferredWidth(int preferredWidth)
+	{
+		dbTreeTableView.setTreeColumnPreferredWidth(preferredWidth);
+		dbTreeTableTreeColumn.setInitialSize(preferredWidth);
 	}
 
 	public void js_setRowHeight(int height)

@@ -30,6 +30,7 @@ public class Column implements IScriptObject
 
 	private String header;
 	private String dataprovider;
+	private int preferredWidth;
 
 	private DBTreeTableView dbTreeTableView;
 
@@ -46,6 +47,16 @@ public class Column implements IScriptObject
 	public void setTableName(String tableName)
 	{
 		this.tableName = tableName;
+	}
+
+	public void setPreferredWidth(int preferredWidth)
+	{
+		this.preferredWidth = preferredWidth;
+	}
+
+	public int getPreferredWidth()
+	{
+		return preferredWidth;
 	}
 
 	public String getDataprovider()

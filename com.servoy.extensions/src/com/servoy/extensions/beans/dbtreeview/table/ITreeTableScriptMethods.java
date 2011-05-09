@@ -27,7 +27,11 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 {
 	public void js_setTreeColumnHeader(String treeColumnHeader);
 
+	public void js_setTreeColumnPreferredWidth(int preferredWidth);
+
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname);
+
+	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth);
 
 	public void js_removeAllColumns();
 }
