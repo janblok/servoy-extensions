@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.swing;
 
 import java.awt.Component;
@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -267,16 +268,33 @@ public class SwingMenuHandler implements IMenuHandler
 	private JMenuBar getJMenuBar(String windowName, boolean create)
 	{
 		Window window = clientPluginAccess.getWindow(windowName);
-		if (!(window instanceof JFrame))
+		JMenuBar menuBar;
+		if (window instanceof JFrame)
+		{
+			menuBar = ((JFrame)window).getJMenuBar();
+		}
+		else if (window instanceof JDialog)
+		{
+			menuBar = ((JDialog)window).getJMenuBar();
+		}
+		else
 		{
 			return null;
 		}
-		JMenuBar menuBar = ((JFrame)window).getJMenuBar();
+
 		if (menuBar == null && create)
 		{
 			menuBar = new JMenuBar();
-			((JFrame)window).setJMenuBar(menuBar);
+			if (window instanceof JFrame)
+			{
+				((JFrame)window).setJMenuBar(menuBar);
+			}
+			else if (window instanceof JDialog)
+			{
+				((JDialog)window).setJMenuBar(menuBar);
+			}
 		}
+
 		return menuBar;
 	}
 
