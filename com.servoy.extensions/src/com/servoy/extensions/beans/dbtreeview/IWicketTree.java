@@ -16,6 +16,9 @@
  */
 package com.servoy.extensions.beans.dbtreeview;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+
+import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IProviderStylePropertyChanges;
 
@@ -26,5 +29,7 @@ import com.servoy.j2db.ui.IProviderStylePropertyChanges;
  */
 public interface IWicketTree extends IComponent, ITreeViewScriptMethods, IProviderStylePropertyChanges
 {
+	IClientPluginAccess getClientPluginAccess();
 
+	void generateAjaxResponse(AjaxRequestTarget target);
 }

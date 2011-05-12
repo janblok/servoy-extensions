@@ -30,10 +30,9 @@ import javax.swing.border.Border;
 import javax.swing.tree.TreeNode;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
-import org.apache.wicket.ajax.calldecorator.CancelEventIfNoAjaxDecorator;
+import org.apache.wicket.ajax.calldecorator.AjaxPostprocessingCallDecorator;
 import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -52,6 +51,8 @@ import com.servoy.extensions.beans.dbtreeview.BindingInfo;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.extensions.beans.dbtreeview.IWicketTree;
+import com.servoy.extensions.beans.dbtreeview.MouseAction;
+import com.servoy.extensions.beans.dbtreeview.MouseEventBehavior;
 import com.servoy.extensions.beans.dbtreeview.RelationInfo;
 import com.servoy.extensions.beans.dbtreeview.WicketTree;
 import com.servoy.j2db.dataprocessing.IRecord;
@@ -164,7 +165,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		}
 	}
 
-	protected void generateAjaxResponse(AjaxRequestTarget target)
+	public void generateAjaxResponse(AjaxRequestTarget target)
 	{
 		synchronized (wicketTree)
 		{
@@ -173,6 +174,11 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			if (application instanceof IWebClientPluginAccess) ((IWebClientPluginAccess)application).generateAjaxResponse(target);
 			if (isChanged) wicketTree.jsChangeRecorder.setChanged();
 		}
+	}
+
+	public IClientPluginAccess getClientPluginAccess()
+	{
+		return application;
 	}
 
 	@Override
@@ -988,65 +994,135 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	{
 		super.onRowPopulated(rowComponent);
 		if (dragEnabled) addDragNDropBehavior(rowComponent);
-		rowComponent.add(new AjaxEventBehavior("oncontextmenu")
+		rowComponent.add(new MouseEventBehavior(new MouseAction(this)
 		{
-			private static final long serialVersionUID = 1L;
-
 			@Override
-			protected void onEvent(AjaxRequestTarget target)
+			public String getName()
 			{
-				String mx = getComponent().getRequest().getParameter("mx");
-				String my = getComponent().getRequest().getParameter("my");
-				onNodeRightClick(target, rowComponent.getDefaultModelObject(), Integer.parseInt(mx), Integer.parseInt(my), null);
+				return "onclick";
 			}
 
 			@Override
-			protected IAjaxCallDecorator getAjaxCallDecorator()
+			public Object getModelObject()
 			{
-				return new CancelEventIfNoAjaxDecorator();
+				return rowComponent.getDefaultModelObject();
 			}
 
 			@Override
-			public CharSequence getCallbackUrl(final boolean onlyTargetActivePage)
+			public String getReturnProvider(UserNode userNode)
 			{
-				CharSequence callbackURL = super.getCallbackUrl(onlyTargetActivePage);
-				return callbackURL.toString() +
-					"&mx=' + (event.pageX ? event.pageX : event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft) + '&my=' + (event.pageY ? event.pageY : event.clientY + document.body.scrollLeft + document.documentElement.scrollLeft) + '";
-			}
-
-			@Override
-			protected CharSequence getCallbackScript()
-			{
-				return getCallbackScript(true);
-			}
-		});
-
-	}
-
-	protected void onNodeRightClick(AjaxRequestTarget target, Object tn, int x, int y, Object arg)
-	{
-		if (tn instanceof FoundSetTreeModel.UserNode)
-		{
-			FoundSetTreeModel.UserNode un = (FoundSetTreeModel.UserNode)tn;
-			IRecord r = un.getRecord();
-			if (r != null)
-			{
-				String returnProvider = bindingInfo.getReturnDataproviderOnRightClick(un);
+				String returnProvider = bindingInfo.getReturnDataproviderOnClick(userNode);
 				if (returnProvider == null)
 				{
-					returnProvider = wicketTree.bindingInfo.getReturnDataproviderOnRightClick((FoundSetTreeModel.UserNode)tn);
+					returnProvider = wicketTree.bindingInfo.getReturnDataproviderOnClick(userNode);
 				}
 
-				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
-				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]), Integer.valueOf(x), Integer.valueOf(y), arg };
-
-				FunctionDefinition f = wicketTree.bindingInfo.getMethodToCallOnRightClick((FoundSetTreeModel.UserNode)tn);
-				if (f != null)
-				{
-					f.execute(application, args, false);
-					generateAjaxResponse(target);
-				}
+				return returnProvider;
 			}
-		}
+
+			@Override
+			public FunctionDefinition getMethodToCall(UserNode userNode)
+			{
+				return wicketTree.bindingInfo.getMethodToCallOnClick(userNode);
+			}
+
+			@Override
+			public AjaxPostprocessingCallDecorator getPostprocessingCallDecorator()
+			{
+				return new AjaxPostprocessingCallDecorator(null)
+				{
+					private static final long serialVersionUID = 1L;
+
+					@SuppressWarnings("nls")
+					@Override
+					public CharSequence postDecorateScript(CharSequence script)
+					{
+						return "Servoy.Utils.startClickTimer(function() { " + script + " Servoy.Utils.clickTimerRunning = false; return false; });";
+					}
+				};
+			}
+		}));
+
+		rowComponent.add(new MouseEventBehavior(new MouseAction(this)
+		{
+			@Override
+			public String getName()
+			{
+				return "ondblclick";
+			}
+
+			@Override
+			public Object getModelObject()
+			{
+				return rowComponent.getDefaultModelObject();
+			}
+
+			@Override
+			public String getReturnProvider(UserNode userNode)
+			{
+				String returnProvider = bindingInfo.getReturnDataproviderOnDoubleClick(userNode);
+				if (returnProvider == null)
+				{
+					returnProvider = wicketTree.bindingInfo.getReturnDataproviderOnDoubleClick(userNode);
+				}
+
+				return returnProvider;
+			}
+
+			@Override
+			public FunctionDefinition getMethodToCall(UserNode userNode)
+			{
+				return wicketTree.bindingInfo.getMethodToCallOnDoubleClick(userNode);
+			}
+
+			@Override
+			public AjaxPostprocessingCallDecorator getPostprocessingCallDecorator()
+			{
+				return new AjaxPostprocessingCallDecorator(null)
+				{
+					private static final long serialVersionUID = 1L;
+
+					@SuppressWarnings("nls")
+					@Override
+					public CharSequence postDecorateScript(CharSequence script)
+					{
+						return "Servoy.Utils.stopClickTimer();" + script + "return !" + IAjaxCallDecorator.WICKET_CALL_RESULT_VAR + ";";
+					}
+				};
+			}
+		}));
+
+		rowComponent.add(new MouseEventBehavior(new MouseAction(this)
+		{
+			@Override
+			public String getName()
+			{
+				return "oncontextmenu";
+			}
+
+			@Override
+			public Object getModelObject()
+			{
+				return rowComponent.getDefaultModelObject();
+			}
+
+			@Override
+			public String getReturnProvider(UserNode userNode)
+			{
+				String returnProvider = bindingInfo.getReturnDataproviderOnRightClick(userNode);
+				if (returnProvider == null)
+				{
+					returnProvider = wicketTree.bindingInfo.getReturnDataproviderOnRightClick(userNode);
+				}
+
+				return returnProvider;
+			}
+
+			@Override
+			public FunctionDefinition getMethodToCall(UserNode userNode)
+			{
+				return wicketTree.bindingInfo.getMethodToCallOnRightClick(userNode);
+			}
+		}));
 	}
 }

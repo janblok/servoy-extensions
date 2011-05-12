@@ -665,6 +665,61 @@ public class BindingInfo
 		}
 	}
 
+	public FunctionDefinition getMethodToCallOnDoubleClick(FoundSetTreeModel.UserNode tn)
+	{
+		Binding tbi = getBinding(tn);
+
+		if (tbi != null)
+		{
+			return tbi.getMethodToCallOnDoubleClick();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public String getReturnDataproviderOnDoubleClick(FoundSetTreeModel.UserNode tn)
+	{
+		Binding tbi = getBinding(tn);
+
+		if (tbi != null)
+		{
+			return tbi.getReturnDataproviderOnDoubleClick();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public FunctionDefinition getMethodToCallOnClick(FoundSetTreeModel.UserNode tn)
+	{
+		Binding tbi = getBinding(tn);
+
+		if (tbi != null)
+		{
+			return tbi.getMethodToCallOnClick();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public String getReturnDataproviderOnClick(FoundSetTreeModel.UserNode tn)
+	{
+		Binding tbi = getBinding(tn);
+
+		if (tbi != null)
+		{
+			return tbi.getReturnDataproviderOnClick();
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	public void addBinding(Binding b)
 	{

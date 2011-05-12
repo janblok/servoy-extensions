@@ -52,6 +52,10 @@ public class Binding implements IScriptObject
 	private String returnDataproviderOnCheckBoxChange;
 	private FunctionDefinition methodToCallOnRightClick;
 	private String returnDataproviderOnRightClick;
+	private FunctionDefinition methodToCallOnDoubleClick;
+	private String returnDataproviderOnDoubleClick;
+	private FunctionDefinition methodToCallOnClick;
+	private String returnDataproviderOnClick;
 
 	private Object[] nRelationInfos;
 
@@ -169,6 +173,16 @@ public class Binding implements IScriptObject
 		return returnDataproviderOnRightClick;
 	}
 
+	public String getReturnDataproviderOnDoubleClick()
+	{
+		return returnDataproviderOnDoubleClick;
+	}
+
+	public String getReturnDataproviderOnClick()
+	{
+		return returnDataproviderOnClick;
+	}
+
 	public String getReturnDataproviderOnCheckBoxChange()
 	{
 		return returnDataproviderOnCheckBoxChange;
@@ -231,7 +245,7 @@ public class Binding implements IScriptObject
 		return methodToCallOnRightClick;
 	}
 
-	public void setMethodToCallOnRightClick(Function methodToCallOnRightClick, String returnDataproviderOnRightClick)
+	public void js_setMethodToCallOnRightClick(Function methodToCallOnRightClick, String returnDataproviderOnRightClick)
 	{
 		if (methodToCallOnRightClick != null)
 		{
@@ -240,8 +254,32 @@ public class Binding implements IScriptObject
 		}
 	}
 
-	public void js_setMethodToCallOnRightClick(Function methodToCallOnRightClick, String returnDataproviderOnRightClick)
+	public FunctionDefinition getMethodToCallOnDoubleClick()
 	{
+		return methodToCallOnDoubleClick;
+	}
+
+	public void js_setMethodToCallOnDoubleClick(Function methodToCallOnDoubleClick, String returnDataproviderOnDoubleClick)
+	{
+		if (methodToCallOnDoubleClick != null)
+		{
+			this.methodToCallOnDoubleClick = new FunctionDefinition(methodToCallOnDoubleClick);
+			this.returnDataproviderOnDoubleClick = returnDataproviderOnDoubleClick;
+		}
+	}
+
+	public FunctionDefinition getMethodToCallOnClick()
+	{
+		return methodToCallOnClick;
+	}
+
+	public void js_setMethodToCallOnClick(Function methodToCallOnClick, String returnDataproviderOnClick)
+	{
+		if (methodToCallOnClick != null)
+		{
+			this.methodToCallOnClick = new FunctionDefinition(methodToCallOnClick);
+			this.returnDataproviderOnClick = returnDataproviderOnClick;
+		}
 	}
 
 	public FunctionDefinition getMethodToCallOnCheckBoxChange()
@@ -261,17 +299,6 @@ public class Binding implements IScriptObject
 	public FunctionDefinition getCallBack()
 	{
 		return callBack;
-	}
-
-	/**
-	 * for compatibility
-	 * 
-	 * @deprecated
-	 */
-	@Deprecated
-	public void js_setMethodToCallOnClick(Function methodToCallOnClick, String returnDataprovider)
-	{
-		js_setCallBackInfo(methodToCallOnClick, returnDataprovider);
 	}
 
 	public void js_setCallBackInfo(Function f, String returnDataprovider)
@@ -442,9 +469,17 @@ public class Binding implements IScriptObject
 		{
 			return "Set callback method for node selection and double click";
 		}
+		else if (methodName.endsWith("MethodToCallOnClick"))
+		{
+			return "Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
+		}
 		else if (methodName.endsWith("MethodToCallOnRightClick"))
 		{
 			return "Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
+		}
+		else if (methodName.endsWith("MethodToCallOnDoubleClick"))
+		{
+			return "Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
 		}
 		else if (methodName.endsWith("ConfigurationDataprovider"))
 		{
@@ -473,7 +508,7 @@ public class Binding implements IScriptObject
 
 	public boolean isDeprecated(String methodName)
 	{
-		return "setMethodToCallOnClick".equals(methodName);
+		return false;
 	}
 
 	@Override

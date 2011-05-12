@@ -20,7 +20,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.Transparency;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -38,6 +41,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.Timer;
 import javax.swing.ToolTipManager;
 import javax.swing.border.Border;
 import javax.swing.event.TableModelEvent;
@@ -846,19 +850,39 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		}
 	}
 
+	protected final static int clickInterval = ((Integer)Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval")).intValue();
+	protected Timer clickTimer;
 
 	/*
 	 * Tree node mouse click listener
 	 */
-	protected void mouseClicked(MouseEvent e)
+	protected void mouseClicked(final MouseEvent e)
 	{
-		if (e.getClickCount() == 2)
+		TreePath selectedPath = tree.getSelectionPath();
+		if (selectedPath != null)
 		{
-			TreePath selectedPath = tree.getSelectionPath();
-			if (selectedPath != null)
+			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
+			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			Point treeLocation = tree.getLocationOnScreen();
+			final Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
+
+			if (e.getClickCount() == 1)
 			{
-				DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
+				clickTimer = new Timer(clickInterval, new ActionListener()
+				{
+					public void actionPerformed(ActionEvent ev)
+					{
+						callMethodOnClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(), null);
+					}
+				});
+				clickTimer.setRepeats(false);
+				clickTimer.start();
+			}
+			else if (e.getClickCount() == 2)
+			{
+				clickTimer.stop();
 				callMethod(tn);
+				callMethodOnDoubleClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(), null);
 			}
 		}
 	}
@@ -959,6 +983,50 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]), Integer.valueOf(x), Integer.valueOf(y), arg };
 
 				FunctionDefinition f = bindingInfo.getMethodToCallOnRightClick((FoundSetTreeModel.UserNode)tn);
+				if (f != null)
+				{
+					f.execute(application, args, true);
+				}
+			}
+		}
+	}
+
+	protected void callMethodOnDoubleClick(DefaultMutableTreeNode tn, int x, int y, Object arg)
+	{
+		if (tn instanceof FoundSetTreeModel.UserNode)
+		{
+			FoundSetTreeModel.UserNode un = (FoundSetTreeModel.UserNode)tn;
+			IRecord r = un.getRecord();
+			if (r != null)
+			{
+				String returnProvider = bindingInfo.getReturnDataproviderOnDoubleClick(un);
+
+				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
+				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]), Integer.valueOf(x), Integer.valueOf(y), arg };
+
+				FunctionDefinition f = bindingInfo.getMethodToCallOnDoubleClick((FoundSetTreeModel.UserNode)tn);
+				if (f != null)
+				{
+					f.execute(application, args, true);
+				}
+			}
+		}
+	}
+
+	protected void callMethodOnClick(DefaultMutableTreeNode tn, int x, int y, Object arg)
+	{
+		if (tn instanceof FoundSetTreeModel.UserNode)
+		{
+			FoundSetTreeModel.UserNode un = (FoundSetTreeModel.UserNode)tn;
+			IRecord r = un.getRecord();
+			if (r != null)
+			{
+				String returnProvider = bindingInfo.getReturnDataproviderOnClick(un);
+
+				String[] server_table = DataSourceUtils.getDBServernameTablename(un.getFoundSet().getDataSource());
+				Object[] args = new Object[] { r.getValue(returnProvider), (server_table == null ? null : server_table[1]), Integer.valueOf(x), Integer.valueOf(y), arg };
+
+				FunctionDefinition f = bindingInfo.getMethodToCallOnClick((FoundSetTreeModel.UserNode)tn);
 				if (f != null)
 				{
 					f.execute(application, args, true);

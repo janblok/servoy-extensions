@@ -21,6 +21,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -223,8 +226,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				int clickedColumnIdx = treeTable.getColumnModel().getColumnIndexAtX(e.getX());
-				if (clickedColumnIdx == 0) SwingDBTreeTableView.this.mouseClicked(e); // it is the tree column
+				SwingDBTreeTableView.this.mouseClicked(e);
 			}
 
 			@Override
@@ -448,6 +450,40 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	public void js_setOnDrop(Function fOnDrop)
 	{
 		treeTable.setOnDropCallback(fOnDrop);
+	}
+
+	@Override
+	protected void mouseClicked(final MouseEvent e)
+	{
+		TreePath selectedPath = tree.getSelectionPath();
+		if (selectedPath != null)
+		{
+			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
+			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			Point treeLocation = treeTable.getLocationOnScreen();
+			final Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
+
+			if (e.getClickCount() == 1)
+			{
+				clickTimer = new Timer(clickInterval, new ActionListener()
+				{
+					public void actionPerformed(ActionEvent ev)
+					{
+						callMethodOnClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(),
+							Integer.valueOf(treeTable.columnAtPoint(e.getPoint())));
+					}
+				});
+				clickTimer.setRepeats(false);
+				clickTimer.start();
+			}
+			else if (e.getClickCount() == 2)
+			{
+				clickTimer.stop();
+				callMethod(tn);
+				callMethodOnDoubleClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(),
+					Integer.valueOf(treeTable.columnAtPoint(e.getPoint())));
+			}
+		}
 	}
 
 	@Override
