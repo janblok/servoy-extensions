@@ -20,14 +20,11 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -43,6 +40,8 @@ import com.servoy.extensions.plugins.window.menu.IMenuHandler;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.menu.IPopupMenu;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.ui.IComponent;
@@ -267,31 +266,19 @@ public class SwingMenuHandler implements IMenuHandler
 
 	private JMenuBar getJMenuBar(String windowName, boolean create)
 	{
-		Window window = clientPluginAccess.getWindow(windowName);
-		JMenuBar menuBar;
-		if (window instanceof JFrame)
+		IRuntimeWindow window = clientPluginAccess.getRuntimeWindow(windowName);
+		JMenuBar menuBar = null;
+		if (window instanceof ISwingRuntimeWindow)
 		{
-			menuBar = ((JFrame)window).getJMenuBar();
-		}
-		else if (window instanceof JDialog)
-		{
-			menuBar = ((JDialog)window).getJMenuBar();
-		}
-		else
-		{
-			return null;
+			menuBar = ((ISwingRuntimeWindow)window).getJMenuBar();
 		}
 
 		if (menuBar == null && create)
 		{
 			menuBar = new JMenuBar();
-			if (window instanceof JFrame)
+			if (window instanceof ISwingRuntimeWindow)
 			{
-				((JFrame)window).setJMenuBar(menuBar);
-			}
-			else if (window instanceof JDialog)
-			{
-				((JDialog)window).setJMenuBar(menuBar);
+				((ISwingRuntimeWindow)window).setJMenuBar(menuBar);
 			}
 		}
 

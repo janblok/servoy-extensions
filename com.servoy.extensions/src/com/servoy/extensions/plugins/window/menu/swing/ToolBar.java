@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu.swing;
 
 
@@ -36,6 +36,8 @@ import com.servoy.extensions.plugins.window.menu.IToolBar;
 import com.servoy.extensions.plugins.window.menu.ToolBarButton;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
@@ -250,7 +252,11 @@ public class ToolBar implements IToolBar, IScriptObject
 		else if (remove)
 		{
 			panel.removeToolBar(_internalName);
-			_application.getWindow(null).validate();
+			IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
+			if (runtimeWindow instanceof ISwingRuntimeWindow)
+			{
+				((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+			}
 		}
 		else
 		{
@@ -768,7 +774,11 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 		_toolBar.validate();
 
-		_application.getWindow(null).validate();
+		IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
+		if (runtimeWindow instanceof ISwingRuntimeWindow)
+		{
+			((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+		}
 	}
 
 	public void js_removeItem(int index) throws PluginException
@@ -889,7 +899,11 @@ public class ToolBar implements IToolBar, IScriptObject
 	{
 		_toolBar.validate();
 
-		_application.getWindow(null).validate();
+		IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
+		if (runtimeWindow instanceof ISwingRuntimeWindow)
+		{
+			((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+		}
 	}
 
 	public void js_visibleItem(int index, boolean visible) throws PluginException

@@ -35,7 +35,6 @@ import javax.swing.KeyStroke;
 import org.mozilla.javascript.Function;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -50,6 +49,7 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -59,6 +59,8 @@ import com.servoy.extensions.plugins.window.shortcut.wicket.WicketShortcutHandle
 import com.servoy.extensions.plugins.window.util.Utilities;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -530,7 +532,11 @@ public class WindowProvider implements IScriptObject
 				panel.removeToolBar(name);
 			}
 
-			plugin.getClientPluginAccess().getWindow(null).validate();
+			IRuntimeWindow runtimeWindow = getClientPluginAccess().getRuntimeWindow(null);
+			if (runtimeWindow instanceof ISwingRuntimeWindow)
+			{
+				((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+			}
 		}
 	}
 
@@ -1182,12 +1188,16 @@ public class WindowProvider implements IScriptObject
 	{
 		if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 		{
-			Window window = getClientPluginAccess().getWindow(windowName);
-			if (window != null && window instanceof JFrame)
+			IRuntimeWindow runtimeWindow = getClientPluginAccess().getRuntimeWindow(windowName);
+			if (runtimeWindow instanceof ISwingRuntimeWindow)
 			{
-				JFrame frame = (JFrame)window;
-				frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
-				frame.repaint();
+				Window window = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (window != null && window instanceof JFrame)
+				{
+					JFrame frame = (JFrame)window;
+					frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
+					frame.repaint();
+				}
 			}
 		}
 	}
