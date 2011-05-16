@@ -355,7 +355,10 @@ public class WindowProvider implements IScriptObject
 	{
 		if (graphicsDevice == null)
 		{
-			graphicsDevice = plugin.getClientPluginAccess().getCurrentWindow().getGraphicsConfiguration().getDevice();
+			IRuntimeWindow runtimeWindow = plugin.getClientPluginAccess().getCurrentRuntimeWindow();
+			Window currentWindow = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			graphicsDevice = currentWindow.getGraphicsConfiguration().getDevice();
 		}
 		return graphicsDevice;
 	}
@@ -366,7 +369,9 @@ public class WindowProvider implements IScriptObject
 		{
 			if (full)
 			{
-				Window currentWindow = plugin.getClientPluginAccess().getCurrentWindow();
+				IRuntimeWindow runtimeWindow = plugin.getClientPluginAccess().getCurrentRuntimeWindow();
+				Window currentWindow = null;
+				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
 				if (getGraphicsDevice().getFullScreenWindow() == currentWindow) return;
 				if (currentWindow instanceof JFrame)
 				{
@@ -374,11 +379,13 @@ public class WindowProvider implements IScriptObject
 					((JFrame)currentWindow).setUndecorated(true);
 				}
 
-				getGraphicsDevice().setFullScreenWindow(plugin.getClientPluginAccess().getCurrentWindow());
+				getGraphicsDevice().setFullScreenWindow(currentWindow);
 			}
 			else
 			{
-				Window currentWindow = plugin.getClientPluginAccess().getCurrentWindow();
+				IRuntimeWindow runtimeWindow = plugin.getClientPluginAccess().getCurrentRuntimeWindow();
+				Window currentWindow = null;
+				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
 				if (currentWindow instanceof JFrame && getGraphicsDevice().getFullScreenWindow() == currentWindow)
 				{
 					currentWindow.dispose();

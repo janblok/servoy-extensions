@@ -34,6 +34,8 @@ import javax.swing.RootPaneContainer;
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
@@ -97,7 +99,9 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 	private RootPaneContainer getRootPane()
 	{
-		Component w = access.getCurrentWindow();
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Component w = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) w = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
 		while (w != null)
 		{
 			if (w instanceof RootPaneContainer)

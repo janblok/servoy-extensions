@@ -49,6 +49,8 @@ import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTree;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 
 /**
  * Class representing the smart client db tree table view
@@ -459,7 +461,9 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		if (selectedPath != null)
 		{
 			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
-			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
+			Point windowLocation = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
 			Point treeLocation = treeTable.getLocationOnScreen();
 			final Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
 
@@ -493,7 +497,9 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		if (selectedPath != null)
 		{
 			DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
-			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
+			Point windowLocation = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
 			Point treeTableLocation = treeTable.getLocationOnScreen();
 			Point treeTableLocationToWindow = new Point((int)(treeTableLocation.getX() - windowLocation.getX()),
 				(int)(treeTableLocation.getY() - windowLocation.getY()));

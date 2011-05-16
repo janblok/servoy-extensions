@@ -864,7 +864,6 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		if (selectedPath != null)
 		{
 			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
-//			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
 			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
 			Point windowLocation = null;
 			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
@@ -898,7 +897,9 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		if (selectedPath != null)
 		{
 			DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
-			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
+			Point windowLocation = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
 			Point treeLocation = tree.getLocationOnScreen();
 			Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
 			callMethodOnRightClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(), null);

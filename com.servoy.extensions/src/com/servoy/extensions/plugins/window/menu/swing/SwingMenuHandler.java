@@ -20,6 +20,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
@@ -96,14 +97,20 @@ public class SwingMenuHandler implements IMenuHandler
 
 	public Component findComponentAt(Point location)
 	{
-		return clientPluginAccess.getCurrentWindow().findComponentAt(location);
+		IRuntimeWindow runtimeWindow = clientPluginAccess.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		return currentWindow.findComponentAt(location);
 	}
 
 	public Point makeLocationWindowRelative(Object component, Point location)
 	{
 		if (component instanceof Component)
 		{
-			Point windowLocation = clientPluginAccess.getCurrentWindow().getLocationOnScreen();
+			IRuntimeWindow runtimeWindow = clientPluginAccess.getCurrentRuntimeWindow();
+			Window currentWindow = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			Point windowLocation = currentWindow.getLocationOnScreen();
 			Point compLocation = ((Component)component).getLocationOnScreen();
 			Point compLocationToWindow = new Point((int)(compLocation.getX() - windowLocation.getX()), (int)(compLocation.getY() - windowLocation.getY()));
 			return new Point(location.x - compLocationToWindow.x, location.y - compLocationToWindow.y);
@@ -156,7 +163,10 @@ public class SwingMenuHandler implements IMenuHandler
 		}
 		if (!jcomp.isShowing())
 		{
-			Component container = searchContainer(clientPluginAccess.getCurrentWindow(), jcomp.getName());
+			IRuntimeWindow runtimeWindow = clientPluginAccess.getCurrentRuntimeWindow();
+			Window currentWindow = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			Component container = searchContainer(currentWindow, jcomp.getName());
 			if (container != null)
 			{
 				popupMenu.showPopup(container, popX + jcomp.getX(), popY + jcomp.getY());
@@ -164,7 +174,7 @@ public class SwingMenuHandler implements IMenuHandler
 			else
 			{
 				// container was not found, just show it in current window
-				popupMenu.showPopup(clientPluginAccess.getCurrentWindow(), popX + jcomp.getX(), popY + jcomp.getY());
+				popupMenu.showPopup(currentWindow, popX + jcomp.getX(), popY + jcomp.getY());
 			}
 		}
 		else

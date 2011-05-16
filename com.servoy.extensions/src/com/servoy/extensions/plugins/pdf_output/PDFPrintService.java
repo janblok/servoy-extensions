@@ -17,6 +17,7 @@
 
 package com.servoy.extensions.plugins.pdf_output;
 
+import java.awt.Window;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -33,6 +34,8 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -90,7 +93,10 @@ public class PDFPrintService implements PrintService
 		if (outputFileNameCounter > 0) outputFileName.append(outputFileNameCounter);
 		outputFileName.append(OUTPUT_FILE_EXTENSION);
 		outputFolderChooser.setSelectedFile(new File(System.getProperty("user.home"), outputFileName.toString())); //$NON-NLS-1$
-		if (outputFolderChooser.showSaveDialog(access.getCurrentWindow()) == JFileChooser.APPROVE_OPTION)
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (outputFolderChooser.showSaveDialog(currentWindow) == JFileChooser.APPROVE_OPTION)
 		{
 			try
 			{

@@ -16,6 +16,7 @@
  */
 package com.servoy.extensions.plugins.dialog;
 
+import java.awt.Window;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -23,6 +24,8 @@ import javax.swing.SwingUtilities;
 
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.scripting.IScriptObject;
 
 /**
@@ -97,7 +100,10 @@ public class DialogProvider implements IScriptObject
 		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		int index = JOptionPane.showOptionDialog(access.getCurrentWindow(), msg, title, JOptionPane.DEFAULT_OPTION, type, null, options, options[0]);
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		int index = JOptionPane.showOptionDialog(currentWindow, msg, title, JOptionPane.DEFAULT_OPTION, type, null, options, options[0]);
 		if (index < 0)
 		{
 			return null;
@@ -138,7 +144,10 @@ public class DialogProvider implements IScriptObject
 		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		Object tmp = JOptionPane.showInputDialog(access.getCurrentWindow(), msg, title, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		Object tmp = JOptionPane.showInputDialog(currentWindow, msg, title, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		return (tmp != null ? tmp.toString() : null);
 	}
 
@@ -155,7 +164,10 @@ public class DialogProvider implements IScriptObject
 		String val = null;
 		if (array != null && array.length > 2 && array[2] != null) val = array[2].toString();
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		Object tmp = JOptionPane.showInputDialog(access.getCurrentWindow(), msg, title, JOptionPane.QUESTION_MESSAGE, null, null, val);
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		Object tmp = JOptionPane.showInputDialog(currentWindow, msg, title, JOptionPane.QUESTION_MESSAGE, null, null, val);
 		return (tmp != null ? tmp.toString() : null);
 	}
 

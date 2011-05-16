@@ -17,13 +17,15 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.JTextComponent;
 
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -116,20 +118,22 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	{
 		if (c instanceof JTextComponent)
 		{
-			Window w = application.getCurrentWindow();
-			if (w != null)
+			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
+			Window currentWindow = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (currentWindow != null)
 			{
-				if (gui == null || w != lastWindow)
+				if (gui == null || currentWindow != lastWindow)
 				{
-					lastWindow = w;
+					lastWindow = currentWindow;
 					if (gui != null) gui.dispose();
-					if (w instanceof JDialog)
+					if (currentWindow instanceof JDialog)
 					{
-						gui = new SpellCheckerGUI(this, (JDialog)w, true);
+						gui = new SpellCheckerGUI(this, (JDialog)currentWindow, true);
 					}
-					else if (w instanceof JFrame)
+					else if (currentWindow instanceof JFrame)
 					{
-						gui = new SpellCheckerGUI(this, (JFrame)w, true);
+						gui = new SpellCheckerGUI(this, (JFrame)currentWindow, true);
 					}
 					else
 					{
@@ -138,7 +142,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 					gui.setName("SpellingCheckDialog"); //$NON-NLS-1$
 					if (!Settings.getInstance().loadBounds(gui))
 					{
-						gui.setLocationRelativeTo(w);
+						gui.setLocationRelativeTo(currentWindow);
 					}
 					gui.addWindowListener(new WindowAdapter()
 					{

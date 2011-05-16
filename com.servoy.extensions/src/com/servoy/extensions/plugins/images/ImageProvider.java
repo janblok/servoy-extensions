@@ -16,12 +16,15 @@
  */
 package com.servoy.extensions.plugins.images;
 
+import java.awt.Window;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.gui.SnapShot;
 
@@ -135,7 +138,10 @@ public class ImageProvider implements IScriptObject
 	public JSImage js_createJPGImage(Object obj)
 	{
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		return js_getImage(SnapShot.createJPGImage(access.getCurrentWindow(), obj, -1, -1));
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		return js_getImage(SnapShot.createJPGImage(currentWindow, obj, -1, -1));
 	}
 
 
@@ -143,7 +149,10 @@ public class ImageProvider implements IScriptObject
 	public JSImage js_createJPGImage(Object obj, int width, int height)
 	{
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		return js_getImage(SnapShot.createJPGImage(access.getCurrentWindow(), obj, width, height));
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		return js_getImage(SnapShot.createJPGImage(currentWindow, obj, width, height));
 	}
 
 	public JSImage js_getImage(Object object)
@@ -172,6 +181,9 @@ public class ImageProvider implements IScriptObject
 		}
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		return new JSImage(SnapShot.createJPGImage(access.getCurrentWindow(), object, -1, -1));
+		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
+		Window currentWindow = null;
+		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		return new JSImage(SnapShot.createJPGImage(currentWindow, object, -1, -1));
 	}
 }
