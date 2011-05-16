@@ -69,6 +69,8 @@ import com.servoy.j2db.dataprocessing.IFoundSetInternal;
 import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.dataprocessing.ISwingFoundSet;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
+import com.servoy.j2db.plugins.ISwingRuntimeWindow;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.DataSourceUtils;
@@ -862,7 +864,10 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		if (selectedPath != null)
 		{
 			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
-			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+//			Point windowLocation = application.getCurrentWindow().getLocationOnScreen();
+			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
+			Point windowLocation = null;
+			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
 			Point treeLocation = tree.getLocationOnScreen();
 			final Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
 
