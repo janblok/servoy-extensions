@@ -25,7 +25,7 @@ import javax.swing.text.JTextComponent;
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -120,7 +120,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		{
 			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
 			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			if (currentWindow != null)
 			{
 				if (gui == null || currentWindow != lastWindow)

@@ -70,7 +70,7 @@ import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.dataprocessing.ISwingFoundSet;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.DataSourceUtils;
@@ -866,7 +866,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
 			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
 			Point windowLocation = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) windowLocation = ((ISmartRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
 			Point treeLocation = tree.getLocationOnScreen();
 			final Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
 
@@ -899,7 +899,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
 			IRuntimeWindow runtimeWindow = application.getCurrentRuntimeWindow();
 			Point windowLocation = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) windowLocation = ((ISwingRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) windowLocation = ((ISmartRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
 			Point treeLocation = tree.getLocationOnScreen();
 			Point treeLocationToWindow = new Point((int)(treeLocation.getX() - windowLocation.getX()), (int)(treeLocation.getY() - windowLocation.getY()));
 			callMethodOnRightClick(tn, treeLocationToWindow.x + e.getX(), treeLocationToWindow.y + e.getY(), null);

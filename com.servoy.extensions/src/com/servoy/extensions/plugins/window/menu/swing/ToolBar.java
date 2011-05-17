@@ -37,7 +37,7 @@ import com.servoy.extensions.plugins.window.menu.ToolBarButton;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
@@ -253,9 +253,9 @@ public class ToolBar implements IToolBar, IScriptObject
 		{
 			panel.removeToolBar(_internalName);
 			IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
-			if (runtimeWindow instanceof ISwingRuntimeWindow)
+			if (runtimeWindow instanceof ISmartRuntimeWindow)
 			{
-				((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+				((ISmartRuntimeWindow)runtimeWindow).getWindow().validate();
 			}
 		}
 		else
@@ -775,9 +775,9 @@ public class ToolBar implements IToolBar, IScriptObject
 		_toolBar.validate();
 
 		IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
-		if (runtimeWindow instanceof ISwingRuntimeWindow)
+		if (runtimeWindow instanceof ISmartRuntimeWindow)
 		{
-			((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+			((ISmartRuntimeWindow)runtimeWindow).getWindow().validate();
 		}
 	}
 
@@ -900,9 +900,9 @@ public class ToolBar implements IToolBar, IScriptObject
 		_toolBar.validate();
 
 		IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
-		if (runtimeWindow instanceof ISwingRuntimeWindow)
+		if (runtimeWindow instanceof ISmartRuntimeWindow)
 		{
-			((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+			((ISmartRuntimeWindow)runtimeWindow).getWindow().validate();
 		}
 	}
 

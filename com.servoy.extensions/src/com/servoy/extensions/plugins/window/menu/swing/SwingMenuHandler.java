@@ -42,7 +42,7 @@ import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.extensions.plugins.window.menu.IPopupMenu;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.ui.IComponent;
@@ -99,8 +99,12 @@ public class SwingMenuHandler implements IMenuHandler
 	{
 		IRuntimeWindow runtimeWindow = clientPluginAccess.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
-		return currentWindow.findComponentAt(location);
+		if (runtimeWindow instanceof ISmartRuntimeWindow)
+		{
+			currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
+			return currentWindow.findComponentAt(location);
+		}
+		else return null;
 	}
 
 	public Point makeLocationWindowRelative(Object component, Point location)
@@ -108,9 +112,11 @@ public class SwingMenuHandler implements IMenuHandler
 		if (component instanceof Component)
 		{
 			IRuntimeWindow runtimeWindow = clientPluginAccess.getCurrentRuntimeWindow();
-			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
-			Point windowLocation = currentWindow.getLocationOnScreen();
+			Point windowLocation = null;
+			if (runtimeWindow instanceof ISmartRuntimeWindow)
+			{
+				windowLocation = ((ISmartRuntimeWindow)runtimeWindow).getWindow().getLocationOnScreen();
+			}
 			Point compLocation = ((Component)component).getLocationOnScreen();
 			Point compLocationToWindow = new Point((int)(compLocation.getX() - windowLocation.getX()), (int)(compLocation.getY() - windowLocation.getY()));
 			return new Point(location.x - compLocationToWindow.x, location.y - compLocationToWindow.y);
@@ -165,7 +171,7 @@ public class SwingMenuHandler implements IMenuHandler
 		{
 			IRuntimeWindow runtimeWindow = clientPluginAccess.getCurrentRuntimeWindow();
 			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			Component container = searchContainer(currentWindow, jcomp.getName());
 			if (container != null)
 			{
@@ -278,17 +284,17 @@ public class SwingMenuHandler implements IMenuHandler
 	{
 		IRuntimeWindow window = clientPluginAccess.getRuntimeWindow(windowName);
 		JMenuBar menuBar = null;
-		if (window instanceof ISwingRuntimeWindow)
+		if (window instanceof ISmartRuntimeWindow)
 		{
-			menuBar = ((ISwingRuntimeWindow)window).getJMenuBar();
+			menuBar = ((ISmartRuntimeWindow)window).getJMenuBar();
 		}
 
 		if (menuBar == null && create)
 		{
 			menuBar = new JMenuBar();
-			if (window instanceof ISwingRuntimeWindow)
+			if (window instanceof ISmartRuntimeWindow)
 			{
-				((ISwingRuntimeWindow)window).setJMenuBar(menuBar);
+				((ISmartRuntimeWindow)window).setJMenuBar(menuBar);
 			}
 		}
 

@@ -60,7 +60,7 @@ import com.servoy.extensions.plugins.window.util.Utilities;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -357,7 +357,7 @@ public class WindowProvider implements IScriptObject
 		{
 			IRuntimeWindow runtimeWindow = plugin.getClientPluginAccess().getCurrentRuntimeWindow();
 			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			graphicsDevice = currentWindow.getGraphicsConfiguration().getDevice();
 		}
 		return graphicsDevice;
@@ -371,7 +371,7 @@ public class WindowProvider implements IScriptObject
 			{
 				IRuntimeWindow runtimeWindow = plugin.getClientPluginAccess().getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				if (getGraphicsDevice().getFullScreenWindow() == currentWindow) return;
 				if (currentWindow instanceof JFrame)
 				{
@@ -385,7 +385,7 @@ public class WindowProvider implements IScriptObject
 			{
 				IRuntimeWindow runtimeWindow = plugin.getClientPluginAccess().getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				if (currentWindow instanceof JFrame && getGraphicsDevice().getFullScreenWindow() == currentWindow)
 				{
 					currentWindow.dispose();
@@ -540,9 +540,9 @@ public class WindowProvider implements IScriptObject
 			}
 
 			IRuntimeWindow runtimeWindow = getClientPluginAccess().getRuntimeWindow(null);
-			if (runtimeWindow instanceof ISwingRuntimeWindow)
+			if (runtimeWindow instanceof ISmartRuntimeWindow)
 			{
-				((ISwingRuntimeWindow)runtimeWindow).getWindow().validate();
+				((ISmartRuntimeWindow)runtimeWindow).getWindow().validate();
 			}
 		}
 	}
@@ -1196,9 +1196,9 @@ public class WindowProvider implements IScriptObject
 		if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 		{
 			IRuntimeWindow runtimeWindow = getClientPluginAccess().getRuntimeWindow(windowName);
-			if (runtimeWindow instanceof ISwingRuntimeWindow)
+			if (runtimeWindow instanceof ISmartRuntimeWindow)
 			{
-				Window window = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				Window window = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				if (window != null && window instanceof JFrame)
 				{
 					JFrame frame = (JFrame)window;

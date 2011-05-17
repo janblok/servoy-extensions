@@ -53,7 +53,7 @@ import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IMediaUploadCallback;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IScriptObject;
@@ -264,7 +264,7 @@ public class FileProvider implements IScriptObject
 
 			IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 
 			if (multiSelect)
 			{
@@ -601,7 +601,7 @@ public class FileProvider implements IScriptObject
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				int option = JOptionPane.showConfirmDialog(
 					currentWindow,
 					Messages.getString("servoy.plugin.file.folderDelete.warning") + destFile.getAbsolutePath(), Messages.getString("servoy.plugin.file.folderDelete.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -694,7 +694,7 @@ public class FileProvider implements IScriptObject
 			{
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				file = FileChooserUtils.getAWriteFile(currentWindow, file, false);
 			}
 
@@ -799,7 +799,7 @@ public class FileProvider implements IScriptObject
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				file = FileChooserUtils.getAWriteFile(currentWindow, file, false);
 			}
 			if (file != null && !file.isDirectory())
@@ -832,7 +832,7 @@ public class FileProvider implements IScriptObject
 			IClientPluginAccess access = plugin.getClientPluginAccess();
 			IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			File file = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
 
 			if (file != null) // !cancelled
@@ -909,7 +909,7 @@ public class FileProvider implements IScriptObject
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		File f = FileChooserUtils.getAWriteFile(currentWindow, file, true, title);
 		if (f != null)
 		{
@@ -933,7 +933,7 @@ public class FileProvider implements IScriptObject
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		File retval = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.DIRECTORIES_ONLY, null, title);
 		if (retval != null)
 		{
@@ -956,7 +956,7 @@ public class FileProvider implements IScriptObject
 			IClientPluginAccess access = plugin.getClientPluginAccess();
 			IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 			Window currentWindow = null;
-			if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			File file = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
 
 			byte[] retval = null;
@@ -1545,7 +1545,7 @@ public class FileProvider implements IScriptObject
 				{
 					IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 					Window currentWindow = null;
-					if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+					if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 					file = FileChooserUtils.getAWriteFile(currentWindow, file, false);
 				}
 				FileOutputStream fos = new FileOutputStream(file, true);

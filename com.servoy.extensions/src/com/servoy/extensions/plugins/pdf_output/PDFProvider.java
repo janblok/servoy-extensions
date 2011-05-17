@@ -36,7 +36,7 @@ import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.SimpleBookmark;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.FileChooserUtils;
@@ -66,7 +66,7 @@ public class PDFProvider implements IScriptObject
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				pdfFile = FileChooserUtils.getAWriteFile(currentWindow, f, false);
 				FileOutputStream os = new FileOutputStream(pdfFile);
 				return new PDFPrinterJob(os, false);
@@ -95,7 +95,7 @@ public class PDFProvider implements IScriptObject
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
-				if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				pdfFile = FileChooserUtils.getAWriteFile(currentWindow, f, false);
 				os = new FileOutputStream(pdfFile);
 			}

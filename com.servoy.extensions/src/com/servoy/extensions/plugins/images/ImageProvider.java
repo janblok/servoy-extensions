@@ -24,7 +24,7 @@ import javax.imageio.ImageIO;
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.gui.SnapShot;
 
@@ -140,7 +140,7 @@ public class ImageProvider implements IScriptObject
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		return js_getImage(SnapShot.createJPGImage(currentWindow, obj, -1, -1));
 	}
 
@@ -151,7 +151,7 @@ public class ImageProvider implements IScriptObject
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		return js_getImage(SnapShot.createJPGImage(currentWindow, obj, width, height));
 	}
 
@@ -183,7 +183,7 @@ public class ImageProvider implements IScriptObject
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		return new JSImage(SnapShot.createJPGImage(currentWindow, object, -1, -1));
 	}
 }

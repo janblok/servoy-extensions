@@ -35,7 +35,7 @@ import javax.swing.filechooser.FileFilter;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
-import com.servoy.j2db.plugins.ISwingRuntimeWindow;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -95,7 +95,7 @@ public class PDFPrintService implements PrintService
 		outputFolderChooser.setSelectedFile(new File(System.getProperty("user.home"), outputFileName.toString())); //$NON-NLS-1$
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
-		if (runtimeWindow instanceof ISwingRuntimeWindow) currentWindow = ((ISwingRuntimeWindow)runtimeWindow).getWindow();
+		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		if (outputFolderChooser.showSaveDialog(currentWindow) == JFileChooser.APPROVE_OPTION)
 		{
 			try
