@@ -38,9 +38,11 @@ import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.resources.CompressedResourceReference;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.mozilla.javascript.Function;
 
+import com.inmethod.grid.IGridColumn;
 import com.inmethod.grid.SizeUnit;
 import com.inmethod.grid.common.ColumnsState;
 import com.inmethod.grid.treegrid.TreeGrid;
@@ -83,6 +85,10 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		super(id, new Model((Serializable)(new JTree()).getModel()), columns);
 		setOutputMarkupId(true);
 		setVersioned(false);
+		setClickRowToSelect(true);
+		setClickRowToDeselect(false);
+		setAllowSelectMultiple(false);
+		setAutoSelectChildren(false);
 
 		this.application = application;
 		this.dbTreeTableView = dbTreeTableView;
@@ -148,6 +154,15 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		}
 	}
 
+	@Override
+	protected boolean onCellClicked(AjaxRequestTarget target, IModel rowModel, IGridColumn column)
+	{
+		boolean onCellClickedReturn = super.onCellClicked(target, rowModel, column);
+		onNodeLinkClicked(target, (TreeNode)rowModel.getObject());
+		return onCellClickedReturn;
+	}
+
+
 	protected void onNodeLinkClicked(AjaxRequestTarget target, TreeNode tn)
 	{
 		if (tn instanceof FoundSetTreeModel.UserNode)
@@ -169,6 +184,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 					f.execute(application, args, false);
 				}
 			}
+			wicketTree.updateTree(target);
 		}
 
 		generateAjaxResponse(target);

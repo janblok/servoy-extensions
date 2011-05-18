@@ -54,9 +54,7 @@ public class DBTreeTableTreeColumn extends AbstractTreeColumn
 			protected void onNodeLinkClicked(TreeNode node, AbstractTree tree, AjaxRequestTarget target)
 			{
 				InmethodDBTreeTableView treeGrid = (InmethodDBTreeTableView)getTreeGrid();
-				tree.getTreeState().selectNode(node, !tree.getTreeState().isNodeSelected(node));
 				treeGrid.onNodeLinkClicked(target, node);
-				tree.updateTree(target);
 			}
 
 			@Override
