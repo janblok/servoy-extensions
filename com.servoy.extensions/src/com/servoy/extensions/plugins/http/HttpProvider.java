@@ -295,79 +295,83 @@ public class HttpProvider implements IScriptObject
 	 *
 	 * @sample 
 	 * var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');
-	 * var image_byte_array2 = plugins.http.getMediaData('http://www.cnn.com/cnn.gif', 'clientName');
 	 *
 	 * @param url 
 	 *
-	 * @param [http_clientname] optional 
 	 */
-	public byte[] js_getMediaData(Object[] args)
+	public byte[] js_getMediaData(String url)
 	{
-		if (args.length == 0) return null;
-		String input = (String)args[0];
+		if (url == null) return null;
 		ByteArrayOutputStream sb = new ByteArrayOutputStream();
-		if (args.length == 1)
+		try
 		{
-			try
-			{
-				URL url = new URL(input);
-				URLConnection connection = url.openConnection();
-				if (timeout >= 0) connection.setConnectTimeout(timeout);
-				InputStream is = connection.getInputStream();
-				BufferedInputStream bis = new BufferedInputStream(is);
-				Utils.streamCopy(bis, sb);
-				bis.close();
-				is.close();
-			}
-			catch (Exception e)
-			{
-				Debug.error(e);
-			}
+			URLConnection connection = new URL(url).openConnection();
+			if (timeout >= 0) connection.setConnectTimeout(timeout);
+			InputStream is = connection.getInputStream();
+			BufferedInputStream bis = new BufferedInputStream(is);
+			Utils.streamCopy(bis, sb);
+			bis.close();
+			is.close();
 		}
-		else
+		catch (Exception e)
 		{
-			String clientName = "" + args[1]; //$NON-NLS-1$
-			DefaultHttpClient client = httpClients.get(clientName);
-			if (client == null)
+			Debug.error(e);
+		}
+		return sb.toByteArray();
+	}
+
+	/**
+	 * Get media(binary data) such as images in a variable; it also supports gzip-ed content
+	 *
+	 * @sample 
+	 * var image_byte_array2 = plugins.http.getMediaData('http://www.cnn.com/cnn.gif', 'clientName');
+	 *
+	 * @param url 
+	 * @param clientName 
+	 */
+	public byte[] js_getMediaData(String url, String clientName)
+	{
+		if (url == null || clientName == null) return null;
+		DefaultHttpClient client = httpClients.get(clientName);
+		if (client == null)
+		{
+			return null;
+		}
+		ByteArrayOutputStream sb = new ByteArrayOutputStream();
+		try
+		{
+			setHttpClientProxy(client, url, proxyUser, proxyPassword);
+
+			HttpGet method = new HttpGet(url);
+
+			//for some proxies
+			method.addHeader("Cache-control", "no-cache");
+			method.addHeader("Pragma", "no-cache");
+			//maybe mod_deflate set and wrong configured
+			method.addHeader("Accept-Encoding", "gzip");
+			HttpResponse res = client.execute(method);
+			int statusCode = res.getStatusLine().getStatusCode();
+			if (statusCode != HttpStatus.SC_OK)
 			{
 				return null;
 			}
-			try
+
+			InputStream is = null;
+			Header contentEncoding = res.getFirstHeader("Content-Encoding");
+			boolean gziped = contentEncoding == null ? false : "gzip".equalsIgnoreCase(contentEncoding.getValue());
+			is = res.getEntity().getContent();
+			if (gziped)
 			{
-				setHttpClientProxy(client, input, proxyUser, proxyPassword);
-
-				URL url = new URL(input);
-				HttpGet method = new HttpGet(input);
-
-				//for some proxies
-				method.addHeader("Cache-control", "no-cache");
-				method.addHeader("Pragma", "no-cache");
-				//maybe mod_deflate set and wrong configured
-				method.addHeader("Accept-Encoding", "gzip");
-				HttpResponse res = client.execute(method);
-				int statusCode = res.getStatusLine().getStatusCode();
-				if (statusCode != HttpStatus.SC_OK)
-				{
-					return null;
-				}
-
-				InputStream is = null;
-				Header contentEncoding = res.getFirstHeader("Content-Encoding");
-				boolean gziped = contentEncoding == null ? false : "gzip".equalsIgnoreCase(contentEncoding.getValue());
-				is = res.getEntity().getContent();
-				if (gziped)
-				{
-					is = new GZIPInputStream(is);
-				}
-				BufferedInputStream bis = new BufferedInputStream(is);
-				Utils.streamCopy(bis, sb);
-				bis.close();
-				is.close();
+				is = new GZIPInputStream(is);
 			}
-			catch (IOException e)
-			{
-				Debug.error(e);
-			}
+			BufferedInputStream bis = new BufferedInputStream(is);
+			Utils.streamCopy(bis, sb);
+			bis.close();
+			is.close();
+		}
+		catch (IOException e)
+		{
+			Debug.error(e);
 		}
 		return sb.toByteArray();
 	}
@@ -627,6 +631,7 @@ public class HttpProvider implements IScriptObject
 		return false;
 	}
 
+	@SuppressWarnings("nls")
 	public String[] getParameterNames(String methodName)
 	{
 		if ("getPageData".equals(methodName)) //$NON-NLS-1$
@@ -643,7 +648,7 @@ public class HttpProvider implements IScriptObject
 		}
 		else if ("getMediaData".equals(methodName))
 		{
-			return new String[] { "url" };
+			return new String[] { "url", "[http_clientname]" };
 		}
 		else if ("getPoster".equals(methodName)) //$NON-NLS-1$
 		{
