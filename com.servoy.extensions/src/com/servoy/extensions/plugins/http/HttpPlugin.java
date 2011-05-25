@@ -90,7 +90,7 @@ public class HttpPlugin implements IClientPlugin
 	{
 		if (impl == null)
 		{
-			impl = new HttpProvider(this);
+			impl = new HttpProvider(access);
 		}
 		return impl;
 	}

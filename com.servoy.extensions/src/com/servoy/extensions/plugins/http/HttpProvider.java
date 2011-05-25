@@ -57,6 +57,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
+import com.servoy.j2db.MediaURLStreamHandler;
+import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -72,9 +74,11 @@ public class HttpProvider implements IScriptObject
 
 	@Deprecated
 	private String lastPageEncoding = null;
+	private final IClientPluginAccess access;
 
-	public HttpProvider(HttpPlugin plugin)
+	public HttpProvider(IClientPluginAccess access)
 	{
+		this.access = access;
 	}
 
 	/**
@@ -305,7 +309,15 @@ public class HttpProvider implements IScriptObject
 		ByteArrayOutputStream sb = new ByteArrayOutputStream();
 		try
 		{
-			URLConnection connection = new URL(url).openConnection();
+			URLConnection connection;
+			if (url.startsWith(MediaURLStreamHandler.MEDIA_URL_DEF))
+			{
+				connection = new URL(null, url, access.getMediaURLStreamHandler()).openConnection();
+			}
+			else
+			{
+				connection = new URL(url).openConnection();
+			}
 			if (timeout >= 0) connection.setConnectTimeout(timeout);
 			InputStream is = connection.getInputStream();
 			BufferedInputStream bis = new BufferedInputStream(is);
