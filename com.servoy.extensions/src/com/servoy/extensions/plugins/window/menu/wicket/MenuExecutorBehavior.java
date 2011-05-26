@@ -81,6 +81,8 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 		{
 			int mhash = Utils.getAsInteger(RequestCycle.get().getRequest().getParameter("m")); //$NON-NLS-1$
 			IMenuItem mi = callableMenuItems.get(new Integer(mhash));
+			// free callableMenuItems memory, are to be used only in 1 respond.
+			callableMenuItems = null;
 			if (mi != null)
 			{
 				ActionListener[] als = mi.getActionListeners();
@@ -94,8 +96,6 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 				}
 			}
 		}
-		// free callableMenuItems memory, are to be used only in 1 respond.
-		callableMenuItems = null;
 	}
 
 	public CharSequence getUrlForMenuItem(int hashcode)
