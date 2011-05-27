@@ -29,11 +29,11 @@ import java.util.Set;
 import javax.swing.KeyStroke;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Page;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ResourceReference;
-import org.apache.wicket.Component.IVisitor;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.resources.JavascriptResourceReference;
@@ -275,13 +275,9 @@ public class WicketShortcutHandler implements IShortcutHandler
 			{
 				Debug.trace("WicketShortcutHandler: respond to URL " + RequestCycle.get().getRequest().getURL()); //$NON-NLS-1$
 			}
+			// can be null or empty string if the shortcut target has no id
 			final String markupId = RequestCycle.get().getRequest().getParameter("elementId"); //$NON-NLS-1$
-			if (markupId == null || markupId.length() == 0)
-			{
-				// unknown element or outside dialog clicked -- ignore
-				Debug.trace("WicketShortcutHandler: called for unknown element"); //$NON-NLS-1$
-				return;
-			}
+
 			String sc = RequestCycle.get().getRequest().getParameter("shortcut"); //$NON-NLS-1$
 			ComparableKeyStroke cks = sc == null ? null : shortcuts.getKey(sc);
 			if (cks == null)
