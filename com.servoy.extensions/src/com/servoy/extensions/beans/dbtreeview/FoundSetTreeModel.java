@@ -516,9 +516,19 @@ public class FoundSetTreeModel extends DefaultTreeModel
 			if (!didInit)
 			{
 				lazyLoadChilderenIfNeeded(this);
-
 			}
+
 			return super.getChildCount();
+		}
+
+		public void loadChildren()
+		{
+			if (!didInit)
+			{
+				boolean isLeaf = !hasChild(this);
+				if (isLeaf) setAllowsChildren(false);
+				else lazyLoadChilderenIfNeeded(this);
+			}
 		}
 
 		@Override
