@@ -77,7 +77,7 @@ public class Popup extends AbstractMenu
 	{
 		if ("show".equals(methodName))
 		{
-			return new String[] { "[element]", "[x", "y]" };
+			return new String[] { "[element]", "[x]", "[y]" };
 		}
 
 		return super.getParameterNames(methodName);
