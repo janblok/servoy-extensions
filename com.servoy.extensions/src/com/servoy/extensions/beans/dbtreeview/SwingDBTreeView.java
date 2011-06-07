@@ -52,12 +52,12 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreeCellEditor;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.dataprocessing.IFoundSetInternal;
@@ -474,7 +474,9 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			TreePath tp = tree.getPathForRow(row);
 			if (tp.getPathCount() - 1 <= level && visible)
 			{
-				if (!((TreeNode)tp.getLastPathComponent()).isLeaf() && tree.isCollapsed(row))
+				Object node = tp.getLastPathComponent();
+				if (node instanceof UserNode) ((UserNode)node).loadChildren();
+				if (((FoundSetTreeModel)tree.getModel()).hasChild(node) && tree.isCollapsed(row))
 				{
 					tree.expandRow(row);
 					didChange = true;
