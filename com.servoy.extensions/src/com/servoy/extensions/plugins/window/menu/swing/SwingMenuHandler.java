@@ -404,6 +404,7 @@ public class SwingMenuHandler implements IMenuHandler
 			}
 			jMenuBar.remove(index);
 		}
+		jMenuBar.revalidate();
 	}
 
 	public IMenu getMenubarMenu(String windowName, int index)
