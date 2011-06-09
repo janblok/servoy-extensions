@@ -28,7 +28,6 @@ import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
@@ -389,7 +388,8 @@ public class WindowProvider implements IScriptObject
 					getGraphicsDevice().setFullScreenWindow(null);
 				}
 			}
-			JPopupMenu.setDefaultLightWeightPopupEnabled(full); //in full screen heavy weight popups do not work
+			// this shouldn't be needed now
+			//JPopupMenu.setDefaultLightWeightPopupEnabled(full); //in full screen heavy weight popups do not work
 		}
 	}
 
