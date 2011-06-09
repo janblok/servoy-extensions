@@ -28,13 +28,13 @@ import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import org.mozilla.javascript.Function;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -49,7 +49,6 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -398,7 +397,8 @@ public class WindowProvider implements IScriptObject
 					getGraphicsDevice().setFullScreenWindow(null);
 				}
 			}
-			JPopupMenu.setDefaultLightWeightPopupEnabled(full); //in full screen heavy weight popups do not work
+			// this shouldn't be needed now
+			//JPopupMenu.setDefaultLightWeightPopupEnabled(full); //in full screen heavy weight popups do not work
 		}
 	}
 
