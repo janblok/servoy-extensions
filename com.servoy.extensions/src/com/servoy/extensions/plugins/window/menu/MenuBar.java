@@ -106,6 +106,7 @@ public class MenuBar implements IScriptObject
 		windowProvider.getMenuHandler().resetMenuBar(windowName, initializeMenuBarResult);
 	}
 
+	@Deprecated
 	public void js_validate()
 	{
 		windowProvider.getMenuHandler().validateMenuBar(windowName);

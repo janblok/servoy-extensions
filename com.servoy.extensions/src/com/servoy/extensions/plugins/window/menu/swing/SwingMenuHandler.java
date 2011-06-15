@@ -382,6 +382,7 @@ public class SwingMenuHandler implements IMenuHandler
 		if (jMenuBar != null)
 		{
 			jMenuBar.add((Component)impl.getMenuComponent(), index);
+			jMenuBar.revalidate();
 		}
 	}
 
