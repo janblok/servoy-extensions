@@ -13,8 +13,8 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
-package com.servoy.extensions.plugins.mail;
+ */
+package com.servoy.extensions.plugins.mail.client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,21 +24,23 @@ import java.util.List;
 import com.servoy.j2db.scripting.IScriptObject;
 
 /**
+ * Container class for an email
  * @author jblok
  */
+@SuppressWarnings("nls")
 public class MailMessage implements Serializable, IScriptObject
 {
-	List attachments = new ArrayList();
-	String fromAddresses;
-	String recipientAddresses;
-	String ccAddresses;
-	String replyAddresses;
-	String subject;
-	String headers;
-	Date receivedDate;
-	Date sentDate;
-	String plainMsg;
-	String htmlMsg;
+	public List<Attachment> attachments = new ArrayList<Attachment>();
+	public String fromAddresses;
+	public String recipientAddresses;
+	public String ccAddresses;
+	public String replyAddresses;
+	public String subject;
+	public String headers;
+	public Date receivedDate;
+	public Date sentDate;
+	public String plainMsg;
+	public String htmlMsg;
 
 	public Attachment[] js_getAttachments()
 	{
@@ -140,14 +142,14 @@ public class MailMessage implements Serializable, IScriptObject
 		return plainMsg;
 	}
 
-	void addAttachment(Attachment attachment)
+	public void addAttachment(Attachment attachment)
 	{
 		attachments.add(attachment);
 	}
 
 	public Attachment[] getAttachments()
 	{
-		return (Attachment[])attachments.toArray(new Attachment[attachments.size()]);
+		return attachments.toArray(new Attachment[attachments.size()]);
 	}
 
 	public String getCCAddresses()

@@ -33,6 +33,8 @@ import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
 
+import com.servoy.extensions.plugins.mail.client.Attachment;
+import com.servoy.extensions.plugins.mail.client.MailMessage;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 

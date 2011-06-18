@@ -14,7 +14,7 @@
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
 */
-package com.servoy.extensions.plugins.mail;
+package com.servoy.extensions.plugins.mail.client;
 
 import java.beans.PropertyChangeEvent;
 import java.util.Properties;

@@ -24,11 +24,13 @@ import java.io.OutputStream;
 import javax.activation.DataSource;
 import javax.activation.MimetypesFileTypeMap;
 
+import com.servoy.extensions.plugins.mail.client.Attachment;
+
 /**
  * Separate class because we do not have DataSource class on client
  * @author jblok
  */
-public class AttachmentDataSource implements DataSource
+class AttachmentDataSource implements DataSource
 {
 	private final Attachment attachment;
 

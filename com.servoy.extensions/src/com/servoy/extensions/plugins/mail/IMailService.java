@@ -20,6 +20,9 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Date;
 
+import com.servoy.extensions.plugins.mail.client.Attachment;
+import com.servoy.extensions.plugins.mail.client.MailMessage;
+
 /**
  * RMI interface
  * @author jblok

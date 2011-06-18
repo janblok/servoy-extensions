@@ -45,6 +45,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import com.servoy.extensions.plugins.mail.client.Attachment;
+import com.servoy.extensions.plugins.mail.client.MailMessage;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
