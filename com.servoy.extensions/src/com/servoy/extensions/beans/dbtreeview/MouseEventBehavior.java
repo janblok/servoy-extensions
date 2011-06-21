@@ -33,6 +33,8 @@ public class MouseEventBehavior extends AjaxEventBehavior
 	private static final long serialVersionUID = 1L;
 	private final MouseAction mouseAction;
 
+	public static final String MOUSE_POSITION_SCRIPT = "var mx=(event.pageX ? event.pageX : event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft); var my=(event.pageY ? event.pageY : event.clientY + document.body.scrollLeft + document.documentElement.scrollLeft);";
+
 	public MouseEventBehavior(MouseAction mouseAction)
 	{
 		super(mouseAction.getName());
@@ -51,8 +53,7 @@ public class MouseEventBehavior extends AjaxEventBehavior
 	public CharSequence getCallbackUrl(final boolean onlyTargetActivePage)
 	{
 		CharSequence callbackURL = super.getCallbackUrl(onlyTargetActivePage);
-		return callbackURL.toString() +
-			"&mx=' + (event.pageX ? event.pageX : event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft) + '&my=' + (event.pageY ? event.pageY : event.clientY + document.body.scrollLeft + document.documentElement.scrollLeft) + '";
+		return callbackURL.toString() + "&mx=' + mx + '&my=' + my + '";
 	}
 
 	@Override

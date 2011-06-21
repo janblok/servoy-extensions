@@ -380,7 +380,8 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 					@Override
 					public CharSequence postDecorateScript(CharSequence script)
 					{
-						return "Servoy.Utils.startClickTimer(function() { " + script + " Servoy.Utils.clickTimerRunning = false; return false; });";
+						return MouseEventBehavior.MOUSE_POSITION_SCRIPT + "Servoy.Utils.startClickTimer(function() { " + script +
+							" Servoy.Utils.clickTimerRunning = false; return false; });";
 					}
 				};
 			}
@@ -429,7 +430,8 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 					@Override
 					public CharSequence postDecorateScript(CharSequence script)
 					{
-						return "Servoy.Utils.stopClickTimer();" + script + "return !" + IAjaxCallDecorator.WICKET_CALL_RESULT_VAR + ";";
+						return MouseEventBehavior.MOUSE_POSITION_SCRIPT + "Servoy.Utils.stopClickTimer();" + script + "return !" +
+							IAjaxCallDecorator.WICKET_CALL_RESULT_VAR + ";";
 					}
 				};
 			}
