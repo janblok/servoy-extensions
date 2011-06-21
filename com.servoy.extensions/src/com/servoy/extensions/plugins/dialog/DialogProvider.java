@@ -16,9 +16,12 @@
  */
 package com.servoy.extensions.plugins.dialog;
 
+import java.awt.Dialog;
 import java.awt.Window;
+import java.lang.reflect.Method;
 import java.util.Vector;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -103,12 +106,46 @@ public class DialogProvider implements IScriptObject
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-		int index = JOptionPane.showOptionDialog(currentWindow, msg, title, JOptionPane.DEFAULT_OPTION, type, null, options, options[0]);
-		if (index < 0)
+		JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
+		pane.setInitialValue(options[0]);
+		pane.setComponentOrientation(((currentWindow == null) ? JOptionPane.getRootFrame() : currentWindow).getComponentOrientation());
+		JDialog dialog = pane.createDialog(currentWindow, title);
+		modalizeDialog(dialog);
+		pane.selectInitialValue();
+		dialog.setVisible(true);
+		dialog.dispose();
+		return (String)pane.getValue();
+	}
+
+	/**
+	 * @param dialog
+	 */
+	private void modalizeDialog(JDialog dialog)
+	{
+		Object setModalityTypeMethod = null;
+		Object modalityDocumentModalValue = null;
+		try
 		{
-			return null;
+			Class< ? > clz = Class.forName("java.awt.Dialog$ModalityType");
+			modalityDocumentModalValue = clz.getField("DOCUMENT_MODAL").get(clz);
+			setModalityTypeMethod = Dialog.class.getMethod("setModalityType", clz);
 		}
-		return options[index];
+		catch (Exception e)
+		{
+			setModalityTypeMethod = Boolean.FALSE;
+		}
+
+		if (setModalityTypeMethod instanceof Method)
+		{
+			try
+			{
+				((Method)setModalityTypeMethod).invoke(dialog, new Object[] { modalityDocumentModalValue });
+			}
+			catch (Exception e)
+			{
+				setModalityTypeMethod = Boolean.FALSE;
+			}
+		}
 	}
 
 	public String js_showSelectDialog(Object[] array)
@@ -147,8 +184,19 @@ public class DialogProvider implements IScriptObject
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-		Object tmp = JOptionPane.showInputDialog(currentWindow, msg, title, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		return (tmp != null ? tmp.toString() : null);
+		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
+		pane.setWantsInput(true);
+		pane.setSelectionValues(options);
+		pane.setInitialSelectionValue(options[0]);
+		pane.setComponentOrientation(((currentWindow == null) ? JOptionPane.getRootFrame() : currentWindow).getComponentOrientation());
+		JDialog dialog = pane.createDialog(currentWindow, title);
+		modalizeDialog(dialog);
+		pane.selectInitialValue();
+		dialog.setVisible(true);
+		dialog.dispose();
+
+		Object value = pane.getInputValue();
+		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
 	public String js_showInputDialog(Object[] array)
@@ -167,8 +215,18 @@ public class DialogProvider implements IScriptObject
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-		Object tmp = JOptionPane.showInputDialog(currentWindow, msg, title, JOptionPane.QUESTION_MESSAGE, null, null, val);
-		return (tmp != null ? tmp.toString() : null);
+		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, val);
+		pane.setWantsInput(true);
+		pane.setInitialSelectionValue(val);
+		pane.setComponentOrientation(((currentWindow == null) ? JOptionPane.getRootFrame() : currentWindow).getComponentOrientation());
+		JDialog dialog = pane.createDialog(currentWindow, title);
+		modalizeDialog(dialog);
+		pane.selectInitialValue();
+		dialog.setVisible(true);
+
+		dialog.dispose();
+		Object value = pane.getInputValue();
+		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
 	public boolean isDeprecated(String methodName)
