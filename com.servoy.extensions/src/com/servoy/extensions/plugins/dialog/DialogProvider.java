@@ -102,19 +102,30 @@ public class DialogProvider implements IScriptObject
 		String[] options = new String[buttons.size()];
 		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
+		JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
+		pane.setInitialValue(options[0]);
+		return (String)createAndShowDialog(title, pane);
+	}
+
+	/**
+	 * @param title
+	 * @param pane
+	 * @return
+	 */
+	private Object createAndShowDialog(String title, JOptionPane pane)
+	{
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-		JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
-		pane.setInitialValue(options[0]);
 		pane.setComponentOrientation(((currentWindow == null) ? JOptionPane.getRootFrame() : currentWindow).getComponentOrientation());
 		JDialog dialog = pane.createDialog(currentWindow, title);
 		modalizeDialog(dialog);
 		pane.selectInitialValue();
 		dialog.setVisible(true);
 		dialog.dispose();
-		return (String)pane.getValue();
+		Object value = pane.getInputValue();
+		return value;
 	}
 
 	/**
@@ -180,22 +191,11 @@ public class DialogProvider implements IScriptObject
 		Object[] options = new String[buttons.size()];
 		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
-		IClientPluginAccess access = plugin.getClientPluginAccess();
-		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
-		Window currentWindow = null;
-		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
 		pane.setWantsInput(true);
 		pane.setSelectionValues(options);
 		pane.setInitialSelectionValue(options[0]);
-		pane.setComponentOrientation(((currentWindow == null) ? JOptionPane.getRootFrame() : currentWindow).getComponentOrientation());
-		JDialog dialog = pane.createDialog(currentWindow, title);
-		modalizeDialog(dialog);
-		pane.selectInitialValue();
-		dialog.setVisible(true);
-		dialog.dispose();
-
-		Object value = pane.getInputValue();
+		Object value = createAndShowDialog(title, pane);
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
@@ -211,21 +211,10 @@ public class DialogProvider implements IScriptObject
 		if (array != null && array.length > 1 && array[1] != null) msg = Messages.getStringIfPrefix(array[1].toString());
 		String val = null;
 		if (array != null && array.length > 2 && array[2] != null) val = array[2].toString();
-		IClientPluginAccess access = plugin.getClientPluginAccess();
-		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
-		Window currentWindow = null;
-		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, val);
 		pane.setWantsInput(true);
 		pane.setInitialSelectionValue(val);
-		pane.setComponentOrientation(((currentWindow == null) ? JOptionPane.getRootFrame() : currentWindow).getComponentOrientation());
-		JDialog dialog = pane.createDialog(currentWindow, title);
-		modalizeDialog(dialog);
-		pane.selectInitialValue();
-		dialog.setVisible(true);
-
-		dialog.dispose();
-		Object value = pane.getInputValue();
+		Object value = createAndShowDialog(title, pane);
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
