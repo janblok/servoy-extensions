@@ -36,8 +36,10 @@ import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.resources.JavascriptResourceReference;
 import org.apache.wicket.protocol.http.WebRequest;
+import org.apache.wicket.util.string.AppendingStringBuffer;
 
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
@@ -243,9 +245,11 @@ public class WicketShortcutHandler implements IShortcutHandler
 		}
 
 		@Override
-		protected CharSequence generateCallbackScript(final CharSequence partialCall)
+		protected CharSequence getCallbackScript(boolean onlyTargetActivePage)
 		{
-			return super.generateCallbackScript(partialCall + "+'&shortcut='+encodeURIComponent(sc)+'&elementId='+element.id"); //$NON-NLS-1$
+			// post, serialize the component so that modified data is pushed in the FormComponent.
+			return generateCallbackScript(new AppendingStringBuffer("wicketAjaxPost('").append(getCallbackUrl(onlyTargetActivePage)).append( //$NON-NLS-1$
+				"'+'&shortcut='+encodeURIComponent(sc)+'&elementId='+element.id, wicketSerialize(Wicket.$(element.id))")); //$NON-NLS-1$
 		}
 
 		List<CharSequence> newShortCuts = new ArrayList<CharSequence>();
@@ -294,7 +298,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 				MarkupContainer page = ((Component)pageContributor).findParent(Page.class);
 				if (page != null)
 				{
-					Component comp = (Component)page.visitChildren(Component.class, new IVisitor()
+					Component comp = (Component)page.visitChildren(Component.class, new IVisitor<Component>()
 					{
 						public Object component(Component c)
 						{
@@ -311,6 +315,23 @@ public class WicketShortcutHandler implements IShortcutHandler
 						comp = comp.getParent();
 					}
 					component = (IComponent)comp;
+				}
+			}
+
+			// update the form component input
+			if (component instanceof FormComponent)
+			{
+				FormComponent< ? > formComponent = (FormComponent< ? >)component;
+				formComponent.inputChanged(); // reads input from request post data
+				formComponent.validate();
+				if (formComponent.hasErrorMessage())
+				{
+					formComponent.invalid();
+				}
+				else
+				{
+					formComponent.valid();
+					formComponent.updateModel();
 				}
 			}
 
