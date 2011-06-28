@@ -104,7 +104,8 @@ public class DialogProvider implements IScriptObject
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 		JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
 		pane.setInitialValue(options[0]);
-		return (String)createAndShowDialog(title, pane);
+		createAndShowDialog(title, pane);
+		return (String)pane.getValue();
 	}
 
 	/**
@@ -112,7 +113,7 @@ public class DialogProvider implements IScriptObject
 	 * @param pane
 	 * @return
 	 */
-	private Object createAndShowDialog(String title, JOptionPane pane)
+	private void createAndShowDialog(String title, JOptionPane pane)
 	{
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
@@ -124,8 +125,6 @@ public class DialogProvider implements IScriptObject
 		pane.selectInitialValue();
 		dialog.setVisible(true);
 		dialog.dispose();
-		Object value = pane.getInputValue();
-		return value;
 	}
 
 	/**
@@ -195,7 +194,8 @@ public class DialogProvider implements IScriptObject
 		pane.setWantsInput(true);
 		pane.setSelectionValues(options);
 		pane.setInitialSelectionValue(options[0]);
-		Object value = createAndShowDialog(title, pane);
+		createAndShowDialog(title, pane);
+		Object value = pane.getInputValue();
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
@@ -214,7 +214,8 @@ public class DialogProvider implements IScriptObject
 		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, val);
 		pane.setWantsInput(true);
 		pane.setInitialSelectionValue(val);
-		Object value = createAndShowDialog(title, pane);
+		createAndShowDialog(title, pane);
+		Object value = pane.getInputValue();
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
