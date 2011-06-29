@@ -10,7 +10,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/metadataextractor.jar" sourcepath="libsrc/metadataextractor-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/jFdfTk.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/itext.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/quartz.jar" sourcepath="libsrc/quartz-1.5.2-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/quartz.jar" sourcepath="libsrc/quartz-1.8.4-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell_US_UK_Dict.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.dltk.javascript.rhino"/>
