@@ -597,6 +597,10 @@ public class ToolBar implements IToolBar, IScriptObject
 
 	public boolean isDeprecated(String methodName)
 	{
+		if ("validate".equals(methodName))
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -631,10 +635,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.add(ToolBarButton.addButton(text, method, arguments, icon, tooltip, enabled, visible, _application));
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.add(ToolBarButton.addButton(text, method, arguments, icon, tooltip, enabled, visible, _application));
+			_jToolBar.validate();
 		}
 	}
 
@@ -663,10 +669,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.add(ToolBarButton.addCheckBox(text, method, selected, tooltip, enabled, visible, _application));
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.add(ToolBarButton.addCheckBox(text, method, selected, tooltip, enabled, visible, _application));
+			_jToolBar.validate();
 		}
 	}
 
@@ -690,10 +698,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.add(ToolBarButton.addComboBox(method, index, arguments, tooltip, enabled, visible, _application));
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.add(ToolBarButton.addComboBox(method, index, arguments, tooltip, enabled, visible, _application));
+			_jToolBar.validate();
 		}
 	}
 
@@ -722,10 +732,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.add(ToolBarButton.addField(method, text, length, tooltip, enabled, visible, _application));
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.add(ToolBarButton.addField(method, text, length, tooltip, enabled, visible, _application));
+			_jToolBar.validate();
 		}
 	}
 
@@ -734,10 +746,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.addSeparator();
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.addSeparator();
+			_jToolBar.validate();
 		}
 	}
 
@@ -755,10 +769,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.getComponentAtIndex(index).setEnabled(enabled);
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.remove(index);
+			_jToolBar.validate();
 		}
 	}
 
@@ -795,10 +811,12 @@ public class ToolBar implements IToolBar, IScriptObject
 		if (_toolBar != null)
 		{
 			_toolBar.remove(index);
+			validate();
 		}
 		else if (_jToolBar != null)
 		{
 			_jToolBar.remove(index);
+			_jToolBar.validate();
 		}
 	}
 
@@ -831,6 +849,9 @@ public class ToolBar implements IToolBar, IScriptObject
 			throw new PluginException(e.toString());
 		}
 		box.setSelected(selected);
+
+		if (_toolBar != null) validate();
+		else if (_jToolBar != null) _jToolBar.validate();
 	}
 
 	public void js_selectComboBox(int index, int selection) throws PluginException
@@ -862,6 +883,9 @@ public class ToolBar implements IToolBar, IScriptObject
 			throw new PluginException(e.toString());
 		}
 		box.setSelectedIndex(selection);
+
+		if (_toolBar != null) validate();
+		else if (_jToolBar != null) _jToolBar.validate();
 	}
 
 	public void js_setFieldText(int index, String text) throws PluginException
@@ -893,9 +917,24 @@ public class ToolBar implements IToolBar, IScriptObject
 			throw new PluginException(e.toString());
 		}
 		field.setText(text);
+
+		if (_toolBar != null) validate();
+		else if (_jToolBar != null) _jToolBar.validate();
 	}
 
+	@Deprecated
 	public void js_validate()
+	{
+		_toolBar.validate();
+
+		IRuntimeWindow runtimeWindow = _application.getRuntimeWindow(null);
+		if (runtimeWindow instanceof ISmartRuntimeWindow)
+		{
+			((ISmartRuntimeWindow)runtimeWindow).getWindow().validate();
+		}
+	}
+
+	public void validate()
 	{
 		_toolBar.validate();
 
@@ -925,5 +964,8 @@ public class ToolBar implements IToolBar, IScriptObject
 		{
 			_jToolBar.remove(index);
 		}
+
+		if (_toolBar != null) validate();
+		else if (_jToolBar != null) _jToolBar.validate();
 	}
 }

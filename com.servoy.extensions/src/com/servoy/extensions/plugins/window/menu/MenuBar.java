@@ -170,6 +170,10 @@ public class MenuBar implements IScriptObject
 
 	public boolean isDeprecated(String methodName)
 	{
+		if ("validate".equals(methodName))
+		{
+			return true;
+		}
 		return false;
 	}
 
