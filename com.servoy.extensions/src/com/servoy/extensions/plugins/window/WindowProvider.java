@@ -408,7 +408,13 @@ public class WindowProvider implements IScriptObject
 		getMenubar(null).js_setVisible(v);
 	}
 
+	@Deprecated
 	public void js_setToolBarVisible(boolean v)
+	{
+		js_setToolBarAreaVisible(v);
+	}
+
+	public void js_setToolBarAreaVisible(boolean v)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 		{
@@ -892,7 +898,8 @@ public class WindowProvider implements IScriptObject
 			|| "removeServoyToolBar".equals(methodName) //
 			|| "setMouseOverPopup".equals(methodName) //
 			|| "setPopup".equals(methodName) //
-			|| "showPopupMenu".equals(methodName))
+			|| "showPopupMenu".equals(methodName)//
+			|| "setToolBarVisible".equals(methodName))
 		{
 			return true;
 		}
@@ -946,9 +953,9 @@ public class WindowProvider implements IScriptObject
 
 		// kioskmode methods
 
-		if ("setToolBarVisible".equals(methodName))
+		if ("setToolBarAreaVisible".equals(methodName))
 		{
-			sb.append("%%elementName%%.setToolBarVisible(false)");
+			sb.append("%%elementName%%.setToolBarAreaVisible(false)");
 		}
 		else if ("setFullScreen".equals(methodName))
 		{
