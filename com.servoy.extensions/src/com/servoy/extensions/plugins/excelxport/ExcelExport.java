@@ -93,7 +93,14 @@ public class ExcelExport extends WizardWindow
 	@Override
 	public void reportError(Component parentComponent, String msg, Exception ex)
 	{
-		application.reportError(parentComponent, msg, ex);
+		if (application instanceof ISmartClientApplication)
+		{
+			((ISmartClientApplication)application).reportError(parentComponent, msg, ex);
+		}
+		else
+		{
+			application.reportError(msg, ex);
+		}
 	}
 
 	@Override
@@ -101,5 +108,4 @@ public class ExcelExport extends WizardWindow
 	{
 		reportError(window, msg, ex);
 	}
-
 }
