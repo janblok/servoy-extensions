@@ -116,6 +116,12 @@ public class FileProvider implements IScriptObject
 		}
 	}
 
+	public JSFile js_getHomeFolder()
+	{
+		return new JSFile(new File(System.getProperty("user.home"))); //$NON-NLS-1$
+	}
+
+	@Deprecated
 	public JSFile js_getHomeDirectory()
 	{
 		return new JSFile(new File(System.getProperty("user.home"))); //$NON-NLS-1$
@@ -1498,6 +1504,10 @@ public class FileProvider implements IScriptObject
 	public boolean isDeprecated(String methodName)
 	{
 		if (methodName.equals("convertStringToJSFile") || methodName.equals("getRemoteList"))
+		{
+			return true;
+		}
+		if (methodName.equals("getHomeDirectory"))
 		{
 			return true;
 		}
