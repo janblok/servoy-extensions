@@ -42,56 +42,147 @@ public class MailMessage implements Serializable, IScriptObject
 	public String plainMsg;
 	public String htmlMsg;
 
+	/**
+	 * Returns an array of Attachment instances corresponding to the attachments of this message.
+	 *
+	 * @sample
+	 * var msgs = plugins.mail.receiveMail(username, password, true, 0, null, properties);
+	 * if (msgs != null)
+	 * {
+	 * 	for (var i=0; i < msgs.length; i++)
+	 * 	{
+	 * 		var msg = msgs[i];
+	 * 		var str = '';
+	 * 		str += 'From: ' + msg.getFromAddresses() + '\n';
+	 * 		str += 'To: ' + msg.getRecipientAddresses() + '\n';
+	 * 		str += 'CC: ' + msg.getCCAddresses() + '\n';
+	 * 		str += 'Reply to: ' + msg.getReplyAddresses() + '\n';
+	 * 		str += 'Received on: ' + msg.getReceivedDate() + '\n';
+	 * 		str += 'Sent on: ' + msg.getSentDate() + '\n\n';
+	 * 		str += 'Subject: ' + msg.getSubject() + '\n\n';
+	 * 		str += 'Plain message: ' + msg.getPlainMsg() + '\n\n';
+	 * 		str += 'HTML message: ' + msg.getHtmlMsg() + '\n\n';
+	 * 		str += 'Headers: ' + msg.getHeaders() + '\n\n';
+	 * 		var attachments = msg.getAttachments();
+	 * 		if (attachments != null) {
+	 * 			str += 'Number of attachments: ' + attachments.length + '\n\n';
+	 * 			for (var j=0; j < attachments.length; j++)
+	 * 			{
+	 * 				var attachment = attachments[j];
+	 * 				str += 'Attachment ' + j + '\n';
+	 * 				str += '	Name: ' + attachment.getName() + '\n';
+	 * 				str += '	Size: ' + attachment.getData().length + '\n\n';
+	 * 			}
+	 * 		}
+	 * 		plugins.file.writeTXTFile('msg' + i + '.txt', str);
+	 * 		application.output('Message ' + i + ' retrieved.');
+	 * 	}
+	 * }
+	 * else
+	 * {
+	 * 	application.output("Failed to retrieve messages.");
+	 * }
+	 */
 	public Attachment[] js_getAttachments()
 	{
 		return getAttachments();
 	}
 
+	/**
+	 * Returns a String with all addresses present in the CC field of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getCCAddresses()
 	{
 		return getCCAddresses();
 	}
 
+	/**
+	 * Returns a String with all addresses present in the From field of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getFromAddresses()
 	{
 		return getFromAddresses();
 	}
 
+	/**
+	 * Returns a String with all headers of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getHeaders()
 	{
 		return getHeaders();
 	}
 
+	/**
+	 * Returns a String with the HTML content of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getHtmlMsg()
 	{
 		return getHtmlMsg();
 	}
 
+	/**
+	 * Returns a String with the plain content of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getPlainMsg()
 	{
 		return getPlainMsg();
 	}
 
+	/**
+	 * Returns a Date instace corresponding to the moment when the message was received.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public Date js_getReceivedDate()
 	{
 		return getReceivedDate();
 	}
 
+	/**
+	 * Returns a String with all addresses in the To field of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getRecipientAddresses()
 	{
 		return getRecipientAddresses();
 	}
 
+	/**
+	 * Returns a String with all addresses in the Reply-To field of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getReplyAddresses()
 	{
 		return getReplyAddresses();
 	}
 
+	/**
+	 * Returns a Date instance corresponding to the moment when this message was sent.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public Date js_getSentDate()
 	{
 		return getSentDate();
 	}
 
+	/**
+	 * Returns a String with the subject of this message.
+	 *
+	 * @sampleas js_getAttachments()
+	 */
 	public String js_getSubject()
 	{
 		return getSubject();
@@ -186,65 +277,16 @@ public class MailMessage implements Serializable, IScriptObject
 
 	public String[] getParameterNames(String methodName)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getSample(String methodName)
 	{
-		StringBuffer sb = new StringBuffer();
-		sb.append("var msgs = plugins.mail.receiveMail(username, password, true, 0, null, properties);\n");
-		sb.append("if (msgs != null)\n");
-		sb.append("{\n");
-		sb.append("\tfor (var i=0; i < msgs.length; i++)\n");
-		sb.append("\t{\n");
-		sb.append("\t\tvar msg = msgs[i];\n");
-		sb.append("\t\tvar str = '';\n");
-		sb.append("\t\tstr += 'From: ' + msg.getFromAddresses() + '\\n';\n");
-		sb.append("\t\tstr += 'To: ' + msg.getRecipientAddresses() + '\\n';\n");
-		sb.append("\t\tstr += 'CC: ' + msg.getCCAddresses() + '\\n';\n");
-		sb.append("\t\tstr += 'Reply to: ' + msg.getReplyAddresses() + '\\n';\n");
-		sb.append("\t\tstr += 'Received on: ' + msg.getReceivedDate() + '\\n';\n");
-		sb.append("\t\tstr += 'Sent on: ' + msg.getSentDate() + '\\n\\n';\n");
-		sb.append("\t\tstr += 'Subject: ' + msg.getSubject() + '\\n\\n';\n");
-		sb.append("\t\tstr += 'Plain message: ' + msg.getPlainMsg() + '\\n\\n';\n");
-		sb.append("\t\tstr += 'HTML message: ' + msg.getHtmlMsg() + '\\n\\n';\n");
-		sb.append("\t\tstr += 'Headers: ' + msg.getHeaders() + '\\n\\n';\n");
-		sb.append("\t\tvar attachments = msg.getAttachments();\n");
-		sb.append("\t\tif (attachments != null) {\n");
-		sb.append("\t\t\tstr += 'Number of attachments: ' + attachments.length + '\\n\\n';\n");
-		sb.append("\t\t\tfor (var j=0; j < attachments.length; j++)\n");
-		sb.append("\t\t\t{\n");
-		sb.append("\t\t\t\tvar attachment = attachments[j];\n");
-		sb.append("\t\t\t\tstr += 'Attachment ' + j + '\\n';\n");
-		sb.append("\t\t\t\tstr += '\tName: ' + attachment.getName() + '\\n';\n");
-		sb.append("\t\t\t\tstr += '\tSize: ' + attachment.getData().length + '\\n\\n';\n");
-		sb.append("\t\t\t}\n");
-		sb.append("\t\t}\n");
-		sb.append("\t\tplugins.file.writeTXTFile('msg' + i + '.txt', str);\n");
-		sb.append("\t\tapplication.output('Message ' + i + ' retrieved.');\n");
-		sb.append("\t}\n");
-		sb.append("}\n");
-		sb.append("else\n");
-		sb.append("{\n");
-		sb.append("\tapplication.output(\"Failed to retrieve messages.\");\n");
-		sb.append("}\n");
-		return sb.toString();
+		return null;
 	}
 
 	public String getToolTip(String methodName)
 	{
-		if ("getAttachments".equals(methodName)) return "Returns an array of Attachment instances corresponding to the attachments of this message.";
-		else if ("getCCAddresses".equals(methodName)) return "Returns a String with all addresses present in the CC field of this message.";
-		else if ("getFromAddresses".equals(methodName)) return "Returns a String with all addresses present in the From field of this message.";
-		else if ("getHeaders".equals(methodName)) return "Returns a String with all headers of this message.";
-		else if ("getHtmlMsg".equals(methodName)) return "Returns a String with the HTML content of this message.";
-		else if ("getPlainMsg".equals(methodName)) return "Returns a String with the plain content of this message.";
-		else if ("getReceivedDate".equals(methodName)) return "Returns a Date instace corresponding to the moment when the message was received.";
-		else if ("getRecipientAddresses".equals(methodName)) return "Returns a String with all addresses in the To field of this message.";
-		else if ("getReplyAddresses".equals(methodName)) return "Returns a String with all addresses in the Reply-To field of this message.";
-		else if ("getSentDate".equals(methodName)) return "Returns a Date instance corresponding to the moment when this message was sent.";
-		else if ("getSubject".equals(methodName)) return "Returns a String with the subject of this message.";
 		return null;
 	}
 

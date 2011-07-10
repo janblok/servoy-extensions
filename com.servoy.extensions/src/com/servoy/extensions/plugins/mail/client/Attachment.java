@@ -24,6 +24,7 @@ import com.servoy.j2db.util.ImageLoader;
 /**
  * @author jblok
  */
+@SuppressWarnings("nls")
 public class Attachment implements Serializable, IScriptObject
 {
 	private final String name;
@@ -55,37 +56,72 @@ public class Attachment implements Serializable, IScriptObject
 		this(name, data, null);
 	}
 
+	/**
+	 * Returns a byte array with the content of this attachment.
+	 *
+	 * @sample
+	 * var logo = plugins.mail.createBinaryAttachment('logo.jpg', plugins.file.readFile('d:/logo.jpg'));
+	 * var invoice = plugins.mail.createTextAttachment('invoice.txt', plugins.file.readTXTFile('d:/invoice.txt'));
+	 * var attachments = new Array(logo, invoice);
+	 * var success = plugins.mail.sendMail(toAddress, fromAddress, 'subject line', 'message text', null, null, attachments, properties);
+	 * if (!success)
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert', 'Failed to send mail', 'OK');
+	 * }
+	 * else
+	 * {
+	 * 	plugins.dialogs.showInfoDialog('Success', 'Mail sent', 'OK');
+	 * 	application.output('logo attachment name: ' + logo.getName());
+	 * 	application.output('logo attachment mime type: ' + logo.getMimeType());
+	 * 	application.output('logo attachment size: ' + logo.getData().length);
+	 * 	application.output('logo attachment embedded state: ' + logo.isEmbedded());
+	 * 	application.output('invoice attachment name: ' + invoice.getName());
+	 * 	application.output('invoice attachment mime type: ' + invoice.getMimeType());
+	 * 	application.output('invoice attachment size: ' + invoice.getData().length);
+	 * 	application.output('invoice attachment embedded state: ' + invoice.isEmbedded());
+	 * }
+	 */
 	public byte[] js_getData()
 	{
 		return getData();
 	}
 
+	/**
+	 * Returns the name of this attachment.
+	 *
+	 * @sampleas js_getData()
+	 */
 	public String js_getName()
 	{
 		return getName();
 	}
 
+	/**
+	 * Returns the Mime type of this attachment.
+	 *
+	 * @sampleas js_getData()
+	 */
 	public String js_getMimeType()
 	{
 		return getMimeType();
 	}
 
+	/**
+	 * Returns true if this attachment is embedded, false otherwise. Attachments become embedded 
+	 * if they are references through tags from the body text of the message.
+	 *
+	 * @sampleas js_getData()
+	 */
 	public boolean js_isEmbedded()
 	{
 		return isEmbedded();
 	}
 
-	/**
-	 * @return
-	 */
 	public byte[] getData()
 	{
 		return data;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getName()
 	{
 		return name;
@@ -132,52 +168,11 @@ public class Attachment implements Serializable, IScriptObject
 
 	public String getSample(String methodName)
 	{
-		if ("getData".equals(methodName) || "getMimeType".equals(methodName) || "getName".equals(methodName) || "isEmbedded".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var logo = plugins.mail.createBinaryAttachment('logo.jpg', plugins.file.readFile('d:/logo.jpg'));\n");
-			sb.append("var invoice = plugins.mail.createTextAttachment('invoice.txt', plugins.file.readTXTFile('d:/invoice.txt'));\n");
-			sb.append("var attachments = new Array(logo, invoice);\n");
-			sb.append("var success = plugins.mail.sendMail(toAddress, fromAddress, 'subject line', 'message text', null, null, attachments, properties);\n");
-			sb.append("if (!success)\n");
-			sb.append("{\n");
-			sb.append("\tplugins.dialogs.showWarningDialog('Alert', 'Failed to send mail', 'OK');\n");
-			sb.append("}\n");
-			sb.append("else\n");
-			sb.append("{\n");
-			sb.append("\tplugins.dialogs.showInfoDialog('Success', 'Mail sent', 'OK');\n");
-			sb.append("\tapplication.output('logo attachment name: ' + logo.getName());\n");
-			sb.append("\tapplication.output('logo attachment mime type: ' + logo.getMimeType());\n");
-			sb.append("\tapplication.output('logo attachment size: ' + logo.getData().length);\n");
-			sb.append("\tapplication.output('logo attachment embedded state: ' + logo.isEmbedded());\n");
-			sb.append("\tapplication.output('invoice attachment name: ' + invoice.getName());\n");
-			sb.append("\tapplication.output('invoice attachment mime type: ' + invoice.getMimeType());\n");
-			sb.append("\tapplication.output('invoice attachment size: ' + invoice.getData().length);\n");
-			sb.append("\tapplication.output('invoice attachment embedded state: ' + invoice.isEmbedded());\n");
-			sb.append("}\n");
-			return sb.toString();
-		}
 		return null;
 	}
 
 	public String getToolTip(String methodName)
 	{
-		if ("getData".equals(methodName))
-		{
-			return "Returns a byte array with the content of this attachment.";
-		}
-		if ("getMimeType".equals(methodName))
-		{
-			return "Returns the Mime type of this attachment.";
-		}
-		if ("getName".equals(methodName))
-		{
-			return "Returns the name of this attachment.";
-		}
-		if ("isEmbedded".equals(methodName))
-		{
-			return "Returns true if this attachment is embedded, false otherwise. Attachments become embedded if they are references through tags from the body text of the message.";
-		}
 		return null;
 	}
 

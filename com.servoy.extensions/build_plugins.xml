@@ -327,6 +327,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/mail">
 			<fileset dir="${src_plugins.dir}/mail">
 				<patternset refid="javaGif.sources"/>
+				<include name="**/servoy-doc.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/mail">
