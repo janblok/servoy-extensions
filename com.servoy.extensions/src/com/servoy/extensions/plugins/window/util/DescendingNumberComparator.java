@@ -27,9 +27,9 @@ public class DescendingNumberComparator implements Comparator<Object>
 {
 	public int compare(Object a, Object b)
 	{
-		if (a instanceof Double && b instanceof Double)
+		if (a instanceof Number && b instanceof Number)
 		{
-			return (new Double(((Number)b).doubleValue()).compareTo(new Double(((Number)a).doubleValue())));
+			return Double.compare(((Number)b).doubleValue(), ((Number)a).doubleValue());
 		}
 		return 0;
 	}
