@@ -164,9 +164,9 @@ public class FileProvider implements IScriptObject
 			else
 			{
 				int arg = Utils.getAsInteger(args[0]);
-				if (arg == 1)
+				if (arg == 0)
 				{
-					selection = JFileChooser.FILES_ONLY;
+					selection = JFileChooser.FILES_AND_DIRECTORIES;
 				}
 				else if (arg == 2)
 				{
