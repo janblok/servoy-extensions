@@ -1097,6 +1097,13 @@ public class FileProvider implements IScriptObject
 			sb.append("\tapplication.output(files[i].getAbsolutePath());\n");
 			return sb.toString();
 		}
+		else if ("getHomeFolder".equals(methodName))
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("var d = %%elementName%%.getHomeFolder();\n");
+			sb.append("application.output('home folder: ' + d.getAbsolutePath());\n");
+			return sb.toString();
+		}
 		else if ("getHomeDirectory".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
@@ -1336,6 +1343,10 @@ public class FileProvider implements IScriptObject
 		else if ("getFolderContents".equals(methodName))
 		{
 			return "Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.";
+		}
+		else if ("getHomeFolder".equals(methodName))
+		{
+			return "Returns a JSFile instance corresponding to the home folder of the logged in used.";
 		}
 		else if ("getHomeDirectory".equals(methodName))
 		{

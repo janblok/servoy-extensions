@@ -734,6 +734,14 @@ public abstract class AbstractMenu implements IScriptObject
 			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n");
 			sample.append("var property = plugins.window.getClientProperty('ToolTipText');\n");
 		}
+		else if ("getItemIndexByText".equals(methodName))
+		{
+			sample.append("// " + getToolTip(methodName) + "\n");
+			sample.append("// Retrieve the index of the item by text.\n");
+			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
+			sample.append("var itemIndex = menu.getItemIndexByText(\"someItemText\");\n");
+			sample.append("//menu.removeItem(itemIndex);\n");
+		}
 		else
 		{
 			return null;
