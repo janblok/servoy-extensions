@@ -56,6 +56,11 @@ public class SpellCheckServerPlugin implements IServerPlugin
 {
 	public static final String WEBSERVICE_NAME = "spellchecker"; //$NON-NLS-1$
 
+	public SpellCheckServerPlugin()
+	{
+
+	}
+
 	public void initialize(IServerAccess app) throws PluginException
 	{
 		app.registerWebService(WEBSERVICE_NAME, new SpellCheckXMLServlet(WEBSERVICE_NAME, this));
@@ -74,7 +79,9 @@ public class SpellCheckServerPlugin implements IServerPlugin
 
 	public Properties getProperties()
 	{
-		return null;
+		Properties props = new Properties();
+		props.put(DISPLAY_NAME, "Spellchecker Plugin"); //$NON-NLS-1$
+		return props;
 	}
 
 	public void load() throws PluginException
@@ -88,19 +95,31 @@ public class SpellCheckServerPlugin implements IServerPlugin
 	public String check(String text)
 	{
 		StringBuffer responseBody = new StringBuffer();
-		RequestSAXParser parser = new RequestSAXParser(text);
+		String theLanguage = parseForLanguage(text);
+		String goodText = removeLanguageFromRequest(text);
+		RequestSAXParser parser = new RequestSAXParser(goodText);
 		String textToBeChecked = parser.parseXMLString();
-		responseBody.append(createXmlStringResponse(textToBeChecked));
+		responseBody.append(createXmlStringResponse(textToBeChecked, theLanguage));
 		return responseBody.toString();
 
 	}
 
-	private String createXmlStringResponse(String text)
+	/**
+	 * @param text
+	 * @return
+	 */
+	private String removeLanguageFromRequest(String text)
 	{
+		int startIndex = text.lastIndexOf("<rslang>"); //$NON-NLS-1$
+		int l = "</rslang>".length();//$NON-NLS-1$
+		int endIndex = text.indexOf("</rslang>"); //$NON-NLS-1$
+		return text.substring(0, startIndex) + text.substring(endIndex + l, text.length());
+	}
 
-
+	private String createXmlStringResponse(String text, String theLanguage)
+	{
 		String xmlString = null;
-		SpellResult spellResponse = createResponseFromRapidSpell(text);
+		SpellResult spellResponse = createResponseFromRapidSpell(text, theLanguage);
 		Document dom;
 		//get an instance of factory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -171,19 +190,27 @@ public class SpellCheckServerPlugin implements IServerPlugin
 		return xmlString;
 	}
 
-	public SpellResult createResponseFromRapidSpell(String textToBeChecked)
+	private String parseForLanguage(String xmlString)
+	{
+		int startIndex = xmlString.lastIndexOf("<rslang>"); //$NON-NLS-1$
+		int l = "<rslang>".length();//$NON-NLS-1$
+		int endIndex = xmlString.indexOf("</rslang>"); //$NON-NLS-1$
+		if (startIndex == -1 || endIndex == -1) return SpellCheckerUtils.DEFAULT;
+		else return xmlString.substring(startIndex + l, endIndex);
+	}
+
+	public SpellResult createResponseFromRapidSpell(String textToBeChecked, String lang)
 	{
 		SpellResult spellResult = new SpellResult();
 		RapidSpellChecker checker = new RapidSpellChecker();
 		BadWord badWord;
 		Enumeration suggestions;
 
-		//check some text.
-		spellResult.setCharsCheckednumber(textToBeChecked.length());
-		checker.check(textToBeChecked);
+		//making sure we set a language
+		if (lang == null) checker.setLanguageParser(LanguageType.getLanguageTypeFromString(SpellCheckerUtils.ENGLISH));
+		else checker.setLanguageParser(LanguageType.getLanguageTypeFromString(lang));
 
 		//setting the desired user dictionary
-		String lang = SpellCheckerPreferencePanel.getDesiredLanguage();
 		String mainDict = RapidSpellUtils.getDictionaryForLanguage(lang);
 		if (mainDict != null)
 		{
@@ -195,11 +222,13 @@ public class SpellCheckServerPlugin implements IServerPlugin
 			checker.setDictFilePath(null);
 		}
 
-		checker.setLanguageParser(LanguageType.getLanguageTypeFromString(lang));
-
+		//compound words
 		if ((LanguageType.getLanguageTypeFromString(lang) == LanguageType.DUTCH) || (LanguageType.getLanguageTypeFromString(lang) == LanguageType.GERMAN)) checker.setCheckCompoundWords(true);
 		if (LanguageType.getLanguageTypeFromString(lang) == LanguageType.ITALIAN) checker.setCheckCompoundWords(false);
 
+		//check text
+		spellResult.setCharsCheckednumber(textToBeChecked.length());
+		checker.check(textToBeChecked);
 
 		//iterate through all bad words in the text.
 		while ((badWord = checker.nextBadWord()) != null)
@@ -211,7 +240,6 @@ public class SpellCheckServerPlugin implements IServerPlugin
 
 			try
 			{
-
 				//get suggestions for the current bad word.
 				suggestions = checker.findSuggestions().elements();
 				StringBuffer textCorrection = new StringBuffer();

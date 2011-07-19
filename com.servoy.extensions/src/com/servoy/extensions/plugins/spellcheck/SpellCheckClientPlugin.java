@@ -201,10 +201,10 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		String strUrl = null;
 		try
 		{
+			String selectedLang = SpellCheckerPreferencePanel.getDesiredLanguage();
 			if (Utils.getAsBoolean(application.getSettings().getProperty("plugin.spellcheck.googleServiceProvider"))) //$NON-NLS-1$ 
 			{
-				String selected = SpellCheckerPreferencePanel.getDesiredLanguage();
-				String language = GoogleSpellUtils.getBasicLanguageName(selected);
+				String language = GoogleSpellUtils.getBasicLanguageName(selectedLang);
 				strUrl = "https://www.google.com/tbproxy/spell?lang=" + language + "&hl=" + language; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			else
@@ -219,7 +219,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			String[] words = text.split("[\\p{Space}\\p{Punct}]+"); //$NON-NLS-1$
 			for (String eachWord : words)
 			{
-				String xmlString = serviceHandler.handleTextSpellChecking(eachWord);
+				String xmlString = serviceHandler.handleTextSpellChecking(eachWord, selectedLang);
 				ResponseSAXParser.getInstance().parseXMLString(xmlString);
 				spellResponse = ResponseSAXParser.getInstance().getResponse();
 				if (spellResponse.getSpellCorrections().size() <= 0) continue;

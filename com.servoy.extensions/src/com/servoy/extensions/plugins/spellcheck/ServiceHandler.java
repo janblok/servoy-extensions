@@ -36,12 +36,12 @@ public class ServiceHandler
 		this.strUrlServiceProvider = urlServiceProvider;
 	}
 
-	public String handleTextSpellChecking(String text)
+	public String handleTextSpellChecking(String text, String selectedLang)
 	{
 		StringBuffer responseBody = new StringBuffer();
 
 		// here create an XML file and send a request to google  or to RapidSpellChecker with POST
-		String xmlString = createXmlStringRequest(text);
+		String xmlString = createXmlStringRequest(text, selectedLang);
 
 		try
 		{
@@ -72,10 +72,12 @@ public class ServiceHandler
 		return responseBody.toString();
 	}
 
-	private String createXmlStringRequest(String text)
+	private String createXmlStringRequest(String text, String selectedLang)
 	{
 		StringBuffer requestXML = new StringBuffer();
-		requestXML.append("<spellrequest textalreadyclipped=\"0\"" + " ignoredups=\"1\"" + " ignoredigits=\"1\" ignoreallcaps=\"0\"><text>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		requestXML.append("<spellrequest textalreadyclipped=\"0\"" + " ignoredups=\"1\"" + " ignoredigits=\"1\" ignoreallcaps=\"0\">");//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		requestXML.append("<rslang>" + selectedLang + "</rslang>"); //$NON-NLS-1$ //$NON-NLS-2$
+		requestXML.append("<text>"); //$NON-NLS-1$
 		requestXML.append(text);
 		requestXML.append("</text></spellrequest>"); //$NON-NLS-1$
 		return requestXML.toString();
