@@ -36,7 +36,7 @@ public class SpellCheckerPreferencePanel extends PreferencePanel implements Acti
 {
 	protected IClientPluginAccess application;
 	private final JComboBox languageBox;
-	private static String desiredLanguage;
+	private static String desiredClientLanguage;
 
 	/**
 	 * Constructor for SpellCheckerPreferencePanel.
@@ -66,7 +66,7 @@ public class SpellCheckerPreferencePanel extends PreferencePanel implements Acti
 		});
 		this.add(languageBox, BorderLayout.SOUTH);
 
-		//FIXME: adding by default RapidShell and en_us; this is too hard-coded, should change
+		//FIXME: adding by default RapidShell and en_us; this is not nice, should change
 		populateLanguageBox(RapidSpellUtils.getAvailableDictionaries());
 		setDesiredLanguage(SpellCheckerUtils.DEFAULT);
 	}
@@ -150,12 +150,12 @@ public class SpellCheckerPreferencePanel extends PreferencePanel implements Acti
 
 	public static String getDesiredLanguage()
 	{
-		return desiredLanguage;
+		return desiredClientLanguage;
 	}
 
 	public static void setDesiredLanguage(String s)
 	{
-		desiredLanguage = s;
+		desiredClientLanguage = s;
 	}
 
 	private void populateLanguageBox(List<String> langLst)
