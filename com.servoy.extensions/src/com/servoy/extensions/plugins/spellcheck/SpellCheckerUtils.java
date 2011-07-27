@@ -59,7 +59,7 @@ public class SpellCheckerUtils
 	/** 
 	 * Language Strings
 	 */
-	public static final String ENGLISH = "English"; //$NON-NLS-1$
+	public static final String ENGLISH = "English"; //$NON-NLS-1$ 
 	public static final String DUTCH = "Dutch"; //$NON-NLS-1$
 	public static final String GERMAN = "German"; //$NON-NLS-1$
 	public static final String ITALIAN = "Italian"; //$NON-NLS-1$
