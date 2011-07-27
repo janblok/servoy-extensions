@@ -54,7 +54,7 @@ public class DialogProvider implements IScriptObject
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[1]));
+			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[0]) + "\\n" + String.valueOf(array[1]));
 			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
 		}
 		return js_showDialogEx(array, JOptionPane.WARNING_MESSAGE);
@@ -64,7 +64,7 @@ public class DialogProvider implements IScriptObject
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[1]));
+			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[0]) + "\\n" + String.valueOf(array[1]));
 			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
 		}
 		return js_showDialogEx(array, JOptionPane.INFORMATION_MESSAGE);
@@ -74,7 +74,7 @@ public class DialogProvider implements IScriptObject
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[1]));
+			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[0]) + "\\n" + String.valueOf(array[1]));
 			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
 		}
 		return js_showDialogEx(array, JOptionPane.ERROR_MESSAGE);
