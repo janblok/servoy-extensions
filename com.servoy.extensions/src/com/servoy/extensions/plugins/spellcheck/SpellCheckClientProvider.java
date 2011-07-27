@@ -81,6 +81,8 @@ public class SpellCheckClientProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
+			retval.append("// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.\n"); //$NON-NLS-1$
+			retval.append("// Spellchecking currently works in SmartClient only.\n"); //$NON-NLS-1$
 			retval.append("plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);\n"); //$NON-NLS-1$
 			return retval.toString();
 		}

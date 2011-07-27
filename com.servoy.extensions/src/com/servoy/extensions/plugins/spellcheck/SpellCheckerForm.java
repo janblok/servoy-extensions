@@ -92,11 +92,11 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		jPanel1.add(ignoreBtn);
 		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JButton addBtn = createButton(SpellCheckerUtils.ADD_CMD, SpellCheckerUtils.ADD_BUTTON, this);
-		addBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
-		jPanel1.add(addBtn);
-		jPanel1.add(Box.createHorizontalGlue());
-		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
+//		JButton addBtn = createButton(SpellCheckerUtils.ADD_CMD, SpellCheckerUtils.ADD_BUTTON, this);
+//		addBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
+//		jPanel1.add(addBtn);
+//		jPanel1.add(Box.createHorizontalGlue());
+//		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
 		JButton changeBtn = createButton(SpellCheckerUtils.REPLACE_CMD, SpellCheckerUtils.REPLACE_BUTTON, this);
 		changeBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
@@ -198,7 +198,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		if (SpellCheckerUtils.IGNORE_CMD.equals(e.getActionCommand()))
 		{
 			spellEvent.ignoreWord(false);
-			javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
+			//javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
 		}
 		else if (SpellCheckerUtils.REPLACE_CMD.equals(e.getActionCommand()))
 		{
@@ -212,8 +212,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		else if (SpellCheckerUtils.ADD_CMD.equals(e.getActionCommand()))
 		{
 			// at this moment same functionality as IGNORE
-			javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
-
+			//javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
 		}
 		else if (SpellCheckerUtils.CANCEL_CMD.equals(e.getActionCommand()))
 		{
