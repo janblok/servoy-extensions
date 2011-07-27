@@ -62,11 +62,21 @@ public class DialogProvider implements IScriptObject
 
 	public String js_showInfoDialog(Object[] array)
 	{
+		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
+		{
+			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[1]));
+			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
+		}
 		return js_showDialogEx(array, JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public String js_showErrorDialog(Object[] array)
 	{
+		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
+		{
+			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[1]));
+			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
+		}
 		return js_showDialogEx(array, JOptionPane.ERROR_MESSAGE);
 	}
 
