@@ -17,6 +17,9 @@
 
 package com.servoy.extensions.plugins.spellcheck;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SpellCheckerUtils
 {
 	// Dialog title
@@ -63,4 +66,14 @@ public class SpellCheckerUtils
 	public static final String SPANISH = "Spanish"; //$NON-NLS-1$
 	public static final String DEFAULT = ENGLISH;
 
+	/**
+	 * Get available languages/dictionaries as a list.
+	 * 
+	 * @return list of available language dictionaries
+	 */
+	public static List<String> getAvailableDictionaries()
+	{
+		String[] s = { SpellCheckerUtils.ENGLISH, SpellCheckerUtils.DUTCH, SpellCheckerUtils.GERMAN, SpellCheckerUtils.ITALIAN, SpellCheckerUtils.SPANISH };
+		return Arrays.asList(s);
+	}
 }

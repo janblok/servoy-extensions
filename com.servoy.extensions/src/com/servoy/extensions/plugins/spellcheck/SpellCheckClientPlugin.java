@@ -127,11 +127,11 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-		check(c);
+		check(c, null);
 	}
 
 
-	void check(Component c)
+	void check(Component c, String language)
 	{
 		if (c instanceof JTextComponent)
 		{
@@ -175,7 +175,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 				}
 
 				checkedComponent = (JTextComponent)c;
-				this.check(checkedComponent);
+				this.check(checkedComponent, language);
 				//if we don't have to check we don't pop-up at all
 				//NOTE: if we put this code before the check, the GUI unnecessarily shows up (has no real thing to display)
 				if (gui.hasAtLeastOneSpellEvent())
@@ -188,7 +188,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		}
 	}
 
-	public void check(JTextComponent c)
+	public void check(JTextComponent c, String optLang)
 	{
 		setTheEditFormatter();
 
@@ -201,7 +201,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		String strUrl = null;
 		try
 		{
-			String selectedLang = SpellCheckerPreferencePanel.getDesiredLanguage();
+			String selectedLang = (optLang != null) ? optLang : SpellCheckerPreferencePanel.getDesiredLanguage();
 			if (Utils.getAsBoolean(application.getSettings().getProperty("plugin.spellcheck.googleServiceProvider"))) //$NON-NLS-1$ 
 			{
 				String language = GoogleSpellUtils.getBasicLanguageName(selectedLang);

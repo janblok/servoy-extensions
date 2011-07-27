@@ -17,29 +17,17 @@
 
 package com.servoy.extensions.plugins.spellcheck;
 
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author acostache
  *
  */
-public class RapidSpellUtils
+public class RapidSpellUtils extends SpellCheckerUtils
 {
 	public static final String DutchDictionary = "nl-dutch-v2.dict"; //$NON-NLS-1$
 	public static final String GermanDictionary = "de-German-v2.dict"; //$NON-NLS-1$
 	public static final String ItalianDictionary = "DICT-IT-IT-Italian.dict"; //$NON-NLS-1$
 	public static final String SpanishDictionary = "es-Spanish-v2.dict"; //$NON-NLS-1$
-
-	/** 
-	 * Get the supported languages, corresponding to the available dictionaries for RapidSpell.
-	 * @return
-	 */
-	public static List<String> getAvailableDictionaries()
-	{
-		String[] s = { SpellCheckerUtils.ENGLISH, SpellCheckerUtils.DUTCH, SpellCheckerUtils.GERMAN, SpellCheckerUtils.ITALIAN, SpellCheckerUtils.SPANISH };
-		return Arrays.asList(s);
-	}
 
 	public static String getDictionaryForLanguage(String lang)
 	{

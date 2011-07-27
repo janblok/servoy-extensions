@@ -39,17 +39,36 @@ public class SpellCheckClientProvider implements IScriptObject
 	 *
 	 * @param textComponent 
 	 */
-	public void js_checkTextComponent(Object c)
+	public void js_checkTextComponent(Object textComponent)
 	{
 		try
 		{
-			if (c instanceof IDelegate)
+			if (textComponent instanceof IDelegate)
 			{
-				c = ((IDelegate)c).getDelegate();
+				textComponent = ((IDelegate)textComponent).getDelegate();
 			}
-			if (c instanceof Component)
+			if (textComponent instanceof Component)
 			{
-				plugin.check((Component)c);
+				plugin.check((Component)textComponent, null);
+			}
+		}
+		catch (Exception e)
+		{
+			Debug.error(e);
+		}
+	}
+
+	public void js_checkTextComponent(Object textComponent, String language)
+	{
+		try
+		{
+			if (textComponent instanceof IDelegate)
+			{
+				textComponent = ((IDelegate)textComponent).getDelegate();
+			}
+			if (textComponent instanceof Component)
+			{
+				plugin.check((Component)textComponent, language);
 			}
 		}
 		catch (Exception e)
@@ -68,7 +87,7 @@ public class SpellCheckClientProvider implements IScriptObject
 	{
 		if ("checkTextComponent".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "textComponent" };
+			return new String[] { "textComponent", "[language]" }; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return null;
 	}
@@ -78,12 +97,16 @@ public class SpellCheckClientProvider implements IScriptObject
 		if ("checkTextComponent".equals(methodName)) //$NON-NLS-1$
 		{
 			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
+			retval.append("// "); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
 			retval.append("// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.\n"); //$NON-NLS-1$
 			retval.append("// Spellchecking currently works in SmartClient only.\n"); //$NON-NLS-1$
 			retval.append("plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);\n"); //$NON-NLS-1$
+			retval.append("// Optionally, the language can be sent as an argument to the function.\n"); //$NON-NLS-1$
+			retval.append("// The language string is provided from the language constants class, as in the sample below\n"); //$NON-NLS-1$
+			retval.append("// NOTE: the optional language, if provided, overrides the Preference Panel page setting, of the current SpellCheck provider (RapidSpell/Google).\n"); //$NON-NLS-1$
+			retval.append("// plugins.spellcheck.checkTextComponent(textInDutch, SpellCheck_Languages.DUTCH);\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		else
@@ -113,6 +136,6 @@ public class SpellCheckClientProvider implements IScriptObject
 	 */
 	public Class[] getAllReturnedTypes()
 	{
-		return null;
+		return new Class[] { SpellCheck_Languages.class };
 	}
 }
