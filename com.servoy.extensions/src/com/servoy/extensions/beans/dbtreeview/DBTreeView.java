@@ -91,7 +91,9 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 
 	protected SwingDBTreeView getSwingDBTreeView(Object[] cargs, IClientPluginAccess application)
 	{
-		return new SwingDBTreeView(application);
+		SwingDBTreeView swingDBTreeView = new SwingDBTreeView(application);
+		swingDBTreeView.setBorder(null);
+		return swingDBTreeView;
 	}
 
 	public static Class[] getAllReturnedTypes()
