@@ -862,7 +862,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	 */
 	protected void mouseClicked(final MouseEvent e)
 	{
-		TreePath selectedPath = tree.getSelectionPath();
+		TreePath selectedPath = tree.getPathForLocation(e.getX(), e.getY());
 		if (selectedPath != null)
 		{
 			final DefaultMutableTreeNode tn = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
