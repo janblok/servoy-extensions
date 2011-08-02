@@ -902,26 +902,6 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		return wicketTree.getAllReturnedTypes();
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		return wicketTree.getParameterNames(methodName);
-	}
-
-	public String getSample(String methodName)
-	{
-		return wicketTree.getSample(methodName);
-	}
-
-	public String getToolTip(String methodName)
-	{
-		return wicketTree.getToolTip(methodName);
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return wicketTree.isDeprecated(methodName);
-	}
-
 	public IStylePropertyChanges getStylePropertyChanges()
 	{
 		return wicketTree.jsChangeRecorder;

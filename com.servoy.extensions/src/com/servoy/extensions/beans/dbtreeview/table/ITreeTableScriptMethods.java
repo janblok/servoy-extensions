@@ -25,13 +25,53 @@ import com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods;
  */
 public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 {
+	/**
+	 * Set the header text for the tree column
+	 * 
+	 * @sample
+	 * %%elementName%%.setTreeColumnHeader('Tree Column Header');
+	 * 
+	 * @param treeColumnHeader
+	 */
 	public void js_setTreeColumnHeader(String treeColumnHeader);
 
+	/**
+	 * Set the preferred width in pixels for the tree column
+	 * 
+	 * @sample
+	 * %%elementName%%.setTreeColumnPreferredWidth(200);
+	 * 
+	 * @param preferredWidth
+	 */
 	public void js_setTreeColumnPreferredWidth(int preferredWidth);
 
+	/**
+	 * @sameas js_createColumn(String, String, String, String, int)
+	 */
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname);
 
+	/**
+	 * Create and add new column to the tree table
+	 * 
+	 * @sample
+	 * %%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);
+	 * 
+	 * @param servername
+	 * @param tablename
+	 * @param header
+	 * @param fieldname
+	 * @param preferredWidth (optional)
+	 *   
+	 * @return Column object
+	 */
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth);
 
+	/**
+	 * Remove all columns but the tree column from the tree table
+	 * 
+	 * @sample
+	 * %%elementName%%.removeAllColumns();
+	 * 
+	 */
 	public void js_removeAllColumns();
 }

@@ -18,8 +18,10 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.DataSourceUtils;
 
 /**
@@ -28,7 +30,8 @@ import com.servoy.j2db.util.DataSourceUtils;
  * 
  * @author gboros
  */
-public class Binding implements IScriptObject
+@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "Binding")
+public class Binding implements IReturnedTypesProvider, IScriptable
 {
 	private String dataSource;
 
@@ -68,6 +71,23 @@ public class Binding implements IScriptObject
 		return configurationDataprovider;
 	}
 
+	/**
+	 * Set configuration dataprovider. Dataprovider must be MEDIA type and returns a configuration object
+	 * 
+	 * @sample
+	 * var config = new Object();
+	 * config.text = 'my_text';
+	 * config.nRelation = 'my_n_relation';
+	 * config.mRelation = 'my_m_relation';
+	 * config.childSort = 'my_sort_field';
+	 * config.fontType = 'my_font';
+	 * config.toolTipText = 'my_tooltip';
+	 * config.hasCheckBox = 'true';
+	 * config.checkBoxValue = 'true';
+	 * 
+	 * @param configurationDataprovider
+	 * 
+	 */
 	public void js_setConfigurationDataprovider(String configurationDataprovider)
 	{
 		this.configurationDataprovider = configurationDataprovider;
@@ -78,16 +98,29 @@ public class Binding implements IScriptObject
 		return hasCheckBoxDataprovider;
 	}
 
+	/**
+	 * Set has checkbox flag dataprovider. Dataprovider returns INTEGER (0 / 1 / 2) or STRING (false / true / disabled) for (does not have / have / have but disabled)
+	 * 
+	 * @param hasCheckBoxDataprovider
+	 * 
+	 */
 	public void js_setHasCheckBoxDataprovider(String hasCheckBoxDataprovider)
 	{
 		this.hasCheckBoxDataprovider = hasCheckBoxDataprovider;
 	}
+
 
 	public String getCheckBoxValueDataprovider()
 	{
 		return checkBoxValueDataprovider;
 	}
 
+	/**
+	 * Set checkbox value dataprovider. Dataprovider returns INTEGER (0 or 1) or STRING (false or true)
+	 *  
+	 * @param checkBoxValueDataprovider
+	 * 
+	 */
 	public void js_setCheckBoxValueDataprovider(String checkBoxValueDataprovider)
 	{
 		this.checkBoxValueDataprovider = checkBoxValueDataprovider;
@@ -98,6 +131,12 @@ public class Binding implements IScriptObject
 		return childSortDataprovider;
 	}
 
+	/**
+	 * Set the dataprovider name to retrieve column name and sort order for the child nodes.\nThe provided data must be a string of form : column_name_used_for_sort sort_order(asc or desc)
+	 * 
+	 * @param childSortDataprovider
+	 * 
+	 */
 	public void js_setChildSortDataprovider(String childSortDataprovider)
 	{
 		this.childSortDataprovider = childSortDataprovider;
@@ -108,6 +147,12 @@ public class Binding implements IScriptObject
 		return fontTypeDataprovider;
 	}
 
+	/**
+	 * Set the dataprovider name to retrieve the node font from
+	 * 
+	 * @param fontTypeDataprovider
+	 * 
+	 */
 	public void js_setFontTypeDataprovider(String fontTypeDataprovider)
 	{
 		this.fontTypeDataprovider = fontTypeDataprovider;
@@ -118,6 +163,12 @@ public class Binding implements IScriptObject
 		return imageMediaDataprovider;
 	}
 
+	/**
+	 * Set the dataprovider name to retrieve the node image from (blob column)
+	 * 
+	 * @param imageMediaDataprovider
+	 * 
+	 */
 	public void js_setImageMediaDataprovider(String imageMediaDataprovider)
 	{
 		this.imageMediaDataprovider = imageMediaDataprovider;
@@ -128,6 +179,11 @@ public class Binding implements IScriptObject
 		return imageURLDataprovider;
 	}
 
+	/**
+	 * Set the dataprovider name to retrieve the node image from (via url)
+	 * 
+	 * @param imageURLDataprovider
+	 */
 	public void js_setImageURLDataprovider(String imageURLDataprovider)
 	{
 		this.imageURLDataprovider = imageURLDataprovider;
@@ -138,6 +194,12 @@ public class Binding implements IScriptObject
 		return mRelationName;
 	}
 
+	/**
+	 * Set m-relation name
+	 * 
+	 * @param name
+	 * 
+	 */
 	public void js_setMRelationName(String name)
 	{
 		mRelationName = name;
@@ -148,6 +210,12 @@ public class Binding implements IScriptObject
 		return nRelationName;
 	}
 
+	/**
+	 * Set n-relation name
+	 * 
+	 * @param name
+	 * 
+	 */
 	public void js_setNRelationName(String name)
 	{
 		nRelationName = name;
@@ -158,6 +226,22 @@ public class Binding implements IScriptObject
 		return nRelationInfos;
 	}
 
+	/**
+	 * Set n-relation infos (array of RelationInfo objects created using tree.createRelationInfo() for having multiple child relations for one node)
+	 * 
+	 * @sample
+	 * var company_relations = new Array();
+	 * company_relations[0] = tree.createRelationInfo();
+	 * company_relations[0].setLabel('Employees');
+	 * company_relations[0].setNRelationName('companies_to_employees');
+	 * company_relations[1] = tree.createRelationInfo();
+	 * company_relations[1].setLabel('Customers');
+	 * company_relations[1].setNRelationName('companies_to_customers');
+	 * binding.setNRelationInfos(company_relations);
+	 * 
+	 * @param relationInfos
+	 * 
+	 */
 	public void js_setNRelationInfos(Object[] relationInfos)
 	{
 		nRelationInfos = relationInfos;
@@ -225,6 +309,12 @@ public class Binding implements IScriptObject
 		return textDataprovider;
 	}
 
+	/**
+	 * Set text dataprovider
+	 * 
+	 * @param textDataprovider
+	 * 
+	 */
 	public void js_setTextDataprovider(String textDataprovider)
 	{
 		this.textDataprovider = textDataprovider;
@@ -235,6 +325,12 @@ public class Binding implements IScriptObject
 		return toolTipTextDataprovider;
 	}
 
+	/**
+	 * Set the dataprovider name to retrieve the node tooltiptext from
+	 * 
+	 * @param toolTipTextDataprovider
+	 * 
+	 */
 	public void js_setToolTipTextDataprovider(String toolTipTextDataprovider)
 	{
 		this.toolTipTextDataprovider = toolTipTextDataprovider;
@@ -245,6 +341,13 @@ public class Binding implements IScriptObject
 		return methodToCallOnRightClick;
 	}
 
+	/**
+	 * Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY
+	 * 
+	 * @param methodToCallOnRightClick
+	 * @param returnDataproviderOnRightClick
+	 * 
+	 */
 	public void js_setMethodToCallOnRightClick(Function methodToCallOnRightClick, String returnDataproviderOnRightClick)
 	{
 		if (methodToCallOnRightClick != null)
@@ -259,6 +362,13 @@ public class Binding implements IScriptObject
 		return methodToCallOnDoubleClick;
 	}
 
+	/**
+	 * Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY
+	 * 
+	 * @param methodToCallOnDoubleClick
+	 * @param returnDataproviderOnDoubleClick
+	 * 
+	 */
 	public void js_setMethodToCallOnDoubleClick(Function methodToCallOnDoubleClick, String returnDataproviderOnDoubleClick)
 	{
 		if (methodToCallOnDoubleClick != null)
@@ -273,6 +383,13 @@ public class Binding implements IScriptObject
 		return methodToCallOnClick;
 	}
 
+	/**
+	 * Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY
+	 * 
+	 * @param methodToCallOnClick
+	 * @param returnDataproviderOnClick
+	 * 
+	 */
 	public void js_setMethodToCallOnClick(Function methodToCallOnClick, String returnDataproviderOnClick)
 	{
 		if (methodToCallOnClick != null)
@@ -287,6 +404,13 @@ public class Binding implements IScriptObject
 		return methodToCallOnCheckBoxChange;
 	}
 
+	/**
+	 * Set method to call on check box status change
+	 * 
+	 * @param methodToCallOnCheckBoxChange
+	 * @param returnDataproviderOnCheckBoxChange
+	 * 
+	 */
 	public void js_setMethodToCallOnCheckBoxChange(Function methodToCallOnCheckBoxChange, String returnDataproviderOnCheckBoxChange)
 	{
 		if (methodToCallOnCheckBoxChange != null)
@@ -301,6 +425,13 @@ public class Binding implements IScriptObject
 		return callBack;
 	}
 
+	/**
+	 * Set callback method for node selection and double click
+	 * 
+	 * @param f
+	 * @param returnDataprovider
+	 * 
+	 */
 	public void js_setCallBackInfo(Function f, String returnDataprovider)
 	{
 		if (f != null)
@@ -316,6 +447,12 @@ public class Binding implements IScriptObject
 		return mRelationDataprovider;
 	}
 
+	/**
+	 * Set m-relation dataprovider. Dataprovider returns the name of the m-relation
+	 * 
+	 * @param dataprovider
+	 * 
+	 */
 	public void js_setMRelationDataprovider(String dataprovider)
 	{
 		mRelationDataprovider = dataprovider;
@@ -326,6 +463,12 @@ public class Binding implements IScriptObject
 		return nRelationDataprovider;
 	}
 
+	/**
+	 * Set n-relation dataprovider. Dataprovider returns the name of the n-relation
+	 * 
+	 * @param dataprovider
+	 * 
+	 */
 	public void js_setNRelationDataprovider(String dataprovider)
 	{
 		nRelationDataprovider = dataprovider;
@@ -333,183 +476,9 @@ public class Binding implements IScriptObject
 
 	public Class[] getAllReturnedTypes()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		if (methodName.endsWith("provider"))
-		{
-			return new String[] { "dataprovider" };
-		}
-		else if (methodName.startsWith("setMethod"))
-		{
-			return new String[] { "function", "returnDataprovider" };
-		}
-		else if (methodName.endsWith("elationName"))
-		{
-			return new String[] { "relation" };
-		}
-
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if (methodName.endsWith("NRelationInfos"))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var company_relations = new Array();\n");
-			retval.append("company_relations[0] = tree.createRelationInfo();\n");
-			retval.append("company_relations[0].setLabel('Employees');\n");
-			retval.append("company_relations[0].setNRelationName('companies_to_employees');\n");
-			retval.append("company_relations[1] = tree.createRelationInfo();\n");
-			retval.append("company_relations[1].setLabel('Customers');\n");
-			retval.append("company_relations[1].setNRelationName('companies_to_customers');\n");
-			retval.append("binding.setNRelationInfos(company_relations);\n");
-
-			return retval.toString();
-		}
-		else if (methodName.endsWith("provider"))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("binding.");
-			retval.append(methodName);
-			retval.append("('dataprovider');\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (methodName.startsWith("setMethod") || methodName.startsWith("setCallBackInfo"))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("binding.");
-			retval.append(methodName);
-			retval.append("(callbackFunction, 'returnDataprovider');\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (methodName.endsWith("elationName"))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("binding.");
-			retval.append(methodName);
-			retval.append("('relation');\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if (methodName.endsWith("CheckBoxValueDataprovider"))
-		{
-			return "Set checkbox value dataprovider. Dataprovider returns INTEGER (0 or 1) or STRING (false or true)";
-		}
-		else if (methodName.endsWith("ChildSortDataprovider"))
-		{
-			return "Set the dataprovider name to retrieve column name and sort order for the child nodes.\nThe provided data must be a string of form : column_name_used_for_sort sort_order(asc or desc)";
-		}
-		else if (methodName.endsWith("FontTypeDataprovider"))
-		{
-			return "Set the dataprovider name to retrieve the node font from";
-		}
-		else if (methodName.endsWith("HasCheckBoxDataprovider"))
-		{
-			return "Set has checkbox flag dataprovider. Dataprovider returns INTEGER (0 / 1 / 2) or STRING (false / true / disabled) for (does not have / have / have but disabled)";
-		}
-		else if (methodName.endsWith("ImageMediaDataprovider"))
-		{
-			return "Set the dataprovider name to retrieve the node image from (blob column)";
-		}
-		else if (methodName.endsWith("ImageURLDataprovider"))
-		{
-			return "Set the dataprovider name to retrieve the node image from (via url)";
-		}
-		else if (methodName.endsWith("MRelationDataprovider"))
-		{
-			return "Set m-relation dataprovider. Dataprovider returns the name of the m-relation";
-		}
-		else if (methodName.endsWith("NRelationDataprovider"))
-		{
-			return "Set n-relation dataprovider. Dataprovider returns the name of the n-relation";
-		}
-		else if (methodName.endsWith("TextDataprovider"))
-		{
-			return "Set text dataprovider";
-		}
-		else if (methodName.endsWith("ToolTipTextDataprovider"))
-		{
-			return "Set the dataprovider name to retrieve the node tooltiptext from";
-		}
-		else if (methodName.endsWith("MRelationName"))
-		{
-			return "Set m-relation name";
-		}
-		else if (methodName.endsWith("NRelationName"))
-		{
-			return "Set n-relation name";
-		}
-		else if (methodName.endsWith("MethodToCallOnCheckBoxChange"))
-		{
-			return "Set method to call on check box status change";
-		}
-		else if (methodName.endsWith("CallBackInfo"))
-		{
-			return "Set callback method for node selection and double click";
-		}
-		else if (methodName.endsWith("MethodToCallOnClick"))
-		{
-			return "Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
-		}
-		else if (methodName.endsWith("MethodToCallOnRightClick"))
-		{
-			return "Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
-		}
-		else if (methodName.endsWith("MethodToCallOnDoubleClick"))
-		{
-			return "Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY";
-		}
-		else if (methodName.endsWith("ConfigurationDataprovider"))
-		{
-			StringBuffer example = new StringBuffer();
-			example.append("Ex.:\n");
-			example.append("var config = new Object();\n");
-			example.append("config.text = 'my_text';\n");
-			example.append("config.nRelation = 'my_n_relation';\n");
-			example.append("config.mRelation = 'my_m_relation';\n");
-			example.append("config.childSort = 'my_sort_field';\n");
-			example.append("config.fontType = 'my_font';\n");
-			example.append("config.toolTipText = 'my_tooltip';\n");
-			example.append("config.hasCheckBox = 'true';\n");
-			example.append("config.checkBoxValue = 'true';\n");
-
-			return "Set configuration dataprovider. Dataprovider must be MEDIA type and returns a configuration object\n" + example.toString();
-		}
-		else if (methodName.endsWith("NRelationInfos"))
-		{
-			return "Set n-relation infos (array of RelationInfo objects created using tree.createRelationInfo() for having multiple child relations for one node)";
-		}
-
-
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
 
 	@Override
 	public String toString()

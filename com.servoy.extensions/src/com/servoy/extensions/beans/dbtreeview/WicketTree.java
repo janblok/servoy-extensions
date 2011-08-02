@@ -450,26 +450,6 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 		return DBTreeView.getAllReturnedTypes();
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		return DBTreeView.getParameterNames(methodName);
-	}
-
-	public String getSample(String methodName)
-	{
-		return DBTreeView.getSample(methodName);
-	}
-
-	public String getToolTip(String methodName)
-	{
-		return DBTreeView.getToolTip(methodName);
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return DBTreeView.isDeprecated(methodName);
-	}
-
 	public Color getBackground()
 	{
 		return background;

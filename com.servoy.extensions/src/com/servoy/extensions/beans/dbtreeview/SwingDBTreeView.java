@@ -1111,26 +1111,6 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		return DBTreeView.getAllReturnedTypes();
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		return DBTreeView.getParameterNames(methodName);
-	}
-
-	public String getSample(String methodName)
-	{
-		return DBTreeView.getSample(methodName);
-	}
-
-	public String getToolTip(String methodName)
-	{
-		return DBTreeView.getToolTip(methodName);
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return DBTreeView.isDeprecated(methodName);
-	}
-
 	public void tableChanged(TableModelEvent e)
 	{
 		Object foundSet = e.getSource();

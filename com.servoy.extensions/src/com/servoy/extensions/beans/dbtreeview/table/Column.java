@@ -16,14 +16,17 @@
  */
 package com.servoy.extensions.beans.dbtreeview.table;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * Script object holding informations needed to display a tree table column
  * 
  * @author gboros
  */
-public class Column implements IScriptObject
+@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "Column")
+public class Column implements IReturnedTypesProvider, IScriptable
 {
 	private String serverName;
 	private String tableName;
@@ -64,6 +67,15 @@ public class Column implements IScriptObject
 		return dataprovider;
 	}
 
+	/**
+	 * Set column dataprovider
+	 * 
+	 * @sample
+	 * column.setDataprovider('fieldName');
+	 * 
+	 * @param fieldName
+	 * 
+	 */
 	public void js_setDataprovider(String fieldName)
 	{
 		this.dataprovider = fieldName;
@@ -74,6 +86,15 @@ public class Column implements IScriptObject
 		return header;
 	}
 
+	/**
+	 * Set column header text
+	 * 
+	 * @sample
+	 * column.setHeader('header text');
+	 * 
+	 * @param header
+	 * 
+	 */
 	public void js_setHeader(String header)
 	{
 		this.header = header;
@@ -92,65 +113,6 @@ public class Column implements IScriptObject
 
 	public Class[] getAllReturnedTypes()
 	{
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if (methodName.endsWith("Header"))
-		{
-			return new String[] { "headerText" };
-		}
-		else if (methodName.endsWith("Dataprovider"))
-		{
-			return new String[] { "fieldName" };
-		}
-
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if (methodName.endsWith("Header"))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("column.setHeader('header text');\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (methodName.endsWith("Dataprovider"))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("column.setDataprovider('fieldName');\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if (methodName.endsWith("Header"))
-		{
-			return "Set column header text";
-		}
-		else if (methodName.endsWith("Dataprovider"))
-		{
-			return "Set column dataprovider";
-		}
-
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

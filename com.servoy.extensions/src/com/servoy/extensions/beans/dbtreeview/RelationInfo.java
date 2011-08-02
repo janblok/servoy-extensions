@@ -16,14 +16,17 @@
  */
 package com.servoy.extensions.beans.dbtreeview;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * Script object holding informations for relation nodes 
  * 
  * @author gboros
  */
-public class RelationInfo implements IScriptObject
+@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "RelationInfo")
+public class RelationInfo implements IReturnedTypesProvider, IScriptable
 {
 	private String label;
 	private String nRelationName;
@@ -37,6 +40,20 @@ public class RelationInfo implements IScriptObject
 		return label;
 	}
 
+	/**
+	 * Sets the label of a relation info object used to set multiple child relations for a tree node.
+	 * 
+	 * @sample
+	 * var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
+	 * var company_relations = new Array();
+	 * company_relations[0] = elements.myDbTreeView.createRelationInfo();
+	 * company_relations[0].setLabel('Employees');
+	 * company_relations[0].setNRelationName('companies_to_employees');
+	 * companies_binding.setNRelationInfos(company_relations);
+	 * 
+	 * @param label
+	 * 
+	 */
 	public void js_setLabel(String label)
 	{
 		this.label = label;
@@ -47,6 +64,20 @@ public class RelationInfo implements IScriptObject
 		return nRelationName;
 	}
 
+	/**
+	 * Sets the name of a relation info object used to set multiple child relations for a tree node.
+	 * 
+	 * @sample
+	 * var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
+	 * var company_relations = new Array();
+	 * company_relations[0] = elements.myDbTreeView.createRelationInfo();
+	 * company_relations[0].setLabel('Employees');
+	 * company_relations[0].setNRelationName('companies_to_employees');
+	 * companies_binding.setNRelationInfos(company_relations); 
+	 * 
+	 * @param relationName
+	 * 
+	 */
 	public void js_setNRelationName(String relationName)
 	{
 		nRelationName = relationName;
@@ -54,62 +85,7 @@ public class RelationInfo implements IScriptObject
 
 	public Class[] getAllReturnedTypes()
 	{
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setLabel".equals(methodName))
-		{
-			return new String[] { "label" };
-		}
-		else if ("setNRelationName".equals(methodName))
-		{
-			return new String[] { "relationName" };
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("setLabel".equals(methodName) || "setNRelationName".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');\n");
-			retval.append("var company_relations = new Array();\n");
-			retval.append("company_relations[0] = elements.myDbTreeView.createRelationInfo();\n");
-			retval.append("company_relations[0].setLabel('Employees');\n");
-			retval.append("company_relations[0].setNRelationName('companies_to_employees');\n");
-			retval.append("companies_binding.setNRelationInfos(company_relations);\n");
-			return retval.toString();
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("setLabel".equals(methodName))
-		{
-			return "Sets the label of a relation info object used to set multiple child relations for a tree node.";
-		}
-		else if ("setNRelationName".equals(methodName))
-		{
-			return "Sets the name of a relation info object used to set multiple child relations for a tree node.";
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
