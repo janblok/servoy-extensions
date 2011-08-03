@@ -17,12 +17,14 @@
 package com.servoy.extensions.beans.dbtreeview.table;
 
 import com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods;
+import com.servoy.j2db.documentation.ServoyDocumented;
 
 /**
  * Interface to which both the smart and webclient tree table need to conform
  * 
  * @author gboros
  */
+@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "DBTreeTableView", extendsComponent = "DBTreeView")
 public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 {
 	/**
