@@ -538,6 +538,11 @@
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/dbtreeview">
+			<fileset dir="${src_beans.dir}/dbtreeview">
+				<include name="**/servoy-doc.xml"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/dbtreeview">
 			<fileset dir="${bin_beans.dir}/dbtreeview">
 				<filename name="**/*.class"/>
 			</fileset>
