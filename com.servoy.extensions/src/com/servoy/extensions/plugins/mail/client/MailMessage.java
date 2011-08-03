@@ -143,6 +143,7 @@ public class MailMessage implements Serializable, IScriptObject
 	 *
 	 * @sampleas js_getAttachments()
 	 */
+	@Deprecated
 	public Date js_getReceivedDate()
 	{
 		return getReceivedDate();
