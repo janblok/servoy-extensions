@@ -51,7 +51,13 @@ public class MailProvider implements IScriptObject
 	 * Receive mails from pop3 account.
 	 *
 	 * @sample
-	 * var msgs = plugins.mail.receiveMail('me', 'test', true);
+	 * var properties = new Array();
+	 * properties[0] = 'mail.pop3.port=995';
+	 * properties[1] = 'mail.pop3.ssl.enable=true';
+	 * properties[2] = 'mail.pop3.host=myserver.com';
+	 * properties[3] = 'mail.pop3.user=user@myserver.com';
+	 * 
+	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0,  null, properties);
 	 * if (msgs != null) //if is null error occurred!
 	 * {
 	 * 	for (var i = 0 ; i < msgs.length ; i++)
@@ -60,7 +66,6 @@ public class MailProvider implements IScriptObject
 	 * 		application.output(msg.getFromAddresses())
 	 * 		application.output(msg.getRecipientAddresses())
 	 * 		application.output(msg.getReplyAddresses())
-	 * 		application.output(msg.getReceivedDate())
 	 * 		application.output(msg.getSentDate())
 	 * 		application.output(msg.getHeaders())
 	 * 		application.output(msg.getSubject())
