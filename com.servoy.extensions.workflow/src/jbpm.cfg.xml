@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jbpm-configuration>
+	<import resource="jbpm.default.cfg.xml" />
+	<import resource="jbpm.tx.hibernate.cfg.xml" />
+	<import resource="jbpm.jpdl.cfg.xml" />
+	<import resource="jbpm.bpmn.cfg.xml" />
+<!--	<import resource="jbpm.identity.cfg.xml" /> -->
+  	<import resource="jbpm.businesscalendar.cfg.xml" />
+  	<import resource="jbpm.console.cfg.xml" />
+<!--  	<import resource="jbpm.jobexecutor.cfg.xml" /> -->
+	<process-engine-context>
+    	<identity-service/>
+	</process-engine-context>
+	<transaction-context>
+		<object class="com.servoy.extensions.plugins.worflow.IdentitySessionImpl" />
+		<hibernate-session current="true"/>
+	</transaction-context>
+	<mail-session>
+  		<mail-server session-jndi='comp/env/mail/smtp' />
+	</mail-session>
+</jbpm-configuration>

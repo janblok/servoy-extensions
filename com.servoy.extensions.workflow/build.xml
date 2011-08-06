@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<!--
+  - Build file for Servoy workflow plugin
+  -
+  - Authors:
+  -  	Jan Blok
+  -->
+
+<project name="servoy_workflow" basedir="." default="plugin">
+
+	<property name="src.dir" value="src"/>
+	<property name="bin.dir" value="bin"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="build_build.build.dir" value="build"/>
+	<property name="servoy_shared.lib.dir" value="../servoy_shared/lib"/>
+	<property name="javacVerbose" value="false"/>
+	<property name="javacDebugInfo" value="true"/>
+	<property name="bundleJavacSource" value="1.5"/>
+	<property name="bundleJavacTarget" value="1.5"/>
+
+		
+		
+	<property name="bin_plugins.dir" value="${bin.dir}/com/servoy/extensions/plugins"/>
+
+	<property name="src_plugins.dir" value="${src.dir}/com/servoy/extensions/plugins"/>
+
+	<property name="plugins.dir" value="${build_build.build.dir}/plugins"/>
+
+	<property name="tempForJar.dir" value="${basedir}/tempForJar"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+		<fileset dir="${servoy_shared.lib.dir}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+	</path>
+
+	<patternset id="jpgPng.sources">
+	  <include name="**/*.jpg"/>
+	  <include name="**/*.png"/>
+	</patternset>
+
+ 	<target name="prepare">
+		<mkdir dir="${plugins.dir}"/>
+		<mkdir dir="${bin.dir}"/>
+	</target>
+
+	<target name="compile" depends="prepare" description="Compile extensions project">
+		<javac verbose="${javacVerbose}" debug="${javacDebugInfo}" source="${bundleJavacSource}" target="${bundleJavacTarget}"
+			srcdir="${src.dir}"
+			destdir="${bin.dir}"
+			encoding="ISO-8859-1"
+			deprecation="off"
+			classpathref="classpath"
+			fork="yes"
+		/>
+	</target>
+	
+	<target	name="plugin" depends="workflow.jar,compile" />
+
+	<target name="workflow.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${plugins.dir}/_workflow.jar" quiet="true"/>
+
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/workflow">
+			<fileset dir="${bin_plugins.dir}/workflow">
+				<include name="**/*.class"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}">
+			<fileset dir="src">
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/workflow">
+			<fileset dir="${src_plugins.dir}/workflow">
+				<patternset refid="jpgPng.sources"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${plugins.dir}/_workflow.jar"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+
+		<copy overwrite="true" todir="${plugins.dir}/workflow">
+			<fileset dir="lib">
+				<include name="jbpm.jar"/>
+				<include name="juel*.jar"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${deploy}/plugins">
+			<fileset dir=".">
+				<include name="_workflow.jar"/>
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="clean" description="Delete all extensions temporary files" unless="do_not_clean">
+		<delete dir="${bin.dir}"/>
+	</target>
+
+	<target name="clean_thoroughly"
+			depends="clean"
+			description="Delete all extension temporary and result files" unless="do_not_clean">
+	</target>
+
+</project>
