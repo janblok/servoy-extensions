@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Map;
 
 import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
-import com.servoy.extensions.plugins.workflow.TaskData;
+import com.servoy.extensions.plugins.workflow.shared.TaskData;
 import com.servoy.j2db.util.Debug;
 
 /**

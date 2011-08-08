@@ -17,10 +17,12 @@
 
 package com.servoy.extensions.plugins.workflow;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -36,6 +38,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 
 import org.jbpm.api.Configuration;
+import org.jbpm.api.DeploymentQuery;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.NewDeployment;
@@ -45,6 +48,8 @@ import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
 
+import com.servoy.extensions.plugins.workflow.shared.Deployment;
+import com.servoy.extensions.plugins.workflow.shared.TaskData;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.persistence.IServer;
 import com.servoy.j2db.persistence.IServerInternal;
@@ -181,7 +186,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 	{
 		return addProcessDefinition(content, 0);
 	}
-	public String addProcessDefinition(String content,long t)
+	public String addProcessDefinition(String content,long timestamp)
 	{
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
 		try
@@ -195,7 +200,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 			name = getFileName(name);
 			nd.addResourceFromString(name, content);
 			nd.setName(name);
-			nd.setTimestamp(t);
+			nd.setTimestamp(timestamp);
 			return nd.deploy();
 		} 
 		catch (Exception e) 
@@ -565,12 +570,24 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		return processEngine;
 	}
 
+	public List<Deployment> getDeploymentList()
+	{
+		List<Deployment> retval = new ArrayList<Deployment>();
+		DeploymentQuery dq = processEngine.getRepositoryService().createDeploymentQuery();
+		Iterator<org.jbpm.api.Deployment> it = dq.list().iterator();
+		while (it.hasNext()) 
+		{
+			org.jbpm.api.Deployment d = it.next();
+			retval.add(new Deployment(d.getId(), d.getName(), d.getState(), d.getTimestamp()));
+		}
+		return retval;
+	}
 	/**
 	 * Helper method to calculate a long version hash over a string
-	 * @param s
-	 * @return
+	 * @param s the content
+	 * @return the hash code
 	 */
-	private static long stringHashCode(String s) 
+	public long getLongStringHashCode(String s) 
     {
     	long h = 0;
     	if (h == 0) 
