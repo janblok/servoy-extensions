@@ -223,13 +223,24 @@ public class MailServerUtils
 		return retval.toString();
 	}
 
+	private static boolean isAttachmentEmbedded(Part messagePart) throws MessagingException
+	{
+		Enumeration headers = messagePart.getAllHeaders();
+		while (headers.hasMoreElements())
+		{
+			Header header = (Header)headers.nextElement();
+			if (header.getName().startsWith("Content-ID")) return true; //$NON-NLS-1$
+		}
+		return false;
+	}
+
 	private static Attachment createAttachment(Part messagePart) throws MessagingException, IOException
 	{
 		InputStream is = messagePart.getInputStream();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		Utils.streamCopy(is, baos);
 		is.close();
-		return new Attachment(messagePart.getFileName(), baos.toByteArray());
+		return new Attachment(messagePart.getFileName(), baos.toByteArray(), isAttachmentEmbedded(messagePart));
 	}
 
 	private static String createAddressString(Address[] addresses)

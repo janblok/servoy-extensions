@@ -38,22 +38,32 @@ public class Attachment implements Serializable, IScriptObject
 		this(null, null, null);
 	}
 
+	public Attachment(String name, byte[] data)
+	{
+		this(name, data, null);
+	}
+
+	public Attachment(String name, byte[] data, boolean embedded)
+	{
+		this(name, data, null, embedded);
+	}
+
 	public Attachment(String name, byte[] data, String mimeType)
+	{
+		this(name, data, mimeType, false);
+	}
+
+	public Attachment(String name, byte[] data, String mimeType, boolean embedded)
 	{
 		this.name = name;
 		this.mimeType = mimeType;
 		this.data = data;
-		this.embedded = false;
+		this.embedded = embedded;
 
 		if (mimeType == null && data != null && data.length != 0)
 		{
 			this.mimeType = ImageLoader.getContentType(data, name);
 		}
-	}
-
-	public Attachment(String name, byte[] data)
-	{
-		this(name, data, null);
 	}
 
 	/**
