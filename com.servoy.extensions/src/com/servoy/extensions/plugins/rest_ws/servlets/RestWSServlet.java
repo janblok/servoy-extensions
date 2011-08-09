@@ -352,7 +352,7 @@ public class RestWSServlet extends HttpServlet
 					"Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""), HttpServletResponse.SC_METHOD_NOT_ALLOWED); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 
-			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, "ws_default_headers");
+			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, "ws_response_headers");
 			if (fd_headers.exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
 				Object result = client.getPluginAccess().executeMethod(wsRequest.formName, "ws_default_headers", null, false);
