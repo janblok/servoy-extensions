@@ -352,6 +352,26 @@ public class RestWSServlet extends HttpServlet
 					"Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""), HttpServletResponse.SC_METHOD_NOT_ALLOWED); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 
+			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, "ws_default_headers");
+			if (fd_headers.exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
+			{
+				Object result = client.getPluginAccess().executeMethod(wsRequest.formName, "ws_default_headers", null, false);
+				if (result instanceof String)
+				{
+					String[] l_r = String.valueOf(result).split("=");
+					if (l_r.length == 2) response.addHeader(l_r[0], l_r[1]);
+				}
+				else if (result instanceof Object[])
+				{
+					Object[] resultArray = (Object[])result;
+					for (Object element : resultArray)
+					{
+						String[] l_r = String.valueOf(element).split("=");
+						if (l_r.length == 2) response.addHeader(l_r[0], l_r[1]);
+					}
+				}
+			}
+
 			Object[] args = null;
 			if (fixedArgs != null || wsRequest.args.length > 0 || request.getParameterMap().size() > 0)
 			{
@@ -376,11 +396,15 @@ public class RestWSServlet extends HttpServlet
 						Entry<String, Object> entry = parameters.next();
 						if (entry.getValue() instanceof String)
 						{
-							jsMap.put(entry.getKey(), new String[] { (String)entry.getValue() });
+							jsMap.put(entry.getKey(), entry.getValue());
 						}
-						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
+						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length == 1)
 						{
-							jsMap.put(entry.getKey(), (String[])entry.getValue());
+							jsMap.put(entry.getKey(), ((String[])entry.getValue())[0]);
+						}
+						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 1)
+						{
+							jsMap.put(entry.getKey(), entry.getValue());
 						}
 					}
 
@@ -416,7 +440,7 @@ public class RestWSServlet extends HttpServlet
 		Exist authMethodExists = fd.exists(client);
 		if (authorizedGroups == null && authMethodExists != FunctionDefinition.Exist.METHOD_FOUND)
 		{
-			plugin.log.debug("No authorization to check, allow all access"); //$NON-NLS-1$
+			plugin.log.debug("No authorization to check, allow all access");
 			return;
 		}
 
@@ -426,7 +450,7 @@ public class RestWSServlet extends HttpServlet
 		String password = null;
 		if (authorizationHeader != null)
 		{
-			if (authorizationHeader.toLowerCase().startsWith("basic ")) //$NON-NLS-1$
+			if (authorizationHeader.toLowerCase().startsWith("basic "))
 			{
 				String authorization = authorizationHeader.substring(6);
 				authorization = new String(Utils.decodeBASE64(authorization));
@@ -439,17 +463,17 @@ public class RestWSServlet extends HttpServlet
 			}
 			else
 			{
-				plugin.log.debug("No or unsupported Authorization header"); //$NON-NLS-1$
+				plugin.log.debug("No or unsupported Authorization header");
 			}
 		}
 		else
 		{
-			plugin.log.debug("No Authorization header"); //$NON-NLS-1$
+			plugin.log.debug("No Authorization header");
 		}
 
 		if (user == null || password == null || user.trim().length() == 0 || password.trim().length() == 0)
 		{
-			plugin.log.debug("No credentials to proceed with authentication"); //$NON-NLS-1$
+			plugin.log.debug("No credentials to proceed with authentication");
 			throw new NotAuthenticatedException(solutionName);
 		}
 
@@ -460,14 +484,14 @@ public class RestWSServlet extends HttpServlet
 			{
 				return;
 			}
-			plugin.log.debug("Authentication method ws_authenticate denied autentication"); //$NON-NLS-1$
+			plugin.log.debug("Authentication method ws_authenticate denied autentication");
 			throw new NotAuthenticatedException(solutionName);
 		}
 
 		String userUid = plugin.getServerAccess().checkPasswordForUserName(user, password);
 		if (userUid == null)
 		{
-			plugin.log.debug("Supplied credentails not valid"); //$NON-NLS-1$
+			plugin.log.debug("Supplied credentails not valid");
 			throw new NotAuthenticatedException(user);
 		}
 
@@ -484,7 +508,7 @@ public class RestWSServlet extends HttpServlet
 					{
 						if (plugin.log.isDebugEnabled())
 						{
-							plugin.log.debug("Authorized access for user " + user + ", group " + ug); //$NON-NLS-1$ //$NON-NLS-2$
+							plugin.log.debug("Authorized access for user " + user + ", group " + ug);
 						}
 						return;
 					}
@@ -510,7 +534,7 @@ public class RestWSServlet extends HttpServlet
 				baos.write(buffer, 0, length);
 			}
 
-			return new String(baos.toByteArray(), getCharset(request, "Content-Type", CHARSET_DEFAULT)); //$NON-NLS-1$
+			return new String(baos.toByteArray(), getCharset(request, "Content-Type", CHARSET_DEFAULT));
 		}
 		finally
 		{
@@ -524,11 +548,11 @@ public class RestWSServlet extends HttpServlet
 	private int getContentType(HttpServletRequest request, String header, String contents, int defaultContentType)
 	{
 		String contentType = request.getHeader(header);
-		if (contentType != null && contentType.toLowerCase().indexOf("json") >= 0) //$NON-NLS-1$
+		if (contentType != null && contentType.toLowerCase().indexOf("json") >= 0)
 		{
 			return CONTENT_JSON;
 		}
-		if (contentType != null && contentType.toLowerCase().indexOf("xml") >= 0) //$NON-NLS-1$
+		if (contentType != null && contentType.toLowerCase().indexOf("xml") >= 0)
 		{
 			return CONTENT_XML;
 		}
@@ -554,7 +578,7 @@ public class RestWSServlet extends HttpServlet
 			String[] split = contentType.split("; *"); //$NON-NLS-1$
 			for (String element : split)
 			{
-				if (element.toLowerCase().startsWith("charset=")) //$NON-NLS-1$
+				if (element.toLowerCase().startsWith("charset="))
 				{
 					String charset = element.substring("charset=".length()); //$NON-NLS-1$
 					if (charset.length() > 1 && charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"')
