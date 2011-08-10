@@ -76,6 +76,10 @@ import com.servoy.j2db.util.Utils;
  */
 public class RestWSServlet extends HttpServlet
 {
+	/**
+	 * 
+	 */
+	private static final String WS_RESPONSE_HEADERS = "ws_response_headers";
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
 	private static final int CONTENT_XML = 2;
@@ -352,10 +356,10 @@ public class RestWSServlet extends HttpServlet
 					"Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""), HttpServletResponse.SC_METHOD_NOT_ALLOWED); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 
-			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, "ws_response_headers");
+			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, WS_RESPONSE_HEADERS);
 			if (fd_headers.exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				Object result = client.getPluginAccess().executeMethod(wsRequest.formName, "ws_default_headers", null, false);
+				Object result = client.getPluginAccess().executeMethod(wsRequest.formName, WS_RESPONSE_HEADERS, null, false);
 				if (result instanceof String)
 				{
 					String[] l_r = String.valueOf(result).split("=");
