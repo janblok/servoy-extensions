@@ -39,8 +39,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
+import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -90,7 +90,7 @@ public class RestWSServlet extends HttpServlet
 	private static final int CONTENT_XML = 2;
 
 	private static final int CONTENT_DEFAULT = CONTENT_JSON;
-	private static final String CHARSET_DEFAULT = "UTF-8"; //$NON-NLS-1$
+	private static final String CHARSET_DEFAULT = "UTF-8";
 
 	private final RestWSPlugin plugin;
 
@@ -107,7 +107,7 @@ public class RestWSServlet extends HttpServlet
 	{
 		try
 		{
-			plugin.log.trace("GET"); //$NON-NLS-1$ 
+			plugin.log.trace("GET");
 			Object result = wsService(WS_READ, null, request, response);
 			if (result == null)
 			{
@@ -128,13 +128,13 @@ public class RestWSServlet extends HttpServlet
 		final int error;
 		if (e instanceof NotAuthenticatedException)
 		{
-			plugin.log.debug(request.getRequestURI() + ": Not authenticated"); //$NON-NLS-1$
-			response.setHeader("WWW-Authenticate", "Basic realm=\"" + ((NotAuthenticatedException)e).getRealm() + '"'); //$NON-NLS-1$ //$NON-NLS-2$
+			plugin.log.debug(request.getRequestURI() + ": Not authenticated");
+			response.setHeader("WWW-Authenticate", "Basic realm=\"" + ((NotAuthenticatedException)e).getRealm() + '"');
 			error = HttpServletResponse.SC_UNAUTHORIZED;
 		}
 		else if (e instanceof NotAuthorizedException)
 		{
-			plugin.log.info(request.getRequestURI() + ": Not authorised: " + e.getMessage()); //$NON-NLS-1$ 
+			plugin.log.info(request.getRequestURI() + ": Not authorised: " + e.getMessage());
 			error = HttpServletResponse.SC_FORBIDDEN;
 		}
 		else if (e instanceof NoClientsException)
@@ -144,7 +144,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		else if (e instanceof IllegalArgumentException)
 		{
-			plugin.log.info("Could not parse path '" + e.getMessage() + '\''); //$NON-NLS-1$
+			plugin.log.info("Could not parse path '" + e.getMessage() + '\'');
 			error = HttpServletResponse.SC_BAD_REQUEST;
 		}
 		else if (e instanceof WebServiceException)
@@ -154,7 +154,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		else if (e instanceof JavaScriptException)
 		{
-			plugin.log.info("ws_ method threw an exception '" + e.getMessage() + '\''); //$NON-NLS-1$
+			plugin.log.info("ws_ method threw an exception '" + e.getMessage() + '\'');
 			if (((JavaScriptException)e).getValue() instanceof Double)
 			{
 				error = ((Double)((JavaScriptException)e).getValue()).intValue();
@@ -177,7 +177,7 @@ public class RestWSServlet extends HttpServlet
 	{
 		try
 		{
-			plugin.log.trace("DELETE"); //$NON-NLS-1$ 
+			plugin.log.trace("DELETE");
 			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response)))
 			{
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -196,13 +196,13 @@ public class RestWSServlet extends HttpServlet
 		try
 		{
 			String contents = getBody(request);
-			plugin.log.trace("POST contents='" + contents + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+			plugin.log.trace("POST contents='" + contents + "'");
 			if (contents == null || contents.length() == 0)
 			{
 				response.sendError(HttpServletResponse.SC_NO_CONTENT);
 				return;
 			}
-			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER); //$NON-NLS-1$
+			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER);
 			if (contentType == CONTENT_OTHER)
 			{
 				response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
@@ -227,13 +227,13 @@ public class RestWSServlet extends HttpServlet
 		try
 		{
 			String contents = getBody(request);
-			plugin.log.trace("PUT contents='" + contents + "'"); //$NON-NLS-1$ //$NON-NLS-2$
+			plugin.log.trace("PUT contents='" + contents + "'");
 			if (contents == null || contents.length() == 0)
 			{
 				response.sendError(HttpServletResponse.SC_NO_CONTENT);
 				return;
 			}
-			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER); //$NON-NLS-1$
+			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER);
 			if (contentType == CONTENT_OTHER)
 			{
 				response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
@@ -258,33 +258,33 @@ public class RestWSServlet extends HttpServlet
 		WsRequest wsRequest = null;
 		try
 		{
-			plugin.log.trace("OPTIONS"); //$NON-NLS-1$ 
+			plugin.log.trace("OPTIONS");
 			wsRequest = parsePath(request);
 
 			client = plugin.getClient(wsRequest.solutionName);
 			checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
 
-			String retval = "TRACE, OPTIONS"; //$NON-NLS-1$
+			String retval = "TRACE, OPTIONS";
 			if (new FunctionDefinition(wsRequest.formName, WS_READ).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				retval += ", GET"; //$NON-NLS-1$
+				retval += ", GET";
 			}
 			//TODO: implement HEAD?
-			retval += ", HEAD"; //$NON-NLS-1$
+			retval += ", HEAD";
 			if (new FunctionDefinition(wsRequest.formName, WS_CREATE).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				retval += ", POST"; //$NON-NLS-1$
+				retval += ", POST";
 			}
 			if (new FunctionDefinition(wsRequest.formName, WS_UPDATE).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				retval += ", PUT"; //$NON-NLS-1$
+				retval += ", PUT";
 			}
 			if (new FunctionDefinition(wsRequest.formName, WS_DELETE).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				retval += ", DELETE"; //$NON-NLS-1$
+				retval += ", DELETE";
 			}
 
-			response.setHeader("Allow", retval); //$NON-NLS-1$
+			response.setHeader("Allow", retval);
 		}
 		catch (Exception e)
 		{
@@ -310,10 +310,10 @@ public class RestWSServlet extends HttpServlet
 	{
 		String path = request.getPathInfo(); //without servlet name
 
-		plugin.log.debug("Request '" + path + '\''); //$NON-NLS-1$
+		plugin.log.debug("Request '" + path + '\'');
 
 		// parse the path: /webServiceName/mysolution/myform/arg1/arg2/...
-		String[] segments = path == null ? null : path.split("/"); //$NON-NLS-1$
+		String[] segments = path == null ? null : path.split("/");
 		if (segments == null || segments.length < 4 || !webServiceName.equals(segments[1]))
 		{
 			throw new IllegalArgumentException(path);
@@ -336,7 +336,7 @@ public class RestWSServlet extends HttpServlet
 	{
 		String path = request.getPathInfo(); //without servlet name
 
-		plugin.log.debug("Request '" + path + '\''); //$NON-NLS-1$
+		plugin.log.debug("Request '" + path + '\'');
 
 		WsRequest wsRequest = parsePath(request);
 		IHeadlessClient client = null;
@@ -349,16 +349,16 @@ public class RestWSServlet extends HttpServlet
 			Exist functionExists = fd.exists(client.getPluginAccess());
 			if (functionExists == FunctionDefinition.Exist.NO_SOLUTION)
 			{
-				throw new WebServiceException("Solution " + wsRequest.solutionName + "not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new WebServiceException("Solution " + wsRequest.solutionName + "not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE);
 			}
 			if (functionExists == FunctionDefinition.Exist.FORM_NOT_FOUND)
 			{
-				throw new WebServiceException("Form " + wsRequest.formName + " not found", HttpServletResponse.SC_NOT_FOUND); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new WebServiceException("Form " + wsRequest.formName + " not found", HttpServletResponse.SC_NOT_FOUND);
 			}
 			if (functionExists != FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				throw new WebServiceException(
-					"Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""), HttpServletResponse.SC_METHOD_NOT_ALLOWED); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				throw new WebServiceException("Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""),
+					HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			}
 
 			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, WS_RESPONSE_HEADERS);
@@ -421,9 +421,10 @@ public class RestWSServlet extends HttpServlet
 				}
 			}
 
-			plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			Object result = fd.executeSync(client.getPluginAccess(), args);
-			plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\''))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)");
+			//DO NOT USE FunctionDefinition here! we want to be able to catch possible exceptions! 
+			Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
+			plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
 			return result;
 		}
 		finally
@@ -454,7 +455,7 @@ public class RestWSServlet extends HttpServlet
 		}
 
 		//Process authentication Header
-		String authorizationHeader = request.getHeader("Authorization"); //$NON-NLS-1$
+		String authorizationHeader = request.getHeader("Authorization");
 		String user = null;
 		String password = null;
 		if (authorizationHeader != null)
@@ -584,12 +585,12 @@ public class RestWSServlet extends HttpServlet
 		String contentType = request.getHeader(header);
 		if (contentType != null)
 		{
-			String[] split = contentType.split("; *"); //$NON-NLS-1$
+			String[] split = contentType.split("; *");
 			for (String element : split)
 			{
 				if (element.toLowerCase().startsWith("charset="))
 				{
-					String charset = element.substring("charset=".length()); //$NON-NLS-1$
+					String charset = element.substring("charset=".length());
 					if (charset.length() > 1 && charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"')
 					{
 						charset = charset.substring(1, charset.length() - 1);
@@ -618,12 +619,12 @@ public class RestWSServlet extends HttpServlet
 
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
 	{
-		int contentType = getContentType(request, "Accept", null, defaultContentType); //$NON-NLS-1$
+		int contentType = getContentType(request, "Accept", null, defaultContentType);
 
 		boolean isXML = (result instanceof XMLObject);
 		Object json = (isXML) ? XML.toJSONObject(result.toString()) : plugin.getJSONSerializer().toJSON(result);
 		String content;
-		String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT)); //$NON-NLS-1$ //$NON-NLS-2$
+		String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT));
 		switch (contentType)
 		{
 			case CONTENT_JSON :
@@ -639,7 +640,7 @@ public class RestWSServlet extends HttpServlet
 				break;
 
 			case CONTENT_XML :
-				content = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\n" + ((isXML) ? result.toString() : XML.toString(json, null)); //$NON-NLS-1$ //$NON-NLS-2$
+				content = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\n" + ((isXML) ? result.toString() : XML.toString(json, null));
 				break;
 
 			default :
@@ -651,18 +652,18 @@ public class RestWSServlet extends HttpServlet
 		switch (contentType)
 		{
 			case CONTENT_JSON :
-				resultContentType = "application/json"; //$NON-NLS-1$
+				resultContentType = "application/json";
 				break;
 
 			case CONTENT_XML :
-				resultContentType = "application/xml"; //$NON-NLS-1$
+				resultContentType = "application/xml";
 				break;
 
 			default :
 				// how can this happen...
 				throw new IllegalStateException();
 		}
-		response.setHeader("Content-Type", resultContentType + ";charset=" + charset); //$NON-NLS-1$ //$NON-NLS-2$
+		response.setHeader("Content-Type", resultContentType + ";charset=" + charset);
 
 
 		byte[] bytes = content.getBytes(charset);

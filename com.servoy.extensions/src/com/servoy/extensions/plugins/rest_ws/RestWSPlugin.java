@@ -53,18 +53,19 @@ import com.servoy.j2db.util.serialize.NativeObjectSerializer;
  * @author rgansevles
  * 
  */
+@SuppressWarnings("nls")
 public class RestWSPlugin implements IServerPlugin
 {
-	private static final String CLIENT_POOL_SIZE_PROPERTY = "rest_ws_plugin_client_pool_size"; //$NON-NLS-1$
+	private static final String CLIENT_POOL_SIZE_PROPERTY = "rest_ws_plugin_client_pool_size";
 	private static final int CLIENT_POOL_SIZE_DEFAULT = 5;
-	private static final String CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY = "rest_ws_plugin_client_pool_exhausted_action"; //$NON-NLS-1$
-	private static final String ACTION_BLOCK = "block"; //$NON-NLS-1$
-	private static final String ACTION_FAIL = "fail"; //$NON-NLS-1$
-	private static final String ACTION_GROW = "grow"; //$NON-NLS-1$
-	private static final String AUTHORIZED_GROUPS_PROPERTY = "rest_ws_plugin_authorized_groups"; //$NON-NLS-1$
+	private static final String CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY = "rest_ws_plugin_client_pool_exhausted_action";
+	private static final String ACTION_BLOCK = "block";
+	private static final String ACTION_FAIL = "fail";
+	private static final String ACTION_GROW = "grow";
+	private static final String AUTHORIZED_GROUPS_PROPERTY = "rest_ws_plugin_authorized_groups";
 
-	private static final String WEBSERVICE_NAME = "rest_ws"; //$NON-NLS-1$
-	private static final String[] SOLUTION_OPEN_METHOD_ARGS = new String[] { "rest_ws_server" }; //$NON-NLS-1$
+	private static final String WEBSERVICE_NAME = "rest_ws";
+	private static final String[] SOLUTION_OPEN_METHOD_ARGS = new String[] { "rest_ws_server" };
 
 	public final Log log = LogFactory.getLog(RestWSPlugin.class);
 
@@ -87,21 +88,20 @@ public class RestWSPlugin implements IServerPlugin
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		Map<String, String> req = new HashMap<String, String>();
-		req.put(CLIENT_POOL_SIZE_PROPERTY,
-			"Max number of clients used (this defines the number of concurrent requests and licences used), default = " + CLIENT_POOL_SIZE_DEFAULT); //$NON-NLS-1$ 
-		req.put(CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY, "The following values are supported for this property:\n" + //$NON-NLS-1$
+		req.put(CLIENT_POOL_SIZE_PROPERTY, "Max number of clients used (this defines the number of concurrent requests and licences used), default = " +
+			CLIENT_POOL_SIZE_DEFAULT);
+		req.put(CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY, "The following values are supported for this property:\n" +
 			//
 			ACTION_BLOCK +
-			" (default): requests will wait untill a client becomes available\n" + //$NON-NLS-1$
+			" (default): requests will wait untill a client becomes available\n" +
 			//
-			ACTION_FAIL + ": the request will fail. The API will generate a SERVICE_UNAVAILABLE response (HTTP " + //$NON-NLS-1$
-			HttpServletResponse.SC_SERVICE_UNAVAILABLE +
-			")\n" + //$NON-NLS-1$
+			ACTION_FAIL + ": the request will fail. The API will generate a SERVICE_UNAVAILABLE response (HTTP " + HttpServletResponse.SC_SERVICE_UNAVAILABLE +
+			")\n" +
 			//
 			ACTION_GROW +
-			": allows the pool to temporarily grow, by starting additional clients. These will be automatically removed when not required anymore."); //$NON-NLS-1$ 
+			": allows the pool to temporarily grow, by starting additional clients. These will be automatically removed when not required anymore.");
 		req.put(AUTHORIZED_GROUPS_PROPERTY,
-			"Only authenticated users in the listed groups (comma-separated) have access, when left empty unauthorised access is allowed"); //$NON-NLS-1$ 
+			"Only authenticated users in the listed groups (comma-separated) have access, when left empty unauthorised access is allowed");
 		return req;
 	}
 
@@ -116,7 +116,7 @@ public class RestWSPlugin implements IServerPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "RESTful Web Services Plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "RESTful Web Services Plugin");
 		return props;
 	}
 
@@ -141,7 +141,7 @@ public class RestWSPlugin implements IServerPlugin
 		{
 			return null;
 		}
-		return property.split(","); //$NON-NLS-1$
+		return property.split(",");
 	}
 
 	synchronized KeyedObjectPool getClientPool()
@@ -163,25 +163,25 @@ public class RestWSPlugin implements IServerPlugin
 			if (ACTION_FAIL.equalsIgnoreCase(exchaustedActionCode))
 			{
 				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_FAIL;
-				log.debug("Client pool, exchaustedAction=" + ACTION_FAIL); //$NON-NLS-1$
+				log.debug("Client pool, exchaustedAction=" + ACTION_FAIL);
 			}
 			else if (ACTION_GROW.equalsIgnoreCase(exchaustedActionCode))
 			{
 				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
-				log.debug("Client pool, exchaustedAction=" + ACTION_GROW); //$NON-NLS-1$
+				log.debug("Client pool, exchaustedAction=" + ACTION_GROW);
 			}
 			else
 			{
 				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_BLOCK;
-				log.debug("Client pool, exchaustedAction=" + ACTION_BLOCK); //$NON-NLS-1$
+				log.debug("Client pool, exchaustedAction=" + ACTION_BLOCK);
 			}
-			log.debug("Creating client pool, maxSize=" + poolSize); //$NON-NLS-1$
+			log.debug("Creating client pool, maxSize=" + poolSize);
 			clientPool = new GenericKeyedObjectPool(new BaseKeyedPoolableObjectFactory()
 			{
 				@Override
 				public Object makeObject(Object key) throws Exception
 				{
-					log.debug("creating new session client for solution '" + key + '\''); //$NON-NLS-1$
+					log.debug("creating new session client for solution '" + key + '\'');
 					return HeadlessClientFactory.createHeadlessClient((String)key, SOLUTION_OPEN_METHOD_ARGS);
 				}
 
@@ -189,7 +189,7 @@ public class RestWSPlugin implements IServerPlugin
 				public boolean validateObject(Object key, Object obj)
 				{
 					boolean valid = ((IHeadlessClient)obj).isValid();
-					log.debug("Validated session client for solution '" + key + "', valid = " + valid); //$NON-NLS-1$ //$NON-NLS-2$
+					log.debug("Validated session client for solution '" + key + "', valid = " + valid);
 					return valid;
 				}
 			}, poolSize);
