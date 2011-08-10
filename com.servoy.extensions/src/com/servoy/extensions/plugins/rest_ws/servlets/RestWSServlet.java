@@ -39,8 +39,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
+import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -74,12 +74,17 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  * 
  */
+@SuppressWarnings("nls")
 public class RestWSServlet extends HttpServlet
 {
-	/**
-	 * 
-	 */
+	// solution method names
+	private static final String WS_UPDATE = "ws_update";
+	private static final String WS_CREATE = "ws_create";
+	private static final String WS_DELETE = "ws_delete";
+	private static final String WS_READ = "ws_read";
+	private static final String WS_AUTHENTICATE = "ws_authenticate";
 	private static final String WS_RESPONSE_HEADERS = "ws_response_headers";
+
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
 	private static final int CONTENT_XML = 2;
@@ -103,7 +108,7 @@ public class RestWSServlet extends HttpServlet
 		try
 		{
 			plugin.log.trace("GET"); //$NON-NLS-1$ 
-			Object result = wsService("ws_read", null, request, response); //$NON-NLS-1$
+			Object result = wsService(WS_READ, null, request, response);
 			if (result == null)
 			{
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -173,7 +178,7 @@ public class RestWSServlet extends HttpServlet
 		try
 		{
 			plugin.log.trace("DELETE"); //$NON-NLS-1$ 
-			if (Boolean.FALSE.equals(wsService("ws_delete", null, request, response))) //$NON-NLS-1$
+			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response)))
 			{
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -203,7 +208,7 @@ public class RestWSServlet extends HttpServlet
 				response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			Object result = wsService("ws_create", new Object[] { decodeRequest(contentType, contents) }, request, response); //$NON-NLS-1$
+			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(contentType, contents) }, request, response);
 			HTTPUtils.setNoCacheHeaders(response);
 			if (result != null)
 			{
@@ -234,7 +239,7 @@ public class RestWSServlet extends HttpServlet
 				response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			if (Boolean.FALSE.equals(wsService("ws_update", new Object[] { decodeRequest(contentType, contents) }, request, response))) //$NON-NLS-1$
+			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(contentType, contents) }, request, response)))
 			{
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -260,21 +265,21 @@ public class RestWSServlet extends HttpServlet
 			checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
 
 			String retval = "TRACE, OPTIONS"; //$NON-NLS-1$
-			if ((new FunctionDefinition(wsRequest.formName, "ws_read")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			if (new FunctionDefinition(wsRequest.formName, WS_READ).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
 				retval += ", GET"; //$NON-NLS-1$
 			}
 			//TODO: implement HEAD?
 			retval += ", HEAD"; //$NON-NLS-1$
-			if ((new FunctionDefinition(wsRequest.formName, "ws_create")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			if (new FunctionDefinition(wsRequest.formName, WS_CREATE).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
 				retval += ", POST"; //$NON-NLS-1$
 			}
-			if ((new FunctionDefinition(wsRequest.formName, "ws_update")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			if (new FunctionDefinition(wsRequest.formName, WS_UPDATE).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
 				retval += ", PUT"; //$NON-NLS-1$
 			}
-			if ((new FunctionDefinition(wsRequest.formName, "ws_delete")).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND) //$NON-NLS-1$
+			if (new FunctionDefinition(wsRequest.formName, WS_DELETE).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
 				retval += ", DELETE"; //$NON-NLS-1$
 			}
@@ -359,7 +364,7 @@ public class RestWSServlet extends HttpServlet
 			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, WS_RESPONSE_HEADERS);
 			if (fd_headers.exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				Object result = client.getPluginAccess().executeMethod(wsRequest.formName, WS_RESPONSE_HEADERS, null, false);
+				Object result = fd_headers.executeSync(client.getPluginAccess(), null);
 				if (result instanceof String)
 				{
 					String[] l_r = String.valueOf(result).split("=");
@@ -417,7 +422,7 @@ public class RestWSServlet extends HttpServlet
 			}
 
 			plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
+			Object result = fd.executeSync(client.getPluginAccess(), args);
 			plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\''))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			return result;
 		}
@@ -440,7 +445,7 @@ public class RestWSServlet extends HttpServlet
 	private void checkAuthorization(HttpServletRequest request, IClientPluginAccess client, String solutionName, String formName) throws Exception
 	{
 		String[] authorizedGroups = plugin.getAuthorizedGroups();
-		FunctionDefinition fd = new FunctionDefinition(formName, "ws_authenticate"); //$NON-NLS-1$
+		FunctionDefinition fd = new FunctionDefinition(formName, WS_AUTHENTICATE);
 		Exist authMethodExists = fd.exists(client);
 		if (authorizedGroups == null && authMethodExists != FunctionDefinition.Exist.METHOD_FOUND)
 		{
@@ -488,7 +493,7 @@ public class RestWSServlet extends HttpServlet
 			{
 				return;
 			}
-			plugin.log.debug("Authentication method ws_authenticate denied autentication");
+			plugin.log.debug("Authentication method " + WS_AUTHENTICATE + " denied authentication");
 			throw new NotAuthenticatedException(solutionName);
 		}
 
@@ -611,7 +616,6 @@ public class RestWSServlet extends HttpServlet
 		throw new IllegalStateException();
 	}
 
-	@SuppressWarnings("nls")
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
 	{
 		int contentType = getContentType(request, "Accept", null, defaultContentType); //$NON-NLS-1$
