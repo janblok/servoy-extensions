@@ -25,6 +25,7 @@ import com.servoy.j2db.persistence.DummyValidator;
 import com.servoy.j2db.persistence.IServerInternal;
 import com.servoy.j2db.persistence.IValidateName;
 import com.servoy.j2db.persistence.Table;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
 //this class is likely obsolete, latest hibernate version can do all of below 
@@ -288,8 +289,6 @@ public class DataModel
 	    
 	    createIndex(server,"IDX_DEPLPROP_DEPL","JBPM4_DEPLOYPROP","DEPLOYMENT_");
 
-	    addForeignKeyConstraint(server,"JBPM4_DEPLOYPROP","FK_DEPLPROP_DEPL","DEPLOYMENT_","JBPM4_DEPLOYMENT");
-
 	    createIndex(server,"IDX_EXEC_SUPEREXEC","JBPM4_EXECUTION","SUPEREXEC_");
 
 	    createIndex(server,"IDX_EXEC_INSTANCE","JBPM4_EXECUTION","INSTANCE_");
@@ -298,21 +297,9 @@ public class DataModel
 
 	    createIndex(server,"IDX_EXEC_PARENT","JBPM4_EXECUTION","PARENT_");
 
-	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_PARENT","PARENT_","JBPM4_EXECUTION");
-
-	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_SUBPI","SUBPROCINST_","JBPM4_EXECUTION");
-
-	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_INSTANCE","INSTANCE_","JBPM4_EXECUTION");
-
-	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_SUPEREXEC","SUPEREXEC_","JBPM4_EXECUTION");
-
 	    createIndex(server,"IDX_HACTI_HPROCI","JBPM4_HIST_ACTINST","HPROCI_");
 
 	    createIndex(server,"IDX_HTI_HTASK","JBPM4_HIST_ACTINST","HTASK_");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_ACTINST","FK_HACTI_HPROCI","HPROCI_","JBPM4_HIST_PROCINST");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_ACTINST","FK_HTI_HTASK","HTASK_","JBPM4_HIST_TASK");
 
 	    createIndex(server,"IDX_HDET_HACTI","JBPM4_HIST_DETAIL","HACTI_");
 
@@ -322,37 +309,17 @@ public class DataModel
 
 	    createIndex(server,"IDX_HDET_HTASK","JBPM4_HIST_DETAIL","HTASK_");
 
-	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HPROCI","HPROCI_","JBPM4_HIST_PROCINST");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HACTI","HACTI_","JBPM4_HIST_ACTINST");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HTASK","HTASK_","JBPM4_HIST_TASK");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HVAR","HVAR_","JBPM4_HIST_VAR");
-
 	    createIndex(server,"IDX_HSUPERT_SUB","JBPM4_HIST_TASK","SUPERTASK_");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_TASK","FK_HSUPERT_SUB","SUPERTASK_","JBPM4_HIST_TASK");
 
 	    createIndex(server,"IDX_HVAR_HPROCI","JBPM4_HIST_VAR","HPROCI_");
 
 	    createIndex(server,"IDX_HVAR_HTASK","JBPM4_HIST_VAR","HTASK_");
 
-	    addForeignKeyConstraint(server,"JBPM4_HIST_VAR","FK_HVAR_HPROCI","HPROCI_","JBPM4_HIST_PROCINST");
-
-	    addForeignKeyConstraint(server,"JBPM4_HIST_VAR","FK_HVAR_HTASK","HTASK_","JBPM4_HIST_TASK");
-
 	    createIndex(server,"IDX_GROUP_PARENT","JBPM4_ID_GROUP","PARENT_");
-
-	    addForeignKeyConstraint(server,"JBPM4_ID_GROUP","FK_GROUP_PARENT","PARENT_","JBPM4_ID_GROUP");
 
 	    createIndex(server,"IDX_MEM_USER","JBPM4_ID_MEMBERSHIP","USER_");
 
 	    createIndex(server,"IDX_MEM_GROUP","JBPM4_ID_MEMBERSHIP","GROUP_");
-
-	    addForeignKeyConstraint(server,"JBPM4_ID_MEMBERSHIP","FK_MEM_GROUP","GROUP_","JBPM4_ID_GROUP");
-
-	    addForeignKeyConstraint(server,"JBPM4_ID_MEMBERSHIP","FK_MEM_USER","USER_","JBPM4_ID_USER");
 
 	    createIndex(server,"IDX_JOBRETRIES","JBPM4_JOB","RETRIES_");
 
@@ -366,27 +333,13 @@ public class DataModel
 
 	    createIndex(server,"IDX_JOBDUEDATE","JBPM4_JOB","DUEDATE_");
 
-	    addForeignKeyConstraint(server,"JBPM4_JOB","FK_JOB_CFG","CFG_","JBPM4_LOB");
-
 	    createIndex(server,"IDX_LOB_DEPLOYMENT","JBPM4_LOB","DEPLOYMENT_");
-
-	    addForeignKeyConstraint(server,"JBPM4_LOB","FK_LOB_DEPLOYMENT","DEPLOYMENT_","JBPM4_DEPLOYMENT");
 
 	    createIndex(server,"IDX_PART_TASK","JBPM4_PARTICIPATION","TASK_");
 
-	    addForeignKeyConstraint(server,"JBPM4_PARTICIPATION","FK_PART_SWIMLANE","SWIMLANE_","JBPM4_SWIMLANE");
-
-	    addForeignKeyConstraint(server,"JBPM4_PARTICIPATION","FK_PART_TASK","TASK_","JBPM4_TASK");
-
 	    createIndex(server,"IDX_SWIMLANE_EXEC","JBPM4_SWIMLANE","EXECUTION_");
 
-	    addForeignKeyConstraint(server,"JBPM4_SWIMLANE","FK_SWIMLANE_EXEC","EXECUTION_","JBPM4_EXECUTION");
-
 	    createIndex(server,"IDX_TASK_SUPERTASK","JBPM4_TASK","SUPERTASK_");
-
-	    addForeignKeyConstraint(server,"JBPM4_TASK","FK_TASK_SWIML","SWIMLANE_","JBPM4_SWIMLANE");
-
-	    addForeignKeyConstraint(server,"JBPM4_TASK","FK_TASK_SUPERTASK","SUPERTASK_","JBPM4_TASK");
 
 	    createIndex(server,"IDX_VAR_EXESYS","JBPM4_VARIABLE","EXESYS_");
 
@@ -395,6 +348,54 @@ public class DataModel
 	    createIndex(server,"IDX_VAR_EXECUTION","JBPM4_VARIABLE","EXECUTION_");
 
 	    createIndex(server,"IDX_VAR_LOB","JBPM4_VARIABLE","LOB_");
+
+	    addForeignKeyConstraint(server,"JBPM4_DEPLOYPROP","FK_DEPLPROP_DEPL","DEPLOYMENT_","JBPM4_DEPLOYMENT");
+
+	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_PARENT","PARENT_","JBPM4_EXECUTION");
+
+	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_SUBPI","SUBPROCINST_","JBPM4_EXECUTION");
+
+	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_INSTANCE","INSTANCE_","JBPM4_EXECUTION");
+
+	    addForeignKeyConstraint(server,"JBPM4_EXECUTION","FK_EXEC_SUPEREXEC","SUPEREXEC_","JBPM4_EXECUTION");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_ACTINST","FK_HACTI_HPROCI","HPROCI_","JBPM4_HIST_PROCINST");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_ACTINST","FK_HTI_HTASK","HTASK_","JBPM4_HIST_TASK");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HPROCI","HPROCI_","JBPM4_HIST_PROCINST");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HACTI","HACTI_","JBPM4_HIST_ACTINST");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HTASK","HTASK_","JBPM4_HIST_TASK");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_DETAIL","FK_HDETAIL_HVAR","HVAR_","JBPM4_HIST_VAR");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_TASK","FK_HSUPERT_SUB","SUPERTASK_","JBPM4_HIST_TASK");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_VAR","FK_HVAR_HPROCI","HPROCI_","JBPM4_HIST_PROCINST");
+
+	    addForeignKeyConstraint(server,"JBPM4_HIST_VAR","FK_HVAR_HTASK","HTASK_","JBPM4_HIST_TASK");
+
+	    addForeignKeyConstraint(server,"JBPM4_ID_GROUP","FK_GROUP_PARENT","PARENT_","JBPM4_ID_GROUP");
+
+	    addForeignKeyConstraint(server,"JBPM4_ID_MEMBERSHIP","FK_MEM_GROUP","GROUP_","JBPM4_ID_GROUP");
+
+	    addForeignKeyConstraint(server,"JBPM4_ID_MEMBERSHIP","FK_MEM_USER","USER_","JBPM4_ID_USER");
+
+	    addForeignKeyConstraint(server,"JBPM4_JOB","FK_JOB_CFG","CFG_","JBPM4_LOB");
+
+	    addForeignKeyConstraint(server,"JBPM4_LOB","FK_LOB_DEPLOYMENT","DEPLOYMENT_","JBPM4_DEPLOYMENT");
+
+	    addForeignKeyConstraint(server,"JBPM4_PARTICIPATION","FK_PART_SWIMLANE","SWIMLANE_","JBPM4_SWIMLANE");
+
+	    addForeignKeyConstraint(server,"JBPM4_PARTICIPATION","FK_PART_TASK","TASK_","JBPM4_TASK");
+
+	    addForeignKeyConstraint(server,"JBPM4_SWIMLANE","FK_SWIMLANE_EXEC","EXECUTION_","JBPM4_EXECUTION");
+
+	    addForeignKeyConstraint(server,"JBPM4_TASK","FK_TASK_SWIML","SWIMLANE_","JBPM4_SWIMLANE");
+
+	    addForeignKeyConstraint(server,"JBPM4_TASK","FK_TASK_SUPERTASK","SUPERTASK_","JBPM4_TASK");
 
 	    addForeignKeyConstraint(server,"JBPM4_VARIABLE","FK_VAR_LOB","LOB_","JBPM4_LOB");
 
@@ -418,6 +419,19 @@ public class DataModel
 	
 	public static void createIndex(IServerInternal server, String indexName, String tableName, String[] columnNames) throws Exception 
 	{
+//		StringBuffer sb = new StringBuffer("CREATE INDEX ");
+//		sb.append(indexName);
+//		sb.append(" ON ");
+//		sb.append(tableName);
+//		sb.append(" (");
+//		for (int i = 0; i < columnNames.length; i++) 
+//		{
+//			sb.append(columnNames[i]);
+//			if (i < columnNames.length-1) sb.append(",");
+//		}
+//		sb.append(");");
+//		Debug.trace(sb);
+
 		Table t = (Table) server.getTable(tableName);
 		Column[] cols = new Column[columnNames.length];
 		for (int i = 0; i < columnNames.length; i++) 
@@ -446,7 +460,9 @@ public class DataModel
 		sb.append(key);
 		sb.append(") references ");
 		sb.append(reftable);
-
+		sb.append(" (DBID_)");
+		Debug.trace(sb);
+		
 		Connection c = server.getRawConnection();
 		try
 		{
