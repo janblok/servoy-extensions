@@ -12,7 +12,7 @@
     	<identity-service/>
 	</process-engine-context>
 	<transaction-context>
-		<object class="com.servoy.extensions.plugins.worflow.IdentitySessionImpl" />
+		<object class="com.servoy.extensions.plugins.workflow.IdentitySessionImpl" />
 		<hibernate-session current="true"/>
 	</transaction-context>
 	<mail-session>
