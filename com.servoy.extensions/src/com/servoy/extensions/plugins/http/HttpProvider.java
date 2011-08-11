@@ -648,7 +648,7 @@ public class HttpProvider implements IScriptObject
 	{
 		if ("getPageData".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "url" };
+			return new String[] { "url", "[http_clientname]", " [username]" };
 		}
 		else if ("getLastPageCharset".equals(methodName)) //$NON-NLS-1$
 		{
