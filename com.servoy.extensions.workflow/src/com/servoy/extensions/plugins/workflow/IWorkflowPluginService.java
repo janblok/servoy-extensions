@@ -38,7 +38,6 @@ public interface IWorkflowPluginService extends Remote
 	public List<Deployment> getDeploymentList() throws RemoteException;
 	public String addProcessDefinition(String content) throws RemoteException;
 	public String addProcessDefinition(String content, long timestamp) throws RemoteException;
-	public long getLongStringHashCode(String content) throws RemoteException;
 	
 	public String startProcess(String processName,String solutionName,Map<String,Object> variables) throws RemoteException;
 //	public String getProcessExecutionId(String processName);

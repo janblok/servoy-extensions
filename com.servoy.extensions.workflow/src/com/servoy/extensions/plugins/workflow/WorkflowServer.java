@@ -582,25 +582,4 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		}
 		return retval;
 	}
-	/**
-	 * Helper method to calculate a long version hash over a string
-	 * @param s the content
-	 * @return the hash code
-	 */
-	public long getLongStringHashCode(String s) 
-    {
-    	long h = 0;
-    	if (h == 0) 
-    	{
-    	    int off = 0;
-    	    char val[] = s.toCharArray();
-    	    int len = val.length;
-
-            for (int i = 0; i < len; i++) 
-            {
-                h = 31*h + val[off++];
-            }
-        }
-        return h;
-    }
 }
