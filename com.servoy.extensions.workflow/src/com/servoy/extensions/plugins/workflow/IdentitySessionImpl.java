@@ -56,7 +56,7 @@ public class IdentitySessionImpl implements IdentitySession
     	if (servoy_user_domain != null) domain = servoy_user_domain.toString();
     }
 
-    public Group findGroupById(String iGroupId) 
+    public Group findGroupById(String groupname) 
     {
     	GroupImpl lGroup = null;
     	try 
@@ -67,9 +67,9 @@ public class IdentitySessionImpl implements IdentitySession
 				for (int i = 0; i < groups.getRowCount(); i++) 
 				{
 					Object[] group_row = groups.getRow(i);
-					if (Utils.equalObjects(group_row[1],iGroupId))
+					if (Utils.equalObjects(group_row[1],groupname))
 					{
-						lGroup = new GroupImpl(iGroupId);
+						lGroup = new GroupImpl(groupname);
 						lGroup.setName(group_row[1].toString());
 						break;
 					}
@@ -111,9 +111,9 @@ public class IdentitySessionImpl implements IdentitySession
     	return lGroups;
     }
 
-    public List<Group> findGroupsByUserAndGroupType(String iUserId, String iGroupType) 
+    public List<Group> findGroupsByUserAndGroupType(String username, String iGroupType) 
     {
-    	return findGroupsByUser(iUserId);
+    	return findGroupsByUser(username);
     }
 
     public User findUserById(String username) 
@@ -137,22 +137,23 @@ public class IdentitySessionImpl implements IdentitySession
     	return lUser;
     }
 
-    public List<User> findUsersByGroup(String iGroup) 
+    public List<User> findUsersByGroup(String groupname) 
     {
         List<User> lUsers = new ArrayList<User>();
     	try 
     	{
-    		IDataSet users = (iGroup == null ? userManager.getUsers(clientId) : userManager.getUsersByGroup(clientId,iGroup));
+    		IDataSet users = (groupname == null ? userManager.getUsers(clientId) : userManager.getUsersByGroup(clientId,groupname));
 			if (users != null)
 			{
 				for (int i = 0; i < users.getRowCount(); i++) 
 				{
 					Object[] user_row = users.getRow(i);
+					String username = user_row[1].toString();
 					UserImpl lUser = new UserImpl();
-	    			lUser.setGivenName(user_row[1].toString());
+	    			lUser.setGivenName(username);
 	    			lUser.setId(user_row[0].toString());
-	    			lUser.setDbid(Utils.getAsLong(user_row[2]));
-	    			if (domain != null) lUser.setBusinessEmail(user_row[1].toString()+'@'+domain);
+//	    			lUser.setDbid(Utils.getAsLong(user_row[2]));
+	    			if (domain != null) lUser.setBusinessEmail(username+'@'+domain);
 	    			lUsers.add(lUser);
 				}
 			}
@@ -164,10 +165,10 @@ public class IdentitySessionImpl implements IdentitySession
     	return lUsers;
     }
 
-    public List<User> findUsersById(String... iUserIds) 
+    public List<User> findUsersById(String... usernames) 
     {
-		List<User> lUsers = new ArrayList<User>(iUserIds.length);
-		for (String lUserId : iUserIds) 
+		List<User> lUsers = new ArrayList<User>(usernames.length);
+		for (String lUserId : usernames) 
 		{
 			lUsers.add( findUserById(lUserId) );
 		}
