@@ -39,8 +39,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
+import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -111,7 +111,7 @@ public class RestWSServlet extends HttpServlet
 			Object result = wsService(WS_READ, null, request, response);
 			if (result == null)
 			{
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 				return;
 			}
 			HTTPUtils.setNoCacheHeaders(response);
@@ -169,7 +169,7 @@ public class RestWSServlet extends HttpServlet
 			plugin.log.error(request.getRequestURI(), e);
 			error = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 		}
-		response.sendError(error);
+		sendError(response, error);
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class RestWSServlet extends HttpServlet
 			plugin.log.trace("DELETE");
 			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response)))
 			{
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
@@ -199,13 +199,13 @@ public class RestWSServlet extends HttpServlet
 			plugin.log.trace("POST contents='" + contents + "'");
 			if (contents == null || contents.length() == 0)
 			{
-				response.sendError(HttpServletResponse.SC_NO_CONTENT);
+				sendError(response, HttpServletResponse.SC_NO_CONTENT);
 				return;
 			}
 			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER);
 			if (contentType == CONTENT_OTHER)
 			{
-				response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
 			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(contentType, contents) }, request, response);
@@ -230,18 +230,18 @@ public class RestWSServlet extends HttpServlet
 			plugin.log.trace("PUT contents='" + contents + "'");
 			if (contents == null || contents.length() == 0)
 			{
-				response.sendError(HttpServletResponse.SC_NO_CONTENT);
+				sendError(response, HttpServletResponse.SC_NO_CONTENT);
 				return;
 			}
 			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER);
 			if (contentType == CONTENT_OTHER)
 			{
-				response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
 			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(contentType, contents) }, request, response)))
 			{
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
@@ -409,7 +409,7 @@ public class RestWSServlet extends HttpServlet
 						}
 						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
 						{
-							jsMap.put(entry.getKey(), (String[])entry.getValue());
+							jsMap.put(entry.getKey(), entry.getValue());
 						}
 					}
 
@@ -679,6 +679,17 @@ public class RestWSServlet extends HttpServlet
 			}
 		}
 		response.setContentLength(bytes.length);
+	}
+
+	/** Send the error response but prevent output of the default (html) error page
+	 * @param response
+	 * @param error
+	 * @throws IOException
+	 */
+	protected void sendError(HttpServletResponse response, int error) throws IOException
+	{
+		response.setStatus(error);
+		response.setContentLength(0);
 	}
 
 	public static class WsRequest
