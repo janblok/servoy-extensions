@@ -222,7 +222,7 @@ public class MailProvider implements IScriptObject
 	 * Helper method, returns MailMessage object from binary or 7bits string.
 	 *
 	 * @sample
-	 * var msg = plugins.mail.getMailMessage(myColumn);
+	 * var msg = plugins.mail.getMailMessage(myBlob);
 	 * if (msg != null) //if is null error occurred!
 	 * {
 	 * 	application.output(msg.getFromAddresses())
