@@ -249,89 +249,30 @@ public class MailMessage implements Serializable, IScriptObject
 		return ccAddresses;
 	}
 
-	private String getContentType()
-	{
-		int startIndex = headers.indexOf("Content-Type") + "Content-Type".length() + 1;
-		int endIndex = headers.indexOf(";", startIndex);
-		if (endIndex == -1) endIndex = headers.indexOf("\n", startIndex);
-		String contentType = headers.substring(startIndex, endIndex);
-		if (contentType == null) contentType = "text/plain";
-		return contentType;
-	}
-
-	private String getBoundary()
-	{
-		String boundaryString = null;
-		int startOfContentType = headers.indexOf("Content-Type");// safety
-		int startIndex = headers.indexOf("boundary", startOfContentType);
-		if (startIndex != -1)
-		{
-			startIndex += "boundary".length() + 1;
-			boundaryString = headers.substring(startIndex).split("\"")[1];
-		}
-		if (boundaryString == null && getContentType().startsWith("multipart")) boundaryString = "-";
-		return boundaryString;
-	}
-
 	@Override
 	public String toString()
 	{
-		// -- Formatting multipart messages as described in http://www.w3.org/Protocols/rfc1341/7_2_Multipart.html
-		// -- CRLF characters near content-type and boundaries are important!
 		StringBuffer sb = new StringBuffer();
-
-		// -- Get address, date and subject info --
-		sb.append("From: ");
+		sb.append("from: "); //$NON-NLS-1$
 		sb.append(getFromAddresses());
-		sb.append("\n");
-		sb.append("To: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("to: "); //$NON-NLS-1$
 		sb.append(getRecipientAddresses());
-		sb.append("\n");
-		sb.append("CC: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("cc: "); //$NON-NLS-1$
 		sb.append(getCCAddresses());
-		sb.append("\n");
-		sb.append("Sent-Date: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("sentdate: "); //$NON-NLS-1$
 		sb.append(getSentDate());
-		sb.append("\n");
-		sb.append("Subject: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("subject: "); //$NON-NLS-1$
 		sb.append(getSubject());
-		sb.append("\n");
-
-		// -- Get content type and set boundary
-		sb.append("Content-Type: " + getContentType());
-		boolean multiPartMsg = false;
-		if (getContentType().startsWith("multipart") && getBoundary() != null)
-		{
-			multiPartMsg = true;
-			sb.append("; boundary=\"" + getBoundary() + "\"");
-		}
-		sb.append("\n\n");
-
-		// -- Get the content part of the message
-		if (getPlainMsg() != null)
-		{
-			if (multiPartMsg)
-			{
-				sb.append("--" + getBoundary() + "\n");
-				sb.append("Content-Type: text/plain \n\n");
-			}
-			sb.append(getPlainMsg().trim());
-			sb.append("\n");
-		}
-		if (getHtmlMsg() != null)
-		{
-			if (multiPartMsg)
-			{
-				sb.append("--" + getBoundary() + "\n");
-				sb.append("Content-Type: text/html \n\n");
-			}
-			sb.append(getHtmlMsg().trim());
-			sb.append("\n");
-		}
-
-		// -- The closing boundary!
-		if (multiPartMsg) sb.append("--" + getBoundary() + "--\n");
-
+		sb.append("plain msg: "); //$NON-NLS-1$
+		sb.append(getPlainMsg());
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("html msg: "); //$NON-NLS-1$
+		sb.append(getHtmlMsg());
+		sb.append("\n"); //$NON-NLS-1$
 		return sb.toString();
 	}
 
