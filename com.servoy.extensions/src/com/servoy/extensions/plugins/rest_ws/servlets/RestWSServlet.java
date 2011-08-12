@@ -405,15 +405,11 @@ public class RestWSServlet extends HttpServlet
 						Entry<String, Object> entry = parameters.next();
 						if (entry.getValue() instanceof String)
 						{
-							jsMap.put(entry.getKey(), entry.getValue());
+							jsMap.put(entry.getKey(), new String[] { (String)entry.getValue() });
 						}
-						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length == 1)
+						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
 						{
-							jsMap.put(entry.getKey(), ((String[])entry.getValue())[0]);
-						}
-						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 1)
-						{
-							jsMap.put(entry.getKey(), entry.getValue());
+							jsMap.put(entry.getKey(), (String[])entry.getValue());
 						}
 					}
 
