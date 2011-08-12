@@ -402,7 +402,7 @@ public class MailProvider implements IScriptObject
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var msg = %%elementName%%.getMailMessage(myColumn);\n"); //$NON-NLS-1$
+			retval.append("var msg = %%elementName%%.getMailMessage(myBlob);\n"); //$NON-NLS-1$
 			retval.append("if (msg != null) //if is null error occurred!\n{\n"); //$NON-NLS-1$
 			retval.append("\tapplication.output(msg.getFromAddresses())\n"); //$NON-NLS-1$
 			retval.append("}\n"); //$NON-NLS-1$
