@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -44,7 +45,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.ExecutionContext;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import com.servoy.j2db.util.Debug;
@@ -57,7 +57,6 @@ public class PostRequest extends BaseEntityEnclosingRequest
 {
 	private Map<Pair<String, String>, File> files;
 	private List<NameValuePair> params;
-	protected String charset = HTTP.UTF_8;
 
 	public PostRequest()
 	{
@@ -74,7 +73,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	@Deprecated
 	public void js_setEncoding(String encoding)
 	{
-		this.charset = encoding;
+		js_setCharset(encoding);
 	}
 
 	public boolean js_addFile(String parameterName, String fileName, String fileLocation)
@@ -135,10 +134,10 @@ public class PostRequest extends BaseEntityEnclosingRequest
 					content = null;
 				}
 			}
-			else if (files.size() == 1 && params.size() == 0)
+			else if (files.size() == 1 && params == null)
 			{
 				File f = files.values().iterator().next();
-				post.setEntity(new FileEntity(f, "binary/octet-stream"));
+				post.setEntity(new FileEntity(f, "binary/octet-stream")); //$NON-NLS-1$
 			}
 			else
 			{
@@ -206,7 +205,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			HttpEntity entity;
 			if (files.size() == 0)
 			{
-				entity = new StringEntity(content);
+				entity = new StringEntity(content, charset);
 				content = null;
 			}
 			else if (files.size() == 1)
@@ -260,11 +259,6 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		return ""; //$NON-NLS-1$
 	}
 
-	public void js_setCharset(String charset)
-	{
-		this.charset = charset;
-	}
-
 	@Override
 	public String getSample(String methodName)
 	{
@@ -279,7 +273,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			retval.append("poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post");//$NON-NLS-1$
 			return retval.toString();
 		}
-		else if ("addParameter".equals(methodName)) //$NON-NLS-1$
+		if ("addParameter".equals(methodName)) //$NON-NLS-1$
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//"); //$NON-NLS-1$
@@ -290,7 +284,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			retval.append("poster.addParameter(null,'value') //sets the content to post"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else if ("doPost".equals(methodName)) //$NON-NLS-1$
+		if ("doPost".equals(methodName)) //$NON-NLS-1$
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//"); //$NON-NLS-1$
@@ -299,23 +293,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			retval.append("var httpCode = poster.doPost()"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else if ("setEncoding".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\nvar poster = plugins.http.getPoster('https://twitter.com/statuses/update.json');\nposter.addParameter('status',globals.textToPost);\nposter.addParameter('source','Test Source');\nposter.setEncoding('UTF-8');\nvar httpCode = poster.doPost(globals.twitterUserName, globals.twitterPassword); //httpCode 200 is ok\n");
-			return retval.toString();
-		}
-		else if ("setCharset".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\nvar poster = plugins.http.getPoster('https://twitter.com/statuses/update.json');\nposter.addParameter('status',globals.textToPost);\nposter.addParameter('source','Test Source');\nposter.setCharset('UTF-8');\nvar httpCode = poster.doPost(globals.twitterUserName, globals.twitterPassword); //httpCode 200 is ok\n");
-			return retval.toString();
-		}
-		else if ("getPageData".equals(methodName))
+		if ("getPageData".equals(methodName))
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//");
@@ -334,23 +312,11 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		{
 			return "Add a file to the post."; //$NON-NLS-1$
 		}
-		else if ("addParameter".equals(methodName)) //$NON-NLS-1$
+		if ("addParameter".equals(methodName)) //$NON-NLS-1$
 		{
 			return "Add a parameter to the post."; //$NON-NLS-1$
 		}
-		else if ("doPost".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Do the actual post."; //$NON-NLS-1$
-		}
-		else if ("setEncoding".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Set the encoding used when posting. If this is null or not called it will use the default encoding (UTF-8)."; //$NON-NLS-1$
-		}
-		else if ("setCharset".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8)."; //$NON-NLS-1$
-		}
-		else if ("getPageData".equals(methodName)) //$NON-NLS-1$
+		if ("getPageData".equals(methodName)) //$NON-NLS-1$
 		{
 			return "Get the result page data after a post."; //$NON-NLS-1$
 		}
@@ -364,13 +330,13 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		{
 			return new String[] { "parameterName", "fileName", "fileLocation" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		else if ("doPost".equals(methodName)) //$NON-NLS-1$
+		if ("addParameter".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "[username", "password]" }; //$NON-NLS-1$//$NON-NLS-2$
+			return new String[] { "name", "value" }; //$NON-NLS-1$//$NON-NLS-2$
 		}
-		else if ("setEncoding".equals(methodName)) //$NON-NLS-1$
+		if ("doPost".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "encoding" }; //$NON-NLS-1$
+			return new String[] { "[username]", "[password]" }; //$NON-NLS-1$//$NON-NLS-2$
 		}
 		return super.getParameterNames(methodName);
 	}
@@ -393,9 +359,4 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		return super.isDeprecated(methodName);
 	}
 
-	@Override
-	public Class[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

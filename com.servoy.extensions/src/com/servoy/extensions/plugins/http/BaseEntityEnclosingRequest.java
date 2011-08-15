@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -33,11 +34,10 @@ import com.servoy.j2db.util.Utils;
 public class BaseEntityEnclosingRequest extends BaseRequest
 {
 	protected String content;
-
+	protected String charset = HTTP.UTF_8;
 
 	public BaseEntityEnclosingRequest()
 	{
-
 	}
 
 	public BaseEntityEnclosingRequest(String url, DefaultHttpClient hc)
@@ -45,9 +45,14 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 		super(url, hc);
 	}
 
-	public void js_setBodyContent(String content)
+	public void js_setBodyContent(String s)
 	{
-		this.content = content;
+		this.content = s;
+	}
+
+	public void js_setCharset(String s)
+	{
+		this.charset = s;
 	}
 
 	@Override
@@ -57,7 +62,7 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 		{
 			if (!Utils.stringIsEmpty(content))
 			{
-				((HttpEntityEnclosingRequestBase)method).setEntity(new StringEntity(content));
+				((HttpEntityEnclosingRequestBase)method).setEntity(new StringEntity(content, charset));
 			}
 		}
 		catch (UnsupportedEncodingException e)
@@ -72,11 +77,24 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 	{
 		if ("setBodyContent".equals(methodName)) //$NON-NLS-1$
 		{
-			StringBuffer retval = new StringBuffer();
+			StringBuilder retval = new StringBuilder();
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
 			retval.append("\n"); //$NON-NLS-1$
 			retval.append("method.setBodyContent(content)"); //$NON-NLS-1$
+			return retval.toString();
+		}
+		if ("setCharset".equals(methodName))
+		{
+			StringBuilder retval = new StringBuilder();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");
+			retval.append("\nvar poster = client.createPostRequest('https://twitter.com/statuses/update.json');");
+			retval.append("\nposter.addParameter('status',globals.textToPost);");
+			retval.append("\nposter.addParameter('source','Test Source');");
+			retval.append("\nposter.setCharset('UTF-8');");
+			retval.append("\nvar httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok\n");
 			return retval.toString();
 		}
 		return super.getSample(methodName);
@@ -89,6 +107,10 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 		{
 			return "Set the body of the request."; //$NON-NLS-1$
 		}
+		if ("setCharset".equals(methodName)) //$NON-NLS-1$
+		{
+			return "Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8)."; //$NON-NLS-1$
+		}
 		return super.getToolTip(methodName);
 	}
 
@@ -99,6 +121,11 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 		{
 			return new String[] { "content" }; //$NON-NLS-1$
 		}
+		if ("setCharset".equals(methodName)) //$NON-NLS-1$
+		{
+			return new String[] { "charset" }; //$NON-NLS-1$
+		}
+
 		return super.getParameterNames(methodName);
 	}
 }

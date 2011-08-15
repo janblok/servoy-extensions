@@ -133,7 +133,7 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 			retval.append("var response = method.executeRequest()"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else if ("addHeader".equals(methodName)) //$NON-NLS-1$
+		if ("addHeader".equals(methodName)) //$NON-NLS-1$
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//");
@@ -150,7 +150,7 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 		{
 			return "Add a header to the request."; //$NON-NLS-1$
 		}
-		else if ("executeRequest".equals(methodName)) //$NON-NLS-1$
+		if ("executeRequest".equals(methodName)) //$NON-NLS-1$
 		{
 			return "Execute the request method."; //$NON-NLS-1$
 		}
@@ -161,9 +161,9 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 	{
 		if ("executeRequest".equals(methodName)) //$NON-NLS-1$
 		{
-			return new String[] { "[username", "password]" }; //$NON-NLS-1$//$NON-NLS-2$
+			return new String[] { "[username]", "[password]" }; //$NON-NLS-1$//$NON-NLS-2$
 		}
-		else if ("addHeader".equals(methodName)) //$NON-NLS-1$
+		if ("addHeader".equals(methodName)) //$NON-NLS-1$
 		{
 			return new String[] { "headerName", "value" }; //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -175,7 +175,7 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 		return false;
 	}
 
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
 	}
