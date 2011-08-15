@@ -34,7 +34,6 @@ public class TraceRequest extends BaseRequest
 
 	public TraceRequest(String url, DefaultHttpClient hc)
 	{
-		super(url, hc);
-		method = new HttpTrace(url);
+		super(url, hc, new HttpTrace(url));
 	}
 }

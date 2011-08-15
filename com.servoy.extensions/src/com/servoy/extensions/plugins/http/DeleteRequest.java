@@ -34,7 +34,6 @@ public class DeleteRequest extends BaseRequest
 
 	public DeleteRequest(String url, DefaultHttpClient hc)
 	{
-		super(url, hc);
-		method = new HttpDelete(url);
+		super(url, hc, new HttpDelete(url));
 	}
 }

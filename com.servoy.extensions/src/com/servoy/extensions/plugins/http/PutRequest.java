@@ -37,8 +37,7 @@ public class PutRequest extends BaseEntityEnclosingRequest
 
 	public PutRequest(String url, DefaultHttpClient hc)
 	{
-		super(url, hc);
-		method = new HttpPut(url);
+		super(url, hc, new HttpPut(url));
 	}
 
 	public boolean js_setFile(String filePath)

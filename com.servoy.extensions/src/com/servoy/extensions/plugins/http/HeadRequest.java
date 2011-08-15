@@ -34,7 +34,6 @@ public class HeadRequest extends BaseRequest
 
 	public HeadRequest(String url, DefaultHttpClient hc)
 	{
-		super(url, hc);
-		method = new HttpHead(url);
+		super(url, hc, new HttpHead(url));
 	}
 }

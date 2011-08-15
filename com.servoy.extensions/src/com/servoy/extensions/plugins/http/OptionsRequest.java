@@ -36,8 +36,7 @@ public class OptionsRequest extends BaseRequest
 
 	public OptionsRequest(String url, DefaultHttpClient hc)
 	{
-		super(url, hc);
-		method = new HttpOptions(url);
+		super(url, hc, new HttpOptions(url));
 	}
 
 	public String[] js_getAllowedMethods(Response res)

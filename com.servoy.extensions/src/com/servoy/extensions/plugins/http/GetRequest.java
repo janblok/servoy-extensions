@@ -34,7 +34,6 @@ public class GetRequest extends BaseRequest
 
 	public GetRequest(String url, DefaultHttpClient hc)
 	{
-		super(url, hc);
-		method = new HttpGet(url);
+		super(url, hc, new HttpGet(url));
 	}
 }
