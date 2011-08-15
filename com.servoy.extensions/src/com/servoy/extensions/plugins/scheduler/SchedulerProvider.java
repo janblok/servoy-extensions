@@ -414,19 +414,20 @@ public class SchedulerProvider implements IScriptObject
 	 *
 	 * @param jobname 
 	 */
-	public void js_removeJob(String name)
+	public boolean js_removeJob(String name)
 	{
 		if (scheduler != null)
 		{
 			try
 			{
 				String id = plugin.getClientPluginAccess().getClientID();
-				scheduler.deleteJob(name, id);
+				return scheduler.deleteJob(name, id);
 			}
 			catch (SchedulerException e)
 			{
 				Debug.error("Error removing scheduler job: " + e.getMessage()); //$NON-NLS-1$
 			}
 		}
+		return false;
 	}
 }
