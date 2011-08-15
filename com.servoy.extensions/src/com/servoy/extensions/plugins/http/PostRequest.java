@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.http;
 import java.io.File;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -94,6 +95,10 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	{
 		if (name != null)
 		{
+			if (params == null)
+			{
+				params = new ArrayList<NameValuePair>();
+			}
 			params.add(new BasicNameValuePair(name, value));
 			return true;
 		}
@@ -120,13 +125,13 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		{
 			if (files.size() == 0)
 			{
-				if (params.size() > 0)
+				if (params != null)
 				{
 					post.setEntity(new UrlEncodedFormEntity(params, charset));
 				}
 				else
 				{
-					post.setEntity(new StringEntity(content));
+					post.setEntity(new StringEntity(content, charset));
 					content = null;
 				}
 			}
