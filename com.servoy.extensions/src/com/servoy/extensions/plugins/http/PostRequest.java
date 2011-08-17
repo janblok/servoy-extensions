@@ -17,20 +17,16 @@
 package com.servoy.extensions.plugins.http;
 
 import java.io.File;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
@@ -40,10 +36,8 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.util.EntityUtils;
 
@@ -111,7 +105,6 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	@Deprecated
 	public int js_doPost(Object[] args)
 	{
-		HttpPost post = new HttpPost(url);
 
 		String username = null;
 		String password = null;
@@ -122,73 +115,8 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		}
 		try
 		{
-			if (files.size() == 0)
-			{
-				if (params != null)
-				{
-					post.setEntity(new UrlEncodedFormEntity(params, charset));
-				}
-				else
-				{
-					post.setEntity(new StringEntity(content, charset));
-					content = null;
-				}
-			}
-			else if (files.size() == 1 && params == null)
-			{
-				File f = files.values().iterator().next();
-				post.setEntity(new FileEntity(f, "binary/octet-stream")); //$NON-NLS-1$
-			}
-			else
-			{
-				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-				// For File parameters
-				Iterator<Pair<String, String>> itf = files.keySet().iterator();
-				while (itf.hasNext())
-				{
-					Pair<String, String> p = itf.next();
-					File f = files.get(p);
-					String paramName = p.getLeft();
-					String fname = p.getRight();
-					entity.addPart(paramName, new FileBody(f));
-				}
-
-				// add the parameters
-				Iterator<NameValuePair> it = params.iterator();
-				while (it.hasNext())
-				{
-					NameValuePair nvp = it.next();
-					// For usual String parameters
-					entity.addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
-				}
-
-				post.setEntity(entity);
-			}
-
-			Iterator<String> it = headers.keySet().iterator();
-			while (it.hasNext())
-			{
-				String name = it.next();
-				String[] values = headers.get(name);
-				for (String value : values)
-				{
-					post.addHeader(name, value);
-				}
-			}
-
-			// post
-			if (args.length == 2)
-			{
-				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
-				URL _url = new URL(url);
-				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
-				client.setCredentialsProvider(bcp);
-			}
-			context = new BasicHttpContext();
-			HttpResponse res = client.execute(post, context);
-			int status = res.getStatusLine().getStatusCode();
-			return status;
+			Response res = js_executeRequest(username, password);
+			return res.js_getStatusCode();
 		}
 		catch (Exception ex)
 		{
@@ -205,7 +133,14 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			HttpEntity entity;
 			if (files.size() == 0)
 			{
-				entity = new StringEntity(content, charset);
+				if (params != null)
+				{
+					entity = new UrlEncodedFormEntity(params, charset);
+				}
+				else
+				{
+					entity = new StringEntity(content, charset);
+				}
 				content = null;
 			}
 			else if (files.size() == 1)
@@ -225,6 +160,15 @@ public class PostRequest extends BaseEntityEnclosingRequest
 					File f = files.get(p);
 					String paramName = p.getLeft();
 					((MultipartEntity)entity).addPart(paramName, new FileBody(f));
+				}
+
+				// add the parameters
+				Iterator<NameValuePair> it = params.iterator();
+				while (it.hasNext())
+				{
+					NameValuePair nvp = it.next();
+					// For usual String parameters
+					((MultipartEntity)entity).addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
 				}
 			}
 			if (entity != null)
