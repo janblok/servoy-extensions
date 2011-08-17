@@ -62,12 +62,14 @@ import com.servoy.j2db.util.HTTPUtils;
 import com.servoy.j2db.util.Utils;
 
 /**
+ * Main class to handle processing of PDF forms
  * @author JBlok
  */
+@SuppressWarnings("nls")
 public class PDFServlet extends HttpServlet
 {
-	private static final String ACTION_PROPERTY = "servoy_action_id"; //$NON-NLS-1$
-	private static final String URL_PROPERTY = "servoy_pdf_submit_url"; //$NON-NLS-1$
+	private static final String ACTION_PROPERTY = "servoy_action_id";
+	private static final String URL_PROPERTY = "servoy_pdf_submit_url";
 //	private static final int VIEW = 0;
 	private static final int EDIT = 1;
 	private static Random rnd = new Random();
@@ -85,7 +87,7 @@ public class PDFServlet extends HttpServlet
 	public PDFServlet(IServerAccess app)
 	{
 		this.app = app;
-		String serverName = app.getSettings().getProperty("pdf_forms_plugin_servername", PDF_SERVER); //$NON-NLS-1$ 
+		String serverName = app.getSettings().getProperty("pdf_forms_plugin_servername", PDF_SERVER);
 		if (serverName != null && serverName.length() != 0) PDF_SERVER = serverName;
 	}
 
@@ -94,7 +96,7 @@ public class PDFServlet extends HttpServlet
 	{
 		String hostname = request.getServerName();
 		int port = request.getServerPort();
-		String base = request.getScheme() + "://" + hostname; //$NON-NLS-1$ 
+		String base = request.getScheme() + "://" + hostname;
 		if (port != 80) base += ":" + port;
 		String uri = request.getRequestURI();//with servlet name
 		String path = request.getPathInfo(); //without servlet name
@@ -118,7 +120,7 @@ public class PDFServlet extends HttpServlet
 			{
 				HTTPUtils.setNoCacheHeaders(response);
 
-				String s_action_id = request.getParameter("action_id"); //$NON-NLS-1$
+				String s_action_id = request.getParameter("action_id");
 				int action_id = Utils.getAsInteger(s_action_id);
 				conn = app.getDBServerConnection(PDF_SERVER, null);
 				if (conn == null) Debug.error("Could not find Server " + PDF_SERVER);
@@ -126,7 +128,7 @@ public class PDFServlet extends HttpServlet
 				{
 
 					Statement st = conn.createStatement();
-					ResultSet rs = st.executeQuery("select form_id,template_id,action_type,closed from pdf_actions where action_id = " + action_id); //$NON-NLS-1$
+					ResultSet rs = st.executeQuery("select form_id,template_id,action_type,closed from pdf_actions where action_id = " + action_id);
 					if (rs.next())
 					{
 						int form_id = rs.getInt(1);
@@ -139,7 +141,7 @@ public class PDFServlet extends HttpServlet
 							Map<String, String> values = new HashMap<String, String>();
 							byte[] pdfContent = null;
 							Statement stContent = conn.createStatement();
-							ResultSet rsContent = stContent.executeQuery("select actual_pdf_form from pdf_templates where template_id = " + template_id); //$NON-NLS-1$
+							ResultSet rsContent = stContent.executeQuery("select actual_pdf_form from pdf_templates where template_id = " + template_id);
 							if (rsContent.next())
 							{
 								pdfContent = rsContent.getBytes(1);
@@ -153,16 +155,17 @@ public class PDFServlet extends HttpServlet
 							}
 
 							String sub = uri.substring(0, uri.length() - path.length());
-							String url = base + sub + "/pdf_forms/pdf_process_data"; //$NON-NLS-1$
+							String url = base + sub + "/pdf_forms/pdf_process_data";
 
 							if (action_type == EDIT || !xfa.isXfaPresent())
 							{
 								values.put(ACTION_PROPERTY, Integer.toString(action_id));
+								Debug.trace("Using " + URL_PROPERTY + ": " + url);
 								values.put(URL_PROPERTY, url);
 							}
 							//fill
 							Statement st1 = conn.createStatement();
-							ResultSet rs1 = st1.executeQuery("select value_name,field_value from pdf_form_values where form_id = " + form_id); //$NON-NLS-1$
+							ResultSet rs1 = st1.executeQuery("select value_name,field_value from pdf_form_values where form_id = " + form_id);
 							while (rs1.next())
 							{
 								String name = rs1.getString(1);
@@ -173,10 +176,10 @@ public class PDFServlet extends HttpServlet
 							st1.close();
 
 							//get name
-							String filename = "fromdb"; //$NON-NLS-1$
+							String filename = "fromdb";
 							boolean skipButton = false;
 							Statement st2 = conn.createStatement();
-							ResultSet rs2 = st2.executeQuery("select filename,skip_placing_submit_button from pdf_templates where template_id = " + template_id); //$NON-NLS-1$
+							ResultSet rs2 = st2.executeQuery("select filename,skip_placing_submit_button from pdf_templates where template_id = " + template_id);
 							if (rs2.next())
 							{
 								filename = rs2.getString(1);
@@ -185,7 +188,8 @@ public class PDFServlet extends HttpServlet
 							rs2.close();
 							st2.close();
 
-							String templateLocation = request.getParameter("overrideTemplateLocation"); //$NON-NLS-1$;
+							String templateLocation = request.getParameter("overrideTemplateLocation");
+							;
 							if (templateLocation == null)
 							{
 								templateLocation = base + sub + "/pdf_forms/pdf_template/" + filename + "?template_id=" + template_id + "&rnd=" + rnd.nextInt();
@@ -199,7 +203,7 @@ public class PDFServlet extends HttpServlet
 								{
 									if (!skipButton)
 									{
-										sb.append("var inch = 72;\n"); //$NON-NLS-1$
+										sb.append("var inch = 72;\n");
 										sb.append("var aRect = this.getPageBox( {nPage: 0} );\n");
 										sb.append("aRect[0] = 1;\n");//.5*inch; // position rectangle (.5 inch, .5 inch) 
 										sb.append("aRect[2] = aRect[0]+.5*inch;\n"); // from upper left hand corner of page. 
@@ -230,7 +234,7 @@ public class PDFServlet extends HttpServlet
 								}
 								else
 								{
-									sb.append("for (var i = 0; i < this.numFields; i++)\n"); //$NON-NLS-1$
+									sb.append("for (var i = 0; i < this.numFields; i++)\n");
 									sb.append("{\n");
 									sb.append("    var fname = this.getNthFieldName(i);\n");
 									sb.append("    if (fname != 'pdmSubmitAction')\n");
@@ -283,7 +287,7 @@ public class PDFServlet extends HttpServlet
 						}
 						else
 						{
-							String msg = "<html><head><title></title></head><body>Security violation, use the pdf system to edit pdfs</body></html>"; //$NON-NLS-1$
+							String msg = "<html><head><title></title></head><body>Security violation, use the pdf system to edit pdfs</body></html>";
 							response.setContentType("text/html");
 							Writer wr = response.getWriter();
 							wr.write(msg);
@@ -298,7 +302,7 @@ public class PDFServlet extends HttpServlet
 			{
 				HTTPUtils.setNoCacheHeaders(response);
 
-				String s_template_id = request.getParameter("template_id"); //$NON-NLS-1$
+				String s_template_id = request.getParameter("template_id");
 				int template_id = Utils.getAsInteger(s_template_id);
 				if (template_id > 0)
 				{
@@ -307,7 +311,7 @@ public class PDFServlet extends HttpServlet
 					if (conn != null)
 					{
 						Statement st = conn.createStatement();
-						ResultSet rs = st.executeQuery("select actual_pdf_form from pdf_templates where template_id = " + template_id); //$NON-NLS-1$
+						ResultSet rs = st.executeQuery("select actual_pdf_form from pdf_templates where template_id = " + template_id);
 						if (rs.next())
 						{
 							response.setContentType("application/pdf");
@@ -400,7 +404,7 @@ public class PDFServlet extends HttpServlet
 //					System.out.println(element+" "+FdfInput.GetValue(element));
 //				}			
 
-				String s_action_id = request.getParameter("action_id"); //$NON-NLS-1$
+				String s_action_id = request.getParameter("action_id");
 
 				if (s_action_id == null || s_action_id.length() == 0) s_action_id = FdfInput.GetValue(ACTION_PROPERTY);
 
@@ -410,9 +414,9 @@ public class PDFServlet extends HttpServlet
 					String redirect_url = null;
 
 					IDataServer ds = ApplicationServerSingleton.get().getDataServer();
-					String sql = "select form_id,template_id,closed,redirect_url from pdf_actions where action_id = ?";//$NON-NLS-1$
-					IDataSet rs = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER,
-						"pdf_actions", null, sql, new Object[] { new Integer(action_id) }, 0, -1); //$NON-NLS-1$
+					String sql = "select form_id,template_id,closed,redirect_url from pdf_actions where action_id = ?";
+					IDataSet rs = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER, "pdf_actions", null, sql,
+						new Object[] { new Integer(action_id) }, 0, -1);
 					for (int r = 0; r < rs.getRowCount(); r++)//normally just one (or zero)
 					{
 						Object[] row = rs.getRow(r);
@@ -433,9 +437,9 @@ public class PDFServlet extends HttpServlet
 						if (closed == 0)
 						{
 							Map currentValues = new HashMap();
-							String sql1 = "select value_name,fval_id from pdf_form_values where form_id = ?"; //$NON-NLS-1$
-							IDataSet rs1 = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER,
-								"pdf_form_values", null, sql1, new Object[] { new Integer(form_id) }, 0, -1); //$NON-NLS-1$
+							String sql1 = "select value_name,fval_id from pdf_form_values where form_id = ?";
+							IDataSet rs1 = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER, "pdf_form_values", null, sql1,
+								new Object[] { new Integer(form_id) }, 0, -1);
 							for (int i = 0; i < rs1.getRowCount(); i++)
 							{
 								Object[] row1 = rs1.getRow(i);
@@ -460,7 +464,7 @@ public class PDFServlet extends HttpServlet
 								while (it.hasNext())
 								{
 									String name = (String)it.next();
-									String val = ""; //$NON-NLS-1$
+									String val = "";
 									try
 									{
 										val = FdfInput.GetValue(name);
@@ -484,7 +488,7 @@ public class PDFServlet extends HttpServlet
 								ISQLStatement ps = null;
 								if (!currentValues.containsKey(name))
 								{
-									Number i = (Number)app.getNextSequence(PDF_SERVER, "pdf_form_values", "fval_id"); //$NON-NLS-1$ //$NON-NLS-2$
+									Number i = (Number)app.getNextSequence(PDF_SERVER, "pdf_form_values", "fval_id");
 									Object[] pkData;
 									Object[] questionData;
 									String sql2;
@@ -519,7 +523,7 @@ public class PDFServlet extends HttpServlet
 									Number fval_id = (Number)currentValues.get(name);
 									Object[] pkData = new Object[] { fval_id };
 									Object[] questionData = new Object[] { val, fval_id };
-									String sql2 = "update pdf_form_values set field_value = ? where fval_id = ?"; //$NON-NLS-1$
+									String sql2 = "update pdf_form_values set field_value = ? where fval_id = ?";
 									ps = ds.createSQLStatement(ISQLActionTypes.UPDATE_ACTION, PDF_SERVER, "pdf_form_values", pkData, null, sql2, questionData);
 
 									currentValues.remove(name);
@@ -535,8 +539,8 @@ public class PDFServlet extends HttpServlet
 								Object fval_id = it2.next();
 								Object[] pkData = new Object[] { fval_id };
 								Object[] questionData = new Object[] { fval_id };
-								ISQLStatement ps = ds.createSQLStatement(ISQLActionTypes.DELETE_ACTION, PDF_SERVER,
-									"pdf_form_values", pkData, null, "delete from pdf_form_values where fval_id = ?", questionData); //$NON-NLS-1$
+								ISQLStatement ps = ds.createSQLStatement(ISQLActionTypes.DELETE_ACTION, PDF_SERVER, "pdf_form_values", pkData, null,
+									"delete from pdf_form_values where fval_id = ?", questionData);
 								delList.add(ps);
 							}
 							ds.performUpdates(ApplicationServerSingleton.get().getClientId(),
@@ -544,7 +548,7 @@ public class PDFServlet extends HttpServlet
 
 							Object[] pkData = new Object[] { new Integer(action_id) };
 							Object[] questionData = new Object[] { new Integer(action_id) };
-							String sql5 = "update pdf_actions set closed = 1 where action_id = ?"; //$NON-NLS-1$
+							String sql5 = "update pdf_actions set closed = 1 where action_id = ?";
 							ds.performUpdates(ApplicationServerSingleton.get().getClientId(), new ISQLStatement[] { ds.createSQLStatement(
 								ISQLActionTypes.UPDATE_ACTION, PDF_SERVER, "pdf_actions", pkData, null, sql5, questionData) });
 						}
@@ -564,8 +568,7 @@ public class PDFServlet extends HttpServlet
 					{
 						response.setContentType("text/html");
 						out = response.getWriter();
-						String msg = "<html><head><title></title></head><body>\n" + //$NON-NLS-1$
-							"Data successfully stored,close this window</body></html>"; //$NON-NLS-1$
+						String msg = "<html><head><title></title></head><body>\n" + "Data successfully stored,close this window</body></html>";
 						out.println(msg);
 					}
 				}
