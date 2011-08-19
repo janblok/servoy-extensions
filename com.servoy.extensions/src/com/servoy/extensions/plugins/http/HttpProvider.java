@@ -341,6 +341,7 @@ public class HttpProvider implements IScriptObject
 	 * @param url 
 	 * @param clientName 
 	 */
+	@Deprecated
 	public byte[] js_getMediaData(String url, String clientName)
 	{
 		if (url == null || clientName == null) return null;
