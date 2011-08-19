@@ -159,12 +159,15 @@ public class PostRequest extends BaseEntityEnclosingRequest
 				}
 
 				// add the parameters
-				Iterator<NameValuePair> it = params.iterator();
-				while (it.hasNext())
+				if (params != null)
 				{
-					NameValuePair nvp = it.next();
-					// For usual String parameters
-					((MultipartEntity)entity).addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
+					Iterator<NameValuePair> it = params.iterator();
+					while (it.hasNext())
+					{
+						NameValuePair nvp = it.next();
+						// For usual String parameters
+						((MultipartEntity)entity).addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
+					}
 				}
 			}
 			((HttpEntityEnclosingRequestBase)method).setEntity(entity);
