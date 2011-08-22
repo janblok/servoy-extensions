@@ -321,7 +321,7 @@ public class PDFProvider implements IScriptObject
 	@SuppressWarnings("nls")
 	public String[] getParameterNames(String methodName)
 	{
-		if ("getPDFPrinter".equals(methodName)) //$NON-NLS-1$
+		if ("getPDFPrinter".equals(methodName) || "startMetaPrintJob".equals(methodName)) //$NON-NLS-1$
 		{
 			return new String[] { "[filename]" };
 		}
