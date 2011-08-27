@@ -47,6 +47,9 @@ import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.email.impl.MailTemplate;
+import org.jbpm.pvm.internal.email.impl.MailTemplateRegistry;
+import org.jbpm.pvm.internal.env.EnvironmentImpl;
 
 import com.servoy.extensions.plugins.workflow.shared.Deployment;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
@@ -60,6 +63,7 @@ import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.server.shared.IApplicationServerSingleton;
 import com.servoy.j2db.server.shared.IUserManager;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Pair;
 
 /**
  * The workflow server being a servoy server plugin.
@@ -553,21 +557,43 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 			{
 				Thread.currentThread().setContextClassLoader(cl);
 			}
-			
-			//TODO make this work
-//		    MailTemplateRegistry templateRegistry = EnvironmentImpl.getFromCurrent(MailTemplateRegistry.class);
-//		    Set<String> templateNames = templateRegistry.getTemplateNames();
-//		    Iterator<String> it = templateNames.iterator();
-//		    while (it.hasNext()) 
-//		    {
-//				String templateName = (String) it.next();
-//				MailTemplate template = templateRegistry.getTemplate(templateName); 
-//				//retreiveData for templatename	and overwrite text+html
-//				template.setHtml(html);
-//				template.setText(text);
-//			}
 		}
 		return processEngine;
+	}
+
+	public Pair<String,String> getMailTemplate(String templateName)
+	{
+	    MailTemplateRegistry templateRegistry = EnvironmentImpl.getFromCurrent(MailTemplateRegistry.class);
+		MailTemplate template = templateRegistry.getTemplate(templateName);
+		if (template != null)
+		{
+			String text = (template.getText() == null ? "" : template.getText());
+			String html = (template.getHtml() == null ? "" : template.getHtml());
+			return new Pair<String,String>(template.getSubject(),text+html);
+		}
+		return null;
+	}
+	
+	public void addMailTemplate(String templateName,String subject,String msgText)
+	{
+	    MailTemplateRegistry templateRegistry = EnvironmentImpl.getFromCurrent(MailTemplateRegistry.class);
+		MailTemplate template = templateRegistry.getTemplate(templateName);
+		if (template != null)
+		{
+			Debug.warn("Overwriting mail template "+templateName);
+		}
+		template = new MailTemplate();
+		template.setSubject(subject);
+
+		int htmlIndex = msgText.toLowerCase().indexOf("<html"); //$NON-NLS-1$
+		boolean hasHTML = (htmlIndex != -1);
+		boolean hasPlain = !hasHTML || htmlIndex > 0;
+		String plain = hasHTML ? msgText.substring(0, htmlIndex) : msgText;
+		String html = hasHTML ? msgText.substring(htmlIndex) : null;
+		if (hasPlain) template.setText(plain);
+		if (hasHTML) template.setHtml(html);
+
+		templateRegistry.addTemplate(templateName, template);
 	}
 
 	public List<Deployment> getDeploymentList()

@@ -25,6 +25,7 @@ import com.servoy.extensions.plugins.workflow.shared.TaskData;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Pair;
 
 /**
  * The plugin api to control the workflow actions from a servoy client
@@ -147,6 +148,34 @@ public class WorkflowProvider implements IScriptObject
 		}
 	}
 
+	public boolean js_addMailTemplate(String templateName,String subject,String msgText)
+	{
+		try
+		{
+			getWorkflowService().addMailTemplate(templateName, subject, msgText);
+			return true;
+		} 
+		catch (RemoteException e) 
+		{
+			Debug.error(e);
+			return false;
+		}
+	}
+	
+	public String[] js_getMailTemplate(String templateName)
+	{
+		try
+		{
+			Pair<String,String> subj_msg = getWorkflowService().getMailTemplate(templateName);
+			if (subj_msg != null) return new String[]{subj_msg.getLeft(),subj_msg.getRight()};
+		} 
+		catch (RemoteException e) 
+		{
+			Debug.error(e);
+		}
+		return null;
+	}
+	
 	public Class[] getAllReturnedTypes() 
 	{
 		return new Class[]{JSTask.class};

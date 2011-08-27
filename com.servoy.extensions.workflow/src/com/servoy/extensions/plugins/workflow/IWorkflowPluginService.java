@@ -24,6 +24,7 @@ import java.util.Map;
 
 import com.servoy.extensions.plugins.workflow.shared.Deployment;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
+import com.servoy.j2db.util.Pair;
 
 /**
  * Public api for the workflow plugin.
@@ -52,4 +53,7 @@ public interface IWorkflowPluginService extends Remote
 	public void takeTask(String tid,String uid) throws RemoteException;
 	public void releaseTask(String tid) throws RemoteException;
 	public void completeTask(String tid, String outcome, Map<String, Object> variables) throws RemoteException;
+	
+	public void addMailTemplate(String templateName,String subject,String msgText) throws RemoteException;
+	public Pair<String,String> getMailTemplate(String templateName) throws RemoteException;
 }
