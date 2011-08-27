@@ -504,6 +504,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 	    return ctx.createSubcontext(subcontext);
     }
 	private volatile ProcessEngine processEngine;
+    private MailTemplateRegistry mailTemplateRegistry;
 	private synchronized ProcessEngine createProcessEngine() throws Exception
 	{
 		if (processEngine == null)
@@ -552,6 +553,9 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 				processEngine.getHistoryService();
 				processEngine.getTaskService();
 				processEngine.getRepositoryService();
+				
+				//store locally
+			    mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
 			}
 			finally
 			{
@@ -563,8 +567,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 
 	public Pair<String,String> getMailTemplate(String templateName)
 	{
-	    MailTemplateRegistry templateRegistry = EnvironmentImpl.getFromCurrent(MailTemplateRegistry.class);
-		MailTemplate template = templateRegistry.getTemplate(templateName);
+		MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
 		if (template != null)
 		{
 			String text = (template.getText() == null ? "" : template.getText());
@@ -576,8 +579,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 	
 	public void addMailTemplate(String templateName,String subject,String msgText)
 	{
-	    MailTemplateRegistry templateRegistry = EnvironmentImpl.getFromCurrent(MailTemplateRegistry.class);
-		MailTemplate template = templateRegistry.getTemplate(templateName);
+		MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
 		if (template != null)
 		{
 			Debug.warn("Overwriting mail template "+templateName);
@@ -593,7 +595,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		if (hasPlain) template.setText(plain);
 		if (hasHTML) template.setHtml(html);
 
-		templateRegistry.addTemplate(templateName, template);
+		mailTemplateRegistry.addTemplate(templateName, template);
 	}
 
 	public List<Deployment> getDeploymentList()
