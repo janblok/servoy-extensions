@@ -49,7 +49,6 @@ import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.email.impl.MailTemplate;
 import org.jbpm.pvm.internal.email.impl.MailTemplateRegistry;
-import org.jbpm.pvm.internal.env.EnvironmentImpl;
 
 import com.servoy.extensions.plugins.workflow.shared.Deployment;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
@@ -504,7 +503,6 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 	    return ctx.createSubcontext(subcontext);
     }
 	private volatile ProcessEngine processEngine;
-    private MailTemplateRegistry mailTemplateRegistry;
 	private synchronized ProcessEngine createProcessEngine() throws Exception
 	{
 		if (processEngine == null)
@@ -554,8 +552,6 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 				processEngine.getTaskService();
 				processEngine.getRepositoryService();
 				
-				//store locally
-			    mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
 			}
 			finally
 			{
@@ -567,6 +563,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 
 	public Pair<String,String> getMailTemplate(String templateName)
 	{
+		MailTemplateRegistry mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
 		MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
 		if (template != null)
 		{
@@ -579,6 +576,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 	
 	public void addMailTemplate(String templateName,String subject,String msgText)
 	{
+		MailTemplateRegistry mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
 		MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
 		if (template != null)
 		{
