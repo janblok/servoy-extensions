@@ -136,6 +136,6 @@ public class SpellCheckClientProvider implements IScriptObject
 	 */
 	public Class[] getAllReturnedTypes()
 	{
-		return new Class[] { SpellCheck_Languages.class };
+		return new Class[] { LANGUAGES.class };
 	}
 }

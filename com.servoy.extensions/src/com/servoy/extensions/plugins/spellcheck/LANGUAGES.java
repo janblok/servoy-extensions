@@ -25,7 +25,7 @@ import com.servoy.j2db.scripting.IConstantsObject;
  * @author acostache
  *
  */
-public abstract class SpellCheck_Languages implements IConstantsObject
+public abstract class LANGUAGES implements IConstantsObject
 {
 	/** 
 	 * Language Strings
