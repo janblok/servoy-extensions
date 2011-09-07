@@ -690,7 +690,8 @@ public class FileProvider implements IScriptObject
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
+	String contentType)
 	{
 		try
 		{
@@ -794,7 +795,8 @@ public class FileProvider implements IScriptObject
 		return js_writeFile(f, data, null);
 	}
 
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -1217,7 +1219,7 @@ public class FileProvider implements IScriptObject
 			sb.append("\tvar textData = 'load of data...'\n");
 			sb.append("\tvar success = %%elementName%%.writeTXTFile(fileNameSuggestion, textData);\n");
 			sb.append("\tif (!success) application.output('Could not write file.');\n");
-			sb.append("\t// For file-encoding parameter options (default OS encoding is used), http://java.sun.com/j2se/1.4.2/docs/guide/intl/encoding.doc.html\n");
+			sb.append("\t// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html\n");
 			sb.append("\t// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'\n"); //$NON-NLS-1$
 			return sb.toString();
 		}
