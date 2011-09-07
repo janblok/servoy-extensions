@@ -189,7 +189,7 @@ public class MenuBar implements IScriptObject
 			sb.append("// ").append(toolTip).append('\n');
 		}
 
-		else if ("addMenu".equals(methodName))
+		if ("addMenu".equals(methodName))
 		{
 			sb.append("// add a menu at the given index\n");
 			sb.append("// when you don't define an index the menu will be added at the last\n");
