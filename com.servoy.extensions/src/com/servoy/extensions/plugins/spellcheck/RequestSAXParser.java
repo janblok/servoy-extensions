@@ -18,10 +18,8 @@
 package com.servoy.extensions.plugins.spellcheck;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -29,8 +27,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.servoy.j2db.util.Debug;
 
-//TODO Remove unnecessary prints
+
 public class RequestSAXParser
 {
 	private static SpellRequest spellRequest;
@@ -60,20 +59,11 @@ public class RequestSAXParser
 			parser.parse(inputStream, handler);
 
 		}
-		catch (SAXException se)
+		catch (Exception e)
 		{
-			se.printStackTrace();
-		}
-		catch (ParserConfigurationException pce)
-		{
-			pce.printStackTrace();
-		}
-		catch (IOException ie)
-		{
-			ie.printStackTrace();
+			Debug.error(e);
 		}
 		return spellRequest.getText();
-
 	}
 
 	private static final class SAXHandler extends DefaultHandler
@@ -128,7 +118,6 @@ public class RequestSAXParser
 			{
 				spellRequest.setText(tempVal);
 			}
-
 		}
 	}
 }

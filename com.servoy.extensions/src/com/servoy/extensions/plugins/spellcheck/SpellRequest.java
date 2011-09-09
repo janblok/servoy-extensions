@@ -46,7 +46,7 @@ public class SpellRequest
 
 	public String getTextalreadyclipped()
 	{
-		return textalreadyclipped + "";
+		return String.valueOf(textalreadyclipped);
 	}
 
 	public void setTextalreadyclipped(int textalreadyclipped)
@@ -56,7 +56,7 @@ public class SpellRequest
 
 	public String getIgnoredups()
 	{
-		return ignoredups + "";
+		return String.valueOf(ignoredups);
 	}
 
 	public void setIgnoredups(int ignoredups)
@@ -66,7 +66,7 @@ public class SpellRequest
 
 	public String getIgnoredigits()
 	{
-		return ignoredigits + "";
+		return String.valueOf(ignoredigits);
 	}
 
 	public void setIgnoredigits(int ignoredigits)
@@ -76,7 +76,7 @@ public class SpellRequest
 
 	public String getIgnoreallcaps()
 	{
-		return ignoreallcaps + "";
+		return String.valueOf(ignoreallcaps);
 	}
 
 	public void setIgnoreallcaps(int ignoreallcaps)

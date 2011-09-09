@@ -18,20 +18,16 @@
 package com.servoy.extensions.plugins.spellcheck;
 
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -49,16 +45,15 @@ import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Settings;
 
-//TODO Remove unnecessary prints
 public class SpellCheckServerPlugin implements IServerPlugin
 {
 	public static final String WEBSERVICE_NAME = "spellchecker"; //$NON-NLS-1$
 
 	public SpellCheckServerPlugin()
 	{
-
 	}
 
 	public void initialize(IServerAccess app) throws PluginException
@@ -75,7 +70,6 @@ public class SpellCheckServerPlugin implements IServerPlugin
 	{
 		return null;
 	}
-
 
 	public Properties getProperties()
 	{
@@ -94,14 +88,13 @@ public class SpellCheckServerPlugin implements IServerPlugin
 
 	public String check(String text)
 	{
-		StringBuffer responseBody = new StringBuffer();
+		StringBuilder responseBody = new StringBuilder();
 		String theLanguage = parseForLanguage(text);
 		String goodText = removeLanguageFromRequest(text);
 		RequestSAXParser parser = new RequestSAXParser(goodText);
 		String textToBeChecked = parser.parseXMLString();
 		responseBody.append(createXmlStringResponse(textToBeChecked, theLanguage));
 		return responseBody.toString();
-
 	}
 
 	/**
@@ -141,7 +134,7 @@ public class SpellCheckServerPlugin implements IServerPlugin
 
 			//create the 'c' (correction) elements and attach them to the spell response
 			// for each correction element
-			ArrayList<SpellCorrection> corrections = spellResponse.getSpellCorrections();
+			List<SpellCorrection> corrections = spellResponse.getSpellCorrections();
 			for (SpellCorrection c : corrections)
 			{
 				Element cEle = dom.createElement("c");
@@ -166,25 +159,9 @@ public class SpellCheckServerPlugin implements IServerPlugin
 			xmlString = result.getWriter().toString();
 
 		}
-		catch (ParserConfigurationException pce)
+		catch (Exception e)
 		{
-			System.out.println("Error while trying to instantiate DocumentBuilder " + pce);
-			System.exit(1);
-		}
-		catch (TransformerConfigurationException e)
-		{
-			System.out.println("Error in transforming XML!" + e);
-			e.printStackTrace();
-		}
-		catch (TransformerFactoryConfigurationError e)
-		{
-			System.out.println("Error in transforming XML!" + e);
-			e.printStackTrace();
-		}
-		catch (TransformerException e)
-		{
-			System.out.println("Error in transforming XML!" + e);
-			e.printStackTrace();
+			Debug.error("Error in transforming XML!", e);
 		}
 
 		return xmlString;
@@ -242,12 +219,12 @@ public class SpellCheckServerPlugin implements IServerPlugin
 			{
 				//get suggestions for the current bad word.
 				suggestions = checker.findSuggestions().elements();
-				StringBuffer textCorrection = new StringBuffer();
+				StringBuilder textCorrection = new StringBuilder();
 
 				//display all suggestions.
 				while (suggestions.hasMoreElements())
 				{
-					textCorrection.append((String)suggestions.nextElement() + " ");
+					textCorrection.append((String)suggestions.nextElement() + ' ');
 				}
 				c.setTextCorrection(textCorrection.toString());
 
@@ -257,7 +234,6 @@ public class SpellCheckServerPlugin implements IServerPlugin
 			catch (NoCurrentBadWordException e)
 			{
 				spellResult.setErrorNumber(1);
-				System.err.println(e);
 			}
 
 		}

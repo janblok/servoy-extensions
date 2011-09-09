@@ -45,7 +45,7 @@ public class SpellCheckClientProvider implements IScriptObject
 		{
 			if (c instanceof IDelegate)
 			{
-				c = ((IDelegate)c).getDelegate();
+				c = ((IDelegate< ? >)c).getDelegate();
 			}
 			if (c instanceof Component)
 			{
@@ -86,10 +86,7 @@ public class SpellCheckClientProvider implements IScriptObject
 			retval.append("plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 
 
@@ -102,10 +99,7 @@ public class SpellCheckClientProvider implements IScriptObject
 		{
 			return "Spellcheck the form element/component."; //$NON-NLS-1$
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 
 	/**

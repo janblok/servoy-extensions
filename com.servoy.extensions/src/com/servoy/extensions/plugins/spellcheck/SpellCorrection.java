@@ -48,7 +48,7 @@ public class SpellCorrection
 
 	public String getOffset()
 	{
-		return offset + "";
+		return String.valueOf(offset);
 	}
 
 	public void setLength(int length)
@@ -58,7 +58,7 @@ public class SpellCorrection
 
 	public String getLength()
 	{
-		return length + "";
+		return String.valueOf(length);
 	}
 
 	public void setConfidence(int confidence)
@@ -68,7 +68,7 @@ public class SpellCorrection
 
 	public String getConfidence()
 	{
-		return confidence + "";
+		return String.valueOf(confidence);
 	}
 
 	public void setTextCorrection(String textCorrection)
