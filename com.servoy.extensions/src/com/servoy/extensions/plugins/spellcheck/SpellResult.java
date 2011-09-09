@@ -18,6 +18,7 @@
 package com.servoy.extensions.plugins.spellcheck;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpellResult
 {
@@ -25,7 +26,7 @@ public class SpellResult
 	private int clippedNumber = 0;
 	private int charsCheckednumber = 0;
 
-	private ArrayList<SpellCorrection> spellCorrections = new ArrayList<SpellCorrection>();
+	private List<SpellCorrection> spellCorrections = new ArrayList<SpellCorrection>();
 
 	public void setErrorNumber(int errorNumber)
 	{
@@ -34,7 +35,7 @@ public class SpellResult
 
 	public String getErrorNumber()
 	{
-		return errorNumber + "";
+		return String.valueOf(errorNumber);
 	}
 
 	public void setClippedNumber(int clippedNumber)
@@ -44,7 +45,7 @@ public class SpellResult
 
 	public String getClippedNumber()
 	{
-		return clippedNumber + "";
+		return String.valueOf(clippedNumber);
 	}
 
 	public void setCharsCheckednumber(int charsCheckednumber)
@@ -54,15 +55,15 @@ public class SpellResult
 
 	public String getCharsCheckednumber()
 	{
-		return charsCheckednumber + "";
+		return String.valueOf(charsCheckednumber);
 	}
 
-	public void setSpellCorrections(ArrayList<SpellCorrection> spellCorrections)
+	public void setSpellCorrections(List<SpellCorrection> spellCorrections)
 	{
 		this.spellCorrections = spellCorrections;
 	}
 
-	public ArrayList<SpellCorrection> getSpellCorrections()
+	public List<SpellCorrection> getSpellCorrections()
 	{
 		return spellCorrections;
 	}

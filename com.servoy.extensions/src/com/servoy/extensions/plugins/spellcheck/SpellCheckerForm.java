@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -58,7 +59,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 	protected JTextField checkText;
 
 	protected SpellCheckEvent spellEvent;
-	protected ArrayList<SpellCheckEvent> spellEvents = new ArrayList<SpellCheckEvent>();
+	protected List<SpellCheckEvent> spellEvents = new ArrayList<SpellCheckEvent>();
 
 	public SpellCheckerForm()
 	{
@@ -315,7 +316,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		}
 	}
 
-	public ArrayList<SpellCheckEvent> getSpellEventsList()
+	public List<SpellCheckEvent> getSpellEventsList()
 	{
 		return spellEvents;
 	}

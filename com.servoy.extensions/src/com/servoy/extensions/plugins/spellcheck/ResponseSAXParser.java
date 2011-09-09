@@ -18,16 +18,16 @@
 package com.servoy.extensions.plugins.spellcheck;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.servoy.j2db.util.Debug;
 
 public class ResponseSAXParser
 {
@@ -56,17 +56,9 @@ public class ResponseSAXParser
 			parser.parse(inputStream, handler);
 
 		}
-		catch (SAXException se)
+		catch (Exception e)
 		{
-			se.printStackTrace();
-		}
-		catch (ParserConfigurationException pce)
-		{
-			pce.printStackTrace();
-		}
-		catch (IOException ie)
-		{
-			ie.printStackTrace();
+			Debug.error(e);
 		}
 	}
 
