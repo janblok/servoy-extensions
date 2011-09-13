@@ -345,7 +345,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		{
 			throw new IOException("File Plugin is unloaded");
 		}
-		if (!application.isAuthenticated(clientId))
+		if (!application.isServerProcess(clientId) && !application.isAuthenticated(clientId))
 		{
 			throw new SecurityException("Rejected unauthenticated access");
 		}
