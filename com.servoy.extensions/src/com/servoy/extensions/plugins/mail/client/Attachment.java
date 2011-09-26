@@ -18,14 +18,15 @@ package com.servoy.extensions.plugins.mail.client;
 
 import java.io.Serializable;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.ImageLoader;
 
 /**
  * @author jblok
  */
 @SuppressWarnings("nls")
-public class Attachment implements Serializable, IScriptObject
+public class Attachment implements Serializable, IReturnedTypesProvider, IScriptable
 {
 	private final String name;
 	private String mimeType;
@@ -169,26 +170,6 @@ public class Attachment implements Serializable, IScriptObject
 		sb.append(embedded);
 		sb.append("\n");
 		return sb.toString();
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

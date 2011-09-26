@@ -21,14 +21,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * Container class for an email
  * @author jblok
  */
 @SuppressWarnings("nls")
-public class MailMessage implements Serializable, IScriptObject
+public class MailMessage implements Serializable, IReturnedTypesProvider, IScriptable
 {
 	public List<Attachment> attachments = new ArrayList<Attachment>();
 	public String fromAddresses;
@@ -274,26 +275,6 @@ public class MailMessage implements Serializable, IScriptObject
 		sb.append(getHtmlMsg());
 		sb.append("\n"); //$NON-NLS-1$
 		return sb.toString();
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

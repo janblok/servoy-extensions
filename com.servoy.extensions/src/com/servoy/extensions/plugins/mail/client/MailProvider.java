@@ -23,14 +23,15 @@ import java.util.StringTokenizer;
 
 import com.servoy.extensions.plugins.mail.IMailService;
 import com.servoy.j2db.plugins.IClientPluginAccess;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
 /**
  * @author jblok
  */
-public class MailProvider implements IScriptObject
+public class MailProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final MailPlugin plugin;
 	private IMailService mailService = null;
@@ -211,11 +212,6 @@ public class MailProvider implements IScriptObject
 				Debug.error(ex);
 			}
 		}
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	/**
@@ -445,21 +441,6 @@ public class MailProvider implements IScriptObject
 	public String js_getLastSendMailExceptionMsg()
 	{
 		return sendMailException;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		return null;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()
