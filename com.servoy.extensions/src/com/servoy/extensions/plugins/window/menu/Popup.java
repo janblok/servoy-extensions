@@ -19,7 +19,6 @@ package com.servoy.extensions.plugins.window.menu;
 
 import java.awt.Point;
 
-import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.ui.IComponent;
@@ -47,6 +46,30 @@ public class Popup extends AbstractMenu
 		return (IPopupMenu)super.getMenu();
 	}
 
+	/**
+	 * Show the popup above the specified element.
+	 *
+	 * @sample 
+	 * // NOTE: usually this code is placed in a handler of an event (e.g. right click on some component)
+	 * // create a popup menu
+	 * var menu = plugins.window.createPopupMenu();
+	 * // add a menu item
+	 * menu.addMenuItem("item", feedback_item);
+	 * // add another menu item
+	 * menu.addMenuItem("item 2", feedback_item);
+	 * 
+	 * if (event.getSource())
+	 * {
+	 * 	// display the popup over the component which is the source of the event
+	 * 	menu.show(event.getSource());
+	 * 	// display the popup over the components, at specified coordinates relative to the component
+	 * 	//menu.show(event.getSource(), 10, 10);
+	 * 	// display the popup at specified coordinates relative to the main window
+	 * 	//menu.show(100, 100);
+	 * }
+	 * 
+	 * @param component
+	 */
 	public void js_show(IComponent component) throws PluginException
 	{
 		if (component != null)
@@ -55,11 +78,28 @@ public class Popup extends AbstractMenu
 		}
 	}
 
+	/**
+	 * Show the popup above the specified element, adding x an y values relative to the element.
+	 *
+	 * @sampleas js_show(IComponent)
+	 * 
+	 * @param component
+	 * @param x
+	 * @param y
+	 */
 	public void js_show(IComponent component, int x, int y) throws PluginException
 	{
 		getMenuHandler().showPopup(getMenu(), component, x, y);
 	}
 
+	/**
+	 * Show the popup at x an y coordinates.
+	 *
+	 * @sampleas js_show(IComponent)
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void js_show(int x, int y) throws PluginException
 	{
 		Point loc = new Point(x, y);
@@ -69,34 +109,5 @@ public class Popup extends AbstractMenu
 			loc = getMenuHandler().makeLocationWindowRelative(comp, loc);
 		}
 		getMenu().showPopup(comp, loc.x, loc.y);
-	}
-
-	@SuppressWarnings("nls")
-	@Override
-	public String[] getParameterNames(String methodName)
-	{
-		if ("show".equals(methodName))
-		{
-			return new String[] { "[element]", "[x]", "[y]" };
-		}
-
-		return super.getParameterNames(methodName);
-	}
-
-	@Override
-	public String getSample(String methodName)
-	{
-		return WindowProvider.getPopupMenuSample(new StringBuilder(), "plugins.window").toString(); //$NON-NLS-1$
-	}
-
-	@SuppressWarnings("nls")
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("show".equals(methodName))
-		{
-			return "Show the popup below the element or add x an y values relative to the element";
-		}
-		return super.getToolTip(methodName);
 	}
 }

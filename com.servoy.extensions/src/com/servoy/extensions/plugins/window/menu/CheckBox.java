@@ -39,9 +39,30 @@ public class CheckBox extends AbstractMenuItem
 		super(pluginAccess, menuHandler, menuItem);
 	}
 
-	public CheckBox js_setAlign(boolean a)
+	/**
+	 * Sets the alignment of the checkbox.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a checkbox
+	 * var entry = menu.addCheckBox("menu entry", feedback);
+	 * // alternatively add a radiobutton
+	 * //var entry = menu.addRadioButton("menu entry", feedback);
+	 * 
+	 * // enable alignment of the new entry
+	 * entry.setAlign(true);	
+	 * 
+	 * @param align
+	 */
+	public CheckBox js_setAlign(boolean align)
 	{
-		this.align = a;
+		this.align = align;
 		return this;
 	}
 
@@ -158,41 +179,4 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
-	@Override
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setAlign".equals(methodName))
-		{
-			return new String[] { "boolean" };
-		}
-		return super.getParameterNames(methodName);
-	}
-
-	@Override
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("setAlign".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var align = checkBox.setAlign(true);\n");
-			return retval.toString();
-		}
-		return super.getSample(methodName);
-	}
-
-	@Override
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("setAlign".equals(methodName))
-		{
-			return "Sets the alignment of the check box.";
-		}
-		return super.getToolTip(methodName);
-	}
 }

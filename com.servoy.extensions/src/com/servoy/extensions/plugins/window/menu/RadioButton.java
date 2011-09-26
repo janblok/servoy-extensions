@@ -102,9 +102,16 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
-	public void js_setAlign(boolean a)
+	/**
+	 * Sets the alignment of the radiobutton.
+	 * 
+	 * @sampleas com.servoy.extensions.plugins.window.menu.CheckBox.js_setAlign(boolean)
+	 * 
+	 * @param align
+	 */
+	public void js_setAlign(boolean align)
 	{
-		this.align = a;
+		this.align = align;
 	}
 
 	@Override
@@ -161,38 +168,4 @@ public class RadioButton extends AbstractMenuItem
 		return this;
 	}
 
-	@Override
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setAlign".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "boolean" }; //$NON-NLS-1$ 
-		}
-		return super.getParameterNames(methodName);
-	}
-
-	@Override
-	public String getSample(String methodName)
-	{
-		if ("setAlign".equals(methodName)) //$NON-NLS-1$ 
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$ 
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$ 
-			retval.append("var align = radioButton.setAlign(true);\n"); //$NON-NLS-1$ 
-			return retval.toString();
-		}
-		return super.getSample(methodName);
-	}
-
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("setAlign".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Sets the alignment of the radio button."; //$NON-NLS-1$ 
-		}
-		return super.getToolTip(methodName);
-	}
 }

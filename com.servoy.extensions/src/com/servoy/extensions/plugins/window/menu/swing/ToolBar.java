@@ -39,7 +39,8 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
 import com.servoy.j2db.util.toolbar.Toolbar;
 import com.servoy.j2db.util.toolbar.ToolbarButton;
@@ -49,7 +50,7 @@ import com.servoy.j2db.util.toolbar.ToolbarToggleButton;
  * @author marceltrapman
  */
 @SuppressWarnings("nls")
-public class ToolBar implements IToolBar, IScriptObject
+public class ToolBar implements IToolBar, IReturnedTypesProvider, IScriptable
 {
 	public static JToolBar addServoyToolBar(IClientPluginAccess app, JComponent pane, String name)
 	{
@@ -269,366 +270,108 @@ public class ToolBar implements IToolBar, IScriptObject
 		return null;
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		if ("addButton".equals(methodName))
-		{
-			return new String[] { "text", "method", "[arguments", "[icon", "[tooltip", "[enabled", "[visible]]]]]" };
-		}
-		else if ("addComboBox".equals(methodName))
-		{
-			return new String[] { "method", "index", "input", "[tooltip", "[enabled", "[visible]]]" };
-		}
-		else if ("addCheckBox".equals(methodName))
-		{
-			return new String[] { "text", "method", "[selected", "[tooltip", "[enabled", "[visible]]]]" };
-		}
-		else if ("addField".equals(methodName))
-		{
-			return new String[] { "method", "text", "[tooltip", "[enabled", "[visible]]]" };
-		}
-		else if ("addSeparator".equals(methodName))
-		{
-			return new String[] { };
-		}
-		else if ("removeItem".equals(methodName))
-		{
-			return new String[] { "index" };
-		}
-		else if ("selectCheckBox".equals(methodName))
-		{
-			return new String[] { "index", "boolean" };
-		}
-		else if ("selectComboBox".equals(methodName))
-		{
-			return new String[] { "index", "rowindex" };
-		}
-		else if ("setFieldText".equals(methodName))
-		{
-			return new String[] { "index", "text" };
-		}
-		else if ("removeAllItems".equals(methodName))
-		{
-			return new String[] { };
-		}
-		else if ("validate".equals(methodName))
-		{
-			return new String[] { };
-		}
-		else if ("getItemIndexByText".equals(methodName))
-		{
-			return new String[] { "name" };
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("addButton".equals(methodName) || "addSeparator".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_0\");\n");
-			sample.append("\n");
-			sample.append("// add a button with a text and a method\n");
-			sample.append("toolbar.addButton(\"button\", feedback_button);\n");
-			sample.append("\n");
-			sample.append("// add an input array to the button for feedback in the selected method\n");
-			sample.append("toolbar.addButton(\"button\", feedback_button, [1, \"2\", \"three\"]);\n");
-			sample.append("\n");
-			sample.append("// add an icon to the button\n");
-			sample.append("toolbar.addButton(\"button\", feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\");\n");
-			sample.append("\n");
-			sample.append("// add a tooltip to the button\n");
-			sample.append("toolbar.addButton(\"button\", feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\", \"tooltip.\");\n");
-			sample.append("\n");
-			sample.append("// show only an icon on the button and disable the button\n");
-			sample.append("toolbar.addButton(null, feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\", \"tooltip.\", false);\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// make the button non visible\n");
-			sample.append("toolbar.addButton(null, feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\", \"tooltip.\",true, false);\n");
-			sample.append("\n");
-			sample.append("// and validate the changes\n");
-			sample.append("// to make them know to the user interface)\n");
-			sample.append("toolbar.validate();\n");
-			return sample.toString();
-		}
-		else if ("addComboBox".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// add a toolbar with a name and internal name at the given row index\n");
-			sample.append("var toolbar = plugins.window.addToolBar(\"toolbar_2\", \"toolbar_2\", 3);\n");
-			sample.append("\n");
-			sample.append("// add a combobox with the attached method, selected index and input (list) array\n");
-			sample.append("toolbar.addComboBox(feedback_button, 0, [\"input\",\"array\",\"combobox\",1]);\n");
-			sample.append("\n");
-			sample.append("// add a tooltip to the combobox\n");
-			sample.append("toolbar.addComboBox(feedback_button, 1, [\"input\",\"array\",\"combobox\",2], \"tooltip\");\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// disable the combobox\n");
-			sample.append("toolbar.addComboBox(feedback_button, 2, [\"input\",\"array\",\"combobox\",3], \"tooltip\",false);\n");
-			sample.append("\n");
-			sample.append("// make the combobox non visible\n");
-			sample.append("toolbar.addComboBox(feedback_button, 3, [\"input\",\"array\",\"combobox\",4], \"tooltip\",false, false);\n");
-			sample.append("\n");
-			sample.append("// and validate the changes\n");
-			sample.append("// to make them know to the user interface)\n");
-			sample.append("toolbar.validate();\n");
-			return sample.toString();
-		}
-		else if ("addCheckBox".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// add a toolbar with a name and internal name\n");
-			sample.append("var toolbar = plugins.window.addToolBar(\"toolbar_1\", \"toolbar_1\");\n");
-			sample.append("\n");
-			sample.append("// add a checkbox with a text and a method\n");
-			sample.append("toolbar.addCheckBox(\"checkbox\", feedback_button);\n");
-			sample.append("\n");
-			sample.append("// add an checkbox and set it's state to selected (not selected by default)\n");
-			sample.append("toolbar.addCheckBox(\"checkbox\", feedback_button, true);\n");
-			sample.append("\n");
-			sample.append("// add a tooltip to the checkbox\n");
-			sample.append("toolbar.addCheckBox(\"checkbox\", feedback_button, false, \"tooltip\");\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// disable the checkbox and select it\n");
-			sample.append("toolbar.addCheckBox(\"checkbox\", feedback_button, true, \"tooltip\",false);\n");
-			sample.append("\n");
-			sample.append("// make the button non visible\n");
-			sample.append("toolbar.addCheckBox(\"checkbox\", feedback_button, false, \"tooltip\",false, false);\n");
-			sample.append("\n");
-			sample.append("// and validate the changes\n");
-			sample.append("// to make them know to the user interface)\n");
-			sample.append("toolbar.validate();\n");
-			return sample.toString();
-		}
-		else if ("addField".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// add a toolbar with a name and internal name at the given row index\n");
-			sample.append("var toolbar = plugins.window.addToolBar(\"toolbar_3\", \"toolbar_3\", 4);\n");
-			sample.append("\n");
-			sample.append("// add a field with the attached method and a default text\n");
-			sample.append("toolbar.addField(feedback_button, null);\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// set the length of the field. \n");
-			sample.append("// default length = 8 when length is not set or set to 0\n");
-			sample.append("toolbar.addField(feedback_button, \"field\", 0, \"tooltip\");\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// add a tooltip to the field\n");
-			sample.append("toolbar.addField(feedback_button, \"field\", 10, \"tooltip\");\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// disable the field\n");
-			sample.append("toolbar.addField(feedback_button, null, 5, \"tooltip\",false);\n");
-			sample.append("\n");
-			sample.append("// add a separator\n");
-			sample.append("toolbar.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// make the field non visible\n");
-			sample.append("toolbar.addField(feedback_button, \"field\", 0, \"tooltip\",false, false);\n");
-			sample.append("\n");
-			sample.append("// and validate the changes\n");
-			sample.append("// to make them know to the user interface)\n");
-			sample.append("toolbar.validate();\n");
-			return sample.toString();
-		}
-		else if ("removeItem".equals(methodName) || "validate".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_0\");\n");
-			sample.append("\n");
-			sample.append("// remove the button, checkbox, combobox, separator or field from the toolbar\n");
-			sample.append("// REMARK: the pitfall here is that the indexes start at position 1 here\n");
-			sample.append("// position 0 is reserved for the toolbar handle!\n");
-			sample.append("toolbar.removeItem(1);\n");
-			sample.append("\n");
-			sample.append("// and validate the changes\n");
-			sample.append("// to make them know to the user interface)\n");
-			sample.append("toolbar.validate();\n");
-			return sample.toString();
-		}
-		else if ("enableItem".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_1\");\n");
-			sample.append("\n");
-			sample.append("// enable/disable the selected item at the index\n");
-			sample.append("// REMARK: the pitfall here is that the indexes start at position 1 here\n");
-			sample.append("// position 0 is reserved for the toolbar handle!\n");
-			sample.append("toolbar.enableItem(1, false);\n");
-			return sample.toString();
-		}
-		else if ("visibleItem".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_2\");\n");
-			sample.append("\n");
-			sample.append("// make the selected item at the index visible/invisible\n");
-			sample.append("// REMARK: the pitfall here is that the indexes start at position 1 here\n");
-			sample.append("// position 0 is reserved for the toolbar handle!\n");
-			sample.append("toolbar.visibleItem(1, false);\n");
-			return sample.toString();
-		}
-		else if ("selectCheckBox".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_1\");\n");
-			sample.append("\n");
-			sample.append("// set the selection of the checkbox at the index\n");
-			sample.append("// REMARK: the pitfall here is that the indexes start at position 1 here\n");
-			sample.append("// position 0 is reserved for the toolbar handle!\n");
-			sample.append("toolbar.selectCheckBox(1, false);\n");
-			sample.append("toolbar.selectCheckBox(2, true);\n");
-			return sample.toString();
-		}
-		else if ("selectComboBox".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_2\");\n");
-			sample.append("\n");
-			sample.append("// set the selection of the combobox at the index\n");
-			sample.append("// REMARK: the pitfall here is that the indexes start at position 1 here\n");
-			sample.append("// position 0 is reserved for the toolbar handle!\n");
-			sample.append("toolbar.selectComboBox(1, 0);\n");
-			sample.append("toolbar.selectComboBox(2, 0);\n");
-			return sample.toString();
-		}
-		else if ("setFieldText".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_3\");\n");
-			sample.append("\n");
-			sample.append("// set the text of the field at the index\n");
-			sample.append("// REMARK: the pitfall here is that the indexes start at position 1 here\n");
-			sample.append("// position 0 is reserved for the toolbar handle!\n");
-			sample.append("toolbar.setFieldText(1, \"new text 1\");\n");
-			sample.append("toolbar.setFieldText(2, \"new text 2\");\n");
-			return sample.toString();
-		}
-		else if ("removeAllItems".equals(methodName))
-		{
-			StringBuilder sample = new StringBuilder();
-			sample.append("// get the toolbar at the panel by name\n");
-			sample.append("var toolbar = plugins.window.getToolBar(\"toolbar_0\");\n");
-			sample.append("\n");
-			sample.append("// remove all buttons from the toolbar\n");
-			sample.append("toolbar.removeAllItems();\n");
-			return sample.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("addButton".equals(methodName))
-		{
-			return "Add a Button to the toolbar.";
-		}
-		if ("addComboBox".equals(methodName))
-		{
-			return "Add a ComboBox to the toolbar.";
-		}
-		if ("addField".equals(methodName))
-		{
-			return "Add a Field to the toolbar.";
-		}
-		if ("addCheckBox".equals(methodName))
-		{
-			return "Add a CheckBox to the toolbar.";
-		}
-		if ("addSeparator".equals(methodName))
-		{
-			return "Add a Separator to the toolbar.";
-		}
-		if ("removeItem".equals(methodName))
-		{
-			return "Remove a Button, CheckBox, ComboBox from the toolbar.";
-		}
-		if ("selectCheckBox".equals(methodName))
-		{
-			return "Set the CheckBox selection.";
-		}
-		if ("selectComboBox".equals(methodName))
-		{
-			return "Select a row of the ComboBox via the index.";
-		}
-		if ("setFieldText".equals(methodName))
-		{
-			return "Set a (default) text of the field at the given index.";
-		}
-		if ("removeAllItems".equals(methodName))
-		{
-			return "Remove all Buttons, Checkboxes etc. from the toolbar.";
-		}
-		if ("validate".equals(methodName))
-		{
-			return "You need to call this method after adding or removing items to/from the toolbar.";
-		}
-		if ("getItemIndexByText".equals(methodName))
-		{
-			return "Retrieve the index of the item by text.";
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		if ("validate".equals(methodName))
-		{
-			return true;
-		}
-		return false;
-	}
-
+	/**
+	 * Add a Button to the toolbar.
+	 *
+	 * @sample
+	 * // create a new toolbar
+	 * var toolbar = plugins.window.addToolBar('toolbar_0');
+	 * // add a button with a text and a method
+	 * toolbar.addButton("button", feedback_button);
+	 * // add an input array to the button for feedback in the selected method
+	 * toolbar.addButton("button", feedback_button, [1, "2", "three"]);
+	 * // add an icon to the button
+	 * toolbar.addButton("button", feedback_button, [1, "2", "three"], "media:///yourimage.gif");
+	 * // add a tooltip to the button
+	 * toolbar.addButton("button", feedback_button, [1, "2", "three"], "media:///yourimage.gif", "tooltip");
+	 * // show only an icon on the button and disable the button
+	 * toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.gif", "tooltip", false);
+	 * // make the button non visible
+	 * toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.gif", "tooltip", true, false);
+	 * 
+	 * @param text
+	 * @param method
+	 */
 	public void js_addButton(String text, Function method) throws PluginException
 	{
 		js_addButton(text, method, null, null, null, true, true);
 	}
 
+	/**
+	 * Add a Button to the toolbar.
+	 *
+	 * @sampleas js_addButton(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param arguments
+	 */
 	public void js_addButton(String text, Function method, Object[] arguments) throws PluginException
 	{
 		js_addButton(text, method, arguments, null, null, true, true);
 	}
 
+	/**
+	 * Add a Button to the toolbar.
+	 *
+	 * @sampleas js_addButton(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param arguments
+	 * @param icon
+	 */
 	public void js_addButton(String text, Function method, Object[] arguments, Object icon) throws PluginException
 	{
 		js_addButton(text, method, arguments, icon, null, true, true);
 	}
 
+	/**
+	 * Add a Button to the toolbar.
+	 *
+	 * @sampleas js_addButton(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param arguments
+	 * @param icon
+	 * @param tooltip
+	 */
 	public void js_addButton(String text, Function method, Object[] arguments, Object icon, String tooltip) throws PluginException
 	{
 		js_addButton(text, method, arguments, icon, tooltip, true, true);
 	}
 
+	/**
+	 * Add a Button to the toolbar.
+	 *
+	 * @sampleas js_addButton(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param arguments
+	 * @param icon
+	 * @param tooltip
+	 * @param enabled
+	 */
 	public void js_addButton(String text, Function method, Object[] arguments, Object icon, String tooltip, boolean enabled) throws PluginException
 	{
 		js_addButton(text, method, arguments, icon, tooltip, enabled, true);
 	}
 
+	/**
+	 * Add a Button to the toolbar.
+	 *
+	 * @sampleas js_addButton(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param arguments
+	 * @param icon
+	 * @param tooltip
+	 * @param enabled
+	 * @param visible
+	 */
 	public void js_addButton(String text, Function method, Object[] arguments, Object icon, String tooltip, boolean enabled, boolean visible)
 		throws PluginException
 	{
@@ -644,26 +387,88 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Add a CheckBox to the toolbar.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a checkbox with a text and a method
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox);
+	 * // add an checkbox and set it's state to selected (not selected by default)
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox, true);
+	 * // add a tooltip to the checkbox
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip");
+	 * // disable the checkbox and select it
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox, true, "tooltip", false);
+	 * // make the checkbox non visible
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip", false, false);
+	 * 
+	 * @param text
+	 * @param method
+	 */
 	public void js_addCheckBox(String text, Function method) throws PluginException
 	{
 		js_addCheckBox(text, method, false, null, true, true);
 	}
 
+	/**
+	 * Add a CheckBox to the toolbar.
+	 *
+	 * @sampleas js_addCheckBox(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param selected
+	 */
 	public void js_addCheckBox(String text, Function method, boolean selected) throws PluginException
 	{
 		js_addCheckBox(text, method, selected, null, true, true);
 	}
 
+	/**
+	 * Add a CheckBox to the toolbar.
+	 *
+	 * @sampleas js_addCheckBox(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param selected
+	 * @param tooltip
+	 */
 	public void js_addCheckBox(String text, Function method, boolean selected, String tooltip) throws PluginException
 	{
 		js_addCheckBox(text, method, selected, tooltip, true, true);
 	}
 
+	/**
+	 * Add a CheckBox to the toolbar.
+	 *
+	 * @sampleas js_addCheckBox(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param selected
+	 * @param tooltip
+	 * @param enabled
+	 */
 	public void js_addCheckBox(String text, Function method, boolean selected, String tooltip, boolean enabled) throws PluginException
 	{
 		js_addCheckBox(text, method, selected, tooltip, enabled, true);
 	}
 
+	/**
+	 * Add a CheckBox to the toolbar.
+	 *
+	 * @sampleas js_addCheckBox(String, Function)
+	 * 
+	 * @param text
+	 * @param method
+	 * @param selected
+	 * @param tooltip
+	 * @param enabled
+	 * @param visible
+	 */
 	public void js_addCheckBox(String text, Function method, boolean selected, String tooltip, boolean enabled, boolean visible) throws PluginException
 	{
 		if (_toolBar != null)
@@ -678,55 +483,170 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
-	public void js_addComboBox(Function method, int index, String[] arguments) throws PluginException
+	/**
+	 * Add a ComboBox to the toolbar.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_2");
+	 * // add a combobox with the attached method, selected index and input (list) array
+	 * toolbar.addComboBox(feedback_combobox, 0, ["input","array","combobox",1]);
+	 * // add a tooltip to the combobox
+	 * toolbar.addComboBox(feedback_combobox, 1, ["input","array","combobox",2], "tooltip");
+	 * // disable the combobox
+	 * toolbar.addComboBox(feedback_combobox, 2, ["input","array","combobox",3], "tooltip", false);
+	 * // make the combobox non visible
+	 * toolbar.addComboBox(feedback_combobox, 3, ["input","array","combobox",4], "tooltip", false, false);
+	 * 
+	 * @param method
+	 * @param index
+	 * @param values
+	 */
+	public void js_addComboBox(Function method, int index, String[] values) throws PluginException
 	{
-		js_addComboBox(method, index, arguments, null, true, true);
+		js_addComboBox(method, index, values, null, true, true);
 	}
 
-	public void js_addComboBox(Function method, int index, String[] arguments, String tooltip) throws PluginException
+	/**
+	 * Add a ComboBox to the toolbar.
+	 *
+	 * @sampleas js_addComboBox(Function, int, String[])
+	 * 
+	 * @param method
+	 * @param index
+	 * @param values
+	 * @param tooltip
+	 */
+	public void js_addComboBox(Function method, int index, String[] values, String tooltip) throws PluginException
 	{
-		js_addComboBox(method, index, arguments, tooltip, true, true);
+		js_addComboBox(method, index, values, tooltip, true, true);
 	}
 
-	public void js_addComboBox(Function method, int index, String[] arguments, String tooltip, boolean enabled) throws PluginException
+	/**
+	 * Add a ComboBox to the toolbar.
+	 *
+	 * @sampleas js_addComboBox(Function, int, String[])
+	 * 
+	 * @param method
+	 * @param index
+	 * @param values
+	 * @param tooltip
+	 * @param enabled
+	 */
+	public void js_addComboBox(Function method, int index, String[] values, String tooltip, boolean enabled) throws PluginException
 	{
-		js_addComboBox(method, index, arguments, tooltip, enabled, true);
+		js_addComboBox(method, index, values, tooltip, enabled, true);
 	}
 
-	public void js_addComboBox(Function method, int index, String[] arguments, String tooltip, boolean enabled, boolean visible) throws PluginException
+	/**
+	 * Add a ComboBox to the toolbar.
+	 *
+	 * @sampleas js_addComboBox(Function, int, String[])
+	 * 
+	 * @param method
+	 * @param index
+	 * @param values
+	 * @param tooltip
+	 * @param enabled
+	 * @param visible
+	 */
+	public void js_addComboBox(Function method, int index, String[] values, String tooltip, boolean enabled, boolean visible) throws PluginException
 	{
 		if (_toolBar != null)
 		{
-			_toolBar.add(ToolBarButton.addComboBox(method, index, arguments, tooltip, enabled, visible, _application));
+			_toolBar.add(ToolBarButton.addComboBox(method, index, values, tooltip, enabled, visible, _application));
 			validate();
 		}
 		else if (_jToolBar != null)
 		{
-			_jToolBar.add(ToolBarButton.addComboBox(method, index, arguments, tooltip, enabled, visible, _application));
+			_jToolBar.add(ToolBarButton.addComboBox(method, index, values, tooltip, enabled, visible, _application));
 			_jToolBar.validate();
 		}
 	}
 
+	/**
+	 * Add a Field to the toolbar.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_3");
+	 * // add a field with the attached method and a default text
+	 * toolbar.addField(feedback_field, null);
+	 * // set the length of the field. 
+	 * // default length = 8 when length is not set or set to 0
+	 * toolbar.addField(feedback_field, "field", 0, "tooltip");
+	 * // add a tooltip to the field
+	 * toolbar.addField(feedback_field, null, 10, "tooltip");
+	 * // disable the field
+	 * toolbar.addField(feedback_field, "field", 5, "tooltip", false);
+	 * // make the field non visible
+	 * toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);
+	 * 
+	 * @param method
+	 * @param text
+	 */
 	public void js_addField(Function method, String text) throws PluginException
 	{
 		js_addField(method, text, 8, null, true, true);
 	}
 
+	/**
+	 * Add a Field to the toolbar.
+	 *
+	 * @sampleas js_addField(Function, String)
+	 * 
+	 * @param method
+	 * @param text
+	 * @param length
+	 */
 	public void js_addField(Function method, String text, int length) throws PluginException
 	{
 		js_addField(method, text, 8, null, true, true);
 	}
 
+	/**
+	 * Add a Field to the toolbar.
+	 *
+	 * @sampleas js_addField(Function, String)
+	 * 
+	 * @param method
+	 * @param text
+	 * @param length
+	 * @param tooltip
+	 */
 	public void js_addField(Function method, String text, int length, String tooltip) throws PluginException
 	{
 		js_addField(method, text, length, tooltip, true, true);
 	}
 
+	/**
+	 * Add a Field to the toolbar.
+	 *
+	 * @sampleas js_addField(Function, String)
+	 * 
+	 * @param method
+	 * @param text
+	 * @param length
+	 * @param tooltip
+	 * @param enabled
+	 */
 	public void js_addField(Function method, String text, int length, String tooltip, boolean enabled) throws PluginException
 	{
 		js_addField(method, text, length, tooltip, enabled, true);
 	}
 
+	/**
+	 * Add a Field to the toolbar.
+	 *
+	 * @sampleas js_addField(Function, String)
+	 * 
+	 * @param method
+	 * @param text
+	 * @param length
+	 * @param tooltip
+	 * @param enabled
+	 * @param visible
+	 */
 	public void js_addField(Function method, String text, int length, String tooltip, boolean enabled, boolean visible) throws PluginException
 	{
 		if (_toolBar != null)
@@ -741,6 +661,19 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Add a Separator to the toolbar.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_0");
+	 * // add a button 
+	 * toolbar.addButton("button", feedback_button);
+	 * // add a separator
+	 * toolbar.addSeparator();
+	 * // add a checkbox
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox);
+	 */
 	public void js_addSeparator()
 	{
 		if (_toolBar != null)
@@ -755,6 +688,22 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Enable/disable the item at the specified index.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a checkbox
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox);
+	 * // disable the button
+	 * // REMARK: the pitfall here is that the indexes start at position 1 here
+	 * // position 0 is reserved for the toolbar handle!
+	 * toolbar.enableItem(1, false);
+	 * 
+	 * @param index
+	 * @param enabled
+	 */
 	public void js_enableItem(int index, boolean enabled) throws PluginException
 	{
 		if (index < 1)
@@ -778,6 +727,19 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Remove all Buttons, Checkboxes etc. from the toolbar.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a button
+	 * toolbar.addButton("button", feedback_button);
+	 * // add a checkbox
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox);
+	 * // remove all items from the toolbar
+	 * toolbar.removeAllItems();
+	 */
 	public void js_removeAllItems()
 	{
 		if (_toolBar != null)
@@ -797,6 +759,23 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Remove a Button, CheckBox, ComboBox from the toolbar.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a button
+	 * toolbar.addButton("button", feedback_button);
+	 * // add a checkbox
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox);
+	 * // remove the first item (the button in this case) from the toolbar
+	 * // REMARK: the pitfall here is that the indexes start at position 1 here
+	 * // position 0 is reserved for the toolbar handle!
+	 * toolbar.removeItem(1);
+	 * 
+	 * @param index
+	 */
 	public void js_removeItem(int index) throws PluginException
 	{
 		if (index < 1)
@@ -820,6 +799,25 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Set the CheckBox selection.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a checkbox
+	 * toolbar.addCheckBox("checkbox 1", feedback_checkbox);
+	 * // add another checkbox
+	 * toolbar.addCheckBox("checkbox 2", feedback_checkbox);
+	 * // set the selection of the checkboxes
+	 * // REMARK: the pitfall here is that the indexes start at position 1 here
+	 * // position 0 is reserved for the toolbar handle!
+	 * toolbar.selectCheckBox(1, false);
+	 * toolbar.selectCheckBox(2, true);
+	 * 
+	 * @param index
+	 * @param selected
+	 */
 	public void js_selectCheckBox(int index, boolean selected) throws PluginException
 	{
 		if (index < 1)
@@ -854,6 +852,25 @@ public class ToolBar implements IToolBar, IScriptObject
 		else if (_jToolBar != null) _jToolBar.validate();
 	}
 
+	/**
+	 * Select a row of the ComboBox via the index.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a combobox
+	 * toolbar.addComboBox(feedback_combobox, 1, ["one", "two", "three"]);
+	 * // add another combobox
+	 * toolbar.addComboBox(feedback_combobox, 2, [1, 2, 3, 4, 5]);
+	 * // set the selection of the comboboxes
+	 * // REMARK: the pitfall here is that the indexes start at position 1 here
+	 * // position 0 is reserved for the toolbar handle!
+	 * toolbar.selectComboBox(1, 0); // entry "one" will be selected in the first combobox
+	 * toolbar.selectComboBox(2, 3); // entry 4 will be selected in the second combobox
+	 * 
+	 * @param index
+	 * @param selection
+	 */
 	public void js_selectComboBox(int index, int selection) throws PluginException
 	{
 		if (index < 1)
@@ -888,6 +905,25 @@ public class ToolBar implements IToolBar, IScriptObject
 		else if (_jToolBar != null) _jToolBar.validate();
 	}
 
+	/**
+	 * Set a (default) text of the field at the given index.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a field
+	 * toolbar.addField(feedback_field, "field one");
+	 * // add another field
+	 * toolbar.addField(feedback_field , "field_two");
+	 * // set the text of the fields
+	 * // REMARK: the pitfall here is that the indexes start at position 1 here
+	 * // position 0 is reserved for the toolbar handle!
+	 * toolbar.setFieldText(1, "new text 1");
+	 * toolbar.setFieldText(2, "new text 2");
+	 * 
+	 * @param index
+	 * @param text
+	 */
 	public void js_setFieldText(int index, String text) throws PluginException
 	{
 		if (index < 1)
@@ -922,6 +958,11 @@ public class ToolBar implements IToolBar, IScriptObject
 		else if (_jToolBar != null) _jToolBar.validate();
 	}
 
+	/**
+	 * You need to call this method after adding or removing items to/from the toolbar.
+	 *
+	 * @sampleas js_removeItem(int)
+	 */
 	@Deprecated
 	public void js_validate()
 	{
@@ -945,6 +986,24 @@ public class ToolBar implements IToolBar, IScriptObject
 		}
 	}
 
+	/**
+	 * Make the item at the specified index visible/invisible.
+	 *
+	 * @sample
+	 * // add a toolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_1");
+	 * // add a button
+	 * toolbar.addButton("button", feedback_button);
+	 * // add a checkbox
+	 * toolbar.addCheckBox("checkbox", feedback_checkbox);
+	 * // make the first item (the button) invisible
+	 * // REMARK: the pitfall here is that the indexes start at position 1 here
+	 * // position 0 is reserved for the toolbar handle!
+	 * toolbar.visibleItem(1, false);
+	 * 
+	 * @param index
+	 * @param visible
+	 */
 	public void js_visibleItem(int index, boolean visible) throws PluginException
 	{
 		if (index < 1)

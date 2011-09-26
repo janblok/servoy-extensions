@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.window.menu;
 
 import org.mozilla.javascript.Function;
@@ -26,16 +26,6 @@ import com.servoy.j2db.plugins.PluginException;
  */
 public interface IToolBar
 {
-	public String getSample(String methodName);
-
-	public String getToolTip(String methodName);
-
-	public String[] getParameterNames(String methodName);
-
-	public boolean isDeprecated(String methodName);
-
-	public Class< ? >[] getAllReturnedTypes();
-
 	public void js_addButton(String text, Function method) throws PluginException;
 
 	public void js_addButton(String text, Function method, Object[] arguments) throws PluginException;

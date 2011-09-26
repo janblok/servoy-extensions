@@ -62,7 +62,8 @@ import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
@@ -78,7 +79,7 @@ import com.servoy.j2db.util.toolbar.IToolbarPanel;
  * @author rgansevles
  */
 @SuppressWarnings("nls")
-public class WindowProvider implements IScriptObject
+public class WindowProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final WindowPlugin plugin;
 
@@ -229,6 +230,42 @@ public class WindowProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * Create a shortcut.
+	 *
+	 * @sample
+	 * // this plugin uses the java keystroke parser
+	 * // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
+	 * // global shortcut (on all forms) - 'apple 1' on a mac client and 'control 1' on other client platforms
+	 * plugins.window.createShortcut('menu 1', 'globals.handleShortcut');
+	 * // global handler, only triggered when on form frm_orders
+	 * plugins.window.createShortcut('control shift I', globals.handleOrdersShortcut, 'frm_orders');
+	 * // form method called when shortcut is used
+	 * plugins.window.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');
+	 * // same, but use method in stead of string
+	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');
+	 * // remove global shortcut and form-level shortcut
+	 * plugins.window.removeShortcut('menu 1');
+	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+	 * // shortcut handlers are called with an JSEvent argument
+	 * ///* 
+	 * // * Handle keyboard shortcut.
+	 * // * 
+	 * // * @param {JSEvent} event the event that triggered the action
+	 * // *&#47;
+	 * //function handleShortcut(event)
+	 * //{
+	 * //  application.output(event.getType()) // returns 'menu 1'
+	 * //  application.output(event.getFormName()) // returns 'frm_contacts'
+	 * //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
+	 * //}
+	 * // NOTE: shortcuts will not override existing operating system or browser shortcuts,
+	 * // choose your shortcuts careful to make sure they work in all clients.
+	 *
+	 * @param shortcut 
+	 * @param method 
+	 * @param form_name optional 
+	 */
 	public boolean js_createShortcut(Object[] vargs)
 	{
 		if (vargs == null || vargs.length < 2)
@@ -308,6 +345,14 @@ public class WindowProvider implements IScriptObject
 		return true;
 	}
 
+	/**
+	 * Remove a shortcut.
+	 *
+	 * @sampleas js_createShortcut(Object[])
+	 *
+	 * @param shortcut 
+	 * @param form_name optional 
+	 */
 	public boolean js_removeShortcut(Object[] vargs)
 	{
 		if (vargs == null || vargs.length == 0)
@@ -362,6 +407,15 @@ public class WindowProvider implements IScriptObject
 		return graphicsDevice;
 	}
 
+	/**
+	 * Bring the window into/out of fullsceen mode.
+	 * 
+	 * @sample
+	 * // active fullscreen mode 
+	 * plugins.window.setFullScreen(true);
+	 * 
+	 * @param full
+	 */
 	public void js_setFullScreen(boolean full)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
@@ -414,7 +468,16 @@ public class WindowProvider implements IScriptObject
 		js_setToolBarAreaVisible(v);
 	}
 
-	public void js_setToolBarAreaVisible(boolean v)
+	/**
+	 * Show or hide the toolbar area.
+	 * 
+	 * @sample
+	 * // hide the toolbar area
+	 * plugins.window.setToolBarAreaVisible(false);
+	 * 
+	 * @param visible
+	 */
+	public void js_setToolBarAreaVisible(boolean visible)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 		{
@@ -425,12 +488,21 @@ public class WindowProvider implements IScriptObject
 			IToolbarPanel panel = app.getToolbarPanel();
 			if (panel != null)
 			{
-				((JPanel)panel).setVisible(v);
+				((JPanel)panel).setVisible(visible);
 			}
 		}
 	}
 
-	public void js_setStatusBarVisible(boolean v)
+	/**
+	 * Show or hide the statusbar.
+	 * 
+	 * @sample
+	 * // hide the statusbar
+	 * plugins.window.setStatusBarVisible(false);
+	 * 
+	 * @param visible
+	 */
+	public void js_setStatusBarVisible(boolean visible)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 		{
@@ -447,7 +519,7 @@ public class WindowProvider implements IScriptObject
 				{
 					if (element instanceof JComponent && "statusbar".equals(((JComponent)element).getName()))
 					{
-						((JComponent)element).setVisible(v);
+						((JComponent)element).setVisible(visible);
 						return;
 					}
 				}
@@ -509,31 +581,117 @@ public class WindowProvider implements IScriptObject
 		ToolBar.removeServoyToolBar(pane, name);
 	}
 
+	/**
+	 * Add a toolbar.
+	 *
+	 * @sample
+	 * // Note: method addToolBar only works in the smart client.
+	 * 
+	 * // add a toolbar with only a name
+	 * var toolbar0 = plugins.window.addToolBar("toolbar_0");
+	 * toolbar0.addButton("click me 0", feedback_button);
+	 * 
+	 * // add a toolbar with a name and the row you want it to show at
+	 * // row number starts at 0
+	 * var toolbar1 = plugins.window.addToolBar("toolbar_1", 2);
+	 * toolbar1.addButton("click me 1", feedback_button);
+	 * 
+	 * // add a toolbar with a name and display name
+	 * var toolbar2 = plugins.window.addToolBar("toolbar_2", "toolbar_2_internal_name");
+	 * toolbar2.addButton("click me 2", feedback_button);
+	 * 
+	 * // add a toolbar with a name, display name and the row you want the
+	 * // toolbar to show at. row number starts at 0 
+	 * var toolbar3 = plugins.window.addToolBar("toolbar_3", "toolbar_3_internal_name", 3);
+	 * toolbar3.addButton("click me 3", feedback_button);
+	 * 
+	 * @param name
+	 */
 	public ToolBar js_addToolBar(String name) throws Exception
 	{
 		return js_addToolBar(name, name);
 	}
 
+	/**
+	 * Add a toolbar.
+	 * 
+	 * @sampleas js_addToolBar(String)
+	 * 
+	 * @param name
+	 * @param row
+	 */
 	public ToolBar js_addToolBar(String name, int row) throws Exception
 	{
 		return js_addToolBar(name, name, row);
 	}
 
+	/**
+	 * Add a toolbar.
+	 * 
+	 * @sampleas js_addToolBar(String)
+	 * 
+	 * @param name
+	 * @param displayname
+	 */
 	public ToolBar js_addToolBar(String name, String displayname) throws Exception
 	{
 		return js_addToolBar(name, displayname, -1);
 	}
 
+	/**
+	 * Add a toolbar.
+	 * 
+	 * @sampleas js_addToolBar(String)
+	 * 
+	 * @param name
+	 * @param displayname
+	 * @param row
+	 */
 	public ToolBar js_addToolBar(String name, String displayname, int row) throws Exception
 	{
 		return new ToolBar(plugin.getClientPluginAccess(), name, displayname, row, true, false);
 	}
 
+	/**
+	 * Get the toolbar from the toolbar panel by name.
+	 *
+	 * @sample
+	 * // Note: method getToolBar only works in the smart client.
+	 * 
+	 * // the toolbar must first be create with a call to addToolbar
+	 * plugins.window.addToolBar("toolbar_0");
+	 * 
+	 * // get the toolbar at the panel by name
+	 * var toolbar = plugins.window.getToolBar("toolbar_0");
+	 * // add a button to the toolbar
+	 * toolbar.addButton("button", feedback_button);
+	 * 
+	 * @param name
+	 */
 	public ToolBar js_getToolBar(String name) throws Exception
 	{
 		return new ToolBar(plugin.getClientPluginAccess(), name, null, -1, false, false);
 	}
 
+	/**
+	 * Remove the toolbar from the toolbar panel.
+	 *
+	 * @sample
+	 * // Note: method removeToolBar only works in the smart client.
+	 * 
+	 * // the toolbar must first be create with a call to addToolbar
+	 * var toolbar = plugins.window.addToolBar("toolbar_0");
+	 * 
+	 * // add a button to the toolbar
+	 * toolbar.addButton("button", feedback_button);
+	 * 
+	 * // removing a toolbar from the toolbar panel is done by name
+	 * // the plugin checks the existence of the toolbar
+	 * // when the toolbar does not exist it will not throw an error though.
+	 * plugins.window.removeToolBar("toolbar_0");
+	 * 
+	 * @param name
+	 */
 	public void js_removeToolBar(String name) throws Exception
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
@@ -553,16 +711,63 @@ public class WindowProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * Get all toolbar names from the toolbar panel.
+	 *
+	 * @sample
+	 * // Note: method getToolbarNames only works in the smart client.
+	 * 
+	 * // create an array of toolbar names
+	 * var names = %%elementName%%.getToolbarNames();
+	 * 
+	 * // create an empty message variable
+	 * var message = "";
+	 * 
+	 * // loop through the array
+	 * for (var i = 0 ; i < names.length ; i++) {
+	 * 	//add the name(s) to the message
+	 * 	message += names[i] + "\n";
+	 * }
+	 * 
+	 * // show the message
+	 * plugins.dialogs.showInfoDialog("toolbar names", message);
+	 */
 	public String[] js_getToolbarNames()
 	{
 		return plugin.getClientPluginAccess().getToolbarPanel().getToolBarNames();
 	}
 
+	/**
+	 * Get the menubar of the main window, or of a named window.
+	 *
+	 * @sample
+	 * // create a new window
+	 * var win = application.createWindow("windowName", JSWindow.WINDOW);
+	 * // show a form in the new window
+	 * forms.my_form.controller.show(win);
+	 * // retrieve the menubar of the new window
+	 * var menubar = plugins.window.getMenuBar("windowName");
+	 * // add a new menu to the menubar, with an item in it
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * menu.addMenuItem("an entry", feedback);
+	 * // retrieve the menubar of the main window
+	 * var mainMenubar = plugins.window.getMenuBar();
+	 * // add a new menu to the menubar of the main window
+	 * var menuMain = mainMenubar.addMenu();
+	 * menuMain.text = "New Menu in Main Menubar";
+	 * menuMain.addMenuItem("another entry", feedback);
+	 */
 	public MenuBar js_getMenuBar()
 	{
 		return getMenubar(null);
 	}
 
+	/**
+	 * @sameas js_getMenuBar()
+	 * 
+	 * @param windowName.
+	 */
 	public MenuBar js_getMenuBar(String windowName)
 	{
 		return getMenubar(windowName);
@@ -653,6 +858,24 @@ public class WindowProvider implements IScriptObject
 		return (CheckBox)createMenuItem(null, vargs, IMenuItem.MENU_ITEM_CHECK);
 	}
 
+	/**
+	 * Creates a new popup menu that can be populated with items and displayed.
+	 * 
+	 * @sample
+	 * // create a popup menu
+	 * var menu = plugins.window.createPopupMenu();
+	 * // add a menu item
+	 * menu.addMenuItem("an entry", feedback);
+	 * 
+	 * if (event.getSource()) {
+	 * 	// display the popup over the component which is the source of the event
+	 * 	menu.show(event.getSource());
+	 * 	// display the popup over the components, at specified coordinates relative to the component
+	 * 	//menu.show(event.getSource(), 10, 10);
+	 * 	// display the popup at specified coordinates relative to the main window
+	 * 	//menu.show(100, 100);
+	 * }
+	 */
 	public Popup js_createPopupMenu() throws PluginException
 	{
 		return new Popup(getClientPluginAccess(), getMenuHandler(), getMenuHandler().createPopupMenu());
@@ -836,354 +1059,6 @@ public class WindowProvider implements IScriptObject
 		}
 	}
 
-	/* IScriptObject methods */
-
-	public String[] getParameterNames(String methodName)
-	{
-		// kioskmode methods
-
-		// shortcut methods
-
-		if ("createShortcut".equals(methodName))
-		{
-			return new String[] { "shortcut", "method", "[form_name]" };
-		}
-		if ("removeShortcut".equals(methodName))
-		{
-			return new String[] { "shortcut", "[form_name]" };
-		}
-
-
-		// menu methods
-
-		if ("addToolBar".equals(methodName))
-		{
-			return new String[] { "name", "[displayname]", "[row]" };
-		}
-		if ("getToolBar".equals(methodName))
-		{
-			return new String[] { "name" };
-		}
-		if ("removeToolBar".equals(methodName))
-		{
-			return new String[] { "name" };
-		}
-		if ("getMenuBar".equals(methodName))
-		{
-			return new String[] { "[windowName]" };
-		}
-		if ("maximize".equals(methodName))
-		{
-			return new String[] { "[windowName]" };
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		// kioskmode methods
-
-		// shortcut methods
-
-		// menu methods
-		if ("register".equals(methodName))
-		{
-			return true;
-		}
-
-		if ("addServoyToolBar".equals(methodName) || //
-			"createCheckboxMenuItem".equals(methodName) //
-			|| "createMenuItem".equals(methodName) //
-			|| "createRadioButtonMenuItem".equals(methodName) //
-			|| "removeServoyToolBar".equals(methodName) //
-			|| "setMouseOverPopup".equals(methodName) //
-			|| "setPopup".equals(methodName) //
-			|| "showPopupMenu".equals(methodName)//
-			|| "setToolBarVisible".equals(methodName))
-		{
-			return true;
-		}
-
-		// menubar methods moved to menubar object
-		if ("getMenuCount".equals(methodName) || //
-			"getMenuIndexByText".equals(methodName) //
-			|| "removeAllMenus".equals(methodName) //
-			|| "removeMenu".equals(methodName) //
-			|| "resetMenuBar".equals(methodName) //
-			|| "validateMenuBar".equals(methodName) //
-			|| "addMenu".equals(methodName) //
-			|| "getMenu".equals(methodName) //
-			|| "setMenuVisible".equals(methodName))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	private boolean isSmartClientOnly(String methodName)
-	{
-		// kioskmode methods
-
-		// shortcut methods
-
-		// menu methods
-		if ("addToolBar".equals(methodName) || "getToolBar".equals(methodName) || "removeToolBar".equals(methodName) || "getToolbarNames".equals(methodName))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	public String getSample(String methodName)
-	{
-		StringBuilder sb = new StringBuilder();
-
-		if (isSmartClientOnly(methodName))
-		{
-			sb.append("// Note: method ").append(methodName).append(" only works in the smart client.\n\n");
-		}
-
-		String toolTip = getToolTip(methodName);
-		if (toolTip != null)
-		{
-			sb.append("// ").append(toolTip).append('\n');
-		}
-
-		// kioskmode methods
-
-		if ("setToolBarAreaVisible".equals(methodName))
-		{
-			sb.append("%%elementName%%.setToolBarAreaVisible(false)");
-		}
-		else if ("setFullScreen".equals(methodName))
-		{
-			sb.append("%%elementName%%.setFullScreen(true)");
-		}
-
-
-		// shortcut methods
-
-		else if (methodName.endsWith("Shortcut"))
-		{
-			sb.append("// this plugin uses the java keystroke parser\n");
-			sb.append("// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)\n");
-			sb.append("\n// global shortcut (on all forms) on  'apple 1' on a mac client and 'control 1' on other client platforms\n");
-			sb.append("%%elementName%%.createShortcut('menu 1', 'globals.handleShortcut');\n");
-			sb.append("// global handler, only triggered when on form frm_orders\n");
-			sb.append("%%elementName%%.createShortcut('control shift I', globals.handleOrdersShortcut, 'frm_orders');\n");
-			sb.append("// form method called when shortcut is used\n");
-			sb.append("%%elementName%%.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');\n");
-			sb.append("// same, but use method in stead of string\n");
-			sb.append("%%elementName%%.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');\n");
-			sb.append("\n// remove global shortcut and form-level shortcut\n");
-			sb.append("%%elementName%%.createShortcut('menu 1');\n");
-			sb.append("%%elementName%%.removeShortcut('control RIGHT', 'frm_contacts');\n");
-			sb.append("\n// shortcut handlers are called with an jsevent argument\n");
-			sb.append("///**\n");
-			sb.append("//* Handle keyboard shortcut.\n");
-			sb.append("//*\n");
-			sb.append("//* @param {JSEvent} event the event that triggered the action\n");
-			sb.append("//*/\n");
-			sb.append("//function handleShortcut(event)\n");
-			sb.append("//{\n");
-			sb.append("//  application.output(event.getType()) // returns 'menu 1'\n");
-			sb.append("//  application.output(event.getFormName()) // returns 'frm_contacts'\n");
-			sb.append("//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected\n");
-			sb.append("//}\n");
-			sb.append("\n// NOTE: shortcuts will not override existing operating system or browser shortcuts,\n");
-			sb.append("// choose your shortcuts careful to make sure they work in all clients.");
-		}
-
-
-		// menu methods
-
-		else if ("addToolBar".equals(methodName))
-		{
-			sb.append("// add a toolbar with only a name\n");
-			sb.append("var toolbar = %%elementName%%.addToolBar(\"toolbar_0\");\n");
-			sb.append("\n");
-			sb.append("// add a toolbar with a name and internal name\n");
-			sb.append("// var toolbar = %%elementName%%.addToolBar(\"toolbar_1\", \"toolbar_1\");\n");
-			sb.append("\n");
-			sb.append("// add a toolbar with a name, internal name and the row you want the\n");
-			sb.append("// toolbar to show at. rownumber starts at 0 \n");
-			sb.append("// var toolbar = %%elementName%%.addToolBar(\"toolbar_2\", \"toolbar_2\", 3);\n");
-			sb.append("\n");
-			sb.append("// REMARK: normally you would add buttons, checkboxes etc in the same method\n");
-			sb.append("// this example will show no buttons for now!\n");
-			sb.append("// we will add them via the other methods on this form.");
-		}
-		else if ("getToolBar".equals(methodName))
-		{
-			sb.append("// get the toolbar at the panel by name\n");
-			sb.append("var toolbar = %%elementName%%.getToolBar(\"toolbar_0\");\n");
-			sb.append("\n");
-			sb.append("// add a button with a text and a method\n");
-			sb.append("toolbar.addButton(\"button\", feedback_button);\n");
-			sb.append("\n");
-			sb.append("// add an input array to the button for feedback in the selected method\n");
-			sb.append("toolbar.addButton(\"button\", feedback_button, [1, \"2\", \"three\"]);\n");
-			sb.append("\n");
-			sb.append("// add an icon to the button\n");
-			sb.append("toolbar.addButton(\"button\", feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\");\n");
-			sb.append("\n");
-			sb.append("// add a tooltip to the button\n");
-			sb.append("toolbar.addButton(\"button\", feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\", \"tooltip.\");\n");
-			sb.append("\n");
-			sb.append("// show only an icon on the button and disable the button\n");
-			sb.append("toolbar.addButton(null, feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\", \"tooltip.\", false);\n");
-			sb.append("\n");
-			sb.append("// add a separator\n");
-			sb.append("toolbar.addSeparator();\n");
-			sb.append("\n");
-			sb.append("// make the button non visible\n");
-			sb.append("toolbar.addButton(null, feedback_button, [1, \"2\", \"three\"], \"media:///yourimage.gif\", \"tooltip.\",true, false);\n");
-			sb.append("\n");
-			sb.append("// and validate the changes\n");
-			sb.append("// to make them know to the user interface)\n");
-			sb.append("toolbar.validate();");
-		}
-		else if ("removeToolBar".equals(methodName))
-		{
-			sb.append("// removing a toolbar from the toolbar panel is done by name\n");
-			sb.append("// the plugin checks the existence of the toolbar\n");
-			sb.append("// when the toolbar does not exist it will not throw an error though.\n");
-			sb.append("%%elementName%%.removeToolBar(\"toolbar_0\");\n");
-			sb.append("%%elementName%%.removeToolBar(\"toolbar_1\");\n");
-			sb.append("%%elementName%%.removeToolBar(\"toolbar_2\");");
-		}
-		else if ("getToolbarNames".equals(methodName))
-		{
-			sb.append("// create an array of toolbar names\n");
-			sb.append("var names = %%elementName%%.getToolbarNames();\n");
-			sb.append("\n");
-			sb.append("// create an empty message variable\n");
-			sb.append("var message = \"\";\n");
-			sb.append("\n");
-			sb.append("// loop through the array\n");
-			sb.append("for (var i = 0 ; i < names.length ; i++) {\n");
-			sb.append("\t//add the name(s) to the message\n");
-			sb.append("\tmessage += names[i] + \"\\n\";\n");
-			sb.append("}\n");
-			sb.append("\n");
-			sb.append("// show the message\n");
-			sb.append("plugins.dialogs.showInfoDialog(\"toolbar names\", message);");
-		}
-
-		else if ("createPopupMenu".equals(methodName))
-		{
-			getPopupMenuSample(sb, "%%elementName%%");
-		}
-
-		else if ("getMenuBar".equals(methodName))
-		{
-			sb.append("// get the menubar of the main window\n");
-			sb.append("var mainMenubar = %%elementName%%.getMenuBar();\n");
-			sb.append("\n");
-			sb.append("// get the menubar of a named window\n");
-			sb.append("application.showFormInWindow(forms.contacts,100,80,500,300,'my own window title',false,true,'mywindow');\n");
-			sb.append("var myWindowMenubar = %%elementName%%.getMenuBar('mywindow');\n");
-		}
-
-		else if ("maximize".equals(methodName))
-		{
-			sb.append("// maximize the main window:\n");
-			sb.append("%%elementName%%.maximize();\n");
-			sb.append("// or a window constructed with the name 'test':\n");
-			sb.append("%%elementName%%.maximize('test');\n");
-		}
-		// undocumented?
-		else
-		{
-			sb.append("%%elementName%%.").append(methodName).append("()");
-		}
-
-		return sb.append('\n').toString();
-	}
-
-	public static StringBuilder getPopupMenuSample(StringBuilder sb, String plugin)
-	{
-		sb.append("var popupmenu = ").append(plugin).append(".createPopupMenu()\n\n");
-
-		sb.append("var menuitem1 = popupmenu.addMenuItem('A',myMethod)\n");
-		sb.append("var menuitem2 = popupmenu.addRadioButton('B',myMethod)\n");
-		sb.append("var menuitem3 = popupmenu.addRadioButton('C',myMethod)\n");
-		sb.append("var menuitem4 = popupmenu.addSeparator()\n");
-		sb.append("var menuitem5 = popupmenu.addMenuItem('<html><b>Hello</b></html>',myMethod)\n");
-		sb.append("var menuitem6 = popupmenu.addMenuItem('G', globals.myGlobalMethod)\n");
-		sb.append("//add arguments to the method call\n");
-		sb.append("menuitem6.methodArguments = ['arg1', 'another argument']\n");
-
-		sb.append("\nvar submenu = popupmenu.addMenu('SubMenu')\n");
-		sb.append("var subitem1 = submenu.addCheckBox('i18n:bla_bla',myMethod)\n");
-		sb.append("var subitem2 = submenu.addCheckBox('he' , globals.myOtherGlobalMethod , 'media:///day_obj.gif')\n");
-		sb.append("var subitem3 = submenu.addCheckBox('more' , globals.myOtherGlobalMethod ,null, 'm') //last parameter is mnemonic-key\n");
-
-		sb.append("\nmenuitem2.selected = true;\n");
-		sb.append("menuitem6.enabled = false\n");
-		sb.append("subitem2.selected = true;\n");
-
-		sb.append("\nvar source = event.getSource()\n");
-		sb.append("if (source != null)\n");
-		sb.append("{\n");
-		sb.append("\tpopupmenu.show(source);\n");
-		sb.append("\t//or you can set the coordinates popupmenu.show(10, 10);\n");
-		sb.append("}\n");
-		return sb;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(String)
-	 */
-	public String getToolTip(String methodName)
-	{
-		// kioskmode methods
-
-		// shortcut methods
-
-		if ("createShortcut".equals(methodName))
-		{
-			return "Create a shortcut.";
-		}
-		if ("removeShortcut".equals(methodName))
-		{
-			return "Remove a shortcut.";
-		}
-
-		// menu methods
-
-		if ("addToolBar".equals(methodName))
-		{
-			return "Add a toolbar by name and optional displayname and row.";
-		}
-		if ("getToolBar".equals(methodName))
-		{
-			return "Get the toolbar from the toolbar panel by name.";
-		}
-		if ("removeToolBar".equals(methodName))
-		{
-			return "Remove the toolbar from the toolbar panel.";
-		}
-		if ("getToolbarNames".equals(methodName))
-		{
-			return "Get all toolbar names from the toolbar panel.";
-		}
-
-		if ("getMenuBar".equals(methodName))
-		{
-			return "Get the menubar of a window.";
-		}
-
-		if ("maximize".equals(methodName))
-		{
-			return "Maximize the current window or the window with the name provided (Smart client only)";
-		}
-
-		return null;
-	}
-
 	/**
 	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
 	 */
@@ -1193,11 +1068,31 @@ public class WindowProvider implements IScriptObject
 		return new Class[] { Menu.class, RadioButton.class, CheckBox.class, MenuItem.class, JSMenuItem.class/* deprecated */, Popup.class, ToolBar.class, MenuBar.class };
 	}
 
+	/**
+	 * Maximize the current window or the window with the specified name (Smart client only).
+	 *
+	 * @sample
+	 * // maximize the main window:
+	 * plugins.window.maximize();
+	 * 
+	 * // create a new window
+	 * var win = application.createWindow("windowName", JSWindow.WINDOW);
+	 * // show a form in the new window
+	 * forms.my_form.controller.show(win);
+	 * // maximize the window
+	 * plugins.window.maximize("windowName");
+	 */
 	public void js_maximize()
 	{
 		js_maximize(null);
 	}
 
+	/**
+	 * @clonedesc js_maximize()
+	 * @sampleas js_maximize()
+	 * 
+	 * @param windowName
+	 */
 	public void js_maximize(final String windowName)
 	{
 		if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)

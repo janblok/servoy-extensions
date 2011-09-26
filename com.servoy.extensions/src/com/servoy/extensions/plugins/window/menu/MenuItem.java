@@ -28,8 +28,38 @@ import com.servoy.j2db.scripting.IConstantsObject;
 
 public class MenuItem extends AbstractMenuItem implements IConstantsObject
 {
+	/**
+	 * Constant for centering menu items/checkbox/radiobuttons at creation.
+	 * 
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a left aligned menu item
+	 * menu.addMenuItem("significantly long text", feedback, null, null, true, MenuItem.ALIGN_LEFT);
+	 * // add a centered checkbox
+	 * menu.addCheckBox("a bit shorter", feedback, null, null, true, MenuItem.ALIGN_CENTER);
+	 * // add a right aligned radiobutton
+	 * menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);
+	 */
 	public static final int ALIGN_CENTER = 0;
+
+	/**
+	 * Constant for left aligning menu items/checkbox/radiobuttons at creation.
+	 * 
+	 * @sampleas ALIGN_CENTER
+	 */
 	public static final int ALIGN_LEFT = 2;
+
+	/**
+	 * Constant for right aligning menu items/checkbox/radiobuttons at creation.
+	 * 
+	 * @sampleas ALIGN_CENTER
+	 */
 	public static final int ALIGN_RIGHT = 4;
 
 	public MenuItem()

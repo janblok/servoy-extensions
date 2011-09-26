@@ -38,11 +38,26 @@ public class Menu extends AbstractMenu
 		super(pluginAccess, menuHandler, menu);
 	}
 
+	/**
+	 * Script the selection (emulate a mouse click) of the menu.
+	 *
+	 * @sample
+	 * // retrieve the File menu
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.getMenu(0);
+	 * // simulate a click on the File menu
+	 * menu.doClick();
+	 */
 	public void js_doClick()
 	{
 		getMenu().doClick();
 	}
 
+	/**
+	 * Retrieve/set the text.
+	 * 
+	 * @sampleas js_setEnabled(boolean)
+	 */
 	public String js_getText()
 	{
 		return getMenu().getText();
@@ -87,11 +102,32 @@ public class Menu extends AbstractMenu
 		getMenu().setEnabled(enabled);
 	}
 
+	/**
+	 * Set the the selected menu enabled or disabled.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * // set the menu's text
+	 * menu.text = "New Menu";
+	 * // disable the menu
+	 * menu.setEnabled(false);
+	 * // set a mnemonic
+	 * menu.setMnemonic("u");
+	 * // add an icon to the menu
+	 * menu.setIcon("media:///yourimage.gif");
+	 */
 	public void js_setEnabled(boolean enabled)
 	{
 		getMenu().setEnabled(enabled);
 	}
 
+	/**
+	 * Set the icon of the menu.
+	 *
+	 * @sampleas js_setEnabled(boolean)
+	 */
 	public void js_setIcon(Object icon)
 	{
 		if (" ".equals(icon)/* || (_align && ((icon == null) || "".equals(icon))) */) //$NON-NLS-1$
@@ -108,6 +144,11 @@ public class Menu extends AbstractMenu
 		}
 	}
 
+	/**
+	 * Set the mnemonic of the selected menu.
+	 *
+	 * @sampleas js_setEnabled(boolean)
+	 */
 	public void js_setMnemonic(String mnemonic)
 	{
 		if ((mnemonic == null) || mnemonic.equals("")) //$NON-NLS-1$
@@ -139,99 +180,4 @@ public class Menu extends AbstractMenu
 		getMenu().setText(text);
 	}
 
-	@SuppressWarnings("nls")
-	@Override
-	public boolean isDeprecated(String methodName)
-	{
-		if ("set".equals(methodName))
-		{
-			return true;
-		}
-		return super.isDeprecated(methodName);
-	}
-
-	@Override
-	public String[] getParameterNames(String methodName)
-	{
-		if ("doClick".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "click" }; //$NON-NLS-1$ 
-		}
-		if ("setEnabled".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "enabled" }; //$NON-NLS-1$ 
-		}
-		if ("setIcon".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "icon" }; //$NON-NLS-1$ 
-		}
-		if ("setMnemonic".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "mnemonic" }; //$NON-NLS-1$ 
-		}
-		if ("setText".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "text" }; //$NON-NLS-1$ 
-		}
-
-
-		return super.getParameterNames(methodName);
-	}
-
-	@Override
-	public String getSample(String methodName)
-	{
-		StringBuilder sample = new StringBuilder();
-		if ("doClick".equals(methodName)) //$NON-NLS-1$ 
-		{
-			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ 
-			sample.append("plugins.window.getMenu(0).doClick();\n"); //$NON-NLS-1$ 
-		}
-		else if ("setText".equals(methodName) || "setMnemonic".equals(methodName) || "setEnabled".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		{
-			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ 
-			sample.append("var menu = plugins.window.getMenu(0);\n"); //$NON-NLS-1$ 
-			sample.append("menu.setText(\"Hello\");\n"); //$NON-NLS-1$ 
-			sample.append("menu.setMnemonic(\"H\");\n"); //$NON-NLS-1$ 
-			sample.append("menu.setEnabled(false);\n"); //$NON-NLS-1$ 
-		}
-		else
-		{
-			return super.getSample(methodName);
-		}
-
-		return sample.toString();
-	}
-
-	@SuppressWarnings("nls")
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("doClick".equals(methodName))
-		{
-			return "Script the selection (emulate a mouse click) of the menu.";
-		}
-		if ("getText".equals(methodName))
-		{
-			return "Retrieve the text.";
-		}
-		if ("setEnabled".equals(methodName))
-		{
-			return "Set the the selected menu enabled or disabled.";
-		}
-		if ("setIcon".equals(methodName))
-		{
-			return "Set the icon of the menu.";
-		}
-		if ("setMnemonic".equals(methodName))
-		{
-			return "Set the mnemonic of the selected menu.";
-		}
-		if ("setText".equals(methodName))
-		{
-			return "Set the text of the selected menu.";
-		}
-
-		return super.getToolTip(methodName);
-	}
 }

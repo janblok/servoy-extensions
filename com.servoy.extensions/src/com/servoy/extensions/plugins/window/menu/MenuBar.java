@@ -21,7 +21,8 @@ import java.util.Arrays;
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
@@ -33,7 +34,7 @@ import com.servoy.j2db.util.Utils;
  *
  */
 @SuppressWarnings("nls")
-public class MenuBar implements IScriptObject
+public class MenuBar implements IScriptable, IReturnedTypesProvider
 {
 
 	public MenuBar()
@@ -63,11 +64,38 @@ public class MenuBar implements IScriptObject
 
 	// Javascript methods
 
+	/**
+	 * Get the number of (top level) menu's.
+	 *
+	 * @sample
+	 * // Note: method getMenuCount only works in the smart client.
+	 * 
+	 * // add a new menu before the last menu
+	 * var menubar = plugins.window.getMenuBar();
+	 * var count = menubar.getMenuCount();
+	 * var menu = menubar.addMenu(count-1);
+	 * menu.text = 'new menu';
+	 */
 	public int js_getMenuCount()
 	{
 		return windowProvider.getMenuHandler().getMenubarSize(windowName);
 	}
 
+	/**
+	 * Retrieve the index of the item by text.
+	 *
+	 * @sample
+	 * // Note: method getMenuIndexByText only works in the smart client.
+	 * 
+	 * var menubar = plugins.window.getMenuBar();
+	 * // find the index of the View menu
+	 * var idx = menubar.getMenuIndexByText("View");
+	 * // add a menu before the View menu
+	 * var menu = menubar.addMenu(idx);
+	 * menu.text = "new menu";
+	 * 
+	 * @param name
+	 */
 	public int js_getMenuIndexByText(String name)
 	{
 		if (name == null || "".equals(name))
@@ -79,11 +107,51 @@ public class MenuBar implements IScriptObject
 		return windowProvider.getMenuHandler().getMenuIndexByText(windowName, name);
 	}
 
+	/**
+	 * Remove all menus from the menubar.
+	 *
+	 * @sample
+	 * // Note: method removeAllMenus only works in the smart client.
+	 * 
+	 * // Potentially dangerous because all accelerator (short) keys
+	 * // will be deleted also (including the quit item)
+	 * var menubar = plugins.window.getMenuBar();
+	 * menubar.removeAllMenus();
+	 */
 	public void js_removeAllMenus() throws PluginException
 	{
 		removeMenu(-1);
 	}
 
+	/**
+	 * Remove the menu(s) at the selected index/indices.
+	 *
+	 * @sample
+	 * // Note: method removeMenu only works in the smart client.
+	 * 
+	 * var menubar = plugins.window.getMenuBar();
+	 * // To remove the last menu in the menubar we count the number of menu's in the menubar
+	 * // because the index starts at 0 we have to substract 1 from the counted menu's
+	 * // to actually remove the last menu from the menubar
+	 * var index = menubar.getMenuCount() - 1;
+	 * menubar.removeMenu(index);
+	 * 
+	 * // To remove the last 3 (three) menu's from the menubar we
+	 * // can do that by adding additional indexes to the method
+	 * // and delimit them with a comma.
+	 * index = menubar.getMenuCount() - 1;
+	 * menubar.removeMenu(index, index-1, index-2);
+	 *  
+	 * // For 'security' reasons it is best to ALWAYS remove the menu with the last index
+	 * // first to avoid index out of range issues and other issues
+	 * // EXAMPLE: when you first remove the menu at index 2 and then the menu at index 4
+	 * // you actually remove the menu at index 2 and index 5
+	 * // after removing the menu at index 2 all other menu's moved one index to the left
+	 * // so the menu at index 4 moved to index 3 and the menu at index 5 moved to index 4 etc.
+	 *
+	 * @param index_1 
+	 * @param index_2_to_n optional 
+	 */
 	public void js_removeMenu(Object[] index) throws PluginException
 	{
 		if (index.length > 1)
@@ -101,6 +169,26 @@ public class MenuBar implements IScriptObject
 		}
 	}
 
+	/**
+	 * Reset the menubar to the default.
+	 *
+	 * @sample
+	 * // Note: method removeMenu only works in the smart client.
+	 * 
+	 * // When the menubar settings are solution specific it is advised to reset
+	 * // the bar to its default settings when closing the solution.
+	 * // Another reason is that when a client/developer is started first the
+	 * // plugin will save the current settings in memory.
+	 * // REMARK: Don't manipulate standard Servoy menuitems but remove
+	 * // them and create new ones! Due to the way menuitems are managed by java it is not
+	 * // possible to reset a menuitem anymore.
+	 * var menubar = plugins.window.getMenuBar();
+	 * // add a menu
+	 * var menu = menubar.addMenu();
+	 * menu.text = "new menu";
+	 * // reset the menubar, the newly added menu will dissapear
+	 * menubar.reset();
+	 */
 	public void js_reset()
 	{
 		windowProvider.getMenuHandler().resetMenuBar(windowName, initializeMenuBarResult);
@@ -112,11 +200,40 @@ public class MenuBar implements IScriptObject
 		windowProvider.getMenuHandler().validateMenuBar(windowName);
 	}
 
+	/**
+	 * Add a menu to the menubar.
+	 *
+	 * @sample
+	 * // Note: method addMenu only works in the smart client.
+	 * 
+	 * // when you don't define an index the menu will be added at the last
+	 * // positon of the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * // set the text of the menu
+	 * menu.text = "add menu";
+	 * // set the mnemonic key
+	 * menu.setMnemonic("a");
+	 * // add another menu at a specific position in the menubar
+	 * var another_menu = menubar.addMenu(2);
+	 * another_menu.text = "another menu";
+	 * another_menu.setMnemonic("t")
+	 * // REMARK: normally you would add menu items, checkboxes etc in the same method
+	 * // this example will show no menu items for now!
+	 * // IMPORTANT: Working with menu's on developer and client can differ
+	 */
 	public Menu js_addMenu() throws PluginException
 	{
 		return js_addMenu(-1);
 	}
 
+	/**
+	 * Add a menu to the menubar.
+	 *
+	 * @sampleas js_addMenu()
+	 * 
+	 * @param index
+	 */
 	public Menu js_addMenu(int index) throws PluginException
 	{
 		Menu menu = new Menu(windowProvider.getClientPluginAccess(), windowProvider.getMenuHandler(), windowProvider.getMenuHandler().createMenu(null));
@@ -124,6 +241,35 @@ public class MenuBar implements IScriptObject
 		return menu;
 	}
 
+	/**
+	 * Get the menu at the selected index (starting at 0).
+	 *
+	 * @sample
+	 * // Note: method getMenu only works in the smart client.
+	 * 
+	 * var menubar = plugins.window.getMenuBar();
+	 * // get the menu at index 2
+	 * // indexes start at 0 (zero) so index 2 is in fact position 3
+	 * var menu = menubar.getMenu(2);
+	 * // set the text of the menu at the chose position
+	 * menu.text = "get menu";
+	 * // set the mnemonic key
+	 * menu.setMnemonic("g");
+	 * // disable the menu
+	 * menu.setEnabled(false);
+	 * // REMARK: we actually changed an original menu! As a result resetting the
+	 * // menubar will NOT reset the above changes. We need to reset the menu 
+	 * // manually the following way:
+	 * // get the menu
+	 * //var menu = menubar.getMenu(2);
+	 * // reset the values to default
+	 * // notice we use an i18n message here the same way you would use it with
+	 * // standard Servoy methods and plugins
+	 * //menu.text = "i18n:servoy.menuitem.showAll";
+	 * //menu.setEnabled(true);
+	 * 
+	 * @param index
+	 */
 	public Menu js_getMenu(int index) throws Exception
 	{
 		IMenu impl = windowProvider.getMenuHandler().getMenubarMenu(windowName, index);
@@ -135,209 +281,21 @@ public class MenuBar implements IScriptObject
 		return new Menu(windowProvider.getClientPluginAccess(), windowProvider.getMenuHandler(), impl);
 	}
 
+	/**
+	 * Show/hide the menu bar
+	 *
+	 * @sample
+	 * // Note: method setVisible only works in the smart client.
+	 * 
+	 * // hide the menu bar
+	 * var menubar = plugins.window.getMenuBar();
+	 * menubar.setVisible(false);
+	 * 
+	 * @param visible
+	 */
 	public void js_setVisible(boolean visible)
 	{
 		windowProvider.getMenuHandler().setMenubarVisible(windowName, visible);
-	}
-
-	/* IScriptObject methods */
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("addMenu".equals(methodName))
-		{
-			return new String[] { "[index]" };
-		}
-		if ("getMenu".equals(methodName))
-		{
-			return new String[] { "index" };
-		}
-		if ("removeMenu".equals(methodName))
-		{
-			return new String[] { "index 1", "[index 2-n]" };
-		}
-		if ("getMenuIndexByText".equals(methodName))
-		{
-			return new String[] { "menuName" };
-		}
-		if ("setVisible".equals(methodName))
-		{
-			return new String[] { "visible" };
-		}
-
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		if ("validate".equals(methodName))
-		{
-			return true;
-		}
-		return false;
-	}
-
-	public String getSample(String methodName)
-	{
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("// Note: method ").append(methodName).append(" only works in the smart client.\n\n");
-
-		String toolTip = getToolTip(methodName);
-		if (toolTip != null)
-		{
-			sb.append("// ").append(toolTip).append('\n');
-		}
-
-		else if ("addMenu".equals(methodName))
-		{
-			sb.append("// add a menu at the given index\n");
-			sb.append("// when you don't define an index the menu will be added at the last\n");
-			sb.append("// positon of the menubar\n");
-			sb.append("var menu = %%elementName%%.addMenu();\n");
-			sb.append("\n");
-			sb.append("// set the text of the menu at the chose position\n");
-			sb.append("menu.setText(\"add menu\");\n");
-			sb.append("\n");
-			sb.append("// set the mnemonic key\n");
-			sb.append("menu.setMnemonic(\"a\");\n");
-			sb.append("\n");
-			sb.append("// enable the menu\n");
-			sb.append("menu.setEnabled(true);\n");
-			sb.append("\n");
-			sb.append("// REMARK: normally you would add menu items, checkboxes etc in the same method\n");
-			sb.append("// this example will show no menu items for now!\n");
-			sb.append("\n");
-			sb.append("// IMPORTANT: Working with menu's on developer and client can differ");
-		}
-		else if ("getMenu".equals(methodName))
-		{
-			sb.append("// get the menu from at index 2\n");
-			sb.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sb.append("var menu = %%elementName%%.getMenu(2);\n");
-			sb.append("\n");
-			sb.append("// set the text of the menu at the chose position\n");
-			sb.append("menu.setText(\"get menu\");$\n");
-			sb.append("\n");
-			sb.append("// set the mnemonic key\n");
-			sb.append("menu.setMnemonic(\"g\");\n");
-			sb.append("\n");
-			sb.append("// disable the menu\n");
-			sb.append("menu.setEnabled(false);\n");
-			sb.append("\n");
-			sb.append("// REMARK: we actually changed an original menu! As a result resetting the\n");
-			sb.append("// menubar will NOT reset the above changes. We need to reset the menu \n");
-			sb.append("// manually the following way:\n");
-			sb.append("\n");
-			sb.append("// get the menu\n");
-			sb.append("// var menu = %%elementName%%.getMenu(2);\n");
-			sb.append("\n");
-			sb.append("// reset the values to default\n");
-			sb.append("// notice we use an i18n message here the same way you would use it with\n");
-			sb.append("// standard Servoy methods and plugins\n");
-			sb.append("// menu.setText(\"i18n:servoy.menuitem.showAll\");");
-			sb.append("// menu.setEnabled(true);");
-		}
-		else if ("removeMenu".equals(methodName))
-		{
-			sb.append("// To remove the last menu in the menubar we count the number of menu's in the menubar\n");
-			sb.append("// because the index starts at 0 we have to substract 1 from the counted menu's\n");
-			sb.append("// to actually remove the last menu from the menubar\n");
-			sb.append("%%elementName%%.removeMenu(%%elementName%%.getMenuCount() - 1);\n");
-			sb.append("\n");
-			sb.append("// To remove the last 3 (three) menu's from the menubar we\n");
-			sb.append("// can do that by adding additional indexes to the method\n");
-			sb.append("// and delimit them with a comma.\n");
-			sb.append("var index = %%elementName%%.getMenuCount() - 1;\n");
-			sb.append("\n");
-			sb.append("// remove the last item\n");
-			sb.append("%%elementName%%.removeMenu(index);\n");
-			sb.append("\n");
-			sb.append("// remove 3 (three) items\n");
-			sb.append("// %%elementName%%.removeMenu(this.index, index-1, 2);\n");
-			sb.append("\n");
-			sb.append("// For 'security' reasons it is best to ALWAYS remove the menu with the last index\n");
-			sb.append("// first to avoid index out of range issues and other issues\n");
-			sb.append("// EXAMPLE: when you first remove the menu at index 2 and then the menu at index 4\n");
-			sb.append("// you actually remove the menu at index 2 and index 5\n");
-			sb.append("// after removing the menu at index 2 all other menu's moved one index to the left\n");
-			sb.append("// so the menu at index 4 moved to index 3 and the menu at index 5 moved to index 4 etc.");
-		}
-		else if ("removeAllMenus".equals(methodName))
-		{
-			sb.append("// Remove all menus from the menubar.\n");
-			sb.append("// Potentially dangerous because all accelerator (short) keys\n");
-			sb.append("// will be deleted also (including the quit item)\n");
-			sb.append("%%elementName%%.removeAllMenus();");
-		}
-		else if ("reset".equals(methodName))
-		{
-			sb.append("// When the menubar settings are solution specific it is advised to reset\n");
-			sb.append("// the bar to its default settings when closing the solution.\n");
-			sb.append("// Another reason is that when a client/developer is started first the\n");
-			sb.append("// plugin will save the current settings in memory\n");
-			sb.append("// REMARK: Don't manipulate standard Servoy menuitems but remove\n");
-			sb.append("// them and create new ones! Due to the way menuitems are managed by java it is not\n");
-			sb.append("// possible to reset a menuitem anymore.\n");
-			sb.append("%%elementName%%.reset();");
-		}
-		else if ("setVisible".equals(methodName))
-		{
-			sb.append("%%elementName%%.setVisible(false)");
-		}
-
-		// undocumented?
-		else
-		{
-			sb.append("%%elementName%%.").append(methodName).append("()");
-		}
-
-		return sb.append('\n').toString();
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(String)
-	 */
-	public String getToolTip(String methodName)
-	{
-		if ("addMenu".equals(methodName))
-		{
-			return "Add the menu at the selected index (starting at 0) or add it at the end (empty).";
-		}
-		if ("getMenu".equals(methodName))
-		{
-			return "Get the menu at the selected index (starting at 0).";
-		}
-		if ("getMenuCount".equals(methodName))
-		{
-			return "Get the number of (top level) menu's.";
-		}
-		if ("removeAllMenus".equals(methodName))
-		{
-			return "Remove all menus from the menubar.";
-		}
-		if ("removeMenu".equals(methodName))
-		{
-			return "Remove the menu(s) at the selected index/indices.";
-		}
-		if ("reset".equals(methodName))
-		{
-			return "Reset the menubar to the default.";
-		}
-		if ("validate".equals(methodName))
-		{
-			return "Use this when your add/remove/edit operation won't refresh.";
-		}
-		if ("getMenuIndexByText".equals(methodName))
-		{
-			return "Retrieve the index of the item by text.";
-		}
-		if ("setVisible".equals(methodName))
-		{
-			return "Show/hide the menu bar";
-		}
-
-		return null;
 	}
 
 	/**

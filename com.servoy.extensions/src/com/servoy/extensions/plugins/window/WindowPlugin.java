@@ -28,7 +28,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -92,10 +92,7 @@ public class WindowPlugin implements IClientPlugin
 		return "window"; //$NON-NLS-1$
 	}
 
-	/*
-	 * @see IPlugin#getScriptObject()
-	 */
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		if (impl == null) impl = new WindowProvider(this);
 		return impl;

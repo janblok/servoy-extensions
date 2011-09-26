@@ -31,7 +31,8 @@ import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -40,7 +41,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
-public abstract class AbstractMenuItem implements IScriptObject
+public abstract class AbstractMenuItem implements IReturnedTypesProvider, IScriptable
 {
 	protected IMenuItem menuItem;
 	private IClientPluginAccess pluginAccess;
@@ -115,6 +116,27 @@ public abstract class AbstractMenuItem implements IScriptObject
 		};
 	}
 
+	/**
+	 * Script the selection (emulate a mouse click) of the item.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a menu item
+	 * var entry = menu.addMenuItem("menu entry", feedback);
+	 * // alternatively add a checkbox
+	 * //var entry = menu.addCheckBox("menu entry", feedback);
+	 * // or alternatively add a radiobutton
+	 * //var entry = menu.addRadioButton("menu entry", feedback);
+	 * 
+	 * // simulate a click on the entry
+	 * entry.doClick();
+	 */
 	public void js_doClick() throws PluginException
 	{
 		try
@@ -127,6 +149,11 @@ public abstract class AbstractMenuItem implements IScriptObject
 		}
 	}
 
+	/**
+	 * Get/set the text of the menu item/checkbox/radiobutton.
+	 * 
+	 * @sampleas js_isEnabled()
+	 */
 	public String js_getText()
 	{
 		return menuItem.getText();
@@ -174,12 +201,27 @@ public abstract class AbstractMenuItem implements IScriptObject
 		set(text, method, arguments, icon, accelerator, mnemonic, enabled, visible);
 	}
 
+	/**
+	 * Set the method for the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_isEnabled()
+	 * 
+	 * @param method
+	 */
 	public AbstractMenuItem js_setMethod(Function method)
 	{
 		js_setMethod(method, null);
 		return this;
 	}
 
+	/**
+	 * Set the method for the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_setMethod(Function)
+	 * 
+	 * @param method
+	 * @param arguments
+	 */
 	public AbstractMenuItem js_setMethod(Function method, Object[] arguments)
 	{
 		functionDefinition = new FunctionDefinition(method);
@@ -187,6 +229,35 @@ public abstract class AbstractMenuItem implements IScriptObject
 		return this;
 	}
 
+	/**
+	 * Set the accelerator key of the menu item/checkbox/radiobutton.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a menu item
+	 * var entry = menu.addMenuItem("menu entry", feedback);
+	 * // alternatively add a checkbox
+	 * //var entry = menu.addCheckBox("menu entry", feedback);
+	 * // or alternatively add a radiobutton
+	 * //var entry = menu.addRadioButton("menu entry", feedback);
+	 * 
+	 * // define an accelerator for the menu entry
+	 * entry.setAccelerator("ctrl alt Y");
+	 * // also define a mnemonic
+	 * entry.setMnemonic("y");
+	 * // set a custom background color
+	 * entry.setBackgroundColor("#111111");
+	 * // set a custom foreground color
+	 * entry.setForegroundColor("#EE5555");
+	 * // set an icon
+	 * entry.setIcon("media:///yourimage.gif");
+	 */
 	public AbstractMenuItem js_setAccelerator(String accelerator)
 	{
 		KeyStroke key = WindowProvider.parseShortcut(pluginAccess, accelerator);
@@ -205,12 +276,55 @@ public abstract class AbstractMenuItem implements IScriptObject
 		menuItem.setEnabled(enabled);
 	}
 
+	/**
+	 * Enable/disable the menu item/checkbox/radiobutton.
+	 * 
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a menu item at the first position in the menu
+	 * var entry = menu.addMenuItem(0);
+	 * // alternatively add a checkbox at the first position
+	 * //var entry = menu.addCheckBox(0);
+	 * // or alternatively add a radiobutton at the first position
+	 * //var entry = menu.addRadioButton(0);
+	 * 
+	 * // disable the newly added entry
+	 * entry.enabled = false;
+	 * // give a name to the entry (the name is not visible anywhere)
+	 * entry.name = "my_name";
+	 * // make the entry selected (affects checkboxes and radiobuttons)
+	 * entry.selected = true;
+	 * // set the text of the entry
+	 * entry.text = "menu entry";
+	 * // set the callback method
+	 * entry.setMethod(feedback);
+	 * // set the arguments to be sent to the callback method
+	 * // (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
+	 * // the first 5 arguments are fixed: 
+	 * //	[0] item index
+	 * //	[1] parent item index
+	 * //	[2] isSelected boolean
+	 * //	[3] parent menu text
+	 * //	[4] menu text
+	 * entry.methodArguments = [17, "data"];
+	 */
 	public boolean js_isEnabled()
 	{
 		return menuItem.isEnabled();
 	}
 
 
+	/**
+	 * Set the icon of the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_setAccelerator(String)
+	 */
 	public AbstractMenuItem js_setIcon(Object icon)
 	{
 		if (" ".equals(icon) || (align && ((icon == null) || "".equals(icon)))) //$NON-NLS-1$ //$NON-NLS-2$
@@ -229,6 +343,11 @@ public abstract class AbstractMenuItem implements IScriptObject
 		return this;
 	}
 
+	/**
+	 * Set the mnemonic key of the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_setAccelerator(String)
+	 */
 	public AbstractMenuItem js_setMnemonic(String mnemonic)
 	{
 		if ((mnemonic == null) || mnemonic.equals("")) //$NON-NLS-1$ 
@@ -253,6 +372,33 @@ public abstract class AbstractMenuItem implements IScriptObject
 		menuItem.setText(message);
 	}
 
+	/**
+	 * Set the item visible.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a menu item
+	 * var entry_one = menu.addMenuItem("an entry", feedback);
+	 * // add a checkbox
+	 * var entry_two = menu.addCheckBox("another entry", feedback);
+	 * // add a radiobutton
+	 * var entry_three = menu.addRadioButton("yet another entry", feedback);
+	 * 
+	 * // hide the menu item
+	 * entry_one.setVisible(false);
+	 * // make sure the checkbox is visible
+	 * entry_two.setVisible(true);
+	 * // hide the radiobutton
+	 * entry_three.setVisible(false);
+	 * 
+	 * @param visible
+	 */
 	public AbstractMenuItem js_setVisible(boolean visible)
 	{
 		menuItem.setVisible(visible);
@@ -275,6 +421,11 @@ public abstract class AbstractMenuItem implements IScriptObject
 		menuItem.setVisible(visible);
 	}
 
+	/**
+	 * Set arguments that are sent to the callback method.
+	 *
+	 * @sampleas js_isEnabled()
+	 */
 	public Object[] js_getMethodArguments()
 	{
 		return methodArguments;
@@ -285,6 +436,11 @@ public abstract class AbstractMenuItem implements IScriptObject
 		methodArguments = arguments;
 	}
 
+	/**
+	 * Select/unselect the checkbox/radiobutton.
+	 * 
+	 * @sampleas js_isEnabled()
+	 */
 	public boolean js_getSelected()
 	{
 		return menuItem.isSelected();
@@ -300,26 +456,83 @@ public abstract class AbstractMenuItem implements IScriptObject
 		menuItem.setName(name);
 	}
 
+	/**
+	 * The name of the menu item/checkbox/radiobutton. The name is used only internally, it is not
+	 * visible in the user interface.
+	 * 
+	 * @sampleas js_isEnabled()
+	 */
 	public String js_getName()
 	{
 		return menuItem.getName();
 	}
 
+	/**
+	 * Set the background color of the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_setAccelerator(String)
+	 */
 	public void js_setBackgroundColor(String bgColor)
 	{
 		menuItem.setBackgroundColor(bgColor);
 	}
 
+	/**
+	 * Set the foreground color of the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_setAccelerator(String)
+	 */
 	public void js_setForegroundColor(String fgColor)
 	{
 		menuItem.setForegroundColor(fgColor);
 	}
 
+	/**
+	 * Sets the value for the specified client property key of the menu item/checkbox/radiobutton.
+	 *
+	 * @sampleas js_getClientProperty(Object)
+	 * 
+	 * @param key
+	 * @param value
+	 */
 	public void js_putClientProperty(Object key, Object value)
 	{
 		menuItem.putClientProperty(key, value);
 	}
 
+	/**
+	 * Gets the specified client property for the menu item/checkbox/radiobutton based on a key.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a menu item
+	 * var entry = menu.addMenuItem("menu entry", feedback);
+	 * // alternatively add a checkbox
+	 * //var entry = menu.addCheckBox("menu entry", feedback);
+	 * // or alternatively add a radiobutton
+	 * //var entry = menu.addRadioButton("menu entry", feedback);
+	 * 
+	 * // NOTE: Depending on the operating system, a user interface property name may be available.
+	 * // set the tooltip of the menu item/checkbox/radiobutton via client properties
+	 * // keep the original tooltip in a form or global variable
+	 * originalTooltip = entry.getClientProperty("ToolTipText");
+	 * entry.putClientProperty("ToolTipText", "changed tooltip");
+	 * 
+	 * // later restore the original tooltip from the variable
+	 * //var menubar = plugins.window.getMenuBar();
+	 * //var menuIndex = menubar.getMenuIndexByText("New Menu");
+	 * //var menu = menubar.getMenu(menuIndex);
+	 * //var entry = menu.getItem(0);
+	 * //entry.putClientProperty("ToolTipText", originalTooltip);
+	 * 
+	 * @param key
+	 */
 	public Object js_getClientProperty(Object key)
 	{
 		return menuItem.getClientProperty(key);
@@ -385,189 +598,4 @@ public abstract class AbstractMenuItem implements IScriptObject
 		return null;
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setAccelerator".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "key" }; //$NON-NLS-1$ 
-		}
-		if ("setEnabled".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "enabled" }; //$NON-NLS-1$ 
-		}
-		if ("setIcon".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "icon" }; //$NON-NLS-1$ 
-		}
-		if ("setMethod".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "method" }; //$NON-NLS-1$ 
-		}
-		if ("setMnemonic".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "key" }; //$NON-NLS-1$ 
-		}
-		if ("setText".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "text" }; //$NON-NLS-1$ 
-		}
-		if ("setVisible".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "visible" }; //$NON-NLS-1$ 
-		}
-		if ("setMethod".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "method", "[methodArguments]" }; //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		if ("setBackgroundColor".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "backgroundColor" }; //$NON-NLS-1$
-		}
-		if ("setForegroundColor".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "foregroundColor" }; //$NON-NLS-1$
-		}
-		if ("putClientProperty".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "key", "value" }; //$NON-NLS-1$ //$NON-NLS-2$ 
-		}
-		if ("getClientProperty".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "key" }; //$NON-NLS-1$ 
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		StringBuilder sample = new StringBuilder();
-
-		if ("setAccelerator".equals(methodName) || "setMethod".equals(methodName) || "methodArguments".equals(methodName) || "setEnabled".equals(methodName) || //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			"setIcon".equals(methodName) || "setMethod".equals(methodName) || "setMnemonic".equals(methodName) || "setText".equals(methodName) || //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			"setVisible".equals(methodName) || "setBackgroundColor".equals(methodName) || "setForegroundColor".equals(methodName)) //$NON-NLS-1$  //$NON-NLS-2$ //$NON-NLS-3$
-		{
-			sample.append("var menu = plugins.window.getMenu(2).getItem(0);\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setText")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setText(\"Servoy\");\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setMethod")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setMethod(callback);\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("methodArguments")).append(" - array elements will be passed as arguments 5, 6 and so on to the callback method\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			sample.append("//The first 5 arguments are fixed: \n"); //$NON-NLS-1$ 
-			sample.append("//\t[0] item index\n"); //$NON-NLS-1$ 
-			sample.append("//\t[1] parent item index\n"); //$NON-NLS-1$ 
-			sample.append("//\t[2] isSelected boolean\n"); //$NON-NLS-1$ 
-			sample.append("//\t[3] parent menu text\n"); //$NON-NLS-1$ 
-			sample.append("//\t[4] menu text\n"); //$NON-NLS-1$ 
-			sample.append("menu.methodArguments = [\"a\",\"b\"];\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setIcon")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setIcon(\"media:///TipOfTheDay16.gif\");\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setAccelerator")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setAccelerator(\"meta 4\");\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setMnemonic")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setMnemonic(\"e\");\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setEnabled")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setEnabled(false);\n// "); //$NON-NLS-1$ 
-			sample.append(getToolTip("setVisible")); //$NON-NLS-1$ 
-			sample.append("\nmenu.setVisible(true);\n"); //$NON-NLS-1$ 
-			sample.append("\nmenu.setBackgroundColor('#ff0000');\n"); //$NON-NLS-1$
-			sample.append("\nmenu.setForegroundColor('#0000ff');\n"); //$NON-NLS-1$
-		}
-		else if ("doClick".equals(methodName)) //$NON-NLS-1$ 
-		{
-			sample.append("// ").append(getToolTip(methodName)); //$NON-NLS-1$
-			sample.append("\n// Clicking a separator will throw an error!\n"); //$NON-NLS-1$ 
-			sample.append("plugins.window.getMenu(2).getItem(0).doClick();\n"); //$NON-NLS-1$ 
-		}
-		else if ("putClientProperty".equals(methodName)) //$NON-NLS-1$
-		{
-			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n"); //$NON-NLS-1$
-			sample.append("plugins.window.putClientProperty('ToolTipText','some text');\n"); //$NON-NLS-1$
-		}
-		else if ("getClientProperty".equals(methodName)) //$NON-NLS-1$
-		{
-			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n"); //$NON-NLS-1$
-			sample.append("var property = plugins.window.getClientProperty('ToolTipText');\n"); //$NON-NLS-1$
-		}
-		else
-		{
-			return null;
-		}
-		return sample.toString();
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("doClick".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Script the selection (emulate a mouse click) of the item."; //$NON-NLS-1$ 
-		}
-		if ("setAccelerator".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the accelerator key of the item."; //$NON-NLS-1$ 
-		}
-		if ("methodArguments".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the arguments that can be read by the defined method."; //$NON-NLS-1$ 
-		}
-		if ("setEnabled".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Enable/disable the item."; //$NON-NLS-1$ 
-		}
-		if ("setIcon".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the icon of the item."; //$NON-NLS-1$ 
-		}
-		if ("setMethod".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the method for the item."; //$NON-NLS-1$ 
-		}
-		if ("setMnemonic".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the mnemonic key of the item."; //$NON-NLS-1$ 
-		}
-		if ("setText".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the text of the item."; //$NON-NLS-1$ 
-		}
-		if ("setVisible".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the item visible."; //$NON-NLS-1$ 
-		}
-		if ("getText".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Retrieve the text."; //$NON-NLS-1$ 
-		}
-		if ("setBackgroundColor".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the background color of the item."; //$NON-NLS-1$ 
-		}
-		if ("setForegroundColor".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return "Set the foreground color of the item."; //$NON-NLS-1$ 
-		}
-		if ("putClientProperty".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Sets the value for the specified element client property key."; //$NON-NLS-1$
-		}
-		if ("getClientProperty".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Gets the specified client property for the element based on a key."; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		if ("setArguments".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return true;
-		}
-		if ("set".equals(methodName)) //$NON-NLS-1$
-		{
-			return true;
-		}
-		return false;
-	}
 }

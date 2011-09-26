@@ -147,6 +147,10 @@ public class ScriptableJMenu implements IMenu
 		{
 			return (IMenuItem)item;
 		}
+		if (item instanceof JMenu)
+		{
+			return new ScriptableJMenu((JMenu)item);
+		}
 		if (item instanceof JMenuItem)
 		{
 			return new ScriptableJMenuItem((JMenuItem)item);

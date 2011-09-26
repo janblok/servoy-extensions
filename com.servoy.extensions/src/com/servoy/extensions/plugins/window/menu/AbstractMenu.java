@@ -23,7 +23,8 @@ import org.mozilla.javascript.Function;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
@@ -33,7 +34,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
-public abstract class AbstractMenu implements IScriptObject
+public abstract class AbstractMenu implements IReturnedTypesProvider, IScriptable
 {
 	private final IClientPluginAccess pluginAccess;
 	private final IMenuHandler menuHandler;
@@ -73,6 +74,45 @@ public abstract class AbstractMenu implements IScriptObject
 		return menu == null ? null : menu.getText();
 	}
 
+	/**
+	 * Add a checkbox at the selected index (starting at 0) or at the end.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // when you don't define an index the checkbox will be added at the last position
+	 * // this is what you usually do to build a new menu
+	 * // minimum settings are the text and method 
+	 * // the method can be a global or form method
+	 * // be sure to enter the method WITHOUT '()' at the end
+	 * menu.addCheckBox("checkbox", feedback_checkbox);
+	 * // add a checkbox with an icon
+	 * menu.addCheckBox("checkbox with icon", feedback_checkbox, "media:///yourimage.gif");
+	 * // add a checkbox with a mnemonic
+	 * menu.addCheckBox("checkbox with mnemonic", feedback_checkbox, "media:///yourimage.gif", "c");
+	 * // add a disabled checkbox
+	 * menu.addCheckBox("checkbox disabled", feedback_checkbox, "media:///yourimage.gif", "d", false);
+	 * // add a checkbox with text aligned to the right
+	 * menu.addCheckBox("align right", feedback_checkbox, null, null, true, MenuItem.ALIGN_RIGHT);
+	 * 
+	 * // add a checkbox at a given index (checkbox properties must be configured after creation)
+	 * // indexes start at 0 (zero) so index 2 is in fact position 3
+	 * var chk = menu.addCheckBox(2);
+	 * chk.text = "checkbox at index";
+	 * chk.setMethod(feedback_checkbox);
+	 *
+	 * @param name/index optional 
+	 * @param method optional 
+	 * @param icon optional 
+	 * @param mnemonic optional 
+	 * @param enabled optional 
+	 * @param align optional 
+	 */
 	public CheckBox js_addCheckBox(Object[] vargs) throws PluginException
 	{
 		int index;
@@ -98,6 +138,45 @@ public abstract class AbstractMenu implements IScriptObject
 		return js_addMenuItem(vargs);
 	}
 
+	/**
+	 * Add a menu item at the selected index (starting at 0) or at the end.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // when you don't define an index the item will be added at the last position
+	 * // this is what you usually do to build a new menu
+	 * // minimum settings are the text and method
+	 * // the method can be a global or form method
+	 * // be sure to enter the method WITHOUT '()' at the end
+	 * menu.addMenuItem("item", feedback_item);
+	 * // add an item with an icon
+	 * menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+	 * // add an item with a mnemonic
+	 * menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+	 * // add a disabled item
+	 * menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+	 * // add an item with text aligned to the right
+	 * menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+	 * 
+	 * // add an item at a given index (item properties must be configured after creation)
+	 * // indexes start at 0 (zero) so index 2 is in fact position 3
+	 * var item = menu.addMenuItem(2);
+	 * item.text = "item at index";
+	 * item.setMethod(feedback_item);
+	 *
+	 * @param name/index optional 
+	 * @param method optional 
+	 * @param icon optional 
+	 * @param mnemonic optional 
+	 * @param enabled optional 
+	 * @param align optional 
+	 */
 	public MenuItem js_addMenuItem(Object[] vargs) throws PluginException
 	{
 		int index;
@@ -117,6 +196,52 @@ public abstract class AbstractMenu implements IScriptObject
 		return (MenuItem)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, parseMenuItemArgs(pluginAccess, args), true);
 	}
 
+	/**
+	 * Add a radiobutton at the selected index (starting at 0) or at the end.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 	
+	 * // when you don't define an index the radiobutton will be added at the last position
+	 * // this is what you usually do to build a new menu
+	 * // minimum settings are the text and method
+	 * // the method can be a global or form method
+	 * // be sure to enter the method WITHOUT '()' at the end
+	 * menu.addRadioButton("radio", feedback_radiobutton);
+	 * // add a radiobutton with an icon
+	 * menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
+	 * 	
+	 * // add a new radiobutton group
+	 * // a group will 'bind' all added radiobuttons after the group together
+	 * // as a result checking one item will uncheck the other
+	 * // if no group is added, a group is created automatically when the first radiobutton is added to the menu
+	 * // so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
+	 * menu.addRadioGroup();
+	 * 	
+	 * // add a radiobutton with a mnemonic
+	 * menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
+	 * // add a disabled radiobutton
+	 * menu.addRadioButton("disabled radio", feedback_radiobutton, "media:///yourimage.gif", "d", false);
+	 * // add a radiobutton with text aligned to the right
+	 * menu.addRadioButton("align right", feedback_radiobutton, null, null, true, SM_ALIGNMENT.RIGHT);
+	 * // add a radiobutton at a given index (item properties must be configured after creation)
+	 * // indexes start at 0 (zero) so index 2 is in fact position 3
+	 * var rd = menu.addRadioButton(2);
+	 * rd.text = "radio at index";
+	 * rd.setMethod(feedback_item);
+	 *
+	 * @param name/index optional 
+	 * @param method optional 
+	 * @param icon optional 
+	 * @param mnemonic optional 
+	 * @param enabled optional 
+	 * @param align optional 
+	 */
 	public RadioButton js_addRadioButton(Object[] vargs) throws PluginException
 	{
 		int index;
@@ -141,17 +266,51 @@ public abstract class AbstractMenu implements IScriptObject
 		return (RadioButton)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, parseMenuItemArgs(pluginAccess, args), true);
 	}
 
+	/**
+	 * Add a radiogroup for radiobuttons. A radiogroup groups together all radiobuttons that are added
+	 * after the group is added. From all radiobuttons that belong to the same radiogroup only one can be
+	 * checked at a time.
+	 * 
+	 * If no radiogroup is added, one is created automatically when the first radiobutton is added.
+	 *
+	 * @sampleas js_addRadioButton(Object[])
+	 */
 	public void js_addRadioGroup() throws PluginException
 	{
 		buttonGroup = menuHandler.createButtonGroup();
 	}
 
-	// separator
+	/**
+	 * Add the separator at the selected index (starting at 0) or at the end (empty).
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add an item and a checkbox
+	 * menu.addMenuItem("item", feedback_item);
+	 * menu.addCheckBox("checkbox", feedback_checkbox);
+	 * // add a separator
+	 * menu.addSeparator();
+	 * // add a radiobutton. it will be separated from the rest of the control by the separator
+	 * menu.addRadioButton("radio", feedback_radiobutton);
+	 * // add another separator between the item and the checkbox 
+	 * menu.addSeparator(1);
+	 * 
+	 * @param index optional
+	 */
 	public void js_addSeparator()
 	{
 		menu.addSeparator(-1);
 	}
 
+	/**
+	 * @sameas js_addSeparator()
+	 */
 	public void js_addSeparator(int index)
 	{
 		menu.addSeparator(index);
@@ -170,6 +329,36 @@ public abstract class AbstractMenu implements IScriptObject
 		return js_addMenu(new Object[] { new Integer(index) });
 	}
 
+	/**
+	 * Add a submenu at the selected index (starting at 0) or it at the end.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add a first submenu
+	 * var submenu1 = menu.addMenu("submenu 1");
+	 * submenu1.addMenuItem("sub item 1 - 1", feedback_item);
+	 * // add a submenu as child of the first submenu
+	 * var submenu1_2 = submenu1.addMenu("submenu 1 - 2");
+	 * submenu1_2.addMenuItem("sub item 1 - 2 - 1", feedback_item);
+	 * // add another submenu as a child of the first submenu
+	 * var submenu1_3 = submenu1.addMenu("submenu 1 - 3");
+	 * submenu1_3.addMenuItem("sub item 1 - 3 - 1", feedback_item);
+	 * // add a submenu to the second submenu of the first submenu
+	 * var submenu1_3_2 = submenu1_2.addMenu("submenu 1 - 2 - 2");
+	 * submenu1_3_2.addMenuItem("sub item 1 - 2 - 2 - 1", feedback_item);
+	 * // add a submenu directly to the menu, at the first position
+	 * var submenu0 = menu.addMenu(0);
+	 * submenu0.text = "submenu 0";
+	 * submenu0.addMenuItem("sub item 0 - 1", feedback_item);
+	 *
+	 * @param name/index optional 
+	 */
 	public Menu js_addMenu(Object[] vargs) throws PluginException
 	{
 		int index;
@@ -196,6 +385,58 @@ public abstract class AbstractMenu implements IScriptObject
 		return new Menu(pluginAccess, menuHandler, subMenu);
 	}
 
+	/**
+	 * Get the checkbox at the selected index (starting at 0).
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add two radiobuttons
+	 * menu.addRadioButton("radio one", feedback_radiobutton);
+	 * menu.addRadioButton("radio two", feedback_radiobutton);
+	 * // add a menu item, with a separator before it
+	 * menu.addSeparator();
+	 * menu.addMenuItem("item", feedback_item);
+	 * // add a checkbox, with a separator before it
+	 * menu.addSeparator();
+	 * menu.addCheckBox("check", feedback_checkbox);
+	 * // add a submenu with an item under it
+	 * var submenu = menu.addMenu("submenu");
+	 * submenu.addMenuItem("subitem", feedback_item);
+	 * 
+	 * // depending on some state, update the entries in the menu
+	 * var some_state = true;
+	 * if (some_state) {
+	 * 	// select the first radiobutton
+	 * 	menu.getRadioButton(0).selected = true;
+	 * } else {
+	 * 	// select the first radiobutton
+	 * 	menu.getRadioButton(1).selected = true;
+	 * }
+	 * // enable/disable the menu item
+	 * // remember to include the separators also when counting the index
+	 * menu.getItem(3).enabled = !some_state;
+	 * // select/unselect the checkbox
+	 * // remember to include the separators also when counting the index
+	 * menu.getCheckBox(5).selected = some_state;
+	 * // change the text of the submenu and its item
+	 * application.output(menu.getItemCount());
+	 * if (some_state) {
+	 * 	menu.getMenu(6).text = "some state";
+	 * 	menu.getMenu(6).getItem(0).text = "some text";
+	 * }
+	 * else {
+	 * 	menu.getMenu(6).text = "not some state";
+	 * 	menu.getMenu(6).getItem(0).text = "other text";
+	 * }
+	 * 
+	 * @param index
+	 */
 	public CheckBox js_getCheckBox(int index)
 	{
 		AbstractMenuItem item = js_getItem(index);
@@ -206,6 +447,13 @@ public abstract class AbstractMenu implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Get the item at the selected index (starting at 0).
+	 *
+	 * @sampleas js_getCheckBox(int)
+	 * 
+	 * @param index
+	 */
 	public AbstractMenuItem js_getItem(int index)
 	{
 		IMenuItem menuItem = menu.getMenuItem(index);
@@ -223,23 +471,83 @@ public abstract class AbstractMenu implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Get the number of items in the menu.
+	 *
+	 * @sample
+	 * // REMARK: indexes start at 0, disabled items, non visible items and seperators are counted also
+	 * // REMARK: this is especially important when getting items by the index
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add two radiobuttons
+	 * menu.addRadioButton("radio one", feedback_radiobutton);
+	 * menu.addRadioButton("radio two", feedback_radiobutton);
+	 * // add a checkbox
+	 * menu.addCheckBox("check", feedback_checkbox);
+	 * // add a menu item
+	 * menu.addMenuItem("item", feedback_item);
+	 * // add another menu item
+	 * menu.addMenuItem("item 2", feedback_item);
+	 * 
+	 * // remove the last item
+	 * menu.removeItem(menu.getItemCount() - 1);
+	 */
 	public int js_getItemCount()
 	{
 		return menu.getMenuItemCount();
 	}
 
-	public int js_getItemIndexByText(String name)
+	/**
+	 * Retrieve the index of the item by text.
+	 *
+	 * @sample
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add two radiobuttons
+	 * menu.addRadioButton("radio one", feedback_radiobutton);
+	 * menu.addRadioButton("radio two", feedback_radiobutton);
+	 * // add a checkbox
+	 * menu.addCheckBox("check", feedback_checkbox);
+	 * // add a menu item
+	 * menu.addMenuItem("item", feedback_item);
+	 * // add another menu item
+	 * menu.addMenuItem("item 2", feedback_item);
+	 * 
+	 * // find the index of the checkbox
+	 * var idx = menu.getItemIndexByText("check");
+	 * // remove the checkbox by its index
+	 * menu.removeItem(idx);
+	 * // remove both radiobuttons by their indices
+	 * menu.removeItem([0, 1]);
+	 * // remove all remaining entries
+	 * menu.removeAllItems();
+	 * // add back an item
+	 * menu.addMenuItem("new item", feedback_item);
+	 * 
+	 * @param text
+	 */
+	public int js_getItemIndexByText(String text)
 	{
-		if (name == null || "".equals(name)) //$NON-NLS-1$
+		if (text == null || "".equals(text)) //$NON-NLS-1$
 		{
-			Debug.error("You can not search for a name with a null or empty value."); //$NON-NLS-1$
+			Debug.error("You can not search for a text with a null or empty value."); //$NON-NLS-1$
 			return -1;
 		}
 
 		for (int i = 0; i < menu.getMenuItemCount(); i++)
 		{
 			IMenuItem menuItem = menu.getMenuItem(i);
-			if (menuItem != null && name.equals(menuItem.getText()))
+			if (menuItem != null && text.equals(menuItem.getText()))
 			{
 				return i;
 			}
@@ -260,6 +568,13 @@ public abstract class AbstractMenu implements IScriptObject
 		return -1;
 	}
 
+	/**
+	 * Get the radiobutton at the selected index (starting at 0).
+	 *
+	 * @sampleas js_getCheckBox(int)
+	 * 
+	 * @param index
+	 */
 	public RadioButton js_getRadioButton(int index)
 	{
 		AbstractMenuItem item = js_getItem(index);
@@ -276,6 +591,13 @@ public abstract class AbstractMenu implements IScriptObject
 		return js_getMenu(index);
 	}
 
+	/**
+	 * Get the submenu at the selected index (starting at 0).
+	 *
+	 * @sampleas js_getCheckBox(int)
+	 * 
+	 * @param index
+	 */
 	public Menu js_getMenu(int index)
 	{
 		IMenuItem menuItem = menu.getMenuItem(index);
@@ -286,11 +608,24 @@ public abstract class AbstractMenu implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Remove all items from the menu.
+	 *
+	 * @sampleas js_getItemIndexByText(String)
+	 */
 	public void js_removeAllItems()
 	{
 		menu.removeAllItems();
 	}
 
+	/**
+	 * Remove the item(s) at the selected index/indices.
+	 *
+	 * @sampleas js_getItemIndexByText(String)
+	 *
+	 * @param index_1 
+	 * @param index_2_to_n optional 
+	 */
 	public void js_removeItem(Object[] index) throws PluginException
 	{
 		if (index == null)
@@ -313,11 +648,46 @@ public abstract class AbstractMenu implements IScriptObject
 		}
 	}
 
+	/**
+	 * Sets the value for the specified element client property key.
+	 *
+	 * @sampleas js_getClientProperty(Object)
+	 * 
+	 * @param key
+	 * @param value
+	 */
 	public void js_putClientProperty(Object key, Object value)
 	{
 		menu.putClientProperty(key, value);
 	}
 
+	/**
+	 * Gets the specified client property for the element based on a key.
+	 *
+	 * @sample
+	 * // NOTE: Depending on the operating system, a user interface property name may be available.
+	 * // add a new menu to the menubar
+	 * var menubar = plugins.window.getMenuBar();
+	 * var menu = menubar.addMenu();
+	 * menu.text = "New Menu";
+	 * // alternatively create a popup menu
+	 * //var menu = plugins.window.createPopupMenu();
+	 * 
+	 * // add an item to the menu
+	 * menu.addMenuItem("item", feedback_item);
+	 * 
+	 * // set the tooltip of the menu via client properties
+	 * // keep the original tooltip in a form or global variable
+	 * originalTooltip = menu.getClientProperty("ToolTipText");
+	 * menu.putClientProperty("ToolTipText", "changed tooltip");
+	 * 
+	 * // later restore the original tooltip from the variable
+	 * //var menubar = plugins.window.getMenuBar();
+	 * //var menu = menubar.getMenu(menubar.getMenuCount()-1);
+	 * //menu.putClientProperty("ToolTipText", originalTooltip);
+	 * 
+	 * @param key
+	 */
 	public Object js_getClientProperty(Object key)
 	{
 		return menu.getClientProperty(key);
@@ -326,511 +696,6 @@ public abstract class AbstractMenu implements IScriptObject
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("addMenuItem".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "[name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
-		}
-		if ("addCheckBox".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "[name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
-		}
-		if ("addRadioButton".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "[name]", "[method]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
-		}
-		if ("getItem".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "index" }; //$NON-NLS-1$ 
-		}
-		if ("getCheckBox".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "index" }; //$NON-NLS-1$ 
-		}
-		if ("getRadioButton".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "index" }; //$NON-NLS-1$ 
-		}
-		if ("removeItem".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "index 1", "[index 2-n]" }; //$NON-NLS-1$ //$NON-NLS-2$ 
-		}
-		if ("addMenu".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "[name]", "[menu]", "[icon]", "[mnemonic]", "[enabled]", "[align]", };
-		}
-		if ("getMenu".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "index" }; //$NON-NLS-1$ 
-		}
-		if ("getItemIndexByText".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "name" }; //$NON-NLS-1$ 
-		}
-		if ("putClientProperty".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "key", "value" }; //$NON-NLS-1$ 
-		}
-		if ("getClientProperty".equals(methodName)) //$NON-NLS-1$ 
-		{
-			return new String[] { "key" }; //$NON-NLS-1$ 
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		StringBuilder sample = new StringBuilder();
-		if ("getItemCount".equals(methodName)) //$NON-NLS-1$ 
-		{
-			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ 
-			sample.append("// REMARK: indexes start at 0, disabled items, non visible items and seperators are counted also\n"); //$NON-NLS-1$ 
-			sample.append("// REMARK: this is especially important when getting items by the index\n"); //$NON-NLS-1$ 
-			sample.append("application.output(plugins.window.getMenu(0).getItemCount());\n"); //$NON-NLS-1$ 
-		}
-		else if ("addMenuItem".equals(methodName) || "setIcon".equals(methodName)) //$NON-NLS-1$ 
-		{
-			sample.append("// " + getToolTip(methodName) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ 
-			sample.append("// get the menu at the last index\n"); //$NON-NLS-1$ 
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n"); //$NON-NLS-1$ 
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("// when you don't define an index the item will be added at the last position\n"); //$NON-NLS-1$ 
-			sample.append("// this is what you usually do to build a new menu\n"); //$NON-NLS-1$ 
-			sample.append("// create the settings for the specified menu item\n"); //$NON-NLS-1$ 
-			sample.append("// minimum settings are the text and method properties\n"); //$NON-NLS-1$ 
-			sample.append("// the method can be a global or form method\n"); //$NON-NLS-1$ 
-			sample.append("// be sure to enter the method WITHOUT '()' at the end\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem(\"item with feedback\",globals.feedback_item);\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem();\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("// add an 'input' array. the array will be concatenated to the end of the arguments\n"); //$NON-NLS-1$ 
-			sample.append("// array which can be read out in the selected method\n"); //$NON-NLS-1$ 
-			sample.append("var input = [1,\"is\",\"the\",\"added\",\"input\",false];\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("item.text = \"item with input\";\n"); //$NON-NLS-1$ 
-			sample.append("item.setMethod(globals.feedback_item,input);\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem();\n"); //$NON-NLS-1$ 
-			sample.append("// add an icon to the item\n"); //$NON-NLS-1$ 
-			sample.append("item.text = \"item with icon\";\n"); //$NON-NLS-1$ 
-			sample.append("item.setMethod(globals.feedback_item, input);\n"); //$NON-NLS-1$ 
-			sample.append("item.setIcon(\"media:///yourimage.gif\");\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem();\n"); //$NON-NLS-1$ 
-			sample.append("// add an accelerator key ('alt shift 2' in the below example)\n"); //$NON-NLS-1$ 
-			sample.append("// REMARK: always test the accelerator key. sometimes they will not work because\n"); //$NON-NLS-1$ 
-			sample.append("// these keys already have an 'action' assigned to them via the operating system.\n"); //$NON-NLS-1$ 
-			sample.append("item.text = \"item with accelerator\";\n"); //$NON-NLS-1$ 
-			sample.append("item.setMethod(globals.feedback_item, input);\n"); //$NON-NLS-1$ 
-			sample.append("item.setIcon(\"media:///yourimage.gif\");\n"); //$NON-NLS-1$ 
-			sample.append("item.setAccelerator(\"alt shift 2\");\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem();\n"); //$NON-NLS-1$ 
-			sample.append("// add a mnemonic key  ('i' in our example) which is the underlined shortkey on windows\n"); //$NON-NLS-1$ 
-			sample.append("// REMARK: setting the mnemonic key is platform dependent\n"); //$NON-NLS-1$ 
-			sample.append("// the accelerator key will not work in this and the next example\n"); //$NON-NLS-1$ 
-			sample.append("item.text = \"item with mnemonic\";\n"); //$NON-NLS-1$ 
-			sample.append("item.setMethod(globals.feedback_item, input);\n"); //$NON-NLS-1$ 
-			sample.append("item.setIcon(\"media:///yourimage.gif\");\n"); //$NON-NLS-1$ 
-			sample.append("item.setAccelerator(\"pressed COMMA\");\n"); //$NON-NLS-1$ 
-			sample.append("item.setMnemonic(\"i\");\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("// create a disabled menu item\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem(\"item disabled\",globals.feedback_item,\"media:///yourimage.gif\",\"t\",false);\n"); //$NON-NLS-1$ 
-			sample.append("// set the method args\n"); //$NON-NLS-1$ 
-			sample.append("item.setMethodArguments(input);\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem(\"item visible\",globals.feedback_item,\"media:///yourimage.gif\",\"e\");\n"); //$NON-NLS-1$ 
-			sample.append("// this accelerator key will work\n"); //$NON-NLS-1$ 
-			sample.append("item.setAccelerator(\"shift meta PAGE_DOWN\");\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("var item = menu.addMenuItem(\"item invisible\",globals.feedback_item,\"media:///yourimage.gif\");\n"); //$NON-NLS-1$ 
-			sample.append("// now the item is enabled and NOT visible\n"); //$NON-NLS-1$ 
-			sample.append("item.setVisible(false);\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$ 
-			sample.append("// add a separator at the last position or at a given index\n"); //$NON-NLS-1$ 
-			sample.append("menu.addSeparator();\n"); //$NON-NLS-1$ 
-			sample.append("return;\n"); //$NON-NLS-1$ 
-			sample.append("\n"); //$NON-NLS-1$  
-		}
-		else if ("getItem".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last position\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("var item = menu.getItem(0);\n");
-			sample.append("\n");
-			sample.append("item.setText(\"Changed menu item\");\n");
-			sample.append("\n");
-			sample.append("// REMARK: we actually changed an original menu (item)! As a result resetting the\n");
-			sample.append("// menubar will NOT reset the above changes. We need to reset the menu (item)\n");
-			sample.append("// manually the following way:\n");
-			sample.append("\n");
-			sample.append("// get the menu\n");
-			sample.append("// var menu = plugins.window.getMenu(2);\n");
-			sample.append("\n");
-			sample.append("// get the item\n");
-			sample.append("// var item = menu.getItem(0);\n");
-			sample.append("\n");
-			sample.append("// reset the values to default\n");
-			sample.append("// notice we use an i18n message here the same way you would use it with\n");
-			sample.append("// standard Servoy methods and plugins\n");
-			sample.append("// item.setText(\"i18n:servoy.menuitem.viewAsRecord\");\n");
-		}
-		else if ("addCheckBox".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last index\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("// when you don't define an index the checkbox will be added at the last position\n");
-			sample.append("// this is what you usually do to build a new menu\n");
-			sample.append("// minimum settings are the text and method properties\n");
-			sample.append("// the method can be a global or form method\n");
-			sample.append("// be sure to enter the method WITHOUT '()' at the end\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox with feedback\",feedback_checkbox);\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox selected\",feedback_checkbox);\n");
-			sample.append("// set the checkbox to selected\n");
-			sample.append("checkbox.setSelected(true);\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox with input\");\n");
-			sample.append("\n");
-			sample.append("// add an 'input' array. the array will be concatenated to the end of the arguments\n");
-			sample.append("// array which can be read out in the selected method\n");
-			sample.append("var input = [1,\"is\",\"the\",\"added\",\"input\",false];\n");
-			sample.append("\n");
-			sample.append("checkbox.setMethod(feedback_checkbox, input);\n");
-			sample.append("\n");
-			sample.append("// create a checkbox with an icon\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox with icon\",feedback_checkbox,\"media:///yourimage.gif\");\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox with accelerator\",feedback_checkbox,\"media:///yourimage.gif\");\n");
-			sample.append("// add an accelerator key ('alt shift a' in the below example)\n");
-			sample.append("// REMARK: always test the accelerator key. sometimes they will not work because\n");
-			sample.append("// these keys already have an 'action' assigned to them via the operating system.\n");
-			sample.append("checkbox.setAccelerator(\"alt shift a\");\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox with mnemonic\",feedback_checkbox,false,input,\"media:///yourimage.gif\");\n");
-			sample.append("// add a mnemonic key  ('i' in our example) which is the underlined shortkey on windows\n");
-			sample.append("// REMARK: setting the mnemonic key is platform dependent\n");
-			sample.append("checkbox.setMnemonic(\"i\");\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox disabled\",feedback_checkbox);\n");
-			sample.append("// disable the menu item\n");
-			sample.append("checkbox.setEnabled(false);\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.addCheckBox(\"checkbox invisible\",feedback_checkbox);\n");
-			sample.append("// set the menu item disabled and NOT visible\n");
-			sample.append("checkbox.setVisible(false);\n");
-			sample.append("\n");
-			sample.append("// add a separator at the last position or at a given index\n");
-			sample.append("menu.addSeparator();\n");
-			sample.append("\n");
-		}
-		else if ("getCheckBox".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last position\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.getCheckBox(0);\n");
-			sample.append("\n");
-			sample.append("checkbox.setText(\"Changed menu item\");\n");
-			sample.append("\n");
-			sample.append("// REMARK: we actually changed an original menu (item)! As a result resetting the\n");
-			sample.append("// menubar will NOT reset the above changes. We need to reset the menu (item)\n");
-			sample.append("// manually the following way:\n");
-			sample.append("\n");
-			sample.append("// get the menu\n");
-			sample.append("// var menu = plugins.window.getMenu(2);\n");
-			sample.append("\n");
-			sample.append("// get the item\n");
-			sample.append("// var item = menu.getItem(0);\n");
-			sample.append("\n");
-			sample.append("// reset the values to default\n");
-			sample.append("// notice we use an i18n message here the same way you would use it with\n");
-			sample.append("// standard Servoy methods and plugins\n");
-			sample.append("// item.setText(\"i18n:servoy.menuitem.viewAsRecord\");\n");
-		}
-		else if ("addRadioGroup".equals(methodName) || "addRadioButton".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last index\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("// add a new Radiobutton group\n");
-			sample.append("// a group will 'bind' all added radiobuttons after the group together\n");
-			sample.append("// as a result checking one item will uncheck the other\n");
-			sample.append("menu.addRadioGroup();\n");
-			sample.append("\n");
-			sample.append("// when you don't define an index the radiobutton will be added at the last position\n");
-			sample.append("// this is what you usually do to build a new menu\n");
-			sample.append("\n");
-			sample.append("// create the settings for the specified menu item\n");
-			sample.append("// minimum settings are the text and method properties\n");
-			sample.append("// the method can be a global or form method\n");
-			sample.append("// be sure to enter the method WITHOUT '()' at the end\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton with feedback\",feedback_radiobutton);\n");
-			sample.append("\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton selected\",feedback_radiobutton);\n");
-			sample.append("// set the radiobutton to selected\n");
-			sample.append("radiobutton.setSelected(true);\n");
-			sample.append("\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton with input\");\n");
-			sample.append("\n");
-			sample.append("// add an 'input' array. the array will be concatenated to the end of the arguments\n");
-			sample.append("// array which can be read out in the selected method\n");
-			sample.append("var input = [1,\"is\",\"the\",\"added\",\"input\",false];\n");
-			sample.append("\n");
-			sample.append("radiobutton.setMethod(feedback_radiobutton,input);\n");
-			sample.append("\n");
-			sample.append("// create an item with an icon\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton with icon\",feedback_radiobutton,\"media:///yourimage.gif\");\n");
-			sample.append("\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton with accelerator\",feedback_radiobutton);\n");
-			sample.append("// add an accelerator key ('alt shift 3' in the below example)\n");
-			sample.append("// REMARK: always test the accelerator key. sometimes they will not work because\n");
-			sample.append("// these keys already have an 'action' assigned to them via the operating system.\n");
-			sample.append("radiobutton.setAccelerator(\"alt shift 3\");\n");
-			sample.append("\n");
-			sample.append("// add a separator at the last position or at a given index\n");
-			sample.append("menu.addSeparator();\n");
-			sample.append("\n");
-			sample.append("// add a new Radiobutton group\n");
-			sample.append("menu.addRadioGroup();\n");
-			sample.append("\n");
-			sample.append("// add a mnemonic key  ('i' in our example) which is the underlined shortkey on windows\n");
-			sample.append("// REMARK: setting the mnemonic key is platform dependent\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton with mnemonic\",feedback_radiobutton,\"media:///yourimage.gif\",\"i\");\n");
-			sample.append("\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton disabled\",feedback_radiobutton);\n");
-			sample.append("// disable the menu item\n");
-			sample.append("radiobutton.setEnabled(false);\n");
-			sample.append("\n");
-			sample.append("var radiobutton = menu.addRadioButton(\"radiobutton invisible\",feedback_radiobutton);\n");
-			sample.append("// now the item is enabled and NOT visible\n");
-			sample.append("radiobutton.setVisible(false);\n");
-			sample.append("\n");
-			sample.append("// add a separator at the last position or at a given index\n");
-			sample.append("menu.addSeparator();\n");
-			sample.append("\n");
-		}
-		else if ("getRadioButton".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last position\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.getItem(0);\n");
-			sample.append("\n");
-			sample.append("checkbox.setText(\"Changed menu item\");\n");
-			sample.append("\n");
-			sample.append("// REMARK: we actually changed an original menu (item)! As a result resetting the\n");
-			sample.append("// menubar will NOT reset the above changes. We need to reset the menu (item)\n");
-			sample.append("// manually the following way:\n");
-			sample.append("\n");
-			sample.append("// get the menu\n");
-			sample.append("// var menu = plugins.window.getMenu(2);\n");
-			sample.append("\n");
-			sample.append("// get the item\n");
-			sample.append("// var item = menu.getItem(0);\n");
-			sample.append("\n");
-			sample.append("// reset the values to default\n");
-			sample.append("// notice we use an i18n message here the same way you would use it with\n");
-			sample.append("// standard Servoy methods and plugins\n");
-			sample.append("// item.setText(\"i18n:servoy.menuitem.viewAsRecord\");\n");
-		}
-		else if ("removeItem".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last index\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("// remove only one item at the selected index\n");
-			sample.append("// from the selected menu\n");
-			sample.append("// menu.removeItem(0);\n");
-			sample.append("\n");
-			sample.append("// remove more than one item at the selected indices\n");
-			sample.append("// from the selected menu\n");
-			sample.append("menu.removeItem(1,2);\n");
-		}
-		else if ("removeAllItems".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last index\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("// remove all menu items from the selected menu\n");
-			sample.append("menu.removeAllItems();\n");
-		}
-		else if ("addSeparator".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("plugins.window.getMenu(0).addSeparator();\n");
-		}
-		else if ("addMenu".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last index\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("// add a (first) submenu\n");
-			sample.append("var submenu1 = menu.addMenu(\"submenu 1\");\n");
-			sample.append("submenu1.addMenuItem(\"sub item 1\",globals.feedback_item);\n");
-			sample.append("\n");
-			sample.append("// add a (second) submenu\n");
-			sample.append("var submenu2 = submenu1.addMenu(\"submenu 2\");\n");
-			sample.append("submenu2.addMenuItem(\"sub item 2\",globals.feedback_item);\n");
-			sample.append("\n");
-			sample.append("// add a (third) submenu\n");
-			sample.append("var submenu3 = submenu1.addMenu(\"submenu 3\");\n");
-			sample.append("submenu3.addMenuItem(\"sub item 3\",globals.feedback_item);\n");
-			sample.append("\n");
-			sample.append("// add a (first) submenu to the (third) submenu\n");
-			sample.append("var submenu4 = submenu3.addMenu(\"submenu 4\");\n");
-			sample.append("submenu4.addMenuItem(\"sub item 4\",globals.feedback_item);\n");
-			sample.append("\n");
-			sample.append("// add a (first) submenu to the (first) submenu of the (third) submenu\n");
-			sample.append("var submenu5 = submenu4.addMenu(\"submenu 5\");\n");
-			sample.append("submenu5.addMenuItem(\"sub item 5\",globals.feedback_item);\n");
-		}
-		else if ("getMenu".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// get the menu at the last position\n");
-			sample.append("// indexes start at 0 (zero) so index 2 is in fact position 3\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("\n");
-			sample.append("var checkbox = menu.getMenu(0);\n");
-			sample.append("\n");
-			sample.append("checkbox.setText(\"Changed menu item\");\n");
-		}
-		else if ("putClientProperty".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n");
-			sample.append("plugins.window.putClientProperty('ToolTipText','some text');\n");
-		}
-		else if ("getClientProperty".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// NOTE: Depending on the operating system, a user interface property name may be available.\n");
-			sample.append("var property = plugins.window.getClientProperty('ToolTipText');\n");
-		}
-		else if ("getItemIndexByText".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("// Retrieve the index of the item by text.\n");
-			sample.append("var menu = plugins.window.getMenu(plugins.window.getMenuCount() - 1);\n");
-			sample.append("var itemIndex = menu.getItemIndexByText(\"someItemText\");\n");
-			sample.append("//menu.removeItem(itemIndex);\n");
-		}
-		else
-		{
-			return null;
-		}
-		return sample.toString();
-	}
-
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("getItemCount".equals(methodName))
-		{
-			return "Get the number of items in the menu.";
-		}
-		if ("addMenuItem".equals(methodName))
-		{
-			return "Add the item at the selected index (starting at 0) or add it at the end (empty).";
-		}
-		if ("addCheckBox".equals(methodName))
-		{
-			return "Add the Checkbox at the selected index (starting at 0) or add it at the end (empty).";
-		}
-		if ("addRadioButton".equals(methodName))
-		{
-			return "Add the Radiobutton at the selected index (starting at 0) or add it at the end (empty).";
-		}
-		if ("addRadioGroup".equals(methodName))
-		{
-			return "Add a Radiogroup for the Radiobuttons.";
-		}
-		if ("addSeparator".equals(methodName))
-		{
-			return "Add the separator at the selected index (starting at 0) or add it at the end (empty).";
-		}
-		if ("getItem".equals(methodName))
-		{
-			return "Get the item at the selected index (starting at 0).";
-		}
-		if ("getCheckBox".equals(methodName))
-		{
-			return "Get the Checkbox at the selected index (starting at 0).";
-		}
-		if ("getRadioButton".equals(methodName))
-		{
-			return "Get the Radiobutton at the selected index (starting at 0).";
-		}
-		if ("removeItem".equals(methodName))
-		{
-			return "Remove the item(s) at the selected index/indices.";
-		}
-		if ("removeAllItems".equals(methodName))
-		{
-			return "Remove all items from the menu.";
-		}
-		if ("addMenu".equals(methodName))
-		{
-			return "Add the submenu at the selected index (starting at 0) or add it at the end (empty).";
-		}
-		if ("getMenu".equals(methodName))
-		{
-			return "Get the submenu at the selected index (starting at 0).";
-		}
-		if ("getItemIndexByText".equals(methodName))
-		{
-			return "Retrieve the index of the item by text.";
-		}
-		if ("putClientProperty".equals(methodName))
-		{
-			return "Sets the value for the specified element client property key.";
-		}
-		if ("getClientProperty".equals(methodName))
-		{
-			return "Gets the specified client property for the element based on a key.";
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public boolean isDeprecated(String methodName)
-	{
-		if ("addItem".equals(methodName))
-		{
-			return true;
-		}
-		if ("addSubMenu".equals(methodName) || "getSubMenu".equals(methodName))
-		{
-			return true;
-		}
-		return false;
 	}
 
 	public static MenuItemArgs parseMenuItemArgs(IClientPluginAccess pluginAccess, Object[] args)
