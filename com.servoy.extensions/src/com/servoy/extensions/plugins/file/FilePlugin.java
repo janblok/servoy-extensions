@@ -27,7 +27,7 @@ import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * The main {@link IClientPlugin} implementation
@@ -67,7 +67,7 @@ public class FilePlugin implements IClientPlugin
 		}
 	}
 
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		if (fileProvider == null)
 		{
@@ -95,6 +95,10 @@ public class FilePlugin implements IClientPlugin
 	public void unload() throws PluginException
 	{
 		access = null;
+		if (fileProvider != null)
+		{
+			fileProvider.unload();
+		}
 		fileProvider = null;
 
 	}

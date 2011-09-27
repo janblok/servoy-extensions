@@ -148,11 +148,6 @@ public class WebFileProvider extends FileProvider
 		return super.writeTXT(f, data, encoding, contentType);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.servoy.extensions.plugins.file.FileProvider#js_streamFilesToServer(java.lang.Object, java.lang.Object, org.mozilla.javascript.Function)
-	 */
 	@SuppressWarnings("nls")
 	@Override
 	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object s, final Function callback)

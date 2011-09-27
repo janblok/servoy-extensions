@@ -56,7 +56,8 @@ import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.FileChooserUtils;
 import com.servoy.j2db.util.Utils;
@@ -65,7 +66,7 @@ import com.servoy.j2db.util.Utils;
  * @author jcompagner
  * @author Servoy Stuff
  */
-public class FileProvider implements IScriptObject
+public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
 
 	protected final FilePlugin plugin;
@@ -91,6 +92,13 @@ public class FileProvider implements IScriptObject
 		this.plugin = plugin;
 	}
 
+	/**
+	 * Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.
+	 *
+	 * @sample
+	 * var d = plugins.file.getDesktopFolder();
+	 * application.output('desktop folder is: ' + d.getAbsolutePath());
+	 */
 	public JSFile js_getDesktopFolder()
 	{
 		// in Unix-based systems, the root directory is "/", not ~<user>/Desktop => old implementation not correct
@@ -116,6 +124,13 @@ public class FileProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * Returns a JSFile instance corresponding to the home folder of the logged in used.
+	 *
+	 * @sample
+	 * var d = plugins.file.getHomeFolder();
+	 * application.output('home folder: ' + d.getAbsolutePath());
+	 */
 	public JSFile js_getHomeFolder()
 	{
 		return new JSFile(new File(System.getProperty("user.home"))); //$NON-NLS-1$
@@ -146,6 +161,39 @@ public class FileProvider implements IScriptObject
 		return file;
 	}
 
+	/**
+	 * Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)
+	 *
+	 * @sample
+	 * // This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+	 * // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+	 * /** @type {JSFile} *&#47;
+	 * var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+	 * application.output('File: ' + f.getName());
+	 * application.output('is dir: ' + f.isDirectory());
+	 * application.output('is file: ' + f.isFile());
+	 * application.output('path: ' + f.getAbsolutePath());
+	 * 
+	 * // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+	 * /** @type {JSFile[]} *&#47;
+	 * var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif"));
+	 * for (var i = 0; i < files.length; i++)
+	 * {
+	 * 	 application.output('File: ' + files[i].getName());
+	 * 	 application.output('content type: ' + files[i].getContentType());
+	 * 	 application.output('last modified: ' + files[i].lastModified());
+	 * 	 application.output('size: ' + files[i].size());
+	 * }
+	 * //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)
+	 * var file = plugins.file.showFileOpenDialog(myCallbackMethod)
+	 *
+	 * @param selectionMode optional 0=both,1=Files,2=Dirs 
+	 * @param startDirectory optional null=default/previous 
+	 * @param multiselect optional true/false 
+	 * @param filterarray optional 
+	 * @param callbackmethod optional 
+	 * @param dialog_title_text optional 
+	 */
 	public Object js_showFileOpenDialog(Object[] args)
 	{
 		int selection = JFileChooser.FILES_ONLY;
@@ -290,6 +338,20 @@ public class FileProvider implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.
+	 *
+	 * @sample
+	 * var files = plugins.file.getFolderContents('stories', '.txt');
+	 * for (var i=0; i<files.length; i++)
+	 * 	application.output(files[i].getAbsolutePath());
+	 *
+	 * @param targetFolder 
+	 * @param fileFilter optional 
+	 * @param fileOption optional 1=files, 2=dirs 
+	 * @param visibleOption optional 1=visible, 2=nonvisible 
+	 * @param lockedOption optional 1=locked, 2=nonlocked 
+	 */
 	public JSFile[] js_getFolderContents(Object[] options)
 	{
 		Object path = options[0];
@@ -382,6 +444,22 @@ public class FileProvider implements IScriptObject
 		return jsFiles;
 	}
 
+	/**
+	 * Moves the file from the source to the destination place. Returns true on success, false otherwise.
+	 *
+	 * @sample
+	 * // Move file based on names.
+	 * if (!plugins.file.moveFile('story.txt','story.txt.new'))
+	 * 	application.output('File move failed.');
+	 * // Move file based on JSFile instances.
+	 * var f = plugins.file.convertToJSFile('story.txt.new');
+	 * var fmoved = plugins.file.convertToJSFile('story.txt');
+	 * if (!plugins.file.moveFile(f, fmoved))
+	 * 	application.output('File move back failed.');
+	 *
+	 * @param source 
+	 * @param destination 
+	 */
 	public boolean js_moveFile(Object source, Object destination)
 	{
 		File sourceFile = convertToFile(source);
@@ -424,6 +502,16 @@ public class FileProvider implements IScriptObject
 		return new JSFile(new File(fileName));
 	}
 
+	/**
+	 * Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).
+	 *
+	 * @sample
+	 * var f = plugins.file.convertToJSFile("story.txt");
+	 * if (f.canRead())
+	 * 	application.output("File can be read.");
+	 *
+	 * @param file 
+	 */
 	public JSFile js_convertToJSFile(Object file)
 	{
 		if (file instanceof JSFile) return (JSFile)file;
@@ -440,6 +528,22 @@ public class FileProvider implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Copies the sourcefolder to the destination folder, recursively. Returns true if the copy succeeds, false if any error occurs.
+	 *
+	 * @sample
+	 * // Copy folder based on names.
+	 * if (!plugins.file.copyFolder("stories", "stories_copy"))
+	 * 	application.output("Folder copy failed.");
+	 * // Copy folder based on JSFile instances.
+	 * var d = plugins.file.createFile("stories");
+	 * var dcopy = plugins.file.createFile("stories_copy_2");
+	 * if (!plugins.file.copyFolder(d, dcopy))
+	 * 	application.output("Folder copy failed.");
+	 *
+	 * @param source 
+	 * @param destination 
+	 */
 	public boolean js_copyFolder(Object source, Object destination)
 	{
 		File sourceDir = convertToFile(source);
@@ -491,6 +595,22 @@ public class FileProvider implements IScriptObject
 		return succes;
 	}
 
+	/**
+	 * Copies the source file to the destination file. Returns true if the copy succeeds, false if any error occurs.
+	 *
+	 * @sample
+	 * // Copy based on file names.
+	 * if (!plugins.file.copyFile("story.txt", "story.txt.copy"))
+	 * 	application.output("Copy failed.");
+	 * // Copy based on JSFile instances.
+	 * var f = plugins.file.createFile("story.txt");
+	 * var fcopy = plugins.file.createFile("story.txt.copy2");
+	 * if (!plugins.file.copyFile(f, fcopy))
+	 * 	application.output("Copy failed.");
+	 *
+	 * @param source 
+	 * @param destination 
+	 */
 	public boolean js_copyFile(Object source, Object destination)
 	{
 		File sourceFile = convertToFile(source);
@@ -573,6 +693,16 @@ public class FileProvider implements IScriptObject
 
 	}
 
+	/**
+	 * Creates a folder on disk. Returns true if the folder is successfully created, false if any error occurs.
+	 *
+	 * @sample
+	 * var d = plugins.file.convertToJSFile("newfolder");
+	 * if (!plugins.file.createFolder(d))
+	 * 	application.output("Folder could not be created.");
+	 *
+	 * @param destination 
+	 */
 	public boolean js_createFolder(Object destination)
 	{
 		File destFile = convertToFile(destination);
@@ -586,6 +716,15 @@ public class FileProvider implements IScriptObject
 		return b;
 	}
 
+	/**
+	 * Removes a file from disk. Returns true on success, false otherwise.
+	 *
+	 * @sample
+	 * if (plugins.file.deleteFile('story.txt'))
+	 * 	application.output('File deleted.');
+	 *
+	 * @param destination 
+	 */
 	public boolean js_deleteFile(Object destination)
 	{
 		if (destination instanceof JSFile && ((JSFile)destination).getAbstractFile() instanceof RemoteFile)
@@ -595,14 +734,24 @@ public class FileProvider implements IScriptObject
 		return js_deleteFolder(destination, true);
 	}
 
-	public boolean js_deleteFolder(Object destination, boolean warning)
+	/**
+	 * Deletes a folder from disk recursively. Returns true on success, false otherwise. If the second parameter is set to true, then a warning will be issued to the user before actually removing the folder.
+	 *
+	 * @sample
+	 * if (plugins.file.deleteFolder('stories', true))
+	 * 	application.output('Folder deleted.');
+	 *
+	 * @param destination 
+	 * @param showWarning 
+	 */
+	public boolean js_deleteFolder(Object destination, boolean showWarning)
 	{
 		File destFile = convertToFile(destination);
 		if (destFile == null) return false;
 
 		if (destFile.isDirectory())
 		{
-			if (warning)
+			if (showWarning)
 			{
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
@@ -622,6 +771,15 @@ public class FileProvider implements IScriptObject
 		return destFile.delete();
 	}
 
+	/**
+	 * Returns the size of the specified file.
+	 *
+	 * @sample
+	 * var f = plugins.file.convertToJSFile('story.txt');
+	 * application.output('file size: ' + plugins.file.getFileSize(f));
+	 *
+	 * @param path 
+	 */
 	public long js_getFileSize(Object path)
 	{
 		File file = convertToFile(path);
@@ -629,6 +787,15 @@ public class FileProvider implements IScriptObject
 		return file.length();
 	}
 
+	/**
+	 * Returns the modification date of a file.
+	 *
+	 * @sample
+	 * var f = plugins.file.convertToJSFile('story.txt');
+	 * application.output('last changed: ' + plugins.file.getModificationDate(f));
+	 *
+	 * @param path 
+	 */
 	public Date js_getModificationDate(Object path)
 	{
 		File file = convertToFile(path);
@@ -636,6 +803,14 @@ public class FileProvider implements IScriptObject
 		return new Date(file.lastModified());
 	}
 
+	/**
+	 * Returns an Array of JSFile instances correponding to the file system root folders.
+	 *
+	 * @sample
+	 * var roots = plugins.file.getDiskList();
+	 * for (var i = 0; i < roots.length; i++)
+	 * 	application.output(roots[i].getAbsolutePath());
+	 */
 	public JSFile[] js_getDiskList()
 	{
 		File[] roots = File.listRoots();
@@ -647,6 +822,17 @@ public class FileProvider implements IScriptObject
 		return jsRoots;
 	}
 
+	/**
+	 * Creates a temporary file on disk. A prefix and an extension are specified and they will be part of the file name.
+	 *
+	 * @sample
+	 * var tempFile = plugins.file.createTempFile('myfile','.txt');
+	 * application.output('Temporary file created as: ' + tempFile.getAbsolutePath());
+	 * plugins.file.writeTXTFile(tempFile, 'abcdefg');
+	 *
+	 * @param prefix 
+	 * @param suffix 
+	 */
 	@SuppressWarnings("nls")
 	public JSFile js_createTempFile(String prefix, String suffix)
 	{
@@ -666,11 +852,39 @@ public class FileProvider implements IScriptObject
 		}
 	}
 
-	public JSFile js_createFile(Object name)
+	/**
+	 * Creates a JSFile instance. Does not create the file on disk.
+	 *
+	 * @sample
+	 * // Create the JSFile instance based on the file name.
+	 * var f = plugins.file.createFile("newfile.txt");
+	 * // Create the file on disk.
+	 * if (!f.createNewFile())
+	 * 	application.output("The file could not be created.");
+	 *
+	 * @param targetFile 
+	 */
+	public JSFile js_createFile(Object targetFile)
 	{
-		return js_convertToJSFile(name);
+		return js_convertToJSFile(targetFile);
 	}
 
+	/**
+	 * Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
+	 *
+	 * @sample
+	 * var fileNameSuggestion = 'myspecialexport.tab'
+	 * 	var textData = 'load of data...'
+	 * 	var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+	 * 	if (!success) application.output('Could not write file.');
+	 * 	// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+	 * 	// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+	 *
+	 * @param file 
+	 * @param text_data 
+	 * @param charsetname optional 
+	 * @param mimeType optional 
+	 */
 	@SuppressWarnings("nls")
 	public boolean js_writeTXTFile(Object[] args)
 	{
@@ -690,8 +904,7 @@ public class FileProvider implements IScriptObject
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
-	String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
 	{
 		try
 		{
@@ -763,40 +976,85 @@ public class FileProvider implements IScriptObject
 		return true;
 	}
 
+	/**
+	 * @clonedesc js_writeXMLFile(Object, String)
+	 * @sampleas js_writeXMLFile(Object, String)
+	 * 
+	 * @param file
+	 * @param xml_data
+	 * @param encoding
+	 */
 	@SuppressWarnings("nls")
-	public boolean js_writeXMLFile(Object f, String xml, String encoding)
+	public boolean js_writeXMLFile(Object file, String xml_data, String encoding)
 	{
-		if (xml == null) return false;
-		return writeTXT(f == null ? "file.xml" : f, xml, encoding, "text/xml");
+		if (xml_data == null) return false;
+		return writeTXT(file == null ? "file.xml" : file, xml_data, encoding, "text/xml");
 	}
 
+	/**
+	 * Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
+	 *
+	 * @sample
+	 * var fileName = 'form.xml'
+	 * var xml = controller.printXML()
+	 * var success = plugins.file.writeXMLFile(fileName, xml);
+	 * if (!success) application.output('Could not write file.');
+	 *
+	 * @param file 
+	 * @param xml_data 
+	 */
 	@SuppressWarnings("nls")
-	public boolean js_writeXMLFile(Object f, String xml)
+	public boolean js_writeXMLFile(Object file, String xml_data)
 	{
-		if (xml == null) return false;
+		if (xml_data == null) return false;
 
 		String encoding = "UTF-8";
-		int idx1 = xml.indexOf("encoding=");
-		if (idx1 != -1 && xml.length() > idx1 + 10)
+		int idx1 = xml_data.indexOf("encoding=");
+		if (idx1 != -1 && xml_data.length() > idx1 + 10)
 		{
-			int idx2 = xml.indexOf('"', idx1 + 10);
-			int idx3 = xml.indexOf('\'', idx1 + 10);
+			int idx2 = xml_data.indexOf('"', idx1 + 10);
+			int idx3 = xml_data.indexOf('\'', idx1 + 10);
 			int idx4 = Math.min(idx2, idx3);
 			if (idx4 != -1)
 			{
-				encoding = xml.substring(idx1 + 10, idx4);
+				encoding = xml_data.substring(idx1 + 10, idx4);
 			}
 		}
-		return writeTXT(f == null ? "file.xml" : f, xml, encoding, "text/xml");
+		return writeTXT(file == null ? "file.xml" : file, xml_data, encoding, "text/xml");
 	}
 
+	/**
+	 * Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
+	 *
+	 * @sample
+	 * var bytes = new Array();
+	 * 	for (var i=0; i<1024; i++)
+	 * 		bytes[i] = i % 100;
+	 * 	var f = plugins.file.convertToJSFile('bin.dat');
+	 * 	if (!plugins.file.writeFile(f, bytes))
+	 * 		application.output('Failed to write the file.');
+	 * 	// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+	 * 	var mimeType = 'application/vnd.ms-excel'
+	 * 	if (!plugins.file.writeFile(f, bytes, mimeType))
+	 * 		application.output('Failed to write the file.');
+	 *
+	 * @param f 
+	 * @param data 
+	 */
 	public boolean js_writeFile(Object f, byte[] data)
 	{
 		return js_writeFile(f, data, null);
 	}
 
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
-	String mimeType)
+	/**
+	 * @clonedesc js_writeFile(Object, byte[])
+	 * @sampleas js_writeFile(Object, byte[])
+	 * 
+	 * @param f
+	 * @param data
+	 * @param mimeType
+	 */
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -828,6 +1086,20 @@ public class FileProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)
+	 *
+	 * @sample
+	 * // Read content from a known text file.
+	 * var txt = plugins.file.readTXTFile('story.txt');
+	 * application.output(txt);
+	 * // Read content from a text file selected from the file open dialog.
+	 * var txtUnknown = plugins.file.readTXTFile();
+	 * application.output(txtUnknown);
+	 *
+	 * @param file optional 
+	 * @param charsetname optional 
+	 */
 	public String js_readTXTFile(Object[] args)
 	{
 		try
@@ -902,6 +1174,16 @@ public class FileProvider implements IScriptObject
 		return sb.toString();
 	}
 
+	/**
+	 * Shows a file save dialog.
+	 *
+	 * @sample
+	 * var file = plugins.file.showFileSaveDialog();
+	 * application.output("you've selected file: " + file.getAbsolutePath());
+	 *
+	 * @param fileName_dir_suggestion optional 
+	 * @param dialog_title_text optional 
+	 */
 	public JSFile js_showFileSaveDialog(Object[] args)
 	{
 		File file = null;
@@ -926,6 +1208,16 @@ public class FileProvider implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Shows a directory selector dialog.
+	 *
+	 * @sample
+	 * var dir = plugins.file.showDirectorySelectDialog();
+	 * application.output("you've selected folder: " + dir.getAbsolutePath());
+	 *
+	 * @param directory suggestion optional 
+	 * @param dialog title text optional 
+	 */
 	public JSFile js_showDirectorySelectDialog(Object[] args)
 	{
 		File f = null;
@@ -950,6 +1242,23 @@ public class FileProvider implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)
+	 *
+	 * @sample
+	 * // Read all content from the file.
+	 * var bytes = plugins.file.readFile('big.jpg');
+	 * application.output('file size: ' + bytes.length);
+	 * // Read only the first 1KB from the file.
+	 * var bytesPartial = plugins.file.readFile('big.jpg', 1024);
+	 * application.output('partial file size: ' + bytesPartial.length);
+	 * // Read all content from a file selected from the file open dialog.
+	 * var bytesUnknownFile = plugins.file.readFile();
+	 * application.output('unknown file size: ' + bytesUnknownFile.length);
+	 *
+	 * @param file optional 
+	 * @param size optional 
+	 */
 	public byte[] js_readFile(Object[] args)
 	{
 		try
@@ -991,556 +1300,6 @@ public class FileProvider implements IScriptObject
 		}
 	}
 
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("convertToJSFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var f = %%elementName%%.convertToJSFile(\"story.txt\");\n");
-			sb.append("if (f.canRead())\n");
-			sb.append("\tapplication.output(\"File can be read.\");\n");
-			return sb.toString();
-
-		}
-		else if ("copyFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Copy based on file names.\n");
-			sb.append("if (!%%elementName%%.copyFile(\"story.txt\", \"story.txt.copy\"))\n");
-			sb.append("\tapplication.output(\"Copy failed.\");\n");
-			sb.append("// Copy based on JSFile instances.\n");
-			sb.append("var f = %%elementName%%.createFile(\"story.txt\");\n");
-			sb.append("var fcopy = %%elementName%%.createFile(\"story.txt.copy2\");\n");
-			sb.append("if (!%%elementName%%.copyFile(f, fcopy))\n");
-			sb.append("\tapplication.output(\"Copy failed.\");\n");
-			return sb.toString();
-		}
-		else if ("copyFolder".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Copy folder based on names.\n");
-			sb.append("if (!%%elementName%%.copyFolder(\"stories\", \"stories_copy\"))\n");
-			sb.append("\tapplication.output(\"Folder copy failed.\");\n");
-			sb.append("// Copy folder based on JSFile instances.\n");
-			sb.append("var d = %%elementName%%.createFile(\"stories\");\n");
-			sb.append("var dcopy = %%elementName%%.createFile(\"stories_copy_2\");\n");
-			sb.append("if (!%%elementName%%.copyFolder(d, dcopy))\n");
-			sb.append("\tapplication.output(\"Folder copy failed.\");\n");
-			return sb.toString();
-		}
-		else if ("createFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Create the JSFile instance based on the file name.\n");
-			sb.append("var f = %%elementName%%.createFile(\"newfile.txt\");\n");
-			sb.append("// Create the file on disk.\n");
-			sb.append("if (!f.createNewFile())\n");
-			sb.append("\tapplication.output(\"The file could not be created.\");\n");
-			return sb.toString();
-		}
-		else if ("createFolder".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var d = %%elementName%%.convertToJSFile(\"newfolder\");\n");
-			sb.append("if (!%%elementName%%.createFolder(d))\n");
-			sb.append("\tapplication.output(\"Folder could not be created.\");\n");
-			return sb.toString();
-		}
-		else if ("createTempFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var tempFile = %%elementName%%.createTempFile('myfile','.txt');\n");
-			sb.append("application.output('Temporary file created as: ' + tempFile.getAbsolutePath());\n");
-			sb.append("%%elementName%%.writeTXTFile(tempFile, 'abcdefg');\n");
-			return sb.toString();
-		}
-		else if ("deleteFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("if (%%elementName%%.deleteFile('story.txt'))\n");
-			sb.append("\tapplication.output('File deleted.');\n");
-			return sb.toString();
-		}
-		else if ("deleteFolder".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("if (%%elementName%%.deleteFolder('stories', true))\n");
-			sb.append("\tapplication.output('Folder deleted.');\n");
-			return sb.toString();
-		}
-		else if ("getDesktopFolder".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var d = %%elementName%%.getDesktopFolder();\n");
-			sb.append("application.output('desktop folder is: ' + d.getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("getDiskList".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var roots = %%elementName%%.getDiskList();\n");
-			sb.append("for (var i = 0; i < roots.length; i++)\n");
-			sb.append("\tapplication.output(roots[i].getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("getFileSize".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
-			sb.append("application.output('file size: ' + %%elementName%%.getFileSize(f));\n");
-			return sb.toString();
-		}
-		else if ("getFolderContents".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var files = %%elementName%%.getFolderContents('stories', '.txt');\n");
-			sb.append("for (var i=0; i<files.length; i++)\n");
-			sb.append("\tapplication.output(files[i].getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("getHomeFolder".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var d = %%elementName%%.getHomeFolder();\n");
-			sb.append("application.output('home folder: ' + d.getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("getHomeDirectory".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var d = %%elementName%%.getHomeDirectory();\n");
-			sb.append("application.output('home folder: ' + d.getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("getModificationDate".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var f = %%elementName%%.convertToJSFile('story.txt');\n");
-			sb.append("application.output('last changed: ' + %%elementName%%.getModificationDate(f));\n");
-			return sb.toString();
-		}
-		else if ("moveFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Move file based on names.\n");
-			sb.append("if (!%%elementName%%.moveFile('story.txt','story.txt.new'))\n");
-			sb.append("\tapplication.output('File move failed.');\n");
-			sb.append("// Move file based on JSFile instances.\n");
-			sb.append("var f = %%elementName%%.convertToJSFile('story.txt.new');\n");
-			sb.append("var fmoved = %%elementName%%.convertToJSFile('story.txt');\n");
-			sb.append("if (!%%elementName%%.moveFile(f, fmoved))\n");
-			sb.append("\tapplication.output('File move back failed.');\n");
-			return sb.toString();
-		}
-		else if ("readFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Read all content from the file.\n");
-			sb.append("var bytes = %%elementName%%.readFile('big.jpg');\n");
-			sb.append("application.output('file size: ' + bytes.length);\n");
-			sb.append("// Read only the first 1KB from the file.\n");
-			sb.append("var bytesPartial = %%elementName%%.readFile('big.jpg', 1024);\n");
-			sb.append("application.output('partial file size: ' + bytesPartial.length);\n");
-			sb.append("// Read all content from a file selected from the file open dialog.\n");
-			sb.append("var bytesUnknownFile = %%elementName%%.readFile();\n");
-			sb.append("application.output('unknown file size: ' + bytesUnknownFile.length);\n");
-			return sb.toString();
-		}
-		else if ("readTXTFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Read content from a known text file.\n");
-			sb.append("var txt = %%elementName%%.readTXTFile('story.txt');\n");
-			sb.append("application.output(txt);\n");
-			sb.append("// Read content from a text file selected from the file open dialog.\n");
-			sb.append("var txtUnknown = %%elementName%%.readTXTFile();\n");
-			sb.append("application.output(txtUnknown);\n");
-			return sb.toString();
-		}
-		else if ("showDirectorySelectDialog".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var dir = %%elementName%%.showDirectorySelectDialog();\n");
-			sb.append("application.output(\"you've selected folder: \" + dir.getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("showFileOpenDialog".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and\n");
-			sb.append("// the filter \"JPG and GIF\" should be used: ('new Array(\"JPG and GIF\",\"jpg\",\"gif\")').\n");
-			sb.append("/** @type {JSFile} */\n");
-			sb.append("var f = plugins.file.showFileOpenDialog(1, null, false, new Array(\"JPG and GIF\", \"jpg\", \"gif\"));\n");
-			sb.append("application.output('File: ' + f.getName());\n");
-			sb.append("application.output('is dir: ' + f.isDirectory());\n");
-			sb.append("application.output('is file: ' + f.isFile());\n");
-			sb.append("application.output('path: ' + f.getAbsolutePath());\n");
-			sb.append("\n// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.\n");
-			sb.append("/** @type {JSFile[]} */\n");
-			sb.append("var files = plugins.file.showFileOpenDialog(1, null, true, new Array(\"JPG and GIF\", \"jpg\", \"gif\"));\n");
-			sb.append("for (var i = 0; i < files.length; i++)\n");
-			sb.append("{\n");
-			sb.append("\t application.output('File: ' + files[i].getName());\n");
-			sb.append("\t application.output('content type: ' + files[i].getContentType());\n");
-			sb.append("\t application.output('last modified: ' + files[i].lastModified());\n");
-			sb.append("\t application.output('size: ' + files[i].size());\n");
-			sb.append("}\n");
-			sb.append("//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)\n");
-			sb.append("var file = %%elementName%%.showFileOpenDialog(myCallbackMethod)\n");
-			return sb.toString();
-		}
-		else if ("showFileSaveDialog".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var file = %%elementName%%.showFileSaveDialog();\n");
-			sb.append("application.output(\"you've selected file: \" + file.getAbsolutePath());\n");
-			return sb.toString();
-		}
-		else if ("writeFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var bytes = new Array();\n");
-			sb.append("\tfor (var i=0; i<1024; i++)\n");
-			sb.append("\t\tbytes[i] = i % 100;\n");
-			sb.append("\tvar f = %%elementName%%.convertToJSFile('bin.dat');\n");
-			sb.append("\tif (!%%elementName%%.writeFile(f, bytes))\n");
-			sb.append("\t\tapplication.output('Failed to write the file.');\n");
-			sb.append("\t// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'\n"); //$NON-NLS-1$
-			sb.append("\tvar mimeType = 'application/vnd.ms-excel'\n"); //$NON-NLS-1$
-			sb.append("\tif (!%%elementName%%.writeFile(f, bytes, mimeType))\n"); //$NON-NLS-1$
-			sb.append("\t\tapplication.output('Failed to write the file.');\n");
-			return sb.toString();
-		}
-		else if ("writeTXTFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var fileNameSuggestion = 'myspecialexport.tab'\n");
-			sb.append("\tvar textData = 'load of data...'\n");
-			sb.append("\tvar success = %%elementName%%.writeTXTFile(fileNameSuggestion, textData);\n");
-			sb.append("\tif (!success) application.output('Could not write file.');\n");
-			sb.append("\t// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html\n");
-			sb.append("\t// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'\n"); //$NON-NLS-1$
-			return sb.toString();
-		}
-		else if ("writeXMLFile".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("var fileName = 'form.xml'\n");
-			retval.append("var xml = controller.printXML()\n");
-			retval.append("var success = %%elementName%%.writeXMLFile(fileName, xml);\n");
-			retval.append("if (!success) application.output('Could not write file.');\n");
-			return retval.toString();
-		}
-		else if ("streamFilesToServer".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// send one file:\n");
-			sb.append("\tvar file = %%elementName%%.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );\n");
-			sb.append("\tif (file) {\n");
-			sb.append("\t\t%%elementName%%.streamFilesToServer( file, callbackFunction );\n");
-			sb.append("\t}\n");
-			sb.append("\t// send an array of files:\n");
-			sb.append("\tvar folder = %%elementName%%.showDirectorySelectDialog();\n");
-			sb.append("\tif (folder) {\n");
-			sb.append("\t\tvar files = %%elementName%%.getFolderContents(folder);\n");
-			sb.append("\t\tif (files) {\n");
-			sb.append("\t\t\tvar monitor = %%elementName%%.streamFilesToServer( files, callbackFunction );\n");
-			sb.append("\t\t}\n");
-			sb.append("\t}\n");
-			return sb.toString();
-		}
-		else if ("streamFilesFromServer".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// transfer all the files of a chosen server folder to a directory on the client\n");
-			sb.append("\tvar dir = %%elementName%%.showDirectorySelectDialog();\n");
-			sb.append("\tif (dir) {\n");
-			sb.append("\t\tvar list = %%elementName%%.getRemoteFolderContents('/images/user1/', null, 1);\n");
-			sb.append("\t\tif (list) {\n");
-			sb.append("\t\t\tvar monitor = %%elementName%%.streamFilesFromServer(dir, list, callbackFunction);\n");
-			sb.append("\t\t}\n");
-			sb.append("\t}\n");
-			return sb.toString();
-		}
-		else if ("getRemoteFolderContents".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// retrieves an array of files located on the server side inside the default upload folder:\n");
-			sb.append("\tvar files = %%elementName%%.getRemoteFolderContents('/', '.txt');\n");
-			return sb.toString();
-		}
-		else if ("convertToRemoteJSFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var f = %%elementName%%.convertToRemoteJSFile('/story.txt');\n");
-			sb.append("if (f && f.canRead())\n");
-			sb.append("\tapplication.output('File can be read.');\n");
-			return sb.toString();
-		}
-		else if ("appendToTXTFile".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// append some text to a text file:\n");
-			sb.append("\tvar ok = %%elementName%%.appendToTXTFile('myTextFile.txt', '\\nMy fantastic new line of text\\n');\n");
-			return sb.toString();
-		}
-		else if ("getDefaultUploadLocation".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// get the (server-side) default upload location path:\n");
-			sb.append("\tvar serverPath = %%elementName%%.getDefaultUploadLocation();\n");
-			return sb.toString();
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("convertToJSFile".equals(methodName))
-		{
-			return "Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).";
-		}
-		else if ("copyFile".equals(methodName))
-		{
-			return "Copies the source file to the destination file. Returns true if the copy succeeds, false if any error occurs.";
-		}
-		else if ("copyFolder".equals(methodName))
-		{
-			return "Copies the sourcefolder to the destination folder, recursively. Returns true if the copy succeeds, false if any error occurs.";
-		}
-		else if ("createFile".equals(methodName))
-		{
-			return "Creates a JSFile instance. Does not create the file on disk.";
-		}
-		else if ("createFolder".equals(methodName))
-		{
-			return "Creates a folder on disk. Returns true if the folder is successfully created, false if any error occurs.";
-		}
-		else if ("createTempFile".equals(methodName))
-		{
-			return "Creates a temporary file on disk. A prefix and an extension are specified and they will be part of the file name.";
-		}
-		else if ("deleteFile".equals(methodName))
-		{
-			return "Removes a file from disk. Returns true on success, false otherwise.";
-		}
-		else if ("deleteFolder".equals(methodName))
-		{
-			return "Deletes a folder from disk recursively. Returns true on success, false otherwise. If the second parameter is set to true, then a warning will be issued to the user before actually removing the folder.";
-		}
-		else if ("getDesktopFolder".equals(methodName))
-		{
-			return "Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.";
-		}
-		else if ("getDiskList".equals(methodName))
-		{
-			return "Returns an Array of JSFile instances correponding to the file system root folders.";
-		}
-		else if ("getFileSize".equals(methodName))
-		{
-			return "Returns the size of the specified file.";
-		}
-		else if ("getFolderContents".equals(methodName))
-		{
-			return "Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.";
-		}
-		else if ("getHomeFolder".equals(methodName))
-		{
-			return "Returns a JSFile instance corresponding to the home folder of the logged in used.";
-		}
-		else if ("getHomeDirectory".equals(methodName))
-		{
-			return "Returns a JSFile instance corresponding to the home folder of the logged in used.";
-		}
-		else if ("getModificationDate".equals(methodName))
-		{
-			return "Returns the modification date of a file.";
-		}
-		else if ("moveFile".equals(methodName))
-		{
-			return "Moves the file from the source to the destination place. Returns true on success, false otherwise.";
-		}
-		else if ("readFile".equals(methodName))
-		{
-			return "Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)";
-		}
-		else if ("readTXTFile".equals(methodName))
-		{
-			return "Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)";
-		}
-		else if ("showDirectorySelectDialog".equals(methodName))
-		{
-			return "Shows a directory selector dialog.";
-		}
-		else if ("showFileOpenDialog".equals(methodName))
-		{
-			return "Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)";
-		}
-		else if ("showFileSaveDialog".equals(methodName))
-		{
-			return "Shows a file save dialog.";
-		}
-		else if ("writeFile".equals(methodName))
-		{
-			return "Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)";
-		}
-		else if ("writeTXTFile".equals(methodName))
-		{
-			return "Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)";
-		}
-		else if ("writeXMLFile".equals(methodName))
-		{
-			return "Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)";
-		}
-		else if ("streamFilesToServer".equals(methodName))
-		{
-			return "Streams a file or an array of files to the server in a background task - with optional relative path(s)/(new) name(s). If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object. Note: This only streams files for the smart client, in the webclient the streaming from the browser to the server is done by the browser";
-		}
-		else if ("streamFilesFromServer".equals(methodName))
-		{
-			return "Streams a file or an array of files from the server in a background task to a file (or files) on the client. If provided, calls back a Servoy function when done for each file received with a JSFile and an exception if anything went wrong, returns a JSProgressMonitor object. Note: This only streams files for the smart client, in the webclient the streaming from the server to the browser is done by the browser";
-		}
-		else if ("getRemoteFolderContents".equals(methodName))
-		{
-			return "Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.";
-		}
-		else if ("convertToRemoteJSFile".equals(methodName))
-		{
-			return "Returns the JSFile object of a server file, given its path (relative the default server location).";
-		}
-		else if ("appendToTXTFile".equals(methodName))
-		{
-			return "Appends data into a text file.";
-		}
-		else if ("getDefaultUploadLocation".equals(methodName))
-		{
-			return "Returns the default upload location path of the server";
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("convertToJSFile".equals(methodName))
-		{
-			return new String[] { "file" };
-		}
-		else if ("copyFile".equals(methodName))
-		{
-			return new String[] { "sourceFile", "destinationFile" };
-		}
-		else if ("copyFolder".equals(methodName))
-		{
-			return new String[] { "sourceFolder", "destinationFolder" };
-		}
-		else if ("createFile".equals(methodName))
-		{
-			return new String[] { "targetFile" };
-		}
-		else if ("createFolder".equals(methodName))
-		{
-			return new String[] { "targetFolder" };
-		}
-		else if ("createTempFile".equals(methodName))
-		{
-			return new String[] { "filePrefix", "fileSuffix" };
-		}
-		else if ("deleteFile".equals(methodName))
-		{
-			return new String[] { "targetFile" };
-		}
-		else if ("deleteFolder".equals(methodName))
-		{
-			return new String[] { "targetFolder", "showWarning" };
-		}
-		else if ("getFileSize".equals(methodName))
-		{
-			return new String[] { "targetFile" };
-		}
-		else if ("getFolderContents".equals(methodName))
-		{
-			return new String[] { "targetFolder", "[fileFilter]", "[fileOption(1=files,2=dirs)]", "[visibleOption(1=visible,2=nonvisible)]", "[lockedOption(1=locked,2=nonlocked)]" };
-		}
-		else if ("getModificationDate".equals(methodName))
-		{
-			return new String[] { "targetFile" };
-		}
-		else if ("moveFile".equals(methodName))
-		{
-			return new String[] { "sourceFile", "destinationFile" };
-		}
-		else if ("readFile".equals(methodName))
-		{
-			return new String[] { "[file]", "[size]" };
-		}
-		else if ("readTXTFile".equals(methodName))
-		{
-			return new String[] { "[file]", "[charsetname]" };
-		}
-		else if ("showDirectorySelectDialog".equals(methodName))
-		{
-			return new String[] { "[directory suggestion]", "[dialog title text]" };
-		}
-		else if ("showFileOpenDialog".equals(methodName))
-		{
-			return new String[] { "[selectionMode(0=both,1=Files,2=Dirs)]", "[startDirectory(null=default/previous)]", "[multiselect(true/false)]", "[filterarray]", "[callbackmethod]", "[dialog title text]" };
-		}
-		else if ("showFileSaveDialog".equals(methodName))
-		{
-			return new String[] { "[fileName/dir suggestion]", "[dialog title text]" };
-		}
-		else if ("writeFile".equals(methodName))
-		{
-			return new String[] { "file", "binary_data", "[mimeType]" };
-		}
-		else if ("writeTXTFile".equals(methodName))
-		{
-			return new String[] { "file", "text_data", "[charsetname]", "[mimeType]" };
-		}
-		else if ("writeXMLFile".equals(methodName))
-		{
-			return new String[] { "file", "xml_data" };
-		}
-		else if ("streamFilesToServer".equals(methodName))
-		{
-			return new String[] { "file/fileName|fileArray/fileNameArray", "[serverFile/serverFileName|serverFileArray/serverFileNameArray]", "[callbackFunction]" };
-		}
-		else if ("streamFilesFromServer".equals(methodName))
-		{
-			return new String[] { "file/fileName|fileArray/fileNameArray", "serverFile/serverFileName|serverFileArray/serverFileNameArray", "[callbackFunction]" };
-		}
-		else if ("getRemoteFolderContents".equals(methodName))
-		{
-			return new String[] { "targetFolder", "[fileFilter]", "[fileOption(1=files,2=dirs)]", "[visibleOption(1=visible,2=nonvisible)]", "[lockedOption(1=locked,2=nonlocked)]" };
-		}
-		else if ("convertToRemoteJSFile".equals(methodName))
-		{
-			return new String[] { "serverPath" };
-		}
-		else if ("appendToTXTFile".equals(methodName))
-		{
-			return new String[] { "file/fileName", "text", "[encoding]" };
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public boolean isDeprecated(String methodName)
-	{
-		if (methodName.equals("convertStringToJSFile") || methodName.equals("getRemoteList"))
-		{
-			return true;
-		}
-		if (methodName.equals("getHomeDirectory"))
-		{
-			return true;
-		}
-		return false;
-	}
-
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { JSFile.class, JSProgressMonitor.class };
@@ -1548,44 +1307,52 @@ public class FileProvider implements IScriptObject
 
 
 	/**
-	 * Appends a string given in parameter to a file, using default platform encoding
+	 * Appends a string given in parameter to a file, using default platform encoding.
+	 * 
+	 * @sample
+	 * // append some text to a text file:
+	 * 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');
+	 * 
 	 * @since Servoy 5.2
 	 * 
-	 * @param f either a {@link File}, a local {@link JSFile} or a the file path as a String
+	 * @param file either a {@link File}, a local {@link JSFile} or a the file path as a String
 	 * @param text the text to append to the file
 	 * @return true if appending worked
 	 */
-	public boolean js_appendToTXTFile(Object f, String text)
+	public boolean js_appendToTXTFile(Object file, String text)
 	{
-		return js_appendToTXTFile(f, text, null);
+		return js_appendToTXTFile(file, text, null);
 	}
 
 	/**
-	 * Appends a string given in parameter to a file, using default platform encoding
+	 * Appends a string given in parameter to a file, using the specified encoding.
+	 * 
+	 * @sampleas js_appendToTXTFile(Object, String)
+	 * 
 	 * @since Servoy 5.2
 	 * 
-	 * @param f either a {@link File}, a local {@link JSFile} or a the file path as a String
+	 * @param file either a {@link File}, a local {@link JSFile} or a the file path as a String
 	 * @param text the text to append to the file
 	 * @param encoding the encoding to use
 	 * @return true if appending worked
 	 */
 	@SuppressWarnings("nls")
-	public boolean js_appendToTXTFile(Object f, String text, String encoding)
+	public boolean js_appendToTXTFile(Object file, String text, String encoding)
 	{
 		if (text != null)
 		{
 			try
 			{
 				final IClientPluginAccess access = plugin.getClientPluginAccess();
-				File file = getFileFromArg(f, true);
-				if (file == null)
+				File f = getFileFromArg(file, true);
+				if (f == null)
 				{
 					IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 					Window currentWindow = null;
 					if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-					file = FileChooserUtils.getAWriteFile(currentWindow, file, false);
+					f = FileChooserUtils.getAWriteFile(currentWindow, f, false);
 				}
-				FileOutputStream fos = new FileOutputStream(file, true);
+				FileOutputStream fos = new FileOutputStream(f, true);
 				try
 				{
 					return writeToOutputStream(fos, text.replaceAll("\\n", LF), encoding);
@@ -1604,7 +1371,13 @@ public class FileProvider implements IScriptObject
 	}
 
 	/**
-	 * Convenience return to get a JSFile representation of a server file based on its path<br/>
+	 * Convenience return to get a JSFile representation of a server file based on its path.
+	 * 
+	 * @sample
+	 * var f = plugins.file.convertToRemoteJSFile('/story.txt');
+	 * if (f && f.canRead())
+	 * 	application.output('File can be read.');
+
 	 * @since Servoy 5.2
 	 * 
 	 * @param path the path representing a file on the server (should start with "/")
@@ -1636,11 +1409,19 @@ public class FileProvider implements IScriptObject
 	}
 
 	/**
-	 * Retrieves an array of files/folders from the server
+	 * Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.
+	 *
+	 * @sample
+	 * // retrieves an array of files located on the server side inside the default upload folder:
+	 * 	var files = plugins.file.getRemoteFolderContents('/', '.txt');
+	 *
 	 * @since Servoy 5.2.1
-	 * 
-	 * @param options the path (mandatory), an array of file extensions, fileOptions, visibleOption and lockedOption
-	 * 
+
+	 * @param targetFolder 
+	 * @param fileFilter optional 
+	 * @param fileOption optional 1=files, 2=dirs 
+	 * @param visibleOption optional 1=visible, 2=nonvisible 
+	 * @param lockedOption optional 1=locked, 2=nonlocked 
 	 * @return the array of file names
 	 */
 	@SuppressWarnings("nls")
@@ -1759,6 +1540,21 @@ public class FileProvider implements IScriptObject
 	 * Overloaded method, only defines file(s) to be streamed
 	 * @since Servoy 5.2
 	 * 
+	 * @sample
+	 * // send one file:
+	 * 	var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
+	 * 	if (file) {
+	 * 		plugins.file.streamFilesToServer( file, callbackFunction );
+	 * 	}
+	 * 	// send an array of files:
+	 * 	var folder = plugins.file.showDirectorySelectDialog();
+	 * 	if (folder) {
+	 * 		var files = plugins.file.getFolderContents(folder);
+	 * 		if (files) {
+	 * 			var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
+	 * 		}
+	 * 	}
+	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
@@ -1770,6 +1566,8 @@ public class FileProvider implements IScriptObject
 	/**
 	 * Overloaded method, defines file(s) to be streamed and a callback function
 	 * @since Servoy 5.2
+	 * 
+	 * @sampleas js_streamFilesToServer(Object)
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param o can be a JSFile or JSFile[], a String or String[] or the {@link Function} to be called back at the end of the process
@@ -1790,6 +1588,8 @@ public class FileProvider implements IScriptObject
 	/**
 	 * Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server
 	 * @since Servoy 5.2
+	 * 
+	 * @sampleas js_streamFilesToServer(Object)
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param s can be a JSFile or JSFile[], a String or String[]
@@ -1846,8 +1646,18 @@ public class FileProvider implements IScriptObject
 	}
 
 	/**
-	 * Stream 1 or more file from the server to the client
+	 * Stream 1 or more file from the server to the client.
 	 * @since Servoy 5.2
+	 * 
+	 * @sample
+	 * // transfer all the files of a chosen server folder to a directory on the client
+	 * 	var dir = plugins.file.showDirectorySelectDialog();
+	 * 	if (dir) {
+	 * 		var list = plugins.file.getRemoteFolderContents('/images/user1/', null, 1);
+	 * 		if (list) {
+	 * 			var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
+	 * 		}
+	 * 	}
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param s of the files on the server that will be transfered to the client, can be a String or a String[]
@@ -1862,6 +1672,8 @@ public class FileProvider implements IScriptObject
 	 * Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
 	 * the filename that was transfered. An extra second exception parameter can be given if an exception did occur.
 	 * @since Servoy 5.2
+	 * 
+	 * @sampleas js_streamFilesFromServer(Object, Object)
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param s the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
@@ -2027,7 +1839,12 @@ public class FileProvider implements IScriptObject
 	}
 
 	/**
-	 * Retrieves the server default upload location on the server
+	 * Returns the default upload location path of the server.
+	 *
+	 * @sample
+	 * // get the (server-side) default upload location path:
+	 * 	var serverPath = plugins.file.getDefaultUploadLocation();
+	 * 
 	 * @return the location as canonical path
 	 */
 	public String js_getDefaultUploadLocation()
@@ -2042,6 +1859,11 @@ public class FileProvider implements IScriptObject
 			Debug.error(ex);
 		}
 		return null;
+	}
+
+	public void unload()
+	{
+		timer.cancel();
 	}
 
 

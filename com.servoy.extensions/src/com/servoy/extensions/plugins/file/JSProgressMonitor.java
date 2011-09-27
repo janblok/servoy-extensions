@@ -27,7 +27,8 @@ import org.mozilla.javascript.Function;
 
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * This class is returned to the Servoy client from the {@link FileProvider} js_streamFilesFromServer or js_streamFilesToServer method<br/>
@@ -39,7 +40,7 @@ import com.servoy.j2db.scripting.IScriptObject;
  * @author jcompagner
  * @author Servoy Stuff
  */
-public class JSProgressMonitor extends TimerTask implements IScriptObject, IJavaScriptType
+public class JSProgressMonitor extends TimerTask implements IReturnedTypesProvider, IScriptable, IJavaScriptType
 {
 	private final FileProvider provider;
 	private FunctionDefinition callback;
@@ -78,8 +79,12 @@ public class JSProgressMonitor extends TimerTask implements IScriptObject, IJava
 	}
 
 	/**
-	 * Schedules a callback to a Servoy method
-	 * 
+	 * Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).
+	 *
+	 * @sample
+	 * // call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
+	 * 	monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));
+	 *
 	 * @param function the {@link Function} to call back at the specified interval
 	 * @param interval the interval (in seconds) to use
 	 * @return this for chaining
@@ -90,7 +95,8 @@ public class JSProgressMonitor extends TimerTask implements IScriptObject, IJava
 	}
 
 	/**
-	 * Schedules a callback to a Servoy method
+	 * @clonedesc js_setProgressCallBack(Function, float)
+	 * @sampleas js_setProgressCallBack(Function, float)
 	 * 
 	 * @param function the {@link Function} to call back at the specified interval
 	 * @param interval the interval (in seconds) to use
@@ -115,51 +121,120 @@ public class JSProgressMonitor extends TimerTask implements IScriptObject, IJava
 	}
 
 
+	/**
+	 * Returns the total bytes to transfer to or from the server (sum of all the files size)
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public long js_getTotalBytesToTransfer()
 	{
 		return totalBytes.get();
 	}
 
+	/**
+	 * Returns the total bytes already transferred (for all files)
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public long js_getTotalTransferredBytes()
 	{
 		return totalTransferred.get();
 	}
 
+	/**
+	 * Returns the number of bytes to transfer for the current file.
+	 *
+	 * @sample
+	 * application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	 * 	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	 * 	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	 * 	if (monitor.isCanceled()) {
+	 * 		application.output('canceled!')
+	 * 	}
+	 * 	if (monitor.isFinished()) {
+	 * 		application.output('finished!'
+	 * 	}
+	 */
 	public long js_getCurrentBytesToTransfer()
 	{
 		return currentBytes.get();
 	}
 
+	/**
+	 * Returns the number of bytes already transferred for the current file.
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public long js_getCurrentTransferredBytes()
 	{
 		return currentTransferred.get();
 	}
 
+	/**
+	 * Returns the total number of files to transfer.
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public int js_getTotalFilesToTransfer()
 	{
 		return totalFiles.get();
 	}
 
+	/**
+	 * Returns the index of the current file being transferred.
+	 *
+	 * @sample
+	 * application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	 * 	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	 * 	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	 * 	if (monitor.isCanceled()) {
+	 * 		application.output('canceled!')
+	 * 	}
+	 * 	if (monitor.isFinished()) {
+	 * 		application.output('finished!'
+	 * 	}
+	 */
 	public int js_getCurrentFileIndex()
 	{
 		return currentFileIndex.get();
 	}
 
+	/**
+	 * Returns the name of the current file being transferred.
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public synchronized String js_getCurrentTransferredFileName()
 	{
 		return currentFileName;
 	}
 
+	/**
+	 * Returns true if the process is finished.
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public boolean js_isFinished()
 	{
 		return finished.get();
 	}
 
+	/**
+	 * Returns true if the process was canceled.
+	 *
+	 * @sampleas js_getCurrentBytesToTransfer()
+	 */
 	public boolean js_isCanceled()
 	{
 		return canceled.get();
 	}
 
+	/**
+	 * Cancels the transfer process.
+	 *
+	 * @sample
+	 * monitor.cancel();
+	 */
 	public boolean js_cancel()
 	{
 		this.canceled.set(true);
@@ -179,118 +254,6 @@ public class JSProgressMonitor extends TimerTask implements IScriptObject, IJava
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.servoy.j2db.scripting.IScriptObject#getSample(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("setProgressCallBack".equals(methodName))
-		{
-			return "// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):\n\tmonitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));\n";
-		}
-		else if ("cancel".equals(methodName))
-		{
-			return "monitor.cancel();\n";
-		}
-		else
-		{
-			StringBuffer buffer = new StringBuffer();
-			buffer.append("application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());\n");
-			buffer.append("\tapplication.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');\n");
-			buffer.append("\tapplication.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());\n");
-			buffer.append("\tif (monitor.isCanceled()) {\n");
-			buffer.append("\t\tapplication.output('canceled!')\n");
-			buffer.append("\t}\n");
-			buffer.append("\tif (monitor.isFinished()) {\n");
-			buffer.append("\t\tapplication.output('finished!'\n");
-			buffer.append("\t}\n");
-			return buffer.toString();
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("setProgressCallBack".equals(methodName))
-		{
-			return "Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).";
-		}
-		else if ("cancel".equals(methodName))
-		{
-			return "Cancels the transfer process.";
-		}
-		else if ("getTotalBytesToTransfer".equals(methodName))
-		{
-			return "Returns the total bytes to transfer to or from the server (sum of all the files size)";
-		}
-		else if ("getTotalTransferredBytes".equals(methodName))
-		{
-			return "Returns the total bytes already transferred (for all files)";
-		}
-		else if ("getCurrentBytesToTransfer".equals(methodName))
-		{
-			return "Returns the number of bytes to transfer for the current file.";
-		}
-		else if ("getCurrentTransferredBytes".equals(methodName))
-		{
-			return "Returns the number of bytes already transferred for the current file.";
-		}
-		else if ("getTotalFilesToTransfer".equals(methodName))
-		{
-			return "Returns the total number of files to transfer.";
-		}
-		else if ("getCurrentFileIndex".equals(methodName))
-		{
-			return "Returns the index of the current file being transferred.";
-		}
-		else if ("getCurrentTransferredFileName".equals(methodName))
-		{
-			return "Returns the name of the current file being transferred.";
-		}
-		else if ("isFinished".equals(methodName))
-		{
-			return "Returns true if the process is finished.";
-		}
-		else if ("isCanceled".equals(methodName))
-		{
-			return "Returns true if the process was canceled.";
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.servoy.j2db.scripting.IScriptObject#getParameterNames(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setProgressCallBack".equals(methodName))
-		{
-			return new String[] { "progressCallbackFunction", "interval", "[testDelay]" };
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.servoy.j2db.scripting.IScriptObject#isDeprecated(java.lang.String)
-	 */
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	/**
