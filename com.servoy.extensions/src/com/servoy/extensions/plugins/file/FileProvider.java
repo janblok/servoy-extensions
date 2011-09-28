@@ -1186,8 +1186,8 @@ public class FileProvider implements IScriptObject
 			sb.append("\t application.output('last modified: ' + files[i].lastModified());\n");
 			sb.append("\t application.output('size: ' + files[i].size());\n");
 			sb.append("}\n");
-			sb.append("//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)\n");
-			sb.append("var file = %%elementName%%.showFileOpenDialog(myCallbackMethod)\n");
+			sb.append("//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored\n");
+			sb.append("%%elementName%%.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')\n");
 			return sb.toString();
 		}
 		else if ("showFileSaveDialog".equals(methodName))
