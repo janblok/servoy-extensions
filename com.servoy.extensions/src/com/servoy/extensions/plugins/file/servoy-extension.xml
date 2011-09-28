@@ -5,7 +5,7 @@
     <plugins>
       <object publicName="FileProvider" qualifiedName="com.servoy.extensions.plugins.file.FileProvider">
         <constants>
-          <constant name="CHUNK_BUFFER_SIZE">
+          <constant name="CHUNK_BUFFER_SIZE" since="Servoy 5.2">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Size of the buffer used to stream files to the server]]></description>
             <summary><![CDATA[Size of the buffer used to stream files to the server]]></summary>
@@ -13,7 +13,7 @@
           </constant>
         </constants>
         <functions>
-          <function name="appendToTXTFile">
+          <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
@@ -24,15 +24,15 @@
             <sample><![CDATA[// append some text to a text file:
 var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[or a the file path as a String]]></description>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[either a File, a local JSFile or a the file path as a String]]></description>
               </parameter>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the text to append to the file]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="appendToTXTFile">
+          <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
@@ -44,8 +44,8 @@ var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line
             <sample><![CDATA[// append some text to a text file:
 var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[or a the file path as a String]]></description>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[either a File, a local JSFile or a the file path as a String]]></description>
               </parameter>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the text to append to the file]]></description>
@@ -81,11 +81,11 @@ application.output("File can be read.");]]></sample>
               <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="convertToRemoteJSFile">
+          <function name="convertToRemoteJSFile" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"><![CDATA[com.servoy.extensions.plugins.file.JSFile]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"><![CDATA[the JSFile]]></return>
             <description><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></description>
             <summary><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></summary>
             <sample><![CDATA[var f = plugins.file.convertToRemoteJSFile('/story.txt');
@@ -284,7 +284,7 @@ application.output(files[i].getAbsolutePath());]]></sample>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <description><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></description>
             <summary><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></summary>
-            <sample><![CDATA[var d = plugins.file.getHomeDirectory();
+            <sample><![CDATA[var d = plugins.file.getHomeFolder();
 application.output('home folder: ' + d.getAbsolutePath());]]></sample>
           </function>
           <function name="getModificationDate">
@@ -300,7 +300,7 @@ application.output('last changed: ' + plugins.file.getModificationDate(f));]]></
               <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="getRemoteFolderContents">
+          <function name="getRemoteFolderContents" since="Servoy 5.2.1">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -323,7 +323,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="getRemoteList">
+          <function deprecated="true" name="getRemoteList" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -337,7 +337,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="getRemoteList">
+          <function deprecated="true" name="getRemoteList" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="boolean"/>
@@ -347,8 +347,8 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <summary><![CDATA[Retrieves an array of files/folders from the server]]></summary>
             <sample/>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[or String with the path of a remote directory (relative to the defaultFolder)]]></description>
+              <parameter name="serverPath" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[a JSFile or String with the path of a remote directory (relative to the defaultFolder)]]></description>
               </parameter>
               <parameter name="filesOnly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[if true only files will be retrieve, if false, files and folders will be retrieved]]></description>
@@ -489,12 +489,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <parameter name="dialog_title_text" optional="true"/>
             </parameters>
           </function>
-          <function name="streamFilesFromServer">
+          <function name="streamFilesFromServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Stream 1 or more file from the server to the client.]]></description>
             <summary><![CDATA[Stream 1 or more file from the server to the client.]]></summary>
             <sample><![CDATA[// transfer all the files of a chosen server folder to a directory on the client
@@ -506,21 +506,21 @@ var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[of the files on the server that will be transfered to the client, can be a String or a String[]]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesFromServer">
+          <function name="streamFilesFromServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
 the filename that was transfered. An extra second exception parameter can be given if an exception did occur.]]></description>
             <summary><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
@@ -534,22 +534,22 @@ var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]]]></description>
               </parameter>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to be called back at the end of the process (after every file)]]></description>
+              <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to be called back at the end of the process (after every file)]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesToServer">
+          <function name="streamFilesToServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Overloaded method, only defines file(s) to be streamed]]></description>
             <summary><![CDATA[Overloaded method, only defines file(s) to be streamed]]></summary>
             <sample><![CDATA[// send one file:
@@ -566,17 +566,17 @@ var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesToServer">
+          <function name="streamFilesToServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
             <summary><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
             <sample><![CDATA[// send one file:
@@ -593,21 +593,21 @@ var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to be called back at the end of the process]]></description>
+              <parameter name="o" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[can be a JSFile or JSFile[], a String or String[] or the Function to be called back at the end of the process]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesToServer">
+          <function name="streamFilesToServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></description>
             <summary><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></summary>
             <sample><![CDATA[// send one file:
@@ -624,14 +624,14 @@ var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[can be a JSFile or JSFile[], a String or String[]]]></description>
               </parameter>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to be called back at the end of the process]]></description>
+              <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to be called back at the end of the process]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1190,7 +1190,7 @@ f.renameTo('otherstory.txt');
               <parameter name="destination" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="setBytes">
+          <function name="setBytes" since="5.2.5">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
@@ -1209,7 +1209,7 @@ var success = file.setBytes(blobDataProvider, true);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setBytes">
+          <function name="setBytes" since="5.2.5">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="boolean"/>
@@ -1434,8 +1434,8 @@ application.output('finished!'
             <sample><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
 monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
             <parameters>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to call back at the specified interval]]></description>
+              <parameter name="function" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to call back at the specified interval]]></description>
               </parameter>
               <parameter name="interval" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="float">
                 <description><![CDATA[the interval (in seconds) to use]]></description>
@@ -1454,8 +1454,8 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
             <sample><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
 monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
             <parameters>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to call back at the specified interval]]></description>
+              <parameter name="function" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to call back at the specified interval]]></description>
               </parameter>
               <parameter name="interval" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="float">
                 <description><![CDATA[the interval (in seconds) to use]]></description>
@@ -1469,7 +1469,7 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
       </object>
       <object publicName="WebFileProvider" qualifiedName="com.servoy.extensions.plugins.file.WebFileProvider">
         <constants>
-          <constant name="CHUNK_BUFFER_SIZE">
+          <constant name="CHUNK_BUFFER_SIZE" since="Servoy 5.2">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Size of the buffer used to stream files to the server]]></description>
             <summary><![CDATA[Size of the buffer used to stream files to the server]]></summary>
@@ -1477,7 +1477,7 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
           </constant>
         </constants>
         <functions>
-          <function name="appendToTXTFile">
+          <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
@@ -1488,15 +1488,15 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
             <sample><![CDATA[// append some text to a text file:
 var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[or a the file path as a String]]></description>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[either a File, a local JSFile or a the file path as a String]]></description>
               </parameter>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the text to append to the file]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="appendToTXTFile">
+          <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
@@ -1508,8 +1508,8 @@ var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line
             <sample><![CDATA[// append some text to a text file:
 var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[or a the file path as a String]]></description>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[either a File, a local JSFile or a the file path as a String]]></description>
               </parameter>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the text to append to the file]]></description>
@@ -1545,11 +1545,11 @@ application.output("File can be read.");]]></sample>
               <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="convertToRemoteJSFile">
+          <function name="convertToRemoteJSFile" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"><![CDATA[com.servoy.extensions.plugins.file.JSFile]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"><![CDATA[the JSFile]]></return>
             <description><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></description>
             <summary><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></summary>
             <sample><![CDATA[var f = plugins.file.convertToRemoteJSFile('/story.txt');
@@ -1748,7 +1748,7 @@ application.output(files[i].getAbsolutePath());]]></sample>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <description><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></description>
             <summary><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></summary>
-            <sample><![CDATA[var d = plugins.file.getHomeDirectory();
+            <sample><![CDATA[var d = plugins.file.getHomeFolder();
 application.output('home folder: ' + d.getAbsolutePath());]]></sample>
           </function>
           <function name="getModificationDate">
@@ -1764,7 +1764,7 @@ application.output('last changed: ' + plugins.file.getModificationDate(f));]]></
               <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="getRemoteFolderContents">
+          <function name="getRemoteFolderContents" since="Servoy 5.2.1">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -1787,7 +1787,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="getRemoteList">
+          <function deprecated="true" name="getRemoteList" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -1801,7 +1801,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="getRemoteList">
+          <function deprecated="true" name="getRemoteList" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="boolean"/>
@@ -1811,8 +1811,8 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <summary><![CDATA[Retrieves an array of files/folders from the server]]></summary>
             <sample/>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[or String with the path of a remote directory (relative to the defaultFolder)]]></description>
+              <parameter name="serverPath" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[a JSFile or String with the path of a remote directory (relative to the defaultFolder)]]></description>
               </parameter>
               <parameter name="filesOnly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[if true only files will be retrieve, if false, files and folders will be retrieved]]></description>
@@ -1953,12 +1953,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <parameter name="dialog_title_text" optional="true"/>
             </parameters>
           </function>
-          <function name="streamFilesFromServer">
+          <function name="streamFilesFromServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Stream 1 or more file from the server to the client.]]></description>
             <summary><![CDATA[Stream 1 or more file from the server to the client.]]></summary>
             <sample><![CDATA[// transfer all the files of a chosen server folder to a directory on the client
@@ -1970,21 +1970,21 @@ var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[of the files on the server that will be transfered to the client, can be a String or a String[]]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesFromServer">
+          <function name="streamFilesFromServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
 the filename that was transfered. An extra second exception parameter can be given if an exception did occur.]]></description>
             <summary><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
@@ -1998,22 +1998,22 @@ var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]]]></description>
               </parameter>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to be called back at the end of the process (after every file)]]></description>
+              <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to be called back at the end of the process (after every file)]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesToServer">
+          <function name="streamFilesToServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Overloaded method, only defines file(s) to be streamed]]></description>
             <summary><![CDATA[Overloaded method, only defines file(s) to be streamed]]></summary>
             <sample><![CDATA[// send one file:
@@ -2030,17 +2030,17 @@ var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesToServer">
+          <function name="streamFilesToServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
             <summary><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
             <sample><![CDATA[// send one file:
@@ -2057,21 +2057,21 @@ var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to be called back at the end of the process]]></description>
+              <parameter name="o" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[can be a JSFile or JSFile[], a String or String[] or the Function to be called back at the end of the process]]></description>
               </parameter>
             </parameters>
           </function>
-          <function name="streamFilesToServer">
+          <function name="streamFilesToServer" since="Servoy 5.2">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[com.servoy.extensions.plugins.file.JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
             <description><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></description>
             <summary><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></summary>
             <sample><![CDATA[// send one file:
@@ -2088,14 +2088,14 @@ var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 }
 }]]></sample>
             <parameters>
-              <parameter name="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[) or an Array of these]]></description>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[can be a JSFile or JSFile[], a String or String[]]]></description>
               </parameter>
-              <parameter name="org.mozilla.javascript.Function">
-                <description><![CDATA[to be called back at the end of the process]]></description>
+              <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to be called back at the end of the process]]></description>
               </parameter>
             </parameters>
           </function>
