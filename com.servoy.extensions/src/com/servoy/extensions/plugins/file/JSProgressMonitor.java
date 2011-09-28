@@ -183,16 +183,7 @@ public class JSProgressMonitor extends TimerTask implements IReturnedTypesProvid
 	/**
 	 * Returns the index of the current file being transferred.
 	 *
-	 * @sample
-	 * application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	 * 	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	 * 	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	 * 	if (monitor.isCanceled()) {
-	 * 		application.output('canceled!')
-	 * 	}
-	 * 	if (monitor.isFinished()) {
-	 * 		application.output('finished!'
-	 * 	}
+	 * @sampleas js_getCurrentBytesToTransfer()
 	 */
 	public int js_getCurrentFileIndex()
 	{

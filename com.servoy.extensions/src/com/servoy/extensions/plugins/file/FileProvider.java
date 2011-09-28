@@ -492,8 +492,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * returns a JSFile for the given string
 	 *
-	 * @sample 
-	 *
 	 * @param fileName 
 	 */
 	@Deprecated
@@ -1377,7 +1375,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var f = plugins.file.convertToRemoteJSFile('/story.txt');
 	 * if (f && f.canRead())
 	 * 	application.output('File can be read.');
-
+	 *
 	 * @since Servoy 5.2
 	 * 
 	 * @param path the path representing a file on the server (should start with "/")
@@ -1506,12 +1504,12 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Retrieves an array of files/folders from the server
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @param serverPath the path of a remote directory (relative to the defaultFolder)
 	 * 
 	 * @return the array of file names
-	 * @deprecated
 	 */
 	@Deprecated
 	public JSFile[] js_getRemoteList(final Object serverPath)
@@ -1521,13 +1519,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Retrieves an array of files/folders from the server
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @param serverPath a {@link JSFile} or String with the path of a remote directory (relative to the defaultFolder)
 	 * @param filesOnly if true only files will be retrieve, if false, files and folders will be retrieved
 	 * 
 	 * @return the array of file names
-	 * @deprecated
 	 */
 	@Deprecated
 	public JSFile[] js_getRemoteList(final Object serverPath, final boolean filesOnly)
@@ -1538,6 +1536,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Overloaded method, only defines file(s) to be streamed
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @sample
@@ -1565,6 +1564,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Overloaded method, defines file(s) to be streamed and a callback function
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
@@ -1587,6 +1587,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
@@ -1647,6 +1648,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Stream 1 or more file from the server to the client.
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @sample
@@ -1671,6 +1673,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
 	 * the filename that was transfered. An extra second exception parameter can be given if an exception did occur.
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @sampleas js_streamFilesFromServer(Object, Object)

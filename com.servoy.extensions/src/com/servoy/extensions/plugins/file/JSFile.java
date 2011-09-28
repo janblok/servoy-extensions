@@ -139,7 +139,6 @@ public class JSFile implements IReturnedTypesProvider, IScriptable, IJavaScriptT
 	 * // var f = plugins.file.convertToRemoteJSFile('/story.txt');
 	 * application.output('parent folder: ' + f.getAbsoluteFile().getParent());
 	 * application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');
-	 *
 	 */
 	public JSFile js_getAbsoluteFile()
 	{
@@ -212,8 +211,6 @@ public class JSFile implements IReturnedTypesProvider, IScriptable, IJavaScriptT
 	 * @sample
 	 * var theFile = plugins.file.showFileOpenDialog();
 	 * application.output('The file size in bytes: ' + theFile.getBytes());
-	 * 
-	 * @return
 	 */
 	public byte[] js_getBytes()
 	{
