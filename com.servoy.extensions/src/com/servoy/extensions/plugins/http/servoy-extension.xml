@@ -674,7 +674,7 @@ var pageData = poster.getPageData()]]></sample>
             <summary><![CDATA[Set the proxy username and password.]]></summary>
             <sample><![CDATA[plugins.http.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
             <parameters>
-              <parameter name="username"/>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
@@ -684,7 +684,7 @@ var pageData = poster.getPageData()]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the proxy username and password. Used for named http clients ( else use implicit java data).]]></description>
+            <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
             <summary><![CDATA[Set the proxy username and password.]]></summary>
             <sample><![CDATA[plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');]]></sample>
             <parameters>

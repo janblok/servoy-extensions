@@ -247,7 +247,12 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @sameas js_setClientProxyCredentials(String, String)
+	 * Set the proxy username and password. Used for named http clients (else use implicit java data).
+	 *
+	 * @sample plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');
+	 *
+	 * @param username 
+	 * @param password 
 	 */
 	@Deprecated
 	public void js_setClientProxyUserNamePassword(String userName, String password)
