@@ -16,14 +16,15 @@
  */
 package com.servoy.extensions.plugins.http;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * gives the Servoy developer access to some Cookie methods for basic cookie operations
  * 
  * @author paul
  */
-public class Cookie implements IScriptObject
+public class Cookie implements IReturnedTypesProvider, IScriptable
 {
 
 	private org.apache.http.cookie.Cookie cookie;
@@ -42,134 +43,99 @@ public class Cookie implements IScriptObject
 		this.cookie = cookie;
 	}
 
+	/**
+	 * Returns the cookie name.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('cookieName')
+	 * var name = cookie.getName();
+	 *
+	 * @param  
+	 */
 	public String js_getName()
 	{
 		if (cookie == null) return ""; //$NON-NLS-1$
 		return cookie.getName();
 	}
 
+	/**
+	 * Returns the cookie value.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('cookieName')
+	 * var value = cookie.getValue();
+	 *
+	 * @param  
+	 */
 	public String js_getValue()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getValue();
 	}
 
+	/**
+	 * Returns the cookie domain.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('cookieName')
+	 * var domain = cookie.getDomain();
+	 *
+	 * @param  
+	 */
 	public String js_getDomain()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getDomain();
 	}
 
+	/**
+	 * Returns the cookie path.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('cookieName')
+	 * var path = cookie.getPath();
+	 *
+	 * @param  
+	 */
 	public String js_getPath()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getPath();
 	}
 
+	/**
+	 * Returns the cookie secure attribute.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('cookieName')
+	 * var path = cookie.getSecure();
+	 *
+	 * @param  
+	 */
 	public boolean js_getSecure()
 	{
 		if (cookie == null) return false;
 		return cookie.isSecure();
 	}
 
+	/**
+	 * Returns the cookie comment.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('cookieName')
+	 * var path = cookie.getComment();
+	 *
+	 * @param  
+	 */
 	public String js_getComment()
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getComment();
 	}
 
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		return new String[] { "" };//$NON-NLS-1$
-	}
-
-	public String getSample(String methodName)
-	{
-		StringBuffer retval = new StringBuffer();
-		if (methodName != null && getToolTip(methodName) != null)
-		{
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-		}
-
-		if ("getName".equals(methodName))//$NON-NLS-1$
-		{
-			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
-			retval.append("var name = cookie.getName();\n");//$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getValue".equals(methodName))//$NON-NLS-1$
-		{
-			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
-			retval.append("var value = cookie.getValue();\n");//$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getDomain".equals(methodName))//$NON-NLS-1$
-		{
-			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
-			retval.append("var domain = cookie.getDomain();\n");//$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getPath".equals(methodName))//$NON-NLS-1$
-		{
-			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
-			retval.append("var path = cookie.getPath();\n");//$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getSecure".equals(methodName))//$NON-NLS-1$
-		{
-			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
-			retval.append("var path = cookie.getSecure();\n");//$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getComment".equals(methodName))//$NON-NLS-1$
-		{
-			retval.append("var cookie = client.getCookie('cookieName')\n");//$NON-NLS-1$
-			retval.append("var path = cookie.getComment();\n");//$NON-NLS-1$
-			return retval.toString();
-		}
-
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("getName".equals(methodName))//$NON-NLS-1$
-		{
-			return "Returns the cookie name.";//$NON-NLS-1$
-		}
-		else if ("getValue".equals(methodName))//$NON-NLS-1$
-		{
-			return "Returns the cookie value.";//$NON-NLS-1$
-		}
-		else if ("getDomain".equals(methodName))//$NON-NLS-1$
-		{
-			return "Returns the cookie domain.";//$NON-NLS-1$
-		}
-		else if ("getPath".equals(methodName))//$NON-NLS-1$
-		{
-			return "Returns the cookie path.";//$NON-NLS-1$
-		}
-		else if ("getSecure".equals(methodName))//$NON-NLS-1$
-		{
-			return "Returns the cookie secure attribute.";//$NON-NLS-1$
-		}
-		else if ("getComment".equals(methodName))//$NON-NLS-1$
-		{
-			return "Returns the cookie comment.";//$NON-NLS-1$
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 }

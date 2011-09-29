@@ -46,11 +46,32 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 		super(url, hc, method);
 	}
 
+	/**
+	 * Set the body of the request.
+	 *
+	 * @sample
+	 * method.setBodyContent(content)
+	 *
+	 * @param s 
+	 */
 	public void js_setBodyContent(String s)
 	{
 		this.content = s;
 	}
 
+	/**
+	 * Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).
+	 *
+	 * @sample
+	 * var client = plugins.http.createNewHttpClient();
+	 * var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
+	 * poster.addParameter('status',globals.textToPost);
+	 * poster.addParameter('source','Test Source');
+	 * poster.setCharset('UTF-8');
+	 * var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok
+	 *
+	 * @param charset 
+	 */
 	public void js_setCharset(String s)
 	{
 		this.charset = s;
@@ -73,60 +94,4 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 		return super.js_executeRequest(userName, password);
 	}
 
-	@Override
-	public String getSample(String methodName)
-	{
-		if ("setBodyContent".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuilder retval = new StringBuilder();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("method.setBodyContent(content)"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		if ("setCharset".equals(methodName))
-		{
-			StringBuilder retval = new StringBuilder();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\nvar client = plugins.http.createNewHttpClient();");
-			retval.append("\nvar poster = client.createPostRequest('https://twitter.com/statuses/update.json');");
-			retval.append("\nposter.addParameter('status',globals.textToPost);");
-			retval.append("\nposter.addParameter('source','Test Source');");
-			retval.append("\nposter.setCharset('UTF-8');");
-			retval.append("\nvar httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok\n");
-			return retval.toString();
-		}
-		return super.getSample(methodName);
-	}
-
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("setBodyContent".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Set the body of the request."; //$NON-NLS-1$
-		}
-		if ("setCharset".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8)."; //$NON-NLS-1$
-		}
-		return super.getToolTip(methodName);
-	}
-
-	@Override
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setBodyContent".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "content" }; //$NON-NLS-1$
-		}
-		if ("setCharset".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "charset" }; //$NON-NLS-1$
-		}
-
-		return super.getParameterNames(methodName);
-	}
 }

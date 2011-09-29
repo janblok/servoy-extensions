@@ -30,10 +30,11 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
-public class HttpClient implements IScriptObject, IJavaScriptType
+public class HttpClient implements IReturnedTypesProvider, IScriptable, IJavaScriptType
 {
 	DefaultHttpClient client;
 
@@ -48,6 +49,14 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 		client.getAuthSchemes().register(AuthPolicy.SPNEGO, new NegotiateSchemeFactory());
 	}
 
+	/**
+	 * Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).
+	 *
+	 * @sample
+	 * client.setTimeout(1000)
+	 *
+	 * @param msTimeout 
+	 */
 	public void js_setTimeout(int timeout)
 	{
 		HttpParams params = client.getParams();
@@ -55,26 +64,77 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 		HttpConnectionParams.setSoTimeout(params, timeout);
 	}
 
+	/**
+	 * Add cookie to the this client.
+	 *
+	 * @sample
+	 * var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+	 * if (cookieSet)
+	 * {
+	 * 	//do something
+	 * }
+	 *
+	 * @param cookieName 
+	 * @param cookieValue 
+	 */
 	public boolean js_setCookie(String name, String value)
 	{
 		return js_setCookie(name, value, ""); //$NON-NLS-1$
 	}
 
+	/**
+	 * @clonedesc js_setCookie(String, String)
+	 * @sampleas js_setCookie(String, String)
+	 *
+	 * @param cookieName 
+	 * @param cookieValue 
+	 * @param domain
+	 */
 	public boolean js_setCookie(String name, String value, String domain)
 	{
 		return js_setCookie(name, value, domain, ""); //$NON-NLS-1$
 	}
 
+	/**
+	 * @clonedesc js_setCookie(String, String)
+	 * @sampleas js_setCookie(String, String)
+	 *
+	 * @param cookieName 
+	 * @param cookieValue 
+	 * @param domain
+	 * @param path
+	 */
 	public boolean js_setCookie(String name, String value, String domain, String path)
 	{
 		return js_setCookie(name, value, domain, path, -1);
 	}
 
+	/**
+	 * @clonedesc js_setCookie(String, String)
+	 * @sampleas js_setCookie(String, String)
+	 *
+	 * @param cookieName 
+	 * @param cookieValue 
+	 * @param domain
+	 * @param path
+	 * @param maxAge
+	 */
 	public boolean js_setCookie(String name, String value, String domain, String path, int maxAge)
 	{
 		return js_setCookie(name, value, domain, path, maxAge, false);
 	}
 
+	/**
+	 * @clonedesc js_setCookie(String, String)
+	 * @sampleas js_setCookie(String, String)
+	 *
+	 * @param cookieName 
+	 * @param cookieValue 
+	 * @param domain
+	 * @param path
+	 * @param maxAge
+	 * @param secure
+	 */
 	public boolean js_setCookie(String name, String value, String domain, String path, int maxAge, boolean secure)
 	{
 		//Correct to disallow empty Cookie values? how to clear a Cookie then?
@@ -101,6 +161,20 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 		return true;
 	}
 
+	/**
+	 * Get a cookie by name.
+	 *
+	 * @sample
+	 * var cookie = client.getCookie('JSESSIONID');
+	 * if (cookie != null)
+	 * {
+	 * 	// do something
+	 * }
+	 * else
+	 * 	client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+	 *
+	 * @param cookieName 
+	 */
 	public Cookie js_getCookie(String cookieName)
 	{
 		List<org.apache.http.cookie.Cookie> cookies = client.getCookieStore().getCookies();
@@ -111,6 +185,12 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 		return null;
 	}
 
+	/**
+	 * Get all cookies from this client.
+	 *
+	 * @sample
+	 * var cookies = client.getHttpClientCookies()
+	 */
 	public Cookie[] js_getCookies()
 	{
 		List<org.apache.http.cookie.Cookie> cookies = client.getCookieStore().getCookies();
@@ -122,48 +202,113 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 		return cookieObjects;
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public PostRequest js_createPostRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new PostRequest(url, client);
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public GetRequest js_createGetRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new GetRequest(url, client);
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public DeleteRequest js_createDeleteRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new DeleteRequest(url, client);
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public PutRequest js_createPutRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new PutRequest(url, client);
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public OptionsRequest js_createOptionsRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new OptionsRequest(url, client);
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public HeadRequest js_createHeadRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new HeadRequest(url, client);
 	}
 
+	/**
+	 * Create a new request of specified type.
+	 *
+	 * @sample
+	 * var request = client.createGetRequest('http://www.servoy.com');
+	 *
+	 * @param url 
+	 */
 	public TraceRequest js_createTraceRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
 		return new TraceRequest(url, client);
 	}
 
+	/**
+	 * Set proxy credentials.
+	 *
+	 * @sample
+	 * client.setClientProxyCredentials('my_proxy_username','my_proxy_password');
+	 *
+	 * @param userName 
+	 * @param password 
+	 */
 	public void js_setClientProxyCredentials(String userName, String password)
 	{
 		if (!Utils.stringIsEmpty(userName))
@@ -171,142 +316,6 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 			this.proxyUser = userName;
 			this.proxyPassword = password;
 		}
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("setClientProxyCredentials".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "userName", "password" };
-		}
-		else if ("getCookie".equals(methodName))
-		{
-			return new String[] { "cookieName" };
-		}
-		else if ("getCookies".equals(methodName))
-		{
-			return new String[] { };
-		}
-		else if ("setCookie".equals(methodName))
-		{
-			return new String[] { "cookieName", "cookieValue", "[domain]", "[path]", "[maxAge]", "[secure]" };
-		}
-		else if ("setTimeout".equals(methodName))
-		{
-			return new String[] { "msTimeout" };
-		}
-		else if ("createPostRequest".equals(methodName) || "createGetRequest".equals(methodName) || "createPutRequest".equals(methodName) ||
-			"createDeleteRequest".equals(methodName) || "createTraceRequest".equals(methodName) || "createHeadRequest".equals(methodName) ||
-			"createOptionsRequest".equals(methodName))
-		{
-			return new String[] { "url" };
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("setTimeout".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("client.setTimeout(1000)\n");
-			return retval.toString();
-		}
-		else if ("getCookie".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var cookie = client.getCookie('JSESSIONID');\n"); //$NON-NLS-1$
-			retval.append("if (cookie != null)\n"); //$NON-NLS-1$
-			retval.append("{\n"); //$NON-NLS-1$
-			retval.append("\t// do something\n"); //$NON-NLS-1$
-			retval.append("}\n"); //$NON-NLS-1$
-			retval.append("else\n\t"); //$NON-NLS-1$
-			retval.append("client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("setCookie".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)\n");
-			retval.append("if (cookieSet)\n");
-			retval.append("{\n"); //$NON-NLS-1$
-			retval.append("\t//do something\n");
-			retval.append("}\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getCookies".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var cookies = client.getHttpClientCookies()\n");
-			return retval.toString();
-		}
-		else if ("setClientProxyCredentials".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\nclient.setClientProxyCredentials('my_proxy_username','my_proxy_password');"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("createPostRequest".equals(methodName) || "createGetRequest".equals(methodName) || "createPutRequest".equals(methodName) ||
-			"createDeleteRequest".equals(methodName) || "createTraceRequest".equals(methodName) || "createHeadRequest".equals(methodName) ||
-			"createOptionsRequest".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\nvar request = client.createGetRequest('http://www.servoy.com');"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("setClientProxyCredentials".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Set proxy credentials.";
-		}
-		else if ("getCookie".equals(methodName))
-		{
-			return "Get a cookie by name.";
-		}
-		else if ("getCookies".equals(methodName))
-		{
-			return "Get all cookies from this client.";
-		}
-		else if ("setCookie".equals(methodName))
-		{
-			return "Add cookie to the this client.";
-		}
-		else if ("setTimeout".equals(methodName))
-		{
-			return "Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).";
-		}
-		else if ("createPostRequest".equals(methodName) || "createGetRequest".equals(methodName) || "createPutRequest".equals(methodName) ||
-			"createDeleteRequest".equals(methodName) || "createTraceRequest".equals(methodName) || "createHeadRequest".equals(methodName) ||
-			"createOptionsRequest".equals(methodName))
-		{
-			return "Create a new request of specified type.";
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

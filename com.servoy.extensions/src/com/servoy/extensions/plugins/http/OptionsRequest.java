@@ -39,34 +39,15 @@ public class OptionsRequest extends BaseRequest
 		super(url, hc, new HttpOptions(url));
 	}
 
+	/**
+	 * Returns the supported HTTP Request operations as a String Array
+	 *
+	 * @sample
+	 * var supportedOperations = request.getAllowedMethods()application.output(supportedOperations.join(',');
+	 */
 	public String[] js_getAllowedMethods(Response res)
 	{
 		return res.getAllowedMethods();
 	}
 
-	@Override
-	public String getSample(String methodName)
-	{
-		if ("getAllowedMethods".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var supportedOperations = request.getAllowedMethods()"); //$NON-NLS-1$
-			retval.append("application.output(supportedOperations.join(',');"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return super.getSample(methodName);
-	}
-
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("getAllowedMethods".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Returns the supported HTTP Request operations as a String Array"; //$NON-NLS-1$
-		}
-		return super.getToolTip(methodName);
-	}
 }

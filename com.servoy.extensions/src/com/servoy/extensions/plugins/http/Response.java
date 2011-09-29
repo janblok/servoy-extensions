@@ -71,6 +71,12 @@ public class Response implements IScriptObject, IJavaScriptType
 		return methods.toArray(new String[0]);
 	}
 
+	/**
+	 * Gets the status code of the response, the list of the possible values is in HTTP_STATUS constants.
+	 *
+	 * @sample
+	 * var status = response.getStatusCode();// compare with HTTP_STATUS constants
+	 */
 	public int js_getStatusCode()
 	{
 		if (res != null)
@@ -80,6 +86,12 @@ public class Response implements IScriptObject, IJavaScriptType
 		return 0;
 	}
 
+	/**
+	 * Get the content of the response as String.
+	 *
+	 * @sample
+	 * var pageData = response.getResponseBody();
+	 */
 	public String js_getResponseBody()
 	{
 		try
@@ -93,6 +105,12 @@ public class Response implements IScriptObject, IJavaScriptType
 		return "";
 	}
 
+	/**
+	 * Get the content of response as binary data. It also supports gzip-ed content.
+	 *
+	 * @sample
+	 * var mediaData = response.getMediaData();
+	 */
 	public byte[] js_getMediaData()
 	{
 		try
@@ -119,23 +137,35 @@ public class Response implements IScriptObject, IJavaScriptType
 		return null;
 	}
 
+	/**
+	 * Gets the headers of the response as name/value arrays.
+	 *
+	 * @sample
+	 * var allHeaders = response.getResponseHeaders(null);
+	 */
 	public JSMap js_getResponseHeaders()
 	{
 		return js_getResponseHeaders(null);
 	}
 
-	public JSMap js_getResponseHeaders(String name)
+	/**
+	 * @clonedesc js_getResponseHeaders()
+	 * @sampleas js_getResponseHeaders()
+	 *
+	 * @param headerName 
+	 */
+	public JSMap js_getResponseHeaders(String headerName)
 	{
 		try
 		{
 			Header[] ha;
-			if (name == null)
+			if (headerName == null)
 			{
 				ha = res.getAllHeaders();
 			}
 			else
 			{
-				ha = res.getHeaders(name);
+				ha = res.getHeaders(headerName);
 			}
 			JSMap sa = new JSMap();
 			for (Header element : ha)
@@ -158,6 +188,12 @@ public class Response implements IScriptObject, IJavaScriptType
 		return null;
 	}
 
+	/**
+	 * Get the charset of the response body.
+	 *
+	 * @sample
+	 * var charset = response.getCharset();
+	 */
 	public String js_getCharset()
 	{
 		return EntityUtils.getContentCharSet(res.getEntity());

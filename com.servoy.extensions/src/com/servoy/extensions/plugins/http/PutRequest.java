@@ -40,6 +40,14 @@ public class PutRequest extends BaseEntityEnclosingRequest
 		super(url, hc, new HttpPut(url));
 	}
 
+	/**
+	 * Set a file to put.
+	 *
+	 * @sample
+	 * putRequest.setFile('c:/temp/manual_01a.doc')
+	 *
+	 * @param filePath 
+	 */
 	public boolean js_setFile(String filePath)
 	{
 		if (filePath != null)
@@ -52,41 +60,5 @@ public class PutRequest extends BaseEntityEnclosingRequest
 		}
 		return false;
 	}
-
-	@Override
-	public String getSample(String methodName)
-	{
-		if ("setFile".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("putRequest.setFile('c:/temp/manual_01a.doc')"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return super.getSample(methodName);
-	}
-
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("setFile".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Set a file to put."; //$NON-NLS-1$
-		}
-		return super.getToolTip(methodName);
-	}
-
-	@Override
-	public String[] getParameterNames(String methodName)
-	{
-		if (methodName.equals("setFile")) //$NON-NLS-1$
-		{
-			return new String[] { "filePath" }; //$NON-NLS-1$
-		}
-		return super.getParameterNames(methodName);
-	}
-
 
 }

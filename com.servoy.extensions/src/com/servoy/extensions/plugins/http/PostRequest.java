@@ -70,6 +70,17 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		js_setCharset(encoding);
 	}
 
+	/**
+	 * Add a file to the post.
+	 *
+	 * @sample
+	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
+	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
+	 *
+	 * @param parameterName 
+	 * @param fileName 
+	 * @param fileLocation 
+	 */
 	public boolean js_addFile(String parameterName, String fileName, String fileLocation)
 	{
 		if (fileLocation != null)
@@ -84,6 +95,16 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		return false;
 	}
 
+	/**
+	 * Add a parameter to the post.
+	 *
+	 * @sample
+	 * poster.addParameter('name','value')
+	 * poster.addParameter(null,'value') //sets the content to post
+	 *
+	 * @param name 
+	 * @param value 
+	 */
 	public boolean js_addParameter(String name, String value)
 	{
 		if (name != null)
@@ -102,6 +123,16 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		return false;
 	}
 
+	/**
+	 * 
+	 *
+	 * @sample
+	 * //null
+	 * var httpCode = poster.doPost()
+	 *
+	 * @param username optional
+	 * @param password optional
+	 */
 	@Deprecated
 	public int js_doPost(Object[] args)
 	{
@@ -180,6 +211,12 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		}
 	}
 
+	/**
+	 * Get the result page data after a post.
+	 *
+	 * @sample
+	 * var pageData = poster.getPageData()
+	 */
 	@Deprecated
 	public String js_getPageData()
 	{
@@ -197,106 +234,6 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			Debug.error(e);
 		}
 		return ""; //$NON-NLS-1$
-	}
-
-	@Override
-	public String getSample(String methodName)
-	{
-		if ("addFile".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')"); //$NON-NLS-1$
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post");//$NON-NLS-1$
-			return retval.toString();
-		}
-		if ("addParameter".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("poster.addParameter('name','value')"); //$NON-NLS-1$
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("poster.addParameter(null,'value') //sets the content to post"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		if ("doPost".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var httpCode = poster.doPost()"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		if ("getPageData".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var pageData = poster.getPageData()");
-			return retval.toString();
-		}
-		return super.getSample(methodName);
-	}
-
-	@Override
-	public String getToolTip(String methodName)
-	{
-		if ("addFile".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Add a file to the post."; //$NON-NLS-1$
-		}
-		if ("addParameter".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Add a parameter to the post."; //$NON-NLS-1$
-		}
-		if ("getPageData".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Get the result page data after a post."; //$NON-NLS-1$
-		}
-		return super.getToolTip(methodName);
-	}
-
-	@Override
-	public String[] getParameterNames(String methodName)
-	{
-		if (methodName.equals("addFile")) //$NON-NLS-1$
-		{
-			return new String[] { "parameterName", "fileName", "fileLocation" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		if ("addParameter".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "name", "value" }; //$NON-NLS-1$//$NON-NLS-2$
-		}
-		if ("doPost".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "[username]", "[password]" }; //$NON-NLS-1$//$NON-NLS-2$
-		}
-		return super.getParameterNames(methodName);
-	}
-
-	@Override
-	public boolean isDeprecated(String methodName)
-	{
-		if ("setEncoding".equals(methodName))
-		{
-			return true;
-		}
-		if ("getPageData".equals(methodName))
-		{
-			return true;
-		}
-		if ("doPost".equals(methodName))
-		{
-			return true;
-		}
-		return super.isDeprecated(methodName);
 	}
 
 }

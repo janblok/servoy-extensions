@@ -30,7 +30,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
@@ -38,7 +39,7 @@ import com.servoy.j2db.util.Utils;
  * @author pbakker
  *
  */
-public abstract class BaseRequest implements IScriptObject, IJavaScriptType
+public abstract class BaseRequest implements IReturnedTypesProvider, IScriptable, IJavaScriptType
 {
 	protected DefaultHttpClient client;
 	protected final HttpRequestBase method;
@@ -66,6 +67,15 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 		this.method = method;
 	}
 
+	/**
+	 * Add a header to the request.
+	 *
+	 * @sample
+	 * method.addHeader('Content-type','text/xml; charset=ISO-8859-1')
+	 *
+	 * @param headerName 
+	 * @param value 
+	 */
 	public boolean js_addHeader(String headerName, String value)
 	{
 		if (headerName != null)
@@ -87,11 +97,27 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 		return false;
 	}
 
+	/**
+	 * Execute the request method.
+	 *
+	 * @sample
+	 * var response = method.executeRequest()
+	 *
+	 * @param username optional
+	 * @param password optional
+	 */
 	public Response js_executeRequest()
 	{
 		return js_executeRequest(null, null);
 	}
 
+	/**
+	 * @clonedesc js_executeRequest()
+	 * @sampleas js_executeRequest()
+	 *
+	 * @param username 
+	 * @param password 
+	 */
 	public Response js_executeRequest(String userName, String password)
 	{
 		try
@@ -122,59 +148,6 @@ public abstract class BaseRequest implements IScriptObject, IJavaScriptType
 			Debug.error(ex);
 			return null;
 		}
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("executeRequest".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var response = method.executeRequest()"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		if ("addHeader".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("method.addHeader('Content-type','text/xml; charset=ISO-8859-1')");
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("addHeader".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Add a header to the request."; //$NON-NLS-1$
-		}
-		if ("executeRequest".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Execute the request method."; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("executeRequest".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "[username]", "[password]" }; //$NON-NLS-1$//$NON-NLS-2$
-		}
-		if ("addHeader".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "headerName", "value" }; //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

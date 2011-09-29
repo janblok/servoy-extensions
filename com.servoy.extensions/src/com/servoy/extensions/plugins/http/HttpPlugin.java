@@ -26,7 +26,7 @@ import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * @author jblok
@@ -83,10 +83,7 @@ public class HttpPlugin implements IClientPlugin
 		return "http"; //$NON-NLS-1$
 	}
 
-	/*
-	 * @see IPlugin#getScriptObject()
-	 */
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		if (impl == null)
 		{
