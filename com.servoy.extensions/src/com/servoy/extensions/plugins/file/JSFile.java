@@ -212,7 +212,7 @@ public class JSFile implements IReturnedTypesProvider, IScriptable, IJavaScriptT
 	 * var theFile = plugins.file.showFileOpenDialog();
 	 * application.output('The file size in bytes: ' + theFile.getBytes());
 	 */
-	public byte[] js_getBytes()
+	public byte[] jsFunction_getBytes()
 	{
 		return file.getBytes();
 	}

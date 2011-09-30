@@ -79,7 +79,7 @@ public class WebFileProvider extends FileProvider
 	{
 		if (args != null && args.length > 0 && args[0] instanceof JSFile)
 		{
-			byte[] bytes = ((JSFile)args[0]).js_getBytes();
+			byte[] bytes = ((JSFile)args[0]).jsFunction_getBytes();
 			if (bytes != null)
 			{
 				try
@@ -105,7 +105,7 @@ public class WebFileProvider extends FileProvider
 	{
 		if (args != null && args.length > 0 && args[0] instanceof JSFile)
 		{
-			return ((JSFile)args[0]).js_getBytes();
+			return ((JSFile)args[0]).jsFunction_getBytes();
 		}
 		return super.js_readFile(args);
 	}
