@@ -58,7 +58,6 @@ import com.servoy.j2db.persistence.RepositoryException;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.HTTPUtils;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -116,7 +115,7 @@ public class PDFServlet extends HttpServlet
 			}
 			else if (path.startsWith("/pdf_forms/pdf_form"))
 			{
-				HTTPUtils.setNoCacheHeaders(response);
+				addHeaders(response);
 
 				String s_action_id = request.getParameter("action_id"); //$NON-NLS-1$
 				int action_id = Utils.getAsInteger(s_action_id);
@@ -296,7 +295,7 @@ public class PDFServlet extends HttpServlet
 			}
 			else if (path.startsWith("/pdf_forms/pdf_template"))
 			{
-				HTTPUtils.setNoCacheHeaders(response);
+				addHeaders(response);
 
 				String s_template_id = request.getParameter("template_id"); //$NON-NLS-1$
 				int template_id = Utils.getAsInteger(s_template_id);
@@ -353,6 +352,13 @@ public class PDFServlet extends HttpServlet
 		}
 	}
 
+	private void addHeaders(HttpServletResponse response)
+	{
+		// this is for ie under https
+		response.setHeader("Cache-Control", "max-age=60, must-revalidate, proxy-revalidate"); //$NON-NLS-1$//$NON-NLS-2$
+		response.setHeader("Pragma", "public");//$NON-NLS-1$//$NON-NLS-2$
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -373,7 +379,7 @@ public class PDFServlet extends HttpServlet
 			}
 			else if (path.startsWith("/pdf_forms/pdf_process_data"))
 			{
-				HTTPUtils.setNoCacheHeaders(response);
+				addHeaders(response);
 
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
