@@ -34,7 +34,7 @@ import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -119,7 +119,7 @@ public class AgentPlugin implements IClientPlugin
 		return "agent"; //$NON-NLS-1$
 	}
 
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		return impl;
 	}

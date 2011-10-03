@@ -153,6 +153,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/agent">
 			<fileset dir="${src_plugins.dir}/agent">
 				<patternset refid="javaGifData.sources"/>
+				<include name="**/servoy-*.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/agent">

@@ -13,15 +13,16 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.agent;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
-public interface IJSAgent extends IScriptObject
+public interface IJSAgent extends IScriptable, IReturnedTypesProvider
 {
 	/**
-	 * get or set the x position of the agent
+	 * Gets or sets the x position of the agent.
 	 *
 	 * @sample
 	 * //move the agent diagonaly
@@ -31,7 +32,7 @@ public interface IJSAgent extends IScriptObject
 	public int js_getX();
 
 	/**
-	 * get or set the y position of the agent
+	 * Gets or sets the y position of the agent.
 	 *
 	 * @sample
 	 * //move the agent diagonaly
@@ -41,53 +42,56 @@ public interface IJSAgent extends IScriptObject
 	public int js_getY();
 
 	/**
-	 * set the size of the balloon
+	 * Sets the size of the balloon.
 	 *
-	 * @sample plugins.agent.setBalloonSize(width,height)
+	 * @sample
+	 * plugins.agent.setBalloonSize(width,height)
 	 *
 	 * @param width 
-	 *
 	 * @param height 
 	 */
-	public void js_setBalloonSize(int w, int h);
+	public void js_setBalloonSize(int width, int height);
 
 	/**
-	 * set a new image for this agent
+	 * Sets a new image for the agent.
 	 *
-	 * @sample plugins.agent.setImageURL("url")
+	 * @sample
+	 * plugins.agent.setImageURL("url")
 	 *
 	 * @param url 
 	 */
 	public void js_setImageURL(String url);
 
 	/**
-	 * set the agent location
+	 * Sets the location of the agent.
 	 *
-	 * @sample plugins.agent.setLocation(100,100);
+	 * @sample
+	 * plugins.agent.setLocation(100,100);
 	 *
 	 * @param x 
-	 *
 	 * @param y 
 	 */
 	public void js_setLocation(int x, int y);
 
 	/**
-	 * let the agent speak
+	 * Makes the agent speak.
 	 *
-	 * @sample plugins.agent.speak('hello nerd');
+	 * @sample
+	 * plugins.agent.speak('hello nerd');
 	 *
 	 * @param message 
 	 */
-	public void js_speak(String s);
+	public void js_speak(String message);
 
 	/**
-	 * show/hide the agent
+	 * Show/hides the agent.
 	 *
-	 * @sample plugins.agent.setVisible(true);
+	 * @sample
+	 * plugins.agent.setVisible(true);
 	 *
 	 * @param visible 
 	 */
-	public void js_setVisible(boolean b);
+	public void js_setVisible(boolean visible);
 
 	/** @deprecated */
 	@Deprecated
@@ -98,17 +102,19 @@ public interface IJSAgent extends IScriptObject
 	public void js_setY(int y);
 
 	/**
-	 * hide the agent
+	 * Hides the agent.
 	 *
-	 * @sample plugins.agent.hide();
+	 * @sample
+	 * plugins.agent.hide();
 	 */
 	@Deprecated
 	public void js_hide();
 
 	/**
-	 * show the agent
+	 * Shows the agent.
 	 *
-	 * @sample plugins.agent.show();
+	 * @sample
+	 * plugins.agent.show();
 	 */
 	@Deprecated
 	public void js_show();
