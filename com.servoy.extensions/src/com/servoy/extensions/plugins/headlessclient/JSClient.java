@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.rmi.RemoteException;
@@ -26,18 +26,25 @@ import org.mozilla.javascript.Undefined;
 
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IConstantsObject;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.util.Debug;
 
-public class JSClient implements IScriptObject, IConstantsObject
+public class JSClient implements IScriptable, IReturnedTypesProvider, IConstantsObject
 {
 	private final IHeadlessServer headlessServer;
 	private final HeadlessClientPlugin plugin;
 	private final String clientID;
 
+	/**
+	 * Constant that is returned as a JSEvent type when in the callback method when it executed normally.
+	 */
 	public static final String CALLBACK_EVENT = "headlessCallback"; //$NON-NLS-1$
 
+	/**
+	 * Constant that is returned as a JSEvent type when in the callback method when an exception occured.
+	 */
 	public static final String CALLBACK_EXCEPTION_EVENT = "headlessExceptionCallback"; //$NON-NLS-1$
 
 	// for doc
@@ -53,6 +60,28 @@ public class JSClient implements IScriptObject, IConstantsObject
 		this.plugin = plugin;
 	}
 
+	/**
+	 * gets the id of the client
+	 *
+	 * @sample
+	 * if (jsclient && jsclient.isValid())
+	 * {
+	 * 	/*Queue a method where the callback can do something like this
+	 * 	if (event.getType() == JSClient.CALLBACK_EVENT)
+	 * 	{
+	 * 		application.output("callback data, name: " + event.data);
+	 * 	}
+	 * 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
+	 * 	{
+	 * 		application.output("exception callback, name: " + event.data);
+	 * 	}*&#47;
+	 * 	var x = new Object();
+	 * 	x.name = 'remote1';
+	 * 	x.number = 10;
+	 * 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
+	 * 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
+	 * }
+	 */
 	public String js_getClientID()
 	{
 		return clientID;
@@ -66,6 +95,8 @@ public class JSClient implements IScriptObject, IConstantsObject
 	 * If an exception is thrown somewhere then the callback method will be called with
 	 * the exception as the JSEvent data object with the JSEvent.getType() value of JSClient.CALLBACK_EXCEPTION_EVENT
 	 * The second argument that is give back is the JSClient instance that did the call.
+	 * 
+	 * @sampleas js_getClientID()
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
 	 * @param methodName The method name
@@ -101,7 +132,7 @@ public class JSClient implements IScriptObject, IConstantsObject
 						event.setType(CALLBACK_EVENT);
 						event.setData(retval);
 						// function def will not throw an exception.
-						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this  });
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
 					}
 					catch (Exception ex)
 					{
@@ -119,7 +150,7 @@ public class JSClient implements IScriptObject, IConstantsObject
 							Debug.error(e);
 						}
 						event.setData(data);
-						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this  });
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
 					}
 				}
 				finally
@@ -147,6 +178,11 @@ public class JSClient implements IScriptObject, IConstantsObject
 		}
 	}
 
+	/**
+	 * returns true if this client is still valid/usable
+	 *
+	 * @sampleas js_getClientID()
+	 */
 	public boolean js_isValid()
 	{
 		try
@@ -160,6 +196,10 @@ public class JSClient implements IScriptObject, IConstantsObject
 		}
 	}
 
+	/**
+	 * @sameas js_shutdown(boolean)
+	 */
+	@Deprecated
 	public void js_shutDown(boolean force)
 	{
 		try
@@ -172,11 +212,22 @@ public class JSClient implements IScriptObject, IConstantsObject
 		}
 	}
 
+	/**
+	 * closes the client
+	 *
+	 * @sampleas js_getClientID()
+	 */
 	public void js_shutdown()
 	{
 		js_shutdown(false);
 	}
 
+	/**
+	 * @clonedesc js_shutdown()
+	 * @sampleas js_shutdown()
+	 *
+	 * @param force 
+	 */
 	public void js_shutdown(boolean force)
 	{
 		try
@@ -191,6 +242,24 @@ public class JSClient implements IScriptObject, IConstantsObject
 
 	/**
 	 * Get a dataprovider value.
+	 *
+	 * @sample
+	 * if (jsclient && jsclient.isValid())
+	 * {
+	 * 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
+	 * 	var value = jsclient.getDataProviderValue(null, "globals.number", 'remoteMethod');
+	 * 	if (value != null)
+	 * 	{
+	 * 		application.output("value get from globals.number :: "+ value);
+	 * 		globals.value = value+10;
+	 * 		var returnValue = jsclient.setDataProviderValue(null, "globals.number", globals.value, 'remoteMethod');
+	 * 		application.output("value set to globals.number previous value "+ returnValue);
+	 * 	}
+	 * 	else
+	 * 	{
+	 * 		application.output("value get from globals.number :: " + null);
+	 * 	}
+	 * }
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
 	 * @param dataprovider the dataprovider name as seen in Servoy
@@ -202,8 +271,9 @@ public class JSClient implements IScriptObject, IConstantsObject
 	}
 
 	/**
-	 * Get a dataprovider value.
-	 * 
+	 * @clonedesc js_getDataProviderValue(String, String)
+	 * @sampleas js_getDataProviderValue(String, String)
+	 *
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
 	 * @param dataprovider the dataprovider name as seen in Servoy
 	 * @param methodName the methodname that should be running now for this client, if not then undefined is returned.
@@ -243,6 +313,8 @@ public class JSClient implements IScriptObject, IConstantsObject
 	/**
 	 * Set a dataprovider value.
 	 * 
+	 * @sampleas js_getDataProviderValue(String, String)
+	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
 	 * @param dataprovider the dataprovider name as seen in Servoy
 	 * @param value to set
@@ -254,7 +326,8 @@ public class JSClient implements IScriptObject, IConstantsObject
 	}
 
 	/**
-	 * Set a dataprovider value.
+	 * @clonedesc js_setDataProviderValue(String, String, Object)
+	 * @sampleas js_setDataProviderValue(String, String, Object)
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
 	 * @param dataprovider the dataprovider name as seen in Servoy
@@ -300,97 +373,6 @@ public class JSClient implements IScriptObject, IConstantsObject
 	public String toString()
 	{
 		return "JSClient[" + clientID + "]";
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getParameterNames(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("getDataProviderValue".equals(methodName))
-		{
-			return new String[] { "context", "variableName", "[currentMethodName]" };
-		}
-		if ("setDataProviderValue".equals(methodName))
-		{
-			return new String[] { "context", "variableName", "value", "[currentMethodName]" };
-		}
-		if ("queueMethod".equals(methodName))
-		{
-			return new String[] { "context", "methodName", "args", "callbackFunction" };
-		}
-		if ("shutdown".equals(methodName))
-		{
-			return new String[] { "force" };
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getSample(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("getDataProviderValue".equals(methodName) || "setDataProviderValue".equals(methodName))
-		{
-			return "if (jsclient && jsclient.isValid())\n{\n\t// only gets the globals.media when the 'remoteMethod' is currently executing for this client\n\tvar value = jsclient.getDataProviderValue(null, \"globals.number\", 'remoteMethod');\n\tif (value != null)\n\t{\n\t\tapplication.output(\"value get from globals.number :: \"+ value);\n\t\tglobals.value = value+10;\n\t\tvar returnValue = jsclient.setDataProviderValue(null, \"globals.number\", globals.value, 'remoteMethod');\n\t\tapplication.output(\"value set to globals.number previous value \"+ returnValue);\n\t}\n\telse\n\t{\n\t\tapplication.output(\"value get from globals.number :: \" + null);\n\t}\n}";
-		}
-		else
-		{
-			return "if (jsclient && jsclient.isValid())\n{\n\t/*Queue a method where the callback can do something like this\n\tif (event.getType() == JSClient.CALLBACK_EVENT)\n\t{\n\t\tapplication.output(\"callback data, name: \" + event.data);\n\t}\n\telse if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)\n\t{\n\t\tapplication.output(\"exception callback, name: \" + event.data);\n\t}*/\n\tvar x = new Object();\n\tx.name = 'remote1';\n\tx.number = 10;\n\t// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method\n\tjsclient.queueMethod(null, \"remoteMethod\", [x], callback);\n}";
-		}
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("getDataProviderValue".equals(methodName))
-		{
-			return "get a dataprovider value from the client";
-		}
-		if ("setDataProviderValue".equals(methodName))
-		{
-			return "set a dataprovider value on the client";
-		}
-		if ("queueMethod".equals(methodName))
-		{
-			return "queue a method on the client, calling the method name specified on the context, the callback method will get a JSEvent as the first and a JSClient (the this of the client that did the call) as the second parameter ";
-		}
-		if ("shutDown".equals(methodName))
-		{
-			return "closes the client";
-		}
-		if ("getClientID".equals(methodName))
-		{
-			return "gets the id of the client";
-		}
-		if ("CALLBACK_EVENT".equals(methodName))
-		{
-			return "Constant that is returned as a JSEvent type when in the callback method when it executed normally";
-		}
-		if ("CALLBACK_EXCEPTION_EVENT".equals(methodName))
-		{
-			return "Constant that is returned as a JSEvent type when in the callback method when an exception occured";
-		}
-		if ("isValid".equals(methodName))
-		{
-			return "returns true if this client is still valid/usable";
-		}
-		return methodName;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#isDeprecated(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public boolean isDeprecated(String methodName)
-	{
-		return "shutDown".equals(methodName);
 	}
 
 	/**

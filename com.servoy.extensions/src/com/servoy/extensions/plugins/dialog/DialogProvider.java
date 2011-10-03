@@ -29,13 +29,14 @@ import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * Scritptable object for dialog plugin
  * @author jblok
  */
-public class DialogProvider implements IScriptObject
+public class DialogProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final DialogPlugin plugin;
 
@@ -50,6 +51,17 @@ public class DialogProvider implements IScriptObject
 		return js_showWarningDialog(array);
 	}
 
+	/**
+	 * @clonedesc js_showErrorDialog(Object[])
+	 *
+	 * @sample
+	 * //show dialog
+	 * var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param ...button optional
+	 */
 	public String js_showWarningDialog(Object[] array)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
@@ -60,6 +72,17 @@ public class DialogProvider implements IScriptObject
 		return js_showDialogEx(array, JOptionPane.WARNING_MESSAGE);
 	}
 
+	/**
+	 * @clonedesc js_showErrorDialog(Object[])
+	 *
+	 * @sample
+	 * //show dialog
+	 * var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param ...button optional
+	 */
 	public String js_showInfoDialog(Object[] array)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
@@ -70,6 +93,17 @@ public class DialogProvider implements IScriptObject
 		return js_showDialogEx(array, JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * Shows a message dialog with the specified title, message and a customizable set of buttons.
+	 *
+	 * @sample
+	 * //show dialog
+	 * var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allowed','OK');
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param ...button optional
+	 */
 	public String js_showErrorDialog(Object[] array)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
@@ -80,6 +114,17 @@ public class DialogProvider implements IScriptObject
 		return js_showDialogEx(array, JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * Shows a message dialog with the specified title, message and a customizable set of buttons.
+	 *
+	 * @sample
+	 * //show dialog
+	 * var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param ...button optional
+	 */
 	public String js_showQuestionDialog(Object[] array)
 	{
 		return js_showDialogEx(array, JOptionPane.QUESTION_MESSAGE);
@@ -168,6 +213,20 @@ public class DialogProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.
+	 *
+	 * @sample
+	 * //show select,returns nothing when canceled 
+	 * var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
+	 * //also possible to pass array with options
+	 * //var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name', new Array('jan','johan','sebastiaan'));
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param optionArray/option1 
+	 * @param ...option optional
+	 */
 	public String js_showSelectDialog(Object[] array)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
@@ -209,6 +268,17 @@ public class DialogProvider implements IScriptObject
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
+	/**
+	 * Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.
+	 *
+	 * @sample
+	 * //show input dialog ,returns nothing when canceled 
+	 * var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param initialValue optional
+	 */
 	public String js_showInputDialog(Object[] array)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
@@ -229,94 +299,7 @@ public class DialogProvider implements IScriptObject
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
-	public boolean isDeprecated(String methodName)
-	{
-		if ("showDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			return true;
-		}
-		return false;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("showErrorDialog".equals(methodName) || "showInfoDialog".equals(methodName) || "showWarningDialog".equals(methodName) || "showQuestionDialog".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		{
-			return new String[] { "dialog_title", "msg", "[...button]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
-		}
-		else if ("showInputDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "dialog_title", "msg", "[initialValue]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		else if ("showSelectDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "dialog_title", "msg", "optionArray/option1", "[...option]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
-		}
-		else if ("showDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "[dialog_title]", "[msg]", "[initialValue]" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("showErrorDialog".equals(methodName) || "showInfoDialog".equals(methodName) || "showWarningDialog".equals(methodName) || "showQuestionDialog".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//show dialog\n"); //$NON-NLS-1$
-			retval.append("var thePressedButton = plugins.dialogs." + methodName + "('Title', 'Value not allowed','OK');\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			return retval.toString();
-		}
-		else if ("showInputDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//show input dialog ,returns nothing when canceled \n"); //$NON-NLS-1$
-			retval.append("var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("showSelectDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//show select,returns nothing when canceled \n"); //$NON-NLS-1$
-			retval.append("var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');\n"); //$NON-NLS-1$
-			retval.append("//also possible to pass array with options\n"); //$NON-NLS-1$
-			retval.append("//var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name', new Array('jan','johan','sebastiaan'));\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(String)
-	 */
-	public String getToolTip(String methodName)
-	{
-		if ("showErrorDialog".equals(methodName) || "showInfoDialog".equals(methodName) || "showWarningDialog".equals(methodName) || "showQuestionDialog".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		{
-			return "Shows a message dialog with the specified title, message and a customizable set of buttons."; //$NON-NLS-1$
-		}
-		else if ("showInputDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled."; //$NON-NLS-1$
-		}
-		else if ("showSelectDialog".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled."; //$NON-NLS-1$
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
 	}

@@ -13,14 +13,15 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.amortization;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * This class represents a polynomial in one variable.
@@ -28,7 +29,7 @@ import com.servoy.j2db.scripting.IScriptObject;
  * 
  * @author sebster
  */
-public class Polynomial implements IScriptObject
+public class Polynomial implements IScriptable, IReturnedTypesProvider
 {
 	/**
 	 * The map of terms from which this polynomial is constructed. The map is
@@ -82,46 +83,156 @@ public class Polynomial implements IScriptObject
 		}
 	}
 
-	public void js_addPolynomial(Polynomial p)
+	/**
+	 * Adds another polynomial to this polynomial.
+	 *
+	 * @sampleas js_addTerm(double, int)
+	 *
+	 * @param polynomial 
+	 */
+	public void js_addPolynomial(Polynomial polynomial)
 	{
-		addPolynomial(p);
+		addPolynomial(polynomial);
 	}
 
+	/**
+	 * Adds a term to this polynomial.
+	 *
+	 * @sample
+	 * // (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
+	 * var eq = plugins.amortization.newPolynomial();
+	 * for (var i = 0; i < 4; i++)
+	 * {
+	 * 	var base = plugins.amortization.newPolynomial();
+	 * 	base.addTerm(1, 1);
+	 * 	base.addTerm(1, 0);
+	 * 	base.multiplyByTerm(1, i);
+	 * 	base.multiplyByTerm(i + 1, 0);
+	 * 	eq.addPolynomial(base);
+	 * }
+	 * application.output(eq.getValue(2));
+	 *
+	 * @param coefficient 
+	 * @param exponent 
+	 */
 	public void js_addTerm(double coefficient, int exponent)
 	{
 		addTerm(coefficient, exponent);
 	}
 
-	public double js_findRoot(double root, double error, int iterations)
+	/**
+	 * Finds a root of this polynomial using Newton's method, starting from an initial search value, and with a given precision.
+	 *
+	 * @sample
+	 * // Model the quadratic equation -x^2 + 4x + 0.6 = 0
+	 * var eq = plugins.amortization.newPolynomial();
+	 * eq.addTerm(-1, 2);
+	 * eq.addTerm(4, 1);
+	 * eq.addTerm(0.6, 0);
+	 * // Find the roots of the equation.
+	 * r1 = eq.findRoot(100, 1E-5, 1000);
+	 * r2 = eq.findRoot(-100, 1E-5, 1000);
+	 * application.output("eq(" + r1 + ")=" + eq.getValue(r1));
+	 * application.output("eq(" + r2 + ")=" + eq.getValue(r2));
+	 * // Find the minimum/maximum point by zeroing the first derivative.
+	 * var deriv = eq.getDerivative();
+	 * rd = deriv.findRoot(0, 1E-5, 1000);
+	 * application.output("Min/max point: " + rd);
+	 * application.output("Min/max value: " + eq.getValue(rd));
+	 * if (deriv.getDerivativeValue(rd) < 0) application.output("Max point.");
+	 * else application.output("Min point.");
+	 *
+	 * @param startValue 
+	 * @param error 
+	 * @param iterations 
+	 */
+	public double js_findRoot(double startValue, double error, int iterations)
 	{
-		return findRoot(root, error, iterations);
+		return findRoot(startValue, error, iterations);
 	}
 
+	/**
+	 * Returns a polynomial that holds the derivative of this polynomial.
+	 *
+	 * @sampleas js_findRoot(double, double, int)
+	 */
 	public Polynomial js_getDerivative()
 	{
 		return getDerivative();
 	}
 
+	/**
+	 * Returns the value of the derivative of this polynomial in a certain point.
+	 *
+	 * @sampleas js_findRoot(double, double, int)
+	 *
+	 * @param x 
+	 */
 	public double js_getDerivativeValue(double x)
 	{
 		return getDerivativeValue(x);
 	}
 
+	/**
+	 * Returns the value of this polynomial in a certain point.
+	 *
+	 * @sampleas js_findRoot(double, double, int)
+	 *
+	 * @param x 
+	 */
 	public double js_getValue(double x)
 	{
 		return getValue(x);
 	}
 
+	/**
+	 * Multiplies this polynomial with another polynomial.
+	 *
+	 * @sample
+	 * // Model the quadratic equation (x+1)*(x+2) = 0
+	 * var eq = plugins.amortization.newPolynomial();
+	 * eq.addTerm(1, 1);
+	 * eq.addTerm(1, 0);
+	 * var eq2 = plugins.amortization.newPolynomial();
+	 * eq2.addTerm(1, 1);
+	 * eq2.addTerm(2, 0);
+	 * eq.multiplyByPolynomial(eq2);
+	 * // Find the roots of the equation.
+	 * r1 = eq.findRoot(100, 1E-5, 1000);
+	 * r2 = eq.findRoot(-100, 1E-5, 1000);
+	 * application.output("eq(" + r1 + ")=" + eq.getValue(r1));
+	 * application.output("eq(" + r2 + ")=" + eq.getValue(r2));
+	 *
+	 * @param polynomial 
+	 */
 	public void js_multiplyByPolynomial(Polynomial polynomial)
 	{
 		multiplyByPolynomial(polynomial);
 	}
 
+	/**
+	 * Multiples this polynomial with a term.
+	 *
+	 * @sampleas js_addTerm(double, int)
+	 *
+	 * @param coefficient 
+	 * @param exponent 
+	 */
 	public void js_multiplyByTerm(double coefficient, int exponent)
 	{
 		multiplyByTerm(coefficient, exponent);
 	}
 
+	/**
+	 * Sets this polynomial to zero.
+	 *
+	 * @sample
+	 * var eq = plugins.amortization.newPolynomial();
+	 * eq.addTerm(2, 3);
+	 * application.output(eq.getValue(1.1));
+	 * eq.setToZero();
+	 * application.output(eq.getValue(1.1));
+	 */
 	public void js_setToZero()
 	{
 		setToZero();
@@ -451,110 +562,6 @@ public class Polynomial implements IScriptObject
 			}
 			return buffer.toString();
 		}
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("addPolynomial".equals(methodName)) return new String[] { "polynomial" };
-		else if ("addTerm".equals(methodName)) return new String[] { "coefficient", "exponent" };
-		else if ("findRoot".equals(methodName)) return new String[] { "startValue", "error", "iterations" };
-		else if ("getDerivativeValue".equals(methodName)) return new String[] { "x" };
-		else if ("getValue".equals(methodName)) return new String[] { "x" };
-		else if ("multiplyByPolynomial".equals(methodName)) return new String[] { "polynomial" };
-		else if ("multiplyByTerm".equals(methodName)) return new String[] { "coefficient", "exponent" };
-		else return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("addTerm".equals(methodName) || "findRoot".equals(methodName) || "getDerivative".equals(methodName) || "getDerivativeValue".equals(methodName) ||
-			"getValue".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Model the quadratic equation -x^2 + 4x + 0.6 = 0\n");
-			sb.append("var eq = plugins.amortization.newPolynomial();\n");
-			sb.append("eq.addTerm(-1, 2);\n");
-			sb.append("eq.addTerm(4, 1);\n");
-			sb.append("eq.addTerm(0.6, 0);\n");
-			sb.append("// Find the roots of the equation.\n");
-			sb.append("r1 = eq.findRoot(100, 1E-5, 1000);\n");
-			sb.append("r2 = eq.findRoot(-100, 1E-5, 1000);\n");
-			sb.append("application.output(\"eq(\" + r1 + \")=\" + eq.getValue(r1));\n");
-			sb.append("application.output(\"eq(\" + r2 + \")=\" + eq.getValue(r2));\n");
-			sb.append("// Find the minimum/maximum point by zeroing the first derivative.\n");
-			sb.append("var deriv = eq.getDerivative();\n");
-			sb.append("rd = deriv.findRoot(0, 1E-5, 1000);\n");
-			sb.append("application.output(\"Min/max point: \" + rd);\n");
-			sb.append("application.output(\"Min/max value: \" + eq.getValue(rd));\n");
-			sb.append("if (deriv.getDerivativeValue(rd) < 0) application.output(\"Max point.\");\n");
-			sb.append("else application.output(\"Min point.\");\n");
-			return sb.toString();
-		}
-		else if ("multiplyByPolynomial".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// Model the quadratic equation (x+1)*(x+2) = 0\n");
-			sb.append("var eq = plugins.amortization.newPolynomial();\n");
-			sb.append("eq.addTerm(1, 1);\n");
-			sb.append("eq.addTerm(1, 0);\n");
-			sb.append("var eq2 = plugins.amortization.newPolynomial();\n");
-			sb.append("eq2.addTerm(1, 1);\n");
-			sb.append("eq2.addTerm(2, 0);\n");
-			sb.append("eq.multiplyByPolynomial(eq2);\n");
-			sb.append("// Find the roots of the equation.\n");
-			sb.append("r1 = eq.findRoot(100, 1E-5, 1000);\n");
-			sb.append("r2 = eq.findRoot(-100, 1E-5, 1000);\n");
-			sb.append("application.output(\"eq(\" + r1 + \")=\" + eq.getValue(r1));\n");
-			sb.append("application.output(\"eq(\" + r2 + \")=\" + eq.getValue(r2));\n");
-			return sb.toString();
-		}
-		else if ("addTerm".equals(methodName) || "addPolynomial".equals(methodName) || "multiplyByTerm".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3\n");
-			sb.append("var eq = plugins.amortization.newPolynomial();\n");
-			sb.append("for (var i = 0; i < 4; i++)\n");
-			sb.append("{\n");
-			sb.append("\tvar base = plugins.amortization.newPolynomial();\n");
-			sb.append("\tbase.addTerm(1, 1);\n");
-			sb.append("\tbase.addTerm(1, 0);\n");
-			sb.append("\tbase.multiplyByTerm(1, i);\n");
-			sb.append("\tbase.multiplyByTerm(i + 1, 0);\n");
-			sb.append("\teq.addPolynomial(base);\n");
-			sb.append("}\n");
-			sb.append("application.output(eq.getValue(2));\n");
-			return sb.toString();
-		}
-		else if ("setToZero".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var eq = plugins.amortization.newPolynomial();\n");
-			sb.append("eq.addTerm(2, 3);\n");
-			sb.append("application.output(eq.getValue(1.1));\n");
-			sb.append("eq.setToZero();\n");
-			sb.append("application.output(eq.getValue(1.1));\n");
-			return sb.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("addPolynomial".equals(methodName)) return "Adds another polynomial to this polynomial.";
-		else if ("addTerm".equals(methodName)) return "Adds a term to this polynomial.";
-		else if ("findRoot".equals(methodName)) return "Finds a root of this polynomial using Newton's method, starting from an initial search value, and with a given precision.";
-		else if ("getDerivative".equals(methodName)) return "Returns a polynomial that holds the derivative of this polynomial.";
-		else if ("getDerivativeValue".equals(methodName)) return "Returns the value of the derivative of this polynomial in a certain point.";
-		else if ("getValue".equals(methodName)) return "Returns the value of this polynomial in a certain point.";
-		else if ("multiplyByPolynomial".equals(methodName)) return "Multiplies this polynomial with another polynomial.";
-		else if ("multiplyByTerm".equals(methodName)) return "Multiples this polynomial with a term.";
-		else if ("setToZero".equals(methodName)) return "Sets this polynomial to zero.";
-		else return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

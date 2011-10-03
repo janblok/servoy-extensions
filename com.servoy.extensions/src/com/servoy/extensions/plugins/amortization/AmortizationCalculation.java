@@ -26,14 +26,15 @@ import java.util.Date;
 import com.servoy.j2db.dataprocessing.BufferedDataSet;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.SafeArrayList;
 
 /**
  * @author sebster
  */
-public class AmortizationCalculation implements IScriptObject
+public class AmortizationCalculation implements IScriptable, IReturnedTypesProvider
 {
 
 	/**
@@ -64,75 +65,75 @@ public class AmortizationCalculation implements IScriptObject
 
 
 	/**
-	 * The integer constant used to identify a daily period.
+	 * The numeric constant used to identify a daily period.
 	 */
 	public static final int PERIOD_DAILY = 365;
 
 	/**
-	 * The integer constant used to identify a weekly period.
+	 * The numeric constant used to identify a weekly period.
 	 */
 	public static final int PERIOD_WEEKLY = 52;
 
 	/**
-	 * The integer constant used to identify a two-weekly period (once every two weeks).
+	 * The numeric constant used to identify a two-weekly period (once every two weeks).
 	 */
 	public static final int PERIOD_TWO_WEEKLY = 26;
 
 	/**
-	 * The integer constant used to identify a bi-monthly period (twice every month).
+	 * The numeric constant used to identify a bi-monthly period (twice every month).
 	 * TODO: this period is not supported yet.
 	 */
 	public static final int PERIOD_BI_MONTHLY = 24;
 
 	/**
-	 * The integer constant used to identify a four-weekly period (once every four weeks).
+	 * The numeric constant used to identify a four-weekly period (once every four weeks).
 	 */
 	public static final int PERIOD_FOUR_WEEKLY = 13;
 
 	/**
-	 * The integer constant used to identify a monthly period.
+	 * The numeric constant used to identify a monthly period.
 	 */
 	public static final int PERIOD_MONTHLY = 12;
 
 	/**
-	 * The integer constant used to identify a two-monthly period (once every two months).
+	 * The numeric constant used to identify a two-monthly period (once every two months).
 	 */
 	public static final int PERIOD_TWO_MONTHLY = 6;
 
 	/**
-	 * The integer constant used to identify a quarterly period (once every three months).
+	 * The numeric constant used to identify a quarterly period (once every three months).
 	 */
 	public static final int PERIOD_QUARTERLY = 4;
 
 	/**
-	 * The integer constant used to identify a four-monthly period (once every four months).
+	 * The numeric constant used to identify a four-monthly period (once every four months).
 	 */
 	public static final int PERIOD_FOUR_MONTHLY = 3;
 
 	/**
-	 * The integer constant used to identify a bi-annual period (twice every year).
+	 * The numeric constant used to identify a bi-annual period (twice every year).
 	 */
 	public static final int PERIOD_BI_ANNUALLY = 2;
 
 	/**
-	 * The integer constant used to identify an annual period.
+	 * The numeric constant used to identify an annual period.
 	 */
 	public static final int PERIOD_ANNUALY = 1;
 
 	/**
-	 * The integer constant used to identify that there is no period.
+	 * The numeric constant used to identify that there is no period.
 	 */
 	public static final int PERIOD_NONE = 0;
 
 
 	/**
-	 * The integer constant used to identify an unlimited number of repeated events.
+	 * The numeric constant used to identify an unlimited number of repeated events.
 	 */
 	public static final int NUMBER_UNLIMITED = -1;
 
 
 	/**
-	 * The integer constant used to identify that the same start day should be used as
+	 * The numeric constant used to identify that the same start day should be used as
 	 * the day of the month of the starting date of the event.
 	 */
 	public static final int STARTDAY_NORMAL = -1;
@@ -174,101 +175,290 @@ public class AmortizationCalculation implements IScriptObject
 			new SafeArrayList());
 	}
 
+	/**
+	 * Adds a compound period change.
+	 *
+	 * @sample
+	 * var c = plugins.amortization.newCalculation();
+	 * c.addRateChange(r, new Date(2005, 0, 1));
+	 * c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
+	 * c.addLoan(2000, new Date(2005, 0, 1));
+	 * c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);
+	 *
+	 * @param newPeriod 
+	 * @param date 
+	 */
 	public boolean js_addCompoundPeriodChange(int newPeriod, Date date)
 	{
 		return addCompoundPeriodChange(newPeriod, date);
 	}
 
+	/**
+	 * Adds a loan.
+	 *
+	 * @sampleas js_addCompoundPeriodChange(int, Date)
+	 *
+	 * @param amount 
+	 * @param firstDate 
+	 * @param lastDate 
+	 * @param period 
+	 * @param number 
+	 * @param startday 
+	 */
 	public boolean js_addLoan(double amount, Date firstDate, Date lastDate, int period, int number, int startday)
 	{
 		return addLoan(amount, firstDate, lastDate, period, number, startday);
 	}
 
+	/**
+	 * @clonedesc js_addLoan(double, Date, Date, int, int, int)
+	 * @sampleas js_addLoan(double, Date, Date, int, int, int)
+	 * 
+	 * @param amount
+	 * @param firstDate
+	 * @param lastDate
+	 * @param period
+	 * @param number
+	 */
 	public boolean js_addLoan(double amount, Date firstDate, Date lastDate, int period, int number)
 	{
 		return addLoan(amount, firstDate, lastDate, period, number);
 	}
 
+	/**
+	 * @clonedesc js_addLoan(double, Date, Date, int, int, int)
+	 * @sampleas js_addLoan(double, Date, Date, int, int, int)
+	 * 
+	 * @param amount
+	 * @param firstDate
+	 * @param lastDate
+	 * @param period
+	 */
 	public boolean js_addLoan(double amount, Date firstDate, Date lastDate, int period)
 	{
 		return addLoan(amount, firstDate, lastDate, period);
 	}
 
+	/**
+	 * @clonedesc js_addLoan(double, Date, Date, int, int, int)
+	 * @sampleas js_addLoan(double, Date, Date, int, int, int)
+	 * 
+	 * @param amount
+	 * @param date
+	 */
 	public boolean js_addLoan(double amount, Date date)
 	{
 		return addLoan(amount, date);
 	}
 
+	/**
+	 * Adds a payment.
+	 *
+	 * @sampleas js_addCompoundPeriodChange(int, Date)
+	 *
+	 * @param amount 
+	 * @param firstDate 
+	 * @param lastDate 
+	 * @param period 
+	 * @param number 
+	 * @param startday 
+	 */
 	public boolean js_addPayment(double amount, Date firstDate, Date lastDate, int period, int number, int startday)
 	{
 		return addPayment(amount, firstDate, lastDate, period, number, startday);
 	}
 
+	/**
+	 * @clonedesc js_addPayment(double, Date, Date, int, int, int)
+	 * @sampleas js_addPayment(double, Date, Date, int, int, int)
+	 * 
+	 * @param amount
+	 * @param firstDate
+	 * @param lastDate
+	 * @param period
+	 * @param number
+	 */
 	public boolean js_addPayment(double amount, Date firstDate, Date lastDate, int period, int number)
 	{
 		return addPayment(amount, firstDate, lastDate, period, number);
 	}
 
+	/**
+	 * @clonedesc js_addPayment(double, Date, Date, int, int, int)
+	 * @sampleas js_addPayment(double, Date, Date, int, int, int)
+	 * 
+	 * @param amount
+	 * @param firstDate
+	 * @param lastDate
+	 * @param period
+	 */
 	public boolean js_addPayment(double amount, Date firstDate, Date lastDate, int period)
 	{
 		return addPayment(amount, firstDate, lastDate, period);
 	}
 
+	/**
+	 * @clonedesc js_addPayment(double, Date, Date, int, int, int)
+	 * @sampleas js_addPayment(double, Date, Date, int, int, int)
+	 * 
+	 * @param amount
+	 * @param date
+	 */
 	public boolean js_addPayment(double amount, Date date)
 	{
 		return addPayment(amount, date);
 	}
 
+	/**
+	 * Sets a new interest rate.
+	 *
+	 * @sampleas js_addCompoundPeriodChange(int, Date)
+	 *
+	 * @param newRate 
+	 * @param date 
+	 */
 	public boolean js_addRateChange(double newRate, Date date)
 	{
 		return addRateChange(newRate, date);
 	}
 
+	/**
+	 * Calculates the amortization schedule.
+	 *
+	 * @sample
+	 * plugins.amortization.calculateAmortizationSchedule();
+	 */
 	public boolean js_calculateAmortizationSchedule()
 	{
 		return this.calculateAmortizationSchedule();
 	}
 
+	/**
+	 * Gets the amortization schedule as a JSDataSet.
+	 *
+	 * @sample
+	 * plugins.amortization.getAmortizationSchedule();
+	 */
 	public JSDataSet js_getAmortizationSchedule()
 	{
 		return getAmortizationSchedule();
 	}
 
+	/**
+	 * Returns the error that remains when solving for the unknown.
+	 * Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.
+	 *
+	 * @sample
+	 * //Returns the error that remains when solving for the unknown.
+	 * Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.
+	 * var c = plugins.amortization.newCalculation();
+	 * // sets the rate to -1 for unknown.
+	 * c.addRateChange(-1, new Date(2005, 0, 1));
+	 * c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
+	 * c.addLoan(2000, new Date(2005, 0, 1));
+	 * var lastDate = null;
+	 * var period = 12;
+	 * var number_count = 5;
+	 * var startday = 31;
+	 * c.addPayment(500, new Date(2005, 1, 28), lastDate, period,number_count, startday);
+	 * // solves for the interest rate.
+	 * c.solveForUnknown();
+	 * // gets the interest rate and the error in the calculation.
+	 * // which should be small (otherwise the calculation did
+	 * // not converge for some reason.
+	 * var r = c.getUnknown();
+	 * var e = c.getError();
+	 */
 	public double js_getError()
 	{
 		return getError();
 	}
 
+	/**
+	 * Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.
+	 *
+	 * @sample
+	 * plugins.amortization.getEvents();
+	 */
 	public JSDataSet js_getEvents()
 	{
 		return getEvents();
 	}
 
+	/**
+	 * Gets the rest balance after the amortization schedule.
+	 *
+	 * @sample
+	 * var rb = plugins.amortization.getRestBalance();
+	 */
 	public double js_getRestBalance()
 	{
 		return getRestBalance();
 	}
 
+	/**
+	 * Returns the solveForUnknown value.
+	 *
+	 * @sample
+	 * plugins.amortization.getUnknown();
+	 */
 	public double js_getUnknown()
 	{
 		return getUnknown();
 	}
 
+	/**
+	 * Returns true if the period is valid, or false if the period is not valid.
+	 *
+	 * @sample
+	 * //Returns true if the period is valid, or false if the period is not valid.
+	 * 
+	 * var v_period = plugins.amortization.isValidPeriod(12);
+	 *
+	 * @param period 
+	 */
 	public boolean js_isValidPeriod(int period)
 	{
 		return isValidPeriod(period);
 	}
 
+	/**
+	 * Rounds a number up to the nearest cents.
+	 *
+	 * @sample
+	 * //Rounds a number up to the nearest cents.
+	 * 
+	 * //rounds the number up to 34.35
+	 * var rm = plugins.amortization.roundMoney(34.349384);
+	 *
+	 * @param amount 
+	 */
 	public double js_roundMoney(double amount)
 	{
 		return roundMoney(amount);
 	}
 
+	/**
+	 * Returns true if successful or false if the call failed.
+	 *
+	 * @sample
+	 * //Returns true if successful or false if the call failed.
+	 * 
+	 * plugins.amortization.solveForUnknown();
+	 */
 	public boolean js_solveForUnknown()
 	{
 		return solveForUnknown();
 	}
 
+	/**
+	 * Sorts the amortization events ascending by date.
+	 *
+	 * @sample
+	 * //Sorts the amortization events ascending by date.
+	 * 
+	 * plugins.amortization.sortEvents();
+	 */
 	public void js_sortEvents()
 	{
 		sortEvents();
@@ -799,243 +989,6 @@ public class AmortizationCalculation implements IScriptObject
 		{
 			return calendar.getTime().compareTo(((CalendarEvent)other).calendar.getTime());
 		}
-	}
-
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("addCompoundPeriodChange".equals(methodName))
-		{
-			return new String[] { "newPeriod", "date" };
-		}
-		else if ("addLoan".equals(methodName))
-		{
-			return new String[] { "amount", "firstDate", "[lastDate]", "[period]", "[number]", "[startday]" };
-		}
-		else if ("addPayment".equals(methodName))
-		{
-			return new String[] { "amount", "firstDate", "[lastDate]", "[period]", "[number]", "[startday]" };
-		}
-		else if ("addRateChange".equals(methodName))
-		{
-			return new String[] { "newRate", "date" };
-		}
-		else if ("isValidPeriod".equals(methodName))
-		{
-			return new String[] { "period" };
-		}
-		else if ("roundMoney".equals(methodName))
-		{
-			return new String[] { "amount" };
-		}
-
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("addCompoundPeriodChange".equals(methodName) || "addLoan".equals(methodName) || "addPayment".equals(methodName) ||
-			"addRateChange".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var c = plugins.amortization.newCalculation();\n");
-			retval.append("c.addRateChange(r, new Date(2005, 0, 1));\n");
-			retval.append("c.addCompoundPeriodChange(12, new Date(2005, 0, 1));\n");
-			retval.append("c.addLoan(2000, new Date(2005, 0, 1));\n");
-			retval.append("c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);\n");
-			return retval.toString();
-		}
-		else if ("calculateAmortizationSchedule".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.calculateAmortizationSchedule();\n");
-			return retval.toString();
-		}
-		else if ("getAmortizationSchedule".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.getAmortizationSchedule();\n");
-			return retval.toString();
-		}
-		else if ("getError".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var c = plugins.amortization.newCalculation();\n");
-			retval.append("// sets the rate to -1 for unknown.\n");
-			retval.append("c.addRateChange(-1, new Date(2005, 0, 1));\n");
-			retval.append("c.addCompoundPeriodChange(12, new Date(2005, 0, 1));\n");
-			retval.append("c.addLoan(2000, new Date(2005, 0, 1));\n");
-			retval.append("var lastDate = null;\n");
-			retval.append("var period = 12;\n");
-			retval.append("var number_count = 5;\n");
-			retval.append("var startday = 31;\n");
-			retval.append("c.addPayment(500, new Date(2005, 1, 28), lastDate, period,number_count, startday);\n");
-			retval.append("// solves for the interest rate.\n");
-			retval.append("c.solveForUnknown();\n");
-			retval.append("// gets the interest rate and the error in the calculation.\n");
-			retval.append("// which should be small (otherwise the calculation did\n");
-			retval.append("// not converge for some reason.\n");
-			retval.append("var r = c.getUnknown();\n");
-			retval.append("var e = c.getError();\n");
-			return retval.toString();
-		}
-		else if ("getEvents".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.getEvents();\n");
-			return retval.toString();
-		}
-		else if ("".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.getEvents();\n");
-			return retval.toString();
-		}
-		else if ("getRestBalance".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var rb = plugins.amortization.getRestBalance();\n");
-			return retval.toString();
-		}
-		else if ("getUnknown".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.getUnknown();\n");
-			return retval.toString();
-		}
-		else if ("isValidPeriod".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var v_period = plugins.amortization.isValidPeriod(12);\n");
-			return retval.toString();
-		}
-		else if ("roundMoney".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("//rounds the number up to 34.35\n");
-			retval.append("var rm = plugins.amortization.roundMoney(34.349384);\n");
-			return retval.toString();
-		}
-		else if ("solveForUnknown".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.solveForUnknown();\n");
-			return retval.toString();
-		}
-		else if ("sortEvents".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("plugins.amortization.sortEvents();\n");
-			return retval.toString();
-		}
-
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("addCompoundPeriodChange".equals(methodName))
-		{
-			return "Adds a compound period change.";
-		}
-		else if ("addLoan".equals(methodName))
-		{
-			return "Adds a loan.";
-		}
-		else if ("addPayment".equals(methodName))
-		{
-			return "Adds a payment.";
-		}
-		else if ("addRateChange".equals(methodName))
-		{
-			return "Sets a new interest rate.";
-		}
-		else if ("calculateAmortizationSchedule".equals(methodName))
-		{
-			return "Calculates the amortization schedule.";
-		}
-		else if ("getAmortizationSchedule".equals(methodName))
-		{
-			return "Gets the amortization schedule as a JSDataSet.";
-		}
-		else if ("getError".equals(methodName))
-		{
-			return "Returns the error that remains when solving for the unknown.\nPlease note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.";
-		}
-		else if ("getEvents".equals(methodName))
-		{
-			return "Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.";
-		}
-		else if ("getRestBalance".equals(methodName))
-		{
-			return "Gets the rest balance after the amortization schedule.";
-		}
-		else if ("getUnknown".equals(methodName))
-		{
-			return "Returns the solveForUnknown value.";
-		}
-		else if ("isValidPeriod".equals(methodName))
-		{
-			return "Returns true if the period is valid, or false if the period is not valid.\n";
-		}
-		else if ("roundMoney".equals(methodName))
-		{
-			return "Rounds a number up to the nearest cents.\n";
-		}
-		else if ("solveForUnknown".equals(methodName))
-		{
-			return "Returns true if successful or false if the call failed.\n";
-		}
-		else if ("sortEvents".equals(methodName))
-		{
-			return "Sorts the amortization events ascending by date.\n";
-		}
-
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

@@ -17,10 +17,11 @@
 package com.servoy.extensions.plugins.headlessclient;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
-public class HeadlessClientProvider implements IScriptObject
+public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final HeadlessClientPlugin plugin;
 	private IHeadlessServer headlessServer = null;
@@ -47,23 +48,31 @@ public class HeadlessClientProvider implements IScriptObject
 	}
 
 	/**
-	 * Creates a headless client on the server that will open the given solution
-	 * 
-	 * @param solutionname The solution to load
-	 * @param username The user name that is used to login to the solution
-	 * @param password The password for the user
-	 * @param solutionOpenMethodArgs The arguments that will be passed to the solution open method.
-	 * 
-	 * @return the JSClient that is created.
+	 * Creates a headless client that will open the given solution.
+	 *
+	 * @sample
+	 * // Creates a headless client that will open the given solution.
+	 * var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
+	 * if (headlessClient != null && headlessClient.isValid()) { 
+	 * 	 var x = new Object();
+	 * 	 x.name = 'remote1';
+	 * 	 x.number = 10;
+	 * headlessClient.queueMethod(null, "remoteMethod", [x], callback);
+	 * }
+	 *
+	 * @param solutionName 
+	 * @param username 
+	 * @param password 
+	 * @param solutionOpenMethodArgs 
 	 */
-	public JSClient js_createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs)
+	public JSClient js_createClient(String solutionName, String username, String password, Object[] solutionOpenMethodArgs)
 	{
 		//create if not yet created
 		createService();
 
 		try
 		{
-			String clientID = headlessServer.createClient(solutionname, username, password, solutionOpenMethodArgs);
+			String clientID = headlessServer.createClient(solutionName, username, password, solutionOpenMethodArgs);
 			if (clientID != null)
 			{
 				return new JSClient(clientID, headlessServer, plugin);
@@ -76,6 +85,18 @@ public class HeadlessClientProvider implements IScriptObject
 		return null;
 	}
 
+	/**
+	 * Gets an existing headless client for the given client uuid.
+	 *
+	 * @sample
+	 * // Gets an existing headless client for the given client uuid.
+	 * var headlessClient = plugins.headlessclient.getClient("clientID");
+	 * if (headlessClient != null && headlessClient.isValid()) {
+	 * 	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
+	 * }
+	 *
+	 * @param clientID 
+	 */
 	public JSClient js_getClient(String clientID)
 	{
 		//create if not yet created
@@ -93,69 +114,6 @@ public class HeadlessClientProvider implements IScriptObject
 			Debug.error(ex);
 		}
 		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("createClient".equals(methodName))
-		{
-			return new String[] { "solutionName", "username", "password", "solutionOpenMethodArgs" };
-		}
-		if ("getClient".equals(methodName))
-		{
-			return new String[] { "clientID" };
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		StringBuilder sample = new StringBuilder();
-		if ("createClient".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("var headlessClient = plugins.headlessclient.createClient(\"someSolution\", \"user\", \"pass\", null);\n");
-			sample.append("if (headlessClient != null && headlessClient.isValid()) { \n");
-			sample.append("\t var x = new Object();\n");
-			sample.append("\t x.name = 'remote1';\n");
-			sample.append("\t x.number = 10;\n");
-			sample.append("headlessClient.queueMethod(null, \"remoteMethod\", [x], callback);\n");
-			sample.append("}\n");
-		}
-		else if ("getClient".equals(methodName))
-		{
-			sample.append("// " + getToolTip(methodName) + "\n");
-			sample.append("var headlessClient = plugins.headlessclient.getClient(\"clientID\");\n");
-			sample.append("if (headlessClient != null && headlessClient.isValid()) {\n");
-			sample.append("\t headlessClient.queueMethod(null, \"someRemoteMethod\", null, callback);\n");
-			sample.append("}\n");
-		}
-		else
-		{
-			return null;
-		}
-		return sample.toString();
-	}
-
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("createClient".equals(methodName))
-		{
-			return "Creates a headless client that will open the given solution.";
-		}
-		if ("getClient".equals(methodName))
-		{
-			return "Gets an existing headless client for the given client uuid.";
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
 	}
 
 	public Class< ? >[] getAllReturnedTypes()

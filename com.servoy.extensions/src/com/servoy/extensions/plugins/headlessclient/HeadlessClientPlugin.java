@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.beans.PropertyChangeEvent;
@@ -26,7 +26,7 @@ import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.serialize.JSONConverter;
 
 public class HeadlessClientPlugin implements IClientPlugin
@@ -59,7 +59,7 @@ public class HeadlessClientPlugin implements IClientPlugin
 	}
 
 
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		if (impl == null)
 		{
