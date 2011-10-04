@@ -241,6 +241,8 @@ public class RawSQLProvider implements IScriptObject
 			retval.append("\tvar msg = plugins.rawSQL.getException().getMessage(); //see exception node for more info about the exception obj\n"); //$NON-NLS-1$
 			retval.append("\tplugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')\n"); //$NON-NLS-1$
 			retval.append("}\n"); //$NON-NLS-1$
+			retval.append("\n// Note that when this function is used to create a new table in the database, this table will only be seen by\n"); //$NON-NLS-1$
+			retval.append("// the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.\n"); //$NON-NLS-1$
 		}
 		else if ("executeStoredProcedure".equals(methodName)) //$NON-NLS-1$
 		{
