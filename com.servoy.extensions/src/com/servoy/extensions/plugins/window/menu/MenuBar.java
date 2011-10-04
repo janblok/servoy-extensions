@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
@@ -34,6 +35,7 @@ import com.servoy.j2db.util.Utils;
  *
  */
 @SuppressWarnings("nls")
+@ServoyDocumented
 public class MenuBar implements IScriptable, IReturnedTypesProvider
 {
 

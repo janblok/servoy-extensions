@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.mail.client;
 
 import java.io.Serializable;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.ImageLoader;
@@ -25,7 +26,7 @@ import com.servoy.j2db.util.ImageLoader;
 /**
  * @author jblok
  */
-@SuppressWarnings("nls")
+@ServoyDocumented
 public class Attachment implements Serializable, IReturnedTypesProvider, IScriptable
 {
 	private final String name;
@@ -154,6 +155,7 @@ public class Attachment implements Serializable, IReturnedTypesProvider, IScript
 	}
 
 	@Override
+	@SuppressWarnings("nls")
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -28,7 +29,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * Container class for an email
  * @author jblok
  */
-@SuppressWarnings("nls")
+@ServoyDocumented
 public class MailMessage implements Serializable, IReturnedTypesProvider, IScriptable
 {
 	public List<Attachment> attachments = new ArrayList<Attachment>();

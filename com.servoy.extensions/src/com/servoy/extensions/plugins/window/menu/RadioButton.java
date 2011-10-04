@@ -19,13 +19,14 @@ package com.servoy.extensions.plugins.window.menu;
 import org.mozilla.javascript.Function;
 
 import com.servoy.extensions.plugins.window.util.Utilities;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 
 /**
  * Radio button scriptable.
  * 
  */
-
+@ServoyDocumented
 public class RadioButton extends AbstractMenuItem
 {
 	public RadioButton()

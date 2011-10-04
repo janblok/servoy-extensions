@@ -20,10 +20,13 @@ package com.servoy.extensions.plugins.http;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
+
 /**
  * @author pbakker
  *
  */
+@ServoyDocumented
 public class DeleteRequest extends BaseRequest
 {
 	//only used by script engine

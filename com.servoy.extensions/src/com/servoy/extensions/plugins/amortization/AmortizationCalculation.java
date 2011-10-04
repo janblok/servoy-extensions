@@ -26,6 +26,7 @@ import java.util.Date;
 import com.servoy.j2db.dataprocessing.BufferedDataSet;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
@@ -34,6 +35,7 @@ import com.servoy.j2db.util.SafeArrayList;
 /**
  * @author sebster
  */
+@ServoyDocumented
 public class AmortizationCalculation implements IScriptable, IReturnedTypesProvider
 {
 

@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import com.servoy.j2db.Messages;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
@@ -36,6 +37,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * Scritptable object for dialog plugin
  * @author jblok
  */
+@ServoyDocumented
 public class DialogProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final DialogPlugin plugin;

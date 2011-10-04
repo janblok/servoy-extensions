@@ -19,12 +19,14 @@ package com.servoy.extensions.plugins.amortization;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * @author sebster
  */
+@ServoyDocumented
 public class AmortizationProvider implements IScriptable, IReturnedTypesProvider
 {
 

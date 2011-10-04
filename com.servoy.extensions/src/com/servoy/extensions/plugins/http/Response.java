@@ -31,6 +31,7 @@ import org.apache.http.HeaderIterator;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.scripting.JSMap;
@@ -41,6 +42,7 @@ import com.servoy.j2db.util.Utils;
  * @author pbakker
  *
  */
+@ServoyDocumented
 public class Response implements IScriptObject, IJavaScriptType
 {
 	private HttpResponse res;

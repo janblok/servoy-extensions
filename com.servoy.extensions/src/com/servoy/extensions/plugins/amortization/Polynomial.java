@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -29,6 +30,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author sebster
  */
+@ServoyDocumented
 public class Polynomial implements IScriptable, IReturnedTypesProvider
 {
 	/**

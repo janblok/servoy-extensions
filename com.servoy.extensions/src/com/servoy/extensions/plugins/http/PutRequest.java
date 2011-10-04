@@ -23,10 +23,13 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
+
 /**
  * @author pbakker
  *
  */
+@ServoyDocumented
 public class PutRequest extends BaseEntityEnclosingRequest
 {
 	//only used by script engine

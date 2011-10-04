@@ -20,10 +20,13 @@ package com.servoy.extensions.plugins.http;
 import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
+
 /**
  * @author pbakker
  *
  */
+@ServoyDocumented
 public class OptionsRequest extends BaseRequest
 {
 	public static String OPTIONS_HEADER = "Allow"; //$NON-NLS-1$

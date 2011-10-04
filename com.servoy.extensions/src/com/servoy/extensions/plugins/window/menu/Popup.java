@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.window.menu;
 
 import java.awt.Point;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.ui.IComponent;
@@ -27,7 +28,7 @@ import com.servoy.j2db.ui.IComponent;
  * Popup menu scriptable.
  * 
  */
-
+@ServoyDocumented
 public class Popup extends AbstractMenu
 {
 	public Popup()

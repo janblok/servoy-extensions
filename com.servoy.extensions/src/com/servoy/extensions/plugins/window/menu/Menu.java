@@ -20,6 +20,7 @@ import java.awt.event.KeyEvent;
 
 import com.servoy.extensions.plugins.window.util.Utilities;
 import com.servoy.j2db.Messages;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 
@@ -27,6 +28,7 @@ import com.servoy.j2db.plugins.PluginException;
  * Menu scriptable.
  * 
  */
+@ServoyDocumented
 public class Menu extends AbstractMenu
 {
 	public Menu()

@@ -25,6 +25,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -40,6 +41,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jcompagner
  * @author Servoy Stuff
  */
+@ServoyDocumented
 public class JSProgressMonitor extends TimerTask implements IReturnedTypesProvider, IScriptable, IJavaScriptType
 {
 	private final FileProvider provider;

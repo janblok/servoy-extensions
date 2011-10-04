@@ -42,12 +42,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.util.EntityUtils;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
 
 /**
  * @author jblok
  */
+@ServoyDocumented
 public class PostRequest extends BaseEntityEnclosingRequest
 {
 	private Map<Pair<String, String>, File> files;

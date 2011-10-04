@@ -50,6 +50,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 
 import com.servoy.j2db.Messages;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IMediaUploadCallback;
 import com.servoy.j2db.plugins.IRuntimeWindow;
@@ -66,6 +67,7 @@ import com.servoy.j2db.util.Utils;
  * @author jcompagner
  * @author Servoy Stuff
  */
+@ServoyDocumented
 public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
 

@@ -35,6 +35,7 @@ import org.mozilla.javascript.Function;
 import com.servoy.extensions.plugins.window.menu.IToolBar;
 import com.servoy.extensions.plugins.window.menu.ToolBarButton;
 import com.servoy.j2db.Messages;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
@@ -50,6 +51,7 @@ import com.servoy.j2db.util.toolbar.ToolbarToggleButton;
  * @author marceltrapman
  */
 @SuppressWarnings("nls")
+@ServoyDocumented
 public class ToolBar implements IToolBar, IReturnedTypesProvider, IScriptable
 {
 	public static JToolBar addServoyToolBar(IClientPluginAccess app, JComponent pane, String name)

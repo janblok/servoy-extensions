@@ -16,6 +16,7 @@
  */
 package com.servoy.extensions.plugins.http;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -24,6 +25,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author paul
  */
+@ServoyDocumented
 public class Cookie implements IReturnedTypesProvider, IScriptable
 {
 

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.servoy.extensions.plugins.mail.IMailService;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
@@ -31,6 +32,7 @@ import com.servoy.j2db.util.Utils;
 /**
  * @author jblok
  */
+@ServoyDocumented
 public class MailProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final MailPlugin plugin;

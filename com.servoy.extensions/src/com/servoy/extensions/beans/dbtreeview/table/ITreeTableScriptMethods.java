@@ -62,7 +62,7 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 * @param tablename
 	 * @param header
 	 * @param fieldname
-	 * @param preferredWidth (optional)
+	 * @param preferredWidth optional
 	 *   
 	 * @return Column object
 	 */

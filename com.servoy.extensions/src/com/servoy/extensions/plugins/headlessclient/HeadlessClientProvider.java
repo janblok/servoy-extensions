@@ -16,11 +16,13 @@
  */
 package com.servoy.extensions.plugins.headlessclient;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
+@ServoyDocumented
 public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final HeadlessClientPlugin plugin;

@@ -56,6 +56,7 @@ import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
 import com.servoy.extensions.plugins.window.shortcut.swing.SwingShortcutHandler;
 import com.servoy.extensions.plugins.window.shortcut.wicket.WicketShortcutHandler;
 import com.servoy.extensions.plugins.window.util.Utilities;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
@@ -79,6 +80,7 @@ import com.servoy.j2db.util.toolbar.IToolbarPanel;
  * @author rgansevles
  */
 @SuppressWarnings("nls")
+@ServoyDocumented
 public class WindowProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final WindowPlugin plugin;

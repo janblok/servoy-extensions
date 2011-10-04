@@ -29,11 +29,13 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
+@ServoyDocumented
 public class HttpClient implements IReturnedTypesProvider, IScriptable, IJavaScriptType
 {
 	DefaultHttpClient client;

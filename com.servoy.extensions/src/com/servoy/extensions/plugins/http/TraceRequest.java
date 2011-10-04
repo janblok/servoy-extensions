@@ -20,10 +20,13 @@ package com.servoy.extensions.plugins.http;
 import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
+
 /**
  * @author pbakker
  *
  */
+@ServoyDocumented
 public class TraceRequest extends BaseRequest
 {
 	//only used by script engine

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -32,6 +33,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jcompagner
  * @author Servoy Stuff
  */
+@ServoyDocumented
 public class JSFile implements IReturnedTypesProvider, IScriptable, IJavaScriptType
 {
 	private final IAbstractFile file;
