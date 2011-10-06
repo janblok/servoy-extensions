@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.scheduler;
 
 import java.beans.PropertyChangeEvent;
@@ -41,9 +41,11 @@ public class SchedulerPlugin implements IClientPlugin
 	 * 
 	 * @see com.servoy.j2db.plugins.IClientPlugin#initialize(com.servoy.j2db.plugins.IClientPluginAccess)
 	 */
-	public void initialize(IClientPluginAccess access) throws PluginException
+	@SuppressWarnings("nls")
+	public void initialize(IClientPluginAccess acc) throws PluginException
 	{
-		this.access = access;
+		this.access = acc;
+		System.setProperty("org.terracotta.quartz.skipUpdateCheck", "true");
 	}
 
 	/*

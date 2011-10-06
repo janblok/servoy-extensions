@@ -186,8 +186,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	 application.output('last modified: ' + files[i].lastModified());
 	 * 	 application.output('size: ' + files[i].size());
 	 * }
-	 * //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)
-	 * var file = plugins.file.showFileOpenDialog(myCallbackMethod)
+	 * //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+	 * %%elementName%%.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')
 	 *
 	 * @param selectionMode optional 0=both,1=Files,2=Dirs 
 	 * @param startDirectory optional null=default/previous 
@@ -904,7 +904,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
+	String contentType)
 	{
 		try
 		{
@@ -1054,7 +1055,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param data
 	 * @param mimeType
 	 */
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	String mimeType)
 	{
 		if (data == null) return false;
 		try
