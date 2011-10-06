@@ -406,7 +406,6 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="tablename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="preferredWidth" optional="true"/>
             </parameters>
           </function>
           <function name="createColumn">
@@ -426,7 +425,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="tablename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="preferredWidth" optional="true" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="preferredWidth" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="createRelationInfo">

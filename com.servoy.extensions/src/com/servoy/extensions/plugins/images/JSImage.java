@@ -38,14 +38,16 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.Tag;
 import com.drew.metadata.jpeg.JpegComponent;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.ImageLoader;
 import com.servoy.j2db.util.Utils;
 
 /**
  * @author jcompagner
  */
-public class JSImage implements IScriptObject, Wrapper
+@ServoyDocumented
+public class JSImage implements IScriptable, Wrapper
 {
 
 	private byte[] imageData;
@@ -75,129 +77,6 @@ public class JSImage implements IScriptObject, Wrapper
 		file = null;
 	}
 
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getSample(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("resize".equals(methodName) || "getData".equals(methodName))
-		{
-			return "var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image\n"
-				+ "image = image.resize(200,200);//resizes it to 200,200\n" + "var bytes = image.getData();//gets the image bytes\n"
-				+ "plugins.file.writeFile('filename',bytes);//saves the image bytes\n";
-		}
-		else if ("flip".equals(methodName))
-		{
-			return "var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image\n" + "image = image.flip(0);//flip vertically\n"
-				+ "var bytes = image.getData();//gets the image bytes\n" + "plugins.file.writeFile('filename',bytes);//saves the image bytes\n";
-		}
-		else if ("rotate".equals(methodName))
-		{
-			return "var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image\n"
-				+ "image = image.rotate(90);//rotate the image 90 degrees\n" + "var bytes = image.getData();//gets the image bytes\n"
-				+ "plugins.file.writeFile('filename',bytes);//saves the image bytes\n";
-		}
-		else if (methodName.startsWith("getMetaData"))
-		{
-			return "var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image\n"
-				+ "// get the available metadata properties from the image, currently only jpg is supported\n"
-				+ "var propertiesArray = image.getMetaDataProperties();\n" + "for(var i=0;i<propertiesArray.length;i++)\n" + "{\n"
-				+ "	var property = propertiesArray[i]\n" + "	application.output(\"property: \" + property);\n"
-				+ "	application.output(\"description (string): \" + image.getMetaDataDescription(property))\n"
-				+ "	application.output(\"real object: \" + image.getMetaDataObject(property))\n" + "}\n"
-				+ "// Thumbnail data is stored under property 'Exif - Thumbnail Data', extract that and set it in a dataprovider\n"
-				+ "thumbnail = image.getMetaDataObject(\"Exif - Thumbnail Data\"); // gets thumbnail data from the image";
-		}
-		return "var image = plugins.images.getImage(byteArray_or_file);\nvar width = image.getWidth();\nvar height = image.getHeight();\nvar contentType = image.getContentType();\n";
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("getHeight".equals(methodName))
-		{
-			return "Gets the height of this image.";
-		}
-		else if ("getWidth".equals(methodName))
-		{
-			return "Gets the width of this image.";
-		}
-		else if ("getContentType".equals(methodName))
-		{
-			return "Gets the contenttype (image/jpeg) of this image.";
-		}
-		else if ("resize".equals(methodName))
-		{
-			return "Resizes the image to the width/height given, keeping aspect ratio. A new JSImage is returned.";
-		}
-		else if ("rotate".equals(methodName))
-		{
-			return "Rotates the image the number of degrees that is given. A new JSImage is returned.";
-		}
-		else if ("flip".equals(methodName))
-		{
-			return "Flips the image verticaly (type param=0) or horizontaly (type param=1). A new JSImage is returned.";
-		}
-		else if ("getData".equals(methodName))
-		{
-			return "Gets the bytes of this image, so that they can be saved to disk or stored the database.";
-		}
-		else if ("getMetaDataProperties".equals(methodName))
-		{
-			return "Gets the available metadata properties from the image. Currently only jpg is supported.";
-		}
-		else if ("getMetaDataDescription".equals(methodName))
-		{
-			return "Gets the description of a metadata property from the image. Currently only jpg is supported.";
-		}
-		else if ("getMetaDataObject".equals(methodName))
-		{
-			return "Gets the real object of a metadata property from the image. Currently only jpg is supported.";
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getParameterNames(java.lang.String)
-	 */
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("resize".equals(methodName))
-		{
-			return new String[] { "width", "height" };
-		}
-		if ("rotate".equals(methodName))
-		{
-			return new String[] { "degrees" };
-		}
-		if ("flip".equals(methodName))
-		{
-			return new String[] { "type" };
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#isDeprecated(java.lang.String)
-	 */
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
-
 	@SuppressWarnings("nls")
 	@Override
 	public String toString()
@@ -222,7 +101,7 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * get the height of this image
+	 * Gets the height of this image.
 	 *
 	 * @sampleas js_getContentType()
 	 */
@@ -232,7 +111,7 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * get the width of this image
+	 * Gets the width of this image.
 	 *
 	 * @sampleas js_getContentType()
 	 */
@@ -242,7 +121,7 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * get the bytes of this image, so that it can be saved to disk or stored the database
+	 * Gets the bytes of this image, so that they can be saved to disk or stored the database.
 	 *
 	 * @sample
 	 * var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
@@ -260,12 +139,11 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * resizes the image to the width/height given, keeping aspect ratio, a new JSImage is returned
+	 * Resizes the image to the width/height given, keeping aspect ratio. A new JSImage is returned.
 	 *
 	 * @sampleas js_getData()
 	 *
 	 * @param width 
-	 *
 	 * @param height 
 	 */
 	public JSImage js_resize(int width, int height)
@@ -280,7 +158,7 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * rotates the image the number of degrees that is given, a new JSImage is returned
+	 * Rotates the image the number of degrees that is given. A new JSImage is returned.
 	 *
 	 * @sample
 	 * var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
@@ -290,10 +168,10 @@ public class JSImage implements IScriptObject, Wrapper
 	 *
 	 * @param degrees 
 	 */
-	public JSImage js_rotate(final double currentAngle)
+	public JSImage js_rotate(final double degrees)
 	{
 		js_getData();
-		final double radians = Math.toRadians(currentAngle);
+		final double radians = Math.toRadians(degrees);
 
 		final int currentWidth = getSize().width;
 		final int currentHeight = getSize().height;
@@ -343,8 +221,9 @@ public class JSImage implements IScriptObject, Wrapper
 		}
 	}
 
+
 	/**
-	 * flips the image vertical (type param=0) or horizontal (type param=1), a new JSImage is returned
+	 * Flips the image verticaly (type param=0) or horizontaly (type param=1). A new JSImage is returned.
 	 *
 	 * @sample
 	 * var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
@@ -389,7 +268,7 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * get the contenttype (image/jpeg) of this image
+	 * Gets the contenttype (image/jpeg) of this image.
 	 *
 	 * @sample
 	 * var image = plugins.images.getImage(byteArray_or_file);
@@ -416,17 +295,8 @@ public class JSImage implements IScriptObject, Wrapper
 
 
 	/**
-	 * @sameas js_getMetaDataDescription()
-	 */
-	public String[] js_getMetaDataProperties()
-	{
-		generateMetaData();
-		return (String[])metadataMap.keySet().toArray(new String[metadataMap.size()]);
-	}
-
-	/**
+	 * Gets the available metadata properties from the image. Currently only jpg is supported.
 	 * 
-	 *
 	 * @sample
 	 * var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 	 * // get the available metadata properties from the image, currently only jpg is supported
@@ -441,6 +311,19 @@ public class JSImage implements IScriptObject, Wrapper
 	 * // Thumbnail data is stored under property 'Exif - Thumbnail Data', extract that and set it in a dataprovider
 	 * thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail data from the image
 	 */
+	public String[] js_getMetaDataProperties()
+	{
+		generateMetaData();
+		return (String[])metadataMap.keySet().toArray(new String[metadataMap.size()]);
+	}
+
+	/**
+	 * Gets the description of a metadata property from the image. Currently only jpg is supported.
+	 *
+	 * @sampleas js_getMetaDataProperties()
+	 * 
+	 * @param property
+	 */
 	public String js_getMetaDataDescription(String property)
 	{
 		generateMetaData();
@@ -453,7 +336,11 @@ public class JSImage implements IScriptObject, Wrapper
 	}
 
 	/**
-	 * @sameas js_getMetaDataDescription()
+	 * Gets the real object of a metadata property from the image. Currently only jpg is supported.
+	 * 
+	 * @sampleas js_getMetaDataProperties()
+	 * 
+	 * @param property
 	 */
 	public Object js_getMetaDataObject(String property)
 	{

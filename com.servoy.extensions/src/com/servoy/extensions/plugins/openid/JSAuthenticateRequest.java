@@ -23,11 +23,13 @@ import org.openid4java.message.AuthRequest;
 import org.openid4java.message.MessageException;
 import org.openid4java.message.ax.FetchRequest;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
-public class JSAuthenticateRequest implements IJavaScriptType, IScriptObject
+@ServoyDocumented
+public class JSAuthenticateRequest implements IJavaScriptType, IScriptable
 {
 	private final AuthRequest authReq;
 	private FetchRequest fetch;
@@ -44,6 +46,16 @@ public class JSAuthenticateRequest implements IJavaScriptType, IScriptObject
 	}
 
 
+	/**
+	 * Add attribute request
+	 *
+	 * @sample
+	 * authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);
+	 *
+	 * @param alias 
+	 * @param schemaURI 
+	 * @param required 
+	 */
 	public void js_addAttributeRequest(String alias, String schemaURI, boolean required)
 	{
 		try
@@ -65,6 +77,11 @@ public class JSAuthenticateRequest implements IJavaScriptType, IScriptObject
 
 	}
 
+	/**
+	 * 
+	 *
+	 * @sampleas com.servoy.extensions.plugins.openid.OpenIDProvider.js_createAuthenticateRequest(String, Function)
+	 */
 	@SuppressWarnings("nls")
 	public void js_execute()
 	{
@@ -82,53 +99,5 @@ public class JSAuthenticateRequest implements IJavaScriptType, IScriptObject
 			}
 		}
 		RequestCycle.get().setRequestTarget(new RedirectRequestTarget(authReq.getDestinationUrl(true)));
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("addAttributeRequest".equals(methodName))
-		{
-			return new String[] { "alias", "schemaURI", "required" };
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("addAttributeRequest".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);\n");
-			return retval.toString();
-		}
-		else if ("execute".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//see createAuthenticateRequest sample\n");
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("addAttributeRequest".equals(methodName))
-		{
-			return "Add attribute request";
-		}
-		return null;
-	}
-
-	public Class[] getAllReturnedTypes()
-	{
-		return null;
 	}
 }

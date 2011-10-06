@@ -39,8 +39,10 @@ import org.openid4java.message.ParameterList;
 import org.openid4java.message.ax.AxMessage;
 import org.openid4java.message.ax.FetchResponse;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.server.headlessclient.WebClient;
 import com.servoy.j2db.server.headlessclient.WebClientSession;
 import com.servoy.j2db.util.Debug;
@@ -49,7 +51,8 @@ import com.servoy.j2db.util.Debug;
  * @author jblok,jcompagner
  */
 @SuppressWarnings("nls")
-public class OpenIDProvider implements IScriptObject
+@ServoyDocumented
+public class OpenIDProvider implements IScriptable, IReturnedTypesProvider
 {
 	private static final class CallBackBehavior extends AbstractBehavior implements IBehaviorListener
 	{
@@ -123,7 +126,36 @@ public class OpenIDProvider implements IScriptObject
 	{
 	}
 
-	// --- placing the authentication request --- 
+	/**
+	 * Redirect to openID provider to login, callback method will receive answer.
+	 *
+	 * @sample
+	 * var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
+	 * authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);
+	 * //see http://www.axschema.org/types/ for more attributes, not all are supported by all providers!
+	 * authenticateRequest.execute();
+	 * 
+	 * //sample
+	 * //function openIDLoginCallback(identifier,authenticateResult)
+	 * //{
+	 * //	var ok = false;
+	 * //	if (identifier)
+	 * //	{
+	 * //		var id = identifier.substring(identifier.lastIndexOf('=')+1)
+	 * //		application.output('id:'+id)
+	 * //		var email = authenticateResult.getAttributeValue('email')
+	 * //		application.output('email:'+email)
+	 * //		ok = security.login(email, id, ['Administrators'])
+	 * //	}
+	 * //	if (!ok)
+	 * //	{
+	 * //		application.output('Login failed')
+	 * //	}
+	 * //}
+	 *
+	 * @param identifier 
+	 * @param callback 
+	 */
 	public JSAuthenticateRequest js_createAuthenticateRequest(String identifier, Function callback)
 	{
 		RequestCycle rc = RequestCycle.get();
@@ -165,69 +197,7 @@ public class OpenIDProvider implements IScriptObject
 
 	}
 
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("createAuthenticateRequest".equals(methodName))
-		{
-			return new String[] { "identifier", "callbackFunction" };
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("createAuthenticateRequest".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);\n");
-			retval.append("authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);\n");
-			retval.append("//see http://www.axschema.org/types/ for more attributes, not all are supported by all providers!\n");
-			retval.append("authenticateRequest.execute();\n");
-			retval.append("\n");
-			retval.append("//sample\n");
-			retval.append("//function openIDLoginCallback(identifier,authenticateResult)\n");
-			retval.append("//{\n");
-			retval.append("//\tvar ok = false;\n");
-			retval.append("//\tif (identifier)\n");
-			retval.append("//\t{\n");
-			retval.append("//\t\tvar id = identifier.substring(identifier.lastIndexOf('=')+1)\n");
-			retval.append("//\t\tapplication.output('id:'+id)\n");
-			retval.append("//\t\tvar email = authenticateResult.getAttributeValue('email')\n");
-			retval.append("//\t\tapplication.output('email:'+email)\n");
-			retval.append("//\t\tok = security.login(email, id, ['Administrators'])\n");
-			retval.append("//\t}\n");
-			retval.append("//\tif (!ok)\n");
-			retval.append("//\t{\n");
-			retval.append("//\t\tapplication.output('Login failed')\n");
-			retval.append("//\t}\n");
-			retval.append("//}\n");
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("createAuthenticateRequest".equals(methodName))
-		{
-			return "Redirect to openID provider to login, callback method will recieve answer.";
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { JSAuthenticateRequest.class, JSAuthenticateResult.class };
 	}

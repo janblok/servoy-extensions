@@ -48,7 +48,15 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	public void js_setTreeColumnPreferredWidth(int preferredWidth);
 
 	/**
-	 * @sameas js_createColumn(String, String, String, String, int)
+	 * @clonedesc js_createColumn(String, String, String, String, int)
+	 * @sampleas js_createColumn(String, String, String, String, int)
+	 * 
+	 * @param servername
+	 * @param tablename
+	 * @param header
+	 * @param fieldname
+	 *   
+	 * @return Column object
 	 */
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname);
 
@@ -62,7 +70,7 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 * @param tablename
 	 * @param header
 	 * @param fieldname
-	 * @param preferredWidth optional
+	 * @param preferredWidth
 	 *   
 	 * @return Column object
 	 */

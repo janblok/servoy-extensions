@@ -19,10 +19,12 @@ package com.servoy.extensions.plugins.openid;
 
 import org.openid4java.message.ax.FetchResponse;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 
-public class JSAuthenticateResult implements IJavaScriptType, IScriptObject
+@ServoyDocumented
+public class JSAuthenticateResult implements IJavaScriptType, IScriptable
 {
 	private final FetchResponse fetchResp;
 
@@ -37,78 +39,35 @@ public class JSAuthenticateResult implements IJavaScriptType, IScriptObject
 		this.fetchResp = fetchResp;
 	}
 
+	/**
+	 * Get attribute value
+	 *
+	 * @sample
+	 * var email = authenticateResult.getAttributeValue('email')
+	 *
+	 * @param alias 
+	 */
 	public String js_getAttributeValue(String alias)
 	{
 		if (fetchResp != null) return fetchResp.getAttributeValue(alias);
 		return null;
 	}
 
+	/**
+	 * Get an array of attribute values
+	 *
+	 * @sample
+	 * var namesArray = authenticateResult.getAttributeValues('names')
+	 * for (var i = 0; i < namesArray.length; i++) { 
+	 * 	application.output(namesArray[i]); 
+	 * }
+	 *
+	 * @param alias 
+	 */
 	@SuppressWarnings("unchecked")
 	public String[] js_getAttributeValues(String alias)
 	{
 		if (fetchResp != null) return (String[])fetchResp.getAttributeValues(alias).toArray(new String[0]);
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("getAttributeValue".equals(methodName))
-		{
-			return new String[] { "alias" };
-		}
-		else if ("getAttributeValues".equals(methodName))
-		{
-			return new String[] { "alias" };
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("getAttributeValue".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var email = authenticateResult.getAttributeValue('email')\n");
-			return retval.toString();
-		}
-		else if ("getAttributeValues".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var namesArray = authenticateResult.getAttributeValues('names')\n");
-			retval.append("for (var i = 0; i < namesArray.length; i++) { \n");
-			retval.append("	application.output(namesArray[i]); \n");
-			retval.append("} \n");
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("getAttributeValue".equals(methodName))
-		{
-			return "Get attibute value";
-		}
-		else if ("getAttributeValues".equals(methodName))
-		{
-			return "Get an array of attibute values";
-		}
-		return null;
-	}
-
-	public Class[] getAllReturnedTypes()
-	{
 		return null;
 	}
 }

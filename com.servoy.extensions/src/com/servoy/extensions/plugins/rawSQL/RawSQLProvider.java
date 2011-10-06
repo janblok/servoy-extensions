@@ -18,7 +18,8 @@ package com.servoy.extensions.plugins.rawSQL;
 
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.UUID;
@@ -28,9 +29,8 @@ import com.servoy.j2db.util.UUID;
  * 
  * @author jblok
  */
-
-
-public class RawSQLProvider implements IScriptObject
+@ServoyDocumented
+public class RawSQLProvider implements IScriptable
 {
 	private final RawSQLPlugin plugin;
 	private ISQLService sqlService;
@@ -51,20 +51,58 @@ public class RawSQLProvider implements IScriptObject
 		return sqlService;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	@Deprecated
 	public String js_getExceptionMsg()
 	{
 		return (exception == null ? null : exception.toString() + ' ' + exception.getMessage());
 	}
 
+	/**
+	 * If the result from a function was false, it will return the exception object.
+	 *
+	 * @sampleas js_executeSQL(Object[])
+	 */
 	public Exception js_getException()
 	{
 		return exception;
 	}
 
+	/**
+	 * Execute any SQL, returns true if successful.
+	 *
+	 * @sample
+	 * /**************************************************************************** 
+	 * WARNING! You can cause data loss or serious data integrity compromises!
+	 * You should have a THOROUGH understanding of both SQL and your backend
+	 * database (and other interfaces that may use that backend) BEFORE YOU USE
+	 * ANY OF THESE COMMANDS.
+	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+	 * 
+	 * Note that when server names have been switched (databasemanager.switchServer),the 
+	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+	 * ****************************************************************************&#47;
+	 * 
+	 * var country = 'NL'
+	 * var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
+	 * if (done)
+	 * {
+	 * 	//flush is required when changes are made in db
+	 * 	plugins.rawSQL.flushAllClientsCache("example_data","employees")
+	 * }
+	 * else
+	 * {
+	 * 	var msg = plugins.rawSQL.getException().getMessage(); //see exception node for more info about the exception obj
+	 * 	plugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')
+	 * }
+	 * 
+	 * // Note that when this function is used to create a new table in the database, this table will only be seen by
+	 * // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.
+	 * 
+	 * @param serverName 
+	 * @param tableName 
+	 * @param SQL 
+	 * @param arguments optional
+	 */
 	public boolean js_executeSQL(Object[] args)
 	{
 		if (args.length < 3)
@@ -94,23 +132,56 @@ public class RawSQLProvider implements IScriptObject
 		}
 	}
 
-	public JSDataSet js_executeStoredProcedure(String serverName, String procedureDeclaration, Object[] jsargs, int[] jsinOutType, int maxNumberOfRowsToRetrieve)
+	/**
+	 * Execute a stored procedure.
+	 *
+	 * @sample
+	 * /**************************************************************************** 
+	 * WARNING! You can cause data loss or serious data integrity compromises!
+	 * You should have a THOROUGH understanding of both SQL and your backend
+	 * database (and other interfaces that may use that backend) BEFORE YOU USE
+	 * ANY OF THESE COMMANDS.
+	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+	 * 
+	 * Note that when server names have been switched (databasemanager.switchServer),the 
+	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+	 * ****************************************************************************&#47;
+	 * 
+	 * var maxReturnedRows = 10; //useful to limit number of rows
+	 * var procedure_declaration = '{?=calculate_interest_rate(?)}'
+	 * // define the direction, a 0 for input data, a 1 for output data
+	 * var typesArray = [1, 0];
+	 * // define the types and values, a value for input data, a sql-type for output data
+	 * var args = [java.sql.Types.NUMERIC, 3000]
+	 * // A dataset is returned, when no output-parameters defined, the last select-result in the procedure will be returned.
+	 * // When one or more output-parameters are defined, the dataset will contain 1 row with the output data.
+	 * var dataset = plugins.rawSQL.executeStoredProcedure(controller.getServerName(), procedure_declaration, args, typesArray, maxReturnedRows);
+	 * var interest_rate = dataset.getValue(1, 1);
+	 *
+	 * @param serverName 
+	 * @param procedureDeclaration 
+	 * @param arguments 
+	 * @param inOutDirectionality 
+	 * @param maxNumberOfRowsToRetrieve 
+	 */
+	public JSDataSet js_executeStoredProcedure(String serverName, String procedureDeclaration, Object[] arguments, int[] inOutDirectionality,
+		int maxNumberOfRowsToRetrieve)
 	{
 		Object[] args;
 		int[] inOutType;
-		if (jsargs == null || jsinOutType == null)
+		if (arguments == null || inOutDirectionality == null)
 		{
 			args = new Object[0];
 			inOutType = new int[0];
 		}
-		else if (jsargs.length != jsinOutType.length)
+		else if (arguments.length != inOutDirectionality.length)
 		{
 			throw new RuntimeException("In/Out Arguments should be same size as directionality array"); //$NON-NLS-1$
 		}
 		else
 		{
-			args = jsargs;
-			inOutType = jsinOutType;
+			args = arguments;
+			inOutType = inOutDirectionality;
 		}
 
 		try
@@ -135,21 +206,44 @@ public class RawSQLProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * 
+	 *
+	 * @sample
+	 * /**************************************************************************** 
+	 * WARNING! You can cause data loss or serious data integrity compromises!
+	 * You should have a THOROUGH understanding of both SQL and your backend
+	 * database (and other interfaces that may use that backend) BEFORE YOU USE
+	 * ANY OF THESE COMMANDS.
+	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+	 * 
+	 * Note that when server names have been switched (databasemanager.switchServer),the 
+	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+	 * ****************************************************************************&#47;
+	 * 
+	 * var uuid = application.getNewUUID();
+	 * plugins.rawSQL.executeSQL(controller.getServerName(), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);
+	 */
 	@Deprecated
 	public byte[] js_convertUUIDToBytes(String uuid)
 	{
 		return UUID.fromString(uuid).toBytes();
 	}
 
-	/**
-	 * @deprecated
-	 */
 	@Deprecated
 	public String js_convertUUIDToString(byte[] data)
 	{
 		return new UUID(data).toString();
 	}
 
+	/**
+	 * Flush cached database data. Use with extreme care, its affecting the performance of clients!
+	 *
+	 * @sampleas js_executeSQL(Object[])
+	 * 
+	 * @param serverName
+	 * @param tableName
+	 */
 	public boolean js_flushAllClientsCache(String serverName, String tableName)
 	{
 		try
@@ -165,13 +259,39 @@ public class RawSQLProvider implements IScriptObject
 		}
 	}
 
-	public boolean js_notifyDataChange(String serverName, String tableName, IDataSet pks, int action)
+	/**
+	 * Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!
+	 *
+	 * @sample
+	 * /**************************************************************************** 
+	 * WARNING! You can cause data loss or serious data integrity compromises!
+	 * You should have a THOROUGH understanding of both SQL and your backend
+	 * database (and other interfaces that may use that backend) BEFORE YOU USE
+	 * ANY OF THESE COMMANDS.
+	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+	 * 
+	 * Note that when server names have been switched (databasemanager.switchServer),the 
+	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+	 * ****************************************************************************&#47;
+	 * 
+	 * var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
+	 * //var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted
+	 * //var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates
+	 * var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))
+	 * var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees', pksdataset,action)
+	 *
+	 * @param serverName 
+	 * @param tableName 
+	 * @param pksDataset 
+	 * @param action 
+	 */
+	public boolean js_notifyDataChange(String serverName, String tableName, IDataSet pksDataset, int action)
 	{
-		if (pks == null || pks.getRowCount() == 0) return false; //make sure developer does not call this without knowing this would be the same as flushAllClientsCache function
+		if (pksDataset == null || pksDataset.getRowCount() == 0) return false; //make sure developer does not call this without knowing this would be the same as flushAllClientsCache function
 
 		try
 		{
-			return getSQLService().notifyDataChange(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, pks, action,
+			return getSQLService().notifyDataChange(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, pksDataset, action,
 				plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName));
 		}
 		catch (Exception ex)
@@ -182,132 +302,4 @@ public class RawSQLProvider implements IScriptObject
 		}
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		if ("executeSQL".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "serverName", "tableName", "SQL", "[arguments]" }; //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-3$ //$NON-NLS-4$
-		}
-		if ("executeStoredProcedure".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "serverName", "procedureDeclaration", "arguments[]", "IODirectionality[]", "maxNrReturnedRows" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
-		}
-		if ("flushAllClientsCache".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "serverName", "tableName" }; //$NON-NLS-1$  //$NON-NLS-2$
-		}
-		if ("notifyDataChange".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "serverName", "tableName", "pksDataset", "action" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		if ("getExceptionMsg".equals(methodName)) //$NON-NLS-1$
-		{
-			return true;
-		}
-		if (methodName.startsWith("convertUUIDTo")) //$NON-NLS-1$
-		{
-			return true;
-		}
-		return false;
-	}
-
-	public String getSample(String methodName)
-	{
-		StringBuilder retval = new StringBuilder();
-		retval.append("/****************************************************************************\n"); //$NON-NLS-1$
-		retval.append("WARNING! You can cause data loss or serious data integrity compromises!\n"); //$NON-NLS-1$
-		retval.append("You should have a THOROUGH understanding of both SQL and your backend\n"); //$NON-NLS-1$
-		retval.append("database (and other interfaces that may use that backend) BEFORE YOU USE\n"); //$NON-NLS-1$
-		retval.append("ANY OF THESE COMMANDS.\n"); //$NON-NLS-1$
-		retval.append("You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS\n"); //$NON-NLS-1$
-		retval.append("\nNote that when server names have been switched (databasemanager.switchServer),the \n"); //$NON-NLS-1$
-		retval.append("real server names must be used here, plugins.rawSQL is not transparent to switched servers.\n"); //$NON-NLS-1$
-		retval.append("****************************************************************************/\n"); //$NON-NLS-1$
-
-		retval.append("\n// ").append(getToolTip(methodName)).append('\n'); //$NON-NLS-1$
-
-		if ("executeSQL".equals(methodName) || "flushAllClientsCache".equals(methodName) || "getException".equals(methodName)) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		{
-			retval.append("var country = 'NL'\n"); //$NON-NLS-1$
-			retval.append("var done = plugins.rawSQL.executeSQL(\"example_data\",\"employees\",\"update employees set country = ?\", [country])\n"); //$NON-NLS-1$
-			retval.append("if (done)\n{\n\t//flush is required when changes are made in db\n"); //$NON-NLS-1$
-			retval.append("\tplugins.rawSQL.flushAllClientsCache(\"example_data\",\"employees\")\n"); //$NON-NLS-1$
-			retval.append("}\nelse\n{\n"); //$NON-NLS-1$
-			retval.append("\tvar msg = plugins.rawSQL.getException().getMessage(); //see exception node for more info about the exception obj\n"); //$NON-NLS-1$
-			retval.append("\tplugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')\n"); //$NON-NLS-1$
-			retval.append("}\n"); //$NON-NLS-1$
-			retval.append("\n// Note that when this function is used to create a new table in the database, this table will only be seen by\n"); //$NON-NLS-1$
-			retval.append("// the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.\n"); //$NON-NLS-1$
-		}
-		else if ("executeStoredProcedure".equals(methodName)) //$NON-NLS-1$
-		{
-			retval.append("var maxReturnedRows = 10; //useful to limit number of rows\n"); //$NON-NLS-1$
-			retval.append("var procedure_declaration = '{?=calculate_interest_rate(?)}'\n"); //$NON-NLS-1$
-			retval.append("// define the direction, a 0 for input data, a 1 for output data\n"); //$NON-NLS-1$
-			retval.append("var typesArray = [1, 0];\n"); //$NON-NLS-1$
-			retval.append("// define the types and values, a value for input data, a sql-type for output data\n"); //$NON-NLS-1$
-			retval.append("var args = [java.sql.Types.NUMERIC, 3000]\n"); //$NON-NLS-1$
-			retval.append("// A dataset is returned, when no output-parameters defined, the last select-result in the procedure will be returned.\n"); //$NON-NLS-1$
-			retval.append("// When one or more output-parameters are defined, the dataset will contain 1 row with the output data.\n"); //$NON-NLS-1$
-			retval.append("var dataset = plugins.rawSQL.executeStoredProcedure(controller.getServerName(), procedure_declaration, args, typesArray, maxReturnedRows);\n"); //$NON-NLS-1$
-			retval.append("var interest_rate = dataset.getValue(1, 1);\n"); //$NON-NLS-1$
-		}
-		else if ("convertUUIDToBytes".equals(methodName)) //$NON-NLS-1$
-		{
-			retval.append("var uuid = application.getNewUUID();\n"); //$NON-NLS-1$
-			retval.append("plugins.rawSQL.executeSQL(controller.getServerName(), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);\n"); //$NON-NLS-1$
-		}
-		else if ("notifyDataChange".equals(methodName)) //$NON-NLS-1$
-		{
-			retval.append("var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted\n"); //$NON-NLS-1$
-			retval.append("//var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted\n"); //$NON-NLS-1$
-			retval.append("//var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates\n"); //$NON-NLS-1$
-			retval.append("var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))\n"); //$NON-NLS-1$
-			retval.append("var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees', pksdataset,action)\n"); //$NON-NLS-1$
-		}
-		else return null;
-
-		return retval.toString();
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(String)
-	 */
-	public String getToolTip(String methodName)
-	{
-		if ("executeSQL".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Execute any SQL, returns true if successful."; //$NON-NLS-1$
-		}
-		if ("executeStoredProcedure".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Execute a stored procedure."; //$NON-NLS-1$
-		}
-		if ("getException".equals(methodName)) //$NON-NLS-1$
-		{
-			return "If the result from a function was false, it will return the exception object."; //$NON-NLS-1$
-		}
-		if ("flushAllClientsCache".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Flush cached database data. Use with extreme care, its affecting the performance of clients!"; //$NON-NLS-1$
-		}
-		if ("notifyDataChange".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!"; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }
