@@ -30,105 +30,59 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import com.servoy.extensions.plugins.file.JSFile;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
 /**
  * @author jcompagner
  */
 @SuppressWarnings("nls")
-public class XmlReaderProvider implements IScriptObject
+@ServoyDocumented
+public class XmlReaderProvider implements IScriptable, IReturnedTypesProvider
 {
 
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getSample(java.lang.String)
-	 */
-	public String getSample(String methodName)
-	{
-		if ("readXmlDocumentFromFile".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("// specifies a reference to a file containing valid XML\n");
-			retval.append("var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile('c:/test.xml');\n");
-			retval.append("var childNodes = xmlNodes[0].getChildNodes();\n");
-			retval.append("// shows a dialog to open an xml file, then reads the file\n");
-			retval.append("var xmlFile = plugins.file.showFileOpenDialog(1);\n");
-			retval.append("var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile(xmlFile);\n");
-			retval.append("var childNodes = xmlNodes[0].getChildNodes();\n");
-			return retval.toString();
-		}
-		else if ("readXmlDocumentFromString".equals(methodName))
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//");
-			retval.append(getToolTip(methodName));
-			retval.append("\n");
-			retval.append("var xmlString = '<books><book price=\"44.95\">\n");
-			retval.append("<title>Core Java 1.5</title>\n");
-			retval.append("<author>Piet Klerksen</author>\n");
-			retval.append("<nrPages>1487</nrPages>\n");
-			retval.append("</book>\n");
-			retval.append("<book price=\"59.95\">\n");
-			retval.append("<title>Developing with Servoy</title>\n");
-			retval.append("<author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';\n");
-			retval.append("var xmlNodes = plugins.XmlReader.readXmlDocumentFromString(xmlString);\n");
-			return retval.toString();
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(java.lang.String)
-	 */
-	public String getToolTip(String methodName)
-	{
-		if ("readXmlDocumentFromFile".equals(methodName))
-		{
-			return "Reads an XML document from a file.";
-		}
-		else if ("readXmlDocumentFromString".equals(methodName))
-		{
-			return "Reads an XML document from a string.";
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getParameterNames(java.lang.String)
-	 */
-	public String[] getParameterNames(String methodName)
-	{
-		if ("readXmlDocumentFromFile".equals(methodName) || ("readXmlDocumentFromString".equals(methodName)))
-		{
-			return new String[] { "argument" };
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#isDeprecated(java.lang.String)
-	 */
-	public boolean isDeprecated(String methodName)
-	{
-		return "readXmlDocument".equals(methodName);
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { XmlNode.class };
 	}
 
+	/**
+	 * Reads an XML document from a file.
+	 *
+	 * @sample
+	 * // specifies a reference to a file containing valid XML
+	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile('c:/test.xml');
+	 * var childNodes = xmlNodes[0].getChildNodes();
+	 * // shows a dialog to open an xml file, then reads the file
+	 * var xmlFile = plugins.file.showFileOpenDialog(1);
+	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile(xmlFile);
+	 * var childNodes = xmlNodes[0].getChildNodes();
+	 *
+	 * @param argument 
+	 */
 	public XmlNode[] js_readXmlDocumentFromFile(Object argument)
 	{
 		return js_readXmlDocument(argument);
 	}
 
+	/**
+	 * Reads an XML document from a string.
+	 *
+	 * @sample
+	 * var xmlString = '<books><book price="44.95">
+	 * <title>Core Java 1.5</title>
+	 * <author>Piet Klerksen</author>
+	 * <nrPages>1487</nrPages>
+	 * </book>
+	 * <book price="59.95">
+	 * <title>Developing with Servoy</title>
+	 * <author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
+	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromString(xmlString);
+	 *
+	 * @param argument 
+	 */
 	public XmlNode[] js_readXmlDocumentFromString(String argument)
 	{
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -145,6 +99,7 @@ public class XmlReaderProvider implements IScriptObject
 		return null;
 	}
 
+	@Deprecated
 	public XmlNode[] js_readXmlDocument(Object argument)
 	{
 		File file = null;

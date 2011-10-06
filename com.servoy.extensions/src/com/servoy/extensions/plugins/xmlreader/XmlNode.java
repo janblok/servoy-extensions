@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.xmlreader;
 
 import java.util.ArrayList;
@@ -23,13 +23,15 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * @author jcompagner
  */
 @SuppressWarnings("nls")
-public class XmlNode implements IScriptObject
+@ServoyDocumented
+public class XmlNode implements IScriptable
 {
 	private final Node node;
 
@@ -127,7 +129,7 @@ public class XmlNode implements IScriptObject
 	}
 
 	/**
-	 * Return the name of the xml node element
+	 * Return the name of the XML node element.
 	 *
 	 * @sampleas js_getChildNodes()
 	 */
@@ -137,7 +139,7 @@ public class XmlNode implements IScriptObject
 	}
 
 	/**
-	 * Return the type of the xml node element
+	 * Return the type of the XML node element.
 	 *
 	 * @sampleas js_getChildNodes()
 	 */
@@ -164,7 +166,7 @@ public class XmlNode implements IScriptObject
 	}
 
 	/**
-	 * Return the text-value of the xml node element
+	 * Return the text-value of the XML node element.
 	 *
 	 * @sampleas js_getChildNodes()
 	 */
@@ -183,9 +185,11 @@ public class XmlNode implements IScriptObject
 	}
 
 	/**
-	 * Return the value of the named attribute
-	 *
+	 * Return the value of the named attribute.
+	 * 
 	 * @sampleas js_getAttributeNames()
+	 * 
+	 * @param attributeName
 	 */
 	public String js_getAttributeValue(String attributeName)
 	{
@@ -193,7 +197,7 @@ public class XmlNode implements IScriptObject
 	}
 
 	/**
-	 * Return all the attribute names of the
+	 * Return all the attribute names of the current node.
 	 *
 	 * @sample
 	 * nodes = plugins.XmlReader.readXmlDocumentFromString("<root attr1='value1' attr2='value2'/>")
@@ -221,7 +225,7 @@ public class XmlNode implements IScriptObject
 	}
 
 	/**
-	 * Return the child nodes of the current node;
+	 * Return the child nodes of the current node.
 	 *
 	 * @sample
 	 * nodes = plugins.XmlReader.readXmlDocumentFromString('<father><child1>John</child1><child2>Mary</child2></father>');
