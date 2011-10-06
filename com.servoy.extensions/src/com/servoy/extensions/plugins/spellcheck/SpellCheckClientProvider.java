@@ -19,11 +19,14 @@ package com.servoy.extensions.plugins.spellcheck;
 
 import java.awt.Component;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.IDelegate;
 
-public class SpellCheckClientProvider implements IScriptObject
+@ServoyDocumented
+public class SpellCheckClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final SpellCheckClientPlugin plugin;
 
@@ -33,9 +36,16 @@ public class SpellCheckClientProvider implements IScriptObject
 	}
 
 	/**
-	 * Spellcheck the form element/component
+	 * Spellcheck the form element/component.
 	 *
-	 * @sample plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
+	 * @sample
+	 * // The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
+	 * // Spellchecking currently works in SmartClient only.
+	 * plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
+	 * // Optionally, the language can be sent as an argument to the function.
+	 * // The language string is provided from the language constants class, as in the sample below
+	 * // NOTE: the optional language, if provided, overrides the Preference Panel page setting, of the current SpellCheck provider (RapidSpell/Google).
+	 * // plugins.spellcheck.checkTextComponent(textInDutch, SpellCheck_Languages.DUTCH);
 	 *
 	 * @param textComponent 
 	 */
@@ -58,6 +68,13 @@ public class SpellCheckClientProvider implements IScriptObject
 		}
 	}
 
+	/**
+	 * @clonedesc js_checkTextComponent(Object)
+	 * @sampleas js_checkTextComponent(Object)
+	 * 
+	 * @param textComponent
+	 * @param language
+	 */
 	public void js_checkTextComponent(Object textComponent, String language)
 	{
 		try
@@ -77,58 +94,7 @@ public class SpellCheckClientProvider implements IScriptObject
 		}
 	}
 
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if ("checkTextComponent".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "textComponent", "[language]" }; //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("checkTextComponent".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("// "); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.\n"); //$NON-NLS-1$
-			retval.append("// Spellchecking currently works in SmartClient only.\n"); //$NON-NLS-1$
-			retval.append("plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);\n"); //$NON-NLS-1$
-			retval.append("// Optionally, the language can be sent as an argument to the function.\n"); //$NON-NLS-1$
-			retval.append("// The language string is provided from the language constants class, as in the sample below\n"); //$NON-NLS-1$
-			retval.append("// NOTE: the optional language, if provided, overrides the Preference Panel page setting, of the current SpellCheck provider (RapidSpell/Google).\n"); //$NON-NLS-1$
-			retval.append("// plugins.spellcheck.checkTextComponent(textInDutch, SpellCheck_Languages.DUTCH);\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return null;
-	}
-
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(String)
-	 */
-	public String getToolTip(String method)
-	{
-		if ("checkTextComponent".equals(method)) //$NON-NLS-1$
-		{
-			return "Spellcheck the form element/component."; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { LANGUAGES.class };
 	}

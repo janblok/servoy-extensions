@@ -32,7 +32,7 @@ import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.smart.ISmartClientPluginAccess;
 
 /**
@@ -68,7 +68,7 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 				exp.setActionCommand("export_tab_file"); //$NON-NLS-1$
 				export_Menu.add(exp);
 			}
-	
+
 			JMenu import_Menu = ((ISmartClientPluginAccess)app).getImportMenu();
 			JMenuItem imp = null;
 			if (import_Menu != null)
@@ -146,7 +146,7 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 	/*
 	 * @see IPlugin#getScriptObject()
 	 */
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		if (en == null) return new Enabler();//return dummy
 		return en;

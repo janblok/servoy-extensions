@@ -45,7 +45,7 @@ import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.smart.dataui.DataField;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Settings;
@@ -323,10 +323,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		return "spellcheck"; //$NON-NLS-1$
 	}
 
-	/*
-	 * @see IPlugin#getScriptObject()
-	 */
-	public IScriptObject getScriptObject()
+	public IScriptable getScriptObject()
 	{
 		return spellCheckProvider;
 	}

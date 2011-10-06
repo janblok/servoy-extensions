@@ -19,10 +19,12 @@ package com.servoy.extensions.plugins.udp;
 import java.io.UTFDataFormatException;
 import java.net.DatagramPacket;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
-public class JSPacket implements IScriptObject
+@ServoyDocumented
+public class JSPacket implements IScriptable
 {
 	static final int MAX_PACKET_LENGTH = 64000;
 	private final DatagramPacket enclosed;
@@ -40,6 +42,29 @@ public class JSPacket implements IScriptObject
 		writtenBytes = dp.getLength();
 	}
 
+	/**
+	 * Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.
+	 *
+	 * @sample
+	 * var packet;
+	 * while (packet = plugins.udp.getReceivedPacket()) {
+	 * 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
+	 * 	if (packet.getLength() > 0) {
+	 * 		application.output('an int is: ' + packet.readInt());
+	 * 		application.output('moved to index: ' + packet.index);
+	 * 		application.output('a short is: ' + packet.readShort());
+	 * 		application.output('moved to index: ' + packet.index);
+	 * 		application.output('a byte is: ' + packet.readByte());
+	 * 		application.output('moved to index: ' + packet.index);
+	 * 		application.output('a byte is: ' + packet.readByte());
+	 * 		application.output('moved to index: ' + packet.index);
+	 * 	}
+	 * 	else {
+	 * 		application.output('end of communication.');
+	 * 		break;
+	 * 	}
+	 * }
+	 */
 	public int js_getIndex()
 	{
 		return getIndex();
@@ -50,75 +75,198 @@ public class JSPacket implements IScriptObject
 		setIndex(i);
 	}
 
+	/**
+	 * Returns the name of the host that sent the packet.
+	 *
+	 * @sample
+	 * var packet;
+	 * while (packet = plugins.udp.getReceivedPacket()) {
+	 * 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
+	 * 	if (packet.getLength() > 0) {
+	 * 		application.output('message is: ' + packet.readUTF());
+	 * 	}
+	 * 	else {
+	 * 		application.output('end of communication.');
+	 * 		break;
+	 * 	}
+	 * }
+	 */
 	public String js_getHost()
 	{
 		return getHost();
 	}
 
+	/**
+	 * Returns the content of the package into a byte array.
+	 *
+	 * @sample
+	 * var packet;
+	 * while (packet = plugins.udp.getReceivedPacket()) {
+	 * 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
+	 * 	if (packet.getLength() > 0) {
+	 * 		var bytes = packet.getByteArray();
+	 * 		application.output('received a packet of length: ' + bytes.length);
+	 * 		for (var i=0; i<bytes.length; i++)
+	 * 			application.output(bytes[i]);
+	 * 		}
+	 * 	else {
+	 * 		application.output('end of communication.');
+	 * 		break;
+	 * 	}
+	 * }
+	 */
 	public byte[] js_getByteArray()
 	{
 		return getByteArray();
 	}
 
+	/**
+	 * Returns the length of the packet in bytes.
+	 * 
+	 * @sampleas js_getHost()
+	 */
 	public int js_getLength()
 	{
 		return getLength();
 	}
 
+	/**
+	 * Returns the port where the packet originated from.
+	 * 
+	 * @sampleas js_getHost()
+	 */
 	public int js_getPort()
 	{
 		return getPort();
 	}
 
+	/**
+	 * Reads an 8 bits byte value from the packet, starting from the current index. Advances the index with one position.
+	 * 
+	 * @sampleas js_getIndex()
+	 */
 	public int js_readByte()
 	{
 		return readByte();
 	}
 
+	/**
+	 * Reads a 32 bits int value from the packet, starting from the current index. Advances the index with 4 positions.
+	 * 
+	 * @sampleas js_getIndex()
+	 */
 	public int js_readInt()
 	{
 		return readInt();
 	}
 
+	/**
+	 * Reads a 32 bits short value from the packet, starting from the current index. Advances the index with 2 positions.
+	 * 
+	 * @sampleas js_getIndex()
+	 */
 	public int js_readShort()
 	{
 		return readShort();
 	}
 
+	/**
+	 * @clonedesc js_readUTF()
+	 * @sampleas js_readUTF()
+	 * 
+	 * @param length
+	 */
 	public String js_readUTF(int length)
 	{
 		return readUTF(Integer.valueOf(length));
 	}
 
+	/**
+	 * Reads a UTF string from the packet, starting from the current index. If an argument is specified, then it represents the length of the string to read. If no argument is specified, then first a 32 bits int is read from the packet and that will be the length of the string. Advances the index with a number of positions that depends on the length of the read string.
+	 * 
+	 * @sampleas js_getHost()
+	 */
 	public String js_readUTF()
 	{
 		return readUTF(null);
 	}
 
 
-	public void js_writeByte(int v)
+	/**
+	 * Writes one byte into the packet, at the current index. The index is advanced with one position.
+	 *
+	 * @sample
+	 * if (!plugins.udp.startSocket('5555', packetReceived)) {
+	 * 	application.output('Failed to start socket.');
+	 * } else {
+	 * 	var packet = plugins.udp.createNewPacket();
+	 * 	packet.writeUTF('hello world!');
+	 * 	plugins.udp.sendPacket('localhost', packet, 1234);
+	 * 	packet = plugins.udp.createNewPacket();
+	 * 	packet.writeByte(0xFF);
+	 * 	packet.writeShort(10001);
+	 * 	packet.writeInt(2000000001);
+	 * 	plugins.udp.sendPacket('localhost', packet, 1234);
+	 * 	var imgBytes = plugins.file.readFile('logo.jpg', 1024);
+	 * 	packet = plugins.udp.createNewPacket();
+	 * 	packet.writeBytes(imgBytes);
+	 * 	plugins.udp.sendPacket('localhost', packet, 1234);
+	 * 	plugins.udp.stopSocket();
+	 * }
+	 *
+	 * @param number 
+	 */
+	public void js_writeByte(int number)
 	{
-		writeByte(v);
+		writeByte(number);
 	}
 
+	/**
+	 * Writes an array of bytes into the packet, at the current index. The index is advanced with a number of positions equal to the length of the written array.
+	 * 
+	 * @sampleas js_writeByte(int)
+	 * 
+	 * @param bytes
+	 */
 	public void js_writeBytes(byte[] bytes)
 	{
 		writeBytes(bytes);
 	}
 
-	public void js_writeInt(int v)
+	/**
+	 * Writes a 32 bits int into the packet, at the current index. The index is advances with 4 positions.
+	 * 
+	 * @sampleas js_writeByte(int)
+	 * 
+	 * @param number
+	 */
+	public void js_writeInt(int number)
 	{
-		writeInt(v);
+		writeInt(number);
 	}
 
-	public void js_writeShort(int v)
+	/**
+	 * Writes a 16 bits short value into the packet, at the current index. The index is advances with 2 positions.
+	 * 
+	 * @sampleas js_writeByte(int)
+	 * 
+	 * @param number
+	 */
+	public void js_writeShort(int number)
 	{
-		writeShort(v);
+		writeShort(number);
 	}
 
-	public int js_writeUTF(String str)
+	/**
+	 * Writes an UTF encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.
+	 *
+	 * @sampleas js_writeByte(int)
+	 * 
+	 * @param string
+	 */
+	public int js_writeUTF(String string)
 	{
-		return writeUTF(str);
+		return writeUTF(string);
 	}
 
 	DatagramPacket getRealPacket()
@@ -369,194 +517,5 @@ public class JSPacket implements IScriptObject
 		p.enclosed.getData()[3] = (byte)-1;
 		System.out.println(p.readInt());
 		System.out.println(p.index);
-	}
-
-	@SuppressWarnings("nls")
-	public String[] getParameterNames(String methodName)
-	{
-		if ("readUTF".equals(methodName))
-		{
-			return new String[] { "[length]" };
-		}
-		else if ("writeByte".equals(methodName))
-		{
-			return new String[] { "number" };
-		}
-		else if ("writeBytes".equals(methodName))
-		{
-			return new String[] { "array" };
-		}
-		else if ("writeInt".equals(methodName))
-		{
-			return new String[] { "number" };
-		}
-		else if ("writeShort".equals(methodName))
-		{
-			return new String[] { "number" };
-		}
-		else if ("writeUTF".equals(methodName))
-		{
-			return new String[] { "string" };
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getSample(String methodName)
-	{
-		if ("getLength".equals(methodName) || "getHost".equals(methodName) || "getPort".equals(methodName) || "readUTF".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var packet;\n");
-			sb.append("while (packet = plugins.udp.getReceivedPacket()) {\n");
-			sb.append("\tapplication.output('packet received from ' + packet.getHost() + ':' + packet.getPort());\n");
-			sb.append("\tif (packet.getLength() > 0) {\n");
-			sb.append("\t\tapplication.output('message is: ' + packet.readUTF());\n");
-			sb.append("\t}\n");
-			sb.append("\telse {\n");
-			sb.append("\t\tapplication.output('end of communication.');\n");
-			sb.append("\t\tbreak;\n");
-			sb.append("\t}\n");
-			sb.append("}\n");
-			return sb.toString();
-		}
-		else if ("index".equals(methodName) || "readInt".equals(methodName) || "readShort".equals(methodName) || "readByte".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var packet;\n");
-			sb.append("while (packet = plugins.udp.getReceivedPacket()) {\n");
-			sb.append("\tapplication.output('packet received from ' + packet.getHost() + ':' + packet.getPort());\n");
-			sb.append("\tif (packet.getLength() > 0) {\n");
-			sb.append("\t\tapplication.output('an int is: ' + packet.readInt());\n");
-			sb.append("\t\tapplication.output('moved to index: ' + packet.index);\n");
-			sb.append("\t\tapplication.output('a short is: ' + packet.readShort());\n");
-			sb.append("\t\tapplication.output('moved to index: ' + packet.index);\n");
-			sb.append("\t\tapplication.output('a byte is: ' + packet.readByte());\n");
-			sb.append("\t\tapplication.output('moved to index: ' + packet.index);\n");
-			sb.append("\t\tapplication.output('a byte is: ' + packet.readByte());\n");
-			sb.append("\t\tapplication.output('moved to index: ' + packet.index);\n");
-			sb.append("\t}\n");
-			sb.append("\telse {\n");
-			sb.append("\t\tapplication.output('end of communication.');\n");
-			sb.append("\t\tbreak;\n");
-			sb.append("\t}\n");
-			sb.append("}\n");
-			return sb.toString();
-		}
-		else if ("writeByte".equals(methodName) || "writeBytes".equals(methodName) || "writeInt".equals(methodName) || "writeShort".equals(methodName) ||
-			"writeUTF".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("if (!plugins.udp.startSocket('5555', packetReceived)) {\n");
-			sb.append("\tapplication.output('Failed to start socket.');\n");
-			sb.append("} else {\n");
-			sb.append("\tvar packet = plugins.udp.createNewPacket();\n");
-			sb.append("\tpacket.writeUTF('hello world!');\n");
-			sb.append("\tplugins.udp.sendPacket('localhost', packet, 1234);\n");
-			sb.append("\tpacket = plugins.udp.createNewPacket();\n");
-			sb.append("\tpacket.writeByte(0xFF);\n");
-			sb.append("\tpacket.writeShort(10001);\n");
-			sb.append("\tpacket.writeInt(2000000001);\n");
-			sb.append("\tplugins.udp.sendPacket('localhost', packet, 1234);\n");
-			sb.append("\tvar imgBytes = plugins.file.readFile('logo.jpg', 1024);\n");
-			sb.append("\tpacket = plugins.udp.createNewPacket();\n");
-			sb.append("\tpacket.writeBytes(imgBytes);\n");
-			sb.append("\tplugins.udp.sendPacket('localhost', packet, 1234);\n");
-			sb.append("\tplugins.udp.stopSocket();\n");
-			sb.append("}\n");
-			return sb.toString();
-		}
-		else if ("getByteArray".equals(methodName))
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("var packet;\n");
-			sb.append("while (packet = plugins.udp.getReceivedPacket()) {\n");
-			sb.append("\tapplication.output('packet received from ' + packet.getHost() + ':' + packet.getPort());\n");
-			sb.append("\tif (packet.getLength() > 0) {\n");
-			sb.append("\t\tvar bytes = packet.getByteArray();\n");
-			sb.append("\t\tapplication.output('received a packet of length: ' + bytes.length);\n");
-			sb.append("\t\tfor (var i=0; i<bytes.length; i++)\n");
-			sb.append("\t\t\tapplication.output(bytes[i]);\n");
-			sb.append("\t\t}\n");
-			sb.append("\telse {\n");
-			sb.append("\t\tapplication.output('end of communication.');\n");
-			sb.append("\t\tbreak;\n");
-			sb.append("\t}\n");
-			sb.append("}\n");
-			return sb.toString();
-		}
-		return null;
-	}
-
-	@SuppressWarnings("nls")
-	public String getToolTip(String methodName)
-	{
-		if ("index".equals(methodName))
-		{
-			return "Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.";
-		}
-		else if ("getByteArray".equals(methodName))
-		{
-			return "Returns the content of the package into a byte array.";
-		}
-		else if ("getHost".equals(methodName))
-		{
-			return "Returns the name of the host that sent the packet.";
-		}
-		else if ("getLength".equals(methodName))
-		{
-			return "Returns the length of the packet in bytes.";
-		}
-		else if ("getPort".equals(methodName))
-		{
-			return "Returns the port where the packet originated from.";
-		}
-		else if ("readByte".equals(methodName))
-		{
-			return "Reads an 8 bits byte value from the packet, starting from the current index. Advances the index with one position.";
-		}
-		else if ("readInt".equals(methodName))
-		{
-			return "Reads a 32 bits int value from the packet, starting from the current index. Advances the index with 4 positions.";
-		}
-		else if ("readShort".equals(methodName))
-		{
-			return "Reads a 32 bits short value from the packet, starting from the current index. Advances the index with 2 positions.";
-		}
-		else if ("readUTF".equals(methodName))
-		{
-			return "Reads a UTF string from the packet, starting from the current index. If an argument is specified, then it represents the length of the string to read. If no argument is specified, then first a 32 bits int is read from the packet and that will be the length of the string. Advances the index with a number of positions that depends on the length of the read string.";
-		}
-		else if ("writeByte".equals(methodName))
-		{
-			return "Writes one byte into the packet, at the current index. The index is advanced with one position.";
-		}
-		else if ("writeBytes".equals(methodName))
-		{
-			return "Writes an array of bytes into the packet, at the current index. The index is advanced with a number of positions equal to the length of the written array.";
-		}
-		else if ("writeInt".equals(methodName))
-		{
-			return "Writes a 32 bits int into the packet, at the current index. The index is advances with 4 positions.";
-		}
-		else if ("writeShort".equals(methodName))
-		{
-			return "Writes a 16 bits short value into the packet, at the current index. The index is advances with 2 positions.";
-		}
-		else if ("writeUTF".equals(methodName))
-		{
-			return "Writes an UTF encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.";
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 }

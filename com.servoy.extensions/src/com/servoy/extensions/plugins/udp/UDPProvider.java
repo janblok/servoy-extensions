@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.udp;
 
 import java.net.DatagramPacket;
@@ -27,12 +27,15 @@ import java.util.List;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
-public class UDPProvider implements IScriptObject
+@ServoyDocumented
+public class UDPProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final UDPPlugin plugin;
 	private DatagramHandler listner;
@@ -47,28 +50,28 @@ public class UDPProvider implements IScriptObject
 	}
 
 	/**
-	 * Start a UDP socket for a port
+	 * Start a UDP socket for a port.
 	 *
-	 * @sample plugins.udp.startSocket(1234,my_packet_process_method)
+	 * @sample
+	 * plugins.udp.startSocket(1234,my_packet_process_method)
 	 *
-	 * @param portnumber 
-	 *
-	 * @param methodToInvokeWhenPacketReceivedAndBufferIsEmpty 
+	 * @param port_number 
+	 * @param method_to_call_when_packet_received_and_buffer_is_empty 
 	 */
-	public boolean js_startSocket(int port, Object method_to_call_when_packet_received_and_buffer_is_empty)
+	public boolean js_startSocket(int port_number, Object method_to_call_when_packet_received_and_buffer_is_empty)
 	{
 		//clear if restart
 		hasSeenEmpty = true;
 		buffer = Collections.synchronizedList(new LinkedList());
 
-		this.port = port;
+		this.port = port_number;
 		if (listner == null)
 		{
 			try
 			{
 				if (!(method_to_call_when_packet_received_and_buffer_is_empty instanceof Function)) throw new IllegalArgumentException("method invalid"); //$NON-NLS-1$
 
-				DatagramSocket socket = new DatagramSocket(port);
+				DatagramSocket socket = new DatagramSocket(port_number);
 				listner = new DatagramHandler(this, socket);
 				listner.start();
 
@@ -84,9 +87,10 @@ public class UDPProvider implements IScriptObject
 	}
 
 	/**
-	 * Stop the UDP socket for a port
+	 * Stop the UDP socket for a port.
 	 *
-	 * @sample plugins.udp.stopSocket()
+	 * @sample
+	 * plugins.udp.stopSocket()
 	 */
 	public void js_stopSocket()
 	{
@@ -95,7 +99,7 @@ public class UDPProvider implements IScriptObject
 	}
 
 	/**
-	 * Create a new empty packet
+	 * Create a new empty packet.
 	 *
 	 * @sample
 	 * var packet = plugins.udp.createNewPacket()
@@ -110,7 +114,7 @@ public class UDPProvider implements IScriptObject
 	}
 
 	/**
-	 * Send a packet
+	 * Send a packet.
 	 *
 	 * @sample
 	 * var packet = plugins.udp.createNewPacket()
@@ -118,10 +122,8 @@ public class UDPProvider implements IScriptObject
 	 * plugins.udp.sendPacket('10.0.0.1',packet)
 	 *
 	 * @param ip/host 
-	 *
 	 * @param packet 
-	 *
-	 * @param [port] optional 
+	 * @param port optional
 	 */
 	public boolean js_sendPacket(Object[] vargs)
 	{
@@ -163,7 +165,7 @@ public class UDPProvider implements IScriptObject
 	}
 
 	/**
-	 * Put a test packet in the receive buffer to test your method call and getReceivedPacket
+	 * Put a test packet in the receive buffer to test your method call and getReceivedPacket.
 	 *
 	 * @sample
 	 * var packet = plugins.udp.createNewPacket()
@@ -181,9 +183,6 @@ public class UDPProvider implements IScriptObject
 		return false;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	@Deprecated
 	public JSPacket js_getRecievedPacket()
 	{
@@ -191,7 +190,7 @@ public class UDPProvider implements IScriptObject
 	}
 
 	/**
-	 * Get a packet from recieve buffer, read buffer until empty (null is returned)
+	 * Get a packet from receive buffer, read buffer until empty (null is returned).
 	 *
 	 * @sample
 	 * var packet = null
@@ -228,140 +227,7 @@ public class UDPProvider implements IScriptObject
 		}
 	}
 
-	public String[] getParameterNames(String method)
-	{
-		if ("startSocket".equals(method)) //$NON-NLS-1$
-		{
-			return new String[] { "portnumber", "methodToInvokeWhenPacketReceivedAndBufferIsEmpty" }; //$NON-NLS-1$//$NON-NLS-2$
-		}
-		else if (method.equals("sendPacket")) //$NON-NLS-1$
-		{
-			return new String[] { "ip/host", "packet", "[port]" }; //$NON-NLS-1$//$NON-NLS-2$
-		}
-		else if (method.equals("testPacket")) //$NON-NLS-1$
-		{
-			return new String[] { "packet" }; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String method)
-	{
-		if ("getRecievedPacket".equals(method)) //$NON-NLS-1$
-		{
-			return true;
-		}
-		return false;
-	}
-
-	public String getSample(String method)
-	{
-		if ("startSocket".equals(method)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(method));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.udp.startSocket(1234,my_packet_process_method)\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (method.equals("sendPacket")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(method));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var packet = plugins.udp.createNewPacket()\n"); //$NON-NLS-1$
-			retval.append("packet.writeUTF('hello world!')\n"); //$NON-NLS-1$
-			retval.append("plugins.udp.sendPacket('10.0.0.1',packet)\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (method.equals("testPacket")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(method));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var packet = plugins.udp.createNewPacket()\n"); //$NON-NLS-1$
-			retval.append("packet.writeUTF('hello world!')\n"); //$NON-NLS-1$
-			retval.append("plugins.udp.testPacket(packet)\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (method.equals("createNewPacket")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(method));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var packet = plugins.udp.createNewPacket()\n"); //$NON-NLS-1$
-			retval.append("packet.writeUTF('hello world!')//writes UTF\n"); //$NON-NLS-1$
-			retval.append("packet.writeInt(12348293)//writes 4 bytes\n"); //$NON-NLS-1$
-			retval.append("packet.writeShort(14823)//writes 2 bytes\n"); //$NON-NLS-1$
-			retval.append("packet.writeByte(123)//writes 1 byte\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (method.equals("stopSocket")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(method));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("plugins.udp.stopSocket()\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (method.equals("getReceivedPacket")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(method));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var packet = null\n"); //$NON-NLS-1$
-			retval.append("while( ( packet = plugins.udp.getReceivedPacket() ) != null)\n"); //$NON-NLS-1$
-			retval.append("{\n"); //$NON-NLS-1$
-			retval.append("\tvar text = packet.readUTF()\n"); //$NON-NLS-1$
-			retval.append("\tvar count = packet.readInt()\n"); //$NON-NLS-1$
-			retval.append("}\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(String)
-	 */
-	public String getToolTip(String method)
-	{
-		if ("startSocket".equals(method)) //$NON-NLS-1$
-		{
-			return "Start a UDP socket for a port."; //$NON-NLS-1$
-		}
-		else if (method.equals("sendPacket")) //$NON-NLS-1$
-		{
-			return "Send a packet."; //$NON-NLS-1$
-		}
-		else if (method.equals("testPacket")) //$NON-NLS-1$
-		{
-			return "Put a test packet in the receive buffer to test your method call and getReceivedPacket."; //$NON-NLS-1$
-		}
-		else if (method.equals("createNewPacket")) //$NON-NLS-1$
-		{
-			return "Create a new empty packet."; //$NON-NLS-1$
-		}
-		else if (method.equals("stopSocket")) //$NON-NLS-1$
-		{
-			return "Stop the UDP socket for a port."; //$NON-NLS-1$
-		}
-		else if (method.equals("getReceivedPacket")) //$NON-NLS-1$
-		{
-			return "Get a packet from recieve buffer, read buffer until empty (null is returned)."; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class[] getAllReturnedTypes()
+	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { JSPacket.class };
 	}

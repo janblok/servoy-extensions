@@ -248,6 +248,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/serialize">
 			<fileset dir="${src_plugins.dir}/serialize">
 				<patternset refid="javaGif.sources"/>
+				<include name="**/servoy-*.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/serialize">
@@ -354,6 +355,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/tabxport">
 			<fileset dir="${src_plugins.dir}/tabxport">
 				<patternset refid="gif.sources"/>
+				<include name="**/servoy-*.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/tabxport">
@@ -436,6 +438,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/scheduler">
 			<fileset dir="${src_plugins.dir}/scheduler">
 				<patternset refid="javaGif.sources"/>
+				<include name="**/servoy-*.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/scheduler">
@@ -594,6 +597,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/spellcheck">
 			<fileset dir="${src_plugins.dir}/spellcheck">
 				<patternset refid="gif.sources"/>
+				<include name="**/servoy-*.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/spellcheck">
@@ -690,6 +694,7 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/udp">
 			<fileset dir="${src_plugins.dir}/udp">
 				<patternset refid="gif.sources"/>
+				<include name="**/servoy-*.xml"/>
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/udp">

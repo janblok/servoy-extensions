@@ -17,6 +17,7 @@
 
 package com.servoy.extensions.plugins.spellcheck;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IConstantsObject;
 
 /**
@@ -25,9 +26,10 @@ import com.servoy.j2db.scripting.IConstantsObject;
  * @author acostache
  *
  */
+@ServoyDocumented
 public abstract class LANGUAGES implements IConstantsObject
 {
-	/** 
+	/*
 	 * Language Strings
 	 */
 	public static final String ENGLISH = SpellCheckerUtils.ENGLISH;

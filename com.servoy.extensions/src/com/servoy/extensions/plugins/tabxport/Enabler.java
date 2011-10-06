@@ -19,14 +19,16 @@ package com.servoy.extensions.plugins.tabxport;
 import javax.swing.JMenuItem;
 
 import com.servoy.j2db.dataprocessing.IFoundSet;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
 /**
  * Xport menu enabler
  * @author jblok
  */
-public class Enabler implements IScriptObject
+@ServoyDocumented
+public class Enabler implements IScriptable
 {
 	private JMenuItem imp;
 	private JMenuItem exp;
@@ -42,85 +44,18 @@ public class Enabler implements IScriptObject
 		this.exp = exp;
 	}
 
-	public String getSample(String methodName)
-	{
-		if (methodName == null) return null;
-		if (methodName.endsWith("xportEnabled")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("%%elementName%%.exportEnabled = true;\n"); //$NON-NLS-1$
-			retval.append("var isEnabled = %%elementName%%.exportEnabled;\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (methodName.endsWith("mportEnabled")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("%%elementName%%.importEnabled = true;\n"); //$NON-NLS-1$
-			retval.append("var isEnabled = %%elementName%%.importEnabled;\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if (methodName.endsWith("textExport")) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("//export with default separator(tab) and no header\n");
-			retval.append("var dataToBeWritten = %%elementName%%.textExport(forms.form1.foundset,['id','name']);\n"); //$NON-NLS-1$
-			retval.append("//export with ';' separator and no header\n");
-			retval.append("var dataToBeWritten = %%elementName%%.textExport(forms.form1.foundset,['id','name'],';');\n"); //$NON-NLS-1$
-			retval.append("//export with ';' separator and header\n");
-			retval.append("var dataToBeWritten = %%elementName%%.textExport(forms.form1.foundset,['id','name'],';',true);\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if (methodName == null) return null;
-		if (methodName.endsWith("xportEnabled")) //$NON-NLS-1$
-		{
-			return "Enable the export feature of this plugin."; //$NON-NLS-1$
-		}
-		else if (methodName.endsWith("mportEnabled")) //$NON-NLS-1$
-		{
-			return "Enable the import feature of this plugin."; //$NON-NLS-1$
-		}
-		else if (methodName.endsWith("textExport"))
-		{
-			return "Export to text 'separated value' data (*.tab/*.csv)";
-		}
-		return null;
-	}
-
-	public String[] getParameterNames(String methodName)
-	{
-		if (methodName.endsWith("textExport")) return new String[] { "foundSet", "dataProviderIds", "[separator]", "[exportHeader]" };
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public Class[] getAllReturnedTypes()
-	{
-		return null;
-	}
-
 	public void js_setExportEnabled(boolean b)
 	{
 		if (exp != null) exp.setEnabled(b);
 	}
 
+	/**
+	 * Enable the export feature of this plugin.
+	 *
+	 * @sample
+	 * plugins.textxport.exportEnabled = true;
+	 * var isEnabled = plugins.textxport.exportEnabled;
+	 */
 	public boolean js_getExportEnabled()
 	{
 		if (exp != null)
@@ -141,6 +76,13 @@ public class Enabler implements IScriptObject
 		}
 	}
 
+	/**
+	 * Enable the import feature of this plugin.
+	 *
+	 * @sample
+	 * plugins.textxport.importEnabled = true;
+	 * var isEnabled = plugins.textxport.importEnabled;
+	 */
 	public boolean js_getImportEnabled()
 	{
 		if (imp != null)
@@ -165,6 +107,22 @@ public class Enabler implements IScriptObject
 		}
 	}
 
+	/**
+	 * Export to text 'separated value' data (*.tab/*.csv)
+	 *
+	 * @sample
+	 * //export with default separator(tab) and no header
+	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);
+	 * //export with ';' separator and no header
+	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');
+	 * //export with ';' separator and header
+	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';',true);
+	 *
+	 * @param foundSet 
+	 * @param dataProviderIds 
+	 * @param separator optional
+	 * @param exportHeader optional
+	 */
 	public String js_textExport(Object[] args)
 	{
 		if ((args.length >= 2) && (args[0] != null) && (args[1] instanceof Object[]) && ((Object[])args[1]).length != 0)
