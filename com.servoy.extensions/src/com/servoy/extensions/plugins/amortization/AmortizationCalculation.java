@@ -27,7 +27,6 @@ import com.servoy.j2db.dataprocessing.BufferedDataSet;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.SafeArrayList;
@@ -36,7 +35,7 @@ import com.servoy.j2db.util.SafeArrayList;
  * @author sebster
  */
 @ServoyDocumented
-public class AmortizationCalculation implements IScriptable, IReturnedTypesProvider
+public class AmortizationCalculation implements IScriptable
 {
 
 	/**
@@ -991,12 +990,6 @@ public class AmortizationCalculation implements IScriptable, IReturnedTypesProvi
 		{
 			return calendar.getTime().compareTo(((CalendarEvent)other).calendar.getTime());
 		}
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

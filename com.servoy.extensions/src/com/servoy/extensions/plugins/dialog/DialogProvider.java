@@ -30,7 +30,6 @@ import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -38,7 +37,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jblok
  */
 @ServoyDocumented
-public class DialogProvider implements IScriptable, IReturnedTypesProvider
+public class DialogProvider implements IScriptable
 {
 	private final DialogPlugin plugin;
 
@@ -301,8 +300,4 @@ public class DialogProvider implements IScriptable, IReturnedTypesProvider
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
 
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

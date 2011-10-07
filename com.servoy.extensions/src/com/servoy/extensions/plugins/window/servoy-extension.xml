@@ -3979,7 +3979,9 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             </parameters>
           </function>
           <function name="show">
-            <argumentsTypes/>
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
+            </argumentsTypes>
             <return type="void" typecode="void"/>
             <description><![CDATA[Show the popup above the specified element.]]></description>
             <summary><![CDATA[Show the popup above the specified element.]]></summary>
@@ -4000,11 +4002,12 @@ menu.show(event.getSource());
 //menu.show(100, 100);
 }]]></sample>
             <parameters>
-              <parameter name="component"/>
+              <parameter name="component" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
             </parameters>
           </function>
           <function name="show">
             <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -4028,7 +4031,7 @@ menu.show(event.getSource());
 //menu.show(100, 100);
 }]]></sample>
             <parameters>
-              <parameter name="component"/>
+              <parameter name="component" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
@@ -5691,9 +5694,11 @@ toolbar.visibleItem(1, false);]]></sample>
           </function>
           <function deprecated="true" name="addServoyToolBar" undocumented="true">
             <argumentsTypes>
+              <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <parameters>
+              <parameter name="pane" type="javax.swing.JComponent" typecode="javax.swing.JComponent"/>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
@@ -6057,10 +6062,12 @@ plugins.window.maximize("windowName");]]></sample>
           </function>
           <function deprecated="true" name="removeServoyToolBar" undocumented="true">
             <argumentsTypes>
+              <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <parameters>
+              <parameter name="pane" type="javax.swing.JComponent" typecode="javax.swing.JComponent"/>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>

@@ -25,7 +25,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -33,7 +32,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jblok
  */
 @ServoyDocumented
-public class Enabler implements IScriptable, IReturnedTypesProvider
+public class Enabler implements IScriptable
 {
 	private JMenuItem imp;
 	private JMenuItem exp;
@@ -47,11 +46,6 @@ public class Enabler implements IScriptable, IReturnedTypesProvider
 	{
 		this.imp = imp;
 		this.exp = exp;
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 	public void js_setExportEnabled(boolean b)

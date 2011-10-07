@@ -17,7 +17,7 @@ var string_data = plugins.serialize.toJSON(org_array);
 var new_array = plugins.serialize.fromJSON(string_data);
 application.output(new_array.join('#'));]]></sample>
             <parameters>
-              <parameter name="data" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="toJSON">
@@ -32,7 +32,7 @@ var string_data = plugins.serialize.toJSON(org_array);
 var new_array = plugins.serialize.fromJSON(string_data);
 application.output(new_array.join('#'));]]></sample>
             <parameters>
-              <parameter name="obj" type="java.lang.Object" typecode="java.lang.Object"/>
+              <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
         </functions>

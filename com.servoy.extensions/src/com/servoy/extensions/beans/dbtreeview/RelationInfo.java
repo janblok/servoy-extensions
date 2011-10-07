@@ -17,7 +17,6 @@
 package com.servoy.extensions.beans.dbtreeview;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -25,8 +24,8 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author gboros
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "RelationInfo")
-public class RelationInfo implements IReturnedTypesProvider, IScriptable
+@ServoyDocumented(category = ServoyDocumented.RUNTIME)
+public class RelationInfo implements IScriptable
 {
 	private String label;
 	private String nRelationName;
@@ -81,11 +80,6 @@ public class RelationInfo implements IReturnedTypesProvider, IScriptable
 	public void js_setNRelationName(String relationName)
 	{
 		nRelationName = relationName;
-	}
-
-	public Class[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 	@Override

@@ -19,7 +19,6 @@ package com.servoy.extensions.plugins.mail.client;
 import java.io.Serializable;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.ImageLoader;
 
@@ -27,7 +26,7 @@ import com.servoy.j2db.util.ImageLoader;
  * @author jblok
  */
 @ServoyDocumented
-public class Attachment implements Serializable, IReturnedTypesProvider, IScriptable
+public class Attachment implements Serializable, IScriptable
 {
 	private final String name;
 	private String mimeType;
@@ -174,8 +173,4 @@ public class Attachment implements Serializable, IReturnedTypesProvider, IScript
 		return sb.toString();
 	}
 
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

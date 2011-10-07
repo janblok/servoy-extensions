@@ -33,7 +33,7 @@ application.output(attributes[1])
 val1 = rootNode.getAttributeValue('attr1');
 application.output(val1)]]></sample>
             <parameters>
-              <parameter name="attributeName" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="attributeName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="getChildNodes">
@@ -118,7 +118,7 @@ application.output(subChilds[0].getType())]]></sample>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
             <parameters>
-              <parameter name="argument" type="java.lang.Object" typecode="java.lang.Object"/>
+              <parameter name="argument" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
           <function name="readXmlDocumentFromFile">
@@ -136,7 +136,7 @@ var xmlFile = plugins.file.showFileOpenDialog(1);
 var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile(xmlFile);
 var childNodes = xmlNodes[0].getChildNodes();]]></sample>
             <parameters>
-              <parameter name="argument" type="java.lang.Object" typecode="java.lang.Object"/>
+              <parameter name="argument" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
           <function name="readXmlDocumentFromString">
@@ -156,7 +156,7 @@ var childNodes = xmlNodes[0].getChildNodes();]]></sample>
 <author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
 var xmlNodes = plugins.XmlReader.readXmlDocumentFromString(xmlString);]]></sample>
             <parameters>
-              <parameter name="argument" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="argument" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
         </functions>

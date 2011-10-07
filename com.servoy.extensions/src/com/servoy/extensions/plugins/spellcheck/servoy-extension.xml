@@ -39,7 +39,7 @@ plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
 // NOTE: the optional language, if provided, overrides the Preference Panel page setting, of the current SpellCheck provider (RapidSpell/Google).
 // plugins.spellcheck.checkTextComponent(textInDutch, SpellCheck_Languages.DUTCH);]]></sample>
             <parameters>
-              <parameter name="textComponent" type="java.lang.Object" typecode="java.lang.Object"/>
+              <parameter name="textComponent" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
           <function name="checkTextComponent">
@@ -58,8 +58,8 @@ plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
 // NOTE: the optional language, if provided, overrides the Preference Panel page setting, of the current SpellCheck provider (RapidSpell/Google).
 // plugins.spellcheck.checkTextComponent(textInDutch, SpellCheck_Languages.DUTCH);]]></sample>
             <parameters>
-              <parameter name="textComponent" type="java.lang.Object" typecode="java.lang.Object"/>
-              <parameter name="language" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="textComponent" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="language" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
         </functions>

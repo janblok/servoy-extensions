@@ -33,7 +33,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -43,7 +43,7 @@ import com.servoy.j2db.util.Utils;
  *
  */
 @ServoyDocumented
-public class Response implements IScriptObject, IJavaScriptType
+public class Response implements IScriptable, IJavaScriptType
 {
 	private HttpResponse res;
 
@@ -201,97 +201,4 @@ public class Response implements IScriptObject, IJavaScriptType
 		return EntityUtils.getContentCharSet(res.getEntity());
 	}
 
-	public String[] getParameterNames(String methodName)
-	{
-		if ("getResponseHeaders".equals(methodName)) //$NON-NLS-1$
-		{
-			return new String[] { "[headerName]" }; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	public String getSample(String methodName)
-	{
-		if ("getResponseBody".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var pageData = response.getResponseBody();\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getCharset".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var charset = response.getCharset();\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getMediaData".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var mediaData = response.getMediaData();\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getResponseHeaders".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var allHeaders = response.getResponseHeaders(null);\n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		else if ("getStatusCode".equals(methodName)) //$NON-NLS-1$
-		{
-			StringBuffer retval = new StringBuffer();
-			retval.append("//"); //$NON-NLS-1$
-			retval.append(getToolTip(methodName));
-			retval.append("\n"); //$NON-NLS-1$
-			retval.append("var status = response.getStatusCode();// compare with HTTP_STATUS constants \n"); //$NON-NLS-1$
-			return retval.toString();
-		}
-		return null;
-	}
-
-	public String getToolTip(String methodName)
-	{
-		if ("getResponseBody".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Get the content of the response as String."; //$NON-NLS-1$
-		}
-		else if ("getCharset".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Get the charset of the response body."; //$NON-NLS-1$
-		}
-		else if ("getMediaData".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Get the content of response as binary data. It also supports gzip-ed content."; //$NON-NLS-1$
-		}
-		else if ("getResponseHeaders".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Gets the headers of the response as name/value arrays."; //$NON-NLS-1$
-		}
-		else if ("getStatusCode".equals(methodName)) //$NON-NLS-1$
-		{
-			return "Gets the status code of the response, the list of the possible values is in HTTP_STATUS constants."; //$NON-NLS-1$
-		}
-		return null;
-	}
-
-	public boolean isDeprecated(String methodName)
-	{
-		return false;
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

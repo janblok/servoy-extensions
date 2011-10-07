@@ -20,7 +20,6 @@ import org.mozilla.javascript.Function;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.DataSourceUtils;
 
@@ -30,8 +29,8 @@ import com.servoy.j2db.util.DataSourceUtils;
  * 
  * @author gboros
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "Binding")
-public class Binding implements IReturnedTypesProvider, IScriptable
+@ServoyDocumented(category = ServoyDocumented.RUNTIME)
+public class Binding implements IScriptable
 {
 	private String dataSource;
 
@@ -473,12 +472,6 @@ public class Binding implements IReturnedTypesProvider, IScriptable
 	{
 		nRelationDataprovider = dataprovider;
 	}
-
-	public Class[] getAllReturnedTypes()
-	{
-		return null;
-	}
-
 
 	@Override
 	public String toString()

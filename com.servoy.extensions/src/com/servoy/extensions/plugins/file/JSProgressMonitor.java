@@ -28,7 +28,6 @@ import org.mozilla.javascript.Function;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -42,7 +41,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author Servoy Stuff
  */
 @ServoyDocumented
-public class JSProgressMonitor extends TimerTask implements IReturnedTypesProvider, IScriptable, IJavaScriptType
+public class JSProgressMonitor extends TimerTask implements IScriptable, IJavaScriptType
 {
 	private final FileProvider provider;
 	private FunctionDefinition callback;
@@ -237,16 +236,6 @@ public class JSProgressMonitor extends TimerTask implements IReturnedTypesProvid
 	public int getDelay()
 	{
 		return testDelay.get();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.servoy.j2db.scripting.IReturnedTypesProvider#getAllReturnedTypes()
-	 */
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 	/**

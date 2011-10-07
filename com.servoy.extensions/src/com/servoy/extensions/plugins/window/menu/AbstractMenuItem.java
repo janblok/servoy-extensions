@@ -31,7 +31,6 @@ import com.servoy.j2db.Messages;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
@@ -41,7 +40,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
-public abstract class AbstractMenuItem implements IReturnedTypesProvider, IScriptable
+public abstract class AbstractMenuItem implements IScriptable
 {
 	protected IMenuItem menuItem;
 	private IClientPluginAccess pluginAccess;
@@ -591,11 +590,6 @@ public abstract class AbstractMenuItem implements IReturnedTypesProvider, IScrip
 
 		abstractMenuItem.setLegacyMenubarArguments(legacyMenubarArguments);
 		return abstractMenuItem;
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 }

@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -31,7 +30,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author sebster
  */
 @ServoyDocumented
-public class Polynomial implements IScriptable, IReturnedTypesProvider
+public class Polynomial implements IScriptable
 {
 	/**
 	 * The map of terms from which this polynomial is constructed. The map is
@@ -564,11 +563,6 @@ public class Polynomial implements IScriptable, IReturnedTypesProvider
 			}
 			return buffer.toString();
 		}
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 }

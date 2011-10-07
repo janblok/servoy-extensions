@@ -23,7 +23,6 @@ import java.util.Date;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -34,7 +33,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author Servoy Stuff
  */
 @ServoyDocumented
-public class JSFile implements IReturnedTypesProvider, IScriptable, IJavaScriptType
+public class JSFile implements IScriptable, IJavaScriptType
 {
 	private final IAbstractFile file;
 	private JSFile[] EMPTY;
@@ -477,11 +476,6 @@ public class JSFile implements IReturnedTypesProvider, IScriptable, IJavaScriptT
 	public String toString()
 	{
 		return file.toString();
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 	/**

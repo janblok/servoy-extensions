@@ -446,13 +446,4 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 		balloonSize = new Dimension(w, h);
 	}
 
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return getAllReturnedTypesEx();
-	}
-
-	public static Class< ? >[] getAllReturnedTypesEx()
-	{
-		return null;
-	}
 }

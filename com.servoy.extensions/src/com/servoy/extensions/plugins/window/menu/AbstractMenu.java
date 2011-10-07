@@ -23,7 +23,6 @@ import org.mozilla.javascript.Function;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -34,7 +33,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
-public abstract class AbstractMenu implements IReturnedTypesProvider, IScriptable
+public abstract class AbstractMenu implements IScriptable
 {
 	private final IClientPluginAccess pluginAccess;
 	private final IMenuHandler menuHandler;
@@ -691,11 +690,6 @@ public abstract class AbstractMenu implements IReturnedTypesProvider, IScriptabl
 	public Object js_getClientProperty(Object key)
 	{
 		return menu.getClientProperty(key);
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 	public static MenuItemArgs parseMenuItemArgs(IClientPluginAccess pluginAccess, Object[] args)

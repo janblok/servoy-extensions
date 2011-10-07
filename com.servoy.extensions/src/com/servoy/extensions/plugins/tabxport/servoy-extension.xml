@@ -21,24 +21,6 @@ var isEnabled = plugins.textxport.importEnabled;]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="setExportEnabled" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="b" type="boolean" typecode="boolean"/>
-            </parameters>
-          </function>
-          <function name="setImportEnabled" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="b" type="boolean" typecode="boolean"/>
-            </parameters>
-          </function>
           <function name="textExport">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>

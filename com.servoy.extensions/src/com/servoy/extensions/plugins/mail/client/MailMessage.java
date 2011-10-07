@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -30,7 +29,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jblok
  */
 @ServoyDocumented
-public class MailMessage implements Serializable, IReturnedTypesProvider, IScriptable
+public class MailMessage implements Serializable, IScriptable
 {
 	public List<Attachment> attachments = new ArrayList<Attachment>();
 	public String fromAddresses;
@@ -278,8 +277,4 @@ public class MailMessage implements Serializable, IReturnedTypesProvider, IScrip
 		return sb.toString();
 	}
 
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

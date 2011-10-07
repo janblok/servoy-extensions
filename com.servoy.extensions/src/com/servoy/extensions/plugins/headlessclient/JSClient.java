@@ -27,13 +27,12 @@ import org.mozilla.javascript.Undefined;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IConstantsObject;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.util.Debug;
 
 @ServoyDocumented
-public class JSClient implements IScriptable, IReturnedTypesProvider, IConstantsObject
+public class JSClient implements IScriptable, IConstantsObject
 {
 	private final IHeadlessServer headlessServer;
 	private final HeadlessClientPlugin plugin;
@@ -377,11 +376,4 @@ public class JSClient implements IScriptable, IReturnedTypesProvider, IConstants
 		return "JSClient[" + clientID + "]";
 	}
 
-	/**
-	 * @see com.servoy.j2db.scripting.IReturnedTypesProvider#getAllReturnedTypes()
-	 */
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

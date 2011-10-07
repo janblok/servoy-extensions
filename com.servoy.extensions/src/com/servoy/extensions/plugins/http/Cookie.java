@@ -17,7 +17,6 @@
 package com.servoy.extensions.plugins.http;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
@@ -26,7 +25,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author paul
  */
 @ServoyDocumented
-public class Cookie implements IReturnedTypesProvider, IScriptable
+public class Cookie implements IScriptable
 {
 
 	private org.apache.http.cookie.Cookie cookie;
@@ -133,11 +132,6 @@ public class Cookie implements IReturnedTypesProvider, IScriptable
 	{
 		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getComment();
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 }

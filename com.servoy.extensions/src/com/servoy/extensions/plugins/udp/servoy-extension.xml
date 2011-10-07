@@ -209,16 +209,7 @@ break;
 }
 }]]></sample>
             <parameters>
-              <parameter name="length" type="int" typecode="int"/>
-            </parameters>
-          </function>
-          <function name="setIndex" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="int"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="i" type="int" typecode="int"/>
+              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="writeByte">
@@ -246,7 +237,7 @@ plugins.udp.sendPacket('localhost', packet, 1234);
 plugins.udp.stopSocket();
 }]]></sample>
             <parameters>
-              <parameter name="number" type="int" typecode="int"/>
+              <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="writeBytes">
@@ -302,7 +293,7 @@ plugins.udp.sendPacket('localhost', packet, 1234);
 plugins.udp.stopSocket();
 }]]></sample>
             <parameters>
-              <parameter name="number" type="int" typecode="int"/>
+              <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="writeShort">
@@ -330,7 +321,7 @@ plugins.udp.sendPacket('localhost', packet, 1234);
 plugins.udp.stopSocket();
 }]]></sample>
             <parameters>
-              <parameter name="number" type="int" typecode="int"/>
+              <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="writeUTF">
@@ -358,7 +349,7 @@ plugins.udp.sendPacket('localhost', packet, 1234);
 plugins.udp.stopSocket();
 }]]></sample>
             <parameters>
-              <parameter name="string" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="string" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
         </functions>
@@ -418,8 +409,8 @@ plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
             <summary><![CDATA[Start a UDP socket for a port.]]></summary>
             <sample><![CDATA[plugins.udp.startSocket(1234,my_packet_process_method)]]></sample>
             <parameters>
-              <parameter name="port_number" type="int" typecode="int"/>
-              <parameter name="method_to_call_when_packet_received_and_buffer_is_empty" type="java.lang.Object" typecode="java.lang.Object"/>
+              <parameter name="port_number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="method_to_call_when_packet_received_and_buffer_is_empty" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
           <function name="stopSocket">

@@ -458,8 +458,8 @@ application.output('content type: ' + files[i].getContentType());
 application.output('last modified: ' + files[i].lastModified());
 application.output('size: ' + files[i].size());
 }
-//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), other options can be set but are not used in the webclient (yet)
-var file = plugins.file.showFileOpenDialog(myCallbackMethod)]]></sample>
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+%%elementName%%.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" optional="true">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>

@@ -30,7 +30,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -39,7 +38,7 @@ import com.servoy.j2db.util.Utils;
  * @author pbakker
  *
  */
-public abstract class BaseRequest implements IReturnedTypesProvider, IScriptable, IJavaScriptType
+public abstract class BaseRequest implements IScriptable, IJavaScriptType
 {
 	protected DefaultHttpClient client;
 	protected final HttpRequestBase method;
@@ -150,8 +149,4 @@ public abstract class BaseRequest implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
-	}
 }

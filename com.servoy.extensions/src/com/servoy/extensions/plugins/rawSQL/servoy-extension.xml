@@ -99,11 +99,11 @@ var args = [java.sql.Types.NUMERIC, 3000]
 var dataset = plugins.rawSQL.executeStoredProcedure(controller.getServerName(), procedure_declaration, args, typesArray, maxReturnedRows);
 var interest_rate = dataset.getValue(1, 1);]]></sample>
             <parameters>
-              <parameter name="serverName" type="java.lang.String" typecode="java.lang.String"/>
-              <parameter name="procedureDeclaration" type="java.lang.String" typecode="java.lang.String"/>
-              <parameter name="arguments" type="java.lang.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="inOutDirectionality" type="int[]" typecode="[I"/>
-              <parameter name="maxNumberOfRowsToRetrieve" type="int" typecode="int"/>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="procedureDeclaration" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="inOutDirectionality" type="com.servoy.j2db.documentation.scripting.docs.Number[]" typecode="[I"/>
+              <parameter name="maxNumberOfRowsToRetrieve" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="flushAllClientsCache">
@@ -138,8 +138,8 @@ plugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
             <parameters>
-              <parameter name="serverName" type="java.lang.String" typecode="java.lang.String"/>
-              <parameter name="tableName" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="getException">
@@ -199,10 +199,10 @@ var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
 var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))
 var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees', pksdataset,action)]]></sample>
             <parameters>
-              <parameter name="serverName" type="java.lang.String" typecode="java.lang.String"/>
-              <parameter name="tableName" type="java.lang.String" typecode="java.lang.String"/>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="pksDataset" type="com.servoy.j2db.dataprocessing.IDataSet" typecode="com.servoy.j2db.dataprocessing.IDataSet"/>
-              <parameter name="action" type="int" typecode="int"/>
+              <parameter name="action" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
         </functions>

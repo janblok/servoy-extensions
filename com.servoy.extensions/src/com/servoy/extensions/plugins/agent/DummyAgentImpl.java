@@ -79,11 +79,6 @@ public class DummyAgentImpl implements IJSAgent
 
 	}
 
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return AgentImpl.getAllReturnedTypesEx();
-	}
-
 	public void js_setVisible(boolean b)
 	{
 		// TODO Auto-generated method stub

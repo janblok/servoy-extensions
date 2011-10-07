@@ -22,7 +22,6 @@ import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -36,7 +35,7 @@ import com.servoy.j2db.util.Utils;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented
-public class MenuBar implements IScriptable, IReturnedTypesProvider
+public class MenuBar implements IScriptable
 {
 
 	public MenuBar()
@@ -298,14 +297,6 @@ public class MenuBar implements IScriptable, IReturnedTypesProvider
 	public void js_setVisible(boolean visible)
 	{
 		windowProvider.getMenuHandler().setMenubarVisible(windowName, visible);
-	}
-
-	/**
-	 * @see com.servoy.j2db.scripting.IScriptObject#getAllReturnedTypes()
-	 */
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 }

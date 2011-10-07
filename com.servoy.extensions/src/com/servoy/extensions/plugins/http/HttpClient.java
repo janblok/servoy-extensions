@@ -31,12 +31,11 @@ import org.apache.http.params.HttpParams;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
 
 @ServoyDocumented
-public class HttpClient implements IReturnedTypesProvider, IScriptable, IJavaScriptType
+public class HttpClient implements IScriptable, IJavaScriptType
 {
 	DefaultHttpClient client;
 
@@ -318,11 +317,6 @@ public class HttpClient implements IReturnedTypesProvider, IScriptable, IJavaScr
 			this.proxyUser = userName;
 			this.proxyPassword = password;
 		}
-	}
-
-	public Class< ? >[] getAllReturnedTypes()
-	{
-		return null;
 	}
 
 }
