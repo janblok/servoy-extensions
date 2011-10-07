@@ -201,7 +201,7 @@ var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees'
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="pksDataset" type="com.servoy.j2db.dataprocessing.IDataSet" typecode="com.servoy.j2db.dataprocessing.IDataSet"/>
+              <parameter name="pksDataset"/>
               <parameter name="action" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
