@@ -48,31 +48,12 @@ public class PDFPrintService implements PrintService
 	private static final String OUTPUT_FILE_EXTENSION = ".pdf"; //$NON-NLS-1$
 
 	private final IClientPluginAccess access;
-	private final JFileChooser outputFolderChooser;
+	private JFileChooser outputFolderChooser;
 	private int outputFileNameCounter;
 
 	public PDFPrintService(IClientPluginAccess access)
 	{
 		this.access = access;
-		outputFolderChooser = new JFileChooser();
-		outputFolderChooser.setDialogTitle("Save PDF output");
-		outputFolderChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		outputFolderChooser.setFileFilter(new FileFilter()
-		{
-
-			@Override
-			public boolean accept(File f)
-			{
-				return f.getName().toLowerCase().endsWith("pdf"); //$NON-NLS-1$
-			}
-
-			@Override
-			public String getDescription()
-			{
-				return "PDF files";
-			}
-
-		});
 	}
 
 	/*
@@ -88,6 +69,28 @@ public class PDFPrintService implements PrintService
 	 */
 	public DocPrintJob createPrintJob()
 	{
+		if (outputFolderChooser == null)
+		{
+			outputFolderChooser = new JFileChooser();
+			outputFolderChooser.setDialogTitle("Save PDF output");
+			outputFolderChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			outputFolderChooser.setFileFilter(new FileFilter()
+			{
+
+				@Override
+				public boolean accept(File f)
+				{
+					return f.getName().toLowerCase().endsWith("pdf"); //$NON-NLS-1$
+				}
+
+				@Override
+				public String getDescription()
+				{
+					return "PDF files";
+				}
+
+			});
+		}
 		DocPrintJob docPrintJob = null;
 		StringBuffer outputFileName = new StringBuffer(OUTPUT_FILE_NAME);
 		if (outputFileNameCounter > 0) outputFileName.append(outputFileNameCounter);
