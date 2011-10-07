@@ -35,10 +35,7 @@ public interface IJSAgent extends IScriptable
 	/**
 	 * Gets or sets the y position of the agent.
 	 *
-	 * @sample
-	 * //move the agent diagonaly
-	 * plugins.agent.x = plugins.agent.x-10;
-	 * plugins.agent.y = plugins.agent.y-10;
+	 * @sampleas js_getX()
 	 */
 	public int js_getY();
 
