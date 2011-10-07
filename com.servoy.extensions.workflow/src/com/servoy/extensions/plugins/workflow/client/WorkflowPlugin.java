@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * The plugin to load in a servoy client
@@ -61,7 +61,7 @@ public class WorkflowPlugin implements IClientPlugin
  		}
  	}
 
- 	public IScriptObject getScriptObject()
+ 	public IScriptable getScriptObject()
  	{
  		if (impl == null)
  		{

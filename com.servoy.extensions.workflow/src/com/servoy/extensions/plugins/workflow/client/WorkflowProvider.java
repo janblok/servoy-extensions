@@ -22,8 +22,10 @@ import java.util.Map;
 
 import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
 
@@ -32,7 +34,8 @@ import com.servoy.j2db.util.Pair;
  * 
  * @author jblok
  */
-public class WorkflowProvider implements IScriptObject
+@ServoyDocumented
+public class WorkflowProvider implements IScriptable, IReturnedTypesProvider
 {
 	private WorkflowPlugin plugin;
 	private IWorkflowPluginService _workflowService;
@@ -176,29 +179,10 @@ public class WorkflowProvider implements IScriptObject
 		return null;
 	}
 	
-	public Class[] getAllReturnedTypes() 
+	public Class<?>[] getAllReturnedTypes() 
 	{
 		return new Class[]{JSTask.class};
 	}
 
-	public String[] getParameterNames(String arg0) 
-	{
-		return null;
-	}
-
-	public String getSample(String arg0) 
-	{
-		return null;
-	}
-
-	public String getToolTip(String arg0) 
-	{
-		return null;
-	}
-
-	public boolean isDeprecated(String arg0) 
-	{
-		return false;
-	}
 }
 
