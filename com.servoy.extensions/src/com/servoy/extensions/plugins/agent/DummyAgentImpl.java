@@ -16,6 +16,9 @@
  */
 package com.servoy.extensions.plugins.agent;
 
+import com.servoy.j2db.documentation.ServoyDocumented;
+
+@ServoyDocumented
 public class DummyAgentImpl implements IJSAgent
 {
 
@@ -31,13 +34,14 @@ public class DummyAgentImpl implements IJSAgent
 		return 0;
 	}
 
+	@Deprecated
 	public void js_hide()
 	{
 		// TODO Auto-generated method stub
 
 	}
 
-	public void js_setBalloonSize(int w, int h)
+	public void js_setBalloonSize(int width, int height)
 	{
 		// TODO Auto-generated method stub
 
@@ -55,31 +59,34 @@ public class DummyAgentImpl implements IJSAgent
 
 	}
 
+	@Deprecated
 	public void js_setX(int x)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
+	@Deprecated
 	public void js_setY(int y)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
+	@Deprecated
 	public void js_show()
 	{
 		// TODO Auto-generated method stub
 
 	}
 
-	public void js_speak(String s)
+	public void js_speak(String message)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
-	public void js_setVisible(boolean b)
+	public void js_setVisible(boolean visible)
 	{
 		// TODO Auto-generated method stub
 
