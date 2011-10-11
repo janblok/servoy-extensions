@@ -198,7 +198,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 				}
 
 				//new: final
-				final IFoundSet fs = fsm.getNewFoundSet(table, null);
+				final IFoundSet fs = fsm.getNewFoundSet(table, null, null);
 
 				long dataRowCount = data.getRowCount();
 				boolean goOn = true;
