@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.rest_ws.servlets;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.XML;
 import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.Wrapper;
 import org.mozilla.javascript.xml.XMLObject;
 
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin;
@@ -39,8 +41,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
+import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -125,51 +127,58 @@ public class RestWSServlet extends HttpServlet
 
 	private void handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
-		final int error;
+		final int errorCode;
+		String errorResponse = null;
 		if (e instanceof NotAuthenticatedException)
 		{
 			plugin.log.debug(request.getRequestURI() + ": Not authenticated");
 			response.setHeader("WWW-Authenticate", "Basic realm=\"" + ((NotAuthenticatedException)e).getRealm() + '"');
-			error = HttpServletResponse.SC_UNAUTHORIZED;
+			errorCode = HttpServletResponse.SC_UNAUTHORIZED;
 		}
 		else if (e instanceof NotAuthorizedException)
 		{
 			plugin.log.info(request.getRequestURI() + ": Not authorised: " + e.getMessage());
-			error = HttpServletResponse.SC_FORBIDDEN;
+			errorCode = HttpServletResponse.SC_FORBIDDEN;
 		}
 		else if (e instanceof NoClientsException)
 		{
 			plugin.log.error(request.getRequestURI(), e);
-			error = HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+			errorCode = HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 		}
 		else if (e instanceof IllegalArgumentException)
 		{
 			plugin.log.info("Could not parse path '" + e.getMessage() + '\'');
-			error = HttpServletResponse.SC_BAD_REQUEST;
+			errorCode = HttpServletResponse.SC_BAD_REQUEST;
 		}
 		else if (e instanceof WebServiceException)
 		{
 			plugin.log.info(request.getRequestURI(), e);
-			error = ((WebServiceException)e).httpResponseCode;
+			errorCode = ((WebServiceException)e).httpResponseCode;
 		}
 		else if (e instanceof JavaScriptException)
 		{
 			plugin.log.info("ws_ method threw an exception '" + e.getMessage() + '\'');
 			if (((JavaScriptException)e).getValue() instanceof Double)
 			{
-				error = ((Double)((JavaScriptException)e).getValue()).intValue();
+				errorCode = ((Double)((JavaScriptException)e).getValue()).intValue();
+			}
+			else if (((JavaScriptException)e).getValue() instanceof Wrapper && ((Wrapper)((JavaScriptException)e).getValue()).unwrap() instanceof Object[])
+			{
+				Object[] throwval = (Object[])((Wrapper)((JavaScriptException)e).getValue()).unwrap();
+				errorCode = Utils.getAsInteger(throwval[0]);
+				errorResponse = (String)throwval[1];
 			}
 			else
 			{
-				error = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+				errorCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 			}
 		}
 		else
 		{
 			plugin.log.error(request.getRequestURI(), e);
-			error = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+			errorCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 		}
-		sendError(response, error);
+		sendError(response, errorCode, errorResponse);
 	}
 
 	@Override
@@ -681,15 +690,37 @@ public class RestWSServlet extends HttpServlet
 		response.setContentLength(bytes.length);
 	}
 
-	/** Send the error response but prevent output of the default (html) error page
+	/** 
+	 * Send the error response but prevent output of the default (html) error page
 	 * @param response
 	 * @param error
 	 * @throws IOException
 	 */
 	protected void sendError(HttpServletResponse response, int error) throws IOException
 	{
+		sendError(response, error, null);
+	}
+
+	/** 
+	 * Send the error response with specified error response msg
+	 * @param response
+	 * @param error
+	 * @param errorResponse 
+	 * @throws IOException
+	 */
+	protected void sendError(HttpServletResponse response, int error, String errorResponse) throws IOException
+	{
 		response.setStatus(error);
-		response.setContentLength(0);
+		if (errorResponse == null)
+		{
+			response.setContentLength(0);
+		}
+		else
+		{
+			Writer w = response.getWriter();
+			w.write(errorResponse);
+			w.close();
+		}
 	}
 
 	public static class WsRequest
