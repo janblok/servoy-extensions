@@ -18,13 +18,12 @@
 package com.servoy.extensions.plugins.openid;
 
 import java.beans.PropertyChangeEvent;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
-import org.apache.commons.collections.map.LinkedMap;
 
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -73,7 +72,7 @@ public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements b
 
 	public Map<String, String> getRequiredPropertyNames()
 	{
-		Map<String, String> req = new LinkedMap();
+		Map<String, String> req = new LinkedHashMap<String, String>();
 //		req.put("openid.redirectServletName", "Redirect servlet name, defaults to 'servoy-webclient'"); //$NON-NLS-1$ //$NON-NLS-2$
 		return req;
 	}
