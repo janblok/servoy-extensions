@@ -22,6 +22,8 @@
                 <description><![CDATA[bean/imageObj/element]]></description>
               </parameter>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#getImage(Object)]]></deprecated>
           </function>
           <function deprecated="true" name="createJPGImage">
             <argumentsTypes>
@@ -40,6 +42,8 @@
               <parameter name="width" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#getImage(Object)]]></deprecated>
           </function>
           <function name="getImage">
             <argumentsTypes>

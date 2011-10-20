@@ -956,7 +956,9 @@ public class ToolBar implements IToolBar, IScriptable
 
 	/**
 	 * You need to call this method after adding or removing items to/from the toolbar.
-	 *
+	 * 
+	 * @deprecated Obsolete method, no longer needed.
+	 * 
 	 * @sampleas js_removeItem(int)
 	 */
 	@Deprecated

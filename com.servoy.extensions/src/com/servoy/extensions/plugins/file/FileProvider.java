@@ -138,6 +138,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		return new JSFile(new File(System.getProperty("user.home"))); //$NON-NLS-1$
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #getHomeFolder()}.
+	 */
 	@Deprecated
 	public JSFile js_getHomeDirectory()
 	{
@@ -493,7 +496,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * returns a JSFile for the given string
-	 *
+	 * 
+	 * @deprecated Replaced by {@link #convertToJSFile(Object)}.
+	 * 
 	 * @param fileName 
 	 */
 	@Deprecated
@@ -904,8 +909,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
-	String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
 	{
 		try
 		{
@@ -1055,8 +1059,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param data
 	 * @param mimeType
 	 */
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
-	String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -1509,6 +1512,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Retrieves an array of files/folders from the server
 	 * 
+	 * @deprecated Replaced by {@link #getRemoteFolderContents(Object[])}.
+	 * 
 	 * @since Servoy 5.2
 	 * 
 	 * @param serverPath the path of a remote directory (relative to the defaultFolder)
@@ -1523,6 +1528,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Retrieves an array of files/folders from the server
+	 * 
+	 * @deprecated Replaced by {@link #getRemoteFolderContents(Object[])}.
 	 * 
 	 * @since Servoy 5.2
 	 * 

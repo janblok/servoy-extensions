@@ -99,6 +99,9 @@ public class XmlReaderProvider implements IScriptable, IReturnedTypesProvider
 		return null;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #readXmlDocumentFromString(String)} and {@link #readXmlDocumentFromFile(Object)}
+	 */
 	@Deprecated
 	public XmlNode[] js_readXmlDocument(Object argument)
 	{

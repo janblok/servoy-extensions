@@ -271,6 +271,9 @@ public class JSFile implements IScriptable, IJavaScriptType
 		return file.createNewFile();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #deleteFile()}.
+	 */
 	@Deprecated
 	public boolean js_delete()
 	{

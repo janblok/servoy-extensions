@@ -131,6 +131,9 @@ public abstract class AbstractMenu implements IScriptable
 		return (CheckBox)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, parseMenuItemArgs(pluginAccess, args), true);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #addMenuItem(Object[])}.
+	 */
 	@Deprecated
 	public MenuItem js_addItem(Object[] vargs) throws PluginException
 	{
@@ -316,12 +319,18 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	// submenu
+	/**
+	 * @deprecated Replaced by {@link #addMenu(Object[])}.
+	 */
 	@Deprecated
 	public Menu js_addSubMenu() throws PluginException
 	{
 		return js_addMenu(null);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #addMenu(Object[])}.
+	 */
 	@Deprecated
 	public Menu js_addSubMenu(int index) throws PluginException
 	{
@@ -584,6 +593,9 @@ public abstract class AbstractMenu implements IScriptable
 		return null;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #getMenu(int)}.
+	 */
 	@Deprecated
 	public Menu js_getSubMenu(int index)
 	{

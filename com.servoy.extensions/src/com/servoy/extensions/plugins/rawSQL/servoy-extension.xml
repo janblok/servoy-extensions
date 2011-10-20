@@ -27,15 +27,21 @@ real server names must be used here, plugins.rawSQL is not transparent to switch
 
 var uuid = application.getNewUUID();
 plugins.rawSQL.executeSQL(controller.getServerName(), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);]]></sample>
+            <deprecated><![CDATA[Replaced by 
+application#getUUID(String)]]></deprecated>
           </function>
-          <function deprecated="true" name="convertUUIDToString" undocumented="true">
+          <function deprecated="true" name="convertUUIDToString">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description/>
+            <sample/>
             <parameters>
               <parameter name="data" type="byte[]" typecode="[B"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+application#getUUID(byte[])]]></deprecated>
           </function>
           <function name="executeSQL">
             <argumentsTypes>
@@ -186,9 +192,14 @@ else
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
           </function>
-          <function deprecated="true" name="getExceptionMsg" undocumented="true">
+          <function deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#getException()
+.]]></deprecated>
           </function>
           <function name="notifyDataChange">
             <argumentsTypes>

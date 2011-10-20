@@ -60,7 +60,9 @@ public class ImageProvider implements IScriptable, IReturnedTypesProvider
 
 	/**
 	 * Creates a javascript image from the given bean/applet/form_element.
-	 *
+	 * 
+	 * @deprecated Replaced by {@link #getImage(Object)}
+	 * 
 	 * @param obj bean/imageObj/element 
 	 */
 	@Deprecated
@@ -75,6 +77,8 @@ public class ImageProvider implements IScriptable, IReturnedTypesProvider
 
 
 	/**
+	 * @deprecated Replaced by {@link #getImage(Object)}
+	 * 
 	 * @clonedesc js_createJPGImage(Object)
 	 * @sampleas js_createJPGImage(Object)
 	 *

@@ -198,6 +198,8 @@ public class JSClient implements IScriptable, IConstantsObject
 	}
 
 	/**
+	 * @deprecated Replaced by {@link #shutdown(boolean)}
+	 * 
 	 * @sameas js_shutdown(boolean)
 	 */
 	@Deprecated

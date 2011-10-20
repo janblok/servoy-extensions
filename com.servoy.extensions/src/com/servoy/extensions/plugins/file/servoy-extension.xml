@@ -79,6 +79,9 @@ JSFile
             <parameters>
               <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#convertToJSFile(Object)
+.]]></deprecated>
           </function>
           <function name="convertToJSFile">
             <argumentsTypes>
@@ -289,9 +292,14 @@ for (var i=0; i<files.length; i++)
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="getHomeDirectory" undocumented="true">
+          <function deprecated="true" name="getHomeDirectory">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#getHomeFolder()
+.]]></deprecated>
           </function>
           <function name="getHomeFolder">
             <argumentsTypes/>
@@ -350,6 +358,9 @@ application.output('last changed: ' + plugins.file.getModificationDate(f));]]></
                 <description><![CDATA[the path of a remote directory (relative to the defaultFolder)]]></description>
               </parameter>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#getRemoteFolderContents(Object[])
+.]]></deprecated>
           </function>
           <function deprecated="true" name="getRemoteList" since="Servoy 5.2">
             <argumentsTypes>
@@ -370,6 +381,9 @@ JSFile
                 <description><![CDATA[if true only files will be retrieve, if false, files and folders will be retrieved]]></description>
               </parameter>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#getRemoteFolderContents(Object[])
+.]]></deprecated>
           </function>
           <function name="moveFile">
             <argumentsTypes>
@@ -1143,9 +1157,14 @@ else {
 	application.output('File/folder not found.');
 }]]></sample>
           </function>
-          <function deprecated="true" name="js_delete" undocumented="true">
+          <function deprecated="true" name="js_delete">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#deleteFile()
+.]]></deprecated>
           </function>
           <function name="lastModified">
             <argumentsTypes/>

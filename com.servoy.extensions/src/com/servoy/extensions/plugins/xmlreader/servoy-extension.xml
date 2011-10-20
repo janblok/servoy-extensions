@@ -116,14 +116,17 @@ application.output(subChilds[0].getType())]]></sample>
       </object>
       <object publicName="XmlReaderProvider" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlReaderProvider">
         <functions>
-          <function deprecated="true" name="readXmlDocument" undocumented="true">
+          <function deprecated="true" name="readXmlDocument">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
-            <parameters>
-              <parameter name="argument" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#readXmlDocumentFromString(String)
+ and 
+#readXmlDocumentFromFile(Object)]]></deprecated>
           </function>
           <function name="readXmlDocumentFromFile">
             <argumentsTypes>

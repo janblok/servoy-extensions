@@ -32,6 +32,8 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <description><![CDATA[Hides the agent.]]></description>
             <summary><![CDATA[Hides the agent.]]></summary>
             <sample><![CDATA[plugins.agent.hide();]]></sample>
+            <deprecated><![CDATA[Replaced by 
+#setVisible(boolean)]]></deprecated>
           </function>
           <function name="setBalloonSize">
             <argumentsTypes>
@@ -91,6 +93,8 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <description><![CDATA[Shows the agent.]]></description>
             <summary><![CDATA[Shows the agent.]]></summary>
             <sample><![CDATA[plugins.agent.show();]]></sample>
+            <deprecated><![CDATA[Replaced by 
+#setVisible(boolean)]]></deprecated>
           </function>
           <function name="speak">
             <argumentsTypes>

@@ -65,6 +65,9 @@ public class Menu extends AbstractMenu
 		return getMenu().getText();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}.
+	 */
 	@Deprecated
 	public void js_set(Object obj) throws PluginException
 	{
@@ -82,6 +85,9 @@ public class Menu extends AbstractMenu
 		}
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)} and {@link #setEnabled(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, boolean enabled) throws PluginException
 	{
@@ -89,6 +95,9 @@ public class Menu extends AbstractMenu
 		js_setEnabled(enabled);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)} and {@link #setMnemonic(String)}.
+	 */
 	@Deprecated
 	public void js_set(String text, String mnemonic) throws PluginException
 	{
@@ -96,6 +105,9 @@ public class Menu extends AbstractMenu
 		js_setMnemonic(mnemonic);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setEnabled(boolean)} and {@link #setMnemonic(String)}.
+	 */
 	@Deprecated
 	public void js_set(String text, String mnemonic, boolean enabled) throws PluginException
 	{

@@ -383,9 +383,14 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 	var count = packet.readInt()
 }]]></sample>
           </function>
-          <function deprecated="true" name="getRecievedPacket" undocumented="true">
+          <function deprecated="true" name="getRecievedPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#getReceivedPacket()
+.]]></deprecated>
           </function>
           <function name="sendPacket">
             <argumentsTypes>

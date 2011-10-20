@@ -307,82 +307,77 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -390,20 +385,19 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -412,21 +406,19 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -436,20 +428,40 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setMethod(Function)
+ and 
+#setSelected(boolean)
+.]]></deprecated>
           </function>
           <function deprecated="true" name="set" undocumented="true">
             <argumentsTypes>
@@ -1699,14 +1711,16 @@ chk.setMethod(feedback_checkbox);]]></sample>
               <parameter name="align" optional="true"/>
             </parameters>
           </function>
-          <function deprecated="true" name="addItem" undocumented="true">
+          <function deprecated="true" name="addItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
-            <parameters>
-              <parameter name="vargs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addMenuItem(Object[])
+.]]></deprecated>
           </function>
           <function name="addMenu">
             <argumentsTypes>
@@ -1931,18 +1945,25 @@ menu.addSeparator(1);]]></sample>
               <parameter name="index" optional="true" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="addSubMenu" undocumented="true">
+          <function deprecated="true" name="addSubMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addMenu(Object[])
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="addSubMenu" undocumented="true">
+          <function deprecated="true" name="addSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addMenu(Object[])
+.]]></deprecated>
           </function>
           <function name="doClick">
             <argumentsTypes/>
@@ -2275,14 +2296,16 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getSubMenu" undocumented="true">
+          <function deprecated="true" name="getSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+public com.servoy.extensions.plugins.window.menu.IMenu getMenu() 
+.]]></deprecated>
           </function>
           <function name="putClientProperty">
             <argumentsTypes>
@@ -2389,49 +2412,61 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <parameter name="index_2_to_n" optional="true"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+ and 
+#setEnabled(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+ and 
+#setMnemonic(String)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setText(String)
+, 
+#setEnabled(boolean)
+ and 
+#setMnemonic(String)
+.]]></deprecated>
           </function>
           <function name="setEnabled">
             <argumentsTypes>
@@ -2692,9 +2727,12 @@ menubar.setVisible(false);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="validate" undocumented="true">
+          <function deprecated="true" name="validate">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Obsolete method, no longer needed.]]></deprecated>
           </function>
         </functions>
       </object>
@@ -3503,14 +3541,16 @@ chk.setMethod(feedback_checkbox);]]></sample>
               <parameter name="align" optional="true"/>
             </parameters>
           </function>
-          <function deprecated="true" name="addItem" undocumented="true">
+          <function deprecated="true" name="addItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
-            <parameters>
-              <parameter name="vargs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addMenuItem(Object[])
+.]]></deprecated>
           </function>
           <function name="addMenu">
             <argumentsTypes>
@@ -3735,18 +3775,25 @@ menu.addSeparator(1);]]></sample>
               <parameter name="index" optional="true" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="addSubMenu" undocumented="true">
+          <function deprecated="true" name="addSubMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addMenu(Object[])
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="addSubMenu" undocumented="true">
+          <function deprecated="true" name="addSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addMenu(Object[])
+.]]></deprecated>
           </function>
           <function name="getCheckBox">
             <argumentsTypes>
@@ -4068,14 +4115,16 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getSubMenu" undocumented="true">
+          <function deprecated="true" name="getSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+public com.servoy.extensions.plugins.window.menu.IMenu getMenu() 
+.]]></deprecated>
           </function>
           <function name="putClientProperty">
             <argumentsTypes>
@@ -4567,31 +4616,28 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4599,14 +4645,11 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4615,15 +4658,11 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4633,16 +4672,11 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4653,17 +4687,11 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4675,18 +4703,11 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4699,17 +4720,9 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
           <function deprecated="true" name="set" undocumented="true">
             <argumentsTypes>
@@ -5894,6 +5907,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox);
 // REMARK: the pitfall here is that the indexes start at position 1 here
 // position 0 is reserved for the toolbar handle!
 toolbar.removeItem(1);]]></sample>
+            <deprecated><![CDATA[Obsolete method, no longer needed.]]></deprecated>
           </function>
           <function name="visibleItem">
             <argumentsTypes>
@@ -5922,28 +5936,36 @@ toolbar.visibleItem(1, false);]]></sample>
       </object>
       <object publicName="WindowProvider" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider">
         <functions>
-          <function deprecated="true" name="addMenu" undocumented="true">
+          <function deprecated="true" name="addMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#addMenu()
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="addMenu" undocumented="true">
+          <function deprecated="true" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#addMenu()
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="addServoyToolBar" undocumented="true">
+          <function deprecated="true" name="addServoyToolBar">
             <argumentsTypes>
               <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <parameters>
-              <parameter name="pane" type="javax.swing.JComponent" typecode="javax.swing.JComponent"/>
-              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#addToolBar(String)
+.]]></deprecated>
           </function>
           <function name="addToolBar">
             <argumentsTypes>
@@ -6073,23 +6095,23 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               <parameter name="row" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="createCheckboxMenuItem" undocumented="true">
+          <function deprecated="true" name="createCheckboxMenuItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"/>
-            <parameters>
-              <parameter name="vargs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
           </function>
-          <function deprecated="true" name="createMenuItem" undocumented="true">
+          <function deprecated="true" name="createMenuItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
-            <parameters>
-              <parameter name="vargs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
           </function>
           <function name="createPopupMenu">
             <argumentsTypes/>
@@ -6110,14 +6132,14 @@ if (event.getSource()) {
 	//menu.show(100, 100);
 }]]></sample>
           </function>
-          <function deprecated="true" name="createRadioButtonMenuItem" undocumented="true">
+          <function deprecated="true" name="createRadioButtonMenuItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"/>
-            <parameters>
-              <parameter name="vargs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
           </function>
           <function name="createShortcut">
             <argumentsTypes>
@@ -6159,14 +6181,16 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="form_name" optional="true"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getMenu" undocumented="true">
+          <function deprecated="true" name="getMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#getMenu(int)
+.]]></deprecated>
           </function>
           <function name="getMenuBar">
             <argumentsTypes/>
@@ -6214,18 +6238,25 @@ var menuMain = mainMenubar.addMenu();
 menuMain.text = "New Menu in Main Menubar";
 menuMain.addMenuItem("another entry", feedback);]]></sample>
           </function>
-          <function deprecated="true" name="getMenuCount" undocumented="true">
+          <function deprecated="true" name="getMenuCount">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#getMenuCount()
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="getMenuIndexByText" undocumented="true">
+          <function deprecated="true" name="getMenuIndexByText">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <parameters>
-              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#getMenuIndexByText(String)
+.]]></deprecated>
           </function>
           <function name="getToolBar">
             <argumentsTypes>
@@ -6304,40 +6335,47 @@ plugins.window.maximize("windowName");]]></sample>
               <parameter name="windowName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="register" undocumented="true">
+          <function deprecated="true" name="register">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <parameters>
-              <parameter name="code" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="developer" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
           </function>
-          <function deprecated="true" name="removeAllMenus" undocumented="true">
+          <function deprecated="true" name="removeAllMenus">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#removeAllMenus()
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="removeMenu" undocumented="true">
+          <function deprecated="true" name="removeMenu">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+public void removeMenu(int) throws com.servoy.j2db.plugins.PluginException
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="removeServoyToolBar" undocumented="true">
+          <function deprecated="true" name="removeServoyToolBar">
             <argumentsTypes>
               <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="pane" type="javax.swing.JComponent" typecode="javax.swing.JComponent"/>
-              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#removeToolBar(String)
+.]]></deprecated>
           </function>
           <function name="removeShortcut">
             <argumentsTypes>
@@ -6401,9 +6439,14 @@ plugins.window.removeToolBar("toolbar_0");]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="resetMenuBar" undocumented="true">
+          <function deprecated="true" name="resetMenuBar">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#reset()
+.]]></deprecated>
           </function>
           <function name="setFullScreen">
             <argumentsTypes>
@@ -6418,36 +6461,47 @@ plugins.window.setFullScreen(true);]]></sample>
               <parameter name="full" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setMenuVisible" undocumented="true">
+          <function deprecated="true" name="setMenuVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="v" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+Menu#setVisible(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="setMouseOverPopup" undocumented="true">
+          <function deprecated="true" name="setMouseOverPopup">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
-            <parameters>
-              <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+private com.servoy.extensions.plugins.window.menu.IPopupMenu createPopupMenu(java.lang.Object[]) throws com.servoy.j2db.plugins.PluginException
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="setPopup" undocumented="true">
+          <function deprecated="true" name="setPopup">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+private com.servoy.extensions.plugins.window.menu.IPopupMenu createPopupMenu(java.lang.Object[]) throws com.servoy.j2db.plugins.PluginException
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="setPopup" undocumented="true">
+          <function deprecated="true" name="setPopup">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
-            <parameters>
-              <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+private com.servoy.extensions.plugins.window.menu.IPopupMenu createPopupMenu(java.lang.Object[]) throws com.servoy.j2db.plugins.PluginException
+.]]></deprecated>
           </function>
           <function name="setStatusBarVisible">
             <argumentsTypes>
@@ -6475,27 +6529,36 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setToolBarVisible" undocumented="true">
+          <function deprecated="true" name="setToolBarVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="v" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setToolBarAreaVisible(boolean)
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="showPopupMenu" undocumented="true">
+          <function deprecated="true" name="showPopupMenu">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="vargs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+private com.servoy.extensions.plugins.window.menu.IPopupMenu createPopupMenu(java.lang.Object[]) throws com.servoy.j2db.plugins.PluginException
+.]]></deprecated>
           </function>
-          <function deprecated="true" name="validateMenuBar" undocumented="true">
+          <function deprecated="true" name="validateMenuBar">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+MenuBar#validate()
+.]]></deprecated>
           </function>
         </functions>
       </object>

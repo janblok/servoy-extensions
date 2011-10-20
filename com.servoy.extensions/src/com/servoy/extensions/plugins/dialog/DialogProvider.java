@@ -46,6 +46,9 @@ public class DialogProvider implements IScriptable
 		this.plugin = plugin;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #showWarningDialog(Object[])}.
+	 */
 	@Deprecated
 	public String js_showDialog(Object[] array)//old one
 	{

@@ -8,14 +8,16 @@
     <plugins>
       <object publicName="DialogProvider" qualifiedName="com.servoy.extensions.plugins.dialog.DialogProvider">
         <functions>
-          <function deprecated="true" name="showDialog" undocumented="true">
+          <function deprecated="true" name="showDialog">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <parameters>
-              <parameter name="array" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#showWarningDialog(Object[])
+.]]></deprecated>
           </function>
           <function name="showErrorDialog">
             <argumentsTypes>

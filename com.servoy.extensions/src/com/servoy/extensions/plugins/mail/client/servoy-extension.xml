@@ -624,9 +624,13 @@ if (!success)
               <parameter name="mimeType" optional="true"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getLastSendMailException" undocumented="true">
+          <function deprecated="true" name="getLastSendMailException">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#getLastSendMailExceptionMsg()]]></deprecated>
           </function>
           <function name="getLastSendMailExceptionMsg">
             <argumentsTypes/>
@@ -742,14 +746,15 @@ if (msgs != null) //if is null error occurred!
               <parameter name="overridePreferencePOP3Host/properties_array" optional="true"/>
             </parameters>
           </function>
-          <function deprecated="true" name="recieveMail" undocumented="true">
+          <function deprecated="true" name="recieveMail">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
-            <parameters>
-              <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#receiveMail(Object[])]]></deprecated>
           </function>
           <function name="sendMail">
             <argumentsTypes>

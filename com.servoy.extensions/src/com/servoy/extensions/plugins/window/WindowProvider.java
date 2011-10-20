@@ -458,12 +458,18 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	/**
+	 * @deprecated Replaced by {@link Menu#setVisible(boolean)}.
+	 */
 	@Deprecated
 	public void js_setMenuVisible(boolean v)
 	{
 		getMenubar(null).js_setVisible(v);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setToolBarAreaVisible(boolean)}.
+	 */
 	@Deprecated
 	public void js_setToolBarVisible(boolean v)
 	{
@@ -531,6 +537,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/* menu methods */
 
+	/**
+	 * @deprecated Replaced by {@link #createPopupMenu(Object[])}.
+	 */
 	@Deprecated
 	public void js_showPopupMenu(Object[] vargs) throws PluginException
 	{
@@ -565,18 +574,27 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	/**
+	 * @deprecated Replaced by Menu class functionality.
+	 */
 	@Deprecated
 	public RadioButton js_createRadioButtonMenuItem(Object[] vargs) throws PluginException
 	{
 		return (RadioButton)createMenuItem(null, vargs, IMenuItem.MENU_ITEM_RADIO);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #addToolBar(String)}.
+	 */
 	@Deprecated
 	public JToolBar js_addServoyToolBar(JComponent pane, String name) throws Exception
 	{
 		return ToolBar.addServoyToolBar(plugin.getClientPluginAccess(), pane, name);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #removeToolBar(String)}.
+	 */
 	@Deprecated
 	public void js_removeServoyToolBar(JComponent pane, String name) throws Exception
 	{
@@ -775,18 +793,27 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		return getMenubar(windowName);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#getMenuCount()}.
+	 */
 	@Deprecated
 	public int js_getMenuCount()
 	{
 		return getMenubar(null).js_getMenuCount();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#getMenuIndexByText(String)}.
+	 */
 	@Deprecated
 	public int js_getMenuIndexByText(String name)
 	{
 		return getMenubar(null).js_getMenuIndexByText(name);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#removeAllMenus()}.
+	 */
 	@Deprecated
 	public Menu js_removeAllMenus() throws PluginException
 	{
@@ -794,66 +821,99 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		return null;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#removeMenu(Object[])}.
+	 */
 	@Deprecated
 	public void js_removeMenu(Object[] index) throws PluginException
 	{
 		getMenubar(null).js_removeMenu(index);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#reset()}.
+	 */
 	@Deprecated
 	public void js_resetMenuBar()
 	{
 		getMenubar(null).js_reset();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#validate()}.
+	 */
 	@Deprecated
 	public void js_validateMenuBar()
 	{
 		getMenubar(null).js_validate();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#addMenu()}.
+	 */
 	@Deprecated
 	public Menu js_addMenu() throws PluginException
 	{
 		return getMenubar(null).js_addMenu();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#addMenu()}.
+	 */
 	@Deprecated
 	public Menu js_addMenu(int index) throws Exception
 	{
 		return getMenubar(null).js_addMenu(index);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link MenuBar#getMenu(int)}.
+	 */
 	@Deprecated
 	public Menu js_getMenu(int index) throws Exception
 	{
 		return getMenubar(null).js_getMenu(index);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #createPopupMenu()}.
+	 */
 	@Deprecated
 	public Popup js_setMouseOverPopup(Object[] args) throws PluginException
 	{
 		return new Popup(plugin.getClientPluginAccess(), getMenuHandler(), createTriggeredPopup(args, IMenuHandler.TRIGGER_MOUSEOVER));
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #createPopupMenu()}.
+	 */
 	@Deprecated
 	public Popup js_setPopup() throws Exception
 	{
 		return js_setPopup(null);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #createPopupMenu()}.
+	 */
 	@Deprecated
 	public Popup js_setPopup(Object[] args) throws Exception
 	{
 		return new Popup(plugin.getClientPluginAccess(), getMenuHandler(), createTriggeredPopup(args, IMenuHandler.TRIGGER_RIGHTCLICK));
 	}
 
+	/**
+	 * @deprecated Replaced by Menu class functionality.
+	 */
 	@Deprecated
 	public MenuItem js_createMenuItem(Object[] vargs) throws PluginException
 	{
 		return (MenuItem)createMenuItem(null, vargs, IMenuItem.MENU_ITEM_BUTTON);
 	}
 
+	/**
+	 * @deprecated Replaced by Menu class functionality.
+	 */
 	@Deprecated
 	public CheckBox js_createCheckboxMenuItem(Object[] vargs) throws PluginException
 	{
@@ -923,7 +983,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		return popupMenu;
 	}
 
-
+	/**
+	 * @deprecated Obsolete method.
+	 */
 	@Deprecated
 	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
 	{

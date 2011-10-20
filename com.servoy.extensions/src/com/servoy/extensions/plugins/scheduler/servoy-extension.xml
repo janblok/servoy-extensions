@@ -283,9 +283,14 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <summary><![CDATA[Returns the last job run from the scheduler.]]></summary>
             <sample><![CDATA[plugins.scheduler.getLastRunJobName();]]></sample>
           </function>
-          <function deprecated="true" name="getLastRunnedJobName" undocumented="true">
+          <function deprecated="true" name="getLastRunnedJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#getLastRunJobName()
+.]]></deprecated>
           </function>
           <function name="removeJob">
             <argumentsTypes>

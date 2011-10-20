@@ -208,6 +208,9 @@ public class SchedulerProvider implements IScriptable
 		}
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #getLastRunJobName()}.
+	 */
 	@Deprecated
 	public String js_getLastRunnedJobName()
 	{

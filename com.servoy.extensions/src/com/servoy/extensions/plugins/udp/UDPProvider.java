@@ -183,6 +183,9 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 		return false;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #getReceivedPacket()}.
+	 */
 	@Deprecated
 	public JSPacket js_getRecievedPacket()
 	{

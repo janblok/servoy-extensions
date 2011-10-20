@@ -195,6 +195,9 @@ public class MenuBar implements IScriptable
 		windowProvider.getMenuHandler().resetMenuBar(windowName, initializeMenuBarResult);
 	}
 
+	/**
+	 * @deprecated Obsolete method, no longer needed.
+	 */
 	@Deprecated
 	public void js_validate()
 	{

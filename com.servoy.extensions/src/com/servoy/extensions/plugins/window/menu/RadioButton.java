@@ -45,6 +45,9 @@ public class RadioButton extends AbstractMenuItem
 		return menuItem.getName();
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Override
 	@Deprecated
 	public void js_set(String text, Function method)
@@ -53,6 +56,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(false);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected)
 	{
@@ -60,6 +66,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments)
 	{
@@ -67,6 +76,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon)
 	{
@@ -74,6 +86,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator)
 	{
@@ -81,6 +96,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic)
 	{
@@ -88,6 +106,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled)
 	{
@@ -95,6 +116,9 @@ public class RadioButton extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled,
 		boolean visible)

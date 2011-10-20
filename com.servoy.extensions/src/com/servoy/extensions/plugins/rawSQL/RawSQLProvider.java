@@ -51,6 +51,9 @@ public class RawSQLProvider implements IScriptable
 		return sqlService;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #getException()}.
+	 */
 	@Deprecated
 	public String js_getExceptionMsg()
 	{
@@ -207,7 +210,7 @@ public class RawSQLProvider implements IScriptable
 	}
 
 	/**
-	 * 
+	 * @deprecated Replaced by {@link application#getUUID(String)}
 	 *
 	 * @sample
 	 * /**************************************************************************** 
@@ -230,6 +233,12 @@ public class RawSQLProvider implements IScriptable
 		return UUID.fromString(uuid).toBytes();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link application#getUUID(byte[])}
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@Deprecated
 	public String js_convertUUIDToString(byte[] data)
 	{

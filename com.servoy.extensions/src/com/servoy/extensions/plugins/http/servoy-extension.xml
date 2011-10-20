@@ -459,6 +459,9 @@ if (cookieSet)
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#createNewHttpClient()
+.]]></deprecated>
           </function>
           <function name="createNewHttpClient">
             <argumentsTypes/>
@@ -478,6 +481,7 @@ if (cookieSet)
             <parameters>
               <parameter name="http_clientname"/>
             </parameters>
+            <deprecated><![CDATA[Obsolete method, HttpClient mechanism has changed.]]></deprecated>
           </function>
           <function deprecated="true" name="getHttpClientCookie">
             <argumentsTypes>
@@ -498,6 +502,9 @@ else
               <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+HttpClient#setCookie(String,String)
+.]]></deprecated>
           </function>
           <function deprecated="true" name="getHttpClientCookies">
             <argumentsTypes>
@@ -510,6 +517,9 @@ else
             <parameters>
               <parameter name="clientName"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+HttpClient#setCookie(String,String)
+.]]></deprecated>
           </function>
           <function deprecated="true" name="getLastPageCharset">
             <argumentsTypes/>
@@ -520,10 +530,14 @@ else
 var charset = plugins.http.getLastPageCharset();
 var success = plugins.file.writeTXTFile('someFilePath', a, charset);
 if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file', 'OK');]]></sample>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
           </function>
-          <function deprecated="true" name="getLastPageEncoding" undocumented="true">
+          <function deprecated="true" name="getLastPageEncoding">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
           </function>
           <function name="getMediaData">
             <argumentsTypes>
@@ -551,6 +565,7 @@ if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
           </function>
           <function name="getPageData">
             <argumentsTypes>
@@ -587,6 +602,9 @@ var pageData = poster.getPageData()]]></sample>
               <parameter name="url"/>
               <parameter name="http_clientname" optional="true"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+HttpClient#createPostRequest(String)
+.]]></deprecated>
           </function>
           <function name="put">
             <argumentsTypes>
@@ -632,6 +650,8 @@ var pageData = poster.getPageData()]]></sample>
               <parameter name="username"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#setClientProxyCredentials(String,String)]]></deprecated>
           </function>
           <function deprecated="true" name="setHttpClientCookie">
             <argumentsTypes>
@@ -654,6 +674,9 @@ if (cookieSet)
               <parameter name="maxAge" optional="true"/>
               <parameter name="secure" optional="true"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+HttpClient#setCookie(String,String)
+.]]></deprecated>
           </function>
           <function deprecated="true" name="setTimeout">
             <argumentsTypes>
@@ -667,6 +690,9 @@ if (cookieSet)
               <parameter name="msTimeout"/>
               <parameter name="http_clientname" optional="true"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+HttpClient#setTimeout(Object[])
+.]]></deprecated>
           </function>
         </functions>
       </object>
@@ -787,6 +813,8 @@ var httpCode = poster.doPost()]]></sample>
               <parameter name="username" optional="true"/>
               <parameter name="password" optional="true"/>
             </parameters>
+            <deprecated><![CDATA[Replaced by 
+#executeRequest(String,String)]]></deprecated>
           </function>
           <function name="executeRequest">
             <argumentsTypes/>
@@ -819,6 +847,8 @@ var httpCode = poster.doPost()]]></sample>
             <description><![CDATA[Get the result page data after a post.]]></description>
             <summary><![CDATA[Get the result page data after a post.]]></summary>
             <sample><![CDATA[var pageData = poster.getPageData()]]></sample>
+            <deprecated><![CDATA[Replaced by 
+#executeRequest(String,String)]]></deprecated>
           </function>
           <function name="setBodyContent">
             <argumentsTypes>
@@ -849,14 +879,15 @@ var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPas
               <parameter name="charset"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setEncoding" undocumented="true">
+          <function deprecated="true" name="setEncoding">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
+            <description/>
+            <sample/>
+            <deprecated><![CDATA[Replaced by 
+#setCharset(String)]]></deprecated>
           </function>
         </functions>
       </object>

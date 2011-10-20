@@ -89,17 +89,23 @@ public interface IJSAgent extends IScriptable
 	 */
 	public void js_setVisible(boolean visible);
 
-	/** @deprecated */
+	/** 
+	 * @deprecated Replaced by {@link #setLocation(int,int)}
+	 */
 	@Deprecated
 	public void js_setX(int x);
 
-	/** @deprecated */
+	/** 
+	 * @deprecated Replaced by {@link #setLocation(int,int)}
+	 */
 	@Deprecated
 	public void js_setY(int y);
 
 	/**
 	 * Hides the agent.
-	 *
+	 * 
+	 * @deprecated Replaced by {@link #setVisible(boolean)}
+	 * 
 	 * @sample
 	 * plugins.agent.hide();
 	 */
@@ -108,7 +114,9 @@ public interface IJSAgent extends IScriptable
 
 	/**
 	 * Shows the agent.
-	 *
+	 * 
+	 * @deprecated Replaced by {@link #setVisible(boolean)}
+	 * 
 	 * @sample
 	 * plugins.agent.show();
 	 */

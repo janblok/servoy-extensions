@@ -44,6 +44,9 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 		this.plugin = plugin;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #receiveMail(Object[])}
+	 */
 	@Deprecated
 	public MailMessage[] js_recieveMail(Object[] args)
 	{
@@ -424,6 +427,9 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #getLastSendMailExceptionMsg()}
+	 */
 	@Deprecated
 	public String js_getLastSendMailException()
 	{

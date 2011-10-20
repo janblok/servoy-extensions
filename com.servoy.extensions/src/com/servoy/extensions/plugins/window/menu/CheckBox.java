@@ -122,6 +122,9 @@ public class CheckBox extends AbstractMenuItem
 		return this;
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Override
 	@Deprecated
 	public void js_set(String text, Function method)
@@ -130,6 +133,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(false);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected)
 	{
@@ -137,6 +143,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments)
 	{
@@ -144,6 +153,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon)
 	{
@@ -151,6 +163,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator)
 	{
@@ -158,6 +173,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic)
 	{
@@ -165,6 +183,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled)
 	{
@@ -172,6 +193,9 @@ public class CheckBox extends AbstractMenuItem
 		js_setSelected(selected);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled,
 		boolean visible)

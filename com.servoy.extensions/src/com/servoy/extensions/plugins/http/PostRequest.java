@@ -66,6 +66,9 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		files = new HashMap<Pair<String, String>, File>();
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #setCharset(String)}
+	 */
 	@Deprecated
 	public void js_setEncoding(String encoding)
 	{
@@ -126,7 +129,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	}
 
 	/**
-	 * 
+	 * @deprecated Replaced by {@link #executeRequest(String,String)}
 	 *
 	 * @sample
 	 * //null
@@ -215,7 +218,9 @@ public class PostRequest extends BaseEntityEnclosingRequest
 
 	/**
 	 * Get the result page data after a post.
-	 *
+	 * 
+	 * @deprecated Replaced by {@link #executeRequest(String,String)}
+	 * 
 	 * @sample
 	 * var pageData = poster.getPageData()
 	 */
