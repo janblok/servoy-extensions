@@ -3,7 +3,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider">
+      <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider" scriptingName="plugins.pdf_output">
         <functions>
           <function name="combinePDFDocuments">
             <argumentsTypes>

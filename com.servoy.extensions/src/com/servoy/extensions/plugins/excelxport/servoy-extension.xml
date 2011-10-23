@@ -3,7 +3,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="excelxport" qualifiedName="com.servoy.extensions.plugins.excelxport.Enabler">
+      <object publicName="excelxport" qualifiedName="com.servoy.extensions.plugins.excelxport.Enabler" scriptingName="plugins.excelxport">
         <properties>
           <property name="exportEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>

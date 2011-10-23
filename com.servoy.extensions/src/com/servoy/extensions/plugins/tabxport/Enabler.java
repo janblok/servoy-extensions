@@ -27,7 +27,7 @@ import com.servoy.j2db.util.Utils;
  * Xport menu enabler
  * @author jblok
  */
-@ServoyDocumented(publicName = "textxport")
+@ServoyDocumented(publicName = TextXportPlugin.PLUGIN_NAME, scriptingName = "plugins." + TextXportPlugin.PLUGIN_NAME)
 public class Enabler implements IScriptable
 {
 	private JMenuItem imp;

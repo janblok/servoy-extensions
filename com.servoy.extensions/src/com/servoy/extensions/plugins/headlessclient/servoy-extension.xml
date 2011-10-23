@@ -340,7 +340,7 @@ The second argument that is give back is the JSClient instance that did the call
           </function>
         </functions>
       </object>
-      <object publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider">
+      <object publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider" scriptingName="plugins.headlessclient">
         <functions>
           <function name="createClient">
             <argumentsTypes>

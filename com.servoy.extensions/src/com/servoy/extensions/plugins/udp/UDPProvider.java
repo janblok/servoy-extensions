@@ -34,7 +34,7 @@ import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
-@ServoyDocumented(publicName = "udp")
+@ServoyDocumented(publicName = UDPPlugin.PLUGIN_NAME, scriptingName = "plugins." + UDPPlugin.PLUGIN_NAME)
 public class UDPProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final UDPPlugin plugin;

@@ -35,6 +35,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class DialogPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "dialogs"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private DialogProvider impl;
 
@@ -82,7 +84,7 @@ public class DialogPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "dialogs"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

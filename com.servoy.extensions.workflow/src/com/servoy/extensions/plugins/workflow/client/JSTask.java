@@ -23,6 +23,7 @@ import java.util.Map;
 
 import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -30,6 +31,7 @@ import com.servoy.j2db.util.Debug;
  * 
  * @author jblok
  */
+@ServoyDocumented
 public class JSTask 
 {
 	private IWorkflowPluginService workflowService;

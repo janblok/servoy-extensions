@@ -67,7 +67,7 @@ import com.servoy.j2db.util.Utils;
  * @author jcompagner
  * @author Servoy Stuff
  */
-@ServoyDocumented(publicName = "file")
+@ServoyDocumented(publicName = FilePlugin.PLUGIN_NAME, scriptingName = "plugins." + FilePlugin.PLUGIN_NAME)
 public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
 

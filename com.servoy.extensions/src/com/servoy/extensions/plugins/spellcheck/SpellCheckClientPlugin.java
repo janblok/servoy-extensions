@@ -56,6 +56,8 @@ import com.servoy.j2db.util.toolbar.ToolbarButton;
 
 public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 {
+	public static final String PLUGIN_NAME = "spellcheck"; //$NON-NLS-1$
+
 	private IClientPluginAccess application;
 	private JButton check;
 	private SpellCheckerGUI gui = null;
@@ -320,7 +322,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	 */
 	public String getName()
 	{
-		return "spellcheck"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

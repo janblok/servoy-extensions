@@ -40,6 +40,8 @@ import com.servoy.j2db.smart.ISmartClientPluginAccess;
  */
 public class TextXportPlugin implements IClientPlugin, ActionListener
 {
+	public static final String PLUGIN_NAME = "textxport"; //$NON-NLS-1$
+
 	private IApplication application;
 	private Enabler en;
 
@@ -140,7 +142,7 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 	 */
 	public String getName()
 	{
-		return "textxport"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	/*

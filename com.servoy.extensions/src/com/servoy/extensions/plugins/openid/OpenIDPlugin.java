@@ -38,6 +38,8 @@ import com.servoy.j2db.scripting.IScriptable;
 */
 public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements both to indicate is webclient/serverclient only
 {
+	public static final String PLUGIN_NAME = "openid"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private OpenIDProvider impl;
 
@@ -97,7 +99,7 @@ public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements b
 	 */
 	public String getName()
 	{
-		return "openid"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

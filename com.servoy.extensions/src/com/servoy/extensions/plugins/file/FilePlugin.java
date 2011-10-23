@@ -36,6 +36,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class FilePlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "file"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private FileProvider fileProvider;
 
@@ -51,7 +53,7 @@ public class FilePlugin implements IClientPlugin
 
 	public String getName()
 	{
-		return "file"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public Icon getImage()

@@ -33,6 +33,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class HttpPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "http"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private HttpProvider impl;
 
@@ -80,7 +82,7 @@ public class HttpPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "http"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

@@ -35,6 +35,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class WorkflowPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "workflow"; //$NON-NLS-1$
+	
  	private IClientPluginAccess access;
  	private WorkflowProvider impl;
 
@@ -45,7 +47,7 @@ public class WorkflowPlugin implements IClientPlugin
 
  	public String getName()
  	{
- 		return "workflow"; //$NON-NLS-1$
+ 		return PLUGIN_NAME;
  	}
 
  	public Icon getImage()

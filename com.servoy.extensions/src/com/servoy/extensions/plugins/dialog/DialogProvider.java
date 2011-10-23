@@ -36,7 +36,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * Scritptable object for dialog plugin
  * @author jblok
  */
-@ServoyDocumented(publicName = "dialogs")
+@ServoyDocumented(publicName = DialogPlugin.PLUGIN_NAME, scriptingName = "plugins." + DialogPlugin.PLUGIN_NAME)
 public class DialogProvider implements IScriptable
 {
 	private final DialogPlugin plugin;

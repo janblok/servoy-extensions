@@ -32,6 +32,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class AmortizationPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "amortization";
+
 	private final AmortizationProvider amortizationProvider = new AmortizationProvider();
 
 	public void initialize(IClientPluginAccess app) throws PluginException
@@ -47,7 +49,7 @@ public class AmortizationPlugin implements IClientPlugin
 
 	public String getName()
 	{
-		return "amortization"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public Icon getImage()

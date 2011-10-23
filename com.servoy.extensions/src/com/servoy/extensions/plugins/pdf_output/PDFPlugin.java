@@ -35,6 +35,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class PDFPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "pdf_output"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private PDFProvider impl;
 
@@ -83,7 +85,7 @@ public class PDFPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "pdf_output"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

@@ -3,7 +3,8 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="workflow" qualifiedName="com.servoy.extensions.plugins.workflow.client.WorkflowProvider">
+      <object publicName="JSTask" qualifiedName="com.servoy.extensions.plugins.workflow.client.JSTask"/>
+      <object publicName="workflow" qualifiedName="com.servoy.extensions.plugins.workflow.client.WorkflowProvider" scriptingName="plugins.workflow">
         <functions>
           <function name="addMailTemplate" undocumented="true">
             <argumentsTypes>

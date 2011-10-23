@@ -32,7 +32,7 @@ import com.servoy.j2db.util.Utils;
 /**
  * @author jblok
  */
-@ServoyDocumented(publicName = "mail")
+@ServoyDocumented(publicName = MailPlugin.PLUGIN_NAME, scriptingName = "plugins." + MailPlugin.PLUGIN_NAME)
 public class MailProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final MailPlugin plugin;

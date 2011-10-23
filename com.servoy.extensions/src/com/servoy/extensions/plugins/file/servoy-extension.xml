@@ -732,7 +732,7 @@ else {
           </function>
         </functions>
       </object>
-      <object publicName="file" qualifiedName="com.servoy.extensions.plugins.file.FileProvider">
+      <object publicName="file" qualifiedName="com.servoy.extensions.plugins.file.FileProvider" scriptingName="plugins.file">
         <constants>
           <constant name="CHUNK_BUFFER_SIZE" since="Servoy 5.2">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>

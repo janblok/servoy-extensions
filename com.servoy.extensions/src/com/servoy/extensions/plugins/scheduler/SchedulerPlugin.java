@@ -33,6 +33,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class SchedulerPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "scheduler"; //$NON-NLS-1$
+
 	private SchedulerProvider schedulerProvider;
 	private IClientPluginAccess access;
 
@@ -65,7 +67,7 @@ public class SchedulerPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "scheduler"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	/*

@@ -158,7 +158,7 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="images" qualifiedName="com.servoy.extensions.plugins.images.ImageProvider">
+      <object publicName="images" qualifiedName="com.servoy.extensions.plugins.images.ImageProvider" scriptingName="plugins.images">
         <functions>
           <function deprecated="true" name="createJPGImage">
             <argumentsTypes>

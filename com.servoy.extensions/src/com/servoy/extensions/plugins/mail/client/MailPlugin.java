@@ -34,6 +34,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class MailPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "mail"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private MailProvider impl;
 
@@ -49,7 +51,7 @@ public class MailPlugin implements IClientPlugin
 
 	public String getName()
 	{
-		return "mail"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public Icon getImage()

@@ -42,6 +42,8 @@ import com.servoy.j2db.util.Utils;
  */
 public class AgentPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "agent"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private IJSAgent impl;
 	private Component showingIn;
@@ -116,7 +118,7 @@ public class AgentPlugin implements IClientPlugin
 
 	public String getName()
 	{
-		return "agent"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

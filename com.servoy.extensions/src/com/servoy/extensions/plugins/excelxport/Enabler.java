@@ -31,7 +31,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * Xport menu enabler
  * @author jblok
  */
-@ServoyDocumented(publicName = "excelxport")
+@ServoyDocumented(publicName = ExcelXportPlugin.PLUGIN_NAME, scriptingName = "plugins." + ExcelXportPlugin.PLUGIN_NAME)
 public class Enabler implements IScriptable
 {
 	private JMenuItem imp;

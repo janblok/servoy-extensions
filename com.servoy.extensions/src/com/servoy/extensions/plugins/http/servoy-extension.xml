@@ -141,6 +141,7 @@ var value = cookie.getValue();]]></sample>
           </function>
         </functions>
       </object>
+      <object publicName="HTTP_STATUS" qualifiedName="com.servoy.extensions.plugins.http.HTTP_STATUS"/>
       <object publicName="HeadRequest" qualifiedName="com.servoy.extensions.plugins.http.HeadRequest">
         <functions>
           <function name="addHeader">
@@ -803,7 +804,7 @@ var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPas
           </function>
         </functions>
       </object>
-      <object publicName="http" qualifiedName="com.servoy.extensions.plugins.http.HttpProvider">
+      <object publicName="http" qualifiedName="com.servoy.extensions.plugins.http.HttpProvider" scriptingName="plugins.http">
         <functions>
           <function deprecated="true" name="createHttpClient">
             <argumentsTypes>

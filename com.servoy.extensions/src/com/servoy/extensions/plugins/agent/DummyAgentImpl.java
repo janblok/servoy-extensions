@@ -18,7 +18,7 @@ package com.servoy.extensions.plugins.agent;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 
-@ServoyDocumented(publicName = "agent")
+@ServoyDocumented(publicName = AgentPlugin.PLUGIN_NAME, scriptingName = "plugins." + AgentPlugin.PLUGIN_NAME)
 public class DummyAgentImpl implements IJSAgent
 {
 

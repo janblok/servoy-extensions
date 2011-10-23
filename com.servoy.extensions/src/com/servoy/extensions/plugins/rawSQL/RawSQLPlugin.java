@@ -33,10 +33,10 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author jblok
  */
-
-
 public class RawSQLPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "rawSQL"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private RawSQLProvider impl;
 
@@ -84,7 +84,7 @@ public class RawSQLPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "rawSQL"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

@@ -354,7 +354,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
           </function>
         </functions>
       </object>
-      <object publicName="udp" qualifiedName="com.servoy.extensions.plugins.udp.UDPProvider">
+      <object publicName="udp" qualifiedName="com.servoy.extensions.plugins.udp.UDPProvider" scriptingName="plugins.udp">
         <functions>
           <function name="createNewPacket">
             <argumentsTypes/>

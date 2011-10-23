@@ -659,7 +659,7 @@ application.output(eq.getValue(1.1));]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="amortization" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationProvider">
+      <object publicName="amortization" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationProvider" scriptingName="plugins.amortization">
         <functions>
           <function name="newCalculation">
             <argumentsTypes/>

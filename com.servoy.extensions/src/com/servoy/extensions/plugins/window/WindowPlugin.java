@@ -38,6 +38,8 @@ import com.servoy.j2db.util.Debug;
  */
 public class WindowPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "window"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private WindowProvider impl;
 
@@ -89,7 +91,7 @@ public class WindowPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "window"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

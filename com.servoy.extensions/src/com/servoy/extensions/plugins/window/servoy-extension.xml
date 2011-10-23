@@ -5843,7 +5843,7 @@ toolbar.visibleItem(1, false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="window" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider">
+      <object publicName="window" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider" scriptingName="plugins.window">
         <functions>
           <function deprecated="true" name="addMenu">
             <argumentsTypes/>
@@ -6184,7 +6184,7 @@ toolbar.addButton("button", feedback_button);]]></sample>
             <sample><![CDATA[// Note: method getToolbarNames only works in the smart client.
 
 // create an array of toolbar names
-var names = %%elementName%%.getToolbarNames();
+var names = plugins.window.getToolbarNames();
 
 // create an empty message variable
 var message = "";

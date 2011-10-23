@@ -110,7 +110,7 @@ application.output(subChilds[0].getType())]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="XmlReaderProvider" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlReaderProvider">
+      <object publicName="XmlReader" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlReaderProvider" scriptingName="plugins.XmlReader">
         <functions>
           <function deprecated="true" name="readXmlDocument">
             <argumentsTypes>

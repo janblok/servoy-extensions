@@ -40,6 +40,8 @@ import com.servoy.j2db.smart.ISmartClientPluginAccess;
  */
 public class ExcelXportPlugin implements IClientPlugin, ActionListener
 {
+	public static final String PLUGIN_NAME = "excelxport"; //$NON-NLS-1$
+
 	private IApplication application;
 	private Enabler en;
 
@@ -140,7 +142,7 @@ public class ExcelXportPlugin implements IClientPlugin, ActionListener
 	 */
 	public String getName()
 	{
-		return "excelxport"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

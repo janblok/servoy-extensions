@@ -3,7 +3,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="scheduler" qualifiedName="com.servoy.extensions.plugins.scheduler.SchedulerProvider">
+      <object publicName="scheduler" qualifiedName="com.servoy.extensions.plugins.scheduler.SchedulerProvider" scriptingName="plugins.scheduler">
         <functions>
           <function name="addCronJob">
             <argumentsTypes>

@@ -31,6 +31,8 @@ import com.servoy.j2db.util.serialize.JSONConverter;
 
 public class HeadlessClientPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "headlessclient"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private HeadlessClientProvider impl;
 	private final JSONConverter jsonConverter = new JSONConverter();
@@ -42,7 +44,7 @@ public class HeadlessClientPlugin implements IClientPlugin
 
 	public String getName()
 	{
-		return "headlessclient"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public Icon getImage()

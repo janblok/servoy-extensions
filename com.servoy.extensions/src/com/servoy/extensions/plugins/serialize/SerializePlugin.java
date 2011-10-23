@@ -34,6 +34,8 @@ import com.servoy.j2db.util.serialize.NativeObjectSerializer;
 
 public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 {
+	public static final String PLUGIN_NAME = "serialize"; //$NON-NLS-1$
+
 	private SerializeProvider impl;
 	private JSONSerializerWrapper serializerWrapper = null;
 
@@ -82,7 +84,7 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	 */
 	public String getName()
 	{
-		return "serialize"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

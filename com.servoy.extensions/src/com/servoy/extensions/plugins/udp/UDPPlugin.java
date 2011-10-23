@@ -31,6 +31,8 @@ import com.servoy.j2db.scripting.IScriptable;
 
 public class UDPPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "udp"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private UDPProvider impl;
 	private URL iconUrl;
@@ -79,7 +81,7 @@ public class UDPPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "udp"; //$NON-NLS-1$
+		return PLUGIN_NAME;
 	}
 
 	public IScriptable getScriptObject()

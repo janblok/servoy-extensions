@@ -33,6 +33,8 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class ImagePlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "images"; //$NON-NLS-1$
+
 	private IClientPluginAccess access;
 	private ImageProvider impl;
 
@@ -62,7 +64,7 @@ public class ImagePlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "images";
+		return PLUGIN_NAME;
 	}
 
 	/**

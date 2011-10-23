@@ -80,7 +80,7 @@ import com.servoy.j2db.util.toolbar.IToolbarPanel;
  * @author rgansevles
  */
 @SuppressWarnings("nls")
-@ServoyDocumented(publicName = "window")
+@ServoyDocumented(publicName = WindowPlugin.PLUGIN_NAME, scriptingName = "plugins." + WindowPlugin.PLUGIN_NAME)
 public class WindowProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final WindowPlugin plugin;
@@ -738,7 +738,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * // Note: method getToolbarNames only works in the smart client.
 	 * 
 	 * // create an array of toolbar names
-	 * var names = %%elementName%%.getToolbarNames();
+	 * var names = plugins.window.getToolbarNames();
 	 * 
 	 * // create an empty message variable
 	 * var message = "";

@@ -67,7 +67,7 @@ import com.servoy.j2db.util.Utils;
 /**
  * @author jblok
  */
-@ServoyDocumented(publicName = "http")
+@ServoyDocumented(publicName = HttpPlugin.PLUGIN_NAME, scriptingName = "plugins." + HttpPlugin.PLUGIN_NAME)
 public class HttpProvider implements IReturnedTypesProvider, IScriptable
 {
 	private String proxyUser = null;

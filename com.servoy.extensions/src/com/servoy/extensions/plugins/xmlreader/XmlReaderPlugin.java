@@ -32,6 +32,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class XmlReaderPlugin implements IClientPlugin
 {
+	public static final String PLUGIN_NAME = "XmlReader"; //$NON-NLS-1$
 
 	/**
 	 * @see com.servoy.j2db.plugins.IClientPlugin#initialize(com.servoy.j2db.plugins.IClientPluginAccess)
@@ -53,7 +54,7 @@ public class XmlReaderPlugin implements IClientPlugin
 	 */
 	public String getName()
 	{
-		return "XmlReader";
+		return PLUGIN_NAME;
 	}
 
 	/**
