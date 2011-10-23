@@ -446,9 +446,9 @@ public class JSFile implements IScriptable, IJavaScriptType
 	 * Will not create a new file if one doesn't exist
 	 * 
 	 * @sample
-	 * var file = %%elementName%%.convertToJSFile('/pathTo/file.jpg');
+	 * var file = plugins.file.convertToJSFile('/pathTo/file.jpg');
 	 * // or for a remote file:
-	 * // var file = %%elementName%%.convertToRemoteJSFile('/remotePathTo/file.jpg');
+	 * // var file = plugins.file.convertToRemoteJSFile('/remotePathTo/file.jpg');
 	 * var success = file.setBytes(blobDataProvider, true);
 	 * 
 	 * @param bytes the data

@@ -464,9 +464,9 @@ f.renameTo('otherstory.txt');
 Will not create a new file if one doesn't exist]]></description>
             <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
 Will not create a new file if one doesn't exist]]></summary>
-            <sample><![CDATA[var file = %%elementName%%.convertToJSFile('/pathTo/file.jpg');
+            <sample><![CDATA[var file = plugins.file.convertToJSFile('/pathTo/file.jpg');
 // or for a remote file:
-// var file = %%elementName%%.convertToRemoteJSFile('/remotePathTo/file.jpg');
+// var file = plugins.file.convertToRemoteJSFile('/remotePathTo/file.jpg');
 var success = file.setBytes(blobDataProvider, true);]]></sample>
             <parameters>
               <parameter name="bytes" type="byte[]" typecode="[B">
