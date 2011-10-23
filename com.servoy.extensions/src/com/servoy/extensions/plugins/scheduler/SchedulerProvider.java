@@ -36,7 +36,7 @@ import com.servoy.j2db.util.Debug;
 /**
  * @author jcompagner
  */
-@ServoyDocumented
+@ServoyDocumented(publicName = "scheduler")
 public class SchedulerProvider implements IScriptable
 {
 	private static Object schedulerLock = new Object();

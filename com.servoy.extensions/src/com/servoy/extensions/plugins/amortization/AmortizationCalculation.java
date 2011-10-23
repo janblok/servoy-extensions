@@ -412,8 +412,6 @@ public class AmortizationCalculation implements IScriptable
 	 * Returns true if the period is valid, or false if the period is not valid.
 	 *
 	 * @sample
-	 * //Returns true if the period is valid, or false if the period is not valid.
-	 * 
 	 * var v_period = plugins.amortization.isValidPeriod(12);
 	 *
 	 * @param period 
@@ -427,8 +425,6 @@ public class AmortizationCalculation implements IScriptable
 	 * Rounds a number up to the nearest cents.
 	 *
 	 * @sample
-	 * //Rounds a number up to the nearest cents.
-	 * 
 	 * //rounds the number up to 34.35
 	 * var rm = plugins.amortization.roundMoney(34.349384);
 	 *
@@ -443,8 +439,6 @@ public class AmortizationCalculation implements IScriptable
 	 * Returns true if successful or false if the call failed.
 	 *
 	 * @sample
-	 * //Returns true if successful or false if the call failed.
-	 * 
 	 * plugins.amortization.solveForUnknown();
 	 */
 	public boolean js_solveForUnknown()
@@ -456,8 +450,6 @@ public class AmortizationCalculation implements IScriptable
 	 * Sorts the amortization events ascending by date.
 	 *
 	 * @sample
-	 * //Sorts the amortization events ascending by date.
-	 * 
 	 * plugins.amortization.sortEvents();
 	 */
 	public void js_sortEvents()

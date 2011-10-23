@@ -19,7 +19,7 @@ package com.servoy.extensions.plugins.serialize;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 
-@ServoyDocumented
+@ServoyDocumented(publicName = "serialize")
 public class SerializeProvider implements IScriptable
 {
 	private final SerializePlugin plugin;

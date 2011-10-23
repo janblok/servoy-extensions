@@ -29,7 +29,7 @@ import com.servoy.j2db.util.UUID;
  * 
  * @author jblok
  */
-@ServoyDocumented
+@ServoyDocumented(publicName = "rawSQL")
 public class RawSQLProvider implements IScriptable
 {
 	private final RawSQLPlugin plugin;

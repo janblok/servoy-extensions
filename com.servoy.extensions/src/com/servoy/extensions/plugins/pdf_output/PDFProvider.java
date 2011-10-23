@@ -45,7 +45,7 @@ import com.servoy.j2db.util.FileChooserUtils;
 /**
  * @author jblok
  */
-@ServoyDocumented
+@ServoyDocumented(publicName = "pdf_output")
 public class PDFProvider implements IScriptable
 {
 	private final PDFPlugin plugin;

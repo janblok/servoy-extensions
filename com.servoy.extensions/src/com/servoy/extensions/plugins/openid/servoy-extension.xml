@@ -81,7 +81,7 @@ for (var i = 0; i < namesArray.length; i++) {
           </function>
         </functions>
       </object>
-      <object publicName="OpenIDProvider" qualifiedName="com.servoy.extensions.plugins.openid.OpenIDProvider">
+      <object publicName="openid" qualifiedName="com.servoy.extensions.plugins.openid.OpenIDProvider">
         <functions>
           <function name="createAuthenticateRequest">
             <argumentsTypes>

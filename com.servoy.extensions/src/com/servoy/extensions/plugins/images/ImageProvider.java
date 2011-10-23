@@ -33,7 +33,7 @@ import com.servoy.j2db.util.gui.SnapShot;
 /**
  * @author jcompagner
  */
-@ServoyDocumented
+@ServoyDocumented(publicName = "images")
 public class ImageProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final ImagePlugin plugin;

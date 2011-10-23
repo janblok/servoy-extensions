@@ -3,7 +3,736 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="FileProvider" qualifiedName="com.servoy.extensions.plugins.file.FileProvider">
+      <object publicName="JSFile" qualifiedName="com.servoy.extensions.plugins.file.JSFile">
+        <functions>
+          <function name="canRead">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="canWrite">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="createNewFile">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Creates the file on disk if needed. Returns true if the file (name) did not already exists and had to be created - for remote, use the streamFilesToServer to stream a file.]]></description>
+            <summary><![CDATA[Creates the file on disk if needed.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+if (!f.exists())
+	f.createNewFile();]]></sample>
+          </function>
+          <function name="deleteFile">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Deletes the file from the disk if possible. Returns true if the file could be deleted. If the file is a directory, then it must be empty in order to be deleted - works on remote files too.]]></description>
+            <summary><![CDATA[Deletes the file from the disk if possible.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/story.txt');
+if (f && f.exists())
+	f.deleteFile();]]></sample>
+          </function>
+          <function name="exists">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="getAbsoluteFile">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></description>
+            <summary><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+// or for a remote file:
+// var f = plugins.file.convertToRemoteJSFile('/story.txt');
+application.output('parent folder: ' + f.getAbsoluteFile().getParent());
+application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');]]></sample>
+          </function>
+          <function name="getAbsolutePath">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></description>
+            <summary><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="getBytes">
+            <argumentsTypes/>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Gets the contents (bytes) for the file data.]]></description>
+            <summary><![CDATA[Gets the contents (bytes) for the file data.]]></summary>
+            <sample><![CDATA[var theFile = plugins.file.showFileOpenDialog();
+application.output('The file size in bytes: ' + theFile.getBytes());]]></sample>
+          </function>
+          <function name="getContentType">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></description>
+            <summary><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="getName">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Returns the name of the file. The name consists in the last part of the file path - works on remote files too.]]></description>
+            <summary><![CDATA[Returns the name of the file.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="getParent">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></description>
+            <summary><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+// or for a remote file:
+// var f = plugins.file.convertToRemoteJSFile('/story.txt');
+application.output('parent folder: ' + f.getAbsoluteFile().getParent());
+application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');]]></sample>
+          </function>
+          <function name="getParentFile">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></description>
+            <summary><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+// or for a remote file:
+// var f = plugins.file.convertToRemoteJSFile('/story.txt');
+application.output('parent folder: ' + f.getAbsoluteFile().getParent());
+application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');]]></sample>
+          </function>
+          <function name="getPath">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></description>
+            <summary><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="isAbsolute">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the path is absolute. The path is absolute if it starts with '/' on Unix/Linux/MacOS or has a driver letter on Windows - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the path is absolute.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="isDirectory">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the file is a directory - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the file is a directory - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="isFile">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="isHidden">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></description>
+            <summary><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function deprecated="true" name="js_delete">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #deleteFile().]]></deprecated>
+            <sample/>
+          </function>
+          <function name="lastModified">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
+            <description><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></description>
+            <summary><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+          <function name="list">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+            <description><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
+            <summary><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
+            <sample><![CDATA[var d = plugins.file.convertToJSFile('plugins');
+// or for a remote file:
+// var d = plugins.convertToRemoteJSFile('/plugins');
+var names = d.list();
+application.output('Names:');
+for (var i=0; i<names.length; i++)
+	application.output(names[i]);
+var files = d.listFiles();
+application.output('Absolute paths:');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+          </function>
+          <function name="listFiles">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
+            <summary><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
+            <sample><![CDATA[var d = plugins.file.convertToJSFile('plugins');
+// or for a remote file:
+// var d = plugins.convertToRemoteJSFile('/plugins');
+var names = d.list();
+application.output('Names:');
+for (var i=0; i<names.length; i++)
+	application.output(names[i]);
+var files = d.listFiles();
+application.output('Absolute paths:');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+          </function>
+          <function name="mkdir">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Creates a directory on disk if possible. Returns true if a new directory was created - for remote, use the streamFilesToServer to create the directory instead.]]></description>
+            <summary><![CDATA[Creates a directory on disk if possible.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('one/two/three/four');
+f.mkdirs(); // Create all four levels of folders in one step.
+var g = plugins.file.convertToJSFile('one/two/three/four/five');
+g.mkdir(); // This will work because all parent folders are already created.]]></sample>
+          </function>
+          <function name="mkdirs">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Creates a directory on disk, together with all its parent directories, if possible. Returns true if the hierarchy of directories is created - for remote, use the streamFilesToServer to create the directories instead.]]></description>
+            <summary><![CDATA[Creates a directory on disk, together with all its parent directories, if possible.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('one/two/three/four');
+f.mkdirs(); // Create all four levels of folders in one step.
+var g = plugins.file.convertToJSFile('one/two/three/four/five');
+g.mkdir(); // This will work because all parent folders are already created.]]></sample>
+          </function>
+          <function name="renameTo">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Renames the file to a different name. Returns true if the file could be renamed - works on remote files too.]]></description>
+            <summary><![CDATA[Renames the file to a different name.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+f.renameTo('otherstory.txt');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/story.txt');
+// f.renameTo('/otherstory.txt');]]></sample>
+            <parameters>
+              <parameter name="destination" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            </parameters>
+          </function>
+          <function name="setBytes" since="5.2.5">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
+            <description><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
+Will not create a new file if one doesn't exist]]></description>
+            <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
+Will not create a new file if one doesn't exist]]></summary>
+            <sample><![CDATA[var file = %%elementName%%.convertToJSFile('/pathTo/file.jpg');
+// or for a remote file:
+// var file = %%elementName%%.convertToRemoteJSFile('/remotePathTo/file.jpg');
+var success = file.setBytes(blobDataProvider, true);]]></sample>
+            <parameters>
+              <parameter name="bytes" type="byte[]" typecode="[B">
+                <description><![CDATA[the data]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="setBytes" since="5.2.5">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
+            <description><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></description>
+            <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></summary>
+            <sample/>
+            <parameters>
+              <parameter name="bytes" type="byte[]" typecode="[B">
+                <description><![CDATA[the data]]></description>
+              </parameter>
+              <parameter name="createFile" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true to create a file if it doesn't exist]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="setLastModified">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Sets the date/time of the last modification on the file.]]></description>
+            <summary><![CDATA[Sets the date/time of the last modification on the file.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
+f.createNewFile();
+// Make the file look old.
+f.setLastModified(new Date(1999, 5, 21));]]></sample>
+            <parameters>
+              <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            </parameters>
+          </function>
+          <function name="setReadOnly">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Sets the readonly attribute of the file/directory. Returns true on success.]]></description>
+            <summary><![CDATA[Sets the readonly attribute of the file/directory.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('invoice.txt');
+plugins.file.writeTXTFile(f, 'important data that should not be changed');
+f.setReadOnly();]]></sample>
+          </function>
+          <function name="size">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
+            <description><![CDATA[Returns the size in bytes of the file. Returns 0 if the file does not exist on disk - works on remote files too.]]></description>
+            <summary><![CDATA[Returns the size in bytes of the file.]]></summary>
+            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
+// or for a remote file:
+// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
+if (f && f.exists()) {
+	application.output('is absolute: ' + f.isAbsolute());
+	application.output('is dir: ' + f.isDirectory());
+	application.output('is file: ' + f.isFile());
+	application.output('is hidden: ' + f.isHidden());
+	application.output('can read: ' + f.canRead());
+	application.output('can write: ' + f.canWrite());
+	application.output('last modified: ' + f.lastModified());
+	application.output('name: ' + f.getName());
+	application.output('path: ' + f.getPath());
+	application.output('absolute path: ' + f.getAbsolutePath());
+	application.output('content type: ' + f.getContentType());
+	application.output('size: ' + f.size());
+}
+else {
+	application.output('File/folder not found.');
+}]]></sample>
+          </function>
+        </functions>
+      </object>
+      <object publicName="JSProgressMonitor" qualifiedName="com.servoy.extensions.plugins.file.JSProgressMonitor">
+        <functions>
+          <function name="cancel">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Cancels the transfer process.]]></description>
+            <summary><![CDATA[Cancels the transfer process.]]></summary>
+            <sample><![CDATA[monitor.cancel();]]></sample>
+          </function>
+          <function name="getCurrentBytesToTransfer">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
+            <description><![CDATA[Returns the number of bytes to transfer for the current file.]]></description>
+            <summary><![CDATA[Returns the number of bytes to transfer for the current file.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="getCurrentFileIndex">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Returns the index of the current file being transferred.]]></description>
+            <summary><![CDATA[Returns the index of the current file being transferred.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="getCurrentTransferredBytes">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
+            <description><![CDATA[Returns the number of bytes already transferred for the current file.]]></description>
+            <summary><![CDATA[Returns the number of bytes already transferred for the current file.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="getCurrentTransferredFileName">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Returns the name of the current file being transferred.]]></description>
+            <summary><![CDATA[Returns the name of the current file being transferred.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="getTotalBytesToTransfer">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
+            <description><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></description>
+            <summary><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="getTotalFilesToTransfer">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Returns the total number of files to transfer.]]></description>
+            <summary><![CDATA[Returns the total number of files to transfer.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="getTotalTransferredBytes">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
+            <description><![CDATA[Returns the total bytes already transferred (for all files)]]></description>
+            <summary><![CDATA[Returns the total bytes already transferred (for all files)]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="isCanceled">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the process was canceled.]]></description>
+            <summary><![CDATA[Returns true if the process was canceled.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="isFinished">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Returns true if the process is finished.]]></description>
+            <summary><![CDATA[Returns true if the process is finished.]]></summary>
+            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
+	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	if (monitor.isCanceled()) {
+		application.output('canceled!')
+	}
+	if (monitor.isFinished()) {
+		application.output('finished!'
+	}]]></sample>
+          </function>
+          <function name="setProgressCallBack">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="float"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[this for chaining]]></return>
+            <description><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
+            <summary><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
+            <sample><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
+	monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
+            <parameters>
+              <parameter name="function" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to call back at the specified interval]]></description>
+              </parameter>
+              <parameter name="interval" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="float">
+                <description><![CDATA[the interval (in seconds) to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="setProgressCallBack">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="float"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[this for chaining]]></return>
+            <description><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
+            <summary><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
+            <sample><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
+	monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
+            <parameters>
+              <parameter name="function" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to call back at the specified interval]]></description>
+              </parameter>
+              <parameter name="interval" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="float">
+                <description><![CDATA[the interval (in seconds) to use]]></description>
+              </parameter>
+              <parameter name="delay" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[adds a delay for testing purpose in Developer]]></description>
+              </parameter>
+            </parameters>
+          </function>
+        </functions>
+      </object>
+      <object publicName="file" qualifiedName="com.servoy.extensions.plugins.file.FileProvider">
         <constants>
           <constant name="CHUNK_BUFFER_SIZE" since="Servoy 5.2">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -744,735 +1473,6 @@ if (!success) application.output('Could not write file.');]]></sample>
               <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
               <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-        </functions>
-      </object>
-      <object publicName="JSFile" qualifiedName="com.servoy.extensions.plugins.file.JSFile">
-        <functions>
-          <function name="canRead">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="canWrite">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="createNewFile">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates the file on disk if needed. Returns true if the file (name) did not already exists and had to be created - for remote, use the streamFilesToServer to stream a file.]]></description>
-            <summary><![CDATA[Creates the file on disk if needed.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-if (!f.exists())
-	f.createNewFile();]]></sample>
-          </function>
-          <function name="deleteFile">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Deletes the file from the disk if possible. Returns true if the file could be deleted. If the file is a directory, then it must be empty in order to be deleted - works on remote files too.]]></description>
-            <summary><![CDATA[Deletes the file from the disk if possible.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/story.txt');
-if (f && f.exists())
-	f.deleteFile();]]></sample>
-          </function>
-          <function name="exists">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="getAbsoluteFile">
-            <argumentsTypes/>
-            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-// or for a remote file:
-// var f = plugins.file.convertToRemoteJSFile('/story.txt');
-application.output('parent folder: ' + f.getAbsoluteFile().getParent());
-application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');]]></sample>
-          </function>
-          <function name="getAbsolutePath">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="getBytes">
-            <argumentsTypes/>
-            <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Gets the contents (bytes) for the file data.]]></description>
-            <summary><![CDATA[Gets the contents (bytes) for the file data.]]></summary>
-            <sample><![CDATA[var theFile = plugins.file.showFileOpenDialog();
-application.output('The file size in bytes: ' + theFile.getBytes());]]></sample>
-          </function>
-          <function name="getContentType">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="getName">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the name of the file. The name consists in the last part of the file path - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the name of the file.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="getParent">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-// or for a remote file:
-// var f = plugins.file.convertToRemoteJSFile('/story.txt');
-application.output('parent folder: ' + f.getAbsoluteFile().getParent());
-application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');]]></sample>
-          </function>
-          <function name="getParentFile">
-            <argumentsTypes/>
-            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-// or for a remote file:
-// var f = plugins.file.convertToRemoteJSFile('/story.txt');
-application.output('parent folder: ' + f.getAbsoluteFile().getParent());
-application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().listFiles().length + ' entries');]]></sample>
-          </function>
-          <function name="getPath">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="isAbsolute">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the path is absolute. The path is absolute if it starts with '/' on Unix/Linux/MacOS or has a driver letter on Windows - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the path is absolute.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="isDirectory">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file is a directory - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file is a directory - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="isFile">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="isHidden">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function deprecated="true" name="js_delete">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #deleteFile().]]></deprecated>
-            <sample/>
-          </function>
-          <function name="lastModified">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
-            <description><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-          <function name="list">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-            <description><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
-            <summary><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
-            <sample><![CDATA[var d = plugins.file.convertToJSFile('plugins');
-// or for a remote file:
-// var d = plugins.convertToRemoteJSFile('/plugins');
-var names = d.list();
-application.output('Names:');
-for (var i=0; i<names.length; i++)
-	application.output(names[i]);
-var files = d.listFiles();
-application.output('Absolute paths:');
-for (var i=0; i<files.length; i++)
-	application.output(files[i].getAbsolutePath());]]></sample>
-          </function>
-          <function name="listFiles">
-            <argumentsTypes/>
-            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
-            <summary><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
-            <sample><![CDATA[var d = plugins.file.convertToJSFile('plugins');
-// or for a remote file:
-// var d = plugins.convertToRemoteJSFile('/plugins');
-var names = d.list();
-application.output('Names:');
-for (var i=0; i<names.length; i++)
-	application.output(names[i]);
-var files = d.listFiles();
-application.output('Absolute paths:');
-for (var i=0; i<files.length; i++)
-	application.output(files[i].getAbsolutePath());]]></sample>
-          </function>
-          <function name="mkdir">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates a directory on disk if possible. Returns true if a new directory was created - for remote, use the streamFilesToServer to create the directory instead.]]></description>
-            <summary><![CDATA[Creates a directory on disk if possible.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('one/two/three/four');
-f.mkdirs(); // Create all four levels of folders in one step.
-var g = plugins.file.convertToJSFile('one/two/three/four/five');
-g.mkdir(); // This will work because all parent folders are already created.]]></sample>
-          </function>
-          <function name="mkdirs">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates a directory on disk, together with all its parent directories, if possible. Returns true if the hierarchy of directories is created - for remote, use the streamFilesToServer to create the directories instead.]]></description>
-            <summary><![CDATA[Creates a directory on disk, together with all its parent directories, if possible.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('one/two/three/four');
-f.mkdirs(); // Create all four levels of folders in one step.
-var g = plugins.file.convertToJSFile('one/two/three/four/five');
-g.mkdir(); // This will work because all parent folders are already created.]]></sample>
-          </function>
-          <function name="renameTo">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Renames the file to a different name. Returns true if the file could be renamed - works on remote files too.]]></description>
-            <summary><![CDATA[Renames the file to a different name.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-f.renameTo('otherstory.txt');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/story.txt');
-// f.renameTo('/otherstory.txt');]]></sample>
-            <parameters>
-              <parameter name="destination" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
-          </function>
-          <function name="setBytes" since="5.2.5">
-            <argumentsTypes>
-              <argumentType typecode="[B"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
-            <description><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
-Will not create a new file if one doesn't exist]]></description>
-            <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
-Will not create a new file if one doesn't exist]]></summary>
-            <sample><![CDATA[var file = %%elementName%%.convertToJSFile('/pathTo/file.jpg');
-// or for a remote file:
-// var file = %%elementName%%.convertToRemoteJSFile('/remotePathTo/file.jpg');
-var success = file.setBytes(blobDataProvider, true);]]></sample>
-            <parameters>
-              <parameter name="bytes" type="byte[]" typecode="[B">
-                <description><![CDATA[the data]]></description>
-              </parameter>
-            </parameters>
-          </function>
-          <function name="setBytes" since="5.2.5">
-            <argumentsTypes>
-              <argumentType typecode="[B"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
-            <description><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></description>
-            <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></summary>
-            <sample/>
-            <parameters>
-              <parameter name="bytes" type="byte[]" typecode="[B">
-                <description><![CDATA[the data]]></description>
-              </parameter>
-              <parameter name="createFile" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-                <description><![CDATA[true to create a file if it doesn't exist]]></description>
-              </parameter>
-            </parameters>
-          </function>
-          <function name="setLastModified">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Sets the date/time of the last modification on the file.]]></description>
-            <summary><![CDATA[Sets the date/time of the last modification on the file.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
-f.createNewFile();
-// Make the file look old.
-f.setLastModified(new Date(1999, 5, 21));]]></sample>
-            <parameters>
-              <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
-          </function>
-          <function name="setReadOnly">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Sets the readonly attribute of the file/directory. Returns true on success.]]></description>
-            <summary><![CDATA[Sets the readonly attribute of the file/directory.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('invoice.txt');
-plugins.file.writeTXTFile(f, 'important data that should not be changed');
-f.setReadOnly();]]></sample>
-          </function>
-          <function name="size">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the size in bytes of the file. Returns 0 if the file does not exist on disk - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the size in bytes of the file.]]></summary>
-            <sample><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
-// or for a remote file:
-// var f = plugins.convertToRemoteJSFile('/images/big.jpg');
-if (f && f.exists()) {
-	application.output('is absolute: ' + f.isAbsolute());
-	application.output('is dir: ' + f.isDirectory());
-	application.output('is file: ' + f.isFile());
-	application.output('is hidden: ' + f.isHidden());
-	application.output('can read: ' + f.canRead());
-	application.output('can write: ' + f.canWrite());
-	application.output('last modified: ' + f.lastModified());
-	application.output('name: ' + f.getName());
-	application.output('path: ' + f.getPath());
-	application.output('absolute path: ' + f.getAbsolutePath());
-	application.output('content type: ' + f.getContentType());
-	application.output('size: ' + f.size());
-}
-else {
-	application.output('File/folder not found.');
-}]]></sample>
-          </function>
-        </functions>
-      </object>
-      <object publicName="JSProgressMonitor" qualifiedName="com.servoy.extensions.plugins.file.JSProgressMonitor">
-        <functions>
-          <function name="cancel">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Cancels the transfer process.]]></description>
-            <summary><![CDATA[Cancels the transfer process.]]></summary>
-            <sample><![CDATA[monitor.cancel();]]></sample>
-          </function>
-          <function name="getCurrentBytesToTransfer">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the number of bytes to transfer for the current file.]]></description>
-            <summary><![CDATA[Returns the number of bytes to transfer for the current file.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="getCurrentFileIndex">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the index of the current file being transferred.]]></description>
-            <summary><![CDATA[Returns the index of the current file being transferred.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="getCurrentTransferredBytes">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the number of bytes already transferred for the current file.]]></description>
-            <summary><![CDATA[Returns the number of bytes already transferred for the current file.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="getCurrentTransferredFileName">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the name of the current file being transferred.]]></description>
-            <summary><![CDATA[Returns the name of the current file being transferred.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="getTotalBytesToTransfer">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></description>
-            <summary><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="getTotalFilesToTransfer">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the total number of files to transfer.]]></description>
-            <summary><![CDATA[Returns the total number of files to transfer.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="getTotalTransferredBytes">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the total bytes already transferred (for all files)]]></description>
-            <summary><![CDATA[Returns the total bytes already transferred (for all files)]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="isCanceled">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the process was canceled.]]></description>
-            <summary><![CDATA[Returns true if the process was canceled.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="isFinished">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the process is finished.]]></description>
-            <summary><![CDATA[Returns true if the process is finished.]]></summary>
-            <sample><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	if (monitor.isCanceled()) {
-		application.output('canceled!')
-	}
-	if (monitor.isFinished()) {
-		application.output('finished!'
-	}]]></sample>
-          </function>
-          <function name="setProgressCallBack">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="float"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[this for chaining]]></return>
-            <description><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
-            <summary><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
-            <sample><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
-	monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
-            <parameters>
-              <parameter name="function" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[the Function to call back at the specified interval]]></description>
-              </parameter>
-              <parameter name="interval" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="float">
-                <description><![CDATA[the interval (in seconds) to use]]></description>
-              </parameter>
-            </parameters>
-          </function>
-          <function name="setProgressCallBack">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="float"/>
-              <argumentType typecode="int"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[this for chaining]]></return>
-            <description><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
-            <summary><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
-            <sample><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
-	monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
-            <parameters>
-              <parameter name="function" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[the Function to call back at the specified interval]]></description>
-              </parameter>
-              <parameter name="interval" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="float">
-                <description><![CDATA[the interval (in seconds) to use]]></description>
-              </parameter>
-              <parameter name="delay" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-                <description><![CDATA[adds a delay for testing purpose in Developer]]></description>
-              </parameter>
             </parameters>
           </function>
         </functions>

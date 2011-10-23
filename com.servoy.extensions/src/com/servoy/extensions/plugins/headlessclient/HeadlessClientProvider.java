@@ -22,7 +22,7 @@ import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
-@ServoyDocumented
+@ServoyDocumented(publicName = "headlessclient")
 public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final HeadlessClientPlugin plugin;

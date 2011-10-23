@@ -80,7 +80,7 @@ import com.servoy.j2db.util.toolbar.IToolbarPanel;
  * @author rgansevles
  */
 @SuppressWarnings("nls")
-@ServoyDocumented
+@ServoyDocumented(publicName = "window")
 public class WindowProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final WindowPlugin plugin;

@@ -3,66 +3,6 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="ImageProvider" qualifiedName="com.servoy.extensions.plugins.images.ImageProvider">
-        <functions>
-          <function deprecated="true" name="createJPGImage">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
-            <summary><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
-            <deprecated><![CDATA[Replaced by #getImage(Object)]]></deprecated>
-            <sample/>
-            <parameters>
-              <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[bean/imageObj/element]]></description>
-              </parameter>
-            </parameters>
-          </function>
-          <function deprecated="true" name="createJPGImage">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="int"/>
-              <argumentType typecode="int"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
-            <summary><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
-            <deprecated><![CDATA[Replaced by #getImage(Object)]]></deprecated>
-            <sample/>
-            <parameters>
-              <parameter name="object" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[bean/imageObj/element]]></description>
-              </parameter>
-              <parameter name="width" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
-          </function>
-          <function name="getImage">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></description>
-            <summary><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></summary>
-            <sample><![CDATA[var image = plugins.images.getImage(byteArray);
-var height = image.getHeight();
-var contentType = image.getContentType();
-var scaled_image = image.resize(30, 30);
-
-var snapshot_image = plugins.images.getImage(forms.companyReports.elements.employeesChartBean);
-var tempFile = plugins.file.createTempFile('bean_snapshot','.jpg')
-plugins.file.writeFile(tempFile, snapshot_image.getData())
-application.setStatusText('Wrote file: '+tempFile)]]></sample>
-            <parameters>
-              <parameter name="object" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[file/byte_array/bean/applet/form_element]]></description>
-              </parameter>
-            </parameters>
-          </function>
-        </functions>
-      </object>
       <object publicName="JSImage" qualifiedName="com.servoy.extensions.plugins.images.JSImage">
         <functions>
           <function name="flip">
@@ -214,6 +154,66 @@ var bytes = image.getData();//gets the image bytes
 plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
             <parameters>
               <parameter name="degrees" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
+            </parameters>
+          </function>
+        </functions>
+      </object>
+      <object publicName="images" qualifiedName="com.servoy.extensions.plugins.images.ImageProvider">
+        <functions>
+          <function deprecated="true" name="createJPGImage">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
+            <description><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
+            <summary><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
+            <deprecated><![CDATA[Replaced by #getImage(Object)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[bean/imageObj/element]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="createJPGImage">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
+            <description><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
+            <summary><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
+            <deprecated><![CDATA[Replaced by #getImage(Object)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="object" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[bean/imageObj/element]]></description>
+              </parameter>
+              <parameter name="width" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function name="getImage">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
+            <description><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></description>
+            <summary><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></summary>
+            <sample><![CDATA[var image = plugins.images.getImage(byteArray);
+var height = image.getHeight();
+var contentType = image.getContentType();
+var scaled_image = image.resize(30, 30);
+
+var snapshot_image = plugins.images.getImage(forms.companyReports.elements.employeesChartBean);
+var tempFile = plugins.file.createTempFile('bean_snapshot','.jpg')
+plugins.file.writeFile(tempFile, snapshot_image.getData())
+application.setStatusText('Wrote file: '+tempFile)]]></sample>
+            <parameters>
+              <parameter name="object" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file/byte_array/bean/applet/form_element]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>

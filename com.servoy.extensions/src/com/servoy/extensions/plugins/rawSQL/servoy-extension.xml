@@ -3,7 +3,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="RawSQLProvider" qualifiedName="com.servoy.extensions.plugins.rawSQL.RawSQLProvider">
+      <object publicName="rawSQL" qualifiedName="com.servoy.extensions.plugins.rawSQL.RawSQLProvider">
         <functions>
           <function deprecated="true" name="convertUUIDToBytes">
             <argumentsTypes>
@@ -86,6 +86,7 @@ else
               <argumentType typecode="[I"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
+            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
             <description><![CDATA[Execute a stored procedure.]]></description>
             <summary><![CDATA[Execute a stored procedure.]]></summary>
             <sample><![CDATA[/**************************************************************************** 
@@ -158,6 +159,7 @@ else
           </function>
           <function name="getException">
             <argumentsTypes/>
+            <return type="java.lang.Exception" typecode="java.lang.Exception"/>
             <description><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
             <summary><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
             <sample><![CDATA[/**************************************************************************** 

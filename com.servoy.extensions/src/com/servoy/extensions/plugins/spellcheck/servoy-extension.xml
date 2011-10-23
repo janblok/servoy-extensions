@@ -22,7 +22,7 @@
           </constant>
         </constants>
       </object>
-      <object publicName="SpellCheckClientProvider" qualifiedName="com.servoy.extensions.plugins.spellcheck.SpellCheckClientProvider">
+      <object publicName="spellcheck" qualifiedName="com.servoy.extensions.plugins.spellcheck.SpellCheckClientProvider">
         <functions>
           <function name="checkTextComponent">
             <argumentsTypes>

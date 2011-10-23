@@ -34,7 +34,7 @@ import com.servoy.j2db.util.Pair;
  * 
  * @author jblok
  */
-@ServoyDocumented
+@ServoyDocumented(publicName = "workflow")
 public class WorkflowProvider implements IScriptable, IReturnedTypesProvider
 {
 	private WorkflowPlugin plugin;

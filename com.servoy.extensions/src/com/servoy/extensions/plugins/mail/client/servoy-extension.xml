@@ -578,7 +578,7 @@ else
           </function>
         </functions>
       </object>
-      <object publicName="MailProvider" qualifiedName="com.servoy.extensions.plugins.mail.client.MailProvider">
+      <object publicName="mail" qualifiedName="com.servoy.extensions.plugins.mail.client.MailProvider">
         <functions>
           <function name="createBinaryAttachment">
             <argumentsTypes>

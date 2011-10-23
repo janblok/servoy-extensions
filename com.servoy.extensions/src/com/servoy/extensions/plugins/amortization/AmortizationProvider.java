@@ -26,7 +26,7 @@ import com.servoy.j2db.scripting.IScriptable;
 /**
  * @author sebster
  */
-@ServoyDocumented
+@ServoyDocumented(publicName = "amortization")
 public class AmortizationProvider implements IScriptable, IReturnedTypesProvider
 {
 

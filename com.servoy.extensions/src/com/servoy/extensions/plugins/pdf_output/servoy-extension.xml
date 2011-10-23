@@ -3,7 +3,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="PDFProvider" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider">
+      <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider">
         <functions>
           <function name="combinePDFDocuments">
             <argumentsTypes>
@@ -112,6 +112,7 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
+            <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
             <description><![CDATA[Returns a PDF printer that can be used in print calls. If a file name is provided, then a PDF printer that generates a PDF into the specified file is returned. If no argument is provided, then the PDF printer corresponding to the last started meta print job is returned.]]></description>
             <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
             <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.

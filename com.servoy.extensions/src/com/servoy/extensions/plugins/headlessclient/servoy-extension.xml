@@ -3,51 +3,6 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="HeadlessClientProvider" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider">
-        <functions>
-          <function name="createClient">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
-            <description><![CDATA[Creates a headless client that will open the given solution.]]></description>
-            <summary><![CDATA[Creates a headless client that will open the given solution.]]></summary>
-            <sample><![CDATA[// Creates a headless client that will open the given solution.
-var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
-if (headlessClient != null && headlessClient.isValid()) { 
-	 var x = new Object();
-	 x.name = 'remote1';
-	 x.number = 10;
-headlessClient.queueMethod(null, "remoteMethod", [x], callback);
-}]]></sample>
-            <parameters>
-              <parameter name="solutionName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="solutionOpenMethodArgs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
-          </function>
-          <function name="getClient">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
-            <description><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
-            <summary><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
-            <sample><![CDATA[// Gets an existing headless client for the given client uuid.
-var headlessClient = plugins.headlessclient.getClient("clientID");
-if (headlessClient != null && headlessClient.isValid()) {
-	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
-}]]></sample>
-            <parameters>
-              <parameter name="clientID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-        </functions>
-      </object>
       <object publicName="JSClient" qualifiedName="com.servoy.extensions.plugins.headlessclient.JSClient">
         <constants>
           <constant name="CALLBACK_EVENT">
@@ -381,6 +336,51 @@ The second argument that is give back is the JSClient instance that did the call
 }]]></sample>
             <parameters>
               <parameter name="force" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            </parameters>
+          </function>
+        </functions>
+      </object>
+      <object publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider">
+        <functions>
+          <function name="createClient">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
+            <description><![CDATA[Creates a headless client that will open the given solution.]]></description>
+            <summary><![CDATA[Creates a headless client that will open the given solution.]]></summary>
+            <sample><![CDATA[// Creates a headless client that will open the given solution.
+var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
+if (headlessClient != null && headlessClient.isValid()) { 
+	 var x = new Object();
+	 x.name = 'remote1';
+	 x.number = 10;
+headlessClient.queueMethod(null, "remoteMethod", [x], callback);
+}]]></sample>
+            <parameters>
+              <parameter name="solutionName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="solutionOpenMethodArgs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+            </parameters>
+          </function>
+          <function name="getClient">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
+            <description><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
+            <summary><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
+            <sample><![CDATA[// Gets an existing headless client for the given client uuid.
+var headlessClient = plugins.headlessclient.getClient("clientID");
+if (headlessClient != null && headlessClient.isValid()) {
+	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
+}]]></sample>
+            <parameters>
+              <parameter name="clientID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
         </functions>

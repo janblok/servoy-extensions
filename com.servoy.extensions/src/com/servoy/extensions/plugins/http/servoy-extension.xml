@@ -433,243 +433,6 @@ if (cookieSet)
           </function>
         </functions>
       </object>
-      <object publicName="HttpProvider" qualifiedName="com.servoy.extensions.plugins.http.HttpProvider">
-        <functions>
-          <function deprecated="true" name="createHttpClient">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Get or create an http client.]]></description>
-            <summary><![CDATA[Get or create an http client.]]></summary>
-            <deprecated><![CDATA[Replaced by #createNewHttpClient().]]></deprecated>
-            <sample><![CDATA[var client = plugins.http.createHttpClient();]]></sample>
-            <parameters>
-              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function name="createNewHttpClient">
-            <argumentsTypes/>
-            <return type="com.servoy.extensions.plugins.http.HttpClient" typecode="com.servoy.extensions.plugins.http.HttpClient"/>
-            <description><![CDATA[Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session.]]></description>
-            <summary><![CDATA[Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();]]></sample>
-          </function>
-          <function deprecated="true" name="deleteHttpClient">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Delete a named http client.]]></description>
-            <summary><![CDATA[Delete a named http client.]]></summary>
-            <deprecated><![CDATA[Obsolete method, HttpClient mechanism has changed.]]></deprecated>
-            <sample><![CDATA[plugins.http.deleteHttpClient('mybrowser');]]></sample>
-            <parameters>
-              <parameter name="http_clientname"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="getHttpClientCookie">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.http.Cookie" typecode="com.servoy.extensions.plugins.http.Cookie"/>
-            <description><![CDATA[Get cookie object from the specified client.]]></description>
-            <summary><![CDATA[Get cookie object from the specified client.]]></summary>
-            <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
-            <sample><![CDATA[var cookie = plugins.http.getHttpClientCookie('clientName', 'JSESSIONID');
-if (cookie != null)
-{
-	// do something
-}
-else
-	plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)]]></sample>
-            <parameters>
-              <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="getHttpClientCookies">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.http.Cookie[]" typecode="[Lcom.servoy.extensions.plugins.http.Cookie;"/>
-            <description><![CDATA[Returns a Cookie array with all the cookies set on the specified client.]]></description>
-            <summary><![CDATA[Returns a Cookie array with all the cookies set on the specified client.]]></summary>
-            <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
-            <sample><![CDATA[var cookies = plugins.http.getHttpClientCookies('clientName')]]></sample>
-            <parameters>
-              <parameter name="clientName"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="getLastPageCharset">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Get the charset of the last page received with getPageData(...)]]></description>
-            <summary><![CDATA[Get the charset of the last page received with getPageData(.]]></summary>
-            <deprecated><![CDATA[Obsolete method.]]></deprecated>
-            <sample><![CDATA[var a = plugins.http.getPageData('http://www.google.com.hk');
-var charset = plugins.http.getLastPageCharset();
-var success = plugins.file.writeTXTFile('someFilePath', a, charset);
-if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file', 'OK');]]></sample>
-          </function>
-          <function deprecated="true" name="getLastPageEncoding">
-            <argumentsTypes/>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description/>
-            <deprecated><![CDATA[Obsolete method.]]></deprecated>
-            <sample/>
-          </function>
-          <function name="getMediaData">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Get media (binary data) such as images in a variable. It also supports gzip-ed content.]]></description>
-            <summary><![CDATA[Get media (binary data) such as images in a variable.]]></summary>
-            <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
-            <parameters>
-              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="http_clientname" optional="true"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="getMediaData">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Get media (binary data) such as images in a variable. It also supports gzip-ed content.]]></description>
-            <summary><![CDATA[Get media (binary data) such as images in a variable.]]></summary>
-            <deprecated><![CDATA[Obsolete method.]]></deprecated>
-            <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
-            <parameters>
-              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function name="getPageData">
-            <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used.]]></description>
-            <summary><![CDATA[Get all page html in a variable (authentication only works with http client usage).]]></summary>
-            <sample><![CDATA[// get data using a default connection
-var pageData = plugins.http.getPageData('http://www.cnn.com');
-// create an http client and use it to get the data
-var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');]]></sample>
-            <parameters>
-              <parameter name="url"/>
-              <parameter name="http_clientname" optional="true"/>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="getPoster">
-            <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.http.PostRequest" typecode="com.servoy.extensions.plugins.http.PostRequest"/>
-            <description><![CDATA[Get poster object to do http (file) posts. If posting files, it will post multipart!]]></description>
-            <summary><![CDATA[Get poster object to do http (file) posts.]]></summary>
-            <deprecated><![CDATA[Replaced by HttpClient#createPostRequest(String).]]></deprecated>
-            <sample><![CDATA[var poster = plugins.http.getPoster('http://www.abc.com/apply_form.jsp');
-var didAddParam = poster.addParameter('myParamName','myValue');
-var didAddFile = poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc');
-var httpCode = poster.doPost('username','mypassword'); //httpCode 200 is ok
-//var httpCode = poster.doPost('username','mypassword'); //use if authentication is needed
-var pageData = poster.getPageData()]]></sample>
-            <parameters>
-              <parameter name="url"/>
-              <parameter name="http_clientname" optional="true"/>
-            </parameters>
-          </function>
-          <function name="put">
-            <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Put a file at the specified URL.]]></description>
-            <summary><![CDATA[Put a file at the specified URL.]]></summary>
-            <sample><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')]]></sample>
-            <parameters>
-              <parameter name="clientName"/>
-              <parameter name="url"/>
-              <parameter name="fileName"/>
-              <parameter name="filePath"/>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
-          </function>
-          <function name="setClientProxyCredentials">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
-            <summary><![CDATA[Set the proxy username and password.]]></summary>
-            <sample><![CDATA[plugins.http.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
-            <parameters>
-              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="setClientProxyUserNamePassword">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
-            <summary><![CDATA[Set the proxy username and password.]]></summary>
-            <deprecated><![CDATA[Replaced by #setClientProxyCredentials(String,String)]]></deprecated>
-            <sample><![CDATA[plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');]]></sample>
-            <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="setHttpClientCookie">
-            <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Add cookie to the specified client.]]></description>
-            <summary><![CDATA[Add cookie to the specified client.]]></summary>
-            <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
-            <sample><![CDATA[var cookieSet = plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)
-if (cookieSet)
-{
-	//do something
-}]]></sample>
-            <parameters>
-              <parameter name="clientName"/>
-              <parameter name="cookieName"/>
-              <parameter name="cookieValue"/>
-              <parameter name="domain" optional="true"/>
-              <parameter name="path" optional="true"/>
-              <parameter name="maxAge" optional="true"/>
-              <parameter name="secure" optional="true"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="setTimeout">
-            <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></description>
-            <summary><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></summary>
-            <deprecated><![CDATA[Replaced by HttpClient#setTimeout(Object[]).]]></deprecated>
-            <sample><![CDATA[plugins.http.setTimeout(1000,'client_name')]]></sample>
-            <parameters>
-              <parameter name="msTimeout"/>
-              <parameter name="http_clientname" optional="true"/>
-            </parameters>
-          </function>
-        </functions>
-      </object>
       <object publicName="OptionsRequest" qualifiedName="com.servoy.extensions.plugins.http.OptionsRequest">
         <constants>
           <constant name="OPTIONS_HEADER" undocumented="true">
@@ -971,6 +734,7 @@ var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPas
           </function>
           <function name="getResponseHeaders">
             <argumentsTypes/>
+            <return type="com.servoy.j2db.scripting.JSMap" typecode="com.servoy.j2db.scripting.JSMap"/>
             <description><![CDATA[Gets the headers of the response as name/value arrays.]]></description>
             <summary><![CDATA[Gets the headers of the response as name/value arrays.]]></summary>
             <sample><![CDATA[var allHeaders = response.getResponseHeaders(null);]]></sample>
@@ -979,6 +743,7 @@ var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPas
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
+            <return type="com.servoy.j2db.scripting.JSMap" typecode="com.servoy.j2db.scripting.JSMap"/>
             <description><![CDATA[Gets the headers of the response as name/value arrays.]]></description>
             <summary><![CDATA[Gets the headers of the response as name/value arrays.]]></summary>
             <sample><![CDATA[var allHeaders = response.getResponseHeaders(null);]]></sample>
@@ -1034,6 +799,243 @@ var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPas
             <parameters>
               <parameter name="username"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+        </functions>
+      </object>
+      <object publicName="http" qualifiedName="com.servoy.extensions.plugins.http.HttpProvider">
+        <functions>
+          <function deprecated="true" name="createHttpClient">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Get or create an http client.]]></description>
+            <summary><![CDATA[Get or create an http client.]]></summary>
+            <deprecated><![CDATA[Replaced by #createNewHttpClient().]]></deprecated>
+            <sample><![CDATA[var client = plugins.http.createHttpClient();]]></sample>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="createNewHttpClient">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.http.HttpClient" typecode="com.servoy.extensions.plugins.http.HttpClient"/>
+            <description><![CDATA[Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session.]]></description>
+            <summary><![CDATA[Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session.]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();]]></sample>
+          </function>
+          <function deprecated="true" name="deleteHttpClient">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Delete a named http client.]]></description>
+            <summary><![CDATA[Delete a named http client.]]></summary>
+            <deprecated><![CDATA[Obsolete method, HttpClient mechanism has changed.]]></deprecated>
+            <sample><![CDATA[plugins.http.deleteHttpClient('mybrowser');]]></sample>
+            <parameters>
+              <parameter name="http_clientname"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getHttpClientCookie">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Cookie" typecode="com.servoy.extensions.plugins.http.Cookie"/>
+            <description><![CDATA[Get cookie object from the specified client.]]></description>
+            <summary><![CDATA[Get cookie object from the specified client.]]></summary>
+            <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
+            <sample><![CDATA[var cookie = plugins.http.getHttpClientCookie('clientName', 'JSESSIONID');
+if (cookie != null)
+{
+	// do something
+}
+else
+	plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)]]></sample>
+            <parameters>
+              <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getHttpClientCookies">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Cookie[]" typecode="[Lcom.servoy.extensions.plugins.http.Cookie;"/>
+            <description><![CDATA[Returns a Cookie array with all the cookies set on the specified client.]]></description>
+            <summary><![CDATA[Returns a Cookie array with all the cookies set on the specified client.]]></summary>
+            <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
+            <sample><![CDATA[var cookies = plugins.http.getHttpClientCookies('clientName')]]></sample>
+            <parameters>
+              <parameter name="clientName"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getLastPageCharset">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Get the charset of the last page received with getPageData(...)]]></description>
+            <summary><![CDATA[Get the charset of the last page received with getPageData(.]]></summary>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
+            <sample><![CDATA[var a = plugins.http.getPageData('http://www.google.com.hk');
+var charset = plugins.http.getLastPageCharset();
+var success = plugins.file.writeTXTFile('someFilePath', a, charset);
+if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file', 'OK');]]></sample>
+          </function>
+          <function deprecated="true" name="getLastPageEncoding">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description/>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
+            <sample/>
+          </function>
+          <function name="getMediaData">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Get media (binary data) such as images in a variable. It also supports gzip-ed content.]]></description>
+            <summary><![CDATA[Get media (binary data) such as images in a variable.]]></summary>
+            <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
+            <parameters>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="http_clientname" optional="true"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getMediaData">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Get media (binary data) such as images in a variable. It also supports gzip-ed content.]]></description>
+            <summary><![CDATA[Get media (binary data) such as images in a variable.]]></summary>
+            <deprecated><![CDATA[Obsolete method.]]></deprecated>
+            <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
+            <parameters>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="getPageData">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used.]]></description>
+            <summary><![CDATA[Get all page html in a variable (authentication only works with http client usage).]]></summary>
+            <sample><![CDATA[// get data using a default connection
+var pageData = plugins.http.getPageData('http://www.cnn.com');
+// create an http client and use it to get the data
+var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');]]></sample>
+            <parameters>
+              <parameter name="url"/>
+              <parameter name="http_clientname" optional="true"/>
+              <parameter name="username" optional="true"/>
+              <parameter name="password" optional="true"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getPoster">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.PostRequest" typecode="com.servoy.extensions.plugins.http.PostRequest"/>
+            <description><![CDATA[Get poster object to do http (file) posts. If posting files, it will post multipart!]]></description>
+            <summary><![CDATA[Get poster object to do http (file) posts.]]></summary>
+            <deprecated><![CDATA[Replaced by HttpClient#createPostRequest(String).]]></deprecated>
+            <sample><![CDATA[var poster = plugins.http.getPoster('http://www.abc.com/apply_form.jsp');
+var didAddParam = poster.addParameter('myParamName','myValue');
+var didAddFile = poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc');
+var httpCode = poster.doPost('username','mypassword'); //httpCode 200 is ok
+//var httpCode = poster.doPost('username','mypassword'); //use if authentication is needed
+var pageData = poster.getPageData()]]></sample>
+            <parameters>
+              <parameter name="url"/>
+              <parameter name="http_clientname" optional="true"/>
+            </parameters>
+          </function>
+          <function name="put">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Put a file at the specified URL.]]></description>
+            <summary><![CDATA[Put a file at the specified URL.]]></summary>
+            <sample><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')]]></sample>
+            <parameters>
+              <parameter name="clientName"/>
+              <parameter name="url"/>
+              <parameter name="fileName"/>
+              <parameter name="filePath"/>
+              <parameter name="username" optional="true"/>
+              <parameter name="password" optional="true"/>
+            </parameters>
+          </function>
+          <function name="setClientProxyCredentials">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
+            <summary><![CDATA[Set the proxy username and password.]]></summary>
+            <sample><![CDATA[plugins.http.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
+            <parameters>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="setClientProxyUserNamePassword">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
+            <summary><![CDATA[Set the proxy username and password.]]></summary>
+            <deprecated><![CDATA[Replaced by #setClientProxyCredentials(String,String)]]></deprecated>
+            <sample><![CDATA[plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');]]></sample>
+            <parameters>
+              <parameter name="username"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="setHttpClientCookie">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Add cookie to the specified client.]]></description>
+            <summary><![CDATA[Add cookie to the specified client.]]></summary>
+            <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
+            <sample><![CDATA[var cookieSet = plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)
+if (cookieSet)
+{
+	//do something
+}]]></sample>
+            <parameters>
+              <parameter name="clientName"/>
+              <parameter name="cookieName"/>
+              <parameter name="cookieValue"/>
+              <parameter name="domain" optional="true"/>
+              <parameter name="path" optional="true"/>
+              <parameter name="maxAge" optional="true"/>
+              <parameter name="secure" optional="true"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="setTimeout">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></description>
+            <summary><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></summary>
+            <deprecated><![CDATA[Replaced by HttpClient#setTimeout(Object[]).]]></deprecated>
+            <sample><![CDATA[plugins.http.setTimeout(1000,'client_name')]]></sample>
+            <parameters>
+              <parameter name="msTimeout"/>
+              <parameter name="http_clientname" optional="true"/>
             </parameters>
           </function>
         </functions>

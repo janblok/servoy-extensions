@@ -5843,7 +5843,7 @@ toolbar.visibleItem(1, false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="WindowProvider" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider">
+      <object publicName="window" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider">
         <functions>
           <function deprecated="true" name="addMenu">
             <argumentsTypes/>
@@ -5866,6 +5866,7 @@ toolbar.visibleItem(1, false);]]></sample>
               <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
+            <return type="javax.swing.JToolBar" typecode="javax.swing.JToolBar"/>
             <description/>
             <deprecated><![CDATA[Replaced by #addToolBar(String).]]></deprecated>
             <sample/>
