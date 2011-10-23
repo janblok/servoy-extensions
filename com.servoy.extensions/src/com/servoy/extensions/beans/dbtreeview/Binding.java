@@ -29,7 +29,7 @@ import com.servoy.j2db.util.DataSourceUtils;
  * 
  * @author gboros
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME)
+@ServoyDocumented(category = ServoyDocumented.BEANS)
 public class Binding implements IScriptable
 {
 	private String dataSource;

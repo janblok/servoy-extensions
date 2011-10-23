@@ -25,7 +25,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author gboros
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "Column")
+@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "Column")
 public class Column implements IReturnedTypesProvider, IScriptable
 {
 	private String serverName;

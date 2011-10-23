@@ -27,7 +27,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author jblok
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "DBTreeView")
+@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "DBTreeView")
 public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScriptable, ITreeView
 {
 	public String js_getBgcolor();

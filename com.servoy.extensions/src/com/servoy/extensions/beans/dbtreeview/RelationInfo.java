@@ -24,7 +24,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author gboros
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME)
+@ServoyDocumented(category = ServoyDocumented.BEANS)
 public class RelationInfo implements IScriptable
 {
 	private String label;

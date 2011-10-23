@@ -190,7 +190,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	 application.output('size: ' + files[i].size());
 	 * }
 	 * //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-	 * %%elementName%%.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')
+	 * plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')
 	 *
 	 * @param selectionMode optional 0=both,1=Files,2=Dirs 
 	 * @param startDirectory optional null=default/previous 

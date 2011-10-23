@@ -24,7 +24,7 @@ import com.servoy.j2db.documentation.ServoyDocumented;
  * 
  * @author gboros
  */
-@ServoyDocumented(category = ServoyDocumented.RUNTIME, publicName = "DBTreeTableView", extendsComponent = "DBTreeView")
+@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "DBTreeTableView", extendsComponent = "DBTreeView")
 public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 {
 	/**
