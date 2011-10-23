@@ -2002,7 +2002,7 @@ menu.putClientProperty("ToolTipText", "changed tooltip");
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.AbstractMenuItem"/>
+            <return type="com.servoy.extensions.plugins.window.menu.AbstractMenuItem" typecode="com.servoy.extensions.plugins.window.menu.AbstractMenuItem"/>
             <description><![CDATA[Get the item at the selected index (starting at 0).]]></description>
             <summary><![CDATA[Get the item at the selected index (starting at 0).]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
@@ -3797,7 +3797,7 @@ menu.putClientProperty("ToolTipText", "changed tooltip");
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
-            <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.AbstractMenuItem"/>
+            <return type="com.servoy.extensions.plugins.window.menu.AbstractMenuItem" typecode="com.servoy.extensions.plugins.window.menu.AbstractMenuItem"/>
             <description><![CDATA[Get the item at the selected index (starting at 0).]]></description>
             <summary><![CDATA[Get the item at the selected index (starting at 0).]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
@@ -4165,7 +4165,7 @@ if (event.getSource())
 	//menu.show(100, 100);
 }]]></sample>
             <parameters>
-              <parameter name="component"/>
+              <parameter name="component" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
             </parameters>
           </function>
           <function name="show">
@@ -4195,7 +4195,7 @@ if (event.getSource())
 	//menu.show(100, 100);
 }]]></sample>
             <parameters>
-              <parameter name="component"/>
+              <parameter name="component" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>

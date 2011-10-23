@@ -48,6 +48,7 @@ import org.mozilla.javascript.Function;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTree;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
@@ -57,6 +58,7 @@ import com.servoy.j2db.plugins.ISmartRuntimeWindow;
  * 
  * @author gboros
  */
+@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "DB Tree Table View", extendsComponent = "DB Tree View")
 public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableScriptMethods
 {
 	private static final long serialVersionUID = 1L;
@@ -254,6 +256,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	}
 
 	@Override
+	@Deprecated
 	public void js_setRoots(Object[] vargs)
 	{
 		super.js_setRoots(vargs);

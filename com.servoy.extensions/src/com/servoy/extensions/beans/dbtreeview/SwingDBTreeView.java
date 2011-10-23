@@ -68,6 +68,7 @@ import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.dataprocessing.IFoundSetInternal;
 import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.dataprocessing.ISwingFoundSet;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
@@ -84,6 +85,7 @@ import com.servoy.j2db.util.Utils;
  * 
  * @author gboros
  */
+@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "DB Tree View")
 public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionListener, TreeExpansionListener, ITreeViewScriptMethods, IComponent,
 	TableModelListener, ItemListener
 {
@@ -216,6 +218,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 //		}
 //	}
 
+	@Deprecated
 	public void js_setRoots(Object[] vargs)
 	{
 		IFoundSet fs = (IFoundSet)((vargs.length >= 1 && vargs[0] instanceof IFoundSet) ? vargs[0] : null);
@@ -244,42 +247,50 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		js_refresh();
 	}
 
+	@Deprecated
 	public void js_setCallBackInfo(Function methodToCallOnClick, String returndp)//can be related dp, when clicked and passed as argument to method
 	{
 		defaultBinding.js_setMethodToCallOnClick(methodToCallOnClick, returndp);
 	}
 
 
+	@Deprecated
 	public void js_bindNodeTooltipTextDataProvider(String dp)//can be related dp
 	{
 		defaultBinding.js_setToolTipTextDataprovider(dp);
 	}
 
+	@Deprecated
 	public void js_bindNodeChildSortDataProvider(String dp)//can be related dp
 	{
 		defaultBinding.js_setChildSortDataprovider(dp);
 	}
 
+	@Deprecated
 	public void js_bindNodeFontTypeDataProvider(String dp)//can be related dp
 	{
 		defaultBinding.js_setFontTypeDataprovider(dp);
 	}
 
+	@Deprecated
 	public void js_bindNodeImageURLDataProvider(String dp)//can be related dp
 	{
 		defaultBinding.js_setImageURLDataprovider(dp);
 	}
 
+	@Deprecated
 	public void js_bindNodeImageMediaDataProvider(String dp)//can be related dp
 	{
 		defaultBinding.js_setImageMediaDataprovider(dp);
 	}
 
+	@Deprecated
 	public void js_setNRelationName(String n_relationName)//normally self join
 	{
 		defaultBinding.js_setNRelationName(n_relationName);
 	}
 
+	@Deprecated
 	public void js_setMRelationName(String m_relationName)//incase of n-m inbetween table
 	{
 		defaultBinding.js_setMRelationName(m_relationName);
@@ -297,9 +308,9 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	/*
 	 * font---------------------------------------------------
 	 */
-	public void js_setFont(String spec)
+	public void js_setFont(String font)
 	{
-		Font f = PersistHelper.createFont(spec);
+		Font f = PersistHelper.createFont(font);
 		setFont(f);
 	}
 
@@ -460,9 +471,9 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	/*
 	 * size---------------------------------------------------
 	 */
-	public void js_setSize(int x, int y)
+	public void js_setSize(int w, int h)
 	{
-		setSize(x, y);
+		setSize(w, h);
 	}
 
 	public int js_getWidth()

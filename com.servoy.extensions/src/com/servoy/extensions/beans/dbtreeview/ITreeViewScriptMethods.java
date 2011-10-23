@@ -18,7 +18,6 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
 
-import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -27,7 +26,6 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author jblok
  */
-@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "DBTreeView")
 public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScriptable, ITreeView
 {
 	public String js_getBgcolor();
@@ -154,12 +152,12 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	 * var pathArray = new Array(14,24,45,67);
 	 * %%elementName%%.setExpandNode(pathArray, true);
 	 * 
-	 * @param path
+	 * @param nodePath
 	 * 
 	 * @param expand_collapse
 	 * 
 	 */
-	public void js_setExpandNode(Object[] path, boolean expand_collapse);
+	public void js_setExpandNode(Object[] nodePath, boolean expand_collapse);
 
 	/**
 	 * Check the path (array with pk records values (only single pk key supported)) expanded status
@@ -168,11 +166,11 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	 * var pathArray = new Array(14,24,45,67);
 	 * %%elementName%%.isNodeExpanded(pathArray);
 	 * 
-	 * @param path
+	 * @param nodePath
 	 * 
 	 * @return True if the node is expanded, False otherwise
 	 */
-	public boolean js_isNodeExpanded(Object[] path);
+	public boolean js_isNodeExpanded(Object[] nodePath);
 
 	/**
 	 * Set the level of visible nodes (expand or collapse to certain level)

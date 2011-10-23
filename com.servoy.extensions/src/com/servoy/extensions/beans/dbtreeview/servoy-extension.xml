@@ -288,7 +288,7 @@ binding.setNRelationInfos(company_relations);]]></sample>
           </function>
         </functions>
       </object>
-      <object extendsComponent="com.servoy.extensions.beans.dbtreeview.DBTreeView" publicName="DBTreeTableView" qualifiedName="com.servoy.extensions.beans.dbtreeview.table.ITreeTableScriptMethods">
+      <object extendsComponent="com.servoy.extensions.beans.dbtreeview.SwingDBTreeView" publicName="DB Tree Table View" qualifiedName="com.servoy.extensions.beans.dbtreeview.table.SwingDBTreeTableView">
         <properties>
           <property name="bgcolor" undocumented="true">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -487,7 +487,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <sample><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.isNodeExpanded(pathArray);]]></sample>
             <parameters>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
           <function name="refresh">
@@ -532,7 +532,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <sample><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.setExpandNode(pathArray, true);]]></sample>
             <parameters>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
               <parameter name="expand_collapse" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
@@ -703,7 +703,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="DBTreeView" qualifiedName="com.servoy.extensions.beans.dbtreeview.ITreeViewScriptMethods">
+      <object publicName="DB Tree View" qualifiedName="com.servoy.extensions.beans.dbtreeview.SwingDBTreeView">
         <properties>
           <property name="bgcolor" undocumented="true">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -864,7 +864,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <sample><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.isNodeExpanded(pathArray);]]></sample>
             <parameters>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
           <function name="refresh">
@@ -902,7 +902,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <sample><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.setExpandNode(pathArray, true);]]></sample>
             <parameters>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
               <parameter name="expand_collapse" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
