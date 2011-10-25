@@ -52,10 +52,14 @@ import com.servoy.extensions.plugins.window.menu.RadioButton;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
+import com.servoy.extensions.plugins.window.popup.IPopupShower;
+import com.servoy.extensions.plugins.window.popup.swing.SwingPopupShower;
 import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
 import com.servoy.extensions.plugins.window.shortcut.swing.SwingShortcutHandler;
 import com.servoy.extensions.plugins.window.shortcut.wicket.WicketShortcutHandler;
 import com.servoy.extensions.plugins.window.util.Utilities;
+import com.servoy.j2db.IForm;
+import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IPluginAccess;
@@ -535,6 +539,41 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	IPopupShower popupShower = null;
+
+	public void js_showFormPopup(IComponent elementToShowRelatedTo, Object formToShow, IRecord record, String dataprovider)
+	{
+		IClientPluginAccess clientPluginAccess = getClientPluginAccess();
+
+		IForm form = null;
+		if (formToShow instanceof String)
+		{
+			form = clientPluginAccess.getFormManager().getForm((String)formToShow);
+		}
+		else if (formToShow instanceof IForm)
+		{
+			form = (IForm)formToShow;
+		}
+
+		if (form != null && elementToShowRelatedTo != null)
+		{
+			if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
+			{
+
+			}
+			else if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+			{
+				popupShower = new SwingPopupShower(elementToShowRelatedTo, form, record, dataprovider);
+			}
+			popupShower.show();
+		}
+	}
+
+	public void js_closeFormPopup(Object retval)
+	{
+		popupShower.close(retval);
+	}
+
 	/* menu methods */
 
 	/**
@@ -987,7 +1026,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @deprecated Obsolete method.
 	 */
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
+	public boolean js_register(@SuppressWarnings("unused")
+	String code, @SuppressWarnings("unused")
+	String developer)
 	{
 		return true;
 	}
