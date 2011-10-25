@@ -24,6 +24,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -115,10 +116,14 @@ public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 
 	public IMenuItem getMenuItem(int index)
 	{
-		Component item = getComponent(index);
+		Component item = index < getComponentCount() ? getComponent(index) : null;
 		if (item instanceof IMenuItem)
 		{
 			return (IMenuItem)item;
+		}
+		if (item instanceof JMenu)
+		{
+			return new ScriptableJMenu((JMenu)item);
 		}
 		if (item instanceof JMenuItem)
 		{
