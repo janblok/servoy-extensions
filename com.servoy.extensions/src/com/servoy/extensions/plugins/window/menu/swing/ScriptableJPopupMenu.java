@@ -116,7 +116,7 @@ public class ScriptableJPopupMenu extends JPopupMenu implements IPopupMenu
 
 	public IMenuItem getMenuItem(int index)
 	{
-		Component item = getComponent(index);
+		Component item = index < getComponentCount() ? getComponent(index) : null;
 		if (item instanceof IMenuItem)
 		{
 			return (IMenuItem)item;

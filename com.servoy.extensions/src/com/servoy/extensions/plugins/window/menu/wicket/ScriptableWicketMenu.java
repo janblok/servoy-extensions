@@ -75,7 +75,7 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 
 	public IMenuItem getMenuItem(int index)
 	{
-		return menuItems.get(index);
+		return index < menuItems.size() ? menuItems.get(index) : null;
 	}
 
 	public int getMenuItemCount()
