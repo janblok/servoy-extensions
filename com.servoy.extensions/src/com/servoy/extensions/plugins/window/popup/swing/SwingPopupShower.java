@@ -22,8 +22,12 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.Window;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.JComponent;
 import javax.swing.JWindow;
@@ -50,6 +54,7 @@ public class SwingPopupShower implements IPopupShower
 	private JWindow window;
 	private Component glassPane;
 	private PopupMouseListener mouseListener;
+	private WindowListener windowListener;
 
 	/**
 	 * @param elementToShowRelatedTo
@@ -82,7 +87,22 @@ public class SwingPopupShower implements IPopupShower
 		}
 		if (parent != null)
 		{
+			windowListener = new WindowListener();
+			((Window)parent).addComponentListener(windowListener);
+			((Window)parent).addWindowStateListener(windowListener);
 			this.window = new JWindow((Window)parent);
+			this.window.setFocusableWindowState(true);
+			this.window.setFocusable(true);
+
+			IFormUI formUI = form.getFormUI();
+
+			window.getContentPane().setLayout(new BorderLayout(0, 0));
+			window.getContentPane().add((Component)formUI, BorderLayout.CENTER);
+			window.pack();
+			Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
+			locationOnScreen.y += elementToShowRelatedTo.getHeight();
+			window.setLocation(locationOnScreen);
+			window.setVisible(true);
 
 			if (parent instanceof RootPaneContainer)
 			{
@@ -92,16 +112,6 @@ public class SwingPopupShower implements IPopupShower
 				glassPane.addMouseListener(mouseListener);
 			}
 
-			IFormUI formUI = form.getFormUI();
-
-			window.getContentPane().setLayout(new BorderLayout(0, 0));
-			window.getContentPane().add((Component)formUI, BorderLayout.CENTER);
-			window.pack();
-
-			Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
-			locationOnScreen.y += elementToShowRelatedTo.getHeight();
-			window.setLocation(locationOnScreen);
-			window.setVisible(true);
 		}
 
 	}
@@ -111,24 +121,66 @@ public class SwingPopupShower implements IPopupShower
 	 * 
 	 * @see com.servoy.extensions.plugins.window.popup.IPopupShower#close(java.lang.Object)
 	 */
+	@SuppressWarnings("nls")
 	public void close(Object retval)
 	{
-		record.startEditing();
-		record.setValue(dataprovider, retval);
+		if (record.startEditing())
+		{
+			record.setValue(dataprovider, retval);
+		}
+		else
+		{
+			throw new RuntimeException("record dataprovider " + dataprovider + " can't be set to " + retval +
+				" in a form popup close because it can't be editted");
+		}
 
-		closeWindow();
-		glassPane.removeMouseListener(mouseListener);
+		closeWindow(true);
 	}
 
 	/**
 	 * 
 	 */
-	private void closeWindow()
+	private void closeWindow(boolean removeMouseListener)
 	{
 		glassPane.setVisible(false);
 		window.setVisible(false);
+		window.getOwner().removeComponentListener(windowListener);
 		window.getContentPane().removeAll();
 		window.dispose();
+		if (removeMouseListener) glassPane.removeMouseListener(mouseListener);
+
+	}
+
+	/**
+	 * @author jcompagner
+	 *
+	 */
+	private final class WindowListener implements ComponentListener, WindowStateListener
+	{
+		public void componentShown(ComponentEvent e)
+		{
+			closeWindow(true);
+		}
+
+		public void componentResized(ComponentEvent e)
+		{
+			closeWindow(true);
+		}
+
+		public void componentMoved(ComponentEvent e)
+		{
+			closeWindow(true);
+		}
+
+		public void componentHidden(ComponentEvent e)
+		{
+			closeWindow(true);
+		}
+
+		public void windowStateChanged(WindowEvent e)
+		{
+			closeWindow(true);
+		}
 	}
 
 	private class PopupMouseListener extends MouseAdapter
@@ -138,7 +190,7 @@ public class SwingPopupShower implements IPopupShower
 		@Override
 		public void mousePressed(MouseEvent e)
 		{
-			closeWindow();
+			closeWindow(false);
 			Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), window.getOwner());
 			dispatchComponent = window.getOwner().findComponentAt(p2.x, p2.y);
 			if (dispatchComponent != null)

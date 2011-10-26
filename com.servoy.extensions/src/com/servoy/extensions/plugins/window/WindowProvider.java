@@ -22,6 +22,7 @@ import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
 import java.awt.Window;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,10 +55,12 @@ import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
 import com.servoy.extensions.plugins.window.popup.swing.SwingPopupShower;
+import com.servoy.extensions.plugins.window.popup.wicket.WicketPopupShower;
 import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
 import com.servoy.extensions.plugins.window.shortcut.swing.SwingShortcutHandler;
 import com.servoy.extensions.plugins.window.shortcut.wicket.WicketShortcutHandler;
 import com.servoy.extensions.plugins.window.util.Utilities;
+import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
 import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.documentation.ServoyDocumented;
@@ -559,12 +562,21 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		{
 			if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
-
+				popupShower = new WicketPopupShower(elementToShowRelatedTo, form, record, dataprovider, getClientPluginAccess());
 			}
 			else if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 			{
 				popupShower = new SwingPopupShower(elementToShowRelatedTo, form, record, dataprovider);
 			}
+			else
+			{
+				throw new RuntimeException("show popup called in a none supported client");
+			}
+			// make sure that the form is in a visible state
+			// TODO this should be api method (that runs the runnables..)
+			((FormController)form).notifyVisible(true, new ArrayList<Runnable>());
+			form.getFormUI().setComponentVisible(true);
+			// show the form
 			popupShower.show();
 		}
 	}
