@@ -18,6 +18,11 @@
 package com.servoy.extensions.plugins.window.popup.wicket;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.Page;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.behavior.SimpleAttributeModifier;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
 import com.servoy.j2db.IForm;
@@ -26,6 +31,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.server.headlessclient.IRepeatingView;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.dataui.WebEventExecutor;
 import com.servoy.j2db.ui.IComponent;
 
 /**
@@ -74,9 +80,23 @@ public class WicketPopupShower implements IPopupShower
 		{
 			repeatingView.removeComponent("popup");
 		}
-		String id = repeatingView.newChildId();
-		repeatingView.addComponent("popup", new PopupPanel(id, form, elementToShowRelatedTo));
+		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo));
+
+		final WebMarkupContainer container = new WebMarkupContainer(repeatingView.newChildId());
+		container.add(new SimpleAttributeModifier("style", "position:absolute;z-index:990;top:0px;right:0px;bottom:0px;left:0px"));
+		container.add(new AjaxEventBehavior("onclick")
+		{
+			@Override
+			protected void onEvent(AjaxRequestTarget target)
+			{
+				Page page = container.getPage();
+				close();
+				WebEventExecutor.generateResponse(target, page);
+			}
+		});
+		repeatingView.addComponent("blocker", container);
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -96,9 +116,19 @@ public class WicketPopupShower implements IPopupShower
 				" in a form popup close because it can't be editted");
 		}
 
+		close();
+
+	}
+
+	/**
+	 * 
+	 */
+	private void close()
+	{
 		IPageContributor pageContributor = ((IWebClientPluginAccess)clientPluginAccess).getPageContributor();
 		IRepeatingView repeatingView = pageContributor.getRepeatingView();
 		repeatingView.removeComponent("popup");
+		repeatingView.removeComponent("blocker");
 	}
 
 }
