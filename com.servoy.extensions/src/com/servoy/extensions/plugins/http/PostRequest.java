@@ -42,6 +42,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.util.EntityUtils;
 
+import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
@@ -81,6 +82,12 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	 * @sample
 	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
+	 * 
+	 * var f = plugins.file.convertToJSFile('./somefile02.txt')
+	 * if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
+	 * 
+	 * f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
+	 * if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)
 	 *
 	 * @param parameterName 
 	 * @param fileName 
@@ -91,6 +98,67 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		if (fileLocation != null)
 		{
 			File f = new File(fileLocation);
+			if (f.exists())
+			{
+				files.put(new Pair<String, String>(parameterName, fileName), f);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Add a file to the post.
+	 * 
+	 * @sample
+	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
+	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
+	 * 
+	 * var f = plugins.file.convertToJSFile('./somefile02.txt')
+	 * if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
+	 * 
+	 * f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
+	 * if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)
+	 * 
+	 * @param parameterName
+	 * @param jsFile
+	 */
+	public boolean js_addFile(String parameterName, Object jsFile)
+	{
+		if (jsFile instanceof JSFile)
+		{
+			File f = ((JSFile)jsFile).getFile();
+			if (f.exists())
+			{
+				files.put(new Pair<String, String>(parameterName, f.getName()), f);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Add a file to the post.
+	 * 
+	 * @sample
+	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
+	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
+	 * 
+	 * var f = plugins.file.convertToJSFile('./somefile02.txt')
+	 * if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
+	 * 
+	 * f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
+	 * if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)
+	 * 
+	 * @param parameterName
+	 * @param fileName
+	 * @param jsFile
+	 */
+	public boolean js_addFile(String parameterName, String fileName, Object jsFile)
+	{
+		if (jsFile instanceof JSFile)
+		{
+			File f = ((JSFile)jsFile).getFile();
 			if (f.exists())
 			{
 				files.put(new Pair<String, String>(parameterName, fileName), f);
