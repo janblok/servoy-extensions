@@ -939,6 +939,8 @@ public class FileProvider implements IScriptObject
 			title = args[1].toString();
 		}
 		IClientPluginAccess access = plugin.getClientPluginAccess();
+		if (access.getApplicationType() != IClientPluginAccess.CLIENT) throw new UnsupportedMethodException(
+			"Directory selection is only supported in the SmartClient (not in web or headless client)"); //$NON-NLS-1$
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
