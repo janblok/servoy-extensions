@@ -246,9 +246,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * // this plugin uses the java keystroke parser
 	 * // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 	 * // global shortcut (on all forms) - 'apple 1' on a mac client and 'control 1' on other client platforms
-	 * plugins.window.createShortcut('menu 1', 'globals.handleShortcut');
+	 * plugins.window.createShortcut('menu 1', 'scopes.globals.handleShortcut');
 	 * // global handler, only triggered when on form frm_orders
-	 * plugins.window.createShortcut('control shift I', globals.handleOrdersShortcut, 'frm_orders');
+	 * plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_orders');
 	 * // form method called when shortcut is used
 	 * plugins.window.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');
 	 * // same, but use method in stead of string
@@ -297,32 +297,47 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			// string callback
 			// 1. formname.method
 			// 2. globals.method
-			// 3. method (on context form)
+			// 3. scopes.scopename.method
+			// 4. method (on context form)
 			String str = ((String)callback);
 			int dot = str.indexOf('.');
 			String methodName;
-			String formName = null;
+			String contextName;
 			if (dot == -1)
 			{
 				if (context == null)
 				{
-					methodName = "globals." + str;
+					contextName = "scopes.globals";
 				}
 				else
 				{
-					formName = context;
-					methodName = context + '.' + str;
+					contextName = context; // form name
 				}
+				methodName = str;
 			}
 			else
 			{
-				if (!str.startsWith("globals."))
+				if (str.startsWith("globals."))
 				{
-					formName = str.substring(0, dot);
+					contextName = "scopes.globals";
+				}
+				else
+				{
+					if (str.startsWith("scopes."))
+					{
+						// look for second dot
+						dot = str.indexOf('.', dot + 1);
+						if (dot == -1)
+						{
+							Debug.error("WindowPlugin: could not find context name for method argument '" + str + '\'');
+							return false;
+						}
+					}
+					contextName = str.substring(0, dot); // either scopes.xxxx or formname
 				}
 				methodName = str.substring(dot + 1);
 			}
-			functionDef = new FunctionDefinition(formName, methodName);
+			functionDef = new FunctionDefinition(contextName, methodName);
 		}
 		else if (callback instanceof Function)
 		{

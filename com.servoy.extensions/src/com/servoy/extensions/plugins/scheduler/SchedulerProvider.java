@@ -187,15 +187,12 @@ public class SchedulerProvider implements IScriptable
 			jobDetail.getJobDataMap().put("scheduler", this); //$NON-NLS-1$
 			FunctionDefinition functionDef = new FunctionDefinition(method);
 			jobDetail.getJobDataMap().put("methodname", functionDef.getMethodName()); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("formname", functionDef.getFormName()); //$NON-NLS-1$
+			jobDetail.getJobDataMap().put("methodcontext", functionDef.getContextName()); //$NON-NLS-1$
 			jobDetail.getJobDataMap().put("args", arguments); //$NON-NLS-1$
 			jobDetail.getJobDataMap().put("access", plugin.getClientPluginAccess()); //$NON-NLS-1$
-			if (repeatCount == -1)
-			{
-				repeatCount = SimpleTrigger.REPEAT_INDEFINITELY;
-			}
 
-			SimpleTrigger trigger = new SimpleTrigger(jobname, id, startDate, endDate, repeatCount, repeatInterval);
+			SimpleTrigger trigger = new SimpleTrigger(jobname, id, startDate, endDate, repeatCount == -1 ? SimpleTrigger.REPEAT_INDEFINITELY : repeatCount,
+				repeatInterval);
 			try
 			{
 				scheduler.scheduleJob(jobDetail, trigger);
@@ -328,7 +325,7 @@ public class SchedulerProvider implements IScriptable
 			jobDetail.getJobDataMap().put("scheduler", this); //$NON-NLS-1$
 			FunctionDefinition functionDef = new FunctionDefinition(method);
 			jobDetail.getJobDataMap().put("methodname", functionDef.getMethodName()); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("formname", functionDef.getFormName()); //$NON-NLS-1$
+			jobDetail.getJobDataMap().put("methodcontext", functionDef.getContextName()); //$NON-NLS-1$
 			jobDetail.getJobDataMap().put("args", arguments); //$NON-NLS-1$
 			jobDetail.getJobDataMap().put("access", plugin.getClientPluginAccess()); //$NON-NLS-1$
 			try

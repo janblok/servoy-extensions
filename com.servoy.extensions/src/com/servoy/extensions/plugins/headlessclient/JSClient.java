@@ -250,17 +250,17 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * if (jsclient && jsclient.isValid())
 	 * {
 	 * 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
-	 * 	var value = jsclient.getDataProviderValue(null, "globals.number", 'remoteMethod');
+	 * 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
 	 * 	if (value != null)
 	 * 	{
-	 * 		application.output("value get from globals.number :: "+ value);
-	 * 		globals.value = value+10;
-	 * 		var returnValue = jsclient.setDataProviderValue(null, "globals.number", globals.value, 'remoteMethod');
-	 * 		application.output("value set to globals.number previous value "+ returnValue);
+	 * 		application.output("value get from scopes.globals.number :: "+ value);
+	 * 		scopes.globals.value = value+10;
+	 * 		var returnValue = jsclient.setDataProviderValue(null, "scopes.globals.number", globals.value, 'remoteMethod');
+	 * 		application.output("value set to scopes.globals.number previous value "+ returnValue);
 	 * 	}
 	 * 	else
 	 * 	{
-	 * 		application.output("value get from globals.number :: " + null);
+	 * 		application.output("value get from scopes.globals.number :: " + null);
 	 * 	}
 	 * }
 	 * 

@@ -65,10 +65,10 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 	 * @sample
 	 * var client = plugins.http.createNewHttpClient();
 	 * var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
-	 * poster.addParameter('status',globals.textToPost);
+	 * poster.addParameter('status',scopes.globals.textToPost);
 	 * poster.addParameter('source','Test Source');
 	 * poster.setCharset('UTF-8');
-	 * var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok
+	 * var httpCode = poster.executeRequest(scopes.globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok
 	 *
 	 * @param charset 
 	 */

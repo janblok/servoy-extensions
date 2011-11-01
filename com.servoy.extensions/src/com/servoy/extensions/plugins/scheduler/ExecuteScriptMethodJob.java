@@ -37,15 +37,15 @@ public class ExecuteScriptMethodJob implements StatefulJob
 	{
 		final String name = jobContext.getJobDetail().getName();
 		JobDataMap jdm = jobContext.getJobDetail().getJobDataMap();
-		Object o = jdm.get("formname"); //$NON-NLS-1$
-		final String formname;
+		Object o = jdm.get("methodcontext"); //$NON-NLS-1$
+		final String methodcontext;
 		if (o instanceof String)
 		{
-			formname = (String)o;
+			methodcontext = (String)o;
 		}
 		else
 		{
-			formname = null;
+			methodcontext = null;
 		}
 		final String methodname = (String)jdm.get("methodname");
 		final Object[] args = (Object[])jdm.get("args");
@@ -64,15 +64,16 @@ public class ExecuteScriptMethodJob implements StatefulJob
 			{
 				trigger = " trigger: " + jobContext.getTrigger();
 			}
-			Debug.trace("Executing job: " + name + " scheduled method: " + methodname + " of form: " + formname + " args: " + Arrays.toString(args) + trigger);
+			Debug.trace("Executing job: " + name + " scheduled method: " + methodname + " of context: " + methodcontext + " args: " + Arrays.toString(args) +
+				trigger);
 		}
 		try
 		{
-			access.executeMethod(formname, methodname, args, true);
+			access.executeMethod(methodcontext, methodname, args, true);
 		}
 		catch (Exception e1)
 		{
-			Debug.error("Error executing scheduled method: " + methodname + " of form: " + formname, e1);
+			Debug.error("Error executing scheduled method: " + methodname + " of context: " + methodcontext, e1);
 			access.handleException(null, e1);
 		}
 	}
