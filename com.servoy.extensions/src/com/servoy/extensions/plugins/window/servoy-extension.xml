@@ -1751,7 +1751,7 @@ var menu = menubar.addMenu();
 menu.text = "New Menu";
 // alternatively create a popup menu
 //var menu = plugins.window.createPopupMenu();
-
+	
 // when you don't define an index the radiobutton will be added at the last position
 // this is what you usually do to build a new menu
 // minimum settings are the text and method
@@ -1760,14 +1760,14 @@ menu.text = "New Menu";
 menu.addRadioButton("radio", feedback_radiobutton);
 // add a radiobutton with an icon
 menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
-
+	
 // add a new radiobutton group
 // a group will 'bind' all added radiobuttons after the group together
 // as a result checking one item will uncheck the other
 // if no group is added, a group is created automatically when the first radiobutton is added to the menu
 // so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
 menu.addRadioGroup();
-
+	
 // add a radiobutton with a mnemonic
 menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
 // add a disabled radiobutton
@@ -1803,7 +1803,7 @@ var menu = menubar.addMenu();
 menu.text = "New Menu";
 // alternatively create a popup menu
 //var menu = plugins.window.createPopupMenu();
-
+	
 // when you don't define an index the radiobutton will be added at the last position
 // this is what you usually do to build a new menu
 // minimum settings are the text and method
@@ -1812,14 +1812,14 @@ menu.text = "New Menu";
 menu.addRadioButton("radio", feedback_radiobutton);
 // add a radiobutton with an icon
 menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
-
+	
 // add a new radiobutton group
 // a group will 'bind' all added radiobuttons after the group together
 // as a result checking one item will uncheck the other
 // if no group is added, a group is created automatically when the first radiobutton is added to the menu
 // so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
 menu.addRadioGroup();
-
+	
 // add a radiobutton with a mnemonic
 menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
 // add a disabled radiobutton
@@ -2237,7 +2237,7 @@ else {
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description/>
-            <deprecated><![CDATA[Replaced by getMenu().]]></deprecated>
+            <deprecated><![CDATA[Replaced by #getMenu().]]></deprecated>
             <sample/>
           </function>
           <function name="putClientProperty">
@@ -2595,7 +2595,7 @@ menubar.removeMenu(index);
 // and delimit them with a comma.
 index = menubar.getMenuCount() - 1;
 menubar.removeMenu(index, index-1, index-2);
-
+ 
 // For 'security' reasons it is best to ALWAYS remove the menu with the last index
 // first to avoid index out of range issues and other issues
 // EXAMPLE: when you first remove the menu at index 2 and then the menu at index 4
@@ -3557,7 +3557,7 @@ var menu = menubar.addMenu();
 menu.text = "New Menu";
 // alternatively create a popup menu
 //var menu = plugins.window.createPopupMenu();
-
+	
 // when you don't define an index the radiobutton will be added at the last position
 // this is what you usually do to build a new menu
 // minimum settings are the text and method
@@ -3566,14 +3566,14 @@ menu.text = "New Menu";
 menu.addRadioButton("radio", feedback_radiobutton);
 // add a radiobutton with an icon
 menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
-
+	
 // add a new radiobutton group
 // a group will 'bind' all added radiobuttons after the group together
 // as a result checking one item will uncheck the other
 // if no group is added, a group is created automatically when the first radiobutton is added to the menu
 // so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
 menu.addRadioGroup();
-
+	
 // add a radiobutton with a mnemonic
 menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
 // add a disabled radiobutton
@@ -3609,7 +3609,7 @@ var menu = menubar.addMenu();
 menu.text = "New Menu";
 // alternatively create a popup menu
 //var menu = plugins.window.createPopupMenu();
-
+	
 // when you don't define an index the radiobutton will be added at the last position
 // this is what you usually do to build a new menu
 // minimum settings are the text and method
@@ -3618,14 +3618,14 @@ menu.text = "New Menu";
 menu.addRadioButton("radio", feedback_radiobutton);
 // add a radiobutton with an icon
 menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
-
+	
 // add a new radiobutton group
 // a group will 'bind' all added radiobuttons after the group together
 // as a result checking one item will uncheck the other
 // if no group is added, a group is created automatically when the first radiobutton is added to the menu
 // so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
 menu.addRadioGroup();
-
+	
 // add a radiobutton with a mnemonic
 menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
 // add a disabled radiobutton
@@ -4032,7 +4032,7 @@ else {
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description/>
-            <deprecated><![CDATA[Replaced by getMenu().]]></deprecated>
+            <deprecated><![CDATA[Replaced by #getMenu().]]></deprecated>
             <sample/>
           </function>
           <function name="putClientProperty">
@@ -6265,7 +6265,7 @@ plugins.window.maximize("windowName");]]></sample>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description/>
-            <deprecated><![CDATA[Replaced by removeMenu(int).]]></deprecated>
+            <deprecated><![CDATA[Replaced by MenuBar#removeMenu(int).]]></deprecated>
             <sample/>
           </function>
           <function deprecated="true" name="removeServoyToolBar">
@@ -6375,14 +6375,14 @@ plugins.window.setFullScreen(true);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
             <description/>
-            <deprecated><![CDATA[Replaced by createPopupMenu(Object[]).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
           <function deprecated="true" name="setPopup">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
             <description/>
-            <deprecated><![CDATA[Replaced by createPopupMenu(Object[]).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
           <function deprecated="true" name="setPopup">
@@ -6391,7 +6391,7 @@ plugins.window.setFullScreen(true);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
             <description/>
-            <deprecated><![CDATA[Replaced by createPopupMenu(Object[]).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
           <function name="setStatusBarVisible">
@@ -6450,7 +6450,7 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description/>
-            <deprecated><![CDATA[Replaced by createPopupMenu(Object[]).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
           <function deprecated="true" name="validateMenuBar">

@@ -80,7 +80,7 @@ public class JSAuthenticateRequest implements IJavaScriptType, IScriptable
 	/**
 	 * 
 	 *
-	 * @sampleas com.servoy.extensions.plugins.openid.OpenIDProvider.js_createAuthenticateRequest(String, Function)
+	 * @sampleas com.servoy.extensions.plugins.openid.OpenIDProvider#js_createAuthenticateRequest(String, Function)
 	 */
 	@SuppressWarnings("nls")
 	public void js_execute()

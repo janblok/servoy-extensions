@@ -130,7 +130,7 @@ public class RadioButton extends AbstractMenuItem
 	/**
 	 * Sets the alignment of the radiobutton.
 	 * 
-	 * @sampleas com.servoy.extensions.plugins.window.menu.CheckBox.js_setAlign(boolean)
+	 * @sampleas com.servoy.extensions.plugins.window.menu.CheckBox#js_setAlign(boolean)
 	 * 
 	 * @param align
 	 */
