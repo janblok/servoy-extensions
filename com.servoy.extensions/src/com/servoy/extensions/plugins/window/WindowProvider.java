@@ -33,6 +33,7 @@ import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
 import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
@@ -62,7 +63,6 @@ import com.servoy.extensions.plugins.window.shortcut.wicket.WicketShortcutHandle
 import com.servoy.extensions.plugins.window.util.Utilities;
 import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
-import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IPluginAccess;
@@ -103,7 +103,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		this.plugin = plugin;
 	}
 
-	public IClientPluginAccess getClientPluginAccess()
+	public final IClientPluginAccess getClientPluginAccess()
 	{
 		return plugin.getClientPluginAccess();
 	}
@@ -559,29 +559,17 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	IPopupShower popupShower = null;
 
-	public void js_showFormPopup(IComponent elementToShowRelatedTo, Object formToShow, IRecord record, String dataprovider)
+	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
 	{
-		IClientPluginAccess clientPluginAccess = getClientPluginAccess();
-
-		IForm form = null;
-		if (formToShow instanceof String)
-		{
-			form = clientPluginAccess.getFormManager().getForm((String)formToShow);
-		}
-		else if (formToShow instanceof IForm)
-		{
-			form = (IForm)formToShow;
-		}
-
 		if (form != null && elementToShowRelatedTo != null)
 		{
-			if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
+			if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
-				popupShower = new WicketPopupShower(elementToShowRelatedTo, form, record, dataprovider, getClientPluginAccess());
+				popupShower = new WicketPopupShower(elementToShowRelatedTo, form, scope, dataprovider, getClientPluginAccess());
 			}
-			else if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+			else if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 			{
-				popupShower = new SwingPopupShower(elementToShowRelatedTo, form, record, dataprovider);
+				popupShower = new SwingPopupShower(elementToShowRelatedTo, form, scope, dataprovider);
 			}
 			else
 			{
@@ -600,6 +588,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	{
 		popupShower.close(retval);
 	}
+
+	public void js_cancelFormPopup()
+	{
+		popupShower.cancel();
+	}
+
 
 	/* menu methods */
 

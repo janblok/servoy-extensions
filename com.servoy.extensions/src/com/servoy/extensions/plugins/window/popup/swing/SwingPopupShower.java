@@ -34,9 +34,10 @@ import javax.swing.JWindow;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 
+import org.mozilla.javascript.Scriptable;
+
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
 import com.servoy.j2db.IForm;
-import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IFormUI;
 
@@ -49,7 +50,7 @@ public class SwingPopupShower implements IPopupShower
 
 	private final JComponent elementToShowRelatedTo;
 	private final IForm form;
-	private final IRecord record;
+	private final Scriptable scope;
 	private final String dataprovider;
 	private JWindow window;
 	private Component glassPane;
@@ -63,13 +64,13 @@ public class SwingPopupShower implements IPopupShower
 	 * @param dataprovider
 	 */
 	@SuppressWarnings("nls")
-	public SwingPopupShower(IComponent elementToShowRelatedTo, IForm form, IRecord record, String dataprovider)
+	public SwingPopupShower(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
 	{
 		if (!(elementToShowRelatedTo instanceof JComponent)) throw new IllegalArgumentException("element to show the popup on is not a JComponent: " +
 			elementToShowRelatedTo);
 		this.elementToShowRelatedTo = (JComponent)elementToShowRelatedTo;
 		this.form = form;
-		this.record = record;
+		this.scope = scope;
 		this.dataprovider = dataprovider;
 	}
 
@@ -124,16 +125,17 @@ public class SwingPopupShower implements IPopupShower
 	@SuppressWarnings("nls")
 	public void close(Object retval)
 	{
-		if (record.startEditing())
-		{
-			record.setValue(dataprovider, retval);
-		}
-		else
-		{
-			throw new RuntimeException("record dataprovider " + dataprovider + " can't be set to " + retval +
-				" in a form popup close because it can't be editted");
-		}
+		scope.put(dataprovider, scope, retval);
+		cancel();
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.window.popup.IPopupShower#cancel()
+	 */
+	public void cancel()
+	{
 		closeWindow(true);
 	}
 

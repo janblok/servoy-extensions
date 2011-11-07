@@ -23,10 +23,10 @@ import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
 import com.servoy.j2db.IForm;
-import com.servoy.j2db.dataprocessing.IRecord;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.server.headlessclient.IRepeatingView;
@@ -42,25 +42,25 @@ public class WicketPopupShower implements IPopupShower
 {
 	private final Component elementToShowRelatedTo;
 	private final IForm form;
-	private final IRecord record;
+	private final Scriptable scope;
 	private final String dataprovider;
 	private final IClientPluginAccess clientPluginAccess;
 
 	/**
 	 * @param elementToShowRelatedTo
 	 * @param form
-	 * @param record
+	 * @param scope
 	 * @param dataprovider
 	 * @param clientPluginAccess 
 	 */
 	@SuppressWarnings("nls")
-	public WicketPopupShower(IComponent elementToShowRelatedTo, IForm form, IRecord record, String dataprovider, IClientPluginAccess clientPluginAccess)
+	public WicketPopupShower(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider, IClientPluginAccess clientPluginAccess)
 	{
 		if (!(elementToShowRelatedTo instanceof Component)) throw new IllegalArgumentException("element to show the popup on is not a wicket Component: " +
 			elementToShowRelatedTo);
 		this.elementToShowRelatedTo = (Component)elementToShowRelatedTo;
 		this.form = form;
-		this.record = record;
+		this.scope = scope;
 		this.dataprovider = dataprovider;
 		this.clientPluginAccess = clientPluginAccess;
 	}
@@ -106,18 +106,17 @@ public class WicketPopupShower implements IPopupShower
 	@SuppressWarnings("nls")
 	public void close(Object retval)
 	{
-		if (record.startEditing())
-		{
-			record.setValue(dataprovider, retval);
-		}
-		else
-		{
-			throw new RuntimeException("record dataprovider " + dataprovider + " can't be set to " + retval +
-				" in a form popup close because it can't be editted");
-		}
+		scope.put(dataprovider, scope, retval);
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.extensions.plugins.window.popup.IPopupShower#cancel()
+	 */
+	public void cancel()
+	{
 		close();
-
 	}
 
 	/**

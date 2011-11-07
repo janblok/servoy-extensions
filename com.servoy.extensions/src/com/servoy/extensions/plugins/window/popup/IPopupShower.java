@@ -34,4 +34,9 @@ public interface IPopupShower
 	 */
 	void close(Object retval);
 
+	/**
+	 * 
+	 */
+	void cancel();
+
 }
