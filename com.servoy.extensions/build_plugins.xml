@@ -662,21 +662,13 @@
 			</fileset>
 		</copy>
 
-		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window/shortcut/wicket/res">
-			<fileset dir="${src_plugins.dir}/window/shortcut/wicket/res">
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window">
+			<fileset dir="${src_plugins.dir}/window">
 				<include name="**/*.css"/>
 				<include name="**/*.png"/>
 				<include name="**/*.gif"/>
 				<include name="**/*.js"/>
-			</fileset>
-		</copy>
-
-		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/window/menu/wicket/res">
-			<fileset dir="${src_plugins.dir}/window/menu/wicket/res">
-				<include name="**/*.css"/>
-				<include name="**/*.png"/>
-				<include name="**/*.gif"/>
-				<include name="**/*.js"/>
+				<include name="**/*.html"/>
 			</fileset>
 		</copy>
 
