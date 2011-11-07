@@ -176,7 +176,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	 * Set the level of visible nodes (expand or collapse to certain level)
 	 *
 	 * @sample
-	 * %%elementName%%.setNodeLevelVisible(globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false)); 
+	 * %%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false)); 
 	 * 
 	 * @param level
 	 * 

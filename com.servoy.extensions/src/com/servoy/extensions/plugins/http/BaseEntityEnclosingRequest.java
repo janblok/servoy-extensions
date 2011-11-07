@@ -68,7 +68,7 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 	 * poster.addParameter('status',scopes.globals.textToPost);
 	 * poster.addParameter('source','Test Source');
 	 * poster.setCharset('UTF-8');
-	 * var httpCode = poster.executeRequest(scopes.globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok
+	 * var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.globals.twitterPassword).getStatusCode() // httpCode 200 is ok
 	 *
 	 * @param charset 
 	 */

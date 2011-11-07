@@ -255,7 +255,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * 	{
 	 * 		application.output("value get from scopes.globals.number :: "+ value);
 	 * 		scopes.globals.value = value+10;
-	 * 		var returnValue = jsclient.setDataProviderValue(null, "scopes.globals.number", globals.value, 'remoteMethod');
+	 * 		var returnValue = jsclient.setDataProviderValue(null, "scopes.globals.number", scopes.globals.value, 'remoteMethod');
 	 * 		application.output("value set to scopes.globals.number previous value "+ returnValue);
 	 * 	}
 	 * 	else
