@@ -107,6 +107,7 @@ public class WicketPopupShower implements IPopupShower
 	public void close(Object retval)
 	{
 		scope.put(dataprovider, scope, retval);
+		cancel();
 	}
 
 	/*
