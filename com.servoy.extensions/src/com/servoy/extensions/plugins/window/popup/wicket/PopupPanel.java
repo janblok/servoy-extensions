@@ -26,6 +26,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
+import com.servoy.j2db.server.headlessclient.yui.YUILoader;
 
 /**
  * @author jcompagner
@@ -58,6 +59,7 @@ public class PopupPanel extends Panel
 	public void renderHead(HtmlHeaderContainer container)
 	{
 		super.renderHead(container);
+		container.getHeaderResponse().renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
 		container.getHeaderResponse().renderOnDomReadyJavascript("positionPopup('" + getMarkupId() + "','" + elementToShowRelatedTo.getMarkupId() + "');");
 	}
 }
