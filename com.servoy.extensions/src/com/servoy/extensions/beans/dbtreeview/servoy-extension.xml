@@ -588,7 +588,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
             <summary><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
-            <sample><![CDATA[%%elementName%%.setNodeLevelVisible(globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
+            <sample><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
             <parameters>
               <parameter name="level" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -958,7 +958,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
             <summary><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
-            <sample><![CDATA[%%elementName%%.setNodeLevelVisible(globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
+            <sample><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
             <parameters>
               <parameter name="level" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>

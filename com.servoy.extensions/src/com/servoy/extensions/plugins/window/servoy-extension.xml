@@ -5999,6 +5999,10 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               <parameter name="row" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
+          <function name="cancelFormPopup" undocumented="true">
+            <argumentsTypes/>
+            <return type="void" typecode="void"/>
+          </function>
           <function name="closeFormPopup" undocumented="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
@@ -6432,15 +6436,15 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
           <function name="showFormPopup" undocumented="true">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="com.servoy.j2db.dataprocessing.IRecord"/>
+              <argumentType typecode="com.servoy.j2db.IForm"/>
+              <argumentType typecode="org.mozilla.javascript.Scriptable"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <parameters>
               <parameter name="elementToShowRelatedTo" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
-              <parameter name="formToShow" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="record" type="com.servoy.j2db.dataprocessing.IRecord" typecode="com.servoy.j2db.dataprocessing.IRecord"/>
+              <parameter name="form" type="com.servoy.j2db.IForm" typecode="com.servoy.j2db.IForm"/>
+              <parameter name="scope" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable"/>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>

@@ -660,7 +660,7 @@ var poster = client.createPostRequest('https://twitter.com/statuses/update.json'
 poster.addParameter('status',scopes.globals.textToPost);
 poster.addParameter('source','Test Source');
 poster.setCharset('UTF-8');
-var httpCode = poster.executeRequest(scopes.globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok]]></sample>
+var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.globals.twitterPassword).getStatusCode() // httpCode 200 is ok]]></sample>
             <parameters>
               <parameter name="charset"/>
             </parameters>
@@ -741,7 +741,7 @@ var poster = client.createPostRequest('https://twitter.com/statuses/update.json'
 poster.addParameter('status',scopes.globals.textToPost);
 poster.addParameter('source','Test Source');
 poster.setCharset('UTF-8');
-var httpCode = poster.executeRequest(scopes.globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok]]></sample>
+var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.globals.twitterPassword).getStatusCode() // httpCode 200 is ok]]></sample>
             <parameters>
               <parameter name="charset"/>
             </parameters>
