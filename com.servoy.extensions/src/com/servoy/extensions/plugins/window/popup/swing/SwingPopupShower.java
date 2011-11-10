@@ -38,6 +38,8 @@ import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
 import com.servoy.j2db.IForm;
+import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IFormUI;
 
@@ -47,8 +49,8 @@ import com.servoy.j2db.ui.IFormUI;
  */
 public class SwingPopupShower implements IPopupShower
 {
-
-	private final JComponent elementToShowRelatedTo;
+	private final IClientPluginAccess clientPluginAccess;
+	private JComponent elementToShowRelatedTo;
 	private final IForm form;
 	private final Scriptable scope;
 	private final String dataprovider;
@@ -64,11 +66,13 @@ public class SwingPopupShower implements IPopupShower
 	 * @param dataprovider
 	 */
 	@SuppressWarnings("nls")
-	public SwingPopupShower(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
+	public SwingPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
 	{
-		if (!(elementToShowRelatedTo instanceof JComponent)) throw new IllegalArgumentException("element to show the popup on is not a JComponent: " +
-			elementToShowRelatedTo);
-		this.elementToShowRelatedTo = (JComponent)elementToShowRelatedTo;
+		this.clientPluginAccess = clientPluginAccess;
+		if (elementToShowRelatedTo instanceof JComponent)
+		{
+			this.elementToShowRelatedTo = (JComponent)elementToShowRelatedTo;
+		}
 		this.form = form;
 		this.scope = scope;
 		this.dataprovider = dataprovider;
@@ -81,11 +85,21 @@ public class SwingPopupShower implements IPopupShower
 	 */
 	public void show()
 	{
-		Container parent = elementToShowRelatedTo.getParent();
+		Container parent = null;
+		if (elementToShowRelatedTo != null)
+		{
+			parent = elementToShowRelatedTo.getParent();
+		}
+		else
+		{
+			parent = ((ISmartRuntimeWindow)clientPluginAccess.getCurrentRuntimeWindow()).getWindow();
+		}
+
 		while (parent != null && !(parent instanceof Window))
 		{
 			parent = parent.getParent();
 		}
+
 		if (parent != null)
 		{
 			windowListener = new WindowListener();
@@ -100,9 +114,16 @@ public class SwingPopupShower implements IPopupShower
 			window.getContentPane().setLayout(new BorderLayout(0, 0));
 			window.getContentPane().add((Component)formUI, BorderLayout.CENTER);
 			window.pack();
-			Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
-			locationOnScreen.y += elementToShowRelatedTo.getHeight();
-			window.setLocation(locationOnScreen);
+			if (elementToShowRelatedTo != null)
+			{
+				Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
+				locationOnScreen.y += elementToShowRelatedTo.getHeight();
+				window.setLocation(locationOnScreen);
+			}
+			else
+			{
+				window.setLocationRelativeTo(null);
+			}
 			window.setVisible(true);
 
 			if (parent instanceof RootPaneContainer)
@@ -112,9 +133,7 @@ public class SwingPopupShower implements IPopupShower
 				mouseListener = new PopupMouseListener();
 				glassPane.addMouseListener(mouseListener);
 			}
-
 		}
-
 	}
 
 	/*
@@ -150,7 +169,6 @@ public class SwingPopupShower implements IPopupShower
 		window.getContentPane().removeAll();
 		window.dispose();
 		if (removeMouseListener) glassPane.removeMouseListener(mouseListener);
-
 	}
 
 	/**
@@ -214,7 +232,6 @@ public class SwingPopupShower implements IPopupShower
 				MouseEvent e2 = new MouseEvent(dispatchComponent, e.getID(), e.getWhen(), e.getModifiers(), p3.x, p3.y, e.getClickCount(), e.isPopupTrigger());
 				dispatchComponent.dispatchEvent(e2);
 			}
-		};
+		}
 	}
-
 }

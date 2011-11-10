@@ -34,7 +34,6 @@ import com.servoy.j2db.server.headlessclient.yui.YUILoader;
  */
 public class PopupPanel extends Panel
 {
-
 	private final Component elementToShowRelatedTo;
 
 	/**
@@ -47,7 +46,7 @@ public class PopupPanel extends Panel
 		add((Component)form.getFormUI());
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
-		add(new SimpleAttributeModifier("style", "position:absolute;z-index:999;width:" + size.width + ";height:" + size.height));
+		add(new SimpleAttributeModifier("style", "position:absolute;z-index:999;width:" + size.width + "px;height:" + size.height + "px"));
 	}
 
 	/*
@@ -59,7 +58,23 @@ public class PopupPanel extends Panel
 	public void renderHead(HtmlHeaderContainer container)
 	{
 		super.renderHead(container);
-		container.getHeaderResponse().renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
-		container.getHeaderResponse().renderOnDomReadyJavascript("positionPopup('" + getMarkupId() + "','" + elementToShowRelatedTo.getMarkupId() + "');");
+		StringBuilder js = new StringBuilder();
+		if (elementToShowRelatedTo != null)
+		{
+			container.getHeaderResponse().renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
+		
+			js.append("positionPopup('");
+			js.append(getMarkupId());
+			js.append("','");
+			js.append(elementToShowRelatedTo.getMarkupId());
+			js.append("');");
+		}
+		else
+		{
+			js.append("centerPopup('");
+			js.append(getMarkupId());
+			js.append("');");
+		}
+		container.getHeaderResponse().renderOnDomReadyJavascript(js.toString());
 	}
 }

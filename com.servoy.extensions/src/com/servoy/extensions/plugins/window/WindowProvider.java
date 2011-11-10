@@ -36,7 +36,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -51,6 +50,7 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -559,17 +559,30 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	IPopupShower popupShower = null;
 
-	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
+	/**
+	 * Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+	 * 
+	 * @sample
+	 * //Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+	 * plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
+	 * //do call closeFormPopup(ordervalue) from the orderPicker form
+	 * 
+	 * @param elementToShowRelatedTo element to show related to or null to center in screen
+	 * @param form the form to show
+	 * @param scope the scope to put retval into
+	 * @param dataproviderID the dataprovider of scope to fill
+	 */
+	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataproviderID)
 	{
-		if (form != null && elementToShowRelatedTo != null)
+		if (form != null)
 		{
 			if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
-				popupShower = new WicketPopupShower(elementToShowRelatedTo, form, scope, dataprovider, getClientPluginAccess());
+				popupShower = new WicketPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scope, dataproviderID);
 			}
 			else if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 			{
-				popupShower = new SwingPopupShower(elementToShowRelatedTo, form, scope, dataprovider);
+				popupShower = new SwingPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scope, dataproviderID);
 			}
 			else
 			{
@@ -1047,9 +1060,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @deprecated Obsolete method.
 	 */
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused")
-	String code, @SuppressWarnings("unused")
-	String developer)
+	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
 	{
 		return true;
 	}

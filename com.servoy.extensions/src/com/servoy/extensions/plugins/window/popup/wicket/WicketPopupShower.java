@@ -40,11 +40,11 @@ import com.servoy.j2db.ui.IComponent;
  */
 public class WicketPopupShower implements IPopupShower
 {
-	private final Component elementToShowRelatedTo;
+	private final IClientPluginAccess clientPluginAccess;
+	private Component elementToShowRelatedTo;
 	private final IForm form;
 	private final Scriptable scope;
 	private final String dataprovider;
-	private final IClientPluginAccess clientPluginAccess;
 
 	/**
 	 * @param elementToShowRelatedTo
@@ -54,15 +54,16 @@ public class WicketPopupShower implements IPopupShower
 	 * @param clientPluginAccess 
 	 */
 	@SuppressWarnings("nls")
-	public WicketPopupShower(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider, IClientPluginAccess clientPluginAccess)
+	public WicketPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
 	{
-		if (!(elementToShowRelatedTo instanceof Component)) throw new IllegalArgumentException("element to show the popup on is not a wicket Component: " +
-			elementToShowRelatedTo);
-		this.elementToShowRelatedTo = (Component)elementToShowRelatedTo;
+		this.clientPluginAccess = clientPluginAccess;
+		if (elementToShowRelatedTo instanceof Component)
+		{
+			this.elementToShowRelatedTo = (Component)elementToShowRelatedTo;
+		}
 		this.form = form;
 		this.scope = scope;
 		this.dataprovider = dataprovider;
-		this.clientPluginAccess = clientPluginAccess;
 	}
 
 	/*
@@ -130,5 +131,4 @@ public class WicketPopupShower implements IPopupShower
 		repeatingView.removeComponent("popup");
 		repeatingView.removeComponent("blocker");
 	}
-
 }
