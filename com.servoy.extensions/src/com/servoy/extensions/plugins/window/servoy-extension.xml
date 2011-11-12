@@ -6433,7 +6433,7 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
             <deprecated><![CDATA[Replaced by #setToolBarAreaVisible(boolean).]]></deprecated>
             <sample/>
           </function>
-          <function name="showFormPopup" undocumented="true">
+          <function name="showFormPopup">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
               <argumentType typecode="com.servoy.j2db.IForm"/>
@@ -6441,11 +6441,24 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description><![CDATA[Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.]]></description>
+            <summary><![CDATA[Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.]]></summary>
+            <sample><![CDATA[//Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
+//do call closeFormPopup(ordervalue) from the orderPicker form]]></sample>
             <parameters>
-              <parameter name="elementToShowRelatedTo" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
-              <parameter name="form" type="com.servoy.j2db.IForm" typecode="com.servoy.j2db.IForm"/>
-              <parameter name="scope" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable"/>
-              <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="elementToShowRelatedTo" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent">
+                <description><![CDATA[element to show related to or null to center in screen]]></description>
+              </parameter>
+              <parameter name="form" type="com.servoy.j2db.IForm" typecode="com.servoy.j2db.IForm">
+                <description><![CDATA[the form to show]]></description>
+              </parameter>
+              <parameter name="scope" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
+                <description><![CDATA[the scope to put retval into]]></description>
+              </parameter>
+              <parameter name="dataproviderID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the dataprovider of scope to fill]]></description>
+              </parameter>
             </parameters>
           </function>
           <function deprecated="true" name="showPopupMenu">
