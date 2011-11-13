@@ -159,7 +159,7 @@ else
           </function>
           <function name="getException">
             <argumentsTypes/>
-            <return type="java.lang.Exception" typecode="java.lang.Exception"/>
+            <return type="com.servoy.j2db.util.ServoyException" typecode="java.lang.Exception"/>
             <description><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
             <summary><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
             <sample><![CDATA[/**************************************************************************** 
