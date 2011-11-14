@@ -6,7 +6,7 @@
 	<classpathentry kind="lib" path="lib/drools-compiler.jar"/>
 	<classpathentry kind="lib" path="lib/drools-core.jar"/>
 	<classpathentry kind="lib" path="lib/jbpm-tomcat6.jar"/>
-	<classpathentry kind="lib" path="lib/jbpm.jar"/>
+	<classpathentry kind="lib" path="lib/jbpm.jar" sourcepath="libsrc/jbpm-4.4-src.zip"/>
 	<classpathentry kind="lib" path="lib/juel-engine.jar"/>
 	<classpathentry kind="lib" path="lib/juel-impl.jar"/>
 	<classpathentry kind="lib" path="lib/juel.jar"/>

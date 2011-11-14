@@ -42,7 +42,7 @@ public class HeadlessClientActivity implements ActivityBehaviour
 {
 	public void execute(ActivityExecution ae) throws Exception 
 	{
-		Map<String,Object> variables = ae.getVariables();
+		Map<String, Object> variables = (Map<String, Object>) ae.getVariables();
 		Object solutionName = variables.get(IWorkflowPluginService.SOLUTION_PROPERTY_NAME);
 		if (solutionName == null)
 		{

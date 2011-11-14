@@ -509,11 +509,9 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		{
 			System.setProperty("hibernate.dialect", jbpm_server.getDialectClassName()); //not really nice, but hibernate does not seem to support more than one anyway
 			System.setProperty("hibernate.connection.datasource","comp/env/jdbc/servoy_"+jbpm_server.getName()); //strange why does java: not work here any more? (while it does in main method below)
+			System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "tyrex.naming.MemoryContextFactory");//Using a kind of hack here with in-mem shared JNDI datasource to have hibernate use the servoy database definition
 
-			//Using a kind of hack here with in-mem shared JNDI datasource to have hibernate use the servoy database definition
-            Hashtable<String, String> environment = new Hashtable<String, String>();
-            environment.put(Context.INITIAL_CONTEXT_FACTORY, "tyrex.naming.MemoryContextFactory");
-            Context ctx = new InitialContext(environment);
+            Context ctx = new InitialContext();
 			ctx = getOrCreateSubContext(ctx, "comp" );
 			ctx = getOrCreateSubContext(ctx, "env" );
 			ctx = getOrCreateSubContext(ctx, "jdbc" );
@@ -546,12 +544,11 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 				conf.setResource("jbpm.cfg.xml");
 				processEngine = conf.buildProcessEngine();
 				
-				//Workarround classload problem to make sure all services are pre loaded
+				//Workarround classload problem to make sure all services are pre loaded (still needed?)
 				processEngine.getExecutionService();
 				processEngine.getHistoryService();
 				processEngine.getTaskService();
 				processEngine.getRepositoryService();
-				
 			}
 			finally
 			{

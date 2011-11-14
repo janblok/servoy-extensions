@@ -14,8 +14,8 @@
 	<transaction-context>
 		<object class="com.servoy.extensions.plugins.workflow.IdentitySessionImpl" />
 		<hibernate-session current="true"/>
+		<mail-session>
+	  		<mail-server session-jndi='comp/env/mail/smtp' />
+		</mail-session>
 	</transaction-context>
-	<mail-session>
-  		<mail-server session-jndi='comp/env/mail/smtp' />
-	</mail-session>
 </jbpm-configuration>
