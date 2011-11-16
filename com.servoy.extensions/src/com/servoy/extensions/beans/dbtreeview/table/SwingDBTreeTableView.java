@@ -328,6 +328,14 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		js_setSelectionPath(selectionPath);
 	}
 
+	@Override
+	public void js_setSelectionPath(Object[] selectionPath)
+	{
+		super.js_setSelectionPath(selectionPath);
+		int[] selectedRows = tree.getSelectionRows();
+		if (selectedRows != null && selectedRows.length > 0) treeTable.getSelectionModel().setSelectionInterval(selectedRows[0], selectedRows[0]);
+	}
+
 	/*
 	 * Tree node checkbox state listener
 	 * 
