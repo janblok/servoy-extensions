@@ -1,0 +1,39 @@
+### Eclipse Workspace Patch 1.0
+#P jbpm-jpdl
+Index: src/main/java/org/jbpm/jpdl/internal/xml/JpdlParser.java
+===================================================================
+--- src/main/java/org/jbpm/jpdl/internal/xml/JpdlParser.java	(revision 23)
++++ src/main/java/org/jbpm/jpdl/internal/xml/JpdlParser.java	(working copy)
+@@ -706,13 +706,30 @@
+ 
+   private MailTemplate parseMailTemplate(Element element, Parse parse,
+     String defaultTemplateName) {
+-    if (element.hasAttribute("template")) {
++    if (element.hasAttribute("template") && !element.hasChildNodes()) {
+       // fetch template from configuration
+       return findMailTemplate(element, parse, element.getAttribute("template"));
+     }
+     if (!XmlUtil.isTextOnly(element)) {
+       // parse inline template
+-      return MailTemplateBinding.parseMailTemplate(element, parse);
++      MailTemplate mt = MailTemplateBinding.parseMailTemplate(element, parse);
++      if (element.hasAttribute("template"))
++      {
++    	  MailTemplate real_template = findMailTemplate(element, parse, element.getAttribute("template"));
++    	  if (real_template != null)
++    	  {
++    		  //copy field where destination is empty
++    		  if (mt.getFrom() == null) mt.setFrom(real_template.getFrom());
++    		  if (mt.getTo() == null) mt.setTo(real_template.getTo());
++    		  if (mt.getCc() == null) mt.setCc(real_template.getCc());
++    		  if (mt.getBcc() == null) mt.setBcc(real_template.getBcc());
++    		  if (mt.getSubject() == null) mt.setSubject(real_template.getSubject());
++    		  if (mt.getText() == null) mt.setText(real_template.getText());
++    		  if (mt.getHtml() == null) mt.setHtml(real_template.getHtml());
++    		  if (mt.getLanguage() == null) mt.setLanguage(real_template.getLanguage());
++    	  }
++      }
++      return mt;
+     }
+     if (defaultTemplateName != null) {
+       // fetch default template

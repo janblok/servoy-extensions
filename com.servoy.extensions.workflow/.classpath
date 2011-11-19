@@ -2,16 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
-	<classpathentry kind="lib" path="lib/drools-api.jar"/>
-	<classpathentry kind="lib" path="lib/drools-compiler.jar"/>
-	<classpathentry kind="lib" path="lib/drools-core.jar"/>
-	<classpathentry kind="lib" path="lib/jbpm-tomcat6.jar"/>
-	<classpathentry kind="lib" path="lib/jbpm.jar" sourcepath="libsrc/jbpm-4.4-src.zip"/>
-	<classpathentry kind="lib" path="lib/juel-engine.jar"/>
-	<classpathentry kind="lib" path="lib/juel-impl.jar"/>
-	<classpathentry kind="lib" path="lib/juel.jar"/>
-	<classpathentry kind="lib" path="lib/livetribe-jsr223.jar"/>
-	<classpathentry kind="lib" path="lib/mvel2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/drools-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/drools-compiler.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/drools-core.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jbpm-tomcat6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jbpm.jar" sourcepath="libsrc/jbpm-4.4-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/juel-engine.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/juel-impl.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/juel.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/livetribe-jsr223.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mvel2.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/servoy_shared"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.dltk.javascript.rhino"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/servoy_headless_client"/>
