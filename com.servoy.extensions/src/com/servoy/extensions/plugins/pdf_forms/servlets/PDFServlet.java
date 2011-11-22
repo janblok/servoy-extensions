@@ -94,7 +94,8 @@ public class PDFServlet extends HttpServlet
 		String hostname = request.getServerName();
 		int port = request.getServerPort();
 		String base = request.getScheme() + "://" + hostname; //$NON-NLS-1$ 
-		if (port != 80) base += ":" + port;
+		// fix for bad pdf behavior, if we add default port it will not work!!!!!
+		if (port != 80 && port != 443) base += ":" + port;
 		String uri = request.getRequestURI();//with servlet name
 		String path = request.getPathInfo(); //without servlet name
 
@@ -192,7 +193,6 @@ public class PDFServlet extends HttpServlet
 							if (outputFDF != null)
 							{
 								outputFDF.SetFile(templateLocation);
-
 								StringBuffer sb = new StringBuffer();
 								if (action_type == EDIT)
 								{
