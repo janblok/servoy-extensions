@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.rmi.RemoteException;
@@ -101,9 +101,9 @@ public class JSClient implements IScriptObject, IConstantsObject
 						event.setType(CALLBACK_EVENT);
 						event.setData(retval);
 						// function def will not throw an exception.
-						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this  });
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
 					}
-					catch (Exception ex)
+					catch (ExceptionWrapper ex)
 					{
 						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						JSEvent event = new JSEvent();
@@ -119,7 +119,16 @@ public class JSClient implements IScriptObject, IConstantsObject
 							Debug.error(e);
 						}
 						event.setData(data);
-						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this  });
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
+					}
+					catch (Exception ex)
+					{
+						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						JSEvent event = new JSEvent();
+						event.setType(CALLBACK_EXCEPTION_EVENT);
+						Object data = ex.getMessage();
+						event.setData(data);
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
 					}
 				}
 				finally

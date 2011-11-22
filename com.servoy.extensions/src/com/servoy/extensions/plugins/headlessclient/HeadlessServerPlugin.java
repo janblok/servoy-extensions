@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.NativeError;
 import org.mozilla.javascript.RhinoException;
 
 import com.servoy.j2db.plugins.IServerAccess;
@@ -130,13 +131,20 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 		catch (JavaScriptException jse)
 		{
-			throw new Exception(getJSONConverter().convertToJSON(jse.getValue()));
+			Object o = jse.getValue();
+			if (o instanceof NativeError)
+			{
+				o = ((NativeError)o).get("message", null);
+			}
+			throw new ExceptionWrapper(getJSONConverter().convertToJSON(o));
 		}
 		catch (RhinoException e)
 		{
 			// wrap it in a normal exception, else serializeable exceptions will happen.
-			throw new Exception(getJSONConverter().convertToJSON(e.details()));
+			throw new ExceptionWrapper(getJSONConverter().convertToJSON(e.details()));
 		}
+		// hopefully other exceptions that can happen here will be Serializeable for RMI; exceptions usually are/should be
+
 		finally
 		{
 			synchronized (methodCalls)
