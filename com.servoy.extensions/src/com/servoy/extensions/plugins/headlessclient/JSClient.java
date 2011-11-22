@@ -135,7 +135,7 @@ public class JSClient implements IScriptable, IConstantsObject
 						// function def will not throw an exception.
 						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
 					}
-					catch (Exception ex)
+					catch (ExceptionWrapper ex)
 					{
 						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						JSEvent event = new JSEvent();
@@ -150,6 +150,15 @@ public class JSClient implements IScriptable, IConstantsObject
 						{
 							Debug.error(e);
 						}
+						event.setData(data);
+						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
+					}
+					catch (Exception ex)
+					{
+						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						JSEvent event = new JSEvent();
+						event.setType(CALLBACK_EXCEPTION_EVENT);
+						Object data = ex.getMessage();
 						event.setData(data);
 						functionDef.executeAsync(plugin.getPluginAccess(), new Object[] { event, JSClient.this });
 					}
