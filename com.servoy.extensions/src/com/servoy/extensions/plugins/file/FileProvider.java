@@ -1202,6 +1202,7 @@ public class FileProvider implements IScriptObject
 		else if ("writeFile".equals(methodName))
 		{
 			StringBuffer sb = new StringBuffer();
+			sb.append("/** @type {Array<byte>}*/");
 			sb.append("var bytes = new Array();\n");
 			sb.append("\tfor (var i=0; i<1024; i++)\n");
 			sb.append("\t\tbytes[i] = i % 100;\n");
