@@ -164,7 +164,9 @@ public class DialogProvider implements IScriptable
 		JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
 		pane.setInitialValue(options[0]);
 		createAndShowDialog(title, pane);
-		return (String)pane.getValue();
+		Object retValue = pane.getValue();
+		if (retValue != null) return retValue.toString();
+		return null;
 	}
 
 	/**

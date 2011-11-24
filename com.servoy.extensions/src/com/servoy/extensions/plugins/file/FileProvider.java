@@ -909,7 +909,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
+	String contentType)
 	{
 		try
 		{
@@ -1032,6 +1033,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
 	 *
 	 * @sample
+	 * /**@type {Array<byte>}*&#47;
 	 * var bytes = new Array();
 	 * 	for (var i=0; i<1024; i++)
 	 * 		bytes[i] = i % 100;
@@ -1059,7 +1061,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param data
 	 * @param mimeType
 	 */
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	String mimeType)
 	{
 		if (data == null) return false;
 		try
