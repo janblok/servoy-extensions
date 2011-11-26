@@ -1378,7 +1378,8 @@ the filename that was transfered.]]></summary>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
             <summary><![CDATA[Writes data into a binary file.]]></summary>
-            <sample><![CDATA[var bytes = new Array();
+            <sample><![CDATA[/**@type {Array<byte>}*/
+var bytes = new Array();
 	for (var i=0; i<1024; i++)
 		bytes[i] = i % 100;
 	var f = plugins.file.convertToJSFile('bin.dat');
@@ -1402,7 +1403,8 @@ the filename that was transfered.]]></summary>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
             <summary><![CDATA[Writes data into a binary file.]]></summary>
-            <sample><![CDATA[var bytes = new Array();
+            <sample><![CDATA[/**@type {Array<byte>}*/
+var bytes = new Array();
 	for (var i=0; i<1024; i++)
 		bytes[i] = i % 100;
 	var f = plugins.file.convertToJSFile('bin.dat');
