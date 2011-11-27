@@ -153,7 +153,7 @@ public class JSProgressMonitor extends TimerTask implements IScriptable, IJavaSc
 	 * 		application.output('canceled!')
 	 * 	}
 	 * 	if (monitor.isFinished()) {
-	 * 		application.output('finished!'
+	 * 		application.output('finished!')
 	 * 	}
 	 */
 	public long js_getCurrentBytesToTransfer()

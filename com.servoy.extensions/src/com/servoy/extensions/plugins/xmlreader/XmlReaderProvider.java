@@ -71,14 +71,14 @@ public class XmlReaderProvider implements IScriptable, IReturnedTypesProvider
 	 * Reads an XML document from a string.
 	 *
 	 * @sample
-	 * var xmlString = '<books><book price="44.95">
-	 * <title>Core Java 1.5</title>
-	 * <author>Piet Klerksen</author>
-	 * <nrPages>1487</nrPages>
-	 * </book>
-	 * <book price="59.95">
-	 * <title>Developing with Servoy</title>
-	 * <author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
+	 * var xmlString = '<books><book price="44.95">' +
+	 * '<title>Core Java 1.5</title>' +
+	 * '<author>Piet Klerksen</author>' +
+	 * '<nrPages>1487</nrPages>' +
+	 * '</book>' +
+	 * '<book price="59.95">' +
+	 * '<title>Developing with Servoy</title>' +
+	 * '<author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
 	 * var xmlNodes = plugins.XmlReader.readXmlDocumentFromString(xmlString);
 	 *
 	 * @param argument 

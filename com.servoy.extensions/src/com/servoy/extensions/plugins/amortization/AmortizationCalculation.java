@@ -350,8 +350,6 @@ public class AmortizationCalculation implements IScriptable
 	 * Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.
 	 *
 	 * @sample
-	 * //Returns the error that remains when solving for the unknown.
-	 * Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.
 	 * var c = plugins.amortization.newCalculation();
 	 * // sets the rate to -1 for unknown.
 	 * c.addRateChange(-1, new Date(2005, 0, 1));

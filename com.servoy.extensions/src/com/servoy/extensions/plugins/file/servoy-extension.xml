@@ -564,7 +564,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="getCurrentFileIndex">
@@ -579,7 +579,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="getCurrentTransferredBytes">
@@ -594,7 +594,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="getCurrentTransferredFileName">
@@ -609,7 +609,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="getTotalBytesToTransfer">
@@ -624,7 +624,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="getTotalFilesToTransfer">
@@ -639,7 +639,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="getTotalTransferredBytes">
@@ -654,7 +654,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="isCanceled">
@@ -669,7 +669,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="isFinished">
@@ -684,7 +684,7 @@ else {
 		application.output('canceled!')
 	}
 	if (monitor.isFinished()) {
-		application.output('finished!'
+		application.output('finished!')
 	}]]></sample>
           </function>
           <function name="setProgressCallBack">

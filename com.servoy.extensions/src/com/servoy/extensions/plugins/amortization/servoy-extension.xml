@@ -353,9 +353,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             <description><![CDATA[Returns the error that remains when solving for the unknown.
 Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.]]></description>
             <summary><![CDATA[Returns the error that remains when solving for the unknown.]]></summary>
-            <sample><![CDATA[//Returns the error that remains when solving for the unknown.
-Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.
-var c = plugins.amortization.newCalculation();
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
 // sets the rate to -1 for unknown.
 c.addRateChange(-1, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));

@@ -145,14 +145,14 @@ var childNodes = xmlNodes[0].getChildNodes();]]></sample>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
             <description><![CDATA[Reads an XML document from a string.]]></description>
             <summary><![CDATA[Reads an XML document from a string.]]></summary>
-            <sample><![CDATA[var xmlString = '<books><book price="44.95">
-<title>Core Java 1.5</title>
-<author>Piet Klerksen</author>
-<nrPages>1487</nrPages>
-</book>
-<book price="59.95">
-<title>Developing with Servoy</title>
-<author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
+            <sample><![CDATA[var xmlString = '<books><book price="44.95">' +
+'<title>Core Java 1.5</title>' +
+'<author>Piet Klerksen</author>' +
+'<nrPages>1487</nrPages>' +
+'</book>' +
+'<book price="59.95">' +
+'<title>Developing with Servoy</title>' +
+'<author>Cheryl Owens and others</author><nrPages>492</nrPages></book></books>';
 var xmlNodes = plugins.XmlReader.readXmlDocumentFromString(xmlString);]]></sample>
             <parameters>
               <parameter name="argument" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>

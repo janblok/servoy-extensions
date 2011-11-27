@@ -633,7 +633,8 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Returns the supported HTTP Request operations as a String Array]]></description>
             <summary><![CDATA[Returns the supported HTTP Request operations as a String Array]]></summary>
-            <sample><![CDATA[var supportedOperations = request.getAllowedMethods()application.output(supportedOperations.join(',');]]></sample>
+            <sample><![CDATA[var supportedOperations = request.getAllowedMethods()
+application.output(supportedOperations.join(','));]]></sample>
           </function>
         </functions>
       </object>
