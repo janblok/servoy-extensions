@@ -56,10 +56,10 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 	 * // Creates a headless client that will open the given solution.
 	 * var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 	 * if (headlessClient != null && headlessClient.isValid()) { 
-	 * 	 var x = new Object();
-	 * 	 x.name = 'remote1';
-	 * 	 x.number = 10;
-	 * headlessClient.queueMethod(null, "remoteMethod", [x], callback);
+	 * 	var x = new Object();
+	 * 	x.name = 'remote1';
+	 * 	x.number = 10;
+	 * 	headlessClient.queueMethod(null, "remoteMethod", [x], callback);
 	 * }
 	 *
 	 * @param solutionName 

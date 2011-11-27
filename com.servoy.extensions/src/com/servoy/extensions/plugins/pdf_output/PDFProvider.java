@@ -144,10 +144,10 @@ public class PDFProvider implements IScriptable
 	 * var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
 	 * if (success)
 	 * {
-	 * forms.form_one.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
-	 * application.output('form one printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
-	 * forms.form_two.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
-	 * application.output('form two printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+	 * 	forms.form_one.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	 * 	application.output('form one printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+	 * 	forms.form_two.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	 * 	application.output('form two printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
 	 * }
 	 * application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 	 * plugins.pdf_output.endMetaPrintJob()
@@ -156,10 +156,10 @@ public class PDFProvider implements IScriptable
 	 * var success = plugins.pdf_output.startMetaPrintJob()
 	 * if (success)
 	 * {
-	 * forms.form_one.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
-	 * application.output('form one printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
-	 * forms.form_two.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
-	 * application.output('form two printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+	 * 	forms.form_one.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	 * 	application.output('form one printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+	 * 	forms.form_two.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	 * 	application.output('form two printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
 	 * }
 	 * application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 	 * mediaDataProvider = plugins.pdf_output.endMetaPrintJob()

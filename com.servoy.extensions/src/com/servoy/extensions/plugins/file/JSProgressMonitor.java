@@ -84,7 +84,7 @@ public class JSProgressMonitor extends TimerTask implements IScriptable, IJavaSc
 	 *
 	 * @sample
 	 * // call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
-	 * 	monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));
+	 * monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));
 	 *
 	 * @param function the {@link Function} to call back at the specified interval
 	 * @param interval the interval (in seconds) to use
@@ -147,14 +147,14 @@ public class JSProgressMonitor extends TimerTask implements IScriptable, IJavaSc
 	 *
 	 * @sample
 	 * application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
-	 * 	application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
-	 * 	application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
-	 * 	if (monitor.isCanceled()) {
-	 * 		application.output('canceled!')
-	 * 	}
-	 * 	if (monitor.isFinished()) {
-	 * 		application.output('finished!')
-	 * 	}
+	 * application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
+	 * application.output('current bytes transferred: '+monitor.getCurrentTransferredBytes() + ' / ' + monitor.getCurrentBytesToTransfer());
+	 * if (monitor.isCanceled()) {
+	 * 	application.output('canceled!')
+	 * }
+	 * if (monitor.isFinished()) {
+	 * 	application.output('finished!')
+	 * }
 	 */
 	public long js_getCurrentBytesToTransfer()
 	{

@@ -879,11 +879,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * var fileNameSuggestion = 'myspecialexport.tab'
-	 * 	var textData = 'load of data...'
-	 * 	var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
-	 * 	if (!success) application.output('Could not write file.');
-	 * 	// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
-	 * 	// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+	 * var textData = 'load of data...'
+	 * var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+	 * if (!success) application.output('Could not write file.');
+	 * // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
 	 *
 	 * @param file 
 	 * @param text_data 
@@ -909,8 +909,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
-	String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
 	{
 		try
 		{
@@ -1035,15 +1034,15 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * /**@type {Array<byte>}*&#47;
 	 * var bytes = new Array();
-	 * 	for (var i=0; i<1024; i++)
-	 * 		bytes[i] = i % 100;
-	 * 	var f = plugins.file.convertToJSFile('bin.dat');
-	 * 	if (!plugins.file.writeFile(f, bytes))
-	 * 		application.output('Failed to write the file.');
-	 * 	// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
-	 * 	var mimeType = 'application/vnd.ms-excel'
-	 * 	if (!plugins.file.writeFile(f, bytes, mimeType))
-	 * 		application.output('Failed to write the file.');
+	 * for (var i=0; i<1024; i++)
+	 * 	bytes[i] = i % 100;
+	 * var f = plugins.file.convertToJSFile('bin.dat');
+	 * if (!plugins.file.writeFile(f, bytes))
+	 * 	application.output('Failed to write the file.');
+	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+	 * var mimeType = 'application/vnd.ms-excel'
+	 * if (!plugins.file.writeFile(f, bytes, mimeType))
+	 * 	application.output('Failed to write the file.');
 	 *
 	 * @param f 
 	 * @param data 
@@ -1061,8 +1060,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param data
 	 * @param mimeType
 	 */
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
-	String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -1423,7 +1421,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // retrieves an array of files located on the server side inside the default upload folder:
-	 * 	var files = plugins.file.getRemoteFolderContents('/', '.txt');
+	 * var files = plugins.file.getRemoteFolderContents('/', '.txt');
 	 *
 	 * @since Servoy 5.2.1
 
@@ -1557,18 +1555,18 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sample
 	 * // send one file:
-	 * 	var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
-	 * 	if (file) {
-	 * 		plugins.file.streamFilesToServer( file, callbackFunction );
+	 * var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
+	 * if (file) {
+	 * 	plugins.file.streamFilesToServer( file, callbackFunction );
+	 * }
+	 * // send an array of files:
+	 * var folder = plugins.file.showDirectorySelectDialog();
+	 * if (folder) {
+	 * 	var files = plugins.file.getFolderContents(folder);
+	 * 	if (files) {
+	 * 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	 * 	}
-	 * 	// send an array of files:
-	 * 	var folder = plugins.file.showDirectorySelectDialog();
-	 * 	if (folder) {
-	 * 		var files = plugins.file.getFolderContents(folder);
-	 * 		if (files) {
-	 * 			var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
-	 * 		}
-	 * 	}
+	 * }
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
@@ -1669,13 +1667,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sample
 	 * // transfer all the files of a chosen server folder to a directory on the client
-	 * 	var dir = plugins.file.showDirectorySelectDialog();
-	 * 	if (dir) {
-	 * 		var list = plugins.file.getRemoteFolderContents('/images/user1/', null, 1);
-	 * 		if (list) {
-	 * 			var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
-	 * 		}
+	 * var dir = plugins.file.showDirectorySelectDialog();
+	 * if (dir) {
+	 * 	var list = plugins.file.getRemoteFolderContents('/images/user1/', null, 1);
+	 * 	if (list) {
+	 * 		var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 	 * 	}
+	 * }
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param s of the files on the server that will be transfered to the client, can be a String or a String[]
@@ -1862,7 +1860,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // get the (server-side) default upload location path:
-	 * 	var serverPath = plugins.file.getDefaultUploadLocation();
+	 * var serverPath = plugins.file.getDefaultUploadLocation();
 	 * 
 	 * @return the location as canonical path
 	 */
