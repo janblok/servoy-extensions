@@ -38,7 +38,7 @@ public class ValidatorPlugin implements IClientPlugin, IColumnValidatorProvider
 	{
 		if (validators == null)
 		{
-			validators = new IColumnValidator[] { new GlobalMethodValidator(application), new EmailValidator(), new RegexValidator(), new NumberRangeValidator(), new SizeValidator() };
+			validators = new IColumnValidator[] { new GlobalMethodValidator(application), new EmailValidator(), new RegexValidator(), new NumberRangeValidator(), new SizeValidator(), new IdentValidator() };
 		}
 		return validators;
 	}
