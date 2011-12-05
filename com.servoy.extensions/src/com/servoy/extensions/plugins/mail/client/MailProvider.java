@@ -118,7 +118,7 @@ public class MailProvider implements IScriptObject
 
 	public boolean js_isValidEmailAddress(String email)
 	{
-		return Utils.isValidEmailAddress(email);
+		return (email != null ? Utils.isValidEmailAddress(email) : false);
 	}
 
 	private void createMailService()
