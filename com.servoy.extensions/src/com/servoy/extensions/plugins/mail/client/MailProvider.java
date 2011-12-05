@@ -200,7 +200,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public boolean js_isValidEmailAddress(String email)
 	{
-		return (email != null ? Utils.isValidEmailAddress(email) : false);
+		return Utils.isValidEmailAddress(email);
 	}
 
 	private void createMailService()
