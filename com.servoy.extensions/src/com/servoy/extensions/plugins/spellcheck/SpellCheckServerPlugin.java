@@ -40,17 +40,16 @@ import com.keyoti.rapidSpell.LanguageType;
 import com.keyoti.rapidSpell.NoCurrentBadWordException;
 import com.keyoti.rapidSpell.RapidSpellChecker;
 import com.servoy.extensions.plugins.spellcheck.servlets.SpellCheckXMLServlet;
-import com.servoy.j2db.J2DBGlobals;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.Settings;
 
 public class SpellCheckServerPlugin implements IServerPlugin
 {
 	public static final String WEBSERVICE_NAME = "spellchecker"; //$NON-NLS-1$
+	private IServerAccess serverAccess;
 
 	public SpellCheckServerPlugin()
 	{
@@ -58,7 +57,8 @@ public class SpellCheckServerPlugin implements IServerPlugin
 
 	public void initialize(IServerAccess app) throws PluginException
 	{
-		app.registerWebService(WEBSERVICE_NAME, new SpellCheckXMLServlet(WEBSERVICE_NAME, this));
+		this.serverAccess = app;
+		this.serverAccess.registerWebService(WEBSERVICE_NAME, new SpellCheckXMLServlet(WEBSERVICE_NAME, this));
 	}
 
 	public PreferencePanel[] getPreferencePanels()
@@ -191,8 +191,14 @@ public class SpellCheckServerPlugin implements IServerPlugin
 		String mainDict = RapidSpellUtils.getDictionaryForLanguage(lang);
 		if (mainDict != null)
 		{
-			String path2dictionary = (String)Settings.getInstance().get(J2DBGlobals.SERVOY_APPLICATION_SERVER_DIRECTORY_KEY) + "/plugins/spellcheck/"; //$NON-NLS-1$
-			checker.setDictFilePath(path2dictionary + mainDict);
+			try
+			{
+				checker.setDictFileStream(serverAccess.getResourceAsStream("/plugins/spellcheck/" + mainDict));
+			}
+			catch (Exception e)
+			{
+				Debug.error("Error setting spellchecks dictionary: /plugins/spellcheck/" + mainDict, e);
+			}
 		}
 		else
 		{
