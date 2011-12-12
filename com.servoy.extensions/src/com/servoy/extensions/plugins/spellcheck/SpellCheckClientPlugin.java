@@ -212,7 +212,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			else
 			{
 				URL url = getPluginAccess().getServerURL();
-				URL serviceURL = new URL(url, "/servoy-service/" + SpellCheckServerPlugin.WEBSERVICE_NAME); //$NON-NLS-1$
+				URL serviceURL = new URL(url, "servoy-service/" + SpellCheckServerPlugin.WEBSERVICE_NAME); //$NON-NLS-1$
 				strUrl = serviceURL.toString();
 			}
 
