@@ -29,7 +29,8 @@ import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 
 /**
- * An activity node to execute something in a servoy headlessclient from within the workflow.
+ * An activity node to execute a global method bpm_<node_name> with workflow variables as argument in a servoy headlessclient from within the workflow.
+ * If the return value is a string from the servoy method that value is used as transition name otherwise default. 
  *
  * <custom name="printdots" class="com.servoy.extensions.plugins.worflow.impl.HeadlessClientActivity">
  *   <transition to="end" /> <!-- 1th == default transition -->
@@ -51,15 +52,16 @@ public class HeadlessClientActivity implements ActivityBehaviour
 			throw new IllegalStateException(msg);
 		}
 		IHeadlessClient client = HeadlessClientFactory.createHeadlessClient(solutionName.toString(), null);
-		Object js = MapSerializer.convertFromMap(variables);
-		Object transition = client.getPluginAccess().executeMethod(null, "bpm_"+ae.getActivityName(), new Object[]{js}, false);
-		if (transition == null)
+		Object jsObj = MapSerializer.convertFromMap(variables);
+		Object transition = client.getPluginAccess().executeMethod(null, "bpm_"+ae.getActivityName(), new Object[]{jsObj}, false);
+		//TODO investigate if we can get values from jsObj to store again
+		if (transition instanceof String)
 		{
-			ae.takeDefaultTransition();
+			ae.take(transition.toString());
 		}
 		else
 		{
-			ae.take(transition.toString());
+			ae.takeDefaultTransition();
 		}
 	}
 }
