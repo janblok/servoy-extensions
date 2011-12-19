@@ -1,0 +1,19 @@
+### Eclipse Workspace Patch 1.0
+#P jbpm-pvm
+Index: src/main/java/org/jbpm/pvm/internal/email/impl/MailProducerImpl.java
+===================================================================
+--- src/main/java/org/jbpm/pvm/internal/email/impl/MailProducerImpl.java	(revision 23)
++++ src/main/java/org/jbpm/pvm/internal/email/impl/MailProducerImpl.java	(working copy)
+@@ -103,7 +103,11 @@
+   protected void fillFrom(Execution execution, Message email) throws MessagingException {
+     AddressTemplate fromTemplate = template.getFrom();
+     // "from" attribute is optional
+-    if (fromTemplate == null) return;
++    if (fromTemplate == null) 
++    {
++    	email.setFrom();//defaults to "mail.from" mail property
++    	return;
++    }
+ 
+     // resolve and parse addresses
+     String addresses = fromTemplate.getAddresses();
