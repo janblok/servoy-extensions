@@ -61,6 +61,7 @@ import com.servoy.j2db.util.UUID;
  * 
  * @author jblok
  */
+@SuppressWarnings("nls")
 public class MailServer implements IMailService, IServerPlugin
 {
 	private Properties settings;
@@ -73,7 +74,7 @@ public class MailServer implements IMailService, IServerPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.mailserver.displayname")); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.mailserver.displayname"));
 		return props;
 	}
 
@@ -100,10 +101,10 @@ public class MailServer implements IMailService, IServerPlugin
 		while (it.hasNext())
 		{
 			String key = (String)it.next();
-			if (key.startsWith("mail.")) //$NON-NLS-1$
+			if (key.startsWith("mail."))
 			{
 				String value = settings.getProperty(key);
-				if (value != null && !value.trim().equals("")) //$NON-NLS-1$
+				if (value != null && !value.trim().equals(""))
 				{
 					System.setProperty(key, value);
 				}
@@ -119,28 +120,28 @@ public class MailServer implements IMailService, IServerPlugin
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		Map<String, String> req = new LinkedHashMap<String, String>();
-		req.put("mail.server.allowUnauthenticatedRMIAccess", "Allow mailserver access for unauthenticated smart (rmi) client (true/false), defaults to false"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.pop3.host", "The name of POP3 server to recieve mails from"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.pop3.apop.enable", "Whether or not to use APOP for authentication (true/false), defaults to false."); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.host", "The name of SMTP server to deliver the mails to"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.port", "The port of SMTP server to deliver the mails to"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.from", "Default 'from' address if none is specified"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.auth", "Use authentication (true/false), defaults to false."); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.username", "Specify username if using authentication"); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.password", "Specify password if using authentication"); //$NON-NLS-1$ //$NON-NLS-2$		
-		req.put("mail.smtp.connectiontimeout", "Socket connection timeout value in milliseconds. Default is infinite timeout."); //$NON-NLS-1$ //$NON-NLS-2$       
-		req.put("mail.smtp.timeout", "Socket I/O timeout value in milliseconds. Default is infinite timeout."); //$NON-NLS-1$ //$NON-NLS-2$
-		req.put("mail.smtp.ssl.enable", "Use SSL (true/false), defaults to false ."); //$NON-NLS-1$ //$NON-NLS-2$ 
+		req.put("mail.server.allowUnauthenticatedRMIAccess", "Allow mailserver access for unauthenticated smart (rmi) client (true/false), defaults to false");
+		req.put("mail.pop3.host", "The name of POP3 server to recieve mails from");
+		req.put("mail.pop3.apop.enable", "Whether or not to use APOP for authentication (true/false), defaults to false.");
+		req.put("mail.smtp.host", "The name of SMTP server to deliver the mails to");
+		req.put("mail.smtp.port", "The port of SMTP server to deliver the mails to");
+		req.put("mail.from", "Default 'from' address if none is specified");
+		req.put("mail.smtp.auth", "Use authentication (true/false), defaults to false.");
+		req.put("mail.smtp.username", "Specify username if using authentication");
+		req.put("mail.smtp.password", "Specify password if using authentication");
+		req.put("mail.smtp.connectiontimeout", "Socket connection timeout value in milliseconds. Default is infinite timeout.");
+		req.put("mail.smtp.timeout", "Socket I/O timeout value in milliseconds. Default is infinite timeout.");
+		req.put("mail.smtp.ssl.enable", "Use SSL (true/false), defaults to false .");
 		req.put(
-			"mail.mime.charset", //$NON-NLS-1$
-			"Specify the name of the charset to use for mail encoding (leave emtpy for system default), see http://java.sun.com/j2se/1.4.2/docs/api/java/nio/charset/Charset.html forinfo which charset names are usable"); //$NON-NLS-1$ 
+			"mail.mime.charset",
+			"Specify the name of the charset to use for mail encoding (leave emtpy for system default), see http://java.sun.com/j2se/1.4.2/docs/api/java/nio/charset/Charset.html forinfo which charset names are usable");
 		req.put(
-			"mail.development.override.address", //$NON-NLS-1$
-			"Specify an email address to which all email will be send instead of the specified To, Cc and Bcc addresses.\nThe specified to, Cc and Bcc addresses will be added to the Subject."); //$NON-NLS-1$ 
+			"mail.development.override.address",
+			"Specify an email address to which all email will be send instead of the specified To, Cc and Bcc addresses.\nThe specified to, Cc and Bcc addresses will be added to the Subject.");
 		return req;
 	}
 
-	public void sendMail(String clientId, String to, String rawFrom, String subject, String rawMsgText, String cc, String bcc, Attachment[] attachments,
+	public void sendMail(String clientId, String to, String from, String subject, String rawMsgText, String cc, String bcc, Attachment[] attachments,
 		String[] overrideProperties) throws RemoteException, Exception
 	{
 		if (!checkAccess(clientId)) return;
@@ -154,36 +155,34 @@ public class MailServer implements IMailService, IServerPlugin
 			Properties properties = overrideProperties(settings, overrideProperties);
 			Session session = Session.getInstance(properties, new SMTPAuthenticator(properties));
 
-			String encoding = properties.getProperty("mail.mime.encoding"); //$NON-NLS-1$
-			String charset = properties.getProperty("mail.mime.charset"); //$NON-NLS-1$
-			if (charset == null) charset = "UTF-8"; //$NON-NLS-1$
+			String encoding = properties.getProperty("mail.mime.encoding");
+			String charset = properties.getProperty("mail.mime.charset");
+			if (charset == null) charset = "UTF-8";
 
-			String plainTextContentType = "text/plain; charset=" + charset; //$NON-NLS-1$
-			String htmlContentType = "text/html; charset=" + charset; //$NON-NLS-1$
+			String plainTextContentType = "text/plain; charset=" + charset;
+			String htmlContentType = "text/html; charset=" + charset;
 
 			// create a new MimeMessage object (using the Session created above)
 			MimeMessage message = new MimeMessage(session);
 			String reply = null;
-			String from;
-			if (rawFrom == null)
+			if (from == null)
 			{
-				from = properties.getProperty("mail.from"); //$NON-NLS-1$
+				message.setFrom();//defaults to "mail.from" mail property
 			}
 			else
 			{
-				String[] froma = rawFrom.split(","); //$NON-NLS-1$
-				from = froma[0];
-				if (froma.length > 1) reply = froma[1];
+				String[] from_array = from.split(",");
+				message.setFrom(new InternetAddress(from_array[0]));
+				if (from_array.length > 1) reply = from_array[1];
 			}
-			message.setFrom(new InternetAddress(from));
 			if (reply != null) message.setReplyTo(new InternetAddress[] { new InternetAddress(reply) });
 			message.setSentDate(new Date());
-			String overrideAddress = properties.getProperty("mail.development.override.address"); //$NON-NLS-1$
+			String overrideAddress = properties.getProperty("mail.development.override.address");
 			String overrideFeedback = null;
 			if (overrideAddress != null)
 			{
 				addRecipients(message, overrideAddress, Message.RecipientType.TO);
-				overrideFeedback = " (Override: TO=" + to + ", CC: " + (cc == null ? cc : "") + ", BCC: " + (bcc == null ? bcc : "") + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+				overrideFeedback = " (Override: TO=" + to + ", CC: " + (cc == null ? cc : "") + ", BCC: " + (bcc == null ? bcc : "") + ")";
 			}
 			else
 			{
@@ -192,13 +191,13 @@ public class MailServer implements IMailService, IServerPlugin
 				addRecipients(message, bcc, Message.RecipientType.BCC);
 			}
 
-			String sub = (subject == null ? Messages.getString("servoy.plugin.mailserver.defaultsubject") : subject); //$NON-NLS-1$
+			String sub = (subject == null ? Messages.getString("servoy.plugin.mailserver.defaultsubject") : subject);
 			if (overrideFeedback != null) sub = sub + overrideFeedback;
 			message.setSubject(sub, charset);
 
-			String msgText = (rawMsgText == null) ? "" : rawMsgText.trim(); //$NON-NLS-1$
+			String msgText = (rawMsgText == null) ? "" : rawMsgText.trim();
 
-			int htmlIndex = msgText.toLowerCase().indexOf("<html"); //$NON-NLS-1$
+			int htmlIndex = msgText.toLowerCase().indexOf("<html");
 			boolean hasHTML = (htmlIndex != -1);
 			boolean hasPlain = !hasHTML || htmlIndex > 0;
 
@@ -215,13 +214,13 @@ public class MailServer implements IMailService, IServerPlugin
 				List<MimeBodyPart> embeddedImages = resolver.getMimeBodyParts();
 				if (embeddedImages.size() > 0)
 				{
-					htmlMultipart = new MimeMultipart("related"); //$NON-NLS-1$
+					htmlMultipart = new MimeMultipart("related");
 					MimeBodyPart htmlBodyPart = new MimeBodyPart();
 
 					htmlBodyPart.setContent(html, htmlContentType);
 					if (encoding != null)
 					{
-						htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding); //$NON-NLS-1$
+						htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding);
 					}
 					htmlMultipart.addBodyPart(htmlBodyPart);
 
@@ -241,13 +240,13 @@ public class MailServer implements IMailService, IServerPlugin
 			}
 			else if (hasPlain && hasHTML)
 			{
-				messageMultipart = new MimeMultipart("alternative"); //$NON-NLS-1$
+				messageMultipart = new MimeMultipart("alternative");
 
 				MimeBodyPart textBodyPart = new MimeBodyPart();
 				textBodyPart.setContent(plain, plainTextContentType);
 				if (encoding != null)
 				{
-					textBodyPart.setHeader("Content-Transfer-Encoding", encoding); //$NON-NLS-1$
+					textBodyPart.setHeader("Content-Transfer-Encoding", encoding);
 				}
 				messageMultipart.addBodyPart(textBodyPart);
 
@@ -261,7 +260,7 @@ public class MailServer implements IMailService, IServerPlugin
 					htmlBodyPart.setContent(html, htmlContentType);
 					if (encoding != null)
 					{
-						htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding); //$NON-NLS-1$
+						htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding);
 					}
 				}
 				messageMultipart.addBodyPart(htmlBodyPart);
@@ -277,7 +276,7 @@ public class MailServer implements IMailService, IServerPlugin
 
 				if (mixedMultipart == null)
 				{
-					mixedMultipart = new MimeMultipart("mixed"); //$NON-NLS-1$
+					mixedMultipart = new MimeMultipart("mixed");
 					MimeBodyPart messageBodyPart = new MimeBodyPart();
 					if (messageMultipart != null)
 					{
@@ -288,7 +287,7 @@ public class MailServer implements IMailService, IServerPlugin
 						messageBodyPart.setContent(msgText, hasHTML ? htmlContentType : plainTextContentType);
 						if (encoding != null)
 						{
-							messageBodyPart.setHeader("Content-Transfer-Encoding", encoding); //$NON-NLS-1$
+							messageBodyPart.setHeader("Content-Transfer-Encoding", encoding);
 						}
 					}
 					mixedMultipart.addBodyPart(messageBodyPart);
@@ -317,7 +316,7 @@ public class MailServer implements IMailService, IServerPlugin
 				message.setContent(msgText, hasHTML ? htmlContentType : plainTextContentType);
 				if (encoding != null)
 				{
-					message.setHeader("Content-Transfer-Encoding", encoding); //$NON-NLS-1$
+					message.setHeader("Content-Transfer-Encoding", encoding);
 				}
 			}
 
@@ -325,7 +324,7 @@ public class MailServer implements IMailService, IServerPlugin
 		}
 		catch (Exception ex)
 		{
-			Debug.error("SMTPSend " + ex.getMessage(), ex); //$NON-NLS-1$
+			Debug.error("SMTPSend " + ex.getMessage(), ex);
 			throw new Exception(ex.getMessage()); //not all exceptions are serializable
 		}
 		finally
@@ -338,7 +337,7 @@ public class MailServer implements IMailService, IServerPlugin
 	{
 		if (recp != null)
 		{
-			StringTokenizer tk = new StringTokenizer(recp, ";,"); //$NON-NLS-1$
+			StringTokenizer tk = new StringTokenizer(recp, ";,");
 			int nrto = tk.countTokens();
 			InternetAddress[] addresses = new InternetAddress[nrto];
 			for (int i = 0; i < nrto; i++)
@@ -387,18 +386,18 @@ public class MailServer implements IMailService, IServerPlugin
 			// -- Get hold of the default session --
 			Properties properties = overrideProperties(settings, overrideProperties);
 			Session session = Session.getDefaultInstance(properties, null);
-			session.setDebug(Boolean.valueOf(settings.getProperty("mail.pop3.debug", "false")).booleanValue()); //$NON-NLS-1$ //$NON-NLS-2$
+			session.setDebug(Boolean.valueOf(settings.getProperty("mail.pop3.debug", "false")).booleanValue());
 			// -- Get hold of a POP3 message store, and connect to it --
-			store = session.getStore("pop3"); //$NON-NLS-1$
-			String host = properties.getProperty("mail.pop3.host"); //$NON-NLS-1$
-			Debug.trace("receiveMail: host=" + host + ", user=" + userName); //$NON-NLS-1$ //$NON-NLS-2$
+			store = session.getStore("pop3");
+			String host = properties.getProperty("mail.pop3.host");
+			Debug.trace("receiveMail: host=" + host + ", user=" + userName);
 			store.connect(host, userName, password);
 			// -- Try to get hold of the default folder --
 			folder = store.getDefaultFolder();
-			if (folder == null) throw new Exception("No default folder"); //$NON-NLS-1$
+			if (folder == null) throw new Exception("No default folder");
 			// -- ...and its INBOX --
-			folder = folder.getFolder("INBOX"); //$NON-NLS-1$
-			if (folder == null) throw new Exception("No POP3 INBOX found"); //$NON-NLS-1$
+			folder = folder.getFolder("INBOX");
+			if (folder == null) throw new Exception("No POP3 INBOX found");
 			// -- Open the folder for read only --
 			folder.open(leaveMsgsOnServer ? Folder.READ_ONLY : Folder.READ_WRITE);
 			// -- Get the message wrappers and process them --
@@ -471,8 +470,8 @@ public class MailServer implements IMailService, IServerPlugin
 		@Override
 		public PasswordAuthentication getPasswordAuthentication()
 		{
-			String username = properties.getProperty("mail.smtp.username"); //$NON-NLS-1$
-			String password = properties.getProperty("mail.smtp.password"); //$NON-NLS-1$
+			String username = properties.getProperty("mail.smtp.username");
+			String password = properties.getProperty("mail.smtp.password");
 			return new PasswordAuthentication(username, password);
 		}
 	}
@@ -541,16 +540,16 @@ public class MailServer implements IMailService, IServerPlugin
 					mbp.setDataHandler(new DataHandler(new AttachmentDataSource(attachment)));
 					mimeBodyParts.add(mbp);
 					attachment.setEmbedded(true);
-					String contentID = "servoy-" + UUID.randomUUID(); //$NON-NLS-1$
-					mbp.setContentID("<" + contentID + ">"); //$NON-NLS-1$ //$NON-NLS-2$
-					return "cid:" + contentID; //$NON-NLS-1$
+					String contentID = "servoy-" + UUID.randomUUID();
+					mbp.setContentID("<" + contentID + ">");
+					return "cid:" + contentID;
 				}
 				catch (MessagingException e)
 				{
 					Debug.error(e);
 				}
 			}
-			return "%%" + name + "%%"; //$NON-NLS-1$ //$NON-NLS-2$
+			return "%%" + name + "%%";
 		}
 
 		public List<MimeBodyPart> getMimeBodyParts()
@@ -562,11 +561,11 @@ public class MailServer implements IMailService, IServerPlugin
 	protected final boolean checkAccess(String clientId)
 	{
 		// this plugin may be accessed by server processes or authenticated clients, unless overridden in props
-		boolean access = Boolean.valueOf(settings.getProperty("mail.server.allowUnauthenticatedRMIAccess", "false")).booleanValue() || //$NON-NLS-1$//$NON-NLS-2$
+		boolean access = Boolean.valueOf(settings.getProperty("mail.server.allowUnauthenticatedRMIAccess", "false")).booleanValue() ||
 			application.isServerProcess(clientId) || application.isAuthenticated(clientId);
 		if (!access)
 		{
-			Debug.warn("Rejected unauthenticated access"); //$NON-NLS-1$
+			Debug.warn("Rejected unauthenticated access");
 		}
 		return access;
 	}
