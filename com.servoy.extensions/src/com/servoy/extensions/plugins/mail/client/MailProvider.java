@@ -170,7 +170,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * Helper method to only get the plain addresses.
 	 *
 	 * @sample
-	 * var plainArray = plugins.mail.getPlainMailAddresses('John Cobb <from_me@example.com>;Pete Cobb<from_pete@example.com>');
+	 * var plainArray = plugins.mail.getPlainMailAddresses('John Cobb <from_me@example.com>,Pete Cobb<from_pete@example.com>');
 	 * application.output(plainArray[0]) //will return 'from_me@example.com'
 	 *
 	 * @param addressesString 
