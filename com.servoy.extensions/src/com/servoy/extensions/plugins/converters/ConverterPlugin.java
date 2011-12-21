@@ -22,17 +22,31 @@ import java.util.Properties;
 import javax.swing.Icon;
 
 import com.servoy.j2db.dataprocessing.IColumnConverter;
+import com.servoy.j2db.dataprocessing.IUIConverter;
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IColumnConverterProvider;
+import com.servoy.j2db.plugins.IUIConverterProvider;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptable;
 
-public class ConverterPlugin implements IClientPlugin, IColumnConverterProvider
+/**
+ * Plugin for GlobalMethodConverter converters.
+ * 
+ * @author pianas
+ *
+ */
+public class ConverterPlugin implements IClientPlugin, IColumnConverterProvider, IUIConverterProvider
 {
-	private IColumnConverter[] converters;
+	private IColumnConverter[] columnConverters;
+	private IUIConverter[] uiConverters;
 	private IClientPluginAccess application;
+
+	IClientPluginAccess getApplication()
+	{
+		return application;
+	}
 
 	public Icon getImage()
 	{
@@ -41,7 +55,7 @@ public class ConverterPlugin implements IClientPlugin, IColumnConverterProvider
 
 	public String getName()
 	{
-		return "ConverterPlugin";
+		return getClass().getSimpleName();
 	}
 
 	public PreferencePanel[] getPreferencePanels()
@@ -57,17 +71,6 @@ public class ConverterPlugin implements IClientPlugin, IColumnConverterProvider
 	public void initialize(IClientPluginAccess app) throws PluginException
 	{
 		application = app;
-		// the init is executed later than getColumnConvertors so must be sure plugin access is not null
-		if (converters != null)
-		{
-			for (IColumnConverter converter : converters)
-			{
-				if (converter instanceof GlobalMethodConverter)
-				{
-					((GlobalMethodConverter)converter).setClientPluginAccess(app);
-				}
-			}
-		}
 	}
 
 	public Properties getProperties()
@@ -89,10 +92,19 @@ public class ConverterPlugin implements IClientPlugin, IColumnConverterProvider
 
 	public IColumnConverter[] getColumnConverters()
 	{
-		if (converters == null)
+		if (columnConverters == null)
 		{
-			converters = new IColumnConverter[] { new GlobalMethodConverter(application) };
+			columnConverters = new IColumnConverter[] { new GlobalMethodConverter(this) };
 		}
-		return converters;
+		return columnConverters;
+	}
+
+	public IUIConverter[] getUIConverters()
+	{
+		if (uiConverters == null)
+		{
+			uiConverters = new IUIConverter[] { new GlobalMethodConverter(this) };
+		}
+		return uiConverters;
 	}
 }

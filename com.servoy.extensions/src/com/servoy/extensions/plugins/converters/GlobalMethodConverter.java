@@ -22,35 +22,41 @@ import java.util.Map;
 import com.servoy.j2db.dataprocessing.IPropertyDescriptor;
 import com.servoy.j2db.dataprocessing.IPropertyDescriptorProvider;
 import com.servoy.j2db.dataprocessing.ITypedColumnConverter;
+import com.servoy.j2db.dataprocessing.IUIConverter;
 import com.servoy.j2db.dataprocessing.PropertyDescriptor;
 import com.servoy.j2db.persistence.ArgumentType;
 import com.servoy.j2db.persistence.Column;
 import com.servoy.j2db.persistence.IColumnTypes;
 import com.servoy.j2db.persistence.IMethodArgument;
 import com.servoy.j2db.persistence.IMethodTemplate;
-import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IMethodTemplatesFactory;
 import com.servoy.j2db.plugins.IMethodTemplatesProvider;
 
-public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDescriptorProvider, IMethodTemplatesProvider
+/**
+ * Column/UI converter that uses global methods.
+ * 
+ * @author pianas
+ */
+
+public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverter, IPropertyDescriptorProvider, IMethodTemplatesProvider
 {
 	private final String TO_OBJECT_NAME_PROPERTY = "toObjectMethodName"; //$NON-NLS-1$
 	private final String FROM_OBJECT_NAME_PROPERTY = "fromObjectMethodName"; //$NON-NLS-1$
 	private final String TYPE_NAME_PROPERTY = "type"; //$NON-NLS-1$
 
-	private IClientPluginAccess clientPluginAccess;
+	private final ConverterPlugin plugin;
 
-	public GlobalMethodConverter(IClientPluginAccess clientPluginAccess)
+	public GlobalMethodConverter(ConverterPlugin plugin)
 	{
-		this.clientPluginAccess = clientPluginAccess;
+		this.plugin = plugin;
 	}
 
 	private Object executeMethod(String methodName, int column_type, Object obj) throws Exception
 	{
 		Object value = obj;
-		if (clientPluginAccess != null && methodName != null && methodName.trim().length() != 0)
+		if (plugin.getApplication() != null && methodName != null && methodName.trim().length() != 0)
 		{
-			value = clientPluginAccess.executeMethod(null, methodName, new Object[] { obj, Column.getDisplayTypeString(column_type) }, false);
+			value = plugin.getApplication().executeMethod(null, methodName, new Object[] { obj, Column.getDisplayTypeString(column_type) }, false);
 		}
 		return value;
 	}
@@ -76,7 +82,7 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDe
 
 	public String getName()
 	{
-		return "GlobalMethodConverter"; //$NON-NLS-1$
+		return getClass().getSimpleName();
 	}
 
 	/**
@@ -101,6 +107,11 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDe
 		return new int[] { IColumnTypes.DATETIME, IColumnTypes.INTEGER, IColumnTypes.MEDIA, IColumnTypes.NUMBER, IColumnTypes.TEXT };
 	}
 
+	public int[] getSupportedDataproviderTypes()
+	{
+		return getSupportedColumnTypes();
+	}
+
 	/**
 	 * @see com.servoy.j2db.dataprocessing.ITypedColumnConverter#getPropertyDescriptor(java.lang.String)
 	 */
@@ -116,13 +127,14 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDe
 		}
 		if (TYPE_NAME_PROPERTY.equals(property))
 		{
-			String[] choices = new String[6];
-			choices[0] = "<as is>"; //$NON-NLS-1$
-			choices[1] = "TEXT"; //$NON-NLS-1$
-			choices[2] = "INTEGER"; //$NON-NLS-1$
-			choices[3] = "NUMBER"; //$NON-NLS-1$
-			choices[4] = "DATETIME"; //$NON-NLS-1$
-			choices[5] = "MEDIA"; //$NON-NLS-1$
+			String[] choices = new String[] {//
+			"<as is>", //$NON-NLS-1$
+			"TEXT", //$NON-NLS-1$
+			"INTEGER", //$NON-NLS-1$
+			"NUMBER", //$NON-NLS-1$
+			"DATETIME", //$NON-NLS-1$
+			"MEDIA" //$NON-NLS-1$
+			};
 			return new PropertyDescriptor("The converted object type", IPropertyDescriptor.NUMBER, choices); //$NON-NLS-1$
 		}
 		return null;
@@ -133,11 +145,6 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IPropertyDe
 	 */
 	public void validateProperties(Map<String, String> properties)
 	{
-	}
-
-	public void setClientPluginAccess(IClientPluginAccess clientPluginAccess)
-	{
-		this.clientPluginAccess = clientPluginAccess;
 	}
 
 	public Map<String, IMethodTemplate> getMethodTemplates(IMethodTemplatesFactory methodTemplatesFactory)
