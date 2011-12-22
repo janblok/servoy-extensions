@@ -32,6 +32,7 @@ import com.servoy.j2db.IServoyBeanFactory;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.FixedStyleSheet;
 import com.servoy.j2db.util.IStyleSheet;
 
 /**
@@ -226,7 +227,7 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 					Object sbackground_color = style.getAttribute(CSS.Attribute.BACKGROUND_COLOR);
 					if (sbackground_color != null)
 					{
-						if ("transparent".equals(sbackground_color.toString()))
+						if (FixedStyleSheet.COLOR_TRANSPARENT.equals(sbackground_color.toString()))
 						{
 							component.setOpaque(false);
 						}
