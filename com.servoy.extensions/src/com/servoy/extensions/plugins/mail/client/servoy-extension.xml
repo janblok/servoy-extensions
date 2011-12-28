@@ -659,7 +659,7 @@ if (msg != null) //if is null error occurred!
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Helper method to only get the plain addresses.]]></description>
             <summary><![CDATA[Helper method to only get the plain addresses.]]></summary>
-            <sample><![CDATA[var plainArray = plugins.mail.getPlainMailAddresses('John Cobb <from_me@example.com>;Pete Cobb<from_pete@example.com>');
+            <sample><![CDATA[var plainArray = plugins.mail.getPlainMailAddresses('John Cobb <from_me@example.com>,Pete Cobb<from_pete@example.com>');
 application.output(plainArray[0]) //will return 'from_me@example.com']]></sample>
             <parameters>
               <parameter name="addressesString"/>
