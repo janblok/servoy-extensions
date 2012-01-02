@@ -41,8 +41,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
+import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -670,8 +670,8 @@ public class RestWSServlet extends HttpServlet
 		}
 		response.setHeader("Content-Type", resultContentType + ";charset=" + charset);
 
-
 		byte[] bytes = content.getBytes(charset);
+		response.setContentLength(bytes.length);
 
 		ServletOutputStream outputStream = null;
 		try
@@ -687,7 +687,6 @@ public class RestWSServlet extends HttpServlet
 				outputStream.close();
 			}
 		}
-		response.setContentLength(bytes.length);
 	}
 
 	/** 
