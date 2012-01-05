@@ -26,6 +26,7 @@ import com.servoy.extensions.plugins.window.menu.IMenu;
 import com.servoy.extensions.plugins.window.menu.IMenuItem;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.util.HtmlUtils;
 
 /**
  * Menu in webclient.
@@ -163,6 +164,7 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				}
 
 				String text = elem.getText();
+				if (text != null) text = HtmlUtils.escapeMarkup(text).toString();
 				if (controlClass != null || imageIcon != null)
 				{
 					StringBuilder labelText = new StringBuilder("<html><table><tr>"); //$NON-NLS-1$ 
