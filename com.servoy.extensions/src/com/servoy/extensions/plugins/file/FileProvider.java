@@ -297,13 +297,16 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			{
 				public void uploadComplete(IUploadData[] fu)
 				{
-					JSFile[] files = new JSFile[fu.length];
-					for (int i = 0; i < fu.length; i++)
+					if (fu.length > 0)
 					{
-						files[i] = new JSFile(fu[i]);
-						returnList.add(files[i]);
+						JSFile[] files = new JSFile[fu.length];
+						for (int i = 0; i < fu.length; i++)
+						{
+							files[i] = new JSFile(fu[i]);
+							returnList.add(files[i]);
+						}
+						functionDef.executeSync(plugin.getClientPluginAccess(), new Object[] { files });
 					}
-					functionDef.executeSync(plugin.getClientPluginAccess(), new Object[] { files });
 				}
 
 				public void onSubmit()
