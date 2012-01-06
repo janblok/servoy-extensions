@@ -843,7 +843,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		return null;
 	}
 
-	private JSDNDEvent createScriptEvent(EventType type, Point xy, WebMarkupContainer row)
+	private JSDNDEvent createScriptEvent(EventType type, Point xy, int modifiers, WebMarkupContainer row)
 	{
 		JSDNDEvent jsEvent = new JSDNDEvent();
 		jsEvent.setType(type);
@@ -857,6 +857,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		jsEvent.setElementName(dragSourceName);
 
 		if (xy != null) jsEvent.setLocation(xy);
+		jsEvent.setModifiers(modifiers);
 
 		Object rowSource = row.getDefaultModelObject();
 		if (rowSource instanceof UserNode)
@@ -873,24 +874,24 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		DraggableBehavior dragBehavior = new DraggableBehavior()
 		{
 			@Override
-			protected void onDragEnd(String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected void onDragEnd(String id, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
 				if (getCurrentDragOperation() != DRAGNDROP.NONE)
 				{
-					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragEnd, null, row);
+					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragEnd, null, m, row);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
 					event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
 					InmethodDBTreeTableView.this.onDragEnd(event);
 				}
 
-				super.onDragEnd(id, x, y, ajaxRequestTarget);
+				super.onDragEnd(id, x, y, m, ajaxRequestTarget);
 			}
 
 			@Override
-			protected boolean onDragStart(final String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected boolean onDragStart(final String id, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
-				JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrag, new Point(x, y), row);
+				JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrag, new Point(x, y), m, row);
 				setDropResult(false);
 				int dragOp = InmethodDBTreeTableView.this.onDrag(event);
 				if (dragOp == DRAGNDROP.NONE) return false;
@@ -900,11 +901,11 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			}
 
 			@Override
-			protected void onDrop(String id, final String targetid, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected void onDrop(String id, final String targetid, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
 				if (getCurrentDragOperation() != DRAGNDROP.NONE)
 				{
-					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrop, new Point(x, y), row);
+					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrop, new Point(x, y), m, row);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
 					setDropResult(InmethodDBTreeTableView.this.onDrop(event));
@@ -912,11 +913,11 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			}
 
 			@Override
-			protected void onDropHover(String id, final String targetid, AjaxRequestTarget ajaxRequestTarget)
+			protected void onDropHover(String id, final String targetid, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
 				if (getCurrentDragOperation() != DRAGNDROP.NONE)
 				{
-					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragOver, null, row);
+					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragOver, null, m, row);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
 					InmethodDBTreeTableView.this.onDragOver(event);

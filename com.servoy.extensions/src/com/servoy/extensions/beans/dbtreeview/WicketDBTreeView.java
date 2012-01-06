@@ -1067,7 +1067,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		return null;
 	}
 
-	private JSDNDEvent createScriptEvent(EventType type, Point xy, WicketDBTreeViewNode node)
+	private JSDNDEvent createScriptEvent(EventType type, Point xy, int modifiers, WicketDBTreeViewNode node)
 	{
 		JSDNDEvent jsEvent = new JSDNDEvent();
 		jsEvent.setType(type);
@@ -1081,6 +1081,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		jsEvent.setElementName(dragSourceName);
 
 		if (xy != null) jsEvent.setLocation(xy);
+		jsEvent.setModifiers(modifiers);
 
 		Object nodeSource = node.getDefaultModelObject();
 		if (nodeSource instanceof UserNode)
@@ -1097,24 +1098,24 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		DraggableBehavior dragBehavior = new DraggableBehavior()
 		{
 			@Override
-			protected void onDragEnd(String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected void onDragEnd(String id, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
 				if (getCurrentDragOperation() != DRAGNDROP.NONE)
 				{
-					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragEnd, null, node);
+					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragEnd, null, m, node);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
 					event.setDragResult(getDropResult() ? getCurrentDragOperation() : DRAGNDROP.NONE);
 					WicketDBTreeView.this.onDragEnd(event);
 				}
 
-				super.onDragEnd(id, x, y, ajaxRequestTarget);
+				super.onDragEnd(id, x, y, m, ajaxRequestTarget);
 			}
 
 			@Override
-			protected boolean onDragStart(final String id, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected boolean onDragStart(final String id, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
-				JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrag, new Point(x, y), node);
+				JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrag, new Point(x, y), m, node);
 				setDropResult(false);
 				int dragOp = WicketDBTreeView.this.onDrag(event);
 				if (dragOp == DRAGNDROP.NONE) return false;
@@ -1124,11 +1125,11 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			}
 
 			@Override
-			protected void onDrop(String id, final String targetid, int x, int y, AjaxRequestTarget ajaxRequestTarget)
+			protected void onDrop(String id, final String targetid, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
 				if (getCurrentDragOperation() != DRAGNDROP.NONE)
 				{
-					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrop, new Point(x, y), node);
+					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrop, new Point(x, y), m, node);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
 					setDropResult(WicketDBTreeView.this.onDrop(event));
@@ -1136,11 +1137,11 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			}
 
 			@Override
-			protected void onDropHover(String id, final String targetid, AjaxRequestTarget ajaxRequestTarget)
+			protected void onDropHover(String id, final String targetid, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
 				if (getCurrentDragOperation() != DRAGNDROP.NONE)
 				{
-					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragOver, null, node);
+					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragOver, null, m, node);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
 					WicketDBTreeView.this.onDragOver(event);
