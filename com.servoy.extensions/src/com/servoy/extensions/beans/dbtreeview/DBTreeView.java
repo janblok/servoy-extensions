@@ -24,7 +24,6 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import javax.swing.border.Border;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.html.CSS;
 
 import com.servoy.j2db.IApplication;
@@ -32,7 +31,7 @@ import com.servoy.j2db.IServoyBeanFactory;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.FixedStyleSheet;
+import com.servoy.j2db.util.IStyleRule;
 import com.servoy.j2db.util.IStyleSheet;
 
 /**
@@ -216,18 +215,18 @@ public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 			{
 				String treeViewRule = DBTreeView.ELEMENT_TYPE.toLowerCase();
 				if (rule != null) treeViewRule = new StringBuffer(treeViewRule).append('.').append(rule).toString();
-				AttributeSet style = ss.getRule(treeViewRule);
+				IStyleRule style = ss.getCSSRule(treeViewRule);
 				if (style != null)
 				{
-					if (style.getAttribute(CSS.Attribute.COLOR) != null)
+					if (style.getValue(CSS.Attribute.COLOR.toString()) != null)
 					{
 						Color cfg = ss.getForeground(style);
 						if (cfg != null) component.setForeground(cfg);
 					}
-					Object sbackground_color = style.getAttribute(CSS.Attribute.BACKGROUND_COLOR);
+					Object sbackground_color = style.getValue(CSS.Attribute.BACKGROUND_COLOR.toString());
 					if (sbackground_color != null)
 					{
-						if (FixedStyleSheet.COLOR_TRANSPARENT.equals(sbackground_color.toString()))
+						if (IStyleSheet.COLOR_TRANSPARENT.equals(sbackground_color.toString()))
 						{
 							component.setOpaque(false);
 						}
