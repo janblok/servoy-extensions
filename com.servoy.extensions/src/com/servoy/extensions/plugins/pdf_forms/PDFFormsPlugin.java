@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.pdf_forms;
 
 import java.util.HashMap;
@@ -44,7 +44,8 @@ public class PDFFormsPlugin implements IServerPlugin
 	public Map getRequiredPropertyNames()
 	{
 		HashMap req = new HashMap();
-		req.put("pdf_forms_plugin_servername", "The name of the server to locate the required pdf_form_values,pdf_templates,pdf_actions SQL tabels"); //$NON-NLS-1$ //$NON-NLS-2$
+		req.put(PDFServlet.SERVER_NAME_PROPERTY, "The name of the server to locate the required pdf_form_values,pdf_templates,pdf_actions SQL tabels"); //$NON-NLS-1$ 
+		req.put(PDFServlet.TEMPLATE_LOCATION_PROPERTY, "The url to retrieve the pdf templates(using file name from database)"); //$NON-NLS-1$ 
 		return req;
 	}
 

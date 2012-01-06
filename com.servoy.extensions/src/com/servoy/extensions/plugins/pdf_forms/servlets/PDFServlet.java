@@ -67,6 +67,8 @@ public class PDFServlet extends HttpServlet
 {
 	private static final String ACTION_PROPERTY = "servoy_action_id"; //$NON-NLS-1$
 	private static final String URL_PROPERTY = "servoy_pdf_submit_url"; //$NON-NLS-1$
+	public static final String SERVER_NAME_PROPERTY = "pdf_forms_plugin_servername";//$NON-NLS-1$
+	public static final String TEMPLATE_LOCATION_PROPERTY = "pdf_forms_plugin_template_location";//$NON-NLS-1$
 //	private static final int VIEW = 0;
 	private static final int EDIT = 1;
 	private static Random rnd = new Random();
@@ -80,12 +82,18 @@ public class PDFServlet extends HttpServlet
 	private String valuesColumnInsertStringWithoutPk;
 	private HashMap<String, Integer> valuesColumnOrder;
 	private String valuesColumnInsertString;
+	private String genericTemplateLocation;
 
 	public PDFServlet(IServerAccess app)
 	{
 		this.app = app;
-		String serverName = app.getSettings().getProperty("pdf_forms_plugin_servername", PDF_SERVER); //$NON-NLS-1$ 
+		String serverName = app.getSettings().getProperty(SERVER_NAME_PROPERTY, PDF_SERVER);
 		if (serverName != null && serverName.length() != 0) PDF_SERVER = serverName;
+		genericTemplateLocation = app.getSettings().getProperty(TEMPLATE_LOCATION_PROPERTY, null);
+		if (genericTemplateLocation != null && !genericTemplateLocation.endsWith("/"))
+		{
+			genericTemplateLocation += "/";
+		}
 	}
 
 	@Override
@@ -188,7 +196,15 @@ public class PDFServlet extends HttpServlet
 							String templateLocation = request.getParameter("overrideTemplateLocation"); //$NON-NLS-1$;
 							if (templateLocation == null)
 							{
-								templateLocation = base + sub + "/pdf_forms/pdf_template/" + filename + "?template_id=" + template_id + "&rnd=" + rnd.nextInt();
+								if (genericTemplateLocation == null)
+								{
+									templateLocation = base + sub + "/pdf_forms/pdf_template/" + filename + "?template_id=" + template_id + "&rnd=" +
+										rnd.nextInt();
+								}
+								else
+								{
+									templateLocation = genericTemplateLocation + filename;
+								}
 							}
 							if (outputFDF != null)
 							{
