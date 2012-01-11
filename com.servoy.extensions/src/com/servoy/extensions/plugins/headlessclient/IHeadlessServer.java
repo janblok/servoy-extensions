@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.rmi.Remote;
@@ -21,20 +21,21 @@ import java.rmi.RemoteException;
 
 public interface IHeadlessServer extends Remote
 {
-	public static final String SERVICE_NAME = "servoy.IHeadlessServer";
+	public static final String SERVICE_NAME = "servoy.IHeadlessServer"; //$NON-NLS-1$
 
-	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs) throws Exception, RemoteException;
+	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId)
+		throws Exception, RemoteException;
 
-	public Object executeMethod(String clientID, String contextName, String methodName, Object[] args, String callingClientId) throws Exception,
+	public Object executeMethod(String clientKey, String contextName, String methodName, Object[] args, String callingClientId) throws Exception,
 		RemoteException;
 
-	public boolean isValid(String clientID) throws RemoteException;
+	public boolean isValid(String clientKey) throws RemoteException;
 
-	public Object getDataProviderValue(String clientID, String contextName, String dataprovider, String callingClientId, String methodName)
+	public Object getDataProviderValue(String clientKey, String contextName, String dataprovider, String callingClientId, String methodName)
 		throws RemoteException;
 
-	public Object setDataProviderValue(String clientID, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
+	public Object setDataProviderValue(String clientKey, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
 		throws RemoteException;
 
-	public void shutDown(String clientID, boolean force) throws RemoteException;
+	public void shutDown(String clientKey, boolean force) throws RemoteException;
 }
