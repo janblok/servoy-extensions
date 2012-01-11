@@ -224,7 +224,10 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	public RemoteFileData[] getRemoteFolderContent(final String clientId, final String path, final String[] fileFilter, final int filesOption,
 		final int visibleOption, final int lockedOption) throws RemoteException, IOException, SecurityException
 	{
-		securityCheck(clientId, path);
+		if (!application.isAuthenticated(clientId))
+		{
+			throw new SecurityException("Rejected unauthenticated access");
+		}
 		final File f = new File(defaultFolder, path);
 		if (!FilePluginUtils.checkParentFile(f.getCanonicalFile(), defaultFolder))
 		{
