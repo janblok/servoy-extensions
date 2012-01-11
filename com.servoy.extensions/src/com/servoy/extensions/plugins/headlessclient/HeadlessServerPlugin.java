@@ -18,9 +18,11 @@ package com.servoy.extensions.plugins.headlessclient;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.NativeError;
@@ -32,15 +34,17 @@ import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.UUID;
 import com.servoy.j2db.util.serialize.JSONConverter;
 
 @SuppressWarnings("nls")
 public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 {
-	private final Map<String, WeakReference<IHeadlessClient>> clients = new HashMap<String, WeakReference<IHeadlessClient>>();
-	private final Map<String, MethodCall> methodCalls = new HashMap<String, MethodCall>();
+	private final Map<String, WeakReference<IHeadlessClient>> clients = new ConcurrentHashMap<String, WeakReference<IHeadlessClient>>();
+	private final Map<String, MethodCall> methodCalls = new ConcurrentHashMap<String, MethodCall>();
 
 	private final JSONConverter jsonConverter = new JSONConverter();
+	private IServerAccess application;
 
 	public HeadlessServerPlugin()//must have default constructor
 	{
@@ -59,6 +63,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	public void initialize(IServerAccess app)
 	{
+		this.application = app;
 		try
 		{
 			app.registerRMIService(IHeadlessServer.SERVICE_NAME, this);
@@ -83,17 +88,31 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		return null;
 	}
 
-	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs) throws Exception
+	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
 	{
+		if (!application.isAuthenticated(callingClientId))
+		{
+			throw new SecurityException("Rejected unauthenticated access");
+		}
+		Iterator<Entry<String, WeakReference<IHeadlessClient>>> clientsIterator = clients.entrySet().iterator();
+		while (clientsIterator.hasNext())
+		{
+			Entry<String, WeakReference<IHeadlessClient>> entry = clientsIterator.next();
+			if (entry.getValue().get() == null)
+			{
+				clientsIterator.remove();
+			}
+		}
 		IHeadlessClient c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
 		WeakReference<IHeadlessClient> clientRef = new WeakReference<IHeadlessClient>(c);
-		clients.put(c.getClientID(), clientRef);
-		return c.getClientID();
+		String newClientKey = UUID.randomUUID().toString();
+		clients.put(newClientKey, clientRef);
+		return newClientKey;
 	}
 
-	private IHeadlessClient getClient(String clientID) throws ClientNotFoundException
+	private IHeadlessClient getClient(String clientKey) throws ClientNotFoundException
 	{
-		WeakReference<IHeadlessClient> clientRef = clients.get(clientID);
+		WeakReference<IHeadlessClient> clientRef = clients.get(clientKey);
 		if (clientRef != null)
 		{
 			IHeadlessClient c = clientRef.get();
@@ -102,18 +121,18 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 				return c;
 			}
 		}
-		throw new ClientNotFoundException(clientID);
+		throw new ClientNotFoundException(clientKey);
 	}
 
-	public Object executeMethod(String clientID, String contextName, String methodName, Object[] args, String callingClientId) throws Exception
+	public Object executeMethod(String clientKey, String contextName, String methodName, Object[] args, String callingClientId) throws Exception
 	{
 		MethodCall call = new MethodCall(callingClientId, methodName);
 
 		synchronized (methodCalls)
 		{
-			while (methodCalls.containsKey(clientID))
+			while (methodCalls.containsKey(clientKey))
 				methodCalls.wait();
-			methodCalls.put(clientID, call);
+			methodCalls.put(clientKey, call);
 		}
 		try
 		{
@@ -126,7 +145,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 					convertedArgs[i] = getJSONConverter().convertFromJSON(args[i]);
 				}
 			}
-			IHeadlessClient c = getClient(clientID);
+			IHeadlessClient c = getClient(clientKey);
 			return getJSONConverter().convertToJSON(c.getPluginAccess().executeMethod(contextName, methodName, convertedArgs, false));
 		}
 		catch (JavaScriptException jse)
@@ -149,7 +168,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		{
 			synchronized (methodCalls)
 			{
-				methodCalls.remove(clientID);
+				methodCalls.remove(clientKey);
 				methodCalls.notifyAll();
 			}
 		}
@@ -160,20 +179,20 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		return jsonConverter;
 	}
 
-	public Object getDataProviderValue(String clientID, String contextName, String dataprovider, String callingClientId, String methodName)
+	public Object getDataProviderValue(String clientKey, String contextName, String dataprovider, String callingClientId, String methodName)
 	{
 		if (methodName != null)
 		{
 			synchronized (methodCalls)
 			{
-				MethodCall methodCall = methodCalls.get(clientID);
+				MethodCall methodCall = methodCalls.get(clientKey);
 				if (methodCall == null || !(methodCall.callingClientId.equals(callingClientId) && methodCall.methodName.equals(methodName)))
 				{
 					return UndefinedMarker.INSTANCE;
 				}
 			}
 		}
-		IHeadlessClient c = getClient(clientID);
+		IHeadlessClient c = getClient(clientKey);
 		Object dataProviderValue = c.getDataProviderValue(contextName, dataprovider);
 		try
 		{
@@ -185,34 +204,34 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 	}
 
-	public boolean isValid(String clientID)
+	public boolean isValid(String clientKey)
 	{
 		try
 		{
-			IHeadlessClient c = getClient(clientID);
+			IHeadlessClient c = getClient(clientKey);
 			return c.isValid();
 		}
 		catch (RuntimeException re)
 		{
-			Debug.trace("client not found for " + clientID, re);
+			Debug.trace("client not found for " + clientKey, re);
 		}
 		return false;
 	}
 
-	public Object setDataProviderValue(String clientID, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
+	public Object setDataProviderValue(String clientKey, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
 	{
 		if (methodName != null)
 		{
 			synchronized (methodCalls)
 			{
-				MethodCall methodCall = methodCalls.get(clientID);
+				MethodCall methodCall = methodCalls.get(clientKey);
 				if (methodCall == null || !(methodCall.callingClientId.equals(callingClientId) && methodCall.methodName.equals(methodName)))
 				{
 					return UndefinedMarker.INSTANCE;
 				}
 			}
 		}
-		IHeadlessClient c = getClient(clientID);
+		IHeadlessClient c = getClient(clientKey);
 		Object retValue;
 		try
 		{
@@ -234,16 +253,16 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	}
 
-	public void shutDown(String clientID, boolean force)
+	public void shutDown(String clientKey, boolean force)
 	{
-		IHeadlessClient c = getClient(clientID);
+		IHeadlessClient c = getClient(clientKey);
 		try
 		{
 			c.shutDown(force);
 		}
 		finally
 		{
-			clients.remove(clientID);
+			clients.remove(clientKey);
 		}
 	}
 

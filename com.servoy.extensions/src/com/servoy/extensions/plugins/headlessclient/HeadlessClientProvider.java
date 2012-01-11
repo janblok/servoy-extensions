@@ -63,7 +63,7 @@ public class HeadlessClientProvider implements IScriptObject
 
 		try
 		{
-			String clientID = headlessServer.createClient(solutionname, username, password, solutionOpenMethodArgs);
+			String clientID = headlessServer.createClient(solutionname, username, password, solutionOpenMethodArgs, plugin.getPluginAccess().getClientID());
 			if (clientID != null)
 			{
 				return new JSClient(clientID, headlessServer, plugin);
