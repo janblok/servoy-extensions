@@ -477,8 +477,9 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#getDefaultFolderLocation()
 	 */
-	public String getDefaultFolderLocation() throws RemoteException
+	public String getDefaultFolderLocation(final String clientId) throws RemoteException
 	{
+		application.isAuthenticated(clientId);
 		String location = null;
 		try
 		{
@@ -490,5 +491,4 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		return location;
 
 	}
-
 }

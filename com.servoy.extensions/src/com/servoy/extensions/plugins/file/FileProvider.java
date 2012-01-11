@@ -669,7 +669,8 @@ public class FileProvider implements IScriptObject
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
+	String contentType)
 	{
 		try
 		{
@@ -770,7 +771,8 @@ public class FileProvider implements IScriptObject
 		return js_writeFile(f, data, null);
 	}
 
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	String mimeType)
 	{
 		if (data == null) return false;
 		try
@@ -1962,7 +1964,7 @@ public class FileProvider implements IScriptObject
 		try
 		{
 			final IFileService service = getFileService();
-			return service.getDefaultFolderLocation();
+			return service.getDefaultFolderLocation(plugin.getClientPluginAccess().getClientID());
 		}
 		catch (final Exception ex)
 		{
