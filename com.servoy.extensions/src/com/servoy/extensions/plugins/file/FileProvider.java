@@ -1872,7 +1872,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		try
 		{
 			final IFileService service = getFileService();
-			return service.getDefaultFolderLocation();
+			return service.getDefaultFolderLocation(plugin.getClientPluginAccess().getClientID());
 		}
 		catch (final Exception ex)
 		{
