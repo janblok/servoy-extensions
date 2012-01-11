@@ -2041,7 +2041,7 @@ public class FileProvider implements IScriptObject
 		try
 		{
 			final IFileService service = getFileService();
-			return service.getDefaultFolderLocation();
+			return service.getDefaultFolderLocation(plugin.getClientPluginAccess().getClientID());
 		}
 		catch (final Exception ex)
 		{

@@ -166,6 +166,6 @@ public interface IFileService extends Remote
 	 * Returns the defaultFolder location as a String (canonical representation of the folder)
 	 * @return the defaultFolder
 	 */
-	public String getDefaultFolderLocation() throws RemoteException;
+	public String getDefaultFolderLocation(final String clientId) throws RemoteException;
 
 }
