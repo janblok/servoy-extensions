@@ -74,7 +74,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 
 		try
 		{
-			String clientID = headlessServer.createClient(solutionName, username, password, solutionOpenMethodArgs);
+			String clientID = headlessServer.createClient(solutionName, username, password, solutionOpenMethodArgs, plugin.getPluginAccess().getClientID());
 			if (clientID != null)
 			{
 				return new JSClient(clientID, headlessServer, plugin);
