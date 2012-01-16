@@ -20,7 +20,10 @@ package com.servoy.extensions.plugins.window.popup.swing;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Insets;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -118,6 +121,29 @@ public class SwingPopupShower implements IPopupShower
 			{
 				Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
 				locationOnScreen.y += elementToShowRelatedTo.getHeight();
+
+
+				Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(window.getGraphicsConfiguration());
+				Rectangle bounds = window.getGraphicsConfiguration().getBounds();
+
+				int screenWidth = (bounds.width - screenInsets.left - screenInsets.right);
+				//if necessary right align popup on related component
+				if ((locationOnScreen.x + window.getSize().width) > screenWidth)
+				{
+					locationOnScreen.x = screenWidth - window.getSize().width;
+				}
+
+				int screenHeight = (bounds.height - screenInsets.top - screenInsets.bottom);
+				//if necessary popup on the top of the related component
+				if (window.getSize().height + locationOnScreen.y > screenHeight)
+				{
+					locationOnScreen.y = screenHeight - window.getSize().height;
+				}
+
+				if (locationOnScreen.x < 0) locationOnScreen.x = 0;
+
+				if (locationOnScreen.y < 0) locationOnScreen.y = 0;
+
 				window.setLocation(locationOnScreen);
 			}
 			else

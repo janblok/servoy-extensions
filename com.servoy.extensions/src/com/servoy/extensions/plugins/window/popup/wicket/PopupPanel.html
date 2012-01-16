@@ -24,12 +24,40 @@ function centerPopup(popupId) {
 	popup.style.top = top + "px";
 }
 function positionPopup(popupId, elementId) {
-	 var element = document.getElementById(elementId);
-//	 var parentReg = YAHOO.util.Dom.getRegion(element.offsetParent);
-	 var jsCompReg = YAHOO.util.Dom.getRegion(element);
-	 var popup = document.getElementById(popupId);
-	 popup.style.top = jsCompReg.top + element.clientHeight + element.clientTop + 2 + "px";
-	 popup.style.left = jsCompReg.left + "px";
+	var element = document.getElementById(elementId);
+	var jsCompReg = YAHOO.util.Dom.getRegion(element);
+	var popup = document.getElementById(popupId);
+	var width = Wicket.Window.getViewportWidth();
+	var height = Wicket.Window.getViewportHeight();
+	var modalWidth = popup.offsetWidth;
+	var modalHeight = popup.offsetHeight;
+	var modalTop = jsCompReg.top + element.clientHeight + element.clientTop + 2;
+	var modalLeft = jsCompReg.left;
+	var scTop = 0;
+	var scLeft = 0;
+	
+	if (Wicket.Browser.isIE() || Wicket.Browser.isGecko()) 
+	{ 
+	   scLeft = Wicket.Window.getScrollX(); 
+	   scTop = Wicket.Window.getScrollY(); 
+	}
+	
+	//if necessary right align popup on related component
+	if (modalLeft + modalWidth > width) 
+	{ 
+		modalLeft= width - modalWidth +2 +scLeft; 
+	}
+	
+	//if necessary popup on the top of the related component
+	if (modalTop + modalHeight > height) 
+	{ 
+		modalTop = height - modalHeight -6 +scTop; 
+	}
+	
+	if (modalLeft < 0) modalLeft = 0;
+	if (modalTop < 0) modalTop = 0;
+	popup.style.top = modalTop + "px";
+	popup.style.left = modalLeft + "px";
 }
 /*-->]]>*/
 </script>
