@@ -51,7 +51,7 @@
 	</target>
 
 	<target name="compile" depends="prepare" description="Compile extensions project">
-		<javac verbose="${javacVerbose}" debug="${javacDebugInfo}" source="${bundleJavacSource}" target="${bundleJavacTarget}"
+		<javac debuglevel="lines,vars,source" verbose="${javacVerbose}" debug="${javacDebugInfo}" source="${bundleJavacSource}" target="${bundleJavacTarget}"
 			srcdir="${src.dir}"
 			destdir="${bin.dir}"
 			encoding="ISO-8859-1"
