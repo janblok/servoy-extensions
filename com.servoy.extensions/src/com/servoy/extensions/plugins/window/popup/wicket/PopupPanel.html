@@ -51,7 +51,13 @@ function positionPopup(popupId, elementId) {
 	//if necessary popup on the top of the related component
 	if (modalTop + modalHeight > height) 
 	{ 
-		modalTop = height - modalHeight -6 +scTop; 
+		if (modalTop - element.clientHeight - modalHeight -6 +scTop > 0) {
+			modalTop = modalTop - element.clientHeight - modalHeight -6 +scTop;
+		}
+		else {
+			modalTop = height - modalHeight -6 +scTop;
+		} 
+		
 	}
 	
 	if (modalLeft < 0) modalLeft = 0;

@@ -137,7 +137,14 @@ public class SwingPopupShower implements IPopupShower
 				//if necessary popup on the top of the related component
 				if (window.getSize().height + locationOnScreen.y > screenHeight)
 				{
-					locationOnScreen.y = screenHeight - window.getSize().height;
+					if (locationOnScreen.y - elementToShowRelatedTo.getHeight() - window.getSize().height > screenInsets.top)
+					{
+						locationOnScreen.y = locationOnScreen.y - elementToShowRelatedTo.getHeight() - window.getSize().height;
+					}
+					else
+					{
+						locationOnScreen.y = screenHeight - window.getSize().height;
+					}
 				}
 
 				if (locationOnScreen.x < 0) locationOnScreen.x = 0;
