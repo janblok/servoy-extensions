@@ -32,7 +32,7 @@ import com.servoy.j2db.util.Debug;
 
 public class RequestSAXParser
 {
-	private static SpellRequest spellRequest;
+	private SpellRequest spellRequest;
 
 	private final String xmlString;
 
@@ -66,7 +66,7 @@ public class RequestSAXParser
 		return spellRequest.getText();
 	}
 
-	private static final class SAXHandler extends DefaultHandler
+	private final class SAXHandler extends DefaultHandler
 	{
 		// invoked when document-parsing is started:
 		private String tempVal;
