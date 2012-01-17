@@ -269,15 +269,18 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		}
 		else
 		{
-			if (filesOption == AbstractFile.ALL || filesOption == AbstractFile.FILES)
+			if (f.exists())
 			{
-				if (visibleOption == AbstractFile.ALL || (visibleOption == AbstractFile.VISIBLE && !f.isHidden()) ||
-					(visibleOption == AbstractFile.NON_VISIBLE && f.isHidden()))
+				if (filesOption == AbstractFile.ALL || filesOption == AbstractFile.FILES)
 				{
-					if (lockedOption == AbstractFile.ALL || (lockedOption == AbstractFile.LOCKED && !f.canWrite()) ||
-						(lockedOption == AbstractFile.NON_LOCKED && f.canWrite()))
+					if (visibleOption == AbstractFile.ALL || (visibleOption == AbstractFile.VISIBLE && !f.isHidden()) ||
+						(visibleOption == AbstractFile.NON_VISIBLE && f.isHidden()))
 					{
-						return new RemoteFileData[] { new RemoteFileData(f, parent) };
+						if (lockedOption == AbstractFile.ALL || (lockedOption == AbstractFile.LOCKED && !f.canWrite()) ||
+							(lockedOption == AbstractFile.NON_LOCKED && f.canWrite()))
+						{
+							return new RemoteFileData[] { new RemoteFileData(f, parent) };
+						}
 					}
 				}
 			}
