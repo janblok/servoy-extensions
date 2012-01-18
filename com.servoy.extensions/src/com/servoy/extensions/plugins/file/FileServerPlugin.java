@@ -467,7 +467,10 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 */
 	public String getDefaultFolderLocation(final String clientId) throws RemoteException
 	{
-		application.isAuthenticated(clientId);
+		if (!application.isServerProcess(clientId) && !application.isAuthenticated(clientId))
+		{
+			throw new SecurityException("Rejected unauthenticated access");
+		}
 		String location = null;
 		try
 		{
