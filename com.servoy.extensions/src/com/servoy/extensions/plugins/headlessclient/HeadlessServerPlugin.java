@@ -90,7 +90,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
 	{
-		if (!application.isAuthenticated(callingClientId))
+		if (!application.isServerProcess(callingClientId) && !application.isAuthenticated(callingClientId))
 		{
 			throw new SecurityException("Rejected unauthenticated access");
 		}
