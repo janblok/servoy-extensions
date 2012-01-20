@@ -197,7 +197,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 				}
 
 				String prevLastLine = data.parseLines();
-				IFoundSet fs = fsm.getNewFoundSet(table, null, null);
+				IFoundSet fs = fsm.getNewFoundSet(table, null, fsm.getDefaultPKSortColumns(table.getDataSource()));
 				int totalSize = data.getRowCount();
 				createRecords(data, columns, dateformat, fs, start);
 

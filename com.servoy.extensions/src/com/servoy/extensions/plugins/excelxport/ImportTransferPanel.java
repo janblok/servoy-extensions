@@ -80,9 +80,8 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 
 		setLayout(new BorderLayout());
 
-		Dimension d = new Dimension(350, 20);
 		doneLabel = new JLabel(Messages.getString("servoy.plugin.import.importing.label")); //$NON-NLS-1$
-		cancelButton = new JButton(Messages.getString("servoy.general.cancel.title"));
+		cancelButton = new JButton(Messages.getString("servoy.general.cancel.title")); //$NON-NLS-1$
 
 		doneLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -198,7 +197,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 				}
 
 				//new: final
-				final IFoundSet fs = fsm.getNewFoundSet(table, null, null);
+				final IFoundSet fs = fsm.getNewFoundSet(table, null, fsm.getDefaultPKSortColumns(table.getDataSource()));
 
 				long dataRowCount = data.getRowCount();
 				boolean goOn = true;
@@ -224,7 +223,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 						{
 
 							Object fixval = columns.getValueAt(k, 0);
-							if (fixval != null && fixval.toString().startsWith("fixed:"))
+							if (fixval != null && fixval.toString().startsWith("fixed:")) //$NON-NLS-1$
 							{
 								fixval = fixval.toString().substring(6);
 							}
@@ -313,13 +312,13 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 				});
 
 				if (possibleException[0] != null) throw possibleException[0];
-				doneLabel.setText(Messages.getString("servoy.plugin.import.importingDone.label"));
+				doneLabel.setText(Messages.getString("servoy.plugin.import.importingDone.label")); //$NON-NLS-1$
 				IForm dm = application.getFormManager().getCurrentForm();
 				if (dm != null) dm.loadAllRecords();//refresh screen in background
 			}
 			catch (Exception ex)
 			{
-				parent.reportError(Messages.getString("servoy.plugin.import.exception"), ex);
+				parent.reportError(Messages.getString("servoy.plugin.import.exception"), ex); //$NON-NLS-1$
 			}
 			finally
 			{

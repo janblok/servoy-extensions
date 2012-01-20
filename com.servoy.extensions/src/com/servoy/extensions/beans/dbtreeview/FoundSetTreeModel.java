@@ -170,7 +170,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 				String n_relationName = bindingInfo.getNRelationName(un);
 				String m_relationName = bindingInfo.getMRelationName(un);
 
-				nfs = rec.getRelatedFoundSet(n_relationName, null);
+				nfs = rec.getRelatedFoundSet(n_relationName);
 
 				if (nfs != null && nfs.getSize() > 0)
 				{
@@ -183,7 +183,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 						for (int ii = 0; ii < nfs.getSize(); ii++)
 						{
 							IRecord rel = nfs.getRecord(ii);
-							IFoundSet mfs = rel.getRelatedFoundSet(m_relationName, null);
+							IFoundSet mfs = rel.getRelatedFoundSet(m_relationName);
 							if (mfs != null)
 							{
 								if (mfs.getSize() > 0) return true;
@@ -200,7 +200,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 			UserNode parentUserNode = (UserNode)un.getParent();
 			IRecord parentRecord = parentUserNode.getRecord();
 
-			IFoundSet nfs = parentRecord.getRelatedFoundSet(((RelationInfo)un.getUserObject()).getNRelationName(), null);
+			IFoundSet nfs = parentRecord.getRelatedFoundSet(((RelationInfo)un.getUserObject()).getNRelationName());
 
 			if (nfs != null && nfs.getSize() > 0)
 			{
@@ -258,7 +258,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 					String m_relationName = bindingInfo.getMRelationName(un);
 
 
-					nfs = rec.getRelatedFoundSet(n_relationName, null);
+					nfs = rec.getRelatedFoundSet(n_relationName);
 					if (nfs != null && nfs.getSize() > 0)
 					{
 						if (m_relationName == null)
@@ -291,7 +291,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 							for (int ii = 0; ii < nfs.getSize(); ii++)
 							{
 								IRecord rel = nfs.getRecord(ii);
-								IFoundSet mfs = rel.getRelatedFoundSet(m_relationName, null);
+								IFoundSet mfs = rel.getRelatedFoundSet(m_relationName);
 								if (mfs != null)
 								{
 									for (int i = 0; i < mfs.getSize(); i++)
@@ -376,7 +376,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 				UserNode parentUserNode = (UserNode)un.getParent();
 				IRecord parentRecord = parentUserNode.getRecord();
 
-				IFoundSet nfs = parentRecord.getRelatedFoundSet(((RelationInfo)un.getUserObject()).getNRelationName(), null);
+				IFoundSet nfs = parentRecord.getRelatedFoundSet(((RelationInfo)un.getUserObject()).getNRelationName());
 
 				if (nfs != null && nfs.getSize() > 0)
 				{
