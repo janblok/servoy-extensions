@@ -68,7 +68,7 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 		}
 
 		response.renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
-		response.renderJavascriptReference(YUILoader.JS_CONTAINER);
+		response.renderJavascriptReference(YUILoader.JS_CONTAINER_CORE);
 		response.renderJavascriptReference(YUILoader.JS_MENU);
 		response.renderJavascript(
 			"function svy_popmenu_click(psType,psArgs,psValue){wicketAjaxGet(psValue)};var oMenu = new YAHOO.widget.Menu('basicmenu',{});", "yahoomenu"); //$NON-NLS-1$ //$NON-NLS-2$
