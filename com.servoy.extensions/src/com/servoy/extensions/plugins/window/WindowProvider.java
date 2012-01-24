@@ -113,11 +113,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	{
 		public final String shortcut;
 		public final FunctionDefinition functionDefinition;
+		public final Object[] arguments;
 
-		public ShortcutCallData(String shortcut, FunctionDefinition functionDefinition)
+		public ShortcutCallData(String shortcut, FunctionDefinition functionDefinition, Object[] arguments)
 		{
 			this.shortcut = shortcut;
 			this.functionDefinition = functionDefinition;
+			this.arguments = arguments;
 		}
 	}
 
@@ -211,7 +213,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			try
 			{
 				event.setType(globalHandler.shortcut);
-				ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+				if (globalHandler.arguments != null)
+				{
+					ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, globalHandler.arguments });
+				}
+				else globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
 			}
 			catch (Exception e)
 			{
@@ -229,7 +235,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 				try
 				{
 					event.setType(formHandler.shortcut);
-					formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+					if (formHandler.arguments != null)
+					{
+						formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, formHandler.arguments });
+					}
+					else formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
 				}
 				catch (Exception e)
 				{
@@ -253,6 +263,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * plugins.window.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');
 	 * // same, but use method in stead of string
 	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');
+	 * // form method called when shortcut is used and arguments are passed to the method
+	 * plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
 	 * // remove global shortcut and form-level shortcut
 	 * plugins.window.removeShortcut('menu 1');
 	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -286,10 +298,24 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		String shortcut = String.valueOf(vargs[n++]);
 		Object callback = vargs[n++];
 		String context = null;
+		Object[] callbackArgs = null;
 		if (vargs.length > n)
 		{
-			Object arg = vargs[n++];
-			context = arg == null ? null : arg.toString();
+			if (vargs[n] instanceof Object[])
+			{
+				Object[] arg = (Object[])vargs[n++];
+				callbackArgs = arg == null ? null : arg;
+			}
+			else
+			{
+				Object arg = vargs[n++];
+				context = arg == null ? null : arg.toString();
+			}
+		}
+		if (vargs.length > n)
+		{
+			Object[] arg = (Object[])vargs[n++];
+			callbackArgs = arg == null ? null : arg;
 		}
 
 		if (callback instanceof String)
@@ -364,7 +390,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef));
+		if (callbackArgs == null) shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, null));
+		else shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, callbackArgs));
 
 		return true;
 	}
