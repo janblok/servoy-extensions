@@ -103,12 +103,15 @@ public class WindowProvider implements IScriptObject
 	{
 		public final String shortcut;
 		public final FunctionDefinition functionDefinition;
+		public final Object[] arguments;
 
-		public ShortcutCallData(String shortcut, FunctionDefinition functionDefinition)
+		public ShortcutCallData(String shortcut, FunctionDefinition functionDefinition, Object[] arguments)
 		{
 			this.shortcut = shortcut;
 			this.functionDefinition = functionDefinition;
+			this.arguments = arguments;
 		}
+
 	}
 
 	private IShortcutHandler shortcutHandler;
@@ -201,7 +204,11 @@ public class WindowProvider implements IScriptObject
 			try
 			{
 				event.setType(globalHandler.shortcut);
-				ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+				if (globalHandler.arguments != null)
+				{
+					ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, globalHandler.arguments });
+				}
+				else globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
 			}
 			catch (Exception e)
 			{
@@ -219,7 +226,11 @@ public class WindowProvider implements IScriptObject
 				try
 				{
 					event.setType(formHandler.shortcut);
-					formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+					if (formHandler.arguments != null)
+					{
+						formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, formHandler.arguments });
+					}
+					else formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
 				}
 				catch (Exception e)
 				{
@@ -240,10 +251,24 @@ public class WindowProvider implements IScriptObject
 		String shortcut = String.valueOf(vargs[n++]);
 		Object callback = vargs[n++];
 		String context = null;
+		Object[] callbackArgs = null;
 		if (vargs.length > n)
 		{
-			Object arg = vargs[n++];
-			context = arg == null ? null : arg.toString();
+			if (vargs[n] instanceof Object[])
+			{
+				Object[] arg = (Object[])vargs[n++];
+				callbackArgs = arg == null ? null : arg;
+			}
+			else
+			{
+				Object arg = vargs[n++];
+				context = arg == null ? null : arg.toString();
+			}
+		}
+		if (vargs.length > n)
+		{
+			Object[] arg = (Object[])vargs[n++];
+			callbackArgs = arg == null ? null : arg;
 		}
 
 		if (callback instanceof String)
@@ -303,7 +328,8 @@ public class WindowProvider implements IScriptObject
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef));
+		if (callbackArgs == null) shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, null));
+		else shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, callbackArgs));
 
 		return true;
 	}
@@ -846,7 +872,7 @@ public class WindowProvider implements IScriptObject
 
 		if ("createShortcut".equals(methodName))
 		{
-			return new String[] { "shortcut", "method", "[form_name]" };
+			return new String[] { "shortcut", "method", "[form_name]", "[[] arguments]" };
 		}
 		if ("removeShortcut".equals(methodName))
 		{
@@ -977,6 +1003,8 @@ public class WindowProvider implements IScriptObject
 			sb.append("%%elementName%%.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');\n");
 			sb.append("// same, but use method in stead of string\n");
 			sb.append("%%elementName%%.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');\n");
+			sb.append("// form method called when shortcut is used and arguments are passed to the method\n");
+			sb.append("%%elementName%%.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));\n");
 			sb.append("\n// remove global shortcut and form-level shortcut\n");
 			sb.append("%%elementName%%.createShortcut('menu 1');\n");
 			sb.append("%%elementName%%.removeShortcut('control RIGHT', 'frm_contacts');\n");
