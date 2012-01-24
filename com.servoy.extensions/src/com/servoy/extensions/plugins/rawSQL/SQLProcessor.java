@@ -34,6 +34,7 @@ import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -171,8 +172,15 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 	{
 		if (!checkAccess(clientId)) return null;
 
-		return ApplicationServerSingleton.get().getDataServer().executeStoredProcedure(clientId, serverName, transaction_id, procedureDeclaration,
-			questiondata, inOutType, startRow, rowsToRetrieve);
+		try
+		{
+			return application.executeStoredProcedure(clientId, serverName, transaction_id, procedureDeclaration, questiondata, inOutType, startRow,
+				rowsToRetrieve);
+		}
+		catch (ServoyException e)
+		{
+			throw new RepositoryException(e);
+		}
 	}
 
 	public boolean flushAllClientsCache(String client_id, boolean notifySelf, String server_name, String table, String tid) throws RemoteException
