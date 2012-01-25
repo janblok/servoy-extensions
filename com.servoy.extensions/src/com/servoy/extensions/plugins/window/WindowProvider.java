@@ -204,11 +204,8 @@ public class WindowProvider implements IScriptObject
 			try
 			{
 				event.setType(globalHandler.shortcut);
-				if (globalHandler.arguments != null)
-				{
-					ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, globalHandler.arguments });
-				}
-				else globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+				Object[] arguments = Utils.arrayJoin(new Object[] { event }, globalHandler.arguments);
+				ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), arguments);
 			}
 			catch (Exception e)
 			{
@@ -226,11 +223,8 @@ public class WindowProvider implements IScriptObject
 				try
 				{
 					event.setType(formHandler.shortcut);
-					if (formHandler.arguments != null)
-					{
-						formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, formHandler.arguments });
-					}
-					else formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+					Object[] arguments = Utils.arrayJoin(new Object[] { event }, formHandler.arguments);
+					formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), arguments);
 				}
 				catch (Exception e)
 				{
@@ -254,17 +248,15 @@ public class WindowProvider implements IScriptObject
 		Object[] callbackArgs = null;
 		if (vargs.length > n)
 		{
-			if (vargs[n] instanceof Object[])
+			Object arg = vargs[n++];
+			//check if this parameter is really the context and not the other optional parameter
+			if (arg != null && !(arg instanceof String))
 			{
-				Object[] arg = (Object[])vargs[n++];
-				callbackArgs = arg == null ? null : arg;
+				return false;
 			}
-			else
-			{
-				Object arg = vargs[n++];
-				context = arg == null ? null : arg.toString();
-			}
+			context = arg == null ? null : arg.toString();
 		}
+
 		if (vargs.length > n)
 		{
 			Object[] arg = (Object[])vargs[n++];
@@ -328,8 +320,7 @@ public class WindowProvider implements IScriptObject
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		if (callbackArgs == null) shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, null));
-		else shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, callbackArgs));
+		shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, callbackArgs));
 
 		return true;
 	}
