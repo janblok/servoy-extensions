@@ -36,6 +36,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -50,7 +51,6 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -213,11 +213,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			try
 			{
 				event.setType(globalHandler.shortcut);
-				if (globalHandler.arguments != null)
-				{
-					ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, globalHandler.arguments });
-				}
-				else globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+				Object[] arguments = Utils.arrayJoin(new Object[] { event }, globalHandler.arguments);
+				ret = globalHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), arguments);
 			}
 			catch (Exception e)
 			{
@@ -235,11 +232,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 				try
 				{
 					event.setType(formHandler.shortcut);
-					if (formHandler.arguments != null)
-					{
-						formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event, formHandler.arguments });
-					}
-					else formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), new Object[] { event });
+					Object[] arguments = Utils.arrayJoin(new Object[] { event }, formHandler.arguments);
+					formHandler.functionDefinition.executeSync(plugin.getClientPluginAccess(), arguments);
 				}
 				catch (Exception e)
 				{
@@ -247,6 +241,31 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 				}
 			}
 		}
+	}
+
+	/**
+	 * @clonedesc js_createSchedule(Object, Object, Object, Object[])
+	 * @sampleas js_createSchedule(Object, Object, Object, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method
+	 */
+	public boolean js_createShortcut(Object shortcut, Object method)
+	{
+		return js_createShortcut(shortcut, method, null, null);
+	}
+
+	/**
+	 * @clonedesc js_createSchedule(Object, Object, Object, Object[])
+	 * @sampleas js_createSchedule(Object, Object, Object, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method
+	 * @param form_name
+	 */
+	public boolean js_createShortcut(Object shortcut, Object method, Object formName)
+	{
+		return js_createShortcut(shortcut, method, formName, null);
 	}
 
 	/**
@@ -265,6 +284,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');
 	 * // form method called when shortcut is used and arguments are passed to the method
 	 * plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+	 * //plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 	 * // remove global shortcut and form-level shortcut
 	 * plugins.window.removeShortcut('menu 1');
 	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -285,47 +305,27 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @param shortcut 
 	 * @param method 
-	 * @param form_name optional 
+	 * @param form_name
+	 * @param arguments
 	 */
-	public boolean js_createShortcut(Object[] vargs)
+	public boolean js_createShortcut(Object shortcut, Object method, Object formName, Object[] arguments)
 	{
-		if (vargs == null || vargs.length < 2)
+		FunctionDefinition functionDef;
+		String shortCut = String.valueOf(shortcut);
+		if (formName != null && !(formName instanceof String))
 		{
 			return false;
 		}
-		FunctionDefinition functionDef;
-		int n = 0;
-		String shortcut = String.valueOf(vargs[n++]);
-		Object callback = vargs[n++];
-		String context = null;
-		Object[] callbackArgs = null;
-		if (vargs.length > n)
-		{
-			if (vargs[n] instanceof Object[])
-			{
-				Object[] arg = (Object[])vargs[n++];
-				callbackArgs = arg == null ? null : arg;
-			}
-			else
-			{
-				Object arg = vargs[n++];
-				context = arg == null ? null : arg.toString();
-			}
-		}
-		if (vargs.length > n)
-		{
-			Object[] arg = (Object[])vargs[n++];
-			callbackArgs = arg == null ? null : arg;
-		}
+		String context = formName == null ? null : formName.toString();
 
-		if (callback instanceof String)
+		if (method instanceof String)
 		{
 			// string callback
 			// 1. formname.method
 			// 2. globals.method
 			// 3. scopes.scopename.method
 			// 4. method (on context form)
-			String str = ((String)callback);
+			String str = ((String)method);
 			int dot = str.indexOf('.');
 			String methodName;
 			String contextName;
@@ -365,9 +365,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			}
 			functionDef = new FunctionDefinition(contextName, methodName);
 		}
-		else if (callback instanceof Function)
+		else if (method instanceof Function)
 		{
-			functionDef = new FunctionDefinition((Function)callback);
+			functionDef = new FunctionDefinition((Function)method);
 		}
 		else
 		{
@@ -375,10 +375,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			return false;
 		}
 
-		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
+		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortCut);
 		if (key == null)
 		{
-			Debug.error("Could not parse shortcut '" + shortcut + '\'');
+			Debug.error("Could not parse shortcut '" + shortCut + '\'');
 			return false;
 		}
 
@@ -390,8 +390,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		if (callbackArgs == null) shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, null));
-		else shortcutMap.put(context, new ShortcutCallData(shortcut, functionDef, callbackArgs));
+		shortcutMap.put(context, new ShortcutCallData(shortCut, functionDef, arguments));
 
 		return true;
 	}
