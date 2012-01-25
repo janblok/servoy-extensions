@@ -996,6 +996,7 @@ public class WindowProvider implements IScriptObject
 			sb.append("%%elementName%%.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');\n");
 			sb.append("// form method called when shortcut is used and arguments are passed to the method\n");
 			sb.append("%%elementName%%.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));\n");
+			//sb.append("%%elementName%%.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));\n");
 			sb.append("\n// remove global shortcut and form-level shortcut\n");
 			sb.append("%%elementName%%.createShortcut('menu 1');\n");
 			sb.append("%%elementName%%.removeShortcut('control RIGHT', 'frm_contacts');\n");
