@@ -717,7 +717,9 @@ public class WindowProvider implements IScriptObject
 
 
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
+	public boolean js_register(@SuppressWarnings("unused")
+	String code, @SuppressWarnings("unused")
+	String developer)
 	{
 		return true;
 	}
@@ -863,7 +865,7 @@ public class WindowProvider implements IScriptObject
 
 		if ("createShortcut".equals(methodName))
 		{
-			return new String[] { "shortcut", "method", "[form_name]", "[[] arguments]" };
+			return new String[] { "shortcut", "method", "[form_name]", "[arguments]" };
 		}
 		if ("removeShortcut".equals(methodName))
 		{
