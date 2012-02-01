@@ -244,26 +244,26 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createSchedule(Object, Object, Object, Object[])
-	 * @sampleas js_createSchedule(Object, Object, Object, Object[])
+	 * @clonedesc js_createSchedule(String, Object, String, Object[])
+	 * @sampleas js_createSchedule(String, Object, String, Object[])
 	 * 
 	 * @param shortcut
 	 * @param method
 	 */
-	public boolean js_createShortcut(Object shortcut, Object method)
+	public boolean js_createShortcut(String shortcut, Object method)
 	{
 		return js_createShortcut(shortcut, method, null, null);
 	}
 
 	/**
-	 * @clonedesc js_createSchedule(Object, Object, Object, Object[])
-	 * @sampleas js_createSchedule(Object, Object, Object, Object[])
+	 * @clonedesc js_createSchedule(String, Object, String, Object[])
+	 * @sampleas js_createSchedule(String, Object, String, Object[])
 	 * 
 	 * @param shortcut
 	 * @param method
 	 * @param form_name
 	 */
-	public boolean js_createShortcut(Object shortcut, Object method, Object formName)
+	public boolean js_createShortcut(String shortcut, Object method, String formName)
 	{
 		return js_createShortcut(shortcut, method, formName, null);
 	}
@@ -308,16 +308,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @param form_name
 	 * @param arguments
 	 */
-	public boolean js_createShortcut(Object shortcut, Object method, Object formName, Object[] arguments)
+	public boolean js_createShortcut(String shortcut, Object method, String formName, Object[] arguments)
 	{
 		FunctionDefinition functionDef;
-		String shortCut = String.valueOf(shortcut);
-		if (formName != null && !(formName instanceof String))
-		{
-			return false;
-		}
-		String context = formName == null ? null : formName.toString();
-
 		if (method instanceof String)
 		{
 			// string callback
@@ -331,13 +324,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			String contextName;
 			if (dot == -1)
 			{
-				if (context == null)
+				if (formName == null)
 				{
 					contextName = "scopes.globals";
 				}
 				else
 				{
-					contextName = context; // form name
+					contextName = formName; // form name
 				}
 				methodName = str;
 			}
@@ -375,10 +368,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			return false;
 		}
 
-		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortCut);
+		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
 		if (key == null)
 		{
-			Debug.error("Could not parse shortcut '" + shortCut + '\'');
+			Debug.error("Could not parse shortcut '" + shortcut + '\'');
 			return false;
 		}
 
@@ -390,7 +383,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		shortcutMap.put(context, new ShortcutCallData(shortCut, functionDef, arguments));
+		shortcutMap.put(formName, new ShortcutCallData(shortcut, functionDef, arguments));
 
 		return true;
 	}
@@ -1086,7 +1079,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @deprecated Obsolete method.
 	 */
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
+	public boolean js_register(@SuppressWarnings("unused")
+	String code, @SuppressWarnings("unused")
+	String developer)
 	{
 		return true;
 	}
