@@ -6059,6 +6059,37 @@ if (event.getSource()) {
           </function>
           <function name="createShortcut">
             <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description/>
+            <sample/>
+            <parameters>
+              <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            </parameters>
+          </function>
+          <function name="createShortcut">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description/>
+            <sample/>
+            <parameters>
+              <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="form_name"/>
+            </parameters>
+          </function>
+          <function name="createShortcut">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -6074,6 +6105,9 @@ plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShor
 plugins.window.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');
 // same, but use method in stead of string
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');
+// form method called when shortcut is used and arguments are passed to the method
+plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+//plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -6092,9 +6126,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // NOTE: shortcuts will not override existing operating system or browser shortcuts,
 // choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
-              <parameter name="shortcut"/>
-              <parameter name="method"/>
-              <parameter name="form_name" optional="true"/>
+              <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="form_name"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
           <function deprecated="true" name="getMenu">
@@ -6288,33 +6323,7 @@ plugins.window.maximize("windowName");]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Remove a shortcut.]]></description>
             <summary><![CDATA[Remove a shortcut.]]></summary>
-            <sample><![CDATA[// this plugin uses the java keystroke parser
-// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
-// global shortcut (on all forms) - 'apple 1' on a mac client and 'control 1' on other client platforms
-plugins.window.createShortcut('menu 1', 'scopes.globals.handleShortcut');
-// global handler, only triggered when on form frm_orders
-plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_orders');
-// form method called when shortcut is used
-plugins.window.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');
-// same, but use method in stead of string
-plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');
-// remove global shortcut and form-level shortcut
-plugins.window.removeShortcut('menu 1');
-plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
-// shortcut handlers are called with an JSEvent argument
-///* 
-// * Handle keyboard shortcut.
-// * 
-// * @param {JSEvent} event the event that triggered the action
-// */
-//function handleShortcut(event)
-//{
-//  application.output(event.getType()) // returns 'menu 1'
-//  application.output(event.getFormName()) // returns 'frm_contacts'
-//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
-//}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+            <sample/>
             <parameters>
               <parameter name="shortcut"/>
               <parameter name="form_name" optional="true"/>
