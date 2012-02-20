@@ -244,8 +244,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createSchedule(String, Object, String, Object[])
-	 * @sampleas js_createSchedule(String, Object, String, Object[])
+	 * @clonedesc js_createShortcut(String, Object, String, Object[])
+	 * @sampleas js_createShortcut(String, Object, String, Object[])
 	 * 
 	 * @param shortcut
 	 * @param method
@@ -256,8 +256,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createSchedule(String, Object, String, Object[])
-	 * @sampleas js_createSchedule(String, Object, String, Object[])
+	 * @clonedesc js_createShortcut(String, Object, String, Object[])
+	 * @sampleas js_createShortcut(String, Object, String, Object[])
 	 * 
 	 * @param shortcut
 	 * @param method
