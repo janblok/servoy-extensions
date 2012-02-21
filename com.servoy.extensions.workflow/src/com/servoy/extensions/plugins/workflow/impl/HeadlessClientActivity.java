@@ -23,10 +23,10 @@ import org.jbpm.api.activity.ActivityBehaviour;
 import org.jbpm.api.activity.ActivityExecution;
 
 import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
-import com.servoy.extensions.plugins.workflow.client.MapSerializer;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.serialize.MapSerializer;
 
 /**
  * An activity node to execute a global method bpm_<node_name> with workflow variables as argument in a servoy headlessclient from within the workflow.

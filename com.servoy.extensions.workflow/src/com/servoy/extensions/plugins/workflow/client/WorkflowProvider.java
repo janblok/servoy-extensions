@@ -28,6 +28,7 @@ import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
+import com.servoy.j2db.util.serialize.MapSerializer;
 
 /**
  * The plugin api to control the workflow actions from a servoy client
