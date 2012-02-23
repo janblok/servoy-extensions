@@ -321,6 +321,11 @@ public class ScriptableJMenu implements IMenu
 		jmenu.setVisible(aFlag);
 	}
 
+	public boolean isVisible()
+	{
+		return jmenu.isVisible();
+	}
+
 	public void setIconURL(String iconURL)
 	{
 		setIcon(Utilities.getImageIcon(iconURL));

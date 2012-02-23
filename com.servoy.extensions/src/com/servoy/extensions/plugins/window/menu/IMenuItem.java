@@ -53,6 +53,8 @@ public interface IMenuItem
 
 	public void setVisible(boolean visible);
 
+	public boolean isVisible();
+
 	public void addActionListener(ActionListener actionListener);
 
 	public ActionListener[] getActionListeners();
