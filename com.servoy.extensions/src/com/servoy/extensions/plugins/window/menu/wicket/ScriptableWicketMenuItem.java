@@ -41,6 +41,7 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	private boolean enabled;
 	private String bgColor;
 	private String fgColor;
+	private boolean isVisible;
 
 	private AbstractMenuItem scriptObjectWrapper;
 
@@ -48,6 +49,7 @@ public class ScriptableWicketMenuItem implements IMenuItem
 	{
 		this.parentMenu = parentMenu;
 		this.enabled = true;
+		this.isVisible = true;
 	}
 
 	public Object getMenuComponent()
@@ -91,6 +93,12 @@ public class ScriptableWicketMenuItem implements IMenuItem
 
 	public void setVisible(boolean visible)
 	{
+		this.isVisible = visible;
+	}
+
+	public boolean isVisible()
+	{
+		return isVisible;
 	}
 
 	public void setHorizontalAlignment(int align)

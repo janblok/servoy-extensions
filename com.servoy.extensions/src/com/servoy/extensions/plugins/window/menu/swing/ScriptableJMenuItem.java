@@ -143,6 +143,11 @@ public class ScriptableJMenuItem implements IMenuItem
 		jMenuItem.setVisible(aFlag);
 	}
 
+	public boolean isVisible()
+	{
+		return jMenuItem.isVisible();
+	}
+
 	public void setIconURL(String iconURL)
 	{
 		setIcon(Utilities.getImageIcon(iconURL));

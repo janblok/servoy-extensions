@@ -97,6 +97,8 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 		int groupCount = 1;
 		for (IMenuItem elem : menuItems)
 		{
+			if (elem != null && !elem.isVisible()) continue;
+
 			String imageIcon = null;
 			if (elem instanceof ScriptableWicketMenuItem)
 			{
