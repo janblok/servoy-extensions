@@ -108,19 +108,6 @@ public class SwingDBTree extends JTree implements TableCellRenderer, ICompositeD
 		visibleRow = row;
 		((UserNodeTreeCellRenderer)getCellRenderer()).setRowFocus(hasFocus ? row : -1);
 
-		if (isSelected)
-		{
-			setOpaque(true);
-			setBackground(table.getSelectionBackground());
-			setForeground(table.getSelectionForeground());
-		}
-		else
-		{
-			setOpaque(table.isOpaque());
-			setBackground(table.getBackground());
-			setForeground(table.getForeground());
-		}
-
 		return this;
 	}
 
