@@ -22,22 +22,53 @@ var isEnabled = plugins.textxport.importEnabled;]]></sample>
         <functions>
           <function name="textExport">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
             <summary><![CDATA[Export to text 'separated value' data (*.]]></summary>
             <sample><![CDATA[//export with default separator(tab) and no header
-var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);
-//export with ';' separator and no header
-var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');
-//export with ';' separator and header
+var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);]]></sample>
+            <parameters>
+              <parameter name="foundSet"/>
+              <parameter name="dataProviderIds"/>
+            </parameters>
+          </function>
+          <function name="textExport">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
+            <summary><![CDATA[Export to text 'separated value' data (*.]]></summary>
+            <sample><![CDATA[//export with ';' separator and no header
+var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');]]></sample>
+            <parameters>
+              <parameter name="foundSet"/>
+              <parameter name="dataProviderIds"/>
+              <parameter name="separator"/>
+            </parameters>
+          </function>
+          <function name="textExport">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
+            <summary><![CDATA[Export to text 'separated value' data (*.]]></summary>
+            <sample><![CDATA[//export with ';' separator and header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';',true);]]></sample>
             <parameters>
               <parameter name="foundSet"/>
               <parameter name="dataProviderIds"/>
-              <parameter name="separator" optional="true"/>
-              <parameter name="exportHeader" optional="true"/>
+              <parameter name="separator"/>
+              <parameter name="exportHeader" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
         </functions>

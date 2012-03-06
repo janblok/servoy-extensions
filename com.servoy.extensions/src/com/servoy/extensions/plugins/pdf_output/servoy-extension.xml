@@ -108,16 +108,24 @@ application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPri
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           </function>
           <function name="getPDFPrinter">
+            <argumentsTypes/>
+            <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
+            <description><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
+            <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
+controller.print(true,false,plugins.pdf_output.getPDFPrinter());]]></sample>
+          </function>
+          <function name="getPDFPrinter">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
-            <description><![CDATA[Returns a PDF printer that can be used in print calls. If a file name is provided, then a PDF printer that generates a PDF into the specified file is returned. If no argument is provided, then the PDF printer corresponding to the last started meta print job is returned.]]></description>
+            <description><![CDATA[Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.]]></description>
             <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
             <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
 controller.print(true,false,plugins.pdf_output.getPDFPrinter('c:/temp/out.pdf'));]]></sample>
             <parameters>
-              <parameter name="filename" optional="true"/>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="getPagesPrinted">
@@ -195,11 +203,40 @@ plugins.pdf_output.insertFontDirectory('/Library/Fonts');]]></sample>
             </parameters>
           </function>
           <function name="startMetaPrintJob">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.]]></description>
+            <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
+var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
+if (success)
+{
+	forms.form_one.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	application.output('form one printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+	forms.form_two.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	application.output('form two printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+}
+application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
+plugins.pdf_output.endMetaPrintJob()
+
+//to print multiple forms to one pdf document (to store in dataprovider).
+var success = plugins.pdf_output.startMetaPrintJob()
+if (success)
+{
+	forms.form_one.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	application.output('form one printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+	forms.form_two.controller.print(false,false,plugins.pdf_output.getPDFPrinter());
+	application.output('form two printed ' + plugins.pdf_output.getPagesPrinted() + ' pages.');
+}
+application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
+mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
+          </function>
+          <function name="startMetaPrintJob">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. If a file name is specified, then the PDF document is generated into that file. If no argument is specified, then the PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved into a dataprovider, for example.]]></description>
+            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.]]></description>
             <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
             <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
@@ -225,7 +262,7 @@ if (success)
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
             <parameters>
-              <parameter name="filename" optional="true"/>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
         </functions>

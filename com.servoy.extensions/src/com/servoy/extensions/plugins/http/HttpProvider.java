@@ -84,46 +84,72 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used.
+	 * Get all page html in a variable
 	 *
 	 * @sample
 	 * // get data using a default connection
 	 * var pageData = plugins.http.getPageData('http://www.cnn.com');
+	 *
+	 * @param url 
+	 */
+	public String js_getPageData(String url)
+	{
+		return getPageDataOldImplementation(url);
+	}
+
+	/**
+	 * Get all page html in a variable (authentication only works with http client usage). A http client will be created/used.
+	 *
+	 * @sample
 	 * // create an http client and use it to get the data
 	 * var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');
 	 *
 	 * @param url 
-	 * @param http_clientname optional 
-	 * @param username optional 
-	 * @param password optional
+	 * @param httpClientName 
 	 */
-	public String js_getPageData(Object[] vargs)
+	public String js_getPageData(String url, String httpClientName)
 	{
-		String a_url = null;
-		String clientname = null;
-		String username = null;
-		String password = null;
-		if (vargs.length >= 1) a_url = (String)vargs[0];
-		if (a_url == null || a_url.trim().length() == 0) return "";
-		if (vargs.length == 1)
-		{
-			return getPageDataOldImplementation(a_url);
-		}
-		if (vargs.length >= 2) clientname = (String)vargs[1];
-		if (vargs.length >= 3) username = "" + vargs[2];
-		if (vargs.length >= 4) password = "" + vargs[3];
+		return getPageData(url, httpClientName, null, null);
+	}
+
+	/**
+	 * Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used.
+	 *
+	 * @sample
+	 * // create an http client and use it to get the data
+	 * var pageData = plugins.http.getPageData('http://www.admin.com','myclient','myuser','secret');
+	 *
+	 * @param url 
+	 * @param httpClientName 
+	 * @param username 
+	 * @param password
+	 */
+	public String js_getPageData(String url, String httpClientName, String username, String password)
+	{
+		return getPageData(url, httpClientName, username, password);
+	}
+
+	/**
+	 * @param url
+	 * @param httpClientName
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	private String getPageData(String url, String httpClientName, String username, String password)
+	{
 		try
 		{
-			DefaultHttpClient client = getOrCreateHTTPclient(clientname, a_url);
-			HttpGet get = new HttpGet(a_url);
-			URL _url = new URL(a_url);
-			if (vargs.length == 4)
+			DefaultHttpClient client = getOrCreateHTTPclient(httpClientName, url);
+			HttpGet get = new HttpGet(url);
+			HttpResponse res = client.execute(get); // you can get the status from here... (return code)
+			BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+			if (username != null)
 			{
-				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+				URL _url = new URL(url);
 				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
 				client.setCredentialsProvider(bcp);
 			}
-			HttpResponse res = client.execute(get); // you can get the status from here... (return code)
 			lastPageEncoding = EntityUtils.getContentCharSet(res.getEntity());
 			return EntityUtils.toString(res.getEntity());
 		}
@@ -406,25 +432,48 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 * Put a file at the specified URL.
 	 *
 	 * @sample
+	 * var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc')
+	 *
+	 * @param clientName 
+	 * @param url 
+	 * @param fileName 
+	 * @param filePath 
+	 */
+	public boolean js_put(String clientName, String url, String fileName, String filePath)
+	{
+		return put(clientName, url, fileName, filePath, null, null);
+	}
+
+	/**
+	 * Put a file at the specified URL, using authentication.
+	 *
+	 * @sample
 	 * var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')
 	 *
 	 * @param clientName 
 	 * @param url 
 	 * @param fileName 
 	 * @param filePath 
-	 * @param username optional
-	 * @param password optional
+	 * @param username 
+	 * @param password
 	 */
-	public boolean js_put(Object[] vargs)
+	public boolean js_put(String clientName, String url, String fileName, String filePath, String username, String password)
 	{
-		String clientName = "", url = "", fileName = "", path = "", username = "", password = "";
-		if (vargs.length >= 1) clientName = (String)vargs[0];
-		if (vargs.length >= 2) url = (String)vargs[1];
-		if (vargs.length >= 3) fileName = (String)vargs[2];
-		if (vargs.length >= 4) path = (String)vargs[3];
-		if (vargs.length >= 5) username = (String)vargs[4];
-		if (vargs.length >= 6) password = (String)vargs[5];
+		return put(clientName, url, fileName, filePath, username, password);
 
+	}
+
+	/**
+	 * @param clientName
+	 * @param url
+	 * @param fileName
+	 * @param filePath
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	private boolean put(String clientName, String url, String fileName, String filePath, String username, String password)
+	{
 		if ("".equals(clientName.trim())) return false;
 
 		int status = 0;
@@ -433,15 +482,14 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 			URL _url = new URL(url);
 			HttpPut method = new HttpPut(url + "/" + fileName);
 			DefaultHttpClient client = getOrCreateHTTPclient(clientName, url);
-			File file = new File(path);
+			File file = new File(filePath);
 
-			if (!"".equals(username.trim()))
+			if (username != null && !"".equals(username.trim()))
 			{
 				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
 				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
 				client.setCredentialsProvider(bcp);
 			}
-			int statusCode = 0, attempt = 0;
 
 			if (file == null || !file.exists())
 			{

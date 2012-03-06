@@ -1118,20 +1118,49 @@ if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file
           </function>
           <function name="getPageData">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Get all page html in a variable]]></description>
+            <summary><![CDATA[Get all page html in a variable]]></summary>
+            <sample><![CDATA[// get data using a default connection
+var pageData = plugins.http.getPageData('http://www.cnn.com');]]></sample>
+            <parameters>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="getPageData">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Get all page html in a variable (authentication only works with http client usage). A http client will be created/used.]]></description>
+            <summary><![CDATA[Get all page html in a variable (authentication only works with http client usage).]]></summary>
+            <sample><![CDATA[// create an http client and use it to get the data
+var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');]]></sample>
+            <parameters>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="httpClientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="getPageData">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used.]]></description>
             <summary><![CDATA[Get all page html in a variable (authentication only works with http client usage).]]></summary>
-            <sample><![CDATA[// get data using a default connection
-var pageData = plugins.http.getPageData('http://www.cnn.com');
-// create an http client and use it to get the data
-var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');]]></sample>
+            <sample><![CDATA[// create an http client and use it to get the data
+var pageData = plugins.http.getPageData('http://www.admin.com','myclient','myuser','secret');]]></sample>
             <parameters>
-              <parameter name="url"/>
-              <parameter name="http_clientname" optional="true"/>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="httpClientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function deprecated="true" name="getPoster">
@@ -1155,19 +1184,42 @@ var pageData = poster.getPageData()]]></sample>
           </function>
           <function name="put">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Put a file at the specified URL.]]></description>
             <summary><![CDATA[Put a file at the specified URL.]]></summary>
+            <sample><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc')]]></sample>
+            <parameters>
+              <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="filePath" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="put">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Put a file at the specified URL, using authentication.]]></description>
+            <summary><![CDATA[Put a file at the specified URL, using authentication.]]></summary>
             <sample><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')]]></sample>
             <parameters>
-              <parameter name="clientName"/>
-              <parameter name="url"/>
-              <parameter name="fileName"/>
-              <parameter name="filePath"/>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
+              <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="filePath" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="setClientProxyCredentials">

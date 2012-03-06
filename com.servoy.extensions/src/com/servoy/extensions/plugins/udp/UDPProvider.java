@@ -32,7 +32,6 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.Utils;
 
 @ServoyDocumented(publicName = UDPPlugin.PLUGIN_NAME, scriptingName = "plugins." + UDPPlugin.PLUGIN_NAME)
 public class UDPProvider implements IScriptable, IReturnedTypesProvider
@@ -121,36 +120,36 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 * packet.writeUTF('hello world!')
 	 * plugins.udp.sendPacket('10.0.0.1',packet)
 	 *
-	 * @param ip/host 
+	 * @param hostAddress
 	 * @param packet 
-	 * @param port optional
 	 */
-	public boolean js_sendPacket(Object[] vargs)
+	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet)
 	{
-		Object dest_ip = null;
-		Object packet = null;
-		int aport = port;
-		if (vargs != null && vargs.length > 0 && vargs[0] != null)
-		{
-			dest_ip = vargs[0];
-		}
-		if (vargs != null && vargs.length > 1 && vargs[1] != null)
-		{
-			packet = vargs[1];
-		}
-		if (vargs != null && vargs.length > 2 && vargs[2] != null)
-		{
-			int other_port = Utils.getAsInteger(vargs[2]);
-			if (other_port > 0) aport = other_port;
-		}
-		if (dest_ip instanceof String && packet instanceof JSPacket)
+		return js_sendPacket(destIpOrHostname, packet, port);
+	}
+
+	/**
+	 * Send a packet on another port.
+	 *
+	 * @sample
+	 * var packet = plugins.udp.createNewPacket()
+	 * packet.writeUTF('hello world!')
+	 * plugins.udp.sendPacket('10.0.0.1',packet, 4321)
+	 *
+	 * @param hostAddress
+	 * @param packet 
+	 * @param port
+	 */
+	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet, int aport)
+	{
+		if (destIpOrHostname != null && packet != null)
 		{
 			try
 			{
-				InetAddress ip = InetAddress.getByName(dest_ip.toString());
+				InetAddress ip = InetAddress.getByName(destIpOrHostname.toString());
 				if (ip != null && listner != null)
 				{
-					DatagramPacket dp = ((JSPacket)packet).getRealPacket();
+					DatagramPacket dp = packet.getRealPacket();
 					dp.setAddress(ip);
 					dp.setPort(aport);
 					return listner.send(dp);

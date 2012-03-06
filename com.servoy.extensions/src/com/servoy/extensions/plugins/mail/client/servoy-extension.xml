@@ -581,7 +581,8 @@ else
         <functions>
           <function name="createBinaryAttachment">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
             <description><![CDATA[Creates a binary attachment object.]]></description>
@@ -594,14 +595,56 @@ if (!success)
 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 }]]></sample>
             <parameters>
-              <parameter name="filename"/>
-              <parameter name="binarydata"/>
-              <parameter name="mimeType" optional="true"/>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="binarydata" type="byte[]" typecode="[B"/>
+            </parameters>
+          </function>
+          <function name="createBinaryAttachment">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+            <description><![CDATA[Creates a binary attachment object.]]></description>
+            <summary><![CDATA[Creates a binary attachment object.]]></summary>
+            <sample><![CDATA[var attachment1 = plugins.mail.createBinaryAttachment('logo1.gif',plugins.file.readFile('c:/temp/a_logo.gif', 'image/gif'));
+var attachment2 = plugins.mail.createBinaryAttachment('logo2.gif',plugins.file.readFile('c:/temp/another_logo.gif', 'image/gif'));
+var success = plugins.mail.sendMail('to_someone@example.com', 'John Cobb <from_me@example.org>', 'subject', 'msgText',null,null,new Array(attachment1,attachment2));
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="binarydata" type="byte[]" typecode="[B"/>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="createTextAttachment">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+            <description><![CDATA[Creates a text based attachment objec with the default 'text/plain' mimetype]]></description>
+            <summary><![CDATA[Creates a text based attachment objec with the default 'text/plain' mimetype]]></summary>
+            <sample><![CDATA[var attachment = plugins.mail.createTextAttachment('readme.html','<html>bla bla bla');
+var success = plugins.mail.sendMail('to_someone@example.com', 'John Cobb <from_me@example.com>', 'subject', 'msgText',null,null,attachment);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="textdata" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="createTextAttachment">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
             <description><![CDATA[Creates a text based attachment object.]]></description>
@@ -613,9 +656,9 @@ if (!success)
 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 }]]></sample>
             <parameters>
-              <parameter name="filename"/>
-              <parameter name="textdata"/>
-              <parameter name="mimeType" optional="true"/>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="textdata" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function deprecated="true" name="getLastSendMailException">
@@ -679,18 +722,14 @@ application.output(plainArray[0]) //will return 'from_me@example.com']]></sample
           </function>
           <function name="receiveMail">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
             <description><![CDATA[Receive mails from pop3 account.]]></description>
             <summary><![CDATA[Receive mails from pop3 account.]]></summary>
-            <sample><![CDATA[var properties = new Array();
-properties[0] = 'mail.pop3.port=995';
-properties[1] = 'mail.pop3.ssl.enable=true';
-properties[2] = 'mail.pop3.host=myserver.com';
-properties[3] = 'mail.pop3.user=user@myserver.com';
-
-var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0,  null, properties);
+            <sample><![CDATA[var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true);
 if (msgs != null) //if is null error occurred!
 {
 	for (var i = 0 ; i < msgs.length ; i++)
@@ -716,27 +755,172 @@ if (msgs != null) //if is null error occurred!
 			}
 		}
 	}
-}
-
-//it is also possible to first receive the headers and later receive a full message with particular 'sentdate'
-//var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
-//var msgs = plugins.mail.receiveMail('me', 'test', true ,receiveMode);
-
-//when first did receive the headers(=all_field+subject,no body and no attachemnt), get a msg with a specific sentdate
-//var msgs = plugins.mail.receiveMail('me', 'test', true , 1 , theSentDateObjectFormPreviousHeaderLoading);
-
-//it is possbile to set all kind of pop3 properties
-//var properties = new Array()
-//properties[0] = 'mail.pop3.host=myserver.com'
-//properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/pop3/package-summary.html
-//var msgs = plugins.mail.receiveMail('me', 'test', true , 0 , null, properties);]]></sample>
+}]]></sample>
             <parameters>
-              <parameter name="userName"/>
-              <parameter name="password"/>
-              <parameter name="leaveMsgsOnServer"/>
-              <parameter name="receiveMode" optional="true"/>
-              <parameter name="onlyreceiveMsgWithSentDate" optional="true"/>
-              <parameter name="overridePreferencePOP3Host/properties_array" optional="true"/>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            </parameters>
+          </function>
+          <function name="receiveMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
+            <description><![CDATA[Receive mails from pop3 account.]]></description>
+            <summary><![CDATA[Receive mails from pop3 account.]]></summary>
+            <sample><![CDATA[var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0);
+if (msgs != null) //if is null error occurred!
+{
+	for (var i = 0 ; i < msgs.length ; i++)
+	{
+		var msg = msgs[i]
+		application.output(msg.getFromAddresses())
+		application.output(msg.getRecipientAddresses())
+		application.output(msg.getReplyAddresses())
+		application.output(msg.getSentDate())
+		application.output(msg.getHeaders())
+		application.output(msg.getSubject())
+	}
+}]]></sample>
+            <parameters>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function name="receiveMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.util.Date"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
+            <description><![CDATA[Receive mails from pop3 account.]]></description>
+            <summary><![CDATA[Receive mails from pop3 account.]]></summary>
+            <sample><![CDATA[//it is also possible to first receive the headers and later receive a full message with particular 'sentdate'
+//var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0,  theSentDateObjectFormPreviousHeaderLoading);
+if (msgs != null) //if is null error occurred!
+{
+	for (var i = 0 ; i < msgs.length ; i++)
+	{
+		var msg = msgs[i]
+		application.output(msg.getFromAddresses())
+		application.output(msg.getRecipientAddresses())
+		application.output(msg.getReplyAddresses())
+		application.output(msg.getSentDate())
+		application.output(msg.getHeaders())
+		application.output(msg.getSubject())
+	}
+}]]></sample>
+            <parameters>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
+            </parameters>
+          </function>
+          <function name="receiveMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.util.Date"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
+            <description><![CDATA[Receive mails from pop3 account.]]></description>
+            <summary><![CDATA[Receive mails from pop3 account.]]></summary>
+            <sample><![CDATA[//it is also possible to first receive the headers and later receive a full message
+var receiveMode = 0;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+var pop3Host = 'myserver.com';  
+var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  receiveMode,  null, pop3Host);
+if (msgs != null) //if is null error occurred!
+{
+	for (var i = 0 ; i < msgs.length ; i++)
+	{
+		var msg = msgs[i]
+		application.output(msg.getFromAddresses())
+		application.output(msg.getRecipientAddresses())
+		application.output(msg.getReplyAddresses())
+		application.output(msg.getSentDate())
+		application.output(msg.getHeaders())
+		application.output(msg.getSubject())
+		application.output(msg.getHtmlMsg())
+		application.output(msg.getPlainMsg())
+		var attachments = msg.getAttachments()
+		if (attachments != null) 
+		{
+			for (var j = 0 ; j < attachments.length ; j++)
+			{
+				var attachment = attachments[j]
+				application.output(attachment.getName())
+				var attachmentDataByteArray = attachment.getData()
+				//write attachmentDataByteArray to a file...
+			}
+		}
+	}
+}]]></sample>
+            <parameters>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
+              <parameter name="pop3Host" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="receiveMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.util.Date"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
+            <description><![CDATA[Receive mails from pop3 account.]]></description>
+            <summary><![CDATA[Receive mails from pop3 account.]]></summary>
+            <sample><![CDATA[var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+
+var properties = new Array();
+properties[0] = 'mail.pop3.port=995';
+properties[1] = 'mail.pop3.ssl.enable=true';
+properties[2] = 'mail.pop3.host=myserver.com';
+properties[3] = 'mail.pop3.user=user@myserver.com';
+
+var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  receiveMode,  null, properties);
+if (msgs != null) //if is null error occurred!
+{
+	for (var i = 0 ; i < msgs.length ; i++)
+	{
+		var msg = msgs[i]
+		application.output(msg.getFromAddresses())
+		application.output(msg.getRecipientAddresses())
+		application.output(msg.getReplyAddresses())
+		application.output(msg.getSentDate())
+		application.output(msg.getHeaders())
+		application.output(msg.getSubject())
+	}
+}]]></sample>
+            <parameters>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
+              <parameter name="properties" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
           <function deprecated="true" name="recieveMail">
@@ -745,38 +929,339 @@ if (msgs != null) //if is null error occurred!
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
             <description/>
-            <deprecated><![CDATA[Replaced by #receiveMail(Object[])]]></deprecated>
+            <deprecated><![CDATA[Replaced by #receiveMail(String,String,boolean,int,Date,String[])]]></deprecated>
             <sample/>
           </function>
           <function name="sendMail">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>,replyTo@example.com', 'subject', msgText);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,'cc1@example.com,cc2@example.com');
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com');
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com,bcc2@example.com',attachment);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+var smtphost = 'myserver.com';
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',attachment,smtphost);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+              <parameter name="smtpHost" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample/>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+              <parameter name="properties"/>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
             <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
             <sample><![CDATA[var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
 var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
-var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1]);
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com,bcc2@example.com',[attachment1,attachment2]);
 if (!success) 
 {
 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
-}
-
-//it is possbile to set all kind of smtp properties
-//var properties = new Array()
-//properties[0] = 'mail.smtp.host=myserver.com'
-//properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
-//var msgs = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',null, properties);]]></sample>
+}]]></sample>
             <parameters>
-              <parameter name="to[,to2,toN]"/>
-              <parameter name="from[,reply]"/>
-              <parameter name="subject"/>
-              <parameter name="msgText"/>
-              <parameter name="cc,cc2,ccN" optional="true"/>
-              <parameter name="bcc,bcc2,bccN" optional="true"/>
-              <parameter name="attachment/attachments_array" optional="true"/>
-              <parameter name="overridePreferenceSMTPHost/properties_array" optional="true"/>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+var smtphost = 'myserver.com';
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],smtphost);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
+              <parameter name="smtpHost" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="sendMail">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
+            <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
+            <sample><![CDATA[var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+//it is possbile to set all kind of smtp properties
+var properties = new Array()
+properties[0] = 'mail.smtp.host=myserver.com'
+// properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],properties);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
+            <parameters>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
+              </parameter>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[One or more addresses seperated by a comma]]></description>
+              </parameter>
+              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
+              <parameter name="properties"/>
             </parameters>
           </function>
         </functions>

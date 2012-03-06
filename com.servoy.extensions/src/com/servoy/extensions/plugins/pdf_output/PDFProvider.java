@@ -58,22 +58,34 @@ public class PDFProvider implements IScriptable
 	}
 
 	/**
-	 * Returns a PDF printer that can be used in print calls. If a file name is provided, then a PDF printer that generates a PDF into the specified file is returned. If no argument is provided, then the PDF printer corresponding to the last started meta print job is returned.
+	 * Returns a PDF printer that can be used in print calls. Returns the last started meta print job.
+	 *
+	 * @sample
+	 * //to print current record without printdialog to pdf file in temp dir.
+	 * controller.print(true,false,plugins.pdf_output.getPDFPrinter());
+	 */
+	public PrinterJob js_getPDFPrinter()
+	{
+		return metaPrintJob;
+	}
+
+	/**
+	 * Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned. 
 	 *
 	 * @sample
 	 * //to print current record without printdialog to pdf file in temp dir.
 	 * controller.print(true,false,plugins.pdf_output.getPDFPrinter('c:/temp/out.pdf'));
 	 *
-	 * @param filename optional
+	 * @param filename
 	 */
 	@SuppressWarnings("nls")
-	public PrinterJob js_getPDFPrinter(Object[] varargs)
+	public PrinterJob js_getPDFPrinter(String filename)
 	{
 		try
 		{
-			if (varargs != null && varargs.length != 0 && varargs[0] != null)
+			if (filename != null)
 			{
-				File f = new File(varargs[0].toString());
+				File f = new File(filename);
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
@@ -90,26 +102,36 @@ public class PDFProvider implements IScriptable
 		catch (Exception e)
 		{
 			Debug.error(e);
-			throw new RuntimeException("Error getting a PDF PrinterJob for " + varargs[0], e);
+			throw new RuntimeException("Error getting a PDF PrinterJob for " + filename, e);
 		}
 	}
 
 	/**
-	 * Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. If a file name is specified, then the PDF document is generated into that file. If no argument is specified, then the PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved into a dataprovider, for example.
+	 * Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.
+	 * 
+	 * @sampleas js_endMetaPrintJob()
+	 */
+	public boolean js_startMetaPrintJob()
+	{
+		return js_startMetaPrintJob(null);
+	}
+
+	/**
+	 * Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.
 	 * 
 	 * @sampleas js_endMetaPrintJob()
 	 *
-	 * @param filename optional
+	 * @param filename
 	 */
 	@SuppressWarnings("nls")
-	public boolean js_startMetaPrintJob(Object[] varargs)
+	public boolean js_startMetaPrintJob(String filename)
 	{
 		try
 		{
 			OutputStream os = null;
-			if (varargs != null && varargs.length != 0 && varargs[0] != null)
+			if (filename != null)
 			{
-				File f = new File(varargs[0].toString());
+				File f = new File(filename.toString());
 				IClientPluginAccess access = plugin.getClientPluginAccess();
 				IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 				Window currentWindow = null;
@@ -128,9 +150,9 @@ public class PDFProvider implements IScriptable
 		{
 			Debug.error(e);
 			String message = "Error starting a meta PrinterJob";
-			if (varargs != null && varargs.length != 0 && varargs[0] != null)
+			if (filename != null)
 			{
-				message += " for " + varargs[0];
+				message += " for " + filename;
 			}
 			throw new RuntimeException(message, e); //$NON-NLS-1$
 		}

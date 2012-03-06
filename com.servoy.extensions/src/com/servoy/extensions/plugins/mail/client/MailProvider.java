@@ -50,69 +50,6 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	@Deprecated
 	public MailMessage[] js_recieveMail(Object[] args)
 	{
-		return js_receiveMail(args);
-	}
-
-	/**
-	 * Receive mails from pop3 account.
-	 *
-	 * @sample
-	 * var properties = new Array();
-	 * properties[0] = 'mail.pop3.port=995';
-	 * properties[1] = 'mail.pop3.ssl.enable=true';
-	 * properties[2] = 'mail.pop3.host=myserver.com';
-	 * properties[3] = 'mail.pop3.user=user@myserver.com';
-	 * 
-	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0,  null, properties);
-	 * if (msgs != null) //if is null error occurred!
-	 * {
-	 * 	for (var i = 0 ; i < msgs.length ; i++)
-	 * 	{
-	 * 		var msg = msgs[i]
-	 * 		application.output(msg.getFromAddresses())
-	 * 		application.output(msg.getRecipientAddresses())
-	 * 		application.output(msg.getReplyAddresses())
-	 * 		application.output(msg.getSentDate())
-	 * 		application.output(msg.getHeaders())
-	 * 		application.output(msg.getSubject())
-	 * 		application.output(msg.getHtmlMsg())
-	 * 		application.output(msg.getPlainMsg())
-	 * 		var attachments = msg.getAttachments()
-	 * 		if (attachments != null) 
-	 * 		{
-	 * 			for (var j = 0 ; j < attachments.length ; j++)
-	 * 			{
-	 * 				var attachment = attachments[j]
-	 * 				application.output(attachment.getName())
-	 * 				var attachmentDataByteArray = attachment.getData()
-	 * 				//write attachmentDataByteArray to a file...
-	 * 			}
-	 * 		}
-	 * 	}
-	 * }
-	 * 
-	 * //it is also possible to first receive the headers and later receive a full message with particular 'sentdate'
-	 * //var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
-	 * //var msgs = plugins.mail.receiveMail('me', 'test', true ,receiveMode);
-	 * 
-	 * //when first did receive the headers(=all_field+subject,no body and no attachemnt), get a msg with a specific sentdate
-	 * //var msgs = plugins.mail.receiveMail('me', 'test', true , 1 , theSentDateObjectFormPreviousHeaderLoading);
-	 * 
-	 * //it is possbile to set all kind of pop3 properties
-	 * //var properties = new Array()
-	 * //properties[0] = 'mail.pop3.host=myserver.com'
-	 * //properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/pop3/package-summary.html
-	 * //var msgs = plugins.mail.receiveMail('me', 'test', true , 0 , null, properties);
-	 *
-	 * @param userName 
-	 * @param password 
-	 * @param leaveMsgsOnServer 
-	 * @param receiveMode optional 
-	 * @param onlyreceiveMsgWithSentDate optional 
-	 * @param overridePreferencePOP3Host/properties_array optional 
-	 */
-	public MailMessage[] js_receiveMail(Object[] args)
-	{
 		//3 args are required
 		if (args == null || args.length < 3) return null;
 		for (int i = 0; i < 3; i++)
@@ -141,18 +78,221 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 				overrideProperties = new String[] { "mail.pop3.host=" + args[5] }; //$NON-NLS-1$
 			}
 		}
+		return receiveMail(userName, password, leaveMsgsOnServer, receiveMode, onlyreceiveMsgWithSentDate, overrideProperties);
+	}
+
+	/**
+	 * Receive mails from pop3 account.
+	 *
+	 * @sample
+	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true);
+	 * if (msgs != null) //if is null error occurred!
+	 * {
+	 * 	for (var i = 0 ; i < msgs.length ; i++)
+	 * 	{
+	 * 		var msg = msgs[i]
+	 * 		application.output(msg.getFromAddresses())
+	 * 		application.output(msg.getRecipientAddresses())
+	 * 		application.output(msg.getReplyAddresses())
+	 * 		application.output(msg.getSentDate())
+	 * 		application.output(msg.getHeaders())
+	 * 		application.output(msg.getSubject())
+	 * 		application.output(msg.getHtmlMsg())
+	 * 		application.output(msg.getPlainMsg())
+	 * 		var attachments = msg.getAttachments()
+	 * 		if (attachments != null) 
+	 * 		{
+	 * 			for (var j = 0 ; j < attachments.length ; j++)
+	 * 			{
+	 * 				var attachment = attachments[j]
+	 * 				application.output(attachment.getName())
+	 * 				var attachmentDataByteArray = attachment.getData()
+	 * 				//write attachmentDataByteArray to a file...
+	 * 			}
+	 * 		}
+	 * 	}
+	 * }
+	 * 
+	 *
+	 * @param username 
+	 * @param password 
+	 * @param leaveMsgsOnServer 
+	 */
+	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer)
+	{
+		return receiveMail(username, password, leaveMsgsOnServer, 0, null, null);
+	}
+
+	/**
+	 * Receive mails from pop3 account.
+	 *
+	 * @sample
+	 * var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0);
+	 * if (msgs != null) //if is null error occurred!
+	 * {
+	 * 	for (var i = 0 ; i < msgs.length ; i++)
+	 * 	{
+	 * 		var msg = msgs[i]
+	 * 		application.output(msg.getFromAddresses())
+	 * 		application.output(msg.getRecipientAddresses())
+	 * 		application.output(msg.getReplyAddresses())
+	 * 		application.output(msg.getSentDate())
+	 * 		application.output(msg.getHeaders())
+	 * 		application.output(msg.getSubject())
+	 * 	}
+	 * }
+	 * 
+	 * @param username 
+	 * @param password 
+	 * @param leaveMsgsOnServer 
+	 * @param receiveMode 
+	 */
+	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode)
+	{
+		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, null, null);
+	}
+
+	/**
+	 * Receive mails from pop3 account.
+	 *
+	 * @sample
+	 * //it is also possible to first receive the headers and later receive a full message with particular 'sentdate'
+	 * //var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  0,  theSentDateObjectFormPreviousHeaderLoading);
+	 * if (msgs != null) //if is null error occurred!
+	 * {
+	 * 	for (var i = 0 ; i < msgs.length ; i++)
+	 * 	{
+	 * 		var msg = msgs[i]
+	 * 		application.output(msg.getFromAddresses())
+	 * 		application.output(msg.getRecipientAddresses())
+	 * 		application.output(msg.getReplyAddresses())
+	 * 		application.output(msg.getSentDate())
+	 * 		application.output(msg.getHeaders())
+	 * 		application.output(msg.getSubject())
+	 * 	}
+	 * }
+	 * 
+	 * @param username 
+	 * @param password 
+	 * @param leaveMsgsOnServer 
+	 * @param receiveMode 
+	 * @param onlyReceiveMsgWithSentDate 
+	 */
+	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate)
+	{
+		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, onlyReceiveMsgWithSentDate, null);
+	}
+
+	/**
+	 * Receive mails from pop3 account.
+	 *
+	 * @sample
+	 * //it is also possible to first receive the headers and later receive a full message
+	 * var receiveMode = 0;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+	 * var pop3Host = 'myserver.com';  
+	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  receiveMode,  null, pop3Host);
+	 * if (msgs != null) //if is null error occurred!
+	 * {
+	 * 	for (var i = 0 ; i < msgs.length ; i++)
+	 * 	{
+	 * 		var msg = msgs[i]
+	 * 		application.output(msg.getFromAddresses())
+	 * 		application.output(msg.getRecipientAddresses())
+	 * 		application.output(msg.getReplyAddresses())
+	 * 		application.output(msg.getSentDate())
+	 * 		application.output(msg.getHeaders())
+	 * 		application.output(msg.getSubject())
+	 * 		application.output(msg.getHtmlMsg())
+	 * 		application.output(msg.getPlainMsg())
+	 * 		var attachments = msg.getAttachments()
+	 * 		if (attachments != null) 
+	 * 		{
+	 * 			for (var j = 0 ; j < attachments.length ; j++)
+	 * 			{
+	 * 				var attachment = attachments[j]
+	 * 				application.output(attachment.getName())
+	 * 				var attachmentDataByteArray = attachment.getData()
+	 * 				//write attachmentDataByteArray to a file...
+	 * 			}
+	 * 		}
+	 * 	}
+	 * }
+	 * 
+	 * @param username 
+	 * @param password 
+	 * @param leaveMsgsOnServer 
+	 * @param receiveMode 
+	 * @param onlyReceiveMsgWithSentDate 
+	 * @param pop3Host 
+	 */
+	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate,
+		String pop3Host)
+	{
+		String[] overrideProperties = null;
+		if (pop3Host != null)
+		{
+			overrideProperties = new String[] { "mail.pop3.host=" + pop3Host }; //$NON-NLS-1$
+		}
+		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, onlyReceiveMsgWithSentDate, overrideProperties);
+	}
+
+	/**
+	 * Receive mails from pop3 account.
+	 *
+	 * @sample
+	 * var receiveMode = 1;//0=FULL,1=HEADERS_ONLY,2=NO_ATTACHMENTS
+	 * 
+	 * var properties = new Array();
+	 * properties[0] = 'mail.pop3.port=995';
+	 * properties[1] = 'mail.pop3.ssl.enable=true';
+	 * properties[2] = 'mail.pop3.host=myserver.com';
+	 * properties[3] = 'mail.pop3.user=user@myserver.com';
+	 * 
+	 * var msgs = plugins.mail.receiveMail('mylogin', 'secretpass',  true,  receiveMode,  null, properties);
+	 * if (msgs != null) //if is null error occurred!
+	 * {
+	 * 	for (var i = 0 ; i < msgs.length ; i++)
+	 * 	{
+	 * 		var msg = msgs[i]
+	 * 		application.output(msg.getFromAddresses())
+	 * 		application.output(msg.getRecipientAddresses())
+	 * 		application.output(msg.getReplyAddresses())
+	 * 		application.output(msg.getSentDate())
+	 * 		application.output(msg.getHeaders())
+	 * 		application.output(msg.getSubject())
+	 * 	}
+	 * }
+	 * 
+	 * @param username 
+	 * @param password 
+	 * @param leaveMsgsOnServer 
+	 * @param receiveMode  
+	 * @param onlyReceiveMsgWithSentDate  
+	 * @param properties  
+	 */
+	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate,
+		String[] properties)
+	{
+		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, onlyReceiveMsgWithSentDate, properties);
+	}
+
+	private MailMessage[] receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate,
+		String[] properties)
+	{
+		if (username == null || password == null) return null;
 
 		//create if not yet created
 		createMailService();
-
 		//incase the server is not started in developer		
 		if (mailService != null)
 		{
 			//receive mail
 			try
 			{
-				return mailService.receiveMail(plugin.getClientPluginAccess().getClientID(), userName, password, leaveMsgsOnServer, receiveMode,
-					onlyreceiveMsgWithSentDate, overrideProperties);
+				return mailService.receiveMail(plugin.getClientPluginAccess().getClientID(), username, password, leaveMsgsOnServer, receiveMode,
+					onlyReceiveMsgWithSentDate, properties);
 			}
 			catch (Exception e)
 			{
@@ -165,6 +305,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			return null;//Todo throw app execption here? with "mail server not running"?
 		}
 	}
+
 
 	/**
 	 * Helper method to only get the plain addresses.
@@ -278,18 +419,53 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @param filename 
 	 * @param binarydata 
-	 * @param mimeType optional 
 	 */
-	public Attachment js_createBinaryAttachment(Object[] args)
+	public Attachment js_createBinaryAttachment(String filename, byte[] binarydata)
 	{
-		if (args == null || args.length < 2) return null;
-		if (args[0] == null || args[1] == null) return null;
-		String name = args[0].toString();
-		if (!(args[1] instanceof byte[])) return null;
-		byte[] data = (byte[])args[1];
-		String mimeType = null;
-		if (args.length > 2) mimeType = args[2].toString();
-		return new Attachment(name, data, mimeType);
+		if (filename == null || binarydata == null) return null;
+		return new Attachment(filename, binarydata);
+	}
+
+	/**
+	 * Creates a binary attachment object.
+	 *
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('logo1.gif',plugins.file.readFile('c:/temp/a_logo.gif', 'image/gif'));
+	 * var attachment2 = plugins.mail.createBinaryAttachment('logo2.gif',plugins.file.readFile('c:/temp/another_logo.gif', 'image/gif'));
+	 * var success = plugins.mail.sendMail('to_someone@example.com', 'John Cobb <from_me@example.org>', 'subject', 'msgText',null,null,new Array(attachment1,attachment2));
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 *
+	 * @param filename 
+	 * @param binarydata 
+	 * @param mimeType 
+	 */
+	public Attachment js_createBinaryAttachment(String filename, byte[] binarydata, String mimeType)
+	{
+		if (filename == null || binarydata == null) return null;
+		return new Attachment(filename, binarydata, mimeType);
+	}
+
+	/**
+	 * Creates a text based attachment objec with the default 'text/plain' mimetype
+	 *
+	 * @sample
+	 * var attachment = plugins.mail.createTextAttachment('readme.html','<html>bla bla bla');
+	 * var success = plugins.mail.sendMail('to_someone@example.com', 'John Cobb <from_me@example.com>', 'subject', 'msgText',null,null,attachment);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 *
+	 * @param filename 
+	 * @param textdata 
+	 */
+	public Attachment js_createTextAttachment(String filename, String textdata)
+	{
+		if (filename == null || textdata == null) return null;
+		return js_createBinaryAttachment(filename, textdata.getBytes(), "text/plain");
 	}
 
 	/**
@@ -305,17 +481,79 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @param filename 
 	 * @param textdata 
-	 * @param mimeType optional 
+	 * @param mimeType 
 	 */
-	public Attachment js_createTextAttachment(Object[] args)
+	public Attachment js_createTextAttachment(String filename, String textdata, String mimeType)
 	{
-		if (args == null || args.length < 2) return null;
-		if (args[0] == null || args[1] == null) return null;
-		String name = args[0].toString();
-		byte[] data = args[1].toString().getBytes();
-		String mimeType = null;
-		if (args.length > 2) mimeType = args[2].toString();
-		return new Attachment(name, data, mimeType == null ? "text/plain" : mimeType); //$NON-NLS-1$
+		if (filename == null || textdata == null) return null;
+		return js_createBinaryAttachment(filename, textdata.getBytes(), mimeType);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>,replyTo@example.com', 'subject', msgText);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 * 
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText)
+	{
+		return sendMail(to, from, subject, msgText, null, null, null, null);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,'cc1@example.com,cc2@example.com');
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 * 
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc)
+	{
+		return sendMail(to, from, subject, msgText, cc, null, null, null);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com');
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 * 
+	 *
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, null, null);
 	}
 
 	/**
@@ -323,82 +561,208 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
 	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
-	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1]);
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com,bcc2@example.com',[attachment1,attachment2]);
 	 * if (!success) 
 	 * {
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 * 
-	 * //it is possbile to set all kind of smtp properties
-	 * //var properties = new Array()
-	 * //properties[0] = 'mail.smtp.host=myserver.com'
-	 * //properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
-	 * //var msgs = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',null, properties);
-	 *
-	 * @param to[,to2,toN]  
-	 * @param from[,reply] 
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
 	 * @param subject 
 	 * @param msgText 
-	 * @param cc,cc2,ccN optional 
-	 * @param bcc,bcc2,bccN optional 
-	 * @param attachment/attachments_array optional 
-	 * @param overridePreferenceSMTPHost/properties_array optional 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments 
 	 */
-	public boolean js_sendMail(Object[] args)
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, attachments, null);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * //it is possbile to set all kind of smtp properties
+	 * var properties = new Array()
+	 * properties[0] = 'mail.smtp.host=myserver.com'
+	 * // properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],properties);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 * 
+	 *
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments 
+	 * @param properties 
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var smtphost = 'myserver.com';
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],smtphost);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 *
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments
+	 * @param smtpHost  
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments, String smtpHost)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, attachments, getOverrideProperties(smtpHost));
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com,bcc2@example.com',attachment);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 *
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachment 
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), null);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * @sample
+	 * var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * //it is possbile to set all kind of smtp properties
+	 * var properties = new Array()
+	 * properties[0] = 'mail.smtp.host=myserver.com'
+	 * // properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',attachment,properties);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 *
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachment 
+	 * @param properties 
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment, String[] overrideProperties)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), overrideProperties);
+	}
+
+	/**
+	 * Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 *
+	 * @sample
+	 * var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var smtphost = 'myserver.com';
+	 * var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',attachment,smtphost);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+	 * }
+	 *
+	 * @param to  A string with 1 address or multiply seperated by a comma.
+	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param subject 
+	 * @param msgText 
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachment 
+	 * @param smtpHost 
+	 */
+	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment, String smtpHost)
+	{
+		return sendMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), getOverrideProperties(smtpHost));
+	}
+
+	/**
+	 * @param smtpHost
+	 * @return
+	 */
+	private String[] getOverrideProperties(String smtpHost)
+	{
+		String[] overrideProperties = null;
+		if (smtpHost != null)
+		{
+			overrideProperties = new String[] { "mail.smtp.host=" + smtpHost }; //$NON-NLS-1$
+		}
+		return overrideProperties;
+	}
+
+	/**
+	 * @param attachment
+	 * @return
+	 */
+	private Attachment[] getAttachments(Attachment attachment)
+	{
+		if (attachment != null)
+		{
+			Attachment[] attachments = new Attachment[1];
+			attachments[0] = attachment;
+			return attachments;
+		}
+		return null;
+	}
+
+	public boolean sendMail(String to, String fromAndReply, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties)
 	{
 		sendMailException = null;
-
-		//4 args are required
-		if (args == null || args.length < 4) return false;
-
-		//3 args cannot be null
-		if (args[0] == null) return false;
-		if (args[2] == null) return false;
-		if (args[3] == null) return false;
-
-		String to = args[0].toString();
-		String from = (args[1] == null ? null : args[1].toString());
-		String subject = args[2].toString();
-		String msgText = args[3].toString();
-		String cc = null;
-		if (args.length >= 5 && args[4] != null) cc = args[4].toString();
-		String bcc = null;
-		if (args.length >= 6 && args[5] != null) bcc = args[5].toString();
+		if (to == null || subject == null || msgText == null) return false;
 
 		//create if not yet created
 		createMailService();
-
-		Attachment[] attachments = null;
-		if (args.length >= 7 && args[6] != null)
-		{
-			if (args[6] instanceof Object[])
-			{
-				Object[] array = (Object[])args[6];
-				attachments = new Attachment[array.length];
-				System.arraycopy(array, 0, attachments, 0, attachments.length);
-			}
-			else if (args[6] instanceof Attachment)
-			{
-				attachments = new Attachment[1];
-				attachments[0] = (Attachment)args[6];
-			}
-		}
-
-		String[] overrideProperties = null;
-		if (args.length >= 8 && args[7] != null)
-		{
-			if (args[7] instanceof Object[])
-			{
-				Object[] array = (Object[])args[7];
-				overrideProperties = new String[array.length];
-				System.arraycopy(array, 0, overrideProperties, 0, overrideProperties.length);
-			}
-			else if (args[7] instanceof String)
-			{
-				overrideProperties = new String[] { "mail.smtp.host=" + args[7] }; //$NON-NLS-1$
-			}
-		}
 
 		//incase the server is not started in developer		
 		if (mailService != null)
@@ -406,7 +770,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			//send mail
 			try
 			{
-				mailService.sendMail(plugin.getClientPluginAccess().getClientID(), to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
+				mailService.sendMail(plugin.getClientPluginAccess().getClientID(), to, fromAndReply, subject, msgText, cc, bcc, attachments, overrideProperties);
 				return true;
 			}
 			catch (Exception mex)
@@ -426,6 +790,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			return false;//Todo throw app execption here? with "mail server not running"?
 		}
 	}
+
 
 	/**
 	 * @deprecated Replaced by {@link #getLastSendMailExceptionMsg()}

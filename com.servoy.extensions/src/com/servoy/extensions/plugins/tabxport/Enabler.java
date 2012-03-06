@@ -21,7 +21,6 @@ import javax.swing.JMenuItem;
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
-import com.servoy.j2db.util.Utils;
 
 /**
  * Xport menu enabler
@@ -113,38 +112,52 @@ public class Enabler implements IScriptable
 	 * @sample
 	 * //export with default separator(tab) and no header
 	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);
+	 *
+	 * @param foundSet 
+	 * @param dataProviderIds 
+	 */
+	public String js_textExport(IFoundSet foundset, String[] dataproviders)
+	{
+		return js_textExport(foundset, dataproviders, "\t", false); //$NON-NLS-1$
+	}
+
+
+	/**
+	 * Export to text 'separated value' data (*.tab/*.csv)
+	 *
+	 * @sample
 	 * //export with ';' separator and no header
 	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');
+	 *
+	 * @param foundSet 
+	 * @param dataProviderIds 
+	 * @param separator
+	 */
+	public String js_textExport(IFoundSet foundset, String[] dataproviders, String sep)
+	{
+		return js_textExport(foundset, dataproviders, sep, false);
+	}
+
+
+	/**
+	 * Export to text 'separated value' data (*.tab/*.csv)
+	 *
+	 * @sample
 	 * //export with ';' separator and header
 	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';',true);
 	 *
 	 * @param foundSet 
 	 * @param dataProviderIds 
-	 * @param separator optional
-	 * @param exportHeader optional
+	 * @param separator
+	 * @param exportHeader
 	 */
-	public String js_textExport(Object[] args)
+	public String js_textExport(IFoundSet foundset, String[] dataproviders, String sep, boolean exportHeader)
 	{
-		if ((args.length >= 2) && (args[0] != null) && (args[1] instanceof Object[]) && ((Object[])args[1]).length != 0)
+		if (foundset != null && dataproviders != null && dataproviders.length > 0)
 		{
-			IFoundSet foundSet = ((IFoundSet)args[0]);
-			Object[] data = (Object[])args[1];
-			String[] dataProviders = new String[data.length];
-			for (int i = 0; i < data.length; i++)
-				dataProviders[i] = (String)data[i];
-			String sep = "\t";
-			boolean exportHeader = false;
-			if (args.length > 2)
-			{
-				sep = (String)args[2];
-				if (args.length > 3)
-				{
-					exportHeader = Utils.getAsBoolean(args[3]);
-				}
-			}
 			StringBuffer fileData = new StringBuffer();
-			if (exportHeader) fileData.insert(0, ExportSpecifyFilePanel.createHeader(dataProviders, sep));
-			fileData.append(ExportSpecifyFilePanel.populateFileData(foundSet, dataProviders, sep));
+			if (exportHeader) fileData.insert(0, ExportSpecifyFilePanel.createHeader(dataproviders, sep));
+			fileData.append(ExportSpecifyFilePanel.populateFileData(foundset, dataproviders, sep));
 
 			return fileData.toString();
 		}

@@ -103,29 +103,29 @@ public class RawSQLProvider implements IScriptable
 	 * 
 	 * @param serverName 
 	 * @param tableName 
-	 * @param SQL 
-	 * @param arguments optional
+	 * @param sql
 	 */
-	public boolean js_executeSQL(Object[] args)
+	public boolean js_executeSQL(String serverName, String tableName, String sql)
 	{
-		if (args.length < 3)
-		{
-			return false;
-		}
+		return js_executeSQL(serverName, tableName, sql, null);
+	}
 
-		String serverName = "" + args[0]; //$NON-NLS-1$
-		String table = "" + args[1]; //$NON-NLS-1$
-		String sql = "" + args[2]; //$NON-NLS-1$
-		Object[] sql_args = null;
-		if (args.length >= 4)
-		{
-			sql_args = (Object[])args[3];
-		}
-
+	/**
+	 * @clonedesc js_executeSQL(String,String,String)
+	 *
+	 * @sampleas js_executeSQL(String,String,String)
+	 * 
+	 * @param serverName 
+	 * @param tableName 
+	 * @param sql
+	 * @param arguments
+	 */
+	public boolean js_executeSQL(String serverName, String tableName, String sql, Object[] sql_args)
+	{
 		try
 		{
 			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName);
-			return getSQLService().executeSQL(plugin.getClientPluginAccess().getClientID(), serverName, table, sql, sql_args, tid);
+			return getSQLService().executeSQL(plugin.getClientPluginAccess().getClientID(), serverName, tableName, sql, sql_args, tid);
 		}
 		catch (Exception ex)
 		{

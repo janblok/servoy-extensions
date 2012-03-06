@@ -387,7 +387,8 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
           </function>
           <function name="sendPacket">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Send a packet.]]></description>
@@ -396,9 +397,26 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
             <parameters>
-              <parameter name="ip/host"/>
-              <parameter name="packet"/>
-              <parameter name="port" optional="true"/>
+              <parameter name="hostAddress"/>
+              <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
+            </parameters>
+          </function>
+          <function name="sendPacket">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Send a packet on another port.]]></description>
+            <summary><![CDATA[Send a packet on another port.]]></summary>
+            <sample><![CDATA[var packet = plugins.udp.createNewPacket()
+packet.writeUTF('hello world!')
+plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
+            <parameters>
+              <parameter name="hostAddress"/>
+              <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
+              <parameter name="port"/>
             </parameters>
           </function>
           <function name="startSocket">
