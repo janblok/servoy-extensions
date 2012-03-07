@@ -730,8 +730,67 @@ var s = "<html>" + c.getAmortizationSchedule().getAsHTML();
 var rb = c.getRestBalance();]]></sample>
           </function>
           <function name="newPolynomial">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
+            <description><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
+            <summary><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></summary>
+            <sample><![CDATA[// create a new polynomial
+var p = plugins.amortization.newPolynomial();
+
+// make the polynomial -4*x^2 + 9
+p.addTerm(-4, 2); // -4*x^2
+p.addTerm(9, 0); // 9
+
+// find the roots
+var r1 = p.findRoot(1, 5E-15, 100);
+var r2 = p.findRoot(-1, 5E-15, 100);
+
+// get the derivative
+q = p.getDerivative();
+
+// show all this information in a dialog
+plugins.dialogs.showInfoDialog(
+	"polynomial",
+	"polynomial: " + p + "\n" +
+	"derivative: " + q + "\n" +
+	"value in 2: " + p.getValue(2) + "\n" +
+	"derivative in 2: " + p.getDerivativeValue(2) + "\n" +
+	"root near 1: " + r1 + "\n" +
+	"root near -1: " + r2,
+	"Ok"
+);
+
+// set q to zero
+q.setToZero();
+
+// make a copy of p, then add 1 and multiply by 3*x^2
+var s = plugins.amortization.newPolynomial(p);
+s.addTerm(1, 0); // add 1
+s.multiplyByTerm(3, 2); // mulitply by 3*x^2
+
+// make a copy of s and add p
+var t = plugins.amortization.newPolynomial(s);
+t.addPolynomial(p);
+
+// make a copy of s and multiply by p
+var u = plugins.amortization.newPolynomial(s);
+u.multiplyByPolynomial(p);
+
+// show all this information in a dialog
+plugins.dialogs.showInfoDialog(
+	"polynomial",
+	"polynomial: " + p + "\n" +
+	"polynomial: " + s + "\n" +
+	"sum: " + t + "\n" +
+	"sum in 2: " + p.getValue(2) + " + " + s.getValue(2) + " = " + t.getValue(2) + "\n" +
+	"product: " + u + "\n" +
+	"product in 2: " + p.getValue(2) + " * " + s.getValue(2) + " = " + u.getValue(2) + "\n",
+	"Ok"
+);]]></sample>
+          </function>
+          <function name="newPolynomial">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             <description><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
@@ -790,7 +849,7 @@ plugins.dialogs.showInfoDialog(
 	"Ok"
 );]]></sample>
             <parameters>
-              <parameter name="polynomial" optional="true"/>
+              <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
           <function name="nextDate">

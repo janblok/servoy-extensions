@@ -7437,7 +7437,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="form_name"/>
+              <parameter name="form_name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="createShortcut">
@@ -7483,7 +7483,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="form_name"/>
+              <parameter name="form_name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>

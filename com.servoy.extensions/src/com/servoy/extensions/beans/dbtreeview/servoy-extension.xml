@@ -204,7 +204,7 @@ config.checkBoxValue = 'true';]]></sample>
           </function>
           <function name="setNRelationInfos">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="[Lcom.servoy.extensions.beans.dbtreeview.RelationInfo;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.createRelationInfo() for having multiple child relations for one node)]]></description>
@@ -218,7 +218,7 @@ company_relations[1].setLabel('Customers');
 company_relations[1].setNRelationName('companies_to_customers');
 binding.setNRelationInfos(company_relations);]]></sample>
             <parameters>
-              <parameter name="relationInfos" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="relationInfos" type="com.servoy.extensions.beans.dbtreeview.RelationInfo[]" typecode="[Lcom.servoy.extensions.beans.dbtreeview.RelationInfo;"/>
             </parameters>
           </function>
           <function name="setNRelationName">
