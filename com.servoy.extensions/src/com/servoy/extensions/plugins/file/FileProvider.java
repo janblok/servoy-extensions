@@ -61,7 +61,6 @@ import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.FileChooserUtils;
-import com.servoy.j2db.util.Utils;
 
 /**
  * @author jcompagner
@@ -191,100 +190,160 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
 	 * plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')
-	 *
-	 * @param selectionMode optional 0=both,1=Files,2=Dirs 
-	 * @param startDirectory optional null=default/previous 
-	 * @param multiselect optional true/false 
-	 * @param filterarray optional 
-	 * @param callbackmethod optional 
-	 * @param dialog_title_text optional 
+	 * 
 	 */
-	public Object js_showFileOpenDialog(Object[] args)
+	public Object js_showFileOpenDialog()
 	{
-		int selection = JFileChooser.FILES_ONLY;
-		boolean multiSelect = false;
-		String[] filter = null;
-		String title = null;
+		return js_showFileOpenDialog(1, null, false, null, null, null);
+	}
 
-		File file = null;
-		FunctionDefinition fd = null;
-		if (args != null && args.length > 0)
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(Function callbackmethod)
+	{
+		return js_showFileOpenDialog(1, null, false, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs 
+	 */
+	public Object js_showFileOpenDialog(int selectionMode)
+	{
+		return js_showFileOpenDialog(selectionMode, null, false, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, null, false, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous 
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous 
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous
+	 * @param multiselect true/false 
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous
+	 * @param multiselect true/false 
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous
+	 * @param multiselect true/false 
+	 * @param filter
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous
+	 * @param multiselect true/false
+	 * @param filter 
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory null=default/previous
+	 * @param multiselect true/false
+	 * @param filter
+	 * @param callbackmethod
+	 * @param title
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	{
+
+		int selection;
+		switch (selectionMode)
 		{
-			if (args[0] instanceof Function)
-			{
-				fd = new FunctionDefinition((Function)args[0]);
-			}
-			else
-			{
-				int arg = Utils.getAsInteger(args[0]);
-				if (arg == 0)
-				{
-					selection = JFileChooser.FILES_AND_DIRECTORIES;
-				}
-				else if (arg == 2)
-				{
-					selection = JFileChooser.DIRECTORIES_ONLY;
-				}
-			}
+			case 0 :
+				selection = JFileChooser.FILES_AND_DIRECTORIES;
+				break;
+			case 2 :
+				selection = JFileChooser.DIRECTORIES_ONLY;
+				break;
+			default :
+				selection = JFileChooser.FILES_ONLY;
+		}
 
-			// start dir
-			if (args.length > 1 && args[1] != null)
-			{
-				if (args[1] instanceof Function)
-				{
-					fd = new FunctionDefinition((Function)args[1]);
-				}
-				else
-				{
-					file = getFileFromArg(args[1], true);
-				}
-			}
-			// multi select
-			if (args.length > 2 && args[2] != null)
-			{
-				if (args[2] instanceof Function)
-				{
-					fd = new FunctionDefinition((Function)args[2]);
-				}
-				else
-				{
-					multiSelect = Utils.getAsBoolean(args[2]);
-				}
-			}
-			// filter
-			if (args.length > 3)
-			{
-				if (args[3] instanceof Function)
-				{
-					fd = new FunctionDefinition((Function)args[3]);
-				}
-				else
-				{
-					if (args[3] instanceof String)
-					{
-						filter = new String[] { (String)args[3] };
-					}
-					else if (args[3] instanceof Object[])
-					{
-						Object[] array = (Object[])args[3];
-						filter = new String[array.length];
-						for (int i = 0; i < array.length; i++)
-						{
-							filter[i] = array[i].toString();
-						}
-					}
-				}
-			}
+		File file = startDirectory != null ? getFileFromArg(startDirectory, true) : null;
+		FunctionDefinition fd = callbackmethod != null ? new FunctionDefinition(callbackmethod) : null;
+		String[] filterA = null;
 
-			if (args.length > 4 && args[4] instanceof Function)
+		if (filter instanceof String)
+		{
+			filterA = new String[] { (String)filter };
+		}
+		else if (filter instanceof Object[])
+		{
+			Object[] array = (Object[])filter;
+			filterA = new String[array.length];
+			for (int i = 0; i < array.length; i++)
 			{
-				fd = new FunctionDefinition((Function)args[4]);
-			}
-
-			// title
-			if (args.length > 5 && args[5] instanceof String)
-			{
-				title = args[5].toString();
+				filterA[i] = array[i].toString();
 			}
 		}
 
@@ -314,7 +373,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 					// submit without uploaded files 
 				}
 			};
-			access.showFileOpenDialog(callback, file != null ? file.getAbsolutePath() : null, multiSelect, filter, selection, title);
+			access.showFileOpenDialog(callback, file != null ? file.getAbsolutePath() : null, multiselect, filterA, selection, title);
 			if (returnList.size() > 0) return returnList.toArray(new JSFile[returnList.size()]);
 		}
 		else
@@ -328,15 +387,15 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			Window currentWindow = null;
 			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 
-			if (multiSelect)
+			if (multiselect)
 			{
-				File[] files = FileChooserUtils.getFiles(currentWindow, file, selection, filter, title);
+				File[] files = FileChooserUtils.getFiles(currentWindow, file, selection, filterA, title);
 				JSFile[] convertedFiles = convertToJSFiles(files);
 				return convertedFiles;
 			}
 			else
 			{
-				File f = FileChooserUtils.getAReadFile(currentWindow, file, selection, filter, title);
+				File f = FileChooserUtils.getAReadFile(currentWindow, file, selection, filterA, title);
 				if (f != null)
 				{
 					return new JSFile(f);
@@ -921,23 +980,38 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
 	 * if (!success) application.output('Could not write file.');
 	 * // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
-	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
-	 *
-	 * @param file 
-	 * @param text_data 
-	 * @param charsetname optional 
-	 * @param mimeType optional 
+	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp' 
+	 */
+	public boolean js_writeTXTFile(Object file, String text_data)
+	{
+		return js_writeTXTFile(file, text_data, null, null);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(Object file, String text_data)
+	 * @sampleas js_writeTXTFile(Object file, String text_data)
+	 * @param file
+	 * @param text_data
+	 * @param charsetname
+	 */
+	public boolean js_writeTXTFile(Object file, String text_data, String charsetname)
+	{
+		return js_writeTXTFile(file, text_data, charsetname, null);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(Object file, String text_data)
+	 * @sampleas js_writeTXTFile(Object file, String text_data)
+	 * @param file
+	 * @param text_data
+	 * @param charsetname
+	 * @param mimeType
 	 */
 	@SuppressWarnings("nls")
-	public boolean js_writeTXTFile(Object[] args)
+	public boolean js_writeTXTFile(Object file, String text_data, String charsetname, String mimeType)
 	{
-		if (args == null) return false;
-		Object f = (args.length > 0 ? args[0] : null);
-		String data = (args.length > 1 && args[1] != null ? args[1].toString() : null);
-		String encoding = (args.length > 2 && args[2] != null ? args[2].toString() : null);
-		String mimeType = (args.length > 3 && args[3] != "text/plain" ? args[3].toString() : null);
-		if (data == null) data = "";
-		return writeTXT(f, data, encoding, mimeType);
+		if (file == null) return false;
+		return writeTXT(file, text_data == null ? "" : text_data, charsetname, mimeType == null ? "text/plain" : mimeType);
 	}
 
 
@@ -1141,29 +1215,48 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * application.output(txt);
 	 * // Read content from a text file selected from the file open dialog.
 	 * var txtUnknown = plugins.file.readTXTFile();
-	 * application.output(txtUnknown);
-	 *
-	 * @param file optional 
-	 * @param charsetname optional 
+	 * application.output(txtUnknown); 
 	 */
-	public String js_readTXTFile(Object[] args)
+
+	public String js_readTXTFile()
+	{
+		return js_readTXTFile(null, null);
+	}
+
+	/**
+	 * @clonedesc js_readTXTFile()
+	 * @sampleas js_readTXTFile()
+	 * @param file
+	 */
+	public String js_readTXTFile(Object file)
+	{
+		return js_readTXTFile(file, null);
+	}
+
+	/**
+	 * @clonedesc js_readTXTFile()
+	 * @sampleas js_readTXTFile()
+	 * @param file
+	 * @param charsetname
+	 */
+	public String js_readTXTFile(Object file, String charsetname)
 	{
 		try
 		{
 			File f = null;
-			if (args != null && args.length != 0 && args[0] != null)
+			if (file != null)
 			{
-				f = getFileFromArg(args[0], true);
+				f = getFileFromArg(file, true);
 			}
 			IClientPluginAccess access = plugin.getClientPluginAccess();
 			IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 			Window currentWindow = null;
 			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-			File file = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
+			File fileObj = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
 
 			if (file != null) // !cancelled
 			{
-				return readTXTFile(args, new FileInputStream(file));
+				return readTXTFile(charsetname, new FileInputStream(fileObj));
 			}
 			return null;
 		}
@@ -1181,9 +1274,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	protected String readTXTFile(Object[] args, InputStream file) throws FileNotFoundException, IOException
+	protected String readTXTFile(String encoding, InputStream file) throws FileNotFoundException, IOException
 	{
-		String encoding = (args != null && args.length > 1 ? args[1].toString() : null);
 		Charset cs = null;
 		if (encoding != null)
 		{
@@ -1226,22 +1318,37 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * var file = plugins.file.showFileSaveDialog();
 	 * application.output("you've selected file: " + file.getAbsolutePath());
-	 *
-	 * @param fileName_dir_suggestion optional 
-	 * @param dialog_title_text optional 
 	 */
-	public JSFile js_showFileSaveDialog(Object[] args)
+
+	public JSFile js_showFileSaveDialog()
+	{
+		return js_showFileSaveDialog(null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileSaveDialog()
+	 * @sampleas js_showFileSaveDialog()
+	 * @param fileNameDir
+	 */
+	public JSFile js_showFileSaveDialog(Object fileNameDir)
+	{
+		return js_showFileSaveDialog(fileNameDir, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileSaveDialog()
+	 * @sampleas js_showFileSaveDialog()
+	 * @param fileNameDir
+	 * @param title
+	 */
+	public JSFile js_showFileSaveDialog(Object fileNameDir, String title)
 	{
 		File file = null;
-		if (args != null && args.length != 0 && args[0] != null)
+		if (fileNameDir != null)
 		{
-			file = getFileFromArg(args[0], true);
+			file = getFileFromArg(fileNameDir, true);
 		}
-		String title = null;
-		if (args != null && args.length > 1 && args[1] != null)
-		{
-			title = args[1].toString();
-		}
+
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
@@ -1260,22 +1367,37 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * var dir = plugins.file.showDirectorySelectDialog();
 	 * application.output("you've selected folder: " + dir.getAbsolutePath());
-	 *
-	 * @param directory suggestion optional 
-	 * @param dialog title text optional 
 	 */
-	public JSFile js_showDirectorySelectDialog(Object[] args)
+
+	public JSFile js_showDirectorySelectDialog()
+	{
+		return js_showDirectorySelectDialog(null, null);
+	}
+
+	/**
+	 * @clonedesc js_showDirectorySelectDialog()
+	 * @sampleas js_showDirectorySelectDialog()
+	 * @param directory
+	 */
+	public JSFile js_showDirectorySelectDialog(Object directory)
+	{
+		return js_showDirectorySelectDialog(directory, null);
+	}
+
+	/**
+	 * @clonedesc js_showDirectorySelectDialog()
+	 * @sampleas js_showDirectorySelectDialog()
+	 * @param directory
+	 * @param title
+	 */
+	public JSFile js_showDirectorySelectDialog(Object directory, String title)
 	{
 		File f = null;
-		if (args != null && args.length != 0 && args[0] != null)
+		if (directory != null)
 		{
-			f = getFileFromArg(args[0], true);
+			f = getFileFromArg(directory, true);
 		}
-		String title = null;
-		if (args != null && args.length > 1 && args[1] != null)
-		{
-			title = args[1].toString();
-		}
+
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		if (access.getApplicationType() != IClientPluginAccess.CLIENT) throw new UnsupportedMethodException(
 			"Directory selection is only supported in the SmartClient (not in web or headless client)"); //$NON-NLS-1$
@@ -1303,40 +1425,55 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * // Read all content from a file selected from the file open dialog.
 	 * var bytesUnknownFile = plugins.file.readFile();
 	 * application.output('unknown file size: ' + bytesUnknownFile.length);
-	 *
-	 * @param file optional 
-	 * @param size optional 
+	 * 
 	 */
-	public byte[] js_readFile(Object[] args)
+	public byte[] js_readFile()
+	{
+		return js_readFile(null, -1);
+	}
+
+	/**
+	 * @clonedesc js_readFile()
+	 * @sampleas js_readFile()
+	 * @param file
+	 */
+	public byte[] js_readFile(Object file)
+	{
+		return js_readFile(file, -1);
+	}
+
+	/**
+	 * @clonedesc js_readFile()
+	 * @sampleas js_readFile()
+	 * @param file
+	 * @param size
+	 */
+	public byte[] js_readFile(Object file, long size)
 	{
 		try
 		{
-
 			File f = null;
-			if (args != null && args.length != 0 && args[0] != null)
+			if (file != null)
 			{
-				f = getFileFromArg(args[0], true);
+				f = getFileFromArg(file, true);
 			}
 
 			IClientPluginAccess access = plugin.getClientPluginAccess();
 			IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 			Window currentWindow = null;
 			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
-			File file = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
+			File fileObj = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
 
 			byte[] retval = null;
-			if (file != null && file.exists() && !file.isDirectory()) // !cancelled
+			if (fileObj != null && fileObj.exists() && !fileObj.isDirectory()) // !cancelled
 			{
-				long size = -1;
-				if (args != null && args.length >= 2) size = Utils.getAsLong(args[1]);
-				else if (args != null && args.length == 1 && f == null) size = Utils.getAsLong(args[0]);
 				if (SwingUtilities.isEventDispatchThread())
 				{
-					retval = FileChooserUtils.paintingReadFile(access.getExecutor(), access, file, size);
+					retval = FileChooserUtils.paintingReadFile(access.getExecutor(), access, fileObj, size);
 				}
 				else
 				{
-					retval = FileChooserUtils.readFile(file, size);
+					retval = FileChooserUtils.readFile(fileObj, size);
 				}
 			}
 			return retval;
@@ -1465,52 +1602,89 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @since Servoy 5.2.1
 
-	 * @param targetFolder 
-	 * @param fileFilter optional 
-	 * @param fileOption optional 1=files, 2=dirs 
-	 * @param visibleOption optional 1=visible, 2=nonvisible 
-	 * @param lockedOption optional 1=locked, 2=nonlocked 
+	 * @param targetFolder  
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(Object targetFolder)
+	{
+		return js_getRemoteFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(Object)
+	 * @sampleas js_getRemoteFolderContents(Object)
+	 * @param targetFolder
+	 * @param fileFilter
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(Object)
+	 * @sampleas js_getRemoteFolderContents(Object)
+	 * @param targetFolder
+	 * @param fileFilter
+	 * @param fileOption
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(Object)
+	 * @sampleas js_getRemoteFolderContents(Object)
+	 * @param targetFolder
+	 * @param fileFilter
+	 * @param fileOption
+	 * @param visibleOption
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption, int visibleOption)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(Object)
+	 * @sampleas js_getRemoteFolderContents(Object)
+	 * @param targetFolder
+	 * @param fileFilter
+	 * @param fileOption
+	 * @param visibleOption
+	 * @param lockedOption
 	 * @return the array of file names
 	 */
 	@SuppressWarnings("nls")
-	public JSFile[] js_getRemoteFolderContents(final Object[] options)
+	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
 	{
-		Object path = options[0];
-		if (path == null) return EMPTY;
+		if (targetFolder == null) return EMPTY;
 
-		final String[] fileFilter;
-		final int filesOption; // null/0 = files and dirs, 1 = files, 2 = dirs.
-		final int visibleOption;// null/0 = visible and non, 1 = visible, 2 = non.
-		final int lockedOption; // null/0 = locked and non, 1 = locked, 2 = non.
-
-		if (options.length > 1 && options[1] != null)
+		String[] fileFilterA = null;
+		if (fileFilter != null)
 		{
-			if (options[1].getClass().isArray())
+			if (fileFilter instanceof String[])
 			{
-				Object[] tmp = (Object[])options[1];
-				fileFilter = new String[tmp.length];
-				for (int i = 0; i < tmp.length; i++)
+				fileFilterA = (String[])fileFilter;
+				for (int i = 0; i < fileFilterA.length; i++)
 				{
-					fileFilter[i] = ((String)tmp[i]).toLowerCase();
+					fileFilterA[i] = fileFilterA[i].toLowerCase();
 				}
 			}
 			else
 			{
-				fileFilter = new String[] { ((String)options[1]).toLowerCase() };
+				fileFilterA = new String[] { fileFilter.toString().toLowerCase() };
 			}
 		}
-		else fileFilter = null;
-		if (options.length > 2) filesOption = Utils.getAsInteger(options[2]);
-		else filesOption = AbstractFile.ALL;
-		if (options.length > 3) visibleOption = Utils.getAsInteger(options[3]);
-		else visibleOption = AbstractFile.ALL;
-		if (options.length > 4) lockedOption = Utils.getAsInteger(options[4]);
-		else lockedOption = AbstractFile.ALL;
 
 		String serverFileName = null;
-		if (path instanceof JSFile)
+		if (targetFolder instanceof JSFile)
 		{
-			IAbstractFile abstractFile = ((JSFile)path).getAbstractFile();
+			IAbstractFile abstractFile = ((JSFile)targetFolder).getAbstractFile();
 			if (abstractFile instanceof RemoteFile)
 			{
 				serverFileName = ((RemoteFile)abstractFile).getAbsolutePath();
@@ -1522,13 +1696,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		}
 		else
 		{
-			serverFileName = path.toString();
+			serverFileName = targetFolder.toString();
 		}
 		try
 		{
 			final IFileService service = getFileService();
 			final String clientId = plugin.getClientPluginAccess().getClientID();
-			final RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, serverFileName, fileFilter, filesOption, visibleOption, lockedOption);
+			final RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, serverFileName, fileFilterA, fileOption, visibleOption, lockedOption);
 			if (remoteList != null)
 			{
 				final JSFile[] files = new JSFile[remoteList.length];

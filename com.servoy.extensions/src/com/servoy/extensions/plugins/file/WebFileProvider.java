@@ -73,18 +73,18 @@ public class WebFileProvider extends FileProvider
 		}
 	}
 
-	@SuppressWarnings("nls")
 	@Override
-	public String js_readTXTFile(Object[] args)
+	@SuppressWarnings("nls")
+	public String js_readTXTFile(Object file, String charsetname)
 	{
-		if (args != null && args.length > 0 && args[0] instanceof JSFile)
+		if (file instanceof JSFile)
 		{
-			byte[] bytes = ((JSFile)args[0]).jsFunction_getBytes();
+			byte[] bytes = ((JSFile)file).jsFunction_getBytes();
 			if (bytes != null)
 			{
 				try
 				{
-					return readTXTFile(args, new ByteArrayInputStream(bytes));
+					return readTXTFile(charsetname, new ByteArrayInputStream(bytes));
 				}
 				catch (Exception e)
 				{
@@ -96,18 +96,18 @@ public class WebFileProvider extends FileProvider
 		}
 		else
 		{
-			return super.js_readTXTFile(args);
+			return super.js_readTXTFile(file, charsetname);
 		}
 	}
 
 	@Override
-	public byte[] js_readFile(Object[] args)
+	public byte[] js_readFile(Object file, long size)
 	{
-		if (args != null && args.length > 0 && args[0] instanceof JSFile)
+		if (file instanceof JSFile)
 		{
-			return ((JSFile)args[0]).jsFunction_getBytes();
+			return ((JSFile)file).jsFunction_getBytes();
 		}
-		return super.js_readFile(args);
+		return super.js_readFile(file, size);
 	}
 
 	/**

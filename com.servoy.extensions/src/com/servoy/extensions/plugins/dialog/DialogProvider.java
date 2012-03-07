@@ -310,42 +310,30 @@ public class DialogProvider implements IScriptable
 	 *
 	 * @param dialog_title 
 	 * @param msg 
-	 * @param optionArray/option1 
-	 * @param ...option optional
+	 * @param optionArray 
 	 */
-	public String js_showSelectDialog(Object[] array)
+	public String js_showSelectDialog(String dialog_title, String msg, String... optionArray)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
 			throw new RuntimeException("Can't use the dialog plugin in a none Swing thread/environment");
 		}
 		String title = Messages.getString("servoy.general.warning"); //$NON-NLS-1$
-		if (array != null && array.length > 0 && array[0] != null) title = Messages.getStringIfPrefix(array[0].toString());
-		String msg = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
-		if (array != null && array.length > 1 && array[1] != null) msg = Messages.getStringIfPrefix(array[1].toString());
-		Vector buttons = new Vector();
-		if (array != null)
+		if (dialog_title != null) title = Messages.getStringIfPrefix(dialog_title);
+		String message = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
+		if (msg != null) message = Messages.getStringIfPrefix(msg);
+		Vector<String> buttons = new Vector<String>();
+		if (optionArray != null)
 		{
-			if (array.length == 3 && array[2] instanceof Object[])
+			for (String element : optionArray)
 			{
-				Object[] args = ((Object[])array[2]);
-				for (Object element : args)
-				{
-					buttons.addElement(element == null ? "" : Messages.getStringIfPrefix(element.toString())); //$NON-NLS-1$
-				}
-			}
-			else
-			{
-				for (int i = 2; i < array.length; i++)
-				{
-					buttons.addElement(array[i] == null ? "" : Messages.getStringIfPrefix(array[i].toString())); //$NON-NLS-1$
-				}
+				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix(element)); //$NON-NLS-1$
 			}
 		}
 		Object[] options = new String[buttons.size()];
 		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
-		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
+		JOptionPane pane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
 		pane.setWantsInput(true);
 		pane.setSelectionValues(options);
 		pane.setInitialSelectionValue(options[0]);
@@ -360,29 +348,58 @@ public class DialogProvider implements IScriptable
 	 * @sample
 	 * //show input dialog ,returns nothing when canceled 
 	 * var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');
-	 *
-	 * @param dialog_title 
-	 * @param msg 
-	 * @param initialValue optional
 	 */
-	public String js_showInputDialog(Object[] array)
+
+	public String js_showInputDialog()
+	{
+		return js_showInputDialog(null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showInputDialog()
+	 * @sampleas js_showInputDialog()
+	 * @param dialog_title
+	 */
+	public String js_showInputDialog(String dialog_title)
+	{
+		return js_showInputDialog(dialog_title, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showInputDialog()
+	 * @sampleas js_showInputDialog()
+	 * @param dialog_title
+	 * @param msg
+	 */
+	public String js_showInputDialog(String dialog_title, String msg)
+	{
+		return js_showInputDialog(dialog_title, msg, null);
+	}
+
+	/**
+	 * @clonedesc js_showInputDialog()
+	 * @sampleas js_showInputDialog()
+	 * @param dialog_title
+	 * @param msg
+	 * @param initialValue
+	 */
+	public String js_showInputDialog(String dialog_title, String msg, String initialValue)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
 			throw new RuntimeException("Can't use the dialog plugin in a none Swing thread/environment");
 		}
 		String title = Messages.getString("servoy.general.warning"); //$NON-NLS-1$
-		if (array != null && array.length > 0 && array[0] != null) title = Messages.getStringIfPrefix(array[0].toString());
-		String msg = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
-		if (array != null && array.length > 1 && array[1] != null) msg = Messages.getStringIfPrefix(array[1].toString());
+		if (dialog_title != null) title = Messages.getStringIfPrefix(dialog_title);
+		String message = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
+		if (msg != null) message = Messages.getStringIfPrefix(msg);
 		String val = null;
-		if (array != null && array.length > 2 && array[2] != null) val = array[2].toString();
-		JOptionPane pane = new JOptionPane(msg, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, val);
+		if (initialValue != null) val = initialValue;
+		JOptionPane pane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, val);
 		pane.setWantsInput(true);
 		pane.setInitialSelectionValue(val);
 		createAndShowDialog(title, pane);
 		Object value = pane.getInputValue();
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
 	}
-
 }
