@@ -354,57 +354,50 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * for (var i=0; i<files.length; i++)
 	 * 	application.output(files[i].getAbsolutePath());
 	 *
-	 * @param targetFolder 
-	 * @param fileFilter optional 
-	 * @param fileOption optional 1=files, 2=dirs 
-	 * @param visibleOption optional 1=visible, 2=nonvisible 
-	 * @param lockedOption optional 1=locked, 2=nonlocked 
+	 * @param targetFolder File or path object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @param lockedOption 1=locked, 2=nonlocked 
 	 */
-	public JSFile[] js_getFolderContents(Object[] options)
+	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
 	{
-		Object path = options[0];
-		if (path == null) return EMPTY;
+		if (targetFolder == null) return EMPTY;
 
-		final String[] fileFilter;
-		final int filesOption; // null/0 = files and dirs, 1 = files, 2 = dirs.
-		final int visibleOption;// null/0 = visible and non, 1 = visible, 2 = non.
-		final int lockedOption; // null/0 = locked and non, 1 = locked, 2 = non.
+		final String[] fileFilterOptions;
 
-		if (options.length > 1 && options[1] != null)
+		if (fileFilter != null)
 		{
-			if (options[1].getClass().isArray())
+			if (fileFilter.getClass().isArray())
 			{
-				Object[] tmp = (Object[])options[1];
-				fileFilter = new String[tmp.length];
+				Object[] tmp = (Object[])fileFilter;
+				fileFilterOptions = new String[tmp.length];
 				for (int i = 0; i < tmp.length; i++)
 				{
-					fileFilter[i] = ((String)tmp[i]).toLowerCase();
+					fileFilterOptions[i] = ((String)tmp[i]).toLowerCase();
 				}
 			}
 			else
 			{
-				fileFilter = new String[] { ((String)options[1]).toLowerCase() };
+				fileFilterOptions = new String[] { ((String)fileFilter).toLowerCase() };
 			}
 		}
-		else fileFilter = null;
-		if (options.length > 2) filesOption = Utils.getAsInteger(options[2]);
-		else filesOption = AbstractFile.ALL;
-		if (options.length > 3) visibleOption = Utils.getAsInteger(options[3]);
-		else visibleOption = AbstractFile.ALL;
-		if (options.length > 4) lockedOption = Utils.getAsInteger(options[4]);
-		else lockedOption = AbstractFile.ALL;
+		else
+		{
+			fileFilterOptions = null;
+		}
 
-		File file = convertToFile(path);
+		File file = convertToFile(targetFolder);
 
 		FileFilter ff = new FileFilter()
 		{
 			public boolean accept(File pathname)
 			{
 				boolean retVal = true;
-				if (fileFilter != null)
+				if (fileFilterOptions != null)
 				{
 					String name = pathname.getName().toLowerCase();
-					for (String element : fileFilter)
+					for (String element : fileFilterOptions)
 					{
 						retVal = name.endsWith(element);
 						if (retVal) break;
@@ -413,11 +406,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 				if (!retVal) return retVal;
 
 				// file or folder
-				if (filesOption == AbstractFile.FILES)
+				if (fileOption == AbstractFile.FILES)
 				{
 					retVal = pathname.isFile();
 				}
-				else if (filesOption == AbstractFile.FOLDERS)
+				else if (fileOption == AbstractFile.FOLDERS)
 				{
 					retVal = pathname.isDirectory();
 				}
@@ -435,6 +428,48 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			}
 		};
 		return convertToJSFiles(file.listFiles(ff));
+	}
+
+	/**
+	 * 
+	 * @param targetFolder File or path object.
+	 * @param fileFilter
+	 * @param fileOption
+	 * @param visibleOption
+	 */
+	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+	}
+
+	/**
+	 * 
+	 * @param targetFolder
+	 * @param fileFilter
+	 * @param fileOption
+	 */
+	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * 
+	 * @param targetFolder
+	 * @param fileFilter
+	 */
+	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * 
+	 * @param targetFolder
+	 */
+	public JSFile[] js_getFolderContents(Object targetFolder)
+	{
+		return js_getFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
 	}
 
 	/**
@@ -912,7 +947,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param encoding
 	 * @return
 	 */
-	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused") String contentType)
+	protected boolean writeTXT(Object f, String data, String encoding, @SuppressWarnings("unused")
+	String contentType)
 	{
 		try
 		{
@@ -1063,7 +1099,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param data
 	 * @param mimeType
 	 */
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused") String mimeType)
+	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	String mimeType)
 	{
 		if (data == null) return false;
 		try

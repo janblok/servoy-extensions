@@ -50,51 +50,105 @@ public class DialogProvider implements IScriptable
 	 * @deprecated Replaced by {@link #showWarningDialog(Object[])}.
 	 */
 	@Deprecated
-	public String js_showDialog(Object[] array)//old one
+	public String js_showDialog(String dialogTitle, String dialogMessage, Object buttonsText)//old one
 	{
-		return js_showWarningDialog(array);
+		return js_showWarningDialog(dialogTitle, dialogMessage, buttonsText);
+	}
+
+	@Deprecated
+	public String js_showDialog(String dialogTitle, String dialogMessage)//old one
+	{
+		return js_showWarningDialog(dialogTitle, dialogMessage, null);
+	}
+
+	private String[] getButtonTexts(Object buttonsText)
+	{
+		if (buttonsText == null) return null;
+		if (buttonsText instanceof String)
+		{
+			return new String[] { buttonsText.toString() };
+		}
+		else if (buttonsText.getClass().isArray())
+		{
+			String[] text = new String[((Object[])buttonsText).length];
+			for (int i = 0; i < ((Object[])buttonsText).length; i++)
+			{
+				text[i] = (String)((Object[])buttonsText)[i];
+			}
+			return text;
+		}
+		else
+		{
+			return new String[] { buttonsText.toString() };
+		}
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(Object[])
+	 * @clonedesc js_showErrorDialog(String,String,Object)
 	 *
 	 * @sample
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialog_title 
-	 * @param msg 
-	 * @param ...button optional
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 * @param buttonsText
 	 */
-	public String js_showWarningDialog(Object[] array)
+	public String js_showWarningDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
+		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[0]) + "\\n" + String.valueOf(array[1]));
-			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
+			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + "\\n" + dialogMessage);
+			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
 		}
-		return js_showDialogEx(array, JOptionPane.WARNING_MESSAGE);
+		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.WARNING_MESSAGE);
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(Object[])
+	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 *
+	 * @sampleas js_showWarningDialog(String,String,Object)
+	 *
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 */
+	public String js_showWarningDialog(String dialogTitle, String dialogMessage)
+	{
+		return js_showWarningDialog(dialogTitle, dialogMessage, null);
+	}
+
+	/**
+	 * @clonedesc js_showErrorDialog(String,String,Object)
 	 *
 	 * @sample
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialog_title 
-	 * @param msg 
-	 * @param ...button optional
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 * @param buttonsText
 	 */
-	public String js_showInfoDialog(Object[] array)
+	public String js_showInfoDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
+		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[0]) + "\\n" + String.valueOf(array[1]));
-			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
+			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + "\\n" + dialogMessage);
+			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
 		}
-		return js_showDialogEx(array, JOptionPane.INFORMATION_MESSAGE);
+		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	/**
+	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 *
+	 * @sampleas js_showInfoDialog(String,String,Object)
+	 *
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 */
+	public String js_showInfoDialog(String dialogTitle, String dialogMessage)
+	{
+		return js_showInfoDialog(dialogTitle, dialogMessage, null);
 	}
 
 	/**
@@ -104,18 +158,31 @@ public class DialogProvider implements IScriptable
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialog_title 
-	 * @param msg 
-	 * @param ...button optional
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 * @param buttonsText
 	 */
-	public String js_showErrorDialog(Object[] array)
+	public String js_showErrorDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT && (array.length == 2 || array.length == 3))
+		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), String.valueOf(array[0]) + "\\n" + String.valueOf(array[1]));
-			return (array.length == 3 ? String.valueOf(array[2]) : "OK");
+			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + "\\n" + dialogMessage);
+			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
 		}
-		return js_showDialogEx(array, JOptionPane.ERROR_MESSAGE);
+		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.ERROR_MESSAGE);
+	}
+
+	/**
+	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 *
+	 * @sampleas js_showErrorDialog(String,String,Object)
+	 *
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 */
+	public String js_showErrorDialog(String dialogTitle, String dialogMessage)
+	{
+		return js_showErrorDialog(dialogTitle, dialogMessage, null);
 	}
 
 	/**
@@ -125,36 +192,49 @@ public class DialogProvider implements IScriptable
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialog_title 
-	 * @param msg 
-	 * @param ...button optional
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 * @param buttonsText
 	 */
-	public String js_showQuestionDialog(Object[] array)
+	public String js_showQuestionDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
-		return js_showDialogEx(array, JOptionPane.QUESTION_MESSAGE);
+		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.QUESTION_MESSAGE);
 	}
 
-	private String js_showDialogEx(Object[] array, int type)
+	/**
+	 * @clonedesc js_showQuestionDialog(String,String,Object)
+	 *
+	 * @sampleas js_showQuestionDialog(String,String,Object)
+	 *
+	 * @param dialogTitle 
+	 * @param dialogMessage 
+	 */
+	public String js_showQuestionDialog(String dialogTitle, String dialogMessage)
+	{
+		return js_showQuestionDialog(dialogTitle, dialogMessage, null);
+	}
+
+	private String js_showDialogEx(String dialogTitle, String dialogMessage, Object buttonsText, int type)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
 			throw new RuntimeException("Can't use the dialog plugin in a none Swing thread/environment");
 		}
 		String title = Messages.getString("servoy.general.warning"); //$NON-NLS-1$
-		if (array != null && array.length > 0 && array[0] != null)
+		if (dialogTitle != null)
 		{
-			title = Messages.getStringIfPrefix(array[0].toString());
+			title = Messages.getStringIfPrefix(dialogTitle);
 		}
 		String msg = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
-		if (array != null && array.length > 1 && array[1] != null) msg = Messages.getStringIfPrefix(array[1].toString());
-		Vector buttons = new Vector();
-		if (array != null)
+		if (dialogMessage != null) msg = Messages.getStringIfPrefix(dialogMessage);
+		Vector<String> buttons = new Vector<String>();
+		if (buttonsText != null)
 		{
-			for (int i = 2; i < array.length; i++)
+			for (String text : getButtonTexts(buttonsText))
 			{
-				if (array[i] != null && !("".equals(array[i]))) //$NON-NLS-1$
+				if (text != null && !("".equals(text))) //$NON-NLS-1$
 				{
-					buttons.addElement(Messages.getStringIfPrefix(array[i].toString()));
+					buttons.addElement(Messages.getStringIfPrefix(text));
 				}
 			}
 		}
