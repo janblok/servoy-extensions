@@ -224,7 +224,7 @@ public class BindingInfo
 	{
 		RelationInfo[] nRelationInfo = null;
 
-		Object[] nRelationInfosObj = null;
+		RelationInfo[] nRelationInfosObj = null;
 		Binding tbi = getBinding(tn);
 		if (tbi != null)
 		{
@@ -237,17 +237,7 @@ public class BindingInfo
 
 		if (nRelationInfosObj != null && nRelationInfosObj.length > 0)
 		{
-			ArrayList nRelationInfosA = new ArrayList();
-			for (Object nRelationInfoObj : nRelationInfosObj)
-			{
-				if (nRelationInfoObj instanceof RelationInfo)
-				{
-					nRelationInfosA.add(nRelationInfoObj);
-				}
-			}
-
-			nRelationInfo = new RelationInfo[0];
-			nRelationInfo = (RelationInfo[])nRelationInfosA.toArray(nRelationInfo);
+			nRelationInfo = nRelationInfosObj;
 		}
 
 		return nRelationInfo;

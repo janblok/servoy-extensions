@@ -391,24 +391,27 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Remove a shortcut.
 	 *
-	 * @sampleas js_createShortcut(Object[])
+	 * @sampleas js_createShortcut(String, Object, String, Object[])
 	 *
-	 * @param shortcut 
-	 * @param form_name optional 
+	 * @param shortcut  
 	 */
-	public boolean js_removeShortcut(Object[] vargs)
+	public boolean js_removeShortcut(String shortcut)
 	{
-		if (vargs == null || vargs.length == 0)
+		return js_removeShortcut(shortcut, null);
+	}
+
+	/**
+	 * @clonedesc js_removeShortcut(String)
+	 * @sampleas js_removeShortcut(String)
+	 * @param shortcut
+	 * @param formName
+	 * @return
+	 */
+	public boolean js_removeShortcut(String shortcut, String formName)
+	{
+		if (shortcut == null)
 		{
 			return false;
-		}
-		int n = 0;
-		String shortcut = String.valueOf(vargs[n++]);
-		String context = null;
-		if (vargs.length > n)
-		{
-			Object arg = vargs[n++];
-			context = arg == null ? null : arg.toString();
 		}
 
 		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
@@ -419,7 +422,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 
 		Map<String, ShortcutCallData> shortcutMap = shortcuts.get(key);
-		if (shortcutMap == null || shortcutMap.remove(context) == null)
+		if (shortcutMap == null || shortcutMap.remove(formName) == null)
 		{
 			// was not used
 			return false;

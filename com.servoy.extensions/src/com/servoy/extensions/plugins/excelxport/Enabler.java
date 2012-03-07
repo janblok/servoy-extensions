@@ -126,45 +126,68 @@ public class Enabler implements IScriptable
 	 *
 	 * @param foundSet 
 	 * @param dataProviderIds 
-	 * @param templateXLS optional
-	 * @param sheetName optional
-	 * @param startRow optional
-	 * @param startColumn optional
 	 */
-	public byte[] js_excelExport(Object[] args) throws IOException
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds) throws IOException
 	{
-		if ((args != null) && (args.length >= 2) && (args[0] instanceof IFoundSet) && ((Object[])args[1]).length != 0)
-		{
-			IFoundSet foundSet = (IFoundSet)args[0];
-			Object[] dataProvidersArray = (Object[])args[1];
-			String[] dps = new String[dataProvidersArray.length];
-			for (int i = 0; i < dataProvidersArray.length; i++)
-				dps[i] = (String)dataProvidersArray[i];
-			byte[] templateXLS = null;
-			String sheetName = "Servoy Data";
-			int startRow = 0;
-			int startColumn = 0;
-			if (args.length > 2 && args[2] instanceof byte[])
-			{
-				templateXLS = (byte[])args[2];
-			}
-			if (args.length > 3 && args[3] instanceof String)
-			{
-				sheetName = (String)args[3];
-			}
-			if (args.length > 4 && args[4] instanceof Double)
-			{
-				double i = (Double)args[4];
-				startRow = (int)(i - 1);
-			}
-			if (args.length > 5 && args[5] instanceof Double)
-			{
-				double i = (Double)args[5];
-				startColumn = (int)(i - 1);
-			}
+		return js_excelExport(foundSet, dataProvidersIds, null, "Servoy data", 1, 1);
+	}
 
+	/**
+	 * @clonedesc js_excelExport(IFoundSet, String[])
+	 * @sampleas js_excelExport(IFoundSet, String[])
+	 * @param foundSet
+	 * @param dataProvidersIds
+	 * @param templateXLS
+	 */
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS) throws IOException
+	{
+		return js_excelExport(foundSet, dataProvidersIds, templateXLS, "Servoy data", 1, 1);
+	}
+
+	/**
+	 * @clonedesc js_excelExport(IFoundSet, String[])
+	 * @sampleas js_excelExport(IFoundSet, String[])
+	 * @param foundSet
+	 * @param dataProvidersIds
+	 * @param templateXLS
+	 * @param sheetName
+	 */
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS, String sheetName) throws IOException
+	{
+		return js_excelExport(foundSet, dataProvidersIds, templateXLS, sheetName, 1, 1);
+	}
+
+	/**
+	 * @clonedesc js_excelExport(IFoundSet, String[])
+	 * @sampleas js_excelExport(IFoundSet, String[])
+	 * @param foundSet
+	 * @param dataProvidersIds
+	 * @param templateXLS
+	 * @param sheetName
+	 * @param startRow
+	 */
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS, String sheetName, int startRow) throws IOException
+	{
+		return js_excelExport(foundSet, dataProvidersIds, templateXLS, sheetName, startRow, 1);
+	}
+
+	/**
+	 * @clonedesc js_excelExport(IFoundSet, String[])
+	 * @sampleas js_excelExport(IFoundSet, String[])
+	 * @param foundSet
+	 * @param dataProvidersIds
+	 * @param templateXLS
+	 * @param sheetName
+	 * @param startRow
+	 * @param startColumn
+	 */
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS, String sheetName, int startRow, int startColumn)
+		throws IOException
+	{
+		if (foundSet != null && dataProvidersIds != null && dataProvidersIds.length > 0)
+		{
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dps, templateXLS, sheetName, startRow, startColumn);
+			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dataProvidersIds, templateXLS, sheetName, startRow - 1, startColumn - 1);
 			wb.write(buffer);
 			return buffer.toByteArray();
 		}

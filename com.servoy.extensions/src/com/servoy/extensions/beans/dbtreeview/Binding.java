@@ -59,7 +59,7 @@ public class Binding implements IScriptable
 	private FunctionDefinition methodToCallOnClick;
 	private String returnDataproviderOnClick;
 
-	private Object[] nRelationInfos;
+	private RelationInfo[] nRelationInfos;
 
 	// dataprovider that return an object with dataproviders for all attributes
 	private String configurationDataprovider;
@@ -220,7 +220,7 @@ public class Binding implements IScriptable
 		nRelationName = name;
 	}
 
-	public Object[] getNRelationInfos()
+	public RelationInfo[] getNRelationInfos()
 	{
 		return nRelationInfos;
 	}
@@ -241,7 +241,7 @@ public class Binding implements IScriptable
 	 * @param relationInfos
 	 * 
 	 */
-	public void js_setNRelationInfos(Object[] relationInfos)
+	public void js_setNRelationInfos(RelationInfo[] relationInfos)
 	{
 		nRelationInfos = relationInfos;
 	}

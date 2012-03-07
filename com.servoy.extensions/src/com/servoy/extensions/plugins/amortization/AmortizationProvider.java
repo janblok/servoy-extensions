@@ -234,13 +234,20 @@ public class AmortizationProvider implements IScriptable, IReturnedTypesProvider
 	 * 	"Ok"
 	 * );
 	 *
-	 * @param polynomial optional
 	 */
-	public Polynomial js_newPolynomial(Object[] arguments)
+	public Polynomial js_newPolynomial()
 	{
-		if (arguments.length == 0) return new Polynomial();
-		else if (arguments.length == 1 && arguments[0] instanceof Polynomial) return new Polynomial((Polynomial)arguments[0]);
+		return js_newPolynomial(null);
+	}
 
-		return null;
+	/**
+	 * @clonedesc js_newPolynomial()
+	 * @sampleas js_newPolynomial()
+	 * @param polynomial
+	 */
+	public Polynomial js_newPolynomial(Polynomial polynomial)
+	{
+		if (polynomial == null) return new Polynomial();
+		else return new Polynomial(polynomial);
 	}
 }
