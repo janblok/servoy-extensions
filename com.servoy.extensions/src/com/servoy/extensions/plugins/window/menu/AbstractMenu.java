@@ -74,8 +74,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the checkbox
 	 * 
@@ -89,8 +89,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text 
 	 * @param feedback_item this can be either a method or an array representing a submenu
@@ -99,12 +99,12 @@ public abstract class AbstractMenu implements IScriptable
 	 */
 	public CheckBox js_addCheckBox(String name, Object feedback_item) throws PluginException
 	{
-		return js_addCheckBox(name, feedback_item, null, Character.valueOf((char)0), true, -1);
+		return js_addCheckBox(name, feedback_item, null, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text 
 	 * @param feedback_item this can be either a method or an array representing a submenu
@@ -114,12 +114,12 @@ public abstract class AbstractMenu implements IScriptable
 	 */
 	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon) throws PluginException
 	{
-		return js_addCheckBox(name, feedback_item, icon, Character.valueOf((char)0), true, -1);
+		return js_addCheckBox(name, feedback_item, icon, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text 
 	 * @param feedback_item this can be either a method or an array representing a submenu
@@ -128,14 +128,14 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, Object mnemonic) throws PluginException
+	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, String mnemonic) throws PluginException
 	{
 		return js_addCheckBox(name, feedback_item, icon, mnemonic, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text 
 	 * @param feedback_item this can be either a method or an array representing a submenu
@@ -145,7 +145,7 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled) throws PluginException
+	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
 	{
 		return js_addCheckBox(name, feedback_item, icon, mnemonic, enabled, -1);
 	}
@@ -191,7 +191,7 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled, int align) throws PluginException
+	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
 	{
 		int index = -1;
 		IMenuItem menuItem = menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_CHECK);
@@ -201,7 +201,7 @@ public abstract class AbstractMenu implements IScriptable
 		return (CheckBox)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, menuItemArgs, true);
 	}
 
-	private MenuItemArgs getMenuItemArgs(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled, int align)
+	private MenuItemArgs getMenuItemArgs(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align)
 	{
 		String text = name;
 		if (name == null) text = "noname"; //$NON-NLS-1$
@@ -221,13 +221,9 @@ public abstract class AbstractMenu implements IScriptable
 		}
 
 		char mnemo = 0;
-		if (mnemonic instanceof Character)
+		if (mnemonic != null && mnemonic.length() >= 1)
 		{
-			mnemo = ((Character)mnemonic).charValue();
-		}
-		if (mnemonic instanceof String && mnemonic.toString().length() >= 1)
-		{
-			mnemo = mnemonic.toString().charAt(0);
+			mnemo = mnemonic.charAt(0);
 		}
 
 		if (icon instanceof String && ((String)icon).length() > 0)
@@ -252,14 +248,14 @@ public abstract class AbstractMenu implements IScriptable
 		else
 		{
 			MenuItemArgs mia = parseMenuItemArgs(pluginAccess, vargs);
-			return js_addMenuItem(mia.name, mia.method, mia.imageURL == null ? mia.imageBytes : mia.imageURL, Character.valueOf(mia.mnemonic), mia.enabled,
+			return js_addMenuItem(mia.name, mia.method, mia.imageURL == null ? mia.imageBytes : mia.imageURL, String.valueOf(mia.mnemonic), mia.enabled,
 				mia.align);
 		}
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the menu item
 	 * 
@@ -273,8 +269,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text
 	 * @param feedback_item this can be either a method or an array representing a submenu
@@ -283,12 +279,12 @@ public abstract class AbstractMenu implements IScriptable
 	 */
 	public MenuItem js_addMenuItem(String name, Object feedback_item) throws PluginException
 	{
-		return js_addMenuItem(name, feedback_item, null, Character.valueOf((char)0), true, -1);
+		return js_addMenuItem(name, feedback_item, null, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -298,12 +294,12 @@ public abstract class AbstractMenu implements IScriptable
 	 */
 	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon) throws PluginException
 	{
-		return js_addMenuItem(name, feedback_item, icon, Character.valueOf((char)0), true, -1);
+		return js_addMenuItem(name, feedback_item, icon, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -312,14 +308,14 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, Object mnemonic) throws PluginException
+	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, String mnemonic) throws PluginException
 	{
 		return js_addMenuItem(name, feedback_item, icon, mnemonic, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,Object,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -329,7 +325,7 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled) throws PluginException
+	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
 	{
 		return js_addMenuItem(name, feedback_item, icon, mnemonic, enabled, -1);
 	}
@@ -375,7 +371,7 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled, int align) throws PluginException
+	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
 	{
 		int index = -1;
 		IMenuItem menuItem = menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_BUTTON);
@@ -386,8 +382,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,Object,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the radio button
 	 * 
@@ -406,8 +402,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,Object,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu 
@@ -420,8 +416,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,Object,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -435,8 +431,8 @@ public abstract class AbstractMenu implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,Object,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -445,14 +441,14 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return a radio button menu item 
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, Object mnemonic) throws PluginException
+	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, String mnemonic) throws PluginException
 	{
 		return js_addRadioButton(name, feedback_item, icon, mnemonic, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,Object,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,Object,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -462,7 +458,7 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return a radio button menu item
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled) throws PluginException
+	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
 	{
 		return js_addRadioButton(name, feedback_item, icon, mnemonic, enabled, -1);
 	}
@@ -515,7 +511,7 @@ public abstract class AbstractMenu implements IScriptable
 	 * 
 	 * @return a radio button menu item
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, Object mnemonic, boolean enabled, int align) throws PluginException
+	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
 	{
 		int index = -1;
 		IRadioButtonMenuItem menuItem = (IRadioButtonMenuItem)menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_RADIO);
