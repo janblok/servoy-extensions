@@ -230,9 +230,9 @@ public abstract class AbstractMenu implements IScriptable
 		{
 			menuItemArgs = new MenuItemArgs(text, submenu, function, (String)icon, null, mnemo, align, enabled);
 		}
-		else if (icon instanceof byte[])
+		else
 		{
-			menuItemArgs = new MenuItemArgs(text, submenu, function, null, (byte[])icon, mnemo, align, enabled);
+			menuItemArgs = new MenuItemArgs(text, submenu, function, null, (icon instanceof byte[]) ? (byte[])icon : null, mnemo, align, enabled);
 		}
 
 		return menuItemArgs;
