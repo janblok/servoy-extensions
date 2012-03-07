@@ -150,8 +150,7 @@ public class MenuBar implements IScriptable
 	 * // after removing the menu at index 2 all other menu's moved one index to the left
 	 * // so the menu at index 4 moved to index 3 and the menu at index 5 moved to index 4 etc.
 	 *
-	 * @param index_1 
-	 * @param index_2_to_n optional 
+	 * @param index array of one or more indexes corresponding to menus to remove 
 	 */
 	public void js_removeMenu(Object[] index) throws PluginException
 	{
