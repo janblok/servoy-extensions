@@ -263,9 +263,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @param method
 	 * @param form_name
 	 */
-	public boolean js_createShortcut(String shortcut, Object method, String formName)
+	public boolean js_createShortcut(String shortcut, Object method, String form_name)
 	{
-		return js_createShortcut(shortcut, method, formName, null);
+		return js_createShortcut(shortcut, method, form_name, null);
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @param form_name
 	 * @param arguments
 	 */
-	public boolean js_createShortcut(String shortcut, Object method, String formName, Object[] arguments)
+	public boolean js_createShortcut(String shortcut, Object method, String form_name, Object[] arguments)
 	{
 		FunctionDefinition functionDef;
 		if (method instanceof String)
@@ -324,13 +324,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			String contextName;
 			if (dot == -1)
 			{
-				if (formName == null)
+				if (form_name == null)
 				{
 					contextName = "scopes.globals";
 				}
 				else
 				{
-					contextName = formName; // form name
+					contextName = form_name; // form name
 				}
 				methodName = str;
 			}
@@ -383,7 +383,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		shortcutMap.put(formName, new ShortcutCallData(shortcut, functionDef, arguments));
+		shortcutMap.put(form_name, new ShortcutCallData(shortcut, functionDef, arguments));
 
 		return true;
 	}
