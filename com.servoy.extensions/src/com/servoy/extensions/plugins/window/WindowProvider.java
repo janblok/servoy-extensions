@@ -596,7 +596,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataproviderID)
 	{
-		if (form != null)
+		if (form != null && scope != null)
 		{
 			if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
@@ -616,6 +616,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			form.getFormUI().setComponentVisible(true);
 			// show the form
 			popupShower.show();
+		}
+		else
+		{
+			throw new RuntimeException("Can't show a form popup, you have to specify form " + form + " and a scope " + scope);
 		}
 	}
 
