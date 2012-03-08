@@ -200,6 +200,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param callbackmethod
 	 */
 	public Object js_showFileOpenDialog(Function callbackmethod)
@@ -210,6 +211,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs 
 	 */
 	public Object js_showFileOpenDialog(int selectionMode)
@@ -220,6 +222,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param callbackmethod
 	 */
@@ -231,6 +234,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory null=default/previous 
 	 */
@@ -242,8 +246,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous 
+	 * @param startDirectory File or path to default folder,null=default/previous 
 	 * @param callbackmethod
 	 */
 	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, Function callbackmethod)
@@ -254,8 +259,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous
+	 * @param startDirectory File or path to default folder,null=default/previous
 	 * @param multiselect true/false 
 	 */
 	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect)
@@ -266,8 +272,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous
+	 * @param startDirectory File or path to default folder,null=default/previous
 	 * @param multiselect true/false 
 	 * @param callbackmethod
 	 */
@@ -279,8 +286,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous
+	 * @param startDirectory File or path to default folder,null=default/previous
 	 * @param multiselect true/false 
 	 * @param filter
 	 */
@@ -292,10 +300,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous
+	 * @param startDirectory File or path to default folder,null=default/previous
 	 * @param multiselect true/false
-	 * @param filter 
+	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackmethod
 	 */
 	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod)
@@ -306,10 +315,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
+	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory null=default/previous
 	 * @param multiselect true/false
-	 * @param filter
+	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackmethod
 	 * @param title
 	 */
@@ -490,11 +500,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * 
+	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
+	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 *  
 	 * @param targetFolder File or path object.
-	 * @param fileFilter
-	 * @param fileOption
-	 * @param visibleOption
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
 	 */
 	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
 	{
@@ -502,10 +514,12 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * 
-	 * @param targetFolder
-	 * @param fileFilter
-	 * @param fileOption
+	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
+	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 *  
+	 * @param targetFolder File or path object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
 	 */
 	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption)
 	{
@@ -513,9 +527,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * 
-	 * @param targetFolder
-	 * @param fileFilter
+	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
+	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 *  
+	 * @param targetFolder File or path object.
+	 * @param fileFilter Filter or array of filters for files in folder.
 	 */
 	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter)
 	{
@@ -523,8 +539,10 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * 
-	 * @param targetFolder
+	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
+	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 *  
+	 * @param targetFolder File or path object.
 	 */
 	public JSFile[] js_getFolderContents(Object targetFolder)
 	{
@@ -613,6 +631,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	application.output("File can be read.");
 	 *
 	 * @param file 
+	 * 
+	 * @return JSFile
 	 */
 	public JSFile js_convertToJSFile(Object file)
 	{
@@ -644,7 +664,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	application.output("Folder copy failed.");
 	 *
 	 * @param source 
-	 * @param destination 
+	 * @param destination
+	 * 
+	 * @return success boolean
 	 */
 	public boolean js_copyFolder(Object source, Object destination)
 	{
@@ -980,7 +1002,12 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
 	 * if (!success) application.output('Could not write file.');
 	 * // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
-	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp' 
+	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+	 * 
+	 *  @param file JSFile or path.
+	 *  @param text_data Text to be written.
+	 *  
+	 *  @return Success boolean.
 	 */
 	public boolean js_writeTXTFile(Object file, String text_data)
 	{
@@ -988,11 +1015,14 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_writeTXTFile(Object file, String text_data)
-	 * @sampleas js_writeTXTFile(Object file, String text_data)
-	 * @param file
-	 * @param text_data
-	 * @param charsetname
+	 * @clonedesc js_writeTXTFile(Object, String)
+	 * @sampleas js_writeTXTFile(Object, String)
+	 * 
+	 * @param file JSFile or path.
+	 * @param text_data Text to be written.
+	 * @param charsetname Charset name.
+	 * 
+	 * @return Success boolean.
 	 */
 	public boolean js_writeTXTFile(Object file, String text_data, String charsetname)
 	{
@@ -1000,12 +1030,15 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_writeTXTFile(Object file, String text_data)
-	 * @sampleas js_writeTXTFile(Object file, String text_data)
-	 * @param file
-	 * @param text_data
-	 * @param charsetname
-	 * @param mimeType
+	 * @clonedesc js_writeTXTFile(Object, String)
+	 * @sampleas js_writeTXTFile(Object, String)
+	 * 
+	 * @param file JSFile or path.
+	 * @param text_data Text to be written.
+	 * @param charsetname Charset name.
+	 * @param mimeType Content type (used only on web).
+	 * 
+	 * @return Success boolean.
 	 */
 	@SuppressWarnings("nls")
 	public boolean js_writeTXTFile(Object file, String text_data, String charsetname, String mimeType)
@@ -1226,7 +1259,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_readTXTFile()
 	 * @sampleas js_readTXTFile()
-	 * @param file
+	 * 
+	 * @param file JSFile or path.
 	 */
 	public String js_readTXTFile(Object file)
 	{
@@ -1236,8 +1270,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_readTXTFile()
 	 * @sampleas js_readTXTFile()
-	 * @param file
-	 * @param charsetname
+	 * 
+	 * @param file JSFile or path.
+	 * @param charsetname Charset name.
 	 */
 	public String js_readTXTFile(Object file, String charsetname)
 	{
@@ -1328,7 +1363,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileSaveDialog()
 	 * @sampleas js_showFileSaveDialog()
-	 * @param fileNameDir
+	 * 
+	 * @param fileNameDir File to save.
 	 */
 	public JSFile js_showFileSaveDialog(Object fileNameDir)
 	{
@@ -1339,7 +1375,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc js_showFileSaveDialog()
 	 * @sampleas js_showFileSaveDialog()
 	 * @param fileNameDir
-	 * @param title
+	 * @param title Dialog title.
 	 */
 	public JSFile js_showFileSaveDialog(Object fileNameDir, String title)
 	{
@@ -1377,7 +1413,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showDirectorySelectDialog()
 	 * @sampleas js_showDirectorySelectDialog()
-	 * @param directory
+	 * 
+	 * @param directory Default directory.
 	 */
 	public JSFile js_showDirectorySelectDialog(Object directory)
 	{
@@ -1387,8 +1424,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showDirectorySelectDialog()
 	 * @sampleas js_showDirectorySelectDialog()
-	 * @param directory
-	 * @param title
+	 * 
+	 * @param directory Default directory.
+	 * @param title Dialog title.
 	 */
 	public JSFile js_showDirectorySelectDialog(Object directory, String title)
 	{
@@ -1435,7 +1473,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_readFile()
 	 * @sampleas js_readFile()
-	 * @param file
+	 * 
+	 * @param file JSFile or path.
 	 */
 	public byte[] js_readFile(Object file)
 	{
@@ -1445,8 +1484,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_readFile()
 	 * @sampleas js_readFile()
-	 * @param file
-	 * @param size
+	 * 
+	 * @param file JSFile or path.
+	 * @param size Number of bytes to read.
 	 */
 	public byte[] js_readFile(Object file, long size)
 	{
@@ -1519,6 +1559,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param file either a {@link File}, a local {@link JSFile} or a the file path as a String
 	 * @param text the text to append to the file
 	 * @param encoding the encoding to use
+	 * 
 	 * @return true if appending worked
 	 */
 	@SuppressWarnings("nls")

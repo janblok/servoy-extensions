@@ -47,7 +47,7 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @deprecated Replaced by {@link #showWarningDialog(Object[])}.
+	 * @deprecated Replaced by {@link #showWarningDialog(String,String,Object)}.
 	 */
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage, Object buttonsText)//old one
@@ -55,6 +55,9 @@ public class DialogProvider implements IScriptable
 		return js_showWarningDialog(dialogTitle, dialogMessage, buttonsText);
 	}
 
+	/**
+	 * @deprecated Replaced by {@link #showWarningDialog(String,String,Object)}.
+	 */
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage)//old one
 	{
@@ -90,9 +93,9 @@ public class DialogProvider implements IScriptable
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
-	 * @param buttonsText
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 * @param buttonsText Array of button texts.
 	 */
 	public String js_showWarningDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
@@ -109,8 +112,8 @@ public class DialogProvider implements IScriptable
 	 *
 	 * @sampleas js_showWarningDialog(String,String,Object)
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
 	 */
 	public String js_showWarningDialog(String dialogTitle, String dialogMessage)
 	{
@@ -124,9 +127,9 @@ public class DialogProvider implements IScriptable
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
-	 * @param buttonsText
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 * @param buttonsText Array of button texts.
 	 */
 	public String js_showInfoDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
@@ -143,8 +146,8 @@ public class DialogProvider implements IScriptable
 	 *
 	 * @sampleas js_showInfoDialog(String,String,Object)
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
 	 */
 	public String js_showInfoDialog(String dialogTitle, String dialogMessage)
 	{
@@ -158,9 +161,9 @@ public class DialogProvider implements IScriptable
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
-	 * @param buttonsText
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 * @param buttonsText Array of button texts.
 	 */
 	public String js_showErrorDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
@@ -177,8 +180,8 @@ public class DialogProvider implements IScriptable
 	 *
 	 * @sampleas js_showErrorDialog(String,String,Object)
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
 	 */
 	public String js_showErrorDialog(String dialogTitle, String dialogMessage)
 	{
@@ -192,9 +195,9 @@ public class DialogProvider implements IScriptable
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
-	 * @param buttonsText
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 * @param buttonsText Array of button texts.
 	 */
 	public String js_showQuestionDialog(String dialogTitle, String dialogMessage, Object buttonsText)
 	{
@@ -206,8 +209,8 @@ public class DialogProvider implements IScriptable
 	 *
 	 * @sampleas js_showQuestionDialog(String,String,Object)
 	 *
-	 * @param dialogTitle 
-	 * @param dialogMessage 
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
 	 */
 	public String js_showQuestionDialog(String dialogTitle, String dialogMessage)
 	{
