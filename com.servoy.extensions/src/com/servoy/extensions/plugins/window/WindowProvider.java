@@ -594,17 +594,26 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @param scope the scope to put retval into
 	 * @param dataproviderID the dataprovider of scope to fill
 	 */
-	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataproviderID)
+	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Object scope, String dataproviderID)
 	{
-		if (form != null && scope != null)
+		Scriptable scriptable = null;
+		if (scope instanceof Scriptable)
+		{
+			scriptable = (Scriptable)scope;
+		}
+		else if (scope instanceof FormController)
+		{
+			scriptable = ((FormController)scope).getFormScope();
+		}
+		if (form != null && scriptable != null)
 		{
 			if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
-				popupShower = new WicketPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scope, dataproviderID);
+				popupShower = new WicketPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scriptable, dataproviderID);
 			}
 			else if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
 			{
-				popupShower = new SwingPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scope, dataproviderID);
+				popupShower = new SwingPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scriptable, dataproviderID);
 			}
 			else
 			{
@@ -619,7 +628,15 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 		else
 		{
-			throw new RuntimeException("Can't show a form popup, you have to specify form " + form + " and a scope " + scope);
+			if (form == null)
+			{
+				throw new RuntimeException("Can't show a form popup, you have to specify form");
+			}
+			else if (scriptable == null)
+			{
+				throw new RuntimeException("Can't show a form popup of form: " + form + ", because the scope " + scope +
+					" is null or not a valid scriptable object");
+			}
 		}
 	}
 
