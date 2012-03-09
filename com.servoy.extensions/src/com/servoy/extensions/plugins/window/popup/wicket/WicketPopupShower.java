@@ -33,6 +33,8 @@ import com.servoy.j2db.server.headlessclient.IRepeatingView;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.dataui.WebEventExecutor;
 import com.servoy.j2db.ui.IComponent;
+import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.ServoyException;
 
 /**
  * @author jcompagner
@@ -130,5 +132,13 @@ public class WicketPopupShower implements IPopupShower
 		IRepeatingView repeatingView = pageContributor.getRepeatingView();
 		repeatingView.removeComponent("popup");
 		repeatingView.removeComponent("blocker");
+		try
+		{
+			form.setUsingAsExternalComponent(false);
+		}
+		catch (ServoyException e)
+		{
+			Debug.error(e);
+		}
 	}
 }

@@ -45,6 +45,8 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IFormUI;
+import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.ServoyException;
 
 /**
  * @author jcompagner
@@ -202,6 +204,14 @@ public class SwingPopupShower implements IPopupShower
 		window.getContentPane().removeAll();
 		window.dispose();
 		if (removeMouseListener) glassPane.removeMouseListener(mouseListener);
+		try
+		{
+			form.setUsingAsExternalComponent(false);
+		}
+		catch (ServoyException e)
+		{
+			Debug.error(e);
+		}
 	}
 
 	/**

@@ -22,7 +22,6 @@ import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.Point;
 import java.awt.Window;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,6 +77,7 @@ import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IContainer;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.Utils;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
 
@@ -619,10 +619,14 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			{
 				throw new RuntimeException("show popup called in a none supported client");
 			}
-			// make sure that the form is in a visible state
-			// TODO this should be api method (that runs the runnables..)
-			((FormController)form).notifyVisible(true, new ArrayList<Runnable>());
-			form.getFormUI().setComponentVisible(true);
+			try
+			{
+				form.setUsingAsExternalComponent(true);
+			}
+			catch (ServoyException e)
+			{
+				Debug.error(e);
+			}
 			// show the form
 			popupShower.show();
 		}
