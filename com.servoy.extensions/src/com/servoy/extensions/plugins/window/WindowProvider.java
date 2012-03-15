@@ -381,7 +381,7 @@ public class WindowProvider implements IScriptObject
 
 	public void js_setFullScreen(boolean full)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+		if (plugin.isSwingClient())
 		{
 			if (full)
 			{
@@ -433,10 +433,11 @@ public class WindowProvider implements IScriptObject
 
 	public void js_setToolBarAreaVisible(boolean v)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+		if (plugin.isSwingClient())
 		{
 			IClientPluginAccess app = plugin.getClientPluginAccess();
 			boolean canResize = Utils.getAsBoolean(app.getSettings().getProperty("window.resize.location.enabled", "true"));
+
 			if (!canResize) return;
 
 			IToolbarPanel panel = app.getToolbarPanel();
@@ -449,7 +450,7 @@ public class WindowProvider implements IScriptObject
 
 	public void js_setStatusBarVisible(boolean v)
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+		if (plugin.isSwingClient())
 		{
 			IClientPluginAccess app = plugin.getClientPluginAccess();
 			boolean canResize = Utils.getAsBoolean(app.getSettings().getProperty("window.resize.location.enabled", "true"));
@@ -553,7 +554,7 @@ public class WindowProvider implements IScriptObject
 
 	public void js_removeToolBar(String name) throws Exception
 	{
-		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+		if (plugin.isSwingClient())
 		{
 			IToolbarPanel panel = plugin.getClientPluginAccess().getToolbarPanel();
 
@@ -1222,7 +1223,7 @@ public class WindowProvider implements IScriptObject
 
 	public void js_maximize(final String windowName)
 	{
-		if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT)
+		if (plugin.isSwingClient())
 		{
 			IRuntimeWindow runtimeWindow = getClientPluginAccess().getRuntimeWindow(windowName);
 			if (runtimeWindow instanceof ISmartRuntimeWindow)
