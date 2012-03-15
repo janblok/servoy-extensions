@@ -60,7 +60,7 @@ public class SchedulerProvider implements IScriptable
 			try
 			{
 				int type = plugin.getClientPluginAccess().getApplicationType();
-				if (type == IClientPluginAccess.CLIENT || type == IClientPluginAccess.DEVELOPER)
+				if (type == IClientPluginAccess.CLIENT || type == IClientPluginAccess.RUNTIME)
 				{
 					scheduler.shutdown(false);
 					scheduler = null;

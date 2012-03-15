@@ -143,4 +143,10 @@ public class WindowPlugin implements IClientPlugin
 			impl.currentWindowChanged();
 		}
 	}
+
+	public boolean isSwingClient()
+	{
+		return getClientPluginAccess().getApplicationType() == IClientPluginAccess.CLIENT ||
+			getClientPluginAccess().getApplicationType() == IClientPluginAccess.RUNTIME;
+	}
 }
