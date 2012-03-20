@@ -145,7 +145,7 @@ public class Response implements IScriptable, IJavaScriptType
 	 * @sample
 	 * var allHeaders = response.getResponseHeaders(null);
 	 */
-	public Object js_getResponseHeaders()
+	public JSMap js_getResponseHeaders()
 	{
 		return js_getResponseHeaders(null);
 	}
@@ -156,7 +156,7 @@ public class Response implements IScriptable, IJavaScriptType
 	 *
 	 * @param headerName 
 	 */
-	public Object js_getResponseHeaders(String headerName)
+	public JSMap js_getResponseHeaders(String headerName)
 	{
 		try
 		{
