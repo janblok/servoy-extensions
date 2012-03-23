@@ -7871,7 +7871,7 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
               <argumentType typecode="com.servoy.j2db.IForm"/>
-              <argumentType typecode="org.mozilla.javascript.Scriptable"/>
+              <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
@@ -7887,7 +7887,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               <parameter name="form" type="com.servoy.j2db.IForm" typecode="com.servoy.j2db.IForm">
                 <description><![CDATA[the form to show]]></description>
               </parameter>
-              <parameter name="scope" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
+              <parameter name="scope" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[the scope to put retval into]]></description>
               </parameter>
               <parameter name="dataproviderID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
