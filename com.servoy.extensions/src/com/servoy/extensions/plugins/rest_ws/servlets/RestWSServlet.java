@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.XML;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Wrapper;
@@ -41,8 +43,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
+import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -418,7 +420,7 @@ public class RestWSServlet extends HttpServlet
 						}
 						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
 						{
-							jsMap.put(entry.getKey(), (String[])entry.getValue());
+							jsMap.put(entry.getKey(), entry.getValue());
 						}
 					}
 
@@ -627,7 +629,20 @@ public class RestWSServlet extends HttpServlet
 		int contentType = getContentType(request, "Accept", null, defaultContentType);
 
 		boolean isXML = (result instanceof XMLObject);
-		Object json = (isXML) ? XML.toJSONObject(result.toString()) : plugin.getJSONSerializer().toJSON(result);
+		boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
+		Object json = null;
+		if (isXML)
+		{
+			json = XML.toJSONObject(result.toString());
+		}
+		else if (isJSON)
+		{
+			json = result.toString();
+		}
+		else
+		{
+			json = plugin.getJSONSerializer().toJSON(result);
+		}
 		String content;
 		String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT));
 		switch (contentType)
