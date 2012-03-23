@@ -35,7 +35,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -50,6 +49,7 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -261,7 +261,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param shortcut
 	 * @param method
-	 * @param form_name
+	 * @param form_name callback context
 	 */
 	public boolean js_createShortcut(String shortcut, Object method, String form_name)
 	{
@@ -305,7 +305,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @param shortcut 
 	 * @param method 
-	 * @param form_name
+	 * @param form_name callback context
 	 * @param arguments
 	 */
 	public boolean js_createShortcut(String shortcut, Object method, String form_name, Object[] arguments)
@@ -1108,9 +1108,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @deprecated Obsolete method.
 	 */
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused")
-	String code, @SuppressWarnings("unused")
-	String developer)
+	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
 	{
 		return true;
 	}
