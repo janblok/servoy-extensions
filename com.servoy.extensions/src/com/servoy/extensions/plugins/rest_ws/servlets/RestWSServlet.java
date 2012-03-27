@@ -43,8 +43,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
+import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -637,7 +637,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		else if (isJSON)
 		{
-			json = result.toString();
+			json = result;
 		}
 		else
 		{
