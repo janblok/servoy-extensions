@@ -309,9 +309,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 	 * // form method called when shortcut is used and arguments are passed to the method
 	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
-	 * // Passing the method argument as string prevents form loading 
-	 * plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-	 * //plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
+	 * // Passing the method argument as a string prevents unnecessary form loading
+	 * plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+	 * //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 	 * // remove global shortcut and form-level shortcut
 	 * plugins.window.removeShortcut('menu 1');
 	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -338,14 +338,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	public boolean js_createShortcut(String shortcut, String method, String form_name, Object[] arguments)
 	{
 		FunctionDefinition functionDef;
-//		if (method instanceof String)
-//		{
 		// string callback
 		// 1. formname.method
 		// 2. globals.method
 		// 3. scopes.scopename.method
 		// 4. method (on context form)
-		//		String str = method;
 		int dot = method.indexOf('.');
 		String methodName;
 		String contextName;
@@ -386,35 +383,6 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		functionDef = new FunctionDefinition(contextName, methodName);
 
 		return finalizeCreateShortcut(shortcut, functionDef, form_name, arguments);
-//		}
-//		else if (method instanceof Function)
-//		{
-//			functionDef = new FunctionDefinition((Function)method);
-//		}
-//		else
-//		{
-//			Debug.error("WindowPlugin: could not find method name for method argument");
-//			return false;
-//		}
-
-//		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
-//		if (key == null)
-//		{
-//			Debug.error("Could not parse shortcut '" + shortcut + '\'');
-//			return false;
-//		}
-//
-//		Map<String, ShortcutCallData> shortcutMap = shortcuts.get(key);
-//		if (shortcutMap == null)
-//		{
-//			// first time this shortcut was used
-//			shortcutMap = new HashMap<String, ShortcutCallData>();
-//			shortcuts.put(key, shortcutMap);
-//			getShortcutHandler().addShortcut(key);
-//		}
-//		shortcutMap.put(form_name, new ShortcutCallData(shortcut, functionDef, arguments));
-//
-//		return true;
 	}
 
 	boolean finalizeCreateShortcut(String shortcut, FunctionDefinition functionDef, String formName, Object[] arguments)

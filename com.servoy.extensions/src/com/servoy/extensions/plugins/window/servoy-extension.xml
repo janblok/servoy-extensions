@@ -7366,9 +7366,10 @@ plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShor
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
-plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7407,9 +7408,10 @@ plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShor
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
-plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7450,9 +7452,10 @@ plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShor
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
-plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7494,9 +7497,10 @@ plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShor
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
-plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7535,9 +7539,10 @@ plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShor
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
-plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
