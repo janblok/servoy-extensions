@@ -35,6 +35,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
+import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
 import com.servoy.extensions.plugins.window.menu.CheckBox;
 import com.servoy.extensions.plugins.window.menu.IButtonGroup;
@@ -49,7 +50,6 @@ import com.servoy.extensions.plugins.window.menu.MenuBar;
 import com.servoy.extensions.plugins.window.menu.MenuItem;
 import com.servoy.extensions.plugins.window.menu.Popup;
 import com.servoy.extensions.plugins.window.menu.RadioButton;
-import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.swing.SwingMenuHandler;
 import com.servoy.extensions.plugins.window.menu.swing.ToolBar;
 import com.servoy.extensions.plugins.window.menu.wicket.WicketMenuHandler;
@@ -244,28 +244,57 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, Object, String, Object[])
-	 * @sampleas js_createShortcut(String, Object, String, Object[])
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 * 
 	 * @param shortcut
 	 * @param method
+	 * @deprecated
 	 */
-	public boolean js_createShortcut(String shortcut, Object method)
+	@Deprecated
+	public boolean js_createShortcut(String shortcut, String method)
 	{
 		return js_createShortcut(shortcut, method, null, null);
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, Object, String, Object[])
-	 * @sampleas js_createShortcut(String, Object, String, Object[])
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 * 
 	 * @param shortcut
 	 * @param method
-	 * @param form_name callback context
+	 * @param arguments
+	 * @deprecated
 	 */
-	public boolean js_createShortcut(String shortcut, Object method, String form_name)
+	@Deprecated
+	public boolean js_createShortcut(String shortcut, String method, Object[] arguments)
 	{
-		return js_createShortcut(shortcut, method, form_name, null);
+		return js_createShortcut(shortcut, method, null, arguments);
+	}
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method
+	 */
+	public boolean js_createShortcut(String shortcut, Function method)
+	{
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, null);
+	}
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method
+	 * @param arguments
+	 */
+	public boolean js_createShortcut(String shortcut, Function method, Object[] arguments)
+	{
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, arguments);
 	}
 
 	/**
@@ -274,15 +303,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * // this plugin uses the java keystroke parser
 	 * // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
-	 * // global shortcut (on all forms) - 'apple 1' on a mac client and 'control 1' on other client platforms
-	 * plugins.window.createShortcut('menu 1', 'scopes.globals.handleShortcut');
-	 * // global handler, only triggered when on form frm_orders
-	 * plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_orders');
+	 * // global handler
+	 * plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
 	 * // form method called when shortcut is used
-	 * plugins.window.createShortcut('control LEFT', 'frm_products.handleShortcut', 'frm_products');
-	 * // same, but use method in stead of string
-	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, 'frm_contacts');
+	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 	 * // form method called when shortcut is used and arguments are passed to the method
+	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+	 * // Passing the method argument as string prevents form loading 
 	 * plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
 	 * //plugins.window.createShortcut('control RIGHT', 'forms.frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 	 * // remove global shortcut and form-level shortcut
@@ -308,66 +335,90 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @param form_name callback context
 	 * @param arguments
 	 */
-	public boolean js_createShortcut(String shortcut, Object method, String form_name, Object[] arguments)
+	public boolean js_createShortcut(String shortcut, String method, String form_name, Object[] arguments)
 	{
 		FunctionDefinition functionDef;
-		if (method instanceof String)
+//		if (method instanceof String)
+//		{
+		// string callback
+		// 1. formname.method
+		// 2. globals.method
+		// 3. scopes.scopename.method
+		// 4. method (on context form)
+		//		String str = method;
+		int dot = method.indexOf('.');
+		String methodName;
+		String contextName;
+		if (dot == -1)
 		{
-			// string callback
-			// 1. formname.method
-			// 2. globals.method
-			// 3. scopes.scopename.method
-			// 4. method (on context form)
-			String str = ((String)method);
-			int dot = str.indexOf('.');
-			String methodName;
-			String contextName;
-			if (dot == -1)
+			if (form_name == null)
 			{
-				if (form_name == null)
-				{
-					contextName = "scopes.globals";
-				}
-				else
-				{
-					contextName = form_name; // form name
-				}
-				methodName = str;
+				contextName = "scopes.globals";
 			}
 			else
 			{
-				if (str.startsWith("globals."))
-				{
-					contextName = "scopes.globals";
-				}
-				else
-				{
-					if (str.startsWith("scopes."))
-					{
-						// look for second dot
-						dot = str.indexOf('.', dot + 1);
-						if (dot == -1)
-						{
-							Debug.error("WindowPlugin: could not find context name for method argument '" + str + '\'');
-							return false;
-						}
-					}
-					contextName = str.substring(0, dot); // either scopes.xxxx or formname
-				}
-				methodName = str.substring(dot + 1);
+				contextName = form_name; // form name
 			}
-			functionDef = new FunctionDefinition(contextName, methodName);
-		}
-		else if (method instanceof Function)
-		{
-			functionDef = new FunctionDefinition((Function)method);
+			methodName = method;
 		}
 		else
 		{
-			Debug.error("WindowPlugin: could not find method name for method argument");
-			return false;
+			if (method.startsWith("globals."))
+			{
+				contextName = "scopes.globals";
+			}
+			else
+			{
+				if (method.startsWith("scopes."))
+				{
+					// look for second dot
+					dot = method.indexOf('.', dot + 1);
+					if (dot == -1)
+					{
+						Debug.error("WindowPlugin: could not find context name for method argument '" + method + '\'');
+						return false;
+					}
+				}
+				contextName = method.substring(0, dot); // either scopes.xxxx or formname
+			}
+			methodName = method.substring(dot + 1);
 		}
+		functionDef = new FunctionDefinition(contextName, methodName);
 
+		return finalizeCreateShortcut(shortcut, functionDef, form_name, arguments);
+//		}
+//		else if (method instanceof Function)
+//		{
+//			functionDef = new FunctionDefinition((Function)method);
+//		}
+//		else
+//		{
+//			Debug.error("WindowPlugin: could not find method name for method argument");
+//			return false;
+//		}
+
+//		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
+//		if (key == null)
+//		{
+//			Debug.error("Could not parse shortcut '" + shortcut + '\'');
+//			return false;
+//		}
+//
+//		Map<String, ShortcutCallData> shortcutMap = shortcuts.get(key);
+//		if (shortcutMap == null)
+//		{
+//			// first time this shortcut was used
+//			shortcutMap = new HashMap<String, ShortcutCallData>();
+//			shortcuts.put(key, shortcutMap);
+//			getShortcutHandler().addShortcut(key);
+//		}
+//		shortcutMap.put(form_name, new ShortcutCallData(shortcut, functionDef, arguments));
+//
+//		return true;
+	}
+
+	boolean finalizeCreateShortcut(String shortcut, FunctionDefinition functionDef, String formName, Object[] arguments)
+	{
 		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
 		if (key == null)
 		{
@@ -383,7 +434,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			shortcuts.put(key, shortcutMap);
 			getShortcutHandler().addShortcut(key);
 		}
-		shortcutMap.put(form_name, new ShortcutCallData(shortcut, functionDef, arguments));
+		shortcutMap.put(formName, new ShortcutCallData(shortcut, functionDef, arguments));
 
 		return true;
 	}
@@ -1108,7 +1159,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @deprecated Obsolete method.
 	 */
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
+	public boolean js_register(@SuppressWarnings("unused")
+	String code, @SuppressWarnings("unused")
+	String developer)
 	{
 		return true;
 	}
