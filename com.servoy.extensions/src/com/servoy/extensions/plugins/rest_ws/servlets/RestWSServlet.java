@@ -470,6 +470,7 @@ public class RestWSServlet extends HttpServlet
 			if (authorizationHeader.toLowerCase().startsWith("basic "))
 			{
 				String authorization = authorizationHeader.substring(6);
+				// TODO: which encoding to use? see http://tools.ietf.org/id/draft-reschke-basicauth-enc-05.xml
 				authorization = new String(Utils.decodeBASE64(authorization));
 				int index = authorization.indexOf(':');
 				if (index > 0)
