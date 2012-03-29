@@ -339,7 +339,7 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 			retval.append(getToolTip(methodName));
 			retval.append("\nvar client = plugins.http.createNewHttpClient();");//$NON-NLS-1$
 			retval.append("\nvar request = client.createOptionsRequest('http://www.servoy.com');"); //$NON-NLS-1$
-			retval.append("\nvar response = request.getAllowedMethods(request.executeRequest());\n"); //$NON-NLS-1$
+			retval.append("\nvar methods = request.getAllowedMethods(request.executeRequest());\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		return null;
