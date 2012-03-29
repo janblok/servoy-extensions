@@ -338,9 +338,13 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.DeleteRequest" typecode="com.servoy.extensions.plugins.http.DeleteRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Creates a new delete request (a request to delete a resource on server).]]></description>
+            <summary><![CDATA[Creates a new delete request (a request to delete a resource on server).]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var request = client.createDeleteRequest('http://www.servoy.com/delete.me');
+var response = request.executeRequest();
+var httpCode = response.getStatusCode(); // httpCode 200 is ok"
+var content = response.getResponseBody();]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -350,9 +354,13 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.GetRequest" typecode="com.servoy.extensions.plugins.http.GetRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Creates a new get request (retrieves whatever information is stored on specified url).]]></description>
+            <summary><![CDATA[Creates a new get request (retrieves whatever information is stored on specified url).]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var request = client.createGetRequest('http://www.servoy.com');
+var response = request.executeRequest();
+var httpCode = response.getStatusCode(); // httpCode 200 is ok"
+var content = response.getResponseBody();]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -362,9 +370,13 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.HeadRequest" typecode="com.servoy.extensions.plugins.http.HeadRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Creates a new head request (similar to get request, must not contain body content).]]></description>
+            <summary><![CDATA[Creates a new head request (similar to get request, must not contain body content).]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var request = client.createHeadRequest('http://www.servoy.com');
+var response = request.executeRequest();
+var httpCode = response.getStatusCode(); // httpCode 200 is ok
+var header = response.getResponseHeaders('last-modified');]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -374,9 +386,11 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.OptionsRequest" typecode="com.servoy.extensions.plugins.http.OptionsRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Creates a new options request (a request for information about communication options).]]></description>
+            <summary><![CDATA[Creates a new options request (a request for information about communication options).]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var request = client.createOptionsRequest('http://www.servoy.com');
+var methods = request.getAllowedMethods(request.executeRequest());]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -386,9 +400,14 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.PostRequest" typecode="com.servoy.extensions.plugins.http.PostRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Create a new post request ( Origin server should accept/process the submitted data.)]]></description>
+            <summary><![CDATA[Create a new post request ( Origin server should accept/process the submitted data.]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
+poster.addParameter('status',globals.textToPost);
+poster.addParameter('source','Test Source');
+poster.setCharset('UTF-8');
+var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode(); // httpCode 200 is ok]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -398,9 +417,12 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.PutRequest" typecode="com.servoy.extensions.plugins.http.PutRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Creates a new put request (similar to post request, contains information to be submitted).]]></description>
+            <summary><![CDATA[Creates a new put request (similar to post request, contains information to be submitted).]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var request = client.createPutRequest('http://jakarta.apache.org');
+request.setFile('UploadMe.gif');
+var httpCode = putRequest.executeRequest().getStatusCode() // httpCode 200 is ok]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -410,9 +432,12 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.TraceRequest" typecode="com.servoy.extensions.plugins.http.TraceRequest"/>
-            <description><![CDATA[Create a new request of specified type.]]></description>
-            <summary><![CDATA[Create a new request of specified type.]]></summary>
-            <sample><![CDATA[var request = client.createGetRequest('http://www.servoy.com');]]></sample>
+            <description><![CDATA[Creates a new trace request (debug request, server will just echo back).]]></description>
+            <summary><![CDATA[Creates a new trace request (debug request, server will just echo back).]]></summary>
+            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+var response = request.executeRequest();
+var httpCode = response.getStatusCode(); // httpCode 200 is ok"
+var content = response.getResponseBody();]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>

@@ -204,10 +204,15 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Create a new post request ( Origin server should accept/process the submitted data.)
 	 *
 	 * @sample
-	 * var request = client.createGetRequest('http://www.servoy.com');
+	 * var client = plugins.http.createNewHttpClient();
+	 * var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
+	 * poster.addParameter('status',globals.textToPost);
+	 * poster.addParameter('source','Test Source');
+	 * poster.setCharset('UTF-8');
+	 * var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode(); // httpCode 200 is ok
 	 *
 	 * @param url 
 	 */
@@ -218,10 +223,14 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Creates a new get request (retrieves whatever information is stored on specified url).
 	 *
 	 * @sample
+	 * var client = plugins.http.createNewHttpClient();
 	 * var request = client.createGetRequest('http://www.servoy.com');
+	 * var response = request.executeRequest();
+	 * var httpCode = response.getStatusCode(); // httpCode 200 is ok"
+	 * var content = response.getResponseBody();
 	 *
 	 * @param url 
 	 */
@@ -232,11 +241,15 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Creates a new delete request (a request to delete a resource on server).
 	 *
 	 * @sample
-	 * var request = client.createGetRequest('http://www.servoy.com');
-	 *
+	 * var client = plugins.http.createNewHttpClient();
+	 * var request = client.createDeleteRequest('http://www.servoy.com/delete.me');
+	 * var response = request.executeRequest();
+	 * var httpCode = response.getStatusCode(); // httpCode 200 is ok"
+	 * var content = response.getResponseBody();
+	 * 
 	 * @param url 
 	 */
 	public DeleteRequest js_createDeleteRequest(String url)
@@ -246,10 +259,13 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Creates a new put request (similar to post request, contains information to be submitted).
 	 *
 	 * @sample
-	 * var request = client.createGetRequest('http://www.servoy.com');
+	 * var client = plugins.http.createNewHttpClient();
+	 * var request = client.createPutRequest('http://jakarta.apache.org');
+	 * request.setFile('UploadMe.gif');
+	 * var httpCode = putRequest.executeRequest().getStatusCode() // httpCode 200 is ok
 	 *
 	 * @param url 
 	 */
@@ -260,11 +276,13 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Creates a new options request (a request for information about communication options).
 	 *
 	 * @sample
-	 * var request = client.createGetRequest('http://www.servoy.com');
-	 *
+	 * var client = plugins.http.createNewHttpClient();
+	 * var request = client.createOptionsRequest('http://www.servoy.com');
+	 * var methods = request.getAllowedMethods(request.executeRequest());
+	 * 
 	 * @param url 
 	 */
 	public OptionsRequest js_createOptionsRequest(String url)
@@ -274,10 +292,14 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Creates a new head request (similar to get request, must not contain body content).
 	 *
 	 * @sample
-	 * var request = client.createGetRequest('http://www.servoy.com');
+	 * var client = plugins.http.createNewHttpClient();
+	 * var request = client.createHeadRequest('http://www.servoy.com');
+	 * var response = request.executeRequest();
+	 * var httpCode = response.getStatusCode(); // httpCode 200 is ok
+	 * var header = response.getResponseHeaders('last-modified');
 	 *
 	 * @param url 
 	 */
@@ -288,11 +310,14 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Create a new request of specified type.
+	 * Creates a new trace request (debug request, server will just echo back).
 	 *
 	 * @sample
-	 * var request = client.createGetRequest('http://www.servoy.com');
-	 *
+	 * var client = plugins.http.createNewHttpClient();
+	 * var response = request.executeRequest();
+	 * var httpCode = response.getStatusCode(); // httpCode 200 is ok"
+	 * var content = response.getResponseBody();
+	 * 
 	 * @param url 
 	 */
 	public TraceRequest js_createTraceRequest(String url)
