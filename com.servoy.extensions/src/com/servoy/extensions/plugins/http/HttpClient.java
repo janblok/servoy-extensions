@@ -260,14 +260,86 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 			retval.append("\nclient.setClientProxyCredentials('my_proxy_username','my_proxy_password');"); //$NON-NLS-1$
 			return retval.toString();
 		}
-		else if ("createPostRequest".equals(methodName) || "createGetRequest".equals(methodName) || "createPutRequest".equals(methodName) ||
-			"createDeleteRequest".equals(methodName) || "createTraceRequest".equals(methodName) || "createHeadRequest".equals(methodName) ||
-			"createOptionsRequest".equals(methodName))
+		else if ("createPostRequest".equals(methodName))
+		{
+			StringBuilder retval = new StringBuilder();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");
+			retval.append("\nvar poster = client.createPostRequest('https://twitter.com/statuses/update.json');");
+			retval.append("\nposter.addParameter('status',globals.textToPost);");
+			retval.append("\nposter.addParameter('source','Test Source');");
+			retval.append("\nposter.setCharset('UTF-8');");
+			retval.append("\nvar httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode() // httpCode 200 is ok\n");
+			return retval.toString();
+		}
+		else if ("createGetRequest".equals(methodName))
 		{
 			StringBuffer retval = new StringBuffer();
 			retval.append("//"); //$NON-NLS-1$
 			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");//$NON-NLS-1$
 			retval.append("\nvar request = client.createGetRequest('http://www.servoy.com');"); //$NON-NLS-1$
+			retval.append("\nvar response = request.executeRequest();"); //$NON-NLS-1$
+			retval.append("\nvar httpCode = response.getStatusCode(); // httpCode 200 is ok"); //$NON-NLS-1$
+			retval.append("\nvar content = response.getResponseBody();\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
+		else if ("createPutRequest".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");
+			retval.append("\nvar putRequest = client.createPutRequest('http://jakarta.apache.org');");
+			retval.append("\nputRequest.setFile('UploadMe.gif');");
+			retval.append("\nvar httpCode = putRequest.executeRequest().getStatusCode() // httpCode 200 is ok\n");
+			return retval.toString();
+		}
+		else if ("createDeleteRequest".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");
+			retval.append("\nvar deleteRequest = client.createDeleteRequest('http://jakarta.apache.org/delete.me');");
+			retval.append("\nvar response = deleteRequest.executeRequest();"); //$NON-NLS-1$
+			retval.append("\nvar httpCode = response.getStatusCode() // httpCode 200 is ok\n");
+			retval.append("\nvar content = response.getResponseBody();\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
+		else if ("createTraceRequest".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");
+			retval.append("\nvar traceRequest = client.createTraceRequest('http://www.servoy.com');");
+			retval.append("\nvar response = traceRequest.executeRequest();"); //$NON-NLS-1$
+			retval.append("\nvar httpCode = response.getStatusCode() // httpCode 200 is ok");
+			retval.append("\nvar content = response.getResponseBody();\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
+		else if ("createHeadRequest".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");//$NON-NLS-1$
+			retval.append("\nvar request = client.createHeadRequest('http://www.servoy.com');"); //$NON-NLS-1$
+			retval.append("\nvar response = request.executeRequest();"); //$NON-NLS-1$
+			retval.append("\nvar httpCode = response.getStatusCode(); // httpCode 200 is ok"); //$NON-NLS-1$
+			retval.append("\nvar header = response.getResponseHeaders('last-modified');\n"); //$NON-NLS-1$
+			return retval.toString();
+		}
+		else if ("createOptionsRequest".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//"); //$NON-NLS-1$
+			retval.append(getToolTip(methodName));
+			retval.append("\nvar client = plugins.http.createNewHttpClient();");//$NON-NLS-1$
+			retval.append("\nvar request = client.createOptionsRequest('http://www.servoy.com');"); //$NON-NLS-1$
+			retval.append("\nvar response = request.getAllowedMethods(request.executeRequest());\n"); //$NON-NLS-1$
 			return retval.toString();
 		}
 		return null;
@@ -295,11 +367,33 @@ public class HttpClient implements IScriptObject, IJavaScriptType
 		{
 			return "Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).";
 		}
-		else if ("createPostRequest".equals(methodName) || "createGetRequest".equals(methodName) || "createPutRequest".equals(methodName) ||
-			"createDeleteRequest".equals(methodName) || "createTraceRequest".equals(methodName) || "createHeadRequest".equals(methodName) ||
-			"createOptionsRequest".equals(methodName))
+		else if ("createPostRequest".equals(methodName))
 		{
-			return "Create a new request of specified type.";
+			return "Create a new post request ( Origin server should accept/process the submitted data.).";
+		}
+		else if ("createHeadRequest".equals(methodName))
+		{
+			return "Creates a new head request (similar to get request, must not contain body content).";
+		}
+		else if ("createGetRequest".equals(methodName))
+		{
+			return "Creates a new get request (retrieves whatever information is stored on specified url).";
+		}
+		else if ("createPutRequest".equals(methodName))
+		{
+			return "Creates a new put request (similar to post request, contains information to be submitted).";
+		}
+		else if ("createDeleteRequest".equals(methodName))
+		{
+			return "Creates a new delete request (a request to delete a resource on server).";
+		}
+		else if ("createTraceRequest".equals(methodName))
+		{
+			return "Creates a new trace request (debug request, server will just echo back).";
+		}
+		else if ("createOptionsRequest".equals(methodName))
+		{
+			return "Creates a new options request (a request for information about communication options).";
 		}
 		return null;
 	}
