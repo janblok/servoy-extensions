@@ -21,6 +21,7 @@ import java.util.Arrays;
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.plugins.PluginException;
+import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -33,7 +34,7 @@ import com.servoy.j2db.util.Utils;
  *
  */
 @SuppressWarnings("nls")
-public class MenuBar implements IScriptObject
+public class MenuBar implements IScriptObject, IJavaScriptType
 {
 
 	public MenuBar()

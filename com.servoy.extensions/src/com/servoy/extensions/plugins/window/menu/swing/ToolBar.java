@@ -39,6 +39,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
+import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptObject;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
 import com.servoy.j2db.util.toolbar.Toolbar;
@@ -49,7 +50,7 @@ import com.servoy.j2db.util.toolbar.ToolbarToggleButton;
  * @author marceltrapman
  */
 @SuppressWarnings("nls")
-public class ToolBar implements IToolBar, IScriptObject
+public class ToolBar implements IToolBar, IScriptObject, IJavaScriptType
 {
 	public static JToolBar addServoyToolBar(IClientPluginAccess app, JComponent pane, String name)
 	{
