@@ -16,23 +16,31 @@
  */
 package com.servoy.extensions.plugins.pdf_output;
 
+import java.awt.Color;
 import java.awt.Window;
 import java.awt.print.PrinterJob;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.mozilla.javascript.Scriptable;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Image;
 import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.FdfReader;
 import com.lowagie.text.pdf.PRAcroForm;
 import com.lowagie.text.pdf.PdfCopy;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.SimpleBookmark;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
@@ -341,6 +349,30 @@ public class PDFProvider implements IScriptObject
 		{
 			return new String[] { "pdf_form", "pdf_password", "name_value_array" };
 		}
+		else if ("numberPages".equals(methodName))
+		{
+			return new String[] { "data", "[fontSize]", "[locationX]", "[locationY]", "[font]", "[fontHexColor]" };
+		}
+		else if ("addMetaData".equals(methodName))
+		{
+			return new String[] { "data", "metaData" };
+		}
+		else if ("encrypt".equals(methodName))
+		{
+			return new String[] { "data", "ownerPassword", "[userPassword]", "[allowAssembly]", "[allowCopy]", "[allowDegradedPrinting]", "[allowFillIn]", "[allowModifyAnnotations]", "[allowModifyContents]", "[allowPrinting]", "[allowScreenreaders]", "[is128bit]", "[metaData]" };
+		}
+		else if ("watermark".equals(methodName))
+		{
+			return new String[] { "data", "image", "[locationX]", "[locationY]", "[isUnderText]", "[pagesToWatermark]" };
+		}
+		else if ("overlay".equals(methodName))
+		{
+			return new String[] { "data", "forOverlay", "outputPath", "[isOver]", "[pages]" };
+		}
+		else if ("overlayText".equals(methodName))
+		{
+			return new String[] { "data", "text", "[locationX]", "[locationY]", "[isUnderText]", "[fontSize]", "[font]", "[fontHexColor]" };
+		}
 		return null;
 	}
 
@@ -438,6 +470,96 @@ public class PDFProvider implements IScriptObject
 			retval.append("%%elementName%%.insertFontDirectory('/Library/Fonts');\n\n");
 			return retval.toString();
 		}
+		else if ("insertFontDirectory".equals(methodName)) //$NON-NLS-1$
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//Insert font directories for font embedding.\n"); //$NON-NLS-1$
+			retval.append("//You must create an MetaPrintJob before using it.\n");
+			retval.append("%%elementName%%.insertFontDirectory('c:/Windows/Fonts');\n");
+			retval.append("%%elementName%%.insertFontDirectory('c:/WinNT/Fonts');\n");
+			retval.append("%%elementName%%.insertFontDirectory('/Library/Fonts');\n\n");
+			return retval.toString();
+		}
+		else if ("numberPages".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//" + getToolTip(methodName) + "\n");
+			retval.append("var unNumberedFile = plugins.file.showFileOpenDialog()\n");
+			retval.append("if (unNumberedFile) {\n");
+			retval.append("\tvar data = plugins.file.readFile(unNumberedFile);\n");
+			retval.append("\tpageNumberedPdf = %%elementName%%.numberPages(data, 12, 520, 30, 'Courier', '#ff0033')\n");
+			retval.append("}\n");
+			return retval.toString();
+		}
+		else if ("addMetaData".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//" + getToolTip(methodName) + "\n");
+			retval.append("var pdf = plugins.file.showFileOpenDialog();\n");
+			retval.append("if (pdf) {\n");
+			retval.append("\tvar data = plugins.file.readFile(pdf);\n");
+			retval.append("\tvar metaData = { Author: 'Servoy' };\n");
+			retval.append("\tpdfResult = %%elementName%%.addMetaData(data, metaData)\n");
+			retval.append("}\n");
+			return retval.toString();
+		}
+		else if ("encrypt".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//" + getToolTip(methodName) + "\n");
+			retval.append("//NOTE: Passwords are case sensitive \n");
+			retval.append("var unEncryptedFile = plugins.file.showFileOpenDialog()\n");
+			retval.append("if (unEncryptedFile) {\n");
+			retval.append("\tvar data = plugins.file.readFile(unEncryptedFile);\n");
+			retval.append("\tencryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true)\n");
+			retval.append("}\n");
+			return retval.toString();
+		}
+		else if ("watermark".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//" + getToolTip(methodName) + "\n");
+			retval.append("var pdf = plugins.file.showFileOpenDialog()\n");
+			retval.append("if (pdf) {\n");
+			retval.append("\tvar data = plugins.file.readFile(pdf);\n");
+			retval.append("\tvar image = plugins.file.showFileOpenDialog()\n");
+			retval.append("\tmodifiedPdf = %%elementName%%.watermark(data, image)\n");
+			retval.append("}\n");
+			return retval.toString();
+		}
+		else if ("overlay".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//" + getToolTip(methodName) + "\n");
+			retval.append("\tvar pages = new Array()\n");
+			retval.append("\tpages[0] = '1'\n");
+			retval.append("\tpages[1] = '3'\n");
+			retval.append("\tpages[2] = '5'\n");
+			retval.append("\tvar input1 = plugins.file.showFileOpenDialog(1,null,false,'pdf',null,'Select source file')\n");
+			retval.append("if (input1) {\n");
+			retval.append("\tvar data = plugins.file.readFile(input1);\n");
+			retval.append("\tvar input2 = plugins.file.showFileOpenDialog(1,null,false,'pdf',null,'Select file for overlay')\n");
+			retval.append("\tif (input2) {\n");
+			retval.append("\tvar data2 = plugins.file.readFile(input2);\n");
+			retval.append("\t\toverlayedPdf = %%elementName%%.overlay( data, data2, false, pages )\n");
+			retval.append("\t\t//overlayedPdf = %%elementName%%.overlay( data, data2 )\n");
+			retval.append("\t\t//overlayedPdf = %%elementName%%.overlay( data, data2, false, null )\n");
+			retval.append("\t\t//overlayedPdf = %%elementName%%.overlay( data, data2, pages )\n");
+			retval.append("\t}\n");
+			retval.append("}\n");
+			return retval.toString();
+		}
+		else if ("overlayText".equals(methodName))
+		{
+			StringBuffer retval = new StringBuffer();
+			retval.append("//" + getToolTip(methodName) + "\n");
+			retval.append("var pdf = plugins.file.showFileOpenDialog()\n");
+			retval.append("if (pdf) {\n");
+			retval.append("\tvar data = plugins.file.readFile(pdf);\n");
+			retval.append("\tmodifiedPdf = %%elementName%%.overlayText(data, 'DRAFT', 230, 430, true, 32, 'Helvetica', '#33ff33')\n");
+			retval.append("}\n");
+			return retval.toString();
+		}
 		else
 		{
 			return null;
@@ -490,6 +612,30 @@ public class PDFProvider implements IScriptObject
 		{
 			return "Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. If a file name is specified, then the PDF document is generated into that file. If no argument is specified, then the PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved into a dataprovider, for example.";
 		}
+		else if ("numberPages".equals(methodName))
+		{
+			return "Add pages numbers to a PDF.";
+		}
+		else if ("addMetaData".equals(methodName))
+		{
+			return "Add metadata to the PDF, like Author.";
+		}
+		else if ("encrypt".equals(methodName))
+		{
+			return "Add password protection and security options to the PDF.";
+		}
+		else if ("watermark".equals(methodName))
+		{
+			return "Add an images as a watermark on every page, or the pages specified as a parameter.";
+		}
+		else if ("overlay".equals(methodName))
+		{
+			return "Add some PDF based content over a PDF.";
+		}
+		else if ("overlayText".equals(methodName))
+		{
+			return "Add text over every page at a 45 degree angle.";
+		}
 		else
 		{
 			return null;
@@ -503,4 +649,443 @@ public class PDFProvider implements IScriptObject
 	{
 		return null;
 	}
+
+	/**
+	 * Scripting method to add metaData to a PDF<br/>
+	 * Method adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param metaData a JavaScript object ({@link Scriptable}) that contains the metadata as property/value pairs
+	 * 
+	 * @return the PDF with metaData added
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_addMetaData(byte[] data, Scriptable metaData) throws Exception
+	{
+
+		if (data == null || metaData == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+
+		Map<String, Object> map = ITextTools.getMapFromScriptable(metaData);
+		if (ITextTools.isNullOrEmpty(map)) throw new IllegalArgumentException("No metadata to add"); //$NON-NLS-1$
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+		return ITextTools.addMetaData(bais, map);
+
+	}
+
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param ownerPassword the owner password
+	 * 
+	 * @return the encrypted PDF
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_encrypt(byte[] data, String ownerPassword) throws Exception
+	{
+		return js_encrypt(data, ownerPassword, ownerPassword, true, true, true, true, true, true, true, true, true, null);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param ownerPassword the owner password
+	 * @param userPassword the user password
+	 * 
+	 * @return the encrypted PDF
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword) throws Exception
+	{
+		return js_encrypt(data, ownerPassword, userPassword, true, true, true, true, true, true, true, true, true, null);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param ownerPassword the owner password
+	 * @param userPassword the user password
+	 * @param allowAssembly whether to set the allow assembly permission
+	 * @param allowCopy whether to set the allow copy permission
+	 * @param allowDegradedPrinting whether to set the allow degraded printing permission
+	 * @param allowFillIn whether to set the allow fill in permission
+	 * @param allowModifyAnnotations whether to set the allow modify annotations permission
+	 * @param allowModifyContents whether to set the allow modify contents permission
+	 * @param allowPrinting whether to set the allow printing permission
+	 * @param allowScreenreaders whether to set the allow screen readers permission
+	 * 
+	 * @return the encrypted PDF
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword, boolean allowAssembly, boolean allowCopy, boolean allowDegradedPrinting,
+		boolean allowFillIn, boolean allowModifyAnnotations, boolean allowModifyContents, boolean allowPrinting, boolean allowScreenreaders) throws Exception
+	{
+		return js_encrypt(data, ownerPassword, userPassword, allowAssembly, allowCopy, allowDegradedPrinting, allowFillIn, allowModifyAnnotations,
+			allowModifyContents, allowPrinting, allowScreenreaders, true, null);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param ownerPassword the owner password
+	 * @param userPassword the user password
+	 * @param allowAssembly whether to set the allow assembly permission
+	 * @param allowCopy whether to set the allow copy permission
+	 * @param allowDegradedPrinting whether to set the allow degraded printing permission
+	 * @param allowFillIn whether to set the allow fill in permission
+	 * @param allowModifyAnnotations whether to set the allow modify annotations permission
+	 * @param allowModifyContents whether to set the allow modify contents permission
+	 * @param allowPrinting whether to set the allow printing permission
+	 * @param allowScreenreaders whether to set the allow screen readers permission
+	 * @param is128bit whether to use 128-bit encryption
+	 * 
+	 * @return the encrypted PDF
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword, boolean allowAssembly, boolean allowCopy, boolean allowDegradedPrinting,
+		boolean allowFillIn, boolean allowModifyAnnotations, boolean allowModifyContents, boolean allowPrinting, boolean allowScreenreaders, boolean is128bit)
+		throws Exception
+	{
+		return js_encrypt(data, ownerPassword, userPassword, allowAssembly, allowCopy, allowDegradedPrinting, allowFillIn, allowModifyAnnotations,
+			allowModifyContents, allowPrinting, allowScreenreaders, is128bit, null);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param ownerPassword the owner password
+	 * @param userPassword the user password
+	 * @param allowAssembly whether to set the allow assembly permission
+	 * @param allowCopy whether to set the allow copy permission
+	 * @param allowDegradedPrinting whether to set the allow degraded printing permission
+	 * @param allowFillIn whether to set the allow fill in permission
+	 * @param allowModifyAnnotations whether to set the allow modify annotations permission
+	 * @param allowModifyContents whether to set the allow modify contents permission
+	 * @param allowPrinting whether to set the allow printing permission
+	 * @param allowScreenreaders whether to set the allow screen readers permission
+	 * @param is128bit whether to use 128-bit encryption
+	 * @param metaData a JavaScript object ({@link Scriptable}) that contains the metadata as property/value pairs
+	 * 
+	 * @return the encrypted PDF
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword, boolean allowAssembly, boolean allowCopy, boolean allowDegradedPrinting,
+		boolean allowFillIn, boolean allowModifyAnnotations, boolean allowModifyContents, boolean allowPrinting, boolean allowScreenreaders, boolean is128bit,
+		Scriptable metaData) throws Exception
+	{
+		if (data == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		int sec = 0;
+		if (allowAssembly)
+		{
+			sec = sec | PdfWriter.ALLOW_ASSEMBLY;
+		}
+		if (allowCopy)
+		{
+			sec = sec | PdfWriter.ALLOW_COPY;
+		}
+		if (allowDegradedPrinting)
+		{
+			sec = sec | PdfWriter.ALLOW_DEGRADED_PRINTING;
+		}
+		if (allowFillIn)
+		{
+			sec = sec | PdfWriter.ALLOW_FILL_IN;
+		}
+		if (allowModifyAnnotations)
+		{
+			sec = sec | PdfWriter.ALLOW_MODIFY_ANNOTATIONS;
+		}
+		if (allowModifyContents)
+		{
+			sec = sec | PdfWriter.ALLOW_MODIFY_CONTENTS;
+		}
+		if (allowPrinting)
+		{
+			sec = sec | PdfWriter.ALLOW_PRINTING;
+		}
+		if (allowScreenreaders)
+		{
+			sec = sec | PdfWriter.ALLOW_SCREENREADERS;
+		}
+		Map<String, Object> map = ITextTools.getMapFromScriptable(metaData);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+		return ITextTools.encrypt(bais, ownerPassword, userPassword, sec, is128bit, map);
+	}
+
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * 
+	 * @return the PDF with numbered pages
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_numberPages(byte[] data) throws Exception
+	{
+		return js_numberPages(data, 10, 520, 30, BaseFont.HELVETICA, "#000000"); //$NON-NLS-1$
+	}
+
+	/**
+	 * Add page numbering to the PDF provided<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param fontSize the font size to use
+	 * @param locationX the x location of the numbers
+	 * @param locationY the y location of the numbers
+	 * @param font the font to use
+	 * @param hexColor the font color to use
+	 * 
+	 * @return the PDF with numbered pages
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_numberPages(byte[] data, int fontSize, int locationX, int locationY, String font, String hexColor) throws Exception
+	{
+		if (data == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+
+		Color myColor = Color.decode(hexColor);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+		return ITextTools.numberPDF(bais, fontSize, locationX, locationY, font, myColor);
+	}
+
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param image the path of an image to use
+	 * 
+	 * @return the PDF with added watermak
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_watermark(byte[] data, String image) throws Exception
+	{
+		return js_watermark(data, image, 200, 400, false, null);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param image the path of an image to use
+	 * @param locationX the x location of the image
+	 * @param locationY the y location of the image
+	 * @param isOver whether to put over the content
+	 * 
+	 * @return the PDF with added watermak
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_watermark(byte[] data, String image, int locationX, int locationY, boolean isOver) throws Exception
+	{
+		return js_watermark(data, image, locationX, locationY, isOver, null);
+	}
+
+	/**
+	 * Adds an image watermark to the PDF provided<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param image the path of an image to use
+	 * @param locationX the x location of the image
+	 * @param locationY the y location of the image
+	 * @param isOver whether to put over the content
+	 * @param pages an array of pages where to apply the watermark
+	 * 
+	 * @return the PDF with added watermak
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_watermark(byte[] data, String image, int locationX, int locationY, boolean isOver, String[] pages) throws Exception
+	{
+		if (data == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+
+		Image watermark = Image.getInstance(image);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+		return ITextTools.watermarkPDF(bais, watermark, locationX, locationY, isOver, pages);
+	}
+
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param forOverlay a PDF to use as overlay
+	 * 
+	 * @return the PDF with added overlay
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_overlay(byte[] data, byte[] forOverlay) throws Exception
+	{
+		return js_overlay(data, forOverlay, false, null);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param forOverlay a PDF to use as overlay
+	 * @param pages an array of page numbers to put the overlay on
+	 * 
+	 * @return the PDF with added overlay
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_overlay(byte[] data, byte[] forOverlay, String[] pages) throws Exception
+	{
+		return js_overlay(data, forOverlay, false, pages);
+	}
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param forOverlay a PDF to use as overlay
+	 * @param isOver whether the overlay will be put over the content
+	 * 
+	 * @return the PDF with added overlay
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_overlay(byte[] data, byte[] forOverlay, boolean isOver) throws Exception
+	{
+		return js_overlay(data, forOverlay, isOver, null);
+	}
+
+
+	/**
+	 * Overlay some PDF content on top of the provided PDF<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param forOverlay a PDF to use as overlay
+	 * @param isOver whether the overlay will be put over the content
+	 * @param pages an array of page numbers to put the overlay on
+	 * 
+	 * @return the PDF with added overlay
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_overlay(byte[] data, byte[] forOverlay, boolean isOver, String[] pages) throws Exception
+	{
+		if (data == null || forOverlay == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+		ByteArrayInputStream foais = new ByteArrayInputStream(forOverlay);
+		return ITextTools.overlay(bais, foais, isOver, pages);
+	}
+
+
+	/**
+	 * Overloaded method<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param text the text to use for the overlay
+	 * 
+	 * @return the PDF with added overlay
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_overlayText(byte[] data, String text) throws Exception
+	{
+		return js_overlayText(data, text, 230, 430, true, 32, BaseFont.HELVETICA, "#000000"); //$NON-NLS-1$
+	}
+
+	/**
+	 * Overlay a text over the provided PDF<br/>
+	 * Adapted from the PDF Pro plugin with full approval from the author
+	 * 
+	 * @author Scott Buttler
+	 * 
+	 * @param data the PDF
+	 * @param text the text to use for the overlay
+	 * @param locationX the x location of the overlay
+	 * @param locationY the y location of the overlay
+	 * @param isOver whether to put the overlay over the content
+	 * @param fontSize the font size to use
+	 * @param font the font to use
+	 * @param hexColor the font color to use
+	 * 
+	 * @return the PDF with added overlay
+	 * 
+	 * @throws Exception
+	 */
+	public byte[] js_overlayText(byte[] data, String text, int locationX, int locationY, boolean isOver, int fontSize, String font, String hexColor)
+		throws Exception
+	{
+		if (data == null || ITextTools.isNullOrEmpty(text) || ITextTools.isNullOrEmpty(font) || ITextTools.isNullOrEmpty(hexColor))
+		{
+			throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		}
+
+		Color myColor = Color.decode(hexColor);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+		return ITextTools.overlayText(bais, text, locationX, locationY, isOver, fontSize, font, myColor);
+	}
+
 }
