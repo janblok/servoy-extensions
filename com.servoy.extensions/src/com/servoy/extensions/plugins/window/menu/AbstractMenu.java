@@ -596,7 +596,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Add a submenu at the selected index (starting at 0) or it at the end.
+	 * 
+	 * Add a submenu with given name.
 	 *
 	 * @sample
 	 * // add a new menu to the menubar
@@ -630,6 +631,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	public Menu js_addMenu(String name) throws PluginException
 	{
 		int index = -1;
+		if (name == null) name = "noname"; //$NON-NLS-1$
 		MenuItemArgs menuItemArgs = new MenuItemArgs(name, null, null, null, null, (char)0, -1, true);
 		IMenu subMenu = menuHandler.createMenu(menu);
 		menu.addMenuItem(subMenu, index);
@@ -641,7 +643,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addMenu(String)
+	 * Add a submenu at the selected index (starting at 0).
+	 * 
 	 * @sampleas js_addMenu(String)
 	 * 
 	 * @param index the index at which to add the submenu
@@ -653,6 +656,18 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 		IMenu subMenu = menuHandler.createMenu(menu);
 		menu.addMenuItem(subMenu, index);
 		return new Menu(pluginAccess, menuHandler, subMenu);
+	}
+
+	/**
+	 * Add a submenu at the end.
+	 * 
+	 * @sampleas js_addMenu(String)
+	 * 
+	 * @return the submenu
+	 */
+	public Menu js_addMenu() throws PluginException
+	{
+		return js_addMenu(null);
 	}
 
 	/**
