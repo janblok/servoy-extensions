@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -1918,12 +1918,41 @@ chk.setMethod(feedback_checkbox);]]></sample>
             <sample/>
           </function>
           <function name="addMenu">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
+            <description><![CDATA[Add a submenu at the end.]]></description>
+            <summary><![CDATA[Add a submenu at the end.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// add a first submenu
+var submenu1 = menu.addMenu("submenu 1");
+submenu1.addMenuItem("sub item 1 - 1", feedback_item);
+// add a submenu as child of the first submenu
+var submenu1_2 = submenu1.addMenu("submenu 1 - 2");
+submenu1_2.addMenuItem("sub item 1 - 2 - 1", feedback_item);
+// add another submenu as a child of the first submenu
+var submenu1_3 = submenu1.addMenu("submenu 1 - 3");
+submenu1_3.addMenuItem("sub item 1 - 3 - 1", feedback_item);
+// add a submenu to the second submenu of the first submenu
+var submenu1_3_2 = submenu1_2.addMenu("submenu 1 - 2 - 2");
+submenu1_3_2.addMenuItem("sub item 1 - 2 - 2 - 1", feedback_item);
+// add a submenu directly to the menu, at the first position
+var submenu0 = menu.addMenu(0);
+submenu0.text = "submenu 0";
+submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
+          </function>
+          <function name="addMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
-            <description><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></description>
-            <summary><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></summary>
+            <description><![CDATA[Add a submenu at the selected index (starting at 0).]]></description>
+            <summary><![CDATA[Add a submenu at the selected index (starting at 0).]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
 var menu = menubar.addMenu();
@@ -1958,8 +1987,8 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
-            <description><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></description>
-            <summary><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></summary>
+            <description><![CDATA[Add a submenu with given name.]]></description>
+            <summary><![CDATA[Add a submenu with given name.]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
 var menu = menubar.addMenu();
@@ -4372,12 +4401,41 @@ chk.setMethod(feedback_checkbox);]]></sample>
             <sample/>
           </function>
           <function name="addMenu">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
+            <description><![CDATA[Add a submenu at the end.]]></description>
+            <summary><![CDATA[Add a submenu at the end.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// add a first submenu
+var submenu1 = menu.addMenu("submenu 1");
+submenu1.addMenuItem("sub item 1 - 1", feedback_item);
+// add a submenu as child of the first submenu
+var submenu1_2 = submenu1.addMenu("submenu 1 - 2");
+submenu1_2.addMenuItem("sub item 1 - 2 - 1", feedback_item);
+// add another submenu as a child of the first submenu
+var submenu1_3 = submenu1.addMenu("submenu 1 - 3");
+submenu1_3.addMenuItem("sub item 1 - 3 - 1", feedback_item);
+// add a submenu to the second submenu of the first submenu
+var submenu1_3_2 = submenu1_2.addMenu("submenu 1 - 2 - 2");
+submenu1_3_2.addMenuItem("sub item 1 - 2 - 2 - 1", feedback_item);
+// add a submenu directly to the menu, at the first position
+var submenu0 = menu.addMenu(0);
+submenu0.text = "submenu 0";
+submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
+          </function>
+          <function name="addMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
-            <description><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></description>
-            <summary><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></summary>
+            <description><![CDATA[Add a submenu at the selected index (starting at 0).]]></description>
+            <summary><![CDATA[Add a submenu at the selected index (starting at 0).]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
 var menu = menubar.addMenu();
@@ -4412,8 +4470,8 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
-            <description><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></description>
-            <summary><![CDATA[Add a submenu at the selected index (starting at 0) or it at the end.]]></summary>
+            <description><![CDATA[Add a submenu with given name.]]></description>
+            <summary><![CDATA[Add a submenu with given name.]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
 var menu = menubar.addMenu();
