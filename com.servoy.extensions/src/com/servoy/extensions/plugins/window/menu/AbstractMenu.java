@@ -97,7 +97,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 */
 	public CheckBox js_addCheckBox(String name) throws PluginException
 	{
-		return js_addCheckBox(name, getMenuHandler(), null, null, true, -1);
+		return js_addCheckBox(name, null, null, null, true, -1);
 	}
 
 	/**
@@ -238,7 +238,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 		Object[] submenu = null;
 		Function function = null;
-		if (feedback_item instanceof Function)
+		if (feedback_item instanceof Function && feedback_item != null)
 		{
 			function = (Function)feedback_item;
 		}
@@ -303,7 +303,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 */
 	public MenuItem js_addMenuItem(String name) throws PluginException
 	{
-		return js_addMenuItem(name, getMenuHandler(), null, null, true, -1);
+		return js_addMenuItem(name, null, null, null, true, -1);
 	}
 
 	/**
@@ -456,7 +456,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 */
 	public RadioButton js_addRadioButton(String name) throws PluginException
 	{
-		return js_addRadioButton(name, getMenuHandler(), null, null, true, -1);
+		return js_addRadioButton(name, null, null, null, true, -1);
 	}
 
 	/**
