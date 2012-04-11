@@ -238,11 +238,11 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 		Object[] submenu = null;
 		Function function = null;
-		if (feedback_item instanceof Function && feedback_item != null)
+		if (feedback_item instanceof Function)
 		{
 			function = (Function)feedback_item;
 		}
-		else if (feedback_item.getClass().isArray())
+		else if (feedback_item != null && feedback_item.getClass().isArray())
 		{
 			submenu = (Object[])feedback_item;
 		}
