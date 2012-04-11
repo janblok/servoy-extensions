@@ -75,6 +75,32 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
+	 * Add a checkbox.
+	 * 
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * 
+	 * @return checkbox
+	 */
+	public CheckBox js_addCheckBox() throws PluginException
+	{
+		return js_addCheckBox(-1);
+	}
+
+	/**
+	 * Add a checkbox with given name.
+	 * 
+	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * 
+	 * @param name the checkbox text
+	 * 
+	 * @return checkbox
+	 */
+	public CheckBox js_addCheckBox(String name) throws PluginException
+	{
+		return js_addCheckBox(name, getMenuHandler(), null, null, true, -1);
+	}
+
+	/**
 	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
@@ -255,6 +281,32 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
+	 * Add a menu item.
+	 * 
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * 
+	 * @return menu item
+	 */
+	public MenuItem js_addMenuItem() throws PluginException
+	{
+		return js_addMenuItem(-1);
+	}
+
+	/**
+	 * Add a menu item with given name.
+	 * 
+	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * 
+	 * @param name the menu item text
+	 * 
+	 * @return menu item
+	 */
+	public MenuItem js_addMenuItem(String name) throws PluginException
+	{
+		return js_addMenuItem(name, getMenuHandler(), null, null, true, -1);
+	}
+
+	/**
 	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
@@ -380,6 +432,31 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 		MenuItemArgs menuItemArgs = getMenuItemArgs(name, feedback_item, icon, mnemonic, enabled, align);
 		return (MenuItem)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, menuItemArgs, true);
+	}
+
+	/**
+	 * Add a radio button.
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * 
+	 * @return a radio button menu item 
+	 */
+	public RadioButton js_addRadioButton() throws PluginException
+	{
+		return js_addRadioButton(-1);
+	}
+
+	/**
+	 * Add a radio button with given name.
+	 * 
+	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * 
+	 * @param name the radio button text
+	 * 
+	 * @return a radio button menu item 
+	 */
+	public RadioButton js_addRadioButton(String name) throws PluginException
+	{
+		return js_addRadioButton(name, getMenuHandler(), null, null, true, -1);
 	}
 
 	/**

@@ -1609,6 +1609,39 @@ menu.setIcon("media:///yourimage.gif");]]></sample>
         </properties>
         <functions>
           <function name="addCheckBox">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"><![CDATA[checkbox]]></return>
+            <description><![CDATA[Add a checkbox.]]></description>
+            <summary><![CDATA[Add a checkbox.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the checkbox will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method 
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addCheckBox("checkbox", feedback_checkbox);
+// add a checkbox with an icon
+menu.addCheckBox("checkbox with icon", feedback_checkbox, "media:///yourimage.gif");
+// add a checkbox with a mnemonic
+menu.addCheckBox("checkbox with mnemonic", feedback_checkbox, "media:///yourimage.gif", "c");
+// add a disabled checkbox
+menu.addCheckBox("checkbox disabled", feedback_checkbox, "media:///yourimage.gif", "d", false);
+// add a checkbox with text aligned to the right
+menu.addCheckBox("align right", feedback_checkbox, null, null, true, MenuItem.ALIGN_RIGHT);
+
+// add a checkbox at a given index (checkbox properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var chk = menu.addCheckBox(2);
+chk.text = "checkbox at index";
+chk.setMethod(feedback_checkbox);]]></sample>
+          </function>
+          <function name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -1645,6 +1678,46 @@ chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[the index at which to add the checkbox]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="addCheckBox">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"><![CDATA[checkbox]]></return>
+            <description><![CDATA[Add a checkbox with given name.]]></description>
+            <summary><![CDATA[Add a checkbox with given name.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the checkbox will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method 
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addCheckBox("checkbox", feedback_checkbox);
+// add a checkbox with an icon
+menu.addCheckBox("checkbox with icon", feedback_checkbox, "media:///yourimage.gif");
+// add a checkbox with a mnemonic
+menu.addCheckBox("checkbox with mnemonic", feedback_checkbox, "media:///yourimage.gif", "c");
+// add a disabled checkbox
+menu.addCheckBox("checkbox disabled", feedback_checkbox, "media:///yourimage.gif", "d", false);
+// add a checkbox with text aligned to the right
+menu.addCheckBox("align right", feedback_checkbox, null, null, true, MenuItem.ALIGN_RIGHT);
+
+// add a checkbox at a given index (checkbox properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var chk = menu.addCheckBox(2);
+chk.text = "checkbox at index";
+chk.setMethod(feedback_checkbox);]]></sample>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the checkbox text]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2019,6 +2092,39 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
             </parameters>
           </function>
           <function name="addMenuItem">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
+            <description><![CDATA[Add a menu item.]]></description>
+            <summary><![CDATA[Add a menu item.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the item will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addMenuItem("item", feedback_item);
+// add an item with an icon
+menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+// add an item with a mnemonic
+menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+// add a disabled item
+menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+// add an item with text aligned to the right
+menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+
+// add an item at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var item = menu.addMenuItem(2);
+item.text = "item at index";
+item.setMethod(feedback_item);]]></sample>
+          </function>
+          <function name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -2055,6 +2161,46 @@ item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[the index at which to add the menu item]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="addMenuItem">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
+            <description><![CDATA[Add a menu item with given name.]]></description>
+            <summary><![CDATA[Add a menu item with given name.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the item will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addMenuItem("item", feedback_item);
+// add an item with an icon
+menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+// add an item with a mnemonic
+menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+// add a disabled item
+menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+// add an item with text aligned to the right
+menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+
+// add an item at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var item = menu.addMenuItem(2);
+item.text = "item at index";
+item.setMethod(feedback_item);]]></sample>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the menu item text]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2319,6 +2465,13 @@ item.setMethod(feedback_item);]]></sample>
             </parameters>
           </function>
           <function name="addRadioButton">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"><![CDATA[a radio button menu item]]></return>
+            <description><![CDATA[Add a radio button.]]></description>
+            <summary><![CDATA[Add a radio button.]]></summary>
+            <sample/>
+          </function>
+          <function name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -2329,6 +2482,20 @@ item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[the index at which to add the radio button]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="addRadioButton">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"><![CDATA[a radio button menu item]]></return>
+            <description><![CDATA[Add a radio button with given name.]]></description>
+            <summary><![CDATA[Add a radio button with given name.]]></summary>
+            <sample/>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the radio button text]]></description>
               </parameter>
             </parameters>
           </function>
@@ -4092,6 +4259,39 @@ entry_three.setVisible(false);]]></sample>
       <object publicName="Popup" qualifiedName="com.servoy.extensions.plugins.window.menu.Popup">
         <functions>
           <function name="addCheckBox">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"><![CDATA[checkbox]]></return>
+            <description><![CDATA[Add a checkbox.]]></description>
+            <summary><![CDATA[Add a checkbox.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the checkbox will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method 
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addCheckBox("checkbox", feedback_checkbox);
+// add a checkbox with an icon
+menu.addCheckBox("checkbox with icon", feedback_checkbox, "media:///yourimage.gif");
+// add a checkbox with a mnemonic
+menu.addCheckBox("checkbox with mnemonic", feedback_checkbox, "media:///yourimage.gif", "c");
+// add a disabled checkbox
+menu.addCheckBox("checkbox disabled", feedback_checkbox, "media:///yourimage.gif", "d", false);
+// add a checkbox with text aligned to the right
+menu.addCheckBox("align right", feedback_checkbox, null, null, true, MenuItem.ALIGN_RIGHT);
+
+// add a checkbox at a given index (checkbox properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var chk = menu.addCheckBox(2);
+chk.text = "checkbox at index";
+chk.setMethod(feedback_checkbox);]]></sample>
+          </function>
+          <function name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -4128,6 +4328,46 @@ chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[the index at which to add the checkbox]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="addCheckBox">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"><![CDATA[checkbox]]></return>
+            <description><![CDATA[Add a checkbox with given name.]]></description>
+            <summary><![CDATA[Add a checkbox with given name.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the checkbox will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method 
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addCheckBox("checkbox", feedback_checkbox);
+// add a checkbox with an icon
+menu.addCheckBox("checkbox with icon", feedback_checkbox, "media:///yourimage.gif");
+// add a checkbox with a mnemonic
+menu.addCheckBox("checkbox with mnemonic", feedback_checkbox, "media:///yourimage.gif", "c");
+// add a disabled checkbox
+menu.addCheckBox("checkbox disabled", feedback_checkbox, "media:///yourimage.gif", "d", false);
+// add a checkbox with text aligned to the right
+menu.addCheckBox("align right", feedback_checkbox, null, null, true, MenuItem.ALIGN_RIGHT);
+
+// add a checkbox at a given index (checkbox properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var chk = menu.addCheckBox(2);
+chk.text = "checkbox at index";
+chk.setMethod(feedback_checkbox);]]></sample>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the checkbox text]]></description>
               </parameter>
             </parameters>
           </function>
@@ -4502,6 +4742,39 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
             </parameters>
           </function>
           <function name="addMenuItem">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
+            <description><![CDATA[Add a menu item.]]></description>
+            <summary><![CDATA[Add a menu item.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the item will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addMenuItem("item", feedback_item);
+// add an item with an icon
+menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+// add an item with a mnemonic
+menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+// add a disabled item
+menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+// add an item with text aligned to the right
+menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+
+// add an item at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var item = menu.addMenuItem(2);
+item.text = "item at index";
+item.setMethod(feedback_item);]]></sample>
+          </function>
+          <function name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -4538,6 +4811,46 @@ item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[the index at which to add the menu item]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="addMenuItem">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
+            <description><![CDATA[Add a menu item with given name.]]></description>
+            <summary><![CDATA[Add a menu item with given name.]]></summary>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the item will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addMenuItem("item", feedback_item);
+// add an item with an icon
+menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+// add an item with a mnemonic
+menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+// add a disabled item
+menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+// add an item with text aligned to the right
+menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+
+// add an item at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var item = menu.addMenuItem(2);
+item.text = "item at index";
+item.setMethod(feedback_item);]]></sample>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the menu item text]]></description>
               </parameter>
             </parameters>
           </function>
@@ -4802,6 +5115,13 @@ item.setMethod(feedback_item);]]></sample>
             </parameters>
           </function>
           <function name="addRadioButton">
+            <argumentsTypes/>
+            <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"><![CDATA[a radio button menu item]]></return>
+            <description><![CDATA[Add a radio button.]]></description>
+            <summary><![CDATA[Add a radio button.]]></summary>
+            <sample/>
+          </function>
+          <function name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -4812,6 +5132,20 @@ item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[the index at which to add the radio button]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="addRadioButton">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"><![CDATA[a radio button menu item]]></return>
+            <description><![CDATA[Add a radio button with given name.]]></description>
+            <summary><![CDATA[Add a radio button with given name.]]></summary>
+            <sample/>
+            <parameters>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the radio button text]]></description>
               </parameter>
             </parameters>
           </function>
