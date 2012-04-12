@@ -47,7 +47,7 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @deprecated Replaced by {@link #showWarningDialog(String,String,Object)}.
+	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage, Object buttonsText)//old one
@@ -56,7 +56,7 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @deprecated Replaced by {@link #showWarningDialog(String,String,Object)}.
+	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage)//old one
@@ -87,7 +87,7 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
 	 * @sample
 	 * //show dialog
@@ -108,9 +108,9 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
-	 * @sampleas js_showWarningDialog(String,String,Object)
+	 * @sampleas js_showWarningDialog(String,String,String[])
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
@@ -121,7 +121,7 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
 	 * @sample
 	 * //show dialog
@@ -131,7 +131,7 @@ public class DialogProvider implements IScriptable
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showInfoDialog(String dialogTitle, String dialogMessage, Object buttonsText)
+	public String js_showInfoDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
@@ -142,9 +142,9 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
-	 * @sampleas js_showInfoDialog(String,String,Object)
+	 * @sampleas js_showInfoDialog(String,String,String[])
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
@@ -165,7 +165,7 @@ public class DialogProvider implements IScriptable
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showErrorDialog(String dialogTitle, String dialogMessage, Object buttonsText)
+	public String js_showErrorDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
@@ -176,9 +176,9 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,Object)
+	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
-	 * @sampleas js_showErrorDialog(String,String,Object)
+	 * @sampleas js_showErrorDialog(String,String,String[])
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
@@ -199,15 +199,15 @@ public class DialogProvider implements IScriptable
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showQuestionDialog(String dialogTitle, String dialogMessage, Object buttonsText)
+	public String js_showQuestionDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.QUESTION_MESSAGE);
 	}
 
 	/**
-	 * @clonedesc js_showQuestionDialog(String,String,Object)
+	 * @clonedesc js_showQuestionDialog(String,String,String[])
 	 *
-	 * @sampleas js_showQuestionDialog(String,String,Object)
+	 * @sampleas js_showQuestionDialog(String,String,String[])
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
