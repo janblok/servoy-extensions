@@ -1,73 +1,74 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<servoydoc>
-  <plugins>
-    <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider" scriptingName="plugins.pdf_output">
-      <functions>
-        <function name="addMetaData">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="org.mozilla.javascript.Scriptable"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with metaData added]]></return>
-          <description><![CDATA[Add metadata to the PDF, like Author]]></description>
-          <summary><![CDATA[Add metadata to the PDF, like Author]]></summary>
-          <sample><![CDATA[// Add metadata to the PDF, like Author
+<?xml version="1.0" encoding="UTF-8"?>
+<servoyextension>
+  <servoydoc>
+    <plugins>
+      <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider" scriptingName="plugins.pdf_output">
+        <functions>
+          <function name="addMetaData">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="org.mozilla.javascript.Scriptable"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with metaData added]]></return>
+            <description><![CDATA[Add metadata to the PDF, like Author]]></description>
+            <summary><![CDATA[Add metadata to the PDF, like Author]]></summary>
+            <sample><![CDATA[// Add metadata to the PDF, like Author
 var pdf = plugins.file.showFileOpenDialog();
 if (pdf) {
 	var data = plugins.file.readFile(pdf);
 	var metaData = { Author: 'Servoy' };
 	pdfResult = %%elementName%%.addMetaData(data, metaData);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="metaData" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
-              <description><![CDATA[a JavaScript object (Scriptable) that contains the metadata as property/value pairs]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="combinePDFDocuments">
-          <argumentsTypes>
-            <argumentType typecode="[Ljava.lang.Object;"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"/>
-          <description><![CDATA[Combine multiple PDF docs into one.]]></description>
-          <summary><![CDATA[Combine multiple PDF docs into one.]]></summary>
-          <sample><![CDATA[pdf_blob_column = combinePDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3));]]></sample>
-          <parameters>
-            <parameter name="pdf_docs_bytearrays" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
-              <description><![CDATA[the array of documents to combine]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="combineProtectedPDFDocuments">
-          <argumentsTypes>
-            <argumentType typecode="[Ljava.lang.Object;"/>
-            <argumentType typecode="[Ljava.lang.Object;"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"/>
-          <description><![CDATA[Combine multiple protected PDF docs into one.]]></description>
-          <summary><![CDATA[Combine multiple protected PDF docs into one.]]></summary>
-          <sample><![CDATA[pdf_blob_column = combineProtectedPDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3), new Array(pdf_blob1_pass,pdf_blob2_pass,pdf_blob3_pass));]]></sample>
-          <parameters>
-            <parameter name="pdf_docs_bytearrays" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
-              <description><![CDATA[the array of documents to combine]]></description>
-            </parameter>
-            <parameter name="pdf_docs_passwords" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
-              <description><![CDATA[an array of passwords to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="convertPDFFormToPDFDocument">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.Object"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"/>
-          <description><![CDATA[Convert a PDF form to a PDF document.]]></description>
-          <summary><![CDATA[Convert a PDF form to a PDF document.]]></summary>
-          <sample><![CDATA[var pdfform = plugins.file.readFile('c:/temp/1040a-form.pdf');
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="metaData" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
+                <description><![CDATA[a JavaScript object (Scriptable) that contains the metadata as property/value pairs]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="combinePDFDocuments">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Combine multiple PDF docs into one.]]></description>
+            <summary><![CDATA[Combine multiple PDF docs into one.]]></summary>
+            <sample><![CDATA[pdf_blob_column = combinePDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3));]]></sample>
+            <parameters>
+              <parameter name="pdf_docs_bytearrays" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the array of documents to combine]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="combineProtectedPDFDocuments">
+            <argumentsTypes>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Combine multiple protected PDF docs into one.]]></description>
+            <summary><![CDATA[Combine multiple protected PDF docs into one.]]></summary>
+            <sample><![CDATA[pdf_blob_column = combineProtectedPDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3), new Array(pdf_blob1_pass,pdf_blob2_pass,pdf_blob3_pass));]]></sample>
+            <parameters>
+              <parameter name="pdf_docs_bytearrays" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the array of documents to combine]]></description>
+              </parameter>
+              <parameter name="pdf_docs_passwords" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[an array of passwords to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="convertPDFFormToPDFDocument">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Convert a PDF form to a PDF document.]]></description>
+            <summary><![CDATA[Convert a PDF form to a PDF document.]]></summary>
+            <sample><![CDATA[var pdfform = plugins.file.readFile('c:/temp/1040a-form.pdf');
 //var field_values = plugins.file.readFile('c:/temp/1040a-data.fdf');//read adobe fdf values or
 var field_values = new Array()//construct field values
 field_values[0] = 'f1-1=John C.J.'
@@ -77,25 +78,25 @@ if (result_pdf_doc != null)
 {
 	plugins.file.writeFile('c:/temp/1040a-flatten.pdf', result_pdf_doc)
 }]]></sample>
-          <parameters>
-            <parameter name="pdf_form" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF Form to convert]]></description>
-            </parameter>
-            <parameter name="field_values" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-              <description><![CDATA[the values to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="convertProtectedPDFFormToPDFDocument">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.Object"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"/>
-          <description><![CDATA[Convert a protected PDF form to a PDF document.]]></description>
-          <summary><![CDATA[Convert a protected PDF form to a PDF document.]]></summary>
-          <sample><![CDATA[var pdfform = plugins.file.readFile('c:/temp/1040a-form.pdf');
+            <parameters>
+              <parameter name="pdf_form" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF Form to convert]]></description>
+              </parameter>
+              <parameter name="field_values" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the values to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="convertProtectedPDFFormToPDFDocument">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Convert a protected PDF form to a PDF document.]]></description>
+            <summary><![CDATA[Convert a protected PDF form to a PDF document.]]></summary>
+            <sample><![CDATA[var pdfform = plugins.file.readFile('c:/temp/1040a-form.pdf');
 //var field_values = plugins.file.readFile('c:/temp/1040a-data.fdf');//read adobe fdf values or
 var field_values = new Array()//construct field values
 field_values[0] = 'f1-1=John C.J.'
@@ -105,268 +106,268 @@ if (result_pdf_doc != null)
 {
 	plugins.file.writeFile('c:/temp/1040a-flatten.pdf', result_pdf_doc)
 }]]></sample>
-          <parameters>
-            <parameter name="pdf_form" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF Form to convert]]></description>
-            </parameter>
-            <parameter name="pdf_password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the password to use]]></description>
-            </parameter>
-            <parameter name="field_values" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-              <description><![CDATA[the field values to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="encrypt">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-          <description><![CDATA[Add password protection and security options to the PDF]]></description>
-          <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
-          <sample><![CDATA[// Add password protection and security options to the PDF
+            <parameters>
+              <parameter name="pdf_form" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF Form to convert]]></description>
+              </parameter>
+              <parameter name="pdf_password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password to use]]></description>
+              </parameter>
+              <parameter name="field_values" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the field values to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="encrypt">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
+            <description><![CDATA[Add password protection and security options to the PDF]]></description>
+            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <sample><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
 	encryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the owner password]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="encrypt">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-          <description><![CDATA[Add password protection and security options to the PDF]]></description>
-          <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
-          <sample><![CDATA[// Add password protection and security options to the PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the owner password]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="encrypt">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
+            <description><![CDATA[Add password protection and security options to the PDF]]></description>
+            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <sample><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
 	encryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the owner password]]></description>
-            </parameter>
-            <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the user password]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="encrypt">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-          <description><![CDATA[Add password protection and security options to the PDF]]></description>
-          <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
-          <sample><![CDATA[// Add password protection and security options to the PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the owner password]]></description>
+              </parameter>
+              <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user password]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="encrypt">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
+            <description><![CDATA[Add password protection and security options to the PDF]]></description>
+            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <sample><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
 	encryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the owner password]]></description>
-            </parameter>
-            <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the user password]]></description>
-            </parameter>
-            <parameter name="allowAssembly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow assembly permission]]></description>
-            </parameter>
-            <parameter name="allowCopy" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow copy permission]]></description>
-            </parameter>
-            <parameter name="allowDegradedPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow degraded printing permission]]></description>
-            </parameter>
-            <parameter name="allowFillIn" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow fill in permission]]></description>
-            </parameter>
-            <parameter name="allowModifyAnnotations" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow modify annotations permission]]></description>
-            </parameter>
-            <parameter name="allowModifyContents" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow modify contents permission]]></description>
-            </parameter>
-            <parameter name="allowPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow printing permission]]></description>
-            </parameter>
-            <parameter name="allowScreenreaders" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow screen readers permission]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="encrypt">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-          <description><![CDATA[Add password protection and security options to the PDF]]></description>
-          <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
-          <sample><![CDATA[// Add password protection and security options to the PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the owner password]]></description>
+              </parameter>
+              <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user password]]></description>
+              </parameter>
+              <parameter name="allowAssembly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow assembly permission]]></description>
+              </parameter>
+              <parameter name="allowCopy" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow copy permission]]></description>
+              </parameter>
+              <parameter name="allowDegradedPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow degraded printing permission]]></description>
+              </parameter>
+              <parameter name="allowFillIn" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow fill in permission]]></description>
+              </parameter>
+              <parameter name="allowModifyAnnotations" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow modify annotations permission]]></description>
+              </parameter>
+              <parameter name="allowModifyContents" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow modify contents permission]]></description>
+              </parameter>
+              <parameter name="allowPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow printing permission]]></description>
+              </parameter>
+              <parameter name="allowScreenreaders" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow screen readers permission]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="encrypt">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
+            <description><![CDATA[Add password protection and security options to the PDF]]></description>
+            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <sample><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
 	encryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the owner password]]></description>
-            </parameter>
-            <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the user password]]></description>
-            </parameter>
-            <parameter name="allowAssembly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow assembly permission]]></description>
-            </parameter>
-            <parameter name="allowCopy" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow copy permission]]></description>
-            </parameter>
-            <parameter name="allowDegradedPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow degraded printing permission]]></description>
-            </parameter>
-            <parameter name="allowFillIn" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow fill in permission]]></description>
-            </parameter>
-            <parameter name="allowModifyAnnotations" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow modify annotations permission]]></description>
-            </parameter>
-            <parameter name="allowModifyContents" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow modify contents permission]]></description>
-            </parameter>
-            <parameter name="allowPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow printing permission]]></description>
-            </parameter>
-            <parameter name="allowScreenreaders" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow screen readers permission]]></description>
-            </parameter>
-            <parameter name="is128bit" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to use 128-bit encryption]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="encrypt">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="org.mozilla.javascript.Scriptable"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-          <description><![CDATA[Add password protection and security options to the PDF]]></description>
-          <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
-          <sample><![CDATA[// Add password protection and security options to the PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the owner password]]></description>
+              </parameter>
+              <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user password]]></description>
+              </parameter>
+              <parameter name="allowAssembly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow assembly permission]]></description>
+              </parameter>
+              <parameter name="allowCopy" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow copy permission]]></description>
+              </parameter>
+              <parameter name="allowDegradedPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow degraded printing permission]]></description>
+              </parameter>
+              <parameter name="allowFillIn" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow fill in permission]]></description>
+              </parameter>
+              <parameter name="allowModifyAnnotations" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow modify annotations permission]]></description>
+              </parameter>
+              <parameter name="allowModifyContents" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow modify contents permission]]></description>
+              </parameter>
+              <parameter name="allowPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow printing permission]]></description>
+              </parameter>
+              <parameter name="allowScreenreaders" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow screen readers permission]]></description>
+              </parameter>
+              <parameter name="is128bit" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to use 128-bit encryption]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="encrypt">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="org.mozilla.javascript.Scriptable"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
+            <description><![CDATA[Add password protection and security options to the PDF]]></description>
+            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <sample><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
 	encryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the owner password]]></description>
-            </parameter>
-            <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the user password]]></description>
-            </parameter>
-            <parameter name="allowAssembly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow assembly permission]]></description>
-            </parameter>
-            <parameter name="allowCopy" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow copy permission]]></description>
-            </parameter>
-            <parameter name="allowDegradedPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow degraded printing permission]]></description>
-            </parameter>
-            <parameter name="allowFillIn" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow fill in permission]]></description>
-            </parameter>
-            <parameter name="allowModifyAnnotations" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow modify annotations permission]]></description>
-            </parameter>
-            <parameter name="allowModifyContents" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow modify contents permission]]></description>
-            </parameter>
-            <parameter name="allowPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow printing permission]]></description>
-            </parameter>
-            <parameter name="allowScreenreaders" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to set the allow screen readers permission]]></description>
-            </parameter>
-            <parameter name="is128bit" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to use 128-bit encryption]]></description>
-            </parameter>
-            <parameter name="metaData" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
-              <description><![CDATA[a JavaScript object (Scriptable) that contains the metadata as property/value pairs]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="endMetaPrintJob">
-          <argumentsTypes/>
-          <return type="byte[]" typecode="[B"/>
-          <description><![CDATA[Ends a previously started meta print job. For meta print jobs that were stored in memory, not in a file on disk, also returns the content of the generated PDF document.]]></description>
-          <summary><![CDATA[Ends a previously started meta print job.]]></summary>
-          <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="ownerPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the owner password]]></description>
+              </parameter>
+              <parameter name="userPassword" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user password]]></description>
+              </parameter>
+              <parameter name="allowAssembly" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow assembly permission]]></description>
+              </parameter>
+              <parameter name="allowCopy" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow copy permission]]></description>
+              </parameter>
+              <parameter name="allowDegradedPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow degraded printing permission]]></description>
+              </parameter>
+              <parameter name="allowFillIn" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow fill in permission]]></description>
+              </parameter>
+              <parameter name="allowModifyAnnotations" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow modify annotations permission]]></description>
+              </parameter>
+              <parameter name="allowModifyContents" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow modify contents permission]]></description>
+              </parameter>
+              <parameter name="allowPrinting" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow printing permission]]></description>
+              </parameter>
+              <parameter name="allowScreenreaders" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to set the allow screen readers permission]]></description>
+              </parameter>
+              <parameter name="is128bit" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to use 128-bit encryption]]></description>
+              </parameter>
+              <parameter name="metaData" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
+                <description><![CDATA[a JavaScript object (Scriptable) that contains the metadata as property/value pairs]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="endMetaPrintJob">
+            <argumentsTypes/>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Ends a previously started meta print job. For meta print jobs that were stored in memory, not in a file on disk, also returns the content of the generated PDF document.]]></description>
+            <summary><![CDATA[Ends a previously started meta print job.]]></summary>
+            <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
 if (success)
 {
@@ -389,36 +390,36 @@ if (success)
 }
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
-        </function>
-        <function name="getPDFPrinter">
-          <argumentsTypes/>
-          <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
-          <description><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
-          <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
-          <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
+          </function>
+          <function name="getPDFPrinter">
+            <argumentsTypes/>
+            <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
+            <description><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
+            <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
 controller.print(true,false,plugins.pdf_output.getPDFPrinter());]]></sample>
-        </function>
-        <function name="getPDFPrinter">
-          <argumentsTypes>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
-          <description><![CDATA[Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.]]></description>
-          <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
-          <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
+          </function>
+          <function name="getPDFPrinter">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
+            <description><![CDATA[Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.]]></description>
+            <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
 controller.print(true,false,plugins.pdf_output.getPDFPrinter('c:/temp/out.pdf'));]]></sample>
-          <parameters>
-            <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the file name]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="getPagesPrinted">
-          <argumentsTypes/>
-          <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-          <description><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></description>
-          <summary><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></summary>
-          <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
+            <parameters>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file name]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getPagesPrinted">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></description>
+            <summary><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></summary>
+            <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
 if (success)
 {
@@ -441,13 +442,13 @@ if (success)
 }
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
-        </function>
-        <function name="getTotalPagesPrinted">
-          <argumentsTypes/>
-          <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-          <description><![CDATA[Returns the total number of pages printed in the context of a meta print job. Call this method before ending the meta print job.]]></description>
-          <summary><![CDATA[Returns the total number of pages printed in the context of a meta print job.]]></summary>
-          <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
+          </function>
+          <function name="getTotalPagesPrinted">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Returns the total number of pages printed in the context of a meta print job. Call this method before ending the meta print job.]]></description>
+            <summary><![CDATA[Returns the total number of pages printed in the context of a meta print job.]]></summary>
+            <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
 if (success)
 {
@@ -470,92 +471,92 @@ if (success)
 }
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
-        </function>
-        <function name="insertFontDirectory">
-          <argumentsTypes>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-          <description><![CDATA[Add a directory that should be searched for fonts. Call this only in the context of an active meta print job.]]></description>
-          <summary><![CDATA[Add a directory that should be searched for fonts.]]></summary>
-          <sample><![CDATA[//Insert font directories for font embedding.
+          </function>
+          <function name="insertFontDirectory">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Add a directory that should be searched for fonts. Call this only in the context of an active meta print job.]]></description>
+            <summary><![CDATA[Add a directory that should be searched for fonts.]]></summary>
+            <sample><![CDATA[//Insert font directories for font embedding.
 //You must create an MetaPrintJob before using it.
 plugins.pdf_output.insertFontDirectory('c:/Windows/Fonts');
 plugins.pdf_output.insertFontDirectory('c:/WinNT/Fonts');
 plugins.pdf_output.insertFontDirectory('/Library/Fonts');]]></sample>
-          <parameters>
-            <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the path to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="numberPages">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with numbered pages]]></return>
-          <description><![CDATA[Add pages numbers to a PDF]]></description>
-          <summary><![CDATA[Add pages numbers to a PDF]]></summary>
-          <sample><![CDATA[// Add pages numbers to a PDF
+            <parameters>
+              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="numberPages">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with numbered pages]]></return>
+            <description><![CDATA[Add pages numbers to a PDF]]></description>
+            <summary><![CDATA[Add pages numbers to a PDF]]></summary>
+            <sample><![CDATA[// Add pages numbers to a PDF
 var unNumberedFile = plugins.file.showFileOpenDialog();
 if (unNumberedFile) {
 	var data = plugins.file.readFile(unNumberedFile);
 	pageNumberedPdf = %%elementName%%.numberPages(data, 12, 520, 30, 'Courier', '#ff0033');
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="numberPages">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with numbered pages]]></return>
-          <description><![CDATA[Add pages numbers to a PDF]]></description>
-          <summary><![CDATA[Add pages numbers to a PDF]]></summary>
-          <sample><![CDATA[// Add pages numbers to a PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="numberPages">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with numbered pages]]></return>
+            <description><![CDATA[Add pages numbers to a PDF]]></description>
+            <summary><![CDATA[Add pages numbers to a PDF]]></summary>
+            <sample><![CDATA[// Add pages numbers to a PDF
 var unNumberedFile = plugins.file.showFileOpenDialog();
 if (unNumberedFile) {
 	var data = plugins.file.readFile(unNumberedFile);
 	pageNumberedPdf = %%elementName%%.numberPages(data, 12, 520, 30, 'Courier', '#ff0033');
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="fontSize" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the font size to use]]></description>
-            </parameter>
-            <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the x location of the numbers]]></description>
-            </parameter>
-            <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the y location of the numbers]]></description>
-            </parameter>
-            <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the font to use]]></description>
-            </parameter>
-            <parameter name="hexColor" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the font color to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="overlay">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="[B"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-          <description><![CDATA[Add some PDF based content over a PDF]]></description>
-          <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
-          <sample><![CDATA[// Add some PDF based content over a PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="fontSize" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the font size to use]]></description>
+              </parameter>
+              <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the x location of the numbers]]></description>
+              </parameter>
+              <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the y location of the numbers]]></description>
+              </parameter>
+              <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the font to use]]></description>
+              </parameter>
+              <parameter name="hexColor" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the font color to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="overlay">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="[B"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
+            <description><![CDATA[Add some PDF based content over a PDF]]></description>
+            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <sample><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
 pages[0] = '1';
 pages[1] = '3';
@@ -572,25 +573,25 @@ if (input1) {
 		//overlayedPdf = %%elementName%%.overlay( data, data2, pages );
 	}
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="forOverlay" type="byte[]" typecode="[B">
-              <description><![CDATA[a PDF to use as overlay]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="overlay">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="boolean"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-          <description><![CDATA[Add some PDF based content over a PDF]]></description>
-          <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
-          <sample><![CDATA[// Add some PDF based content over a PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="forOverlay" type="byte[]" typecode="[B">
+                <description><![CDATA[a PDF to use as overlay]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="overlay">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
+            <description><![CDATA[Add some PDF based content over a PDF]]></description>
+            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <sample><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
 pages[0] = '1';
 pages[1] = '3';
@@ -607,29 +608,29 @@ if (input1) {
 		//overlayedPdf = %%elementName%%.overlay( data, data2, pages );
 	}
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="forOverlay" type="byte[]" typecode="[B">
-              <description><![CDATA[a PDF to use as overlay]]></description>
-            </parameter>
-            <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether the overlay will be put over the content]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="overlay">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="[Ljava.lang.String;"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-          <description><![CDATA[Add some PDF based content over a PDF]]></description>
-          <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
-          <sample><![CDATA[// Add some PDF based content over a PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="forOverlay" type="byte[]" typecode="[B">
+                <description><![CDATA[a PDF to use as overlay]]></description>
+              </parameter>
+              <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether the overlay will be put over the content]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="overlay">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
+            <description><![CDATA[Add some PDF based content over a PDF]]></description>
+            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <sample><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
 pages[0] = '1';
 pages[1] = '3';
@@ -646,31 +647,31 @@ if (input1) {
 		//overlayedPdf = %%elementName%%.overlay( data, data2, pages );
 	}
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="forOverlay" type="byte[]" typecode="[B">
-              <description><![CDATA[a PDF to use as overlay]]></description>
-            </parameter>
-            <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether the overlay will be put over the content]]></description>
-            </parameter>
-            <parameter name="pages" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
-              <description><![CDATA[an array of page numbers to put the overlay on]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="overlay">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="[Ljava.lang.String;"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-          <description><![CDATA[Add some PDF based content over a PDF]]></description>
-          <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
-          <sample><![CDATA[// Add some PDF based content over a PDF
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="forOverlay" type="byte[]" typecode="[B">
+                <description><![CDATA[a PDF to use as overlay]]></description>
+              </parameter>
+              <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether the overlay will be put over the content]]></description>
+              </parameter>
+              <parameter name="pages" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[an array of page numbers to put the overlay on]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="overlay">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
+            <description><![CDATA[Add some PDF based content over a PDF]]></description>
+            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <sample><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
 pages[0] = '1';
 pages[1] = '3';
@@ -687,94 +688,94 @@ if (input1) {
 		//overlayedPdf = %%elementName%%.overlay( data, data2, pages );
 	}
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="forOverlay" type="byte[]" typecode="[B">
-              <description><![CDATA[a PDF to use as overlay]]></description>
-            </parameter>
-            <parameter name="pages" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
-              <description><![CDATA[an array of page numbers to put the overlay on]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="overlayText">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-          <description><![CDATA[Add text over every page at a 45 degree angle]]></description>
-          <summary><![CDATA[Add text over every page at a 45 degree angle]]></summary>
-          <sample><![CDATA[// Add text over every page at a 45 degree angle\m
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="forOverlay" type="byte[]" typecode="[B">
+                <description><![CDATA[a PDF to use as overlay]]></description>
+              </parameter>
+              <parameter name="pages" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[an array of page numbers to put the overlay on]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="overlayText">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
+            <description><![CDATA[Add text over every page at a 45 degree angle]]></description>
+            <summary><![CDATA[Add text over every page at a 45 degree angle]]></summary>
+            <sample><![CDATA[// Add text over every page at a 45 degree angle\m
 var pdf = plugins.file.showFileOpenDialog();
 if (pdf) {
 	var data = plugins.file.readFile(pdf);
 	modifiedPdf = %%elementName%%.overlayText(data, 'DRAFT', 230, 430, true, 32, 'Helvetica', '#33ff33');
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the text to use for the overlay]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="overlayText">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-          <description><![CDATA[Add text over every page at a 45 degree angle]]></description>
-          <summary><![CDATA[Add text over every page at a 45 degree angle]]></summary>
-          <sample><![CDATA[// Add text over every page at a 45 degree angle\m
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text to use for the overlay]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="overlayText">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
+            <description><![CDATA[Add text over every page at a 45 degree angle]]></description>
+            <summary><![CDATA[Add text over every page at a 45 degree angle]]></summary>
+            <sample><![CDATA[// Add text over every page at a 45 degree angle\m
 var pdf = plugins.file.showFileOpenDialog();
 if (pdf) {
 	var data = plugins.file.readFile(pdf);
 	modifiedPdf = %%elementName%%.overlayText(data, 'DRAFT', 230, 430, true, 32, 'Helvetica', '#33ff33');
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the text to use for the overlay]]></description>
-            </parameter>
-            <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the x location of the overlay]]></description>
-            </parameter>
-            <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the y location of the overlay]]></description>
-            </parameter>
-            <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to put the overlay over the content]]></description>
-            </parameter>
-            <parameter name="fontSize" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the font size to use]]></description>
-            </parameter>
-            <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the font to use]]></description>
-            </parameter>
-            <parameter name="hexColor" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the font color to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="startMetaPrintJob">
-          <argumentsTypes/>
-          <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-          <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.]]></description>
-          <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
-          <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text to use for the overlay]]></description>
+              </parameter>
+              <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the x location of the overlay]]></description>
+              </parameter>
+              <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the y location of the overlay]]></description>
+              </parameter>
+              <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to put the overlay over the content]]></description>
+              </parameter>
+              <parameter name="fontSize" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the font size to use]]></description>
+              </parameter>
+              <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the font to use]]></description>
+              </parameter>
+              <parameter name="hexColor" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the font color to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="startMetaPrintJob">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.]]></description>
+            <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
 if (success)
 {
@@ -797,15 +798,15 @@ if (success)
 }
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
-        </function>
-        <function name="startMetaPrintJob">
-          <argumentsTypes>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-          <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.]]></description>
-          <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
-          <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
+          </function>
+          <function name="startMetaPrintJob">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.]]></description>
+            <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            <sample><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
 if (success)
 {
@@ -828,113 +829,114 @@ if (success)
 }
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
-          <parameters>
-            <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the file name]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="watermark">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
-          <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
-          <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
-          <sample><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
+            <parameters>
+              <parameter name="filename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file name]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="watermark">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
+            <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
+            <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            <sample><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
 var pdf = plugins.file.showFileOpenDialog();
 if (pdf) {
 	var data = plugins.file.readFile(pdf);
 	var image = plugins.file.showFileOpenDialog();
 	modifiedPdf = %%elementName%%.watermark(data, image);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="image" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the path of an image to use]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="watermark">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="boolean"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
-          <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
-          <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
-          <sample><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="image" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path of an image to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="watermark">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
+            <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
+            <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            <sample><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
 var pdf = plugins.file.showFileOpenDialog();
 if (pdf) {
 	var data = plugins.file.readFile(pdf);
 	var image = plugins.file.showFileOpenDialog();
 	modifiedPdf = %%elementName%%.watermark(data, image);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="image" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the path of an image to use]]></description>
-            </parameter>
-            <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the x location of the image]]></description>
-            </parameter>
-            <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the y location of the image]]></description>
-            </parameter>
-            <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to put over the content]]></description>
-            </parameter>
-          </parameters>
-        </function>
-        <function name="watermark">
-          <argumentsTypes>
-            <argumentType typecode="[B"/>
-            <argumentType typecode="java.lang.String"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="int"/>
-            <argumentType typecode="boolean"/>
-            <argumentType typecode="[Ljava.lang.String;"/>
-          </argumentsTypes>
-          <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
-          <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
-          <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
-          <sample><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="image" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path of an image to use]]></description>
+              </parameter>
+              <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the x location of the image]]></description>
+              </parameter>
+              <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the y location of the image]]></description>
+              </parameter>
+              <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to put over the content]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="watermark">
+            <argumentsTypes>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
+            <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
+            <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            <sample><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
 var pdf = plugins.file.showFileOpenDialog();
 if (pdf) {
 	var data = plugins.file.readFile(pdf);
 	var image = plugins.file.showFileOpenDialog();
 	modifiedPdf = %%elementName%%.watermark(data, image);
 }]]></sample>
-          <parameters>
-            <parameter name="data" type="byte[]" typecode="[B">
-              <description><![CDATA[the PDF]]></description>
-            </parameter>
-            <parameter name="image" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-              <description><![CDATA[the path of an image to use]]></description>
-            </parameter>
-            <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the x location of the image]]></description>
-            </parameter>
-            <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-              <description><![CDATA[the y location of the image]]></description>
-            </parameter>
-            <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-              <description><![CDATA[whether to put over the content]]></description>
-            </parameter>
-            <parameter name="pages" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
-              <description><![CDATA[an array of pages where to apply the watermark]]></description>
-            </parameter>
-          </parameters>
-        </function>
-      </functions>
-    </object>
-  </plugins>
-</servoydoc>
+            <parameters>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the PDF]]></description>
+              </parameter>
+              <parameter name="image" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path of an image to use]]></description>
+              </parameter>
+              <parameter name="locationX" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the x location of the image]]></description>
+              </parameter>
+              <parameter name="locationY" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the y location of the image]]></description>
+              </parameter>
+              <parameter name="isOver" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[whether to put over the content]]></description>
+              </parameter>
+              <parameter name="pages" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[an array of pages where to apply the watermark]]></description>
+              </parameter>
+            </parameters>
+          </function>
+        </functions>
+      </object>
+    </plugins>
+  </servoydoc>
+</servoyextension>
