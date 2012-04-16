@@ -110,7 +110,7 @@ public class DialogProvider implements IScriptable
 	/**
 	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
-	 * @sampleas js_showWarningDialog(String,String,String[])
+	 * @sampleas js_showWarningDialog(String,String,Object)
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.

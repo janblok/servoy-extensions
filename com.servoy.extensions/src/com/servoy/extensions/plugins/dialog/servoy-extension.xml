@@ -231,7 +231,8 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
-            <sample/>
+            <sample><![CDATA[//show dialog
+var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');]]></sample>
             <parameters>
               <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Dialog title.]]></description>
