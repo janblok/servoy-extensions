@@ -50,7 +50,7 @@ public class DialogProvider implements IScriptable
 	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated
-	public String js_showDialog(String dialogTitle, String dialogMessage, Object buttonsText)//old one
+	public String js_showDialog(String dialogTitle, String dialogMessage, String... buttonsText)//old one
 	{
 		return js_showWarningDialog(dialogTitle, dialogMessage, buttonsText);
 	}
@@ -61,7 +61,7 @@ public class DialogProvider implements IScriptable
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage)//old one
 	{
-		return js_showWarningDialog(dialogTitle, dialogMessage, null);
+		return js_showWarningDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	private String[] getButtonTexts(Object buttonsText)
@@ -97,11 +97,11 @@ public class DialogProvider implements IScriptable
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showWarningDialog(String dialogTitle, String dialogMessage, Object buttonsText)
+	public String js_showWarningDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + "\\n" + dialogMessage);
+			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
 			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.WARNING_MESSAGE);
@@ -110,14 +110,14 @@ public class DialogProvider implements IScriptable
 	/**
 	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
-	 * @sampleas js_showWarningDialog(String,String,Object)
+	 * @sampleas js_showWarningDialog(String,String,String[])
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
 	 */
 	public String js_showWarningDialog(String dialogTitle, String dialogMessage)
 	{
-		return js_showWarningDialog(dialogTitle, dialogMessage, null);
+		return js_showWarningDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class DialogProvider implements IScriptable
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + "\\n" + dialogMessage);
+			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
 			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.INFORMATION_MESSAGE);
@@ -151,7 +151,7 @@ public class DialogProvider implements IScriptable
 	 */
 	public String js_showInfoDialog(String dialogTitle, String dialogMessage)
 	{
-		return js_showInfoDialog(dialogTitle, dialogMessage, null);
+		return js_showInfoDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class DialogProvider implements IScriptable
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
-			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + "\\n" + dialogMessage);
+			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
 			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.ERROR_MESSAGE);
@@ -185,7 +185,7 @@ public class DialogProvider implements IScriptable
 	 */
 	public String js_showErrorDialog(String dialogTitle, String dialogMessage)
 	{
-		return js_showErrorDialog(dialogTitle, dialogMessage, null);
+		return js_showErrorDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class DialogProvider implements IScriptable
 	 */
 	public String js_showQuestionDialog(String dialogTitle, String dialogMessage)
 	{
-		return js_showQuestionDialog(dialogTitle, dialogMessage, null);
+		return js_showQuestionDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	private String js_showDialogEx(String dialogTitle, String dialogMessage, Object buttonsText, int type)
@@ -280,9 +280,9 @@ public class DialogProvider implements IScriptable
 		Object modalityDocumentModalValue = null;
 		try
 		{
-			Class< ? > clz = Class.forName("java.awt.Dialog$ModalityType");
-			modalityDocumentModalValue = clz.getField("DOCUMENT_MODAL").get(clz);
-			setModalityTypeMethod = Dialog.class.getMethod("setModalityType", clz);
+			Class< ? > clz = Class.forName("java.awt.Dialog$ModalityType"); //$NON-NLS-1$
+			modalityDocumentModalValue = clz.getField("DOCUMENT_MODAL").get(clz); //$NON-NLS-1$
+			setModalityTypeMethod = Dialog.class.getMethod("setModalityType", clz); //$NON-NLS-1$
 		}
 		catch (Exception e)
 		{

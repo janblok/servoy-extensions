@@ -14,11 +14,11 @@
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="showDialog">
+          <function deprecated="true" name="showDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
@@ -242,11 +242,11 @@ var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not all
               </parameter>
             </parameters>
           </function>
-          <function name="showWarningDialog">
+          <function name="showWarningDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
@@ -260,7 +260,7 @@ var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not all
               <parameter name="dialogMessage" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Dialog message.]]></description>
               </parameter>
-              <parameter name="buttonsText" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+              <parameter name="buttonsText" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
                 <description><![CDATA[Array of button texts.]]></description>
               </parameter>
             </parameters>
