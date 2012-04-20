@@ -35,7 +35,7 @@ public class HeadlessClientPlugin implements IClientPlugin
 
 	private IClientPluginAccess access;
 	private HeadlessClientProvider impl;
-	private final JSONConverter jsonConverter = new JSONConverter();
+	private JSONConverter jsonConverter;
 
 	public PreferencePanel[] getPreferencePanels()
 	{
@@ -59,7 +59,6 @@ public class HeadlessClientPlugin implements IClientPlugin
 			return null;
 		}
 	}
-
 
 	public IScriptable getScriptObject()
 	{
@@ -99,6 +98,10 @@ public class HeadlessClientPlugin implements IClientPlugin
 
 	public JSONConverter getJSONConverter()
 	{
+		if (jsonConverter == null)
+		{
+			jsonConverter = new JSONConverter(access.getDatabaseManager());
+		}
 		return jsonConverter;
 	}
 }

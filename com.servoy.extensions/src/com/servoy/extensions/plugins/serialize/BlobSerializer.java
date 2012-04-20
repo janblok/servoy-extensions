@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.serialize;
 
 import java.util.Map;
@@ -33,13 +33,13 @@ public class BlobSerializer implements ITypedColumnConverter
 	public Object convertFromObject(Map props, int column_type, Object obj) throws Exception
 	{
 		if (obj == null) return null;
-		return plugin.getJSONSerializer().toJSON(obj).toString().getBytes();
+		return plugin.getJSONSerializer().toJSON(obj).toString().getBytes("UTF-8");
 	}
 
 	public Object convertToObject(Map props, int column_type, Object dbvalue) throws Exception
 	{
 		if (dbvalue == null) return null;
-		return plugin.getJSONSerializer().fromJSON(new String((byte[])dbvalue));
+		return plugin.getJSONSerializer().fromJSON(plugin.getClientPluginAccess().getDatabaseManager(), new String((byte[])dbvalue, "UTF-8"));
 	}
 
 	public Map getDefaultProperties()

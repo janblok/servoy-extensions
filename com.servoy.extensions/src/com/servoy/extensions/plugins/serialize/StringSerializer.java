@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.serialize;
 
 import java.util.Map;
@@ -39,7 +39,7 @@ public class StringSerializer implements ITypedColumnConverter
 	public Object convertToObject(Map props, int column_type, Object dbvalue) throws Exception
 	{
 		if (dbvalue == null) return null;
-		return plugin.getJSONSerializer().fromJSON(dbvalue.toString());
+		return plugin.getJSONSerializer().fromJSON(plugin.getClientPluginAccess().getDatabaseManager(), dbvalue.toString());
 	}
 
 	public Map getDefaultProperties()

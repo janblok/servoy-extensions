@@ -54,7 +54,7 @@ public class SerializeProvider implements IScriptable
 	 */
 	public Object js_fromJSON(String data) throws Exception
 	{
-		return plugin.getJSONSerializer().fromJSON(data);
+		return plugin.getJSONSerializer().fromJSON(plugin.getClientPluginAccess().getDatabaseManager(), data);
 	}
 
 }

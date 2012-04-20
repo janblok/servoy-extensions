@@ -136,16 +136,16 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 		try
 		{
+			IHeadlessClient c = getClient(clientKey);
 			Object[] convertedArgs = null;
 			if (args != null)
 			{
 				convertedArgs = new Object[args.length];
 				for (int i = 0; i < args.length; i++)
 				{
-					convertedArgs[i] = getJSONConverter().convertFromJSON(args[i]);
+					convertedArgs[i] = getJSONConverter().convertFromJSON(c.getPluginAccess().getDatabaseManager(), args[i]);
 				}
 			}
-			IHeadlessClient c = getClient(clientKey);
 			return getJSONConverter().convertToJSON(c.getPluginAccess().executeMethod(contextName, methodName, convertedArgs, false));
 		}
 		catch (JavaScriptException jse)
@@ -235,7 +235,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		Object retValue;
 		try
 		{
-			retValue = c.setDataProviderValue(contextName, dataprovider, getJSONConverter().convertFromJSON(value));
+			retValue = c.setDataProviderValue(contextName, dataprovider, getJSONConverter().convertFromJSON(c.getPluginAccess().getDatabaseManager(), value));
 		}
 		catch (Exception e)
 		{

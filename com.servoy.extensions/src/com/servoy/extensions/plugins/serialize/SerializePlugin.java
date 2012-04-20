@@ -39,6 +39,8 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	private SerializeProvider impl;
 	private JSONSerializerWrapper serializerWrapper = null;
 
+	private IClientPluginAccess access;
+
 
 	/*
 	 * @see IPlugin#load()
@@ -52,6 +54,12 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	 */
 	public void initialize(IClientPluginAccess app) throws PluginException
 	{
+		access = app;
+	}
+
+	IClientPluginAccess getClientPluginAccess()
+	{
+		return access;
 	}
 
 	/*
