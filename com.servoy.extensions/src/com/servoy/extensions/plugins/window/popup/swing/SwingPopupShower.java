@@ -33,7 +33,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
 import javax.swing.JComponent;
-import javax.swing.JWindow;
+import javax.swing.JFrame;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 
@@ -59,7 +59,8 @@ public class SwingPopupShower implements IPopupShower
 	private final IForm form;
 	private final Scriptable scope;
 	private final String dataprovider;
-	private JWindow window;
+	private Container parent;
+	private JFrame window;
 	private Component glassPane;
 	private PopupMouseListener mouseListener;
 	private WindowListener windowListener;
@@ -90,7 +91,7 @@ public class SwingPopupShower implements IPopupShower
 	 */
 	public void show()
 	{
-		Container parent = null;
+		parent = null;
 		if (elementToShowRelatedTo != null)
 		{
 			parent = elementToShowRelatedTo.getParent();
@@ -110,9 +111,10 @@ public class SwingPopupShower implements IPopupShower
 			windowListener = new WindowListener();
 			((Window)parent).addComponentListener(windowListener);
 			((Window)parent).addWindowStateListener(windowListener);
-			this.window = new JWindow((Window)parent);
+			this.window = new JFrame();
 			this.window.setFocusableWindowState(true);
 			this.window.setFocusable(true);
+			this.window.setUndecorated(true);
 
 			IFormUI formUI = form.getFormUI();
 
@@ -200,7 +202,7 @@ public class SwingPopupShower implements IPopupShower
 	{
 		glassPane.setVisible(false);
 		window.setVisible(false);
-		window.getOwner().removeComponentListener(windowListener);
+		if (parent != null) parent.removeComponentListener(windowListener);
 		window.getContentPane().removeAll();
 		window.dispose();
 		if (removeMouseListener) glassPane.removeMouseListener(mouseListener);
@@ -254,11 +256,11 @@ public class SwingPopupShower implements IPopupShower
 		public void mousePressed(MouseEvent e)
 		{
 			closeWindow(false);
-			Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), window.getOwner());
-			dispatchComponent = window.getOwner().findComponentAt(p2.x, p2.y);
+			Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), parent);
+			dispatchComponent = parent.findComponentAt(p2.x, p2.y);
 			if (dispatchComponent != null)
 			{
-				Point p3 = SwingUtilities.convertPoint(window.getOwner(), p2, dispatchComponent);
+				Point p3 = SwingUtilities.convertPoint(parent, p2, dispatchComponent);
 				MouseEvent e2 = new MouseEvent(dispatchComponent, e.getID(), e.getWhen(), e.getModifiers(), p3.x, p3.y, e.getClickCount(), e.isPopupTrigger());
 				dispatchComponent.dispatchEvent(e2);
 			}
@@ -270,8 +272,8 @@ public class SwingPopupShower implements IPopupShower
 			glassPane.removeMouseListener(mouseListener);
 			if (dispatchComponent != null)
 			{
-				Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), window.getOwner());
-				Point p3 = SwingUtilities.convertPoint(window.getOwner(), p2, dispatchComponent);
+				Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), parent);
+				Point p3 = SwingUtilities.convertPoint(parent, p2, dispatchComponent);
 				MouseEvent e2 = new MouseEvent(dispatchComponent, e.getID(), e.getWhen(), e.getModifiers(), p3.x, p3.y, e.getClickCount(), e.isPopupTrigger());
 				dispatchComponent.dispatchEvent(e2);
 			}
