@@ -34,6 +34,7 @@ import java.awt.event.WindowStateListener;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JRootPane;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 
@@ -115,6 +116,7 @@ public class SwingPopupShower implements IPopupShower
 			this.window.setFocusableWindowState(true);
 			this.window.setFocusable(true);
 			this.window.setUndecorated(true);
+			this.window.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
 			IFormUI formUI = form.getFormUI();
 
