@@ -248,13 +248,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 * 
 	 * @param shortcut
-	 * @param method
-	 * @deprecated
+	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
 	 */
-	@Deprecated
-	public boolean js_createShortcut(String shortcut, String method)
+	public boolean js_createShortcut(String shortcut, String methodName)
 	{
-		return js_createShortcut(shortcut, method, null, null);
+		return js_createShortcut(shortcut, methodName, null, null);
 	}
 
 	/**
@@ -262,14 +260,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 * 
 	 * @param shortcut
-	 * @param method
+	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
 	 * @param arguments
-	 * @deprecated
 	 */
-	@Deprecated
-	public boolean js_createShortcut(String shortcut, String method, Object[] arguments)
+	public boolean js_createShortcut(String shortcut, String methodName, Object[] arguments)
 	{
-		return js_createShortcut(shortcut, method, null, arguments);
+		return js_createShortcut(shortcut, methodName, null, arguments);
 	}
 
 	/**
@@ -277,7 +273,20 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 * 
 	 * @param shortcut
-	 * @param method
+	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
+	 * @param contextFilter	only triggers the shortcut when on this form
+	 */
+	public boolean js_createShortcut(String shortcut, String methodName, String contextFilter)
+	{
+		return js_createShortcut(shortcut, methodName, contextFilter, null);
+	}
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method the method/function that needs to be called when the shortcut is hit
 	 */
 	public boolean js_createShortcut(String shortcut, Function method)
 	{
@@ -289,12 +298,40 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 * 
 	 * @param shortcut
-	 * @param method
+	 * @param method the method/function that needs to be called when the shortcut is hit
+	 * @param contextFilter	only triggers the shortcut when on this form
+	 */
+	public boolean js_createShortcut(String shortcut, Function method, String contextFilter)
+	{
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, null);
+	}
+
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method the method/function that needs to be called when the shortcut is hit
 	 * @param arguments
 	 */
 	public boolean js_createShortcut(String shortcut, Function method, Object[] arguments)
 	{
 		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, arguments);
+	}
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
+	 * 
+	 * @param shortcut
+	 * @param method the method/function that needs to be called when the shortcut is hit
+	 * @param contextFilter	only triggers the shortcut when on this form
+	 * @param arguments
+	 */
+	public boolean js_createShortcut(String shortcut, Function method, String contextFilter, Object[] arguments)
+	{
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, arguments);
 	}
 
 	/**
@@ -305,13 +342,16 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 	 * // global handler
 	 * plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+	 * // global handler with a form context filter
+	 * plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
 	 * // form method called when shortcut is used
 	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 	 * // form method called when shortcut is used and arguments are passed to the method
 	 * plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
 	 * // Passing the method argument as a string prevents unnecessary form loading
+	 * //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+	 * // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 	 * plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-	 * //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 	 * // remove global shortcut and form-level shortcut
 	 * plugins.window.removeShortcut('menu 1');
 	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -331,11 +371,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * // choose your shortcuts careful to make sure they work in all clients.
 	 *
 	 * @param shortcut 
-	 * @param method 
-	 * @param form_name callback context
+	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
+	 * @param contextFilter	only triggers the shortcut when on this form
 	 * @param arguments
 	 */
-	public boolean js_createShortcut(String shortcut, String method, String form_name, Object[] arguments)
+	public boolean js_createShortcut(String shortcut, String methodName, String contextFilter, Object[] arguments)
 	{
 		FunctionDefinition functionDef;
 		// string callback
@@ -343,46 +383,46 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		// 2. globals.method
 		// 3. scopes.scopename.method
 		// 4. method (on context form)
-		int dot = method.indexOf('.');
-		String methodName;
+		int dot = methodName.indexOf('.');
+		String methodNameIntern;
 		String contextName;
 		if (dot == -1)
 		{
-			if (form_name == null)
+			if (contextFilter == null)
 			{
 				contextName = "scopes.globals";
 			}
 			else
 			{
-				contextName = form_name; // form name
+				contextName = contextFilter; // form name
 			}
-			methodName = method;
+			methodNameIntern = methodName;
 		}
 		else
 		{
-			if (method.startsWith("globals."))
+			if (methodName.startsWith("globals."))
 			{
 				contextName = "scopes.globals";
 			}
 			else
 			{
-				if (method.startsWith("scopes."))
+				if (methodName.startsWith("scopes."))
 				{
 					// look for second dot
-					dot = method.indexOf('.', dot + 1);
+					dot = methodName.indexOf('.', dot + 1);
 					if (dot == -1)
 					{
-						Debug.error("WindowPlugin: could not find context name for method argument '" + method + '\'');
+						Debug.error("WindowPlugin: could not find context name for method argument '" + methodName + '\'');
 						return false;
 					}
 				}
-				contextName = method.substring(0, dot); // either scopes.xxxx or formname
+				contextName = methodName.substring(0, dot); // either scopes.xxxx or formname
 			}
-			methodName = method.substring(dot + 1);
+			methodNameIntern = methodName.substring(dot + 1);
 		}
-		functionDef = new FunctionDefinition(contextName, methodName);
+		functionDef = new FunctionDefinition(contextName, methodNameIntern);
 
-		return finalizeCreateShortcut(shortcut, functionDef, form_name, arguments);
+		return finalizeCreateShortcut(shortcut, functionDef, contextFilter, arguments);
 	}
 
 	boolean finalizeCreateShortcut(String shortcut, FunctionDefinition functionDef, String formName, Object[] arguments)
@@ -423,10 +463,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc js_removeShortcut(String)
 	 * @sampleas js_removeShortcut(String)
 	 * @param shortcut
-	 * @param formName
+	 * @param contextFilter	only triggers the shortcut when on this form
 	 * @return
 	 */
-	public boolean js_removeShortcut(String shortcut, String formName)
+	public boolean js_removeShortcut(String shortcut, String contextFilter)
 	{
 		if (shortcut == null)
 		{
@@ -441,7 +481,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 
 		Map<String, ShortcutCallData> shortcutMap = shortcuts.get(key);
-		if (shortcutMap == null || shortcutMap.remove(formName) == null)
+		if (shortcutMap == null || shortcutMap.remove(contextFilter) == null)
 		{
 			// was not used
 			return false;

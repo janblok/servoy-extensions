@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -7744,7 +7744,7 @@ if (event.getSource()) {
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="createShortcut">
+          <function name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -7756,13 +7756,16 @@ if (event.getSource()) {
 // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 // global handler
 plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
 // Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7782,10 +7785,12 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[scopes.scopename.methodname or formname.methodname String to target the method to execute]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="createShortcut">
+          <function name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -7798,13 +7803,16 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 // global handler
 plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
 // Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7824,8 +7832,60 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[scopes.scopename.methodname or formname.methodname String to target the method to execute]]></description>
+              </parameter>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+            </parameters>
+          </function>
+          <function name="createShortcut">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Create a shortcut.]]></description>
+            <summary><![CDATA[Create a shortcut.]]></summary>
+            <sample><![CDATA[// this plugin uses the java keystroke parser
+// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
+// global handler
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
+// form method called when shortcut is used
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
+// form method called when shortcut is used and arguments are passed to the method
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// remove global shortcut and form-level shortcut
+plugins.window.removeShortcut('menu 1');
+plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+// shortcut handlers are called with an JSEvent argument
+///* 
+// * Handle keyboard shortcut.
+// * 
+// * @param {JSEvent} event the event that triggered the action
+// */
+//function handleShortcut(event)
+//{
+//  application.output(event.getType()) // returns 'menu 1'
+//  application.output(event.getFormName()) // returns 'frm_contacts'
+//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
+//}
+// NOTE: shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+            <parameters>
+              <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[scopes.scopename.methodname or formname.methodname String to target the method to execute]]></description>
+              </parameter>
+              <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[only triggers the shortcut when on this form]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="createShortcut">
@@ -7842,13 +7902,16 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 // global handler
 plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
 // Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7868,9 +7931,11 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="form_name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[callback context]]></description>
+              <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[scopes.scopename.methodname or formname.methodname String to target the method to execute]]></description>
+              </parameter>
+              <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[only triggers the shortcut when on this form]]></description>
               </parameter>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
@@ -7887,13 +7952,16 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 // global handler
 plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
 // Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7913,7 +7981,9 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the method/function that needs to be called when the shortcut is hit]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="createShortcut">
@@ -7929,13 +7999,16 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
 // global handler
 plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
 // form method called when shortcut is used
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
 // form method called when shortcut is used and arguments are passed to the method
 plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
 // Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', null, new Array(argument1, argument2));
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -7955,7 +8028,111 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the method/function that needs to be called when the shortcut is hit]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+            </parameters>
+          </function>
+          <function name="createShortcut">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Create a shortcut.]]></description>
+            <summary><![CDATA[Create a shortcut.]]></summary>
+            <sample><![CDATA[// this plugin uses the java keystroke parser
+// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
+// global handler
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
+// form method called when shortcut is used
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
+// form method called when shortcut is used and arguments are passed to the method
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// remove global shortcut and form-level shortcut
+plugins.window.removeShortcut('menu 1');
+plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+// shortcut handlers are called with an JSEvent argument
+///* 
+// * Handle keyboard shortcut.
+// * 
+// * @param {JSEvent} event the event that triggered the action
+// */
+//function handleShortcut(event)
+//{
+//  application.output(event.getType()) // returns 'menu 1'
+//  application.output(event.getFormName()) // returns 'frm_contacts'
+//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
+//}
+// NOTE: shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+            <parameters>
+              <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the method/function that needs to be called when the shortcut is hit]]></description>
+              </parameter>
+              <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[only triggers the shortcut when on this form]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="createShortcut">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Create a shortcut.]]></description>
+            <summary><![CDATA[Create a shortcut.]]></summary>
+            <sample><![CDATA[// this plugin uses the java keystroke parser
+// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
+// global handler
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
+// form method called when shortcut is used
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
+// form method called when shortcut is used and arguments are passed to the method
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// remove global shortcut and form-level shortcut
+plugins.window.removeShortcut('menu 1');
+plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+// shortcut handlers are called with an JSEvent argument
+///* 
+// * Handle keyboard shortcut.
+// * 
+// * @param {JSEvent} event the event that triggered the action
+// */
+//function handleShortcut(event)
+//{
+//  application.output(event.getType()) // returns 'menu 1'
+//  application.output(event.getFormName()) // returns 'frm_contacts'
+//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
+//}
+// NOTE: shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+            <parameters>
+              <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the method/function that needs to be called when the shortcut is hit]]></description>
+              </parameter>
+              <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[only triggers the shortcut when on this form]]></description>
+              </parameter>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
@@ -8166,7 +8343,9 @@ plugins.window.maximize("windowName");]]></sample>
             <sample/>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="formName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[only triggers the shortcut when on this form]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="removeToolBar">
