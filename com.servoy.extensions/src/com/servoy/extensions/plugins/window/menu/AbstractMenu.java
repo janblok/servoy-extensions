@@ -1057,6 +1057,11 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 		return menu.getClientProperty(key);
 	}
 
+	public IClientPluginAccess getPluginAccess()
+	{
+		return pluginAccess;
+	}
+
 	public static MenuItemArgs parseMenuItemArgs(IClientPluginAccess pluginAccess, Object[] args)
 	{
 		if (args == null) return null;

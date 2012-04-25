@@ -17,11 +17,17 @@
 package com.servoy.extensions.plugins.window.menu;
 
 
+import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Window;
+
+import javax.swing.SwingUtilities;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
+import com.servoy.j2db.smart.SwingRuntimeWindow;
 import com.servoy.j2db.ui.IComponent;
 
 /**
@@ -69,6 +75,9 @@ public class Popup extends AbstractMenu
 	 * 	//menu.show(100, 100);
 	 * }
 	 * 
+	 * // in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
+	 * //menu.show();
+	 * 
 	 * @param component
 	 */
 	public void js_show(IComponent component) throws PluginException
@@ -91,6 +100,29 @@ public class Popup extends AbstractMenu
 	public void js_show(IComponent component, int x, int y) throws PluginException
 	{
 		getMenuHandler().showPopup(getMenu(), component, x, y);
+	}
+
+	/**
+	 * Show the popup at the mouse coordinates (Smart client only).
+	 * 
+	 * @sampleas js_show()
+	 * 
+	 */
+	public void js_show() throws PluginException
+	{
+		IRuntimeWindow runtimeWindow = getPluginAccess().getCurrentRuntimeWindow();
+		Point loc = MouseInfo.getPointerInfo().getLocation();
+		if (runtimeWindow != null && runtimeWindow instanceof SwingRuntimeWindow)
+		{
+			Window window = ((SwingRuntimeWindow)runtimeWindow).getWindow();
+			if (window != null)
+			{
+				SwingUtilities.convertPointFromScreen(loc, window);
+				getMenu().showPopup(window, loc.x, loc.y);
+				return;
+			}
+		}
+		js_show(loc.x, loc.y);
 	}
 
 	/**
