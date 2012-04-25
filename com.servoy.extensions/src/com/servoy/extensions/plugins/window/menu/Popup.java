@@ -17,11 +17,17 @@
 package com.servoy.extensions.plugins.window.menu;
 
 
+import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Window;
+
+import javax.swing.SwingUtilities;
 
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
+import com.servoy.j2db.smart.SwingRuntimeWindow;
 import com.servoy.j2db.ui.IComponent;
 
 /**
@@ -60,6 +66,23 @@ public class Popup extends AbstractMenu
 		getMenuHandler().showPopup(getMenu(), component, x, y);
 	}
 
+	public void js_show() throws PluginException
+	{
+		IRuntimeWindow runtimeWindow = getPluginAccess().getCurrentRuntimeWindow();
+		Point loc = MouseInfo.getPointerInfo().getLocation();
+		if (runtimeWindow != null && runtimeWindow instanceof SwingRuntimeWindow)
+		{
+			Window window = ((SwingRuntimeWindow)runtimeWindow).getWindow();
+			if (window != null)
+			{
+				SwingUtilities.convertPointFromScreen(loc, window);
+				getMenu().showPopup(window, loc.x, loc.y);
+				return;
+			}
+		}
+		js_show(loc.x, loc.y);
+	}
+
 	public void js_show(int x, int y) throws PluginException
 	{
 		Point loc = new Point(x, y);
@@ -95,7 +118,7 @@ public class Popup extends AbstractMenu
 	{
 		if ("show".equals(methodName))
 		{
-			return "Show the popup below the element or add x an y values relative to the element";
+			return "Show the popup below the element or add x an y values relative to the element, - in Smart client, if no parameters are provided, will use global mouse coordinates";
 		}
 		return super.getToolTip(methodName);
 	}

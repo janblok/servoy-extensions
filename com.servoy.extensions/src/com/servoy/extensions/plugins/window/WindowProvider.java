@@ -718,9 +718,7 @@ public class WindowProvider implements IScriptObject
 
 
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused")
-	String code, @SuppressWarnings("unused")
-	String developer)
+	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
 	{
 		return true;
 	}
@@ -1154,6 +1152,9 @@ public class WindowProvider implements IScriptObject
 		sb.append("\tpopupmenu.show(source);\n");
 		sb.append("\t//or you can set the coordinates popupmenu.show(10, 10);\n");
 		sb.append("}\n");
+
+		sb.append("\n\t//in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:");
+		sb.append("\t//popupmenu.show();\n");
 		return sb;
 	}
 

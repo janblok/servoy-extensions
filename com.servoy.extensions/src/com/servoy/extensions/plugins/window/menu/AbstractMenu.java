@@ -324,6 +324,11 @@ public abstract class AbstractMenu implements IScriptObject, IJavaScriptType
 		return menu.getClientProperty(key);
 	}
 
+	public IClientPluginAccess getPluginAccess()
+	{
+		return pluginAccess;
+	}
+
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return null;
