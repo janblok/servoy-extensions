@@ -39,7 +39,8 @@
 	<property name="beans.dir" value="${build_build.build.dir}/beans"/>
 	<property name="server_lib.dir" value="${build_build.build.dir}/server/lib"/>
 	<property name="drivers.dir" value="${build_build.build.dir}/drivers"/>
-
+	<property name="extensions.dir" value="${build_build.build.dir}/extensions"/>
+	
 	<property name="tempForJar.dir" value="${basedir}/tempForJar"/>
 
 	<patternset id="javaGifData.sources">
@@ -128,10 +129,11 @@
 		<mkdir dir="${drivers.dir}"/>
 		<mkdir dir="${bin_oraclefix.dir}"/>
 		<mkdir dir="${bin.dir}"/>
+ 		<mkdir dir="${extensions.dir}"/>
 	</target>
 
 	<target	name="all_plugins"
-			    depends="_all_common_plugins,compile"
+			    depends="_all_common_plugins,compile,all_extensions"
 	/>
 	
 	<target	name="_all_common_plugins"
@@ -141,6 +143,9 @@
 	>
 		<!--<ant target="clean"/>-->
 	</target>
+	
+	<target	name="all_extensions"
+				    depends="pdf_forms.exp,pdf_output.exp"/>
 
 	<!--================================================
 		From here on only targets for specific jar files
@@ -431,6 +436,27 @@
 		<delete dir="${tempForJar.dir}"/>
 	</target>
 
+	<target name="pdf_output.exp" depends="pdf_output.jar">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${extensions.dir}/pdf_output.exp" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
+			<fileset file="resources/pdf_output/pdf_output.jar.jnlp"/>
+			<fileset file="${plugins.dir}/pdf_output.jar"/>
+			<fileset file="${src_plugins.dir}/pdf_output/package.xml"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/pdf_output">
+			<fileset file="lib/itext.jar"/>
+			<fileset file="lib/bcmail.jar"/>
+			<fileset file="lib/bcprov.jar"/>
+		</copy>
+		<zip	destfile="${extensions.dir}/pdf_output.exp"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	
 	<target name="scheduler.jar" depends="compile">
 		<delete dir="${tempForJar.dir}"/>
 		<mkdir dir="${tempForJar.dir}"/>
@@ -478,6 +504,27 @@
 		</copy>
 	</target>
 
+	<target name="pdf_forms.exp" depends="pdf_forms.jar">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${extensions.dir}/pdf_forms.exp" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
+			<fileset file="${plugins.dir}/pdf_forms.jar"/>
+			<fileset file="${src_plugins.dir}/pdf_forms/package.xml"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/pdf_output">
+			<fileset file="lib/itext.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/adobe_pdf_forms">
+			<fileset file="lib/jFdfTk.jar"/>
+		</copy>
+		<zip	destfile="${extensions.dir}/pdf_forms.exp"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	
 	<target name="file.jar" depends="compile">
 		<delete dir="${tempForJar.dir}"/>
 		<mkdir dir="${tempForJar.dir}"/>

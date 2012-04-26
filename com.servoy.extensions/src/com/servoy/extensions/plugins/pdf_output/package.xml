@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension.xsd">
+	<extension-id>pdf_output</extension-id>
+	<extension-name>Plugin for working with PDF documents.</extension-name> 
+	<version>6.1.0</version>
+	<dependencies>
+	    <servoy>
+	       <min-version>6.1.0</min-version>
+	    </servoy>
+	    <lib>
+        	<id>com.lowagie.itext</id>
+       		<path>application_server/plugins/pdf_output/itext.jar</path>
+      		<version>2.1.7</version>
+       		<min-version>2.1.7</min-version>
+    	</lib>
+    	<lib>
+        	<id>org.bouncycastle.bcmail</id>
+       		<path>application_server/plugins/pdf_output/bcmail.jar</path>
+      		<version>1.46</version>
+      		<min-version>1.46</min-version>
+    	</lib>
+    	<lib>
+        	<id>org.bouncycastle.bcprovider</id>
+       		<path>application_server/plugins/pdf_output/bcprov.jar</path>
+      		<version>1.46</version>
+      		<min-version>1.46</min-version>
+    	</lib>
+	 </dependencies>
+</mp:servoy-extension>
