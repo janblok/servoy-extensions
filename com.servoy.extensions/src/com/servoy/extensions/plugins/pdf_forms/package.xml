@@ -9,13 +9,13 @@
 	       <min-version>6.1.0</min-version>
 	    </servoy>
 	    <lib>
-        	<id>com.lowagie.itext</id>
+        	<id>com.lowagie.text</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
        		<path>application_server/plugins/pdf_output/itext.jar</path>
       		<version>2.1.7</version>
        		<min-version>2.1.7</min-version>
     	</lib>
     	<lib>
-        	<id>fdf_toolkit</id>
+        	<id>com.adobe.fdf</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
        		<path>application_server/plugins/adobe_pdf_forms/jFdfTk.jar</path>
       		<version>1.0</version>
     	</lib>

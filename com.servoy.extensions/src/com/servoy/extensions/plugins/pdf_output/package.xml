@@ -9,19 +9,19 @@
 	       <min-version>6.1.0</min-version>
 	    </servoy>
 	    <lib>
-        	<id>com.lowagie.itext</id>
+        	<id>com.lowagie.text</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
        		<path>application_server/plugins/pdf_output/itext.jar</path>
       		<version>2.1.7</version>
        		<min-version>2.1.7</min-version>
     	</lib>
     	<lib>
-        	<id>org.bouncycastle.bcmail</id>
+        	<id>org.bouncycastle.bcmail</id> <!-- "Extension-Name" from MANIFEST.MF -->
        		<path>application_server/plugins/pdf_output/bcmail.jar</path>
       		<version>1.46</version>
       		<min-version>1.46</min-version>
     	</lib>
     	<lib>
-        	<id>org.bouncycastle.bcprovider</id>
+        	<id>org.bouncycastle.bcprovider</id> <!-- "Extension-Name" from MANIFEST.MF -->
        		<path>application_server/plugins/pdf_output/bcprov.jar</path>
       		<version>1.46</version>
       		<min-version>1.46</min-version>
