@@ -440,10 +440,12 @@
 		<delete dir="${tempForJar.dir}"/>
 		<mkdir dir="${tempForJar.dir}"/>
 		<delete file="${extensions.dir}/pdf_output.exp" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}">
+			<fileset file="${src_plugins.dir}/pdf_output/package.xml"/>
+		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="resources/pdf_output/pdf_output.jar.jnlp"/>
 			<fileset file="${plugins.dir}/pdf_output.jar"/>
-			<fileset file="${src_plugins.dir}/pdf_output/package.xml"/>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/pdf_output">
 			<fileset file="lib/itext.jar"/>
@@ -508,9 +510,11 @@
 		<delete dir="${tempForJar.dir}"/>
 		<mkdir dir="${tempForJar.dir}"/>
 		<delete file="${extensions.dir}/pdf_forms.exp" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}">
+			<fileset file="${src_plugins.dir}/pdf_forms/package.xml"/>
+		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/pdf_forms.jar"/>
-			<fileset file="${src_plugins.dir}/pdf_forms/package.xml"/>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/pdf_output">
 			<fileset file="lib/itext.jar"/>
