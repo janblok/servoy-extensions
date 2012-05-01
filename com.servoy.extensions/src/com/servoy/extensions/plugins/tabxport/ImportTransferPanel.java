@@ -314,7 +314,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 						else
 						{
 							fsm.getEditRecordList().stopEditing(true);
-							if (start) fsm.commitTransaction(false);
+							if (start) fsm.commitTransaction(false, true);
 						}
 					}
 					catch (Exception ex)

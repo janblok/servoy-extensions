@@ -279,7 +279,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 								try
 								{
 									fsm.startTransaction();
-									fsm.commitTransaction(true);
+									fsm.commitTransaction(true, true);
 								}
 								catch (Exception ex)
 								{
@@ -302,7 +302,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 						try
 						{
 							fsm.startTransaction();
-							fsm.commitTransaction(true);
+							fsm.commitTransaction(true, true);
 						}
 						catch (Exception ex)
 						{
