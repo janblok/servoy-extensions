@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -5827,6 +5827,13 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             </parameters>
           </function>
           <function name="show">
+            <argumentsTypes/>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Show the popup at the mouse coordinates (Smart client only).]]></description>
+            <summary><![CDATA[Show the popup at the mouse coordinates (Smart client only).]]></summary>
+            <sample/>
+          </function>
+          <function name="show">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
             </argumentsTypes>
@@ -5849,7 +5856,10 @@ if (event.getSource())
 	//menu.show(event.getSource(), 10, 10);
 	// display the popup at specified coordinates relative to the main window
 	//menu.show(100, 100);
-}]]></sample>
+}
+
+// in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
+//menu.show();]]></sample>
             <parameters>
               <parameter name="component" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
             </parameters>
@@ -5879,7 +5889,10 @@ if (event.getSource())
 	//menu.show(event.getSource(), 10, 10);
 	// display the popup at specified coordinates relative to the main window
 	//menu.show(100, 100);
-}]]></sample>
+}
+
+// in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
+//menu.show();]]></sample>
             <parameters>
               <parameter name="component" type="com.servoy.j2db.ui.IComponent" typecode="com.servoy.j2db.ui.IComponent"/>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -5910,7 +5923,10 @@ if (event.getSource())
 	//menu.show(event.getSource(), 10, 10);
 	// display the popup at specified coordinates relative to the main window
 	//menu.show(100, 100);
-}]]></sample>
+}
+
+// in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
+//menu.show();]]></sample>
             <parameters>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
