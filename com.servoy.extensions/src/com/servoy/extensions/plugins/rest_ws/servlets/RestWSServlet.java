@@ -92,6 +92,7 @@ public class RestWSServlet extends HttpServlet
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
 	private static final int CONTENT_XML = 2;
+	private static final int CONTENT_BINARY = 3;
 
 	private static final int CONTENT_DEFAULT = CONTENT_JSON;
 	private static final String CHARSET_DEFAULT = "UTF-8";
@@ -574,6 +575,10 @@ public class RestWSServlet extends HttpServlet
 		{
 			return CONTENT_XML;
 		}
+		if (contentType != null && contentType.toLowerCase().indexOf("binary") >= 0)
+		{
+			return CONTENT_BINARY;
+		}
 
 		// start guessing....
 		if (contents != null && contents.length() > 0 && contents.charAt(0) == '<')
@@ -629,64 +634,79 @@ public class RestWSServlet extends HttpServlet
 	{
 		int contentType = getContentType(request, "Accept", null, defaultContentType);
 
-		boolean isXML = (result instanceof XMLObject);
-		boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
-		Object json = null;
-		if (isXML)
+		String resultContentType;
+		byte[] bytes;
+
+		if ((contentType == CONTENT_BINARY) && (result instanceof byte[]))
 		{
-			json = XML.toJSONObject(result.toString());
-		}
-		else if (isJSON)
-		{
-			json = result;
+			resultContentType = "application/binary";
+			bytes = (byte[])result;
 		}
 		else
 		{
-			json = plugin.getJSONSerializer().toJSON(result);
+			boolean isXML = (result instanceof XMLObject);
+			boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
+
+			Object json = null;
+			if (isXML)
+			{
+				json = XML.toJSONObject(result.toString());
+			}
+			else if (isJSON)
+			{
+				json = result;
+			}
+			else
+			{
+				json = plugin.getJSONSerializer().toJSON(result);
+			}
+
+
+			String content;
+			String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT));
+			switch (contentType)
+			{
+				case CONTENT_JSON :
+					String callback = request.getParameter("callback");
+					if (callback != null && !callback.equals(""))
+					{
+						content = callback + '(' + json.toString() + ')';
+					}
+					else
+					{
+						content = json.toString();
+					}
+					break;
+
+				case CONTENT_XML :
+					content = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\n" + ((isXML) ? result.toString() : XML.toString(json, null));
+					break;
+
+				default :
+					// how can this happen...
+					throw new IllegalStateException();
+			}
+
+			switch (contentType)
+			{
+				case CONTENT_JSON :
+					resultContentType = "application/json";
+					break;
+
+				case CONTENT_XML :
+					resultContentType = "application/xml";
+					break;
+
+				default :
+					// how can this happen...
+					throw new IllegalStateException();
+			}
+
+			resultContentType = resultContentType + ";charset=" + charset;
+			bytes = content.getBytes(charset);
 		}
-		String content;
-		String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT));
-		switch (contentType)
-		{
-			case CONTENT_JSON :
-				String callback = request.getParameter("callback");
-				if (callback != null && !callback.equals(""))
-				{
-					content = callback + '(' + json.toString() + ')';
-				}
-				else
-				{
-					content = json.toString();
-				}
-				break;
 
-			case CONTENT_XML :
-				content = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\n" + ((isXML) ? result.toString() : XML.toString(json, null));
-				break;
-
-			default :
-				// how can this happen...
-				throw new IllegalStateException();
-		}
-
-		String resultContentType;
-		switch (contentType)
-		{
-			case CONTENT_JSON :
-				resultContentType = "application/json";
-				break;
-
-			case CONTENT_XML :
-				resultContentType = "application/xml";
-				break;
-
-			default :
-				// how can this happen...
-				throw new IllegalStateException();
-		}
-		response.setHeader("Content-Type", resultContentType + ";charset=" + charset);
-
-		byte[] bytes = content.getBytes(charset);
+		response.setHeader("Content-Type", resultContentType);
 		response.setContentLength(bytes.length);
 
 		ServletOutputStream outputStream = null;
