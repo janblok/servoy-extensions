@@ -94,6 +94,11 @@ public class WicketShortcutHandler implements IShortcutHandler
 		specialKeys.put(new Integer(KeyEvent.VK_NUMBER_SIGN), "#"); //$NON-NLS-1$
 		specialKeys.put(new Integer(KeyEvent.VK_PLUS), "+"); //$NON-NLS-1$
 		specialKeys.put(new Integer(KeyEvent.VK_UNDERSCORE), "_"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_ADD), "add"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_MULTIPLY), "multiply"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_DIVIDE), "divide"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_SUBTRACT), "subtract"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_DECIMAL), "decimal"); //$NON-NLS-1$
 	}
 
 	private final TreeBidiMap<ComparableKeyStroke, String> shortcuts = new TreeBidiMap<ComparableKeyStroke, String>();
@@ -142,7 +147,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 			Debug.log("WindowPlugin: shortcut contains unsopported modifiers"); //$NON-NLS-1$
 		}
 
-		String specialKey = specialKeys.get(new Integer(key.getKeyCode()));
+		String specialKey = specialKeys.get(Integer.valueOf(key.getKeyCode()));
 		if (specialKey == null)
 		{
 			sb.append(KeyEvent.getKeyText(key.getKeyCode()));
