@@ -314,7 +314,7 @@ public class SchedulerProvider implements IScriptObject
 	}
 
 	/**
-	 * Adds a cron job to the scheduler (parameter: jobname,cronTiming (s m h D/M M D/W),method,[startDate],[endDate])
+	 * Adds a cron job to the scheduler (parameter: jobname,cronTiming (s m h D/M M D/W),method,[startDate],[endDate]). A cron job must have at least one minute between each execution (otherwise it won't execute).
 	 *
 	 * @sample
 	 * // add a job that runs every 20 minutes after the hour (0,20,40)
