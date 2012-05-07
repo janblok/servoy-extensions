@@ -252,7 +252,7 @@ public class SchedulerProvider implements IScriptable
 	}
 
 	/**
-	 * Adds a cron job to the scheduler.
+	 * Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).
 	 *
 	 * @sample
 	 * // see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
