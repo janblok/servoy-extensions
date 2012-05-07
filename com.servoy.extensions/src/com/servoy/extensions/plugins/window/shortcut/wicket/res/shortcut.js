@@ -127,7 +127,24 @@ shortcut = {
 				'f9':120,
 				'f10':121,
 				'f11':122,
-				'f12':123
+				'f12':123,
+				
+				'numpad-0':96,
+				'numpad-1':97,
+				'numpad-2':98,
+				'numpad-3':99,
+				'numpad-4':100,
+				'numpad-5':101,
+				'numpad-6':102,
+				'numpad-7':103,
+				'numpad-8':104,
+				'numpad-9':105,
+				'multiply':106,
+				'add':107,
+				'subtract':109,
+				'decimal':110,
+				'divide':111,
+				'semi-colon':186
 			}
 	
 			var modifiers = { 
