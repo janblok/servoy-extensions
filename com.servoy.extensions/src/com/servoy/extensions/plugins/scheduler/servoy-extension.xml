@@ -11,7 +11,7 @@
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler.]]></description>
+            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
             <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -39,7 +39,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler.]]></description>
+            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
             <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -64,7 +64,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler.]]></description>
+            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
             <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -91,7 +91,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler.]]></description>
+            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
             <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
