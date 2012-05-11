@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension.xsd">
+	<extension-id>http</extension-id>
+	<extension-name>Plugin for doing http requests.</extension-name> 
+	<version>6.1.0</version>
+	<dependencies>
+	    <servoy>
+	       <min-version>6.1.0</min-version>
+	    </servoy>
+	 </dependencies>
+</mp:servoy-extension>

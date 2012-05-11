@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension.xsd">
+	<extension-id>images</extension-id>
+	<extension-name>Plugin for handling images.</extension-name> 
+	<version>6.1.0</version>
+	<dependencies>
+	    <servoy>
+	       <min-version>6.1.0</min-version>
+	    </servoy>
+	    <lib>
+        	<id>com.sun.media.imageio</id> <!-- MANIFEST.MF listed id ) -->
+       		<path>application_server/plugins/images/jai_imageio.jar</path>
+      		<version>1.1</version>
+       		<min-version>1.1</min-version>
+    	</lib>
+    	<lib>
+        	<id>com.drew.imaging</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
+       		<path>application_server/plugins/images/metadataextractor.jar</path>
+      		<version>2.4.0-beta-1</version>
+       		<min-version>2.4.0-beta-1</min-version>
+    	</lib>
+	 </dependencies>
+</mp:servoy-extension>
