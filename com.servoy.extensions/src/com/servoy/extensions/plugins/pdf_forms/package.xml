@@ -19,5 +19,6 @@
        		<path>application_server/plugins/adobe_pdf_forms/jFdfTk.jar</path>
       		<version>1.0</version>
     	</lib>
-	 </dependencies>
+	</dependencies>
+	<requiresRestart/>
 </mp:servoy-extension>

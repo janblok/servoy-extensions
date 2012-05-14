@@ -20,5 +20,6 @@
       		<version>2.0</version>
       		<min-version>2.0</min-version>
     	</lib>
-	 </dependencies>
+	</dependencies>
+	<requiresRestart/>
 </mp:servoy-extension>

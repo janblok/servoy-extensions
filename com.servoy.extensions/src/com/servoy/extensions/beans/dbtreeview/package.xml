@@ -15,4 +15,5 @@
        		<min-version>1.4-SNAPSHOT</min-version>
     	</lib>
 	 </dependencies>
+	 <requiresRestart/>
 </mp:servoy-extension>

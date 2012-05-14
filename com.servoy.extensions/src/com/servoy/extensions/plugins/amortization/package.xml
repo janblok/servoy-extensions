@@ -9,4 +9,5 @@
 	       <min-version>6.1.0</min-version>
 	    </servoy>
 	 </dependencies>
+	 <requiresRestart/>
 </mp:servoy-extension>
