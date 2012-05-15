@@ -265,7 +265,7 @@ public class FoundSetTreeModel extends DefaultTreeModel
 							final List sortColumns = getSortColumns((Table)((IFoundSetInternal)nfs).getTable(), bindingInfo.getChildSortDataprovider(un));
 							if (sortColumns != null)
 							{
-								if (SwingUtilities.isEventDispatchThread())
+								if (application.getApplicationType() == IClientPluginAccess.WEB_CLIENT || SwingUtilities.isEventDispatchThread())
 								{
 									try
 									{
