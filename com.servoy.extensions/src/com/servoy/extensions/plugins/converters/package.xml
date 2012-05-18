@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension.xsd">
-	<extension-id>converters</extension-id>
+	<extension-id>com.servoy.converters</extension-id>
 	<extension-name>Plugin for sql column converter.</extension-name> 
 	<version>6.1.0</version>
 	<dependencies>

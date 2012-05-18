@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension.xsd">
-	<extension-id>rawSQL</extension-id>
+	<extension-id>com.servoy.rawSQL</extension-id>
 	<extension-name>Plugin for executing sql.</extension-name> 
 	<version>6.1.0</version>
 	<dependencies>
