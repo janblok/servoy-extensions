@@ -6,7 +6,7 @@
 	<version>6.1.0</version>
 	<dependencies>
 	    <servoy>
-	       <min-version>6.1.0</min-version>
+	       <min-version>6.1.0 rc1</min-version>
 	    </servoy>
 	 </dependencies>
 	 <requiresRestart/>

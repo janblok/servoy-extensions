@@ -6,7 +6,7 @@
 	<version>6.1.0</version>
 	<dependencies>
 	    <servoy>
-	       <min-version>6.1.0</min-version>
+	       <min-version>6.1.0 rc1</min-version>
 	    </servoy>
 	    <lib>
         	<id>com.lowagie.text</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
