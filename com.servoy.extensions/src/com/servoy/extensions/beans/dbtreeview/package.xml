@@ -11,8 +11,8 @@
 	    <lib>
         	<id>com.inmethod.grid</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
        		<path>application_server/beans/inmethod-grid.jar</path>
-      		<version>1.4-SNAPSHOT</version>
-       		<min-version>1.4-SNAPSHOT</min-version>
+      		<version>1.4a0</version>
+       		<min-version>1.4a0</min-version>
     	</lib>
 	 </dependencies>
 	 <requiresRestart/>
