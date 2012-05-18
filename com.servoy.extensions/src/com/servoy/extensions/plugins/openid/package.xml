@@ -15,7 +15,7 @@
        		<min-version>0.9.6</min-version>
     	</lib>
     	<lib>
-        	<id>com.google.inject</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
+        	<id>com.google.inject</id> <!-- "Bundle-SymbolicName" from MANIFEST.MF -->
        		<path>application_server/plugins/openid/guice-2.0.jar</path>
       		<version>2.0</version>
       		<min-version>2.0</min-version>

@@ -9,7 +9,7 @@
 	       <min-version>6.1.0</min-version>
 	    </servoy>
 	    <lib>
-        	<id>com.sun.media.imageio</id> <!-- MANIFEST.MF listed id ) -->
+        	<id>com.sun.media.imageio</id> <!-- MANIFEST.MF listed id ("Extension-Name" from MANIFEST.MF) -->
        		<path>application_server/plugins/images/jai_imageio.jar</path>
       		<version>1.1</version>
        		<min-version>1.1</min-version>
