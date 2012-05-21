@@ -247,7 +247,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 				}
 				content = null;
 			}
-			else if (files.size() == 1)
+			else if (files.size() == 1 && (params == null || params.size() == 0))
 			{
 				File f = files.values().iterator().next();
 				entity = new FileEntity(f, "binary/octet-stream"); //$NON-NLS-1$
