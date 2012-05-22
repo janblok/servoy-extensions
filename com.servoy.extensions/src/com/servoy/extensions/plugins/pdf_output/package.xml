@@ -2,7 +2,7 @@
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.pdf_output</extension-id>
-	<extension-name>Plugin for working with PDF documents.</extension-name> 
+	<extension-name>PDF Output Plugin</extension-name> 
 	<version>6.1.0</version>
 	<dependencies>
 	    <servoy>
@@ -27,5 +27,9 @@
       		<min-version>1.46</min-version>
     	</lib>
 	</dependencies>
+	<info>
+		<icon path="images/pdf.gif"/>
+		<description>A plugin for working with PDF documents. It provides support for operations such as pdf printing, rendering.</description>
+	</info>
 	<requiresRestart/>
 </mp:servoy-extension>

@@ -2,12 +2,16 @@
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.mail</extension-id>
-	<extension-name>Plugin for handling e-mails.</extension-name> 
+	<extension-name>Mail Plugin</extension-name> 
 	<version>6.1.0</version>
 	<dependencies>
 	    <servoy>
 	       <min-version>6.1.0 rc1</min-version>
 	    </servoy>
 	</dependencies>
+	<info>
+		<icon path="client/images/mail.gif"/>
+		<description>Plugin for handling e-mails. Using it, you can send/receive emails, create text or binary file attachments.</description>
+	</info>
 	<requiresRestart/>
 </mp:servoy-extension>

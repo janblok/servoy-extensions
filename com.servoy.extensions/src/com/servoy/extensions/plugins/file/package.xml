@@ -2,12 +2,16 @@
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.file</extension-id>
-	<extension-name>Plugin for file handling.</extension-name> 
+	<extension-name>File Plugin</extension-name> 
 	<version>6.1.0</version>
 	<dependencies>
 	    <servoy>
 	       <min-version>6.1.0 rc1</min-version>
 	    </servoy>
 	</dependencies>
+	<info>
+		<icon path="images/fiel.gif"/>
+		<description>Plugin for file handling. It provides file and folder functions such as creating, modifying, deleting, returning content and/or size of files and folders.</description>
+	</info>
 	<requiresRestart/>
 </mp:servoy-extension>

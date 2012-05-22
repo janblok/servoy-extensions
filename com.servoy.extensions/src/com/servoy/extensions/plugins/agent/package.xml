@@ -2,12 +2,16 @@
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.agent</extension-id>
-	<extension-name>Plugin for showing a message animation.</extension-name> 
+	<extension-name>Agent Plugin</extension-name> 
 	<version>6.1.0</version>
 	<dependencies>
 	    <servoy>
 	       <min-version>6.1.0 rc1</min-version>
 	    </servoy>
 	</dependencies>
+	<info>
+    	<icon path="images/agent.gif"/>
+    	<description>A plugin for showing a message animation. With the agent plugin, you can show, hide, move and let the agent speak.</description>
+    </info>
 	<requiresRestart/>
 </mp:servoy-extension>
