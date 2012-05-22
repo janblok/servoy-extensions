@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mp:servoy-extension xmlns:mp="http://www.servoy.com/extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension.xsd">
+  xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.spellcheck</extension-id>
 	<extension-name>Plugin for spellcheck.</extension-name> 
 	<version>6.1.0</version>
