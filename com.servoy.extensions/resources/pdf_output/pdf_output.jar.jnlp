@@ -9,7 +9,7 @@
    </information>
    <resources>
       <jar href="/plugins/pdf_output.jar" download="eager" part="pdfoutput" version="%%version%%"/>
-      <jar href="/plugins/pdf_output/itext.jar" download="%%loadmethod%%" part="itext" version="2.0.3"/>
+      <jar href="/plugins/pdf_output/itext.jar" download="%%loadmethod%%" part="itext" version="2.1.7"/>
       <jar href="/plugins/pdf_output/bcmail.jar" download="%%loadmethod%%" part="bouncycastle" version="1.46.0"/>
       <jar href="/plugins/pdf_output/bcprov.jar" download="%%loadmethod%%" part="bouncycastle" version="1.46.0"/>
       <package name="com.lowagie.*" part="itext" recursive="true"/>
