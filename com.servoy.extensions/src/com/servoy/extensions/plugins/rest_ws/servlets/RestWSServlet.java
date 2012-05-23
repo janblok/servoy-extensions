@@ -35,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.Undefined;
 import org.mozilla.javascript.Wrapper;
 import org.mozilla.javascript.xml.XMLObject;
 
@@ -44,8 +45,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
+import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -354,7 +355,7 @@ public class RestWSServlet extends HttpServlet
 		try
 		{
 			client = plugin.getClient(wsRequest.solutionName);
-			checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
+			Object ws_authenticate_result = checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
 
 			FunctionDefinition fd = new FunctionDefinition(wsRequest.formName, methodName);
 			Exist functionExists = fd.exists(client.getPluginAccess());
@@ -409,7 +410,7 @@ public class RestWSServlet extends HttpServlet
 				}
 				if (request.getParameterMap().size() > 0)
 				{
-					JSMap jsMap = new JSMap();
+					JSMap<String, Object> jsMap = new JSMap<String, Object>();
 					Iterator<Entry<String, Object>> parameters = request.getParameterMap().entrySet().iterator();
 					while (parameters.hasNext())
 					{
@@ -423,7 +424,7 @@ public class RestWSServlet extends HttpServlet
 							jsMap.put(entry.getKey(), entry.getValue());
 						}
 					}
-
+					jsMap.put(WS_AUTHENTICATE, new Object[] { ws_authenticate_result });
 					args[idx++] = jsMap;
 				}
 			}
@@ -450,7 +451,7 @@ public class RestWSServlet extends HttpServlet
 		}
 	}
 
-	private void checkAuthorization(HttpServletRequest request, IClientPluginAccess client, String solutionName, String formName) throws Exception
+	private Object checkAuthorization(HttpServletRequest request, IClientPluginAccess client, String solutionName, String formName) throws Exception
 	{
 		String[] authorizedGroups = plugin.getAuthorizedGroups();
 		FunctionDefinition fd = new FunctionDefinition(formName, WS_AUTHENTICATE);
@@ -458,7 +459,7 @@ public class RestWSServlet extends HttpServlet
 		if (authorizedGroups == null && authMethodExists != FunctionDefinition.Exist.METHOD_FOUND)
 		{
 			plugin.log.debug("No authorization to check, allow all access");
-			return;
+			return Boolean.TRUE;
 		}
 
 		//Process authentication Header
@@ -498,9 +499,11 @@ public class RestWSServlet extends HttpServlet
 		//Process the Authentication Header values
 		if (authMethodExists == FunctionDefinition.Exist.METHOD_FOUND)
 		{
-			if (Boolean.TRUE.equals(fd.executeSync(client, (new String[] { user, password }))))
+			//TODO: we should cache the (user,pass,retval) for an hour (across all rest clients), and not invoke WS_AUTHENTICATE function each time! (since authenticate might be expensive like LDAP)
+			Object retval = fd.executeSync(client, (new String[] { user, password }));
+			if (retval != null && !Boolean.FALSE.equals(retval) && retval != Undefined.instance)
 			{
-				return;
+				return retval;
 			}
 			plugin.log.debug("Authentication method " + WS_AUTHENTICATE + " denied authentication");
 			throw new NotAuthenticatedException(solutionName);
@@ -528,7 +531,7 @@ public class RestWSServlet extends HttpServlet
 						{
 							plugin.log.debug("Authorized access for user " + user + ", group " + ug);
 						}
-						return;
+						return Boolean.TRUE;
 					}
 				}
 			}
