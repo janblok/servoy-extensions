@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.rest_ws.servlets;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -207,9 +208,8 @@ public class RestWSServlet extends HttpServlet
 	{
 		try
 		{
-			String contents = getBody(request);
-			plugin.log.trace("POST contents='" + contents + "'");
-			if (contents == null || contents.length() == 0)
+			byte[] contents = getBody(request);
+			if (contents == null || contents.length == 0)
 			{
 				sendError(response, HttpServletResponse.SC_NO_CONTENT);
 				return;
@@ -220,7 +220,7 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(contentType, contents) }, request, response);
+			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response);
 			HTTPUtils.setNoCacheHeaders(response);
 			if (result != null)
 			{
@@ -238,9 +238,8 @@ public class RestWSServlet extends HttpServlet
 	{
 		try
 		{
-			String contents = getBody(request);
-			plugin.log.trace("PUT contents='" + contents + "'");
-			if (contents == null || contents.length() == 0)
+			byte[] contents = getBody(request);
+			if (contents == null || contents.length == 0)
 			{
 				sendError(response, HttpServletResponse.SC_NO_CONTENT);
 				return;
@@ -251,7 +250,7 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(contentType, contents) }, request, response)))
+			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response)))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -538,7 +537,7 @@ public class RestWSServlet extends HttpServlet
 		throw new NotAuthorizedException("User not authorized");
 	}
 
-	protected String getBody(HttpServletRequest request) throws IOException
+	protected byte[] getBody(HttpServletRequest request) throws IOException
 	{
 		InputStream is = null;
 		try
@@ -553,7 +552,7 @@ public class RestWSServlet extends HttpServlet
 				baos.write(buffer, 0, length);
 			}
 
-			return new String(baos.toByteArray(), getCharset(request, "Content-Type", CHARSET_DEFAULT));
+			return baos.toByteArray();
 		}
 		finally
 		{
@@ -564,7 +563,7 @@ public class RestWSServlet extends HttpServlet
 		}
 	}
 
-	private int getContentType(HttpServletRequest request, String header, String contents, int defaultContentType)
+	private int getContentType(HttpServletRequest request, String header, byte[] contents, int defaultContentType) throws UnsupportedEncodingException
 	{
 		String contentType = request.getHeader(header);
 		if (contentType != null && contentType.toLowerCase().indexOf("json") >= 0)
@@ -580,14 +579,18 @@ public class RestWSServlet extends HttpServlet
 			return CONTENT_BINARY;
 		}
 
-		// start guessing....
-		if (contents != null && contents.length() > 0 && contents.charAt(0) == '<')
+		if (contents != null)
 		{
-			return CONTENT_XML;
-		}
-		if (contents != null && contents.length() > 0 && contents.charAt(0) == '{')
-		{
-			return CONTENT_JSON;
+			String stringContent = new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT));
+			// start guessing....
+			if (stringContent.length() > 0 && stringContent.charAt(0) == '<')
+			{
+				return CONTENT_XML;
+			}
+			if (stringContent.length() > 0 && stringContent.charAt(0) == '{')
+			{
+				return CONTENT_JSON;
+			}
 		}
 
 		return defaultContentType;
@@ -615,15 +618,18 @@ public class RestWSServlet extends HttpServlet
 		return defaultCharset;
 	}
 
-	private Object decodeRequest(int contentType, String contents) throws Exception
+	private Object decodeRequest(HttpServletRequest request, int contentType, byte[] contents) throws Exception
 	{
 		switch (contentType)
 		{
 			case CONTENT_JSON :
-				return plugin.getJSONSerializer().fromJSON(contents);
+				return plugin.getJSONSerializer().fromJSON(new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT)));
 
 			case CONTENT_XML :
-				return plugin.getJSONSerializer().fromJSON(XML.toJSONObject(contents));
+				return plugin.getJSONSerializer().fromJSON(XML.toJSONObject(new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT))));
+
+			case CONTENT_BINARY :
+				return contents;
 		}
 
 		// should not happen, content type was checked before
