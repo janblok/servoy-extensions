@@ -20,6 +20,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.Properties;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -62,7 +63,15 @@ public class XmlReaderPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		return null;
+		java.net.URL iconUrl = this.getClass().getResource("images/xml.gif"); //$NON-NLS-1$
+		if (iconUrl != null)
+		{
+			return new ImageIcon(iconUrl);
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	public IScriptable getScriptObject()

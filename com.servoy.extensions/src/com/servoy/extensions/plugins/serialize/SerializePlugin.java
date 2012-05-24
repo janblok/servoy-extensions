@@ -108,7 +108,7 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/browse.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/import-export.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

@@ -16,7 +16,7 @@
     	</lib>
 	</dependencies>
 	<info>
-		<icon path="images/icon_plugin_image.gif"/>
+		<icon path="images/excelxport.gif"/>
 		<description>Plugin for import/export of xls(excel) file as database data.</description>
 	</info>
 	<requiresRestart/>

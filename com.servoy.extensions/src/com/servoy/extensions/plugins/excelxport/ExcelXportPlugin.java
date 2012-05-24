@@ -22,6 +22,7 @@ import java.beans.PropertyChangeEvent;
 import java.util.Properties;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -158,7 +159,15 @@ public class ExcelXportPlugin implements IClientPlugin, ActionListener
 	 */
 	public Icon getImage()
 	{
-		return null;
+		java.net.URL iconUrl = this.getClass().getResource("images/excelxport.gif"); //$NON-NLS-1$
+		if (iconUrl != null)
+		{
+			return new ImageIcon(iconUrl);
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	public void propertyChange(PropertyChangeEvent evt)
