@@ -253,52 +253,26 @@ public class FoundSetTreeModel extends DefaultTreeModel
 				IRecord rec = un.getRecord();
 				if (rec != null)
 				{
+					IFoundSet nfs;
 					String n_relationName = bindingInfo.getNRelationName(un);
 					String m_relationName = bindingInfo.getMRelationName(un);
 
-					final IFoundSet nfs = rec.getRelatedFoundSet(n_relationName);
 
+					nfs = rec.getRelatedFoundSet(n_relationName);
 					if (nfs != null && nfs.getSize() > 0)
 					{
 						if (m_relationName == null)
 						{
-							final List sortColumns = getSortColumns((Table)((IFoundSetInternal)nfs).getTable(), bindingInfo.getChildSortDataprovider(un));
+							List sortColumns = getSortColumns((Table)((IFoundSetInternal)nfs).getTable(), bindingInfo.getChildSortDataprovider(un));
 							if (sortColumns != null)
 							{
-								if (application.getApplicationType() == IClientPluginAccess.WEB_CLIENT || SwingUtilities.isEventDispatchThread())
+								try
 								{
-									try
-									{
-										nfs.sort(sortColumns);
-									}
-									catch (Exception ex)
-									{
-										Debug.error(ex);
-									}
+									nfs.sort(sortColumns);
 								}
-								else
+								catch (Exception ex)
 								{
-									try
-									{
-										SwingUtilities.invokeAndWait(new Runnable()
-										{
-											public void run()
-											{
-												try
-												{
-													nfs.sort(sortColumns);
-												}
-												catch (Exception ex)
-												{
-													Debug.error(ex);
-												}
-											}
-										});
-									}
-									catch (Exception ex)
-									{
-										Debug.error(ex);
-									}
+									Debug.error(ex);
 								}
 							}
 							for (int i = 0; i < nfs.getSize(); i++)
