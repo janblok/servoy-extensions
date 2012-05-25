@@ -45,8 +45,8 @@ import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedExcept
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
+import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
@@ -424,7 +424,10 @@ public class RestWSServlet extends HttpServlet
 							jsMap.put(entry.getKey(), entry.getValue());
 						}
 					}
-					jsMap.put(WS_AUTHENTICATE, new Object[] { ws_authenticate_result });
+					if (ws_authenticate_result != null)
+					{
+						jsMap.put(WS_AUTHENTICATE, new Object[] { ws_authenticate_result });
+					}
 					args[idx++] = jsMap;
 				}
 			}
@@ -459,7 +462,7 @@ public class RestWSServlet extends HttpServlet
 		if (authorizedGroups == null && authMethodExists != FunctionDefinition.Exist.METHOD_FOUND)
 		{
 			plugin.log.debug("No authorization to check, allow all access");
-			return Boolean.TRUE;
+			return null;
 		}
 
 		//Process authentication Header
@@ -500,10 +503,10 @@ public class RestWSServlet extends HttpServlet
 		if (authMethodExists == FunctionDefinition.Exist.METHOD_FOUND)
 		{
 			//TODO: we should cache the (user,pass,retval) for an hour (across all rest clients), and not invoke WS_AUTHENTICATE function each time! (since authenticate might be expensive like LDAP)
-			Object retval = fd.executeSync(client, (new String[] { user, password }));
+			Object retval = fd.executeSync(client, new String[] { user, password });
 			if (retval != null && !Boolean.FALSE.equals(retval) && retval != Undefined.instance)
 			{
-				return retval;
+				return retval instanceof Boolean ? null : retval;
 			}
 			plugin.log.debug("Authentication method " + WS_AUTHENTICATE + " denied authentication");
 			throw new NotAuthenticatedException(solutionName);
@@ -531,7 +534,7 @@ public class RestWSServlet extends HttpServlet
 						{
 							plugin.log.debug("Authorized access for user " + user + ", group " + ug);
 						}
-						return Boolean.TRUE;
+						return null;
 					}
 				}
 			}
