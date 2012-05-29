@@ -185,6 +185,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/agent.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/agent/images/agent.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/agent.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -223,6 +226,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/dialog.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/dialog/images/dialogs.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/dialog.exp"
 				basedir="${tempForJar.dir}"
@@ -267,6 +273,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/http.jar"/>
 			<fileset file="resources/http/http.jar.jnlp"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/http/images/browse.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/http.exp"
 				basedir="${tempForJar.dir}"
@@ -315,6 +324,9 @@
 			<fileset file="lib/openid4java.jar"/>
 			<fileset file="lib/guice-2.0.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/openid/images/openid.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/openid.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -358,6 +370,9 @@
 			<fileset file="${plugins.dir}/serialize.jar"/>
 			<fileset file="resources/http/serialize.jar.jnlp"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/serialize/images/docsave.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/serialize.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -396,6 +411,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/converters.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/converters/images/converter.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/converters.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -431,6 +449,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/rest_ws.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/rest_ws/images/web_services.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/rest_ws.exp"
 				basedir="${tempForJar.dir}"
@@ -468,6 +489,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/headlessclient.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/headlessclient/images/console.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/headlessclient.exp"
 				basedir="${tempForJar.dir}"
@@ -508,6 +532,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/mail.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/mail/client/images/mail.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/mail.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -546,6 +573,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/tabxport.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/tabxport/images/docexport.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/tabxport.exp"
 				basedir="${tempForJar.dir}"
@@ -595,6 +625,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/jakarta-poi">
 			<fileset file="lib/jakarta-poi.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/excelxport/images/excelxport.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/excelxport.exp"
 				basedir="${tempForJar.dir}"
@@ -652,6 +685,9 @@
 			<fileset file="lib/bcmail.jar"/>
 			<fileset file="lib/bcprov.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/pdf_output/images/pdf.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/pdf_output.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -702,6 +738,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/scheduler">
 			<fileset file="lib/quartz.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/scheduler/images/timer.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/scheduler.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -743,6 +782,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/adobe_pdf_forms">
 			<fileset file="lib/jFdfTk.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/pdf_forms/images/pdf.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/pdf_forms.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -782,6 +824,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/file.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/file/images/file.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/file.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -819,6 +864,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/default_validators.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/validators/images/validators.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/default_validators.exp"
 				basedir="${tempForJar.dir}"
@@ -888,6 +936,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/beans">
 			<fileset file="lib/inmethod-grid.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/dbtreeview/res/icon/DBTreeView32.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/dbtreeview.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -926,6 +977,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/amortization.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/amortization/images/calculator.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/amortization.exp"
 				basedir="${tempForJar.dir}"
@@ -977,6 +1031,9 @@
 			<fileset file="lib/RapidSpell_US_UK_Dict.jar"/>
 			<fileset file="resources/spellcheck/*.dict"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/spellcheck/images/spell.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/spellcheck.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -1025,6 +1082,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins/images">
 			<fileset file="lib/jai_imageio.jar"/>
 			<fileset file="lib/metadataextractor.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/images/icon.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/images.exp"
 				basedir="${tempForJar.dir}"
@@ -1077,6 +1137,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/window.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/window/images/window.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/window.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
@@ -1115,6 +1178,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/udp.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/udp/images/udp.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/udp.exp"
 				basedir="${tempForJar.dir}"
@@ -1155,6 +1221,9 @@
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/rawSQL.jar"/>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/rawSQL/images/sql.gif"/>
+		</copy>
 		<zip	destfile="${extensions.dir}/rawSQL.exp"
 			basedir="${tempForJar.dir}"
 			duplicate="fail"
@@ -1193,6 +1262,9 @@
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/application_server/plugins">
 			<fileset file="${plugins.dir}/xmlreader.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
+			<fileset file="${src_plugins.dir}/xmlreader/images/xml.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/xmlreader.exp"
 			basedir="${tempForJar.dir}"
