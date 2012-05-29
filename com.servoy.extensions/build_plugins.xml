@@ -937,7 +937,7 @@
 			<fileset file="lib/inmethod-grid.jar"/>
 		</copy>
 		<copy overwrite="true" todir="${tempForJar.dir}/screenshots">
-			<fileset file="${src_plugins.dir}/dbtreeview/res/icon/DBTreeView32.gif"/>
+			<fileset file="${src_beans.dir}/dbtreeview/res/icon/DBTreeView32.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/dbtreeview.exp"
 				basedir="${tempForJar.dir}"
