@@ -10,7 +10,7 @@
 	    </servoy>
 	</dependencies>
 	<info>
-		<icon path="images/icon_plugin_image.gif"/>
+		<icon path="screenshots/converter.gif"/>
     	<description>Plugin for sql column converter.</description>
 	</info>
 	<requiresRestart/> 

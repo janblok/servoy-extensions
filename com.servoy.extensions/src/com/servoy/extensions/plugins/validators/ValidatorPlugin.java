@@ -17,9 +17,11 @@
 package com.servoy.extensions.plugins.validators;
 
 import java.beans.PropertyChangeEvent;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import com.servoy.j2db.dataprocessing.IColumnValidator;
 import com.servoy.j2db.plugins.IClientPlugin;
@@ -45,7 +47,15 @@ public class ValidatorPlugin implements IClientPlugin, IColumnValidatorProvider
 
 	public Icon getImage()
 	{
-		return null;
+		URL iconUrl = this.getClass().getResource("images/validators.gif"); //$NON-NLS-1$
+		if (iconUrl != null)
+		{
+			return new ImageIcon(iconUrl);
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	public String getName()

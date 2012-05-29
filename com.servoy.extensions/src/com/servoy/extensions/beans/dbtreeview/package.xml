@@ -16,7 +16,7 @@
     	</lib>
 	 </dependencies>
 	<info>
-    	<icon path="res/icon/DBTreeView32.gif"/>
+    	<icon path="screenshots/DBTreeView32.gif"/>
     	<description>Tree table bean that uses datasets as the data model.</description>
     </info>
 	 <requiresRestart/>

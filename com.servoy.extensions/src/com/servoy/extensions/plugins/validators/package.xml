@@ -10,7 +10,7 @@
 	    </servoy>
 	</dependencies>
 	<info>
-		<icon path="images/icon_plugin_image.gif"/>
+		<icon path="screenshots/validators.gif"/>
 		<description>Plugin for SQL column validators.</description>
 	</info>
 	<requiresRestart/>

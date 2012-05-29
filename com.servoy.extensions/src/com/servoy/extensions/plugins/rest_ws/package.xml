@@ -10,7 +10,7 @@
 	    </servoy>
 	</dependencies>
 	<info>
-		<icon path="images/icon_plugin_image.gif"/>
+		<icon path="screenshots/web_services.gif"/>
 		<description>Using the RESTful Web Service plugin, business logic can be exposed as a RESTful Web Service. The RESTful Web Service plugin does not contain any client side functions or properties, it is a 100% server side operating plugin.</description>
 	</info>
 	<requiresRestart/>

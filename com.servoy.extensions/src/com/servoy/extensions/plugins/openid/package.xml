@@ -22,7 +22,7 @@
     	</lib>
 	</dependencies>
 	<info>
-		<icon path="images/openid.gif"/>
+		<icon path="screenshots/openid.gif"/>
 		<description>Plugin for using OpenID authentication.</description>
 	</info>
 	<requiresRestart/>

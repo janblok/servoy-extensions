@@ -28,7 +28,7 @@
     	</lib>
 	</dependencies>
 	<info>
-		<icon path="images/pdf.gif"/>
+		<icon path="screenshots/pdf.gif"/>
 		<description>A plugin for working with PDF documents. It provides support for operations such as pdf printing, rendering.</description>
 	</info>
 	<requiresRestart/>

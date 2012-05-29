@@ -10,7 +10,7 @@
 	    </servoy>
 	</dependencies>
 	<info>
-		<icon path="client/images/mail.gif"/>
+		<icon path="screenshots/mail.gif"/>
 		<description>Plugin for handling e-mails. Using it, you can send/receive emails, create text or binary file attachments.</description>
 	</info>
 	<requiresRestart/>
