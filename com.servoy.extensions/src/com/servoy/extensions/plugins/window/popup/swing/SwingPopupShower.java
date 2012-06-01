@@ -253,10 +253,12 @@ public class SwingPopupShower implements IPopupShower
 	private class PopupMouseListener extends MouseAdapter
 	{
 		private Component dispatchComponent;
+		private boolean mousePressed;
 
 		@Override
 		public void mousePressed(MouseEvent e)
 		{
+			mousePressed = true;
 			closeWindow(false);
 			Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), parent);
 			dispatchComponent = parent.findComponentAt(p2.x, p2.y);
@@ -271,13 +273,17 @@ public class SwingPopupShower implements IPopupShower
 		@Override
 		public void mouseReleased(MouseEvent e)
 		{
-			glassPane.removeMouseListener(mouseListener);
-			if (dispatchComponent != null)
+			if (mousePressed)
 			{
-				Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), parent);
-				Point p3 = SwingUtilities.convertPoint(parent, p2, dispatchComponent);
-				MouseEvent e2 = new MouseEvent(dispatchComponent, e.getID(), e.getWhen(), e.getModifiers(), p3.x, p3.y, e.getClickCount(), e.isPopupTrigger());
-				dispatchComponent.dispatchEvent(e2);
+				glassPane.removeMouseListener(mouseListener);
+				if (dispatchComponent != null)
+				{
+					Point p2 = SwingUtilities.convertPoint(glassPane, e.getPoint(), parent);
+					Point p3 = SwingUtilities.convertPoint(parent, p2, dispatchComponent);
+					MouseEvent e2 = new MouseEvent(dispatchComponent, e.getID(), e.getWhen(), e.getModifiers(), p3.x, p3.y, e.getClickCount(),
+						e.isPopupTrigger());
+					dispatchComponent.dispatchEvent(e2);
+				}
 			}
 		}
 	}
