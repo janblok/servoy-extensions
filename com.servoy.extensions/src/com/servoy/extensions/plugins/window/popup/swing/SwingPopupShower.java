@@ -20,6 +20,8 @@ package com.servoy.extensions.plugins.window.popup.swing;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Frame;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -33,7 +35,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JRootPane;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
@@ -61,7 +63,7 @@ public class SwingPopupShower implements IPopupShower
 	private final Scriptable scope;
 	private final String dataprovider;
 	private Container parent;
-	private JFrame window;
+	private JDialog window;
 	private Component glassPane;
 	private PopupMouseListener mouseListener;
 	private WindowListener windowListener;
@@ -102,17 +104,25 @@ public class SwingPopupShower implements IPopupShower
 			parent = ((ISmartRuntimeWindow)clientPluginAccess.getCurrentRuntimeWindow()).getWindow();
 		}
 
-		while (parent != null && !(parent instanceof Window))
+		while (parent != null && !(parent instanceof Dialog) && !(parent instanceof Frame))
 		{
 			parent = parent.getParent();
 		}
 
-		if (parent != null)
+		if (parent instanceof Dialog)
+		{
+			window = new JDialog((Dialog)parent);
+		}
+		else if (parent instanceof Frame)
+		{
+			window = new JDialog((Frame)parent);
+		}
+
+		if (window != null)
 		{
 			windowListener = new WindowListener();
 			((Window)parent).addComponentListener(windowListener);
 			((Window)parent).addWindowStateListener(windowListener);
-			this.window = new JFrame();
 			this.window.setFocusableWindowState(true);
 			this.window.setFocusable(true);
 			this.window.setUndecorated(true);
