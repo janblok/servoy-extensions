@@ -138,18 +138,17 @@ public class SwingPopupShower implements IPopupShower
 				Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
 				locationOnScreen.y += elementToShowRelatedTo.getHeight();
 
-
 				Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(window.getGraphicsConfiguration());
 				Rectangle bounds = window.getGraphicsConfiguration().getBounds();
 
-				int screenWidth = (bounds.width - screenInsets.left - screenInsets.right);
+				int screenWidth = (bounds.width + bounds.x - screenInsets.left - screenInsets.right);
 				//if necessary right align popup on related component
 				if ((locationOnScreen.x + window.getSize().width) > screenWidth)
 				{
 					locationOnScreen.x = screenWidth - window.getSize().width;
 				}
 
-				int screenHeight = (bounds.height - screenInsets.top - screenInsets.bottom);
+				int screenHeight = (bounds.height + bounds.y - screenInsets.top - screenInsets.bottom);
 				//if necessary popup on the top of the related component
 				if (window.getSize().height + locationOnScreen.y > screenHeight)
 				{
@@ -163,9 +162,9 @@ public class SwingPopupShower implements IPopupShower
 					}
 				}
 
-				if (locationOnScreen.x < 0) locationOnScreen.x = 0;
+				if (locationOnScreen.x < bounds.x) locationOnScreen.x = bounds.x;
 
-				if (locationOnScreen.y < 0) locationOnScreen.y = 0;
+				if (locationOnScreen.y < bounds.y) locationOnScreen.y = bounds.y;
 
 				window.setLocation(locationOnScreen);
 			}
