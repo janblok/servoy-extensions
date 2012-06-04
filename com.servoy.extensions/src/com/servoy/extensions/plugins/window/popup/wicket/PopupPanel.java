@@ -46,7 +46,7 @@ public class PopupPanel extends Panel
 		add((Component)form.getFormUI());
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
-		add(new SimpleAttributeModifier("style", "position:absolute;z-index:999;width:" + size.width + "px;height:" + size.height + "px"));
+		add(new SimpleAttributeModifier("style", "display:none;position:absolute;z-index:999;width:" + size.width + "px;height:" + size.height + "px"));
 	}
 
 	/*
@@ -62,7 +62,7 @@ public class PopupPanel extends Panel
 		if (elementToShowRelatedTo != null)
 		{
 			container.getHeaderResponse().renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
-		
+
 			js.append("positionPopup('");
 			js.append(getMarkupId());
 			js.append("','");

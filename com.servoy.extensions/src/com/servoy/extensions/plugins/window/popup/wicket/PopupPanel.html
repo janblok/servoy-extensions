@@ -22,6 +22,7 @@ function centerPopup(popupId) {
 
 	popup.style.left = left + "px";
 	popup.style.top = top + "px";
+	popup.style.display = "block";
 }
 function positionPopup(popupId, elementId) {
 	var element = document.getElementById(elementId);
@@ -64,6 +65,7 @@ function positionPopup(popupId, elementId) {
 	if (modalTop < 0) modalTop = 0;
 	popup.style.top = modalTop + "px";
 	popup.style.left = modalLeft + "px";
+	popup.style.display = "block";
 }
 /*-->]]>*/
 </script>
