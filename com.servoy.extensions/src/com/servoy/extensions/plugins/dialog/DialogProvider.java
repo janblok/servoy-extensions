@@ -313,9 +313,30 @@ public class DialogProvider implements IScriptable
 	 *
 	 * @param dialog_title 
 	 * @param msg 
-	 * @param optionArray 
+	 * @param options 
 	 */
-	public String js_showSelectDialog(String dialog_title, String msg, String... optionArray)
+	public String js_showSelectDialog(String dialog_title, String msg, String... options)
+	{
+		Vector<String> buttons = new Vector<String>();
+		if (options != null)
+		{
+			for (String element : options)
+			{
+				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix(element)); //$NON-NLS-1$
+			}
+		}
+		Object[] optionsCopy = new String[buttons.size()];
+		buttons.copyInto(optionsCopy);
+		return showSelectDialog(dialog_title, msg, optionsCopy);
+	}
+
+	/**
+	 * @param dialog_title
+	 * @param msg
+	 * @param options
+	 * @return
+	 */
+	public String showSelectDialog(String dialog_title, String msg, Object[] options)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
@@ -325,16 +346,6 @@ public class DialogProvider implements IScriptable
 		if (dialog_title != null) title = Messages.getStringIfPrefix(dialog_title);
 		String message = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
 		if (msg != null) message = Messages.getStringIfPrefix(msg);
-		Vector<String> buttons = new Vector<String>();
-		if (optionArray != null)
-		{
-			for (String element : optionArray)
-			{
-				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix(element)); //$NON-NLS-1$
-			}
-		}
-		Object[] options = new String[buttons.size()];
-		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 		JOptionPane pane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
 		pane.setWantsInput(true);
@@ -343,6 +354,34 @@ public class DialogProvider implements IScriptable
 		createAndShowDialog(title, pane);
 		Object value = pane.getInputValue();
 		return (value != JOptionPane.UNINITIALIZED_VALUE ? value.toString() : null);
+	}
+
+	/**
+	 * Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.
+	 *
+	 * @sample
+	 * //show select,returns nothing when canceled 
+	 * var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
+	 * //also possible to pass array with options
+	 * //var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name', new Array('jan','johan','sebastiaan'));
+	 *
+	 * @param dialog_title 
+	 * @param msg 
+	 * @param optionArray 
+	 */
+	public String js_showSelectDialog(String dialog_title, String msg, Object[] optionArray)
+	{
+		Vector<String> buttons = new Vector<String>();
+		if (optionArray != null)
+		{
+			for (Object element : optionArray)
+			{
+				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix((String)element)); //$NON-NLS-1$
+			}
+		}
+		Object[] options = new String[buttons.size()];
+		buttons.copyInto(options);
+		return showSelectDialog(dialog_title, msg, options);
 	}
 
 	/**

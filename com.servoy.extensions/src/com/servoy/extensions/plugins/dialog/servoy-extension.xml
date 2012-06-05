@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -204,6 +204,25 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               </parameter>
             </parameters>
           </function>
+          <function name="showSelectDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
+            <summary><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+            <sample><![CDATA[//show select,returns nothing when canceled 
+var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
+//also possible to pass array with options
+//var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name', new Array('jan','johan','sebastiaan'));]]></sample>
+            <parameters>
+              <parameter name="dialog_title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="msg" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="optionArray" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+            </parameters>
+          </function>
           <function name="showSelectDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
@@ -220,7 +239,7 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
             <parameters>
               <parameter name="dialog_title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="msg" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="optionArray" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+              <parameter name="options" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
           <function name="showWarningDialog">
