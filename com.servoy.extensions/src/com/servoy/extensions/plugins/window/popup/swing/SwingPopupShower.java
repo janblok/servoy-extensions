@@ -170,7 +170,7 @@ public class SwingPopupShower implements IPopupShower
 			}
 			else
 			{
-				window.setLocationRelativeTo(null);
+				window.setLocationRelativeTo(parent);
 			}
 			window.setVisible(true);
 
