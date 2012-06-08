@@ -7701,17 +7701,29 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               <parameter name="row" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="cancelFormPopup" undocumented="true">
+          <function name="cancelFormPopup">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
+            <description><![CDATA[Close the current form popup panel without assigning a value to the configured data provider.]]></description>
+            <summary><![CDATA[Close the current form popup panel without assigning a value to the configured data provider.]]></summary>
+            <sample><![CDATA[//Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
+//do call closeFormPopup(ordervalue) from the orderPicker form]]></sample>
           </function>
-          <function name="closeFormPopup" undocumented="true">
+          <function name="closeFormPopup">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description><![CDATA[Close the current form popup panel and assign the value to the configured data provider.]]></description>
+            <summary><![CDATA[Close the current form popup panel and assign the value to the configured data provider.]]></summary>
+            <sample><![CDATA[//Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
+//do call closeFormPopup(ordervalue) from the orderPicker form]]></sample>
             <parameters>
-              <parameter name="retval" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="retval" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[return value for data provider]]></description>
+              </parameter>
             </parameters>
           </function>
           <function deprecated="true" name="createCheckboxMenuItem">

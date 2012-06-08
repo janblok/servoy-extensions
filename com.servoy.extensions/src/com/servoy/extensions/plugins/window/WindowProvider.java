@@ -704,11 +704,21 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	/**
+	 * Close the current form popup panel and assign the value to the configured data provider.
+	 * @sampleas js_showFormPopup(IComponent, IForm, Object, String)
+	 * 
+	 * @param retval return value for data provider
+	 */
 	public void js_closeFormPopup(Object retval)
 	{
 		popupShower.close(retval);
 	}
 
+	/**
+	 * Close the current form popup panel without assigning a value to the configured data provider.
+	 * @sampleas js_showFormPopup(IComponent, IForm, Object, String)
+	 */
 	public void js_cancelFormPopup()
 	{
 		popupShower.cancel();
