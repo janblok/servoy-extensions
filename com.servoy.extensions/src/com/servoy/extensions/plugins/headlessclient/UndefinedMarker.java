@@ -13,11 +13,14 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.io.Serializable;
 
+import com.servoy.j2db.server.annotations.TerracottaInstrumentedClass;
+
+@TerracottaInstrumentedClass
 public final class UndefinedMarker implements Serializable
 {
 	public static UndefinedMarker INSTANCE = new UndefinedMarker();

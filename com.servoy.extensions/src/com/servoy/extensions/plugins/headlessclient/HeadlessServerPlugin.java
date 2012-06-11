@@ -16,8 +16,8 @@
  */
 package com.servoy.extensions.plugins.headlessclient;
 
-import java.lang.ref.WeakReference;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,9 +28,14 @@ import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.NativeError;
 import org.mozilla.javascript.RhinoException;
 
+import com.servoy.extensions.plugins.headlessclient.ServerPluginDispatcher.Call;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.preference.PreferencePanel;
+import com.servoy.j2db.server.annotations.TerracottaAutolockRead;
+import com.servoy.j2db.server.annotations.TerracottaAutolockWrite;
+import com.servoy.j2db.server.annotations.TerracottaInstrumentedClass;
+import com.servoy.j2db.server.annotations.TerracottaRoot;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
@@ -38,16 +43,29 @@ import com.servoy.j2db.util.UUID;
 import com.servoy.j2db.util.serialize.JSONConverter;
 
 @SuppressWarnings("nls")
+@TerracottaInstrumentedClass
 public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 {
-	private final Map<String, WeakReference<IHeadlessClient>> clients = new ConcurrentHashMap<String, WeakReference<IHeadlessClient>>();
+
+	@TerracottaRoot
 	private final Map<String, MethodCall> methodCalls = new ConcurrentHashMap<String, MethodCall>();
+
+	private final Map<String, IHeadlessClient> clients = new ConcurrentHashMap<String, IHeadlessClient>();
 
 	private final JSONConverter jsonConverter = new JSONConverter();
 	private IServerAccess application;
 
+	private final String serverPluginID;
+
+	@TerracottaRoot
+	private final Map<String, String> clientIdToServerId = new HashMap<String, String>();
+
+	private ServerPluginDispatcher<HeadlessServerPlugin> serverPluginDispatcher;
+
+
 	public HeadlessServerPlugin()//must have default constructor
 	{
+		this.serverPluginID = UUID.randomUUID().toString(); // in case Servoy is running clustered with terracotta, each Servoy server will start it's own plugin
 	}
 
 	public Properties getProperties()
@@ -66,16 +84,19 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		this.application = app;
 		try
 		{
-			app.registerRMIService(IHeadlessServer.SERVICE_NAME, this);
+			app.registerRemoteService(IHeadlessServer.SERVICE_NAME, this);
 		}
 		catch (Exception e)
 		{
 			Debug.error(e);
 		}
+		serverPluginDispatcher = new ServerPluginDispatcher<HeadlessServerPlugin>(serverPluginID, this);
 	}
 
 	public void unload()
 	{
+		serverPluginDispatcher.shutdown();
+		serverPluginDispatcher.cleanupServer(serverPluginID);
 	}
 
 	public Map<String, String> getRequiredPropertyNames()
@@ -88,34 +109,55 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		return null;
 	}
 
+	@TerracottaAutolockWrite
 	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
 	{
 		if (!application.isServerProcess(callingClientId) && !application.isAuthenticated(callingClientId))
 		{
 			throw new SecurityException("Rejected unauthenticated access");
 		}
-		Iterator<Entry<String, WeakReference<IHeadlessClient>>> clientsIterator = clients.entrySet().iterator();
-		while (clientsIterator.hasNext())
-		{
-			Entry<String, WeakReference<IHeadlessClient>> entry = clientsIterator.next();
-			if (entry.getValue().get() == null)
-			{
-				clientsIterator.remove();
-			}
-		}
+
+		// clear references to all invalid clients
+		serverPluginDispatcher.callOnAllServers(new ClearInvalidClients());
 		IHeadlessClient c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
-		WeakReference<IHeadlessClient> clientRef = new WeakReference<IHeadlessClient>(c);
 		String newClientKey = UUID.randomUUID().toString();
-		clients.put(newClientKey, clientRef);
+		clients.put(newClientKey, c);
+		synchronized (clientIdToServerId) // Terracotta WRITE lock
+		{
+			clientIdToServerId.put(newClientKey, serverPluginID);
+		}
 		return newClientKey;
+	}
+
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class ClearInvalidClients extends Call<HeadlessServerPlugin>
+	{
+		@Override
+		@TerracottaAutolockWrite
+		public Object executeCall(HeadlessServerPlugin correctServerObject)
+		{
+			Iterator<Entry<String, IHeadlessClient>> clientsIterator = correctServerObject.clients.entrySet().iterator();
+			while (clientsIterator.hasNext())
+			{
+				Entry<String, IHeadlessClient> entry = clientsIterator.next();
+				if (!entry.getValue().isValid())
+				{
+					clientsIterator.remove();
+					synchronized (correctServerObject.clientIdToServerId) // Terracotta WRITE lock
+					{
+						correctServerObject.clientIdToServerId.remove(entry.getKey());
+					}
+				}
+			}
+			return null;
+		}
 	}
 
 	private IHeadlessClient getClient(String clientKey) throws ClientNotFoundException
 	{
-		WeakReference<IHeadlessClient> clientRef = clients.get(clientKey);
-		if (clientRef != null)
+		IHeadlessClient c = clients.get(clientKey);
 		{
-			IHeadlessClient c = clientRef.get();
 			if (c != null && c.isValid())
 			{
 				return c;
@@ -124,49 +166,26 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		throw new ClientNotFoundException(clientKey);
 	}
 
-	public Object executeMethod(String clientKey, String contextName, String methodName, Object[] args, String callingClientId) throws Exception
+	@TerracottaAutolockWrite
+	public Object executeMethod(final String clientKey, final String contextName, final String methodName, final String[] args, String callingClientId)
+		throws Exception
 	{
 		MethodCall call = new MethodCall(callingClientId, methodName);
 
-		synchronized (methodCalls)
+		synchronized (methodCalls) // Terracotta WRITE lock
 		{
 			while (methodCalls.containsKey(clientKey))
 				methodCalls.wait();
 			methodCalls.put(clientKey, call);
 		}
+
 		try
 		{
-			IHeadlessClient c = getClient(clientKey);
-			Object[] convertedArgs = null;
-			if (args != null)
-			{
-				convertedArgs = new Object[args.length];
-				for (int i = 0; i < args.length; i++)
-				{
-					convertedArgs[i] = getJSONConverter().convertFromJSON(c.getPluginAccess().getDatabaseManager(), args[i]);
-				}
-			}
-			return getJSONConverter().convertToJSON(c.getPluginAccess().executeMethod(contextName, methodName, convertedArgs, false));
+			return serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new ExecuteMethodCall(clientKey, contextName, methodName, args), true);
 		}
-		catch (JavaScriptException jse)
-		{
-			Object o = jse.getValue();
-			if (o instanceof NativeError)
-			{
-				o = ((NativeError)o).get("message", null);
-			}
-			throw new ExceptionWrapper(getJSONConverter().convertToJSON(o));
-		}
-		catch (RhinoException e)
-		{
-			// wrap it in a normal exception, else serializeable exceptions will happen.
-			throw new ExceptionWrapper(getJSONConverter().convertToJSON(e.details()));
-		}
-		// hopefully other exceptions that can happen here will be Serializeable for RMI; exceptions usually are/should be
-
 		finally
 		{
-			synchronized (methodCalls)
+			synchronized (methodCalls) // Terracotta WRITE lock
 			{
 				methodCalls.remove(clientKey);
 				methodCalls.notifyAll();
@@ -174,16 +193,84 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		}
 	}
 
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class ExecuteMethodCall extends Call<HeadlessServerPlugin>
+	{
+
+		private final String clientKey;
+		private final String contextName;
+		private final String methodName;
+		private final String[] args;
+
+		public ExecuteMethodCall(String clientKey, String contextName, String methodName, String[] args)
+		{
+			this.clientKey = clientKey;
+			this.contextName = contextName;
+			this.methodName = methodName;
+			this.args = args;
+		}
+
+		@Override
+		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
+		{
+			try
+			{
+				IHeadlessClient c = correctServerObject.getClient(clientKey);
+				Object[] convertedArgs = null;
+				if (args != null)
+				{
+					convertedArgs = new Object[args.length];
+					for (int i = 0; i < args.length; i++)
+					{
+						convertedArgs[i] = correctServerObject.getJSONConverter().convertFromJSON(c.getPluginAccess().getDatabaseManager(), args[i]);
+					}
+				}
+				return correctServerObject.getJSONConverter().convertToJSON(c.getPluginAccess().executeMethod(contextName, methodName, convertedArgs, false));
+			}
+			catch (JavaScriptException jse)
+			{
+				Object o = jse.getValue();
+				if (o instanceof NativeError)
+				{
+					o = ((NativeError)o).get("message", null);
+				}
+				throw new ExceptionWrapper(correctServerObject.getJSONConverter().convertToJSON(o));
+			}
+			catch (RhinoException e)
+			{
+				// wrap it in a normal exception, else serializeable exceptions will happen.
+				throw new ExceptionWrapper(correctServerObject.getJSONConverter().convertToJSON(e.details()));
+			}
+		}
+	}
+
+	/**
+	 * Will either return a non-null server id or throw an exception.
+	 */
+	@TerracottaAutolockRead
+	private String getServerId(String clientKey)
+	{
+		String serverId;
+		synchronized (clientIdToServerId) // Terracotta READ lock
+		{
+			serverId = clientIdToServerId.get(clientKey);
+		}
+		if (serverId == null) throw new ClientNotFoundException(clientKey);
+		return serverId;
+	}
+
 	private JSONConverter getJSONConverter()
 	{
 		return jsonConverter;
 	}
 
+	@TerracottaAutolockRead
 	public Object getDataProviderValue(String clientKey, String contextName, String dataprovider, String callingClientId, String methodName)
 	{
 		if (methodName != null)
 		{
-			synchronized (methodCalls)
+			synchronized (methodCalls) // Terracotta READ lock
 			{
 				MethodCall methodCall = methodCalls.get(clientKey);
 				if (methodCall == null || !(methodCall.callingClientId.equals(callingClientId) && methodCall.methodName.equals(methodName)))
@@ -192,37 +279,93 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 				}
 			}
 		}
-		IHeadlessClient c = getClient(clientKey);
-		Object dataProviderValue = c.getDataProviderValue(contextName, dataprovider);
-		try
+
+		return serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new GetDataProviderCall(clientKey, contextName, dataprovider), true);
+	}
+
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class GetDataProviderCall extends Call<HeadlessServerPlugin>
+	{
+
+		private final String clientKey;
+		private final String contextName;
+		private final String dataprovider;
+
+		public GetDataProviderCall(String clientKey, String contextName, String dataprovider)
 		{
-			return getJSONConverter().convertToJSON(dataProviderValue);
+			this.clientKey = clientKey;
+			this.contextName = contextName;
+			this.dataprovider = dataprovider;
 		}
-		catch (Exception e)
+
+		@Override
+		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
-			throw new RuntimeException("exception when serializing value " + dataProviderValue, e);
+
+			IHeadlessClient c = correctServerObject.getClient(clientKey);
+			Object dataProviderValue = c.getDataProviderValue(contextName, dataprovider);
+			try
+			{
+				return correctServerObject.getJSONConverter().convertToJSON(dataProviderValue);
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException("exception when serializing value " + dataProviderValue, e);
+			}
 		}
 	}
 
 	public boolean isValid(String clientKey)
 	{
-		try
+		boolean valid;
+		String serverId = getServerId(clientKey);
+		if (serverId != null)
 		{
-			IHeadlessClient c = getClient(clientKey);
-			return c.isValid();
+			Boolean validB = (Boolean)serverPluginDispatcher.callOnCorrectServer(serverId, new CheckValidityCall(clientKey), true);
+			valid = (validB != null ? validB.booleanValue() : false);
 		}
-		catch (RuntimeException re)
-		{
-			Debug.trace("client not found for " + clientKey, re);
-		}
-		return false;
+		else valid = false;
+
+		return valid;
 	}
 
-	public Object setDataProviderValue(String clientKey, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class CheckValidityCall extends Call<HeadlessServerPlugin>
+	{
+
+		private final String clientKey;
+
+		public CheckValidityCall(String clientKey)
+		{
+			this.clientKey = clientKey;
+		}
+
+		@Override
+		@TerracottaAutolockWrite
+		public Boolean executeCall(HeadlessServerPlugin correctServerObject) throws Exception
+		{
+			Boolean result;
+			IHeadlessClient c = correctServerObject.clients.get(clientKey);
+			if (c != null)
+			{
+				result = Boolean.valueOf(c.isValid());
+			}
+			else
+			{
+				result = Boolean.FALSE;
+			}
+			return result;
+		}
+	}
+
+	@TerracottaAutolockRead
+	public Object setDataProviderValue(String clientKey, String contextName, String dataprovider, String value, String callingClientId, String methodName)
 	{
 		if (methodName != null)
 		{
-			synchronized (methodCalls)
+			synchronized (methodCalls) // Terracotta READ lock
 			{
 				MethodCall methodCall = methodCalls.get(clientKey);
 				if (methodCall == null || !(methodCall.callingClientId.equals(callingClientId) && methodCall.methodName.equals(methodName)))
@@ -231,41 +374,94 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 				}
 			}
 		}
-		IHeadlessClient c = getClient(clientKey);
-		Object retValue;
-		try
+		return serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new SetDataProviderCall(clientKey, contextName, dataprovider, value), true);
+	}
+
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class SetDataProviderCall extends Call<HeadlessServerPlugin>
+	{
+
+		private final String clientKey;
+		private final String contextName;
+		private final String dataprovider;
+		private final String value;
+
+		public SetDataProviderCall(String clientKey, String contextName, String dataprovider, String value)
 		{
-			retValue = c.setDataProviderValue(contextName, dataprovider, getJSONConverter().convertFromJSON(c.getPluginAccess().getDatabaseManager(), value));
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("exception when deserializing value " + value, e);
+			this.clientKey = clientKey;
+			this.contextName = contextName;
+			this.dataprovider = dataprovider;
+			this.value = value;
 		}
 
-		try
+		@Override
+		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
-			return getJSONConverter().convertToJSON(retValue);
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("exception when serializing value " + retValue, e);
-		}
+			IHeadlessClient c = correctServerObject.getClient(clientKey);
+			Object retValue;
+			try
+			{
+				retValue = c.setDataProviderValue(contextName, dataprovider,
+					correctServerObject.getJSONConverter().convertFromJSON(c.getPluginAccess().getDatabaseManager(), value));
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException("exception when deserializing value " + value, e);
+			}
 
+			try
+			{
+				return correctServerObject.getJSONConverter().convertToJSON(retValue);
+			}
+			catch (Exception e)
+			{
+				throw new RuntimeException("exception when serializing value " + retValue, e);
+			}
+		}
 	}
 
 	public void shutDown(String clientKey, boolean force)
 	{
-		IHeadlessClient c = getClient(clientKey);
-		try
+		serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new ShutDownCall(clientKey, force), true);
+	}
+
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class ShutDownCall extends Call<HeadlessServerPlugin>
+	{
+
+		private final String clientKey;
+		private final boolean force;
+
+		public ShutDownCall(String clientKey, boolean force)
 		{
-			c.shutDown(force);
+			this.clientKey = clientKey;
+			this.force = force;
 		}
-		finally
+
+		@Override
+		@TerracottaAutolockWrite
+		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
-			clients.remove(clientKey);
+			IHeadlessClient c = correctServerObject.getClient(clientKey);
+			try
+			{
+				c.shutDown(force);
+			}
+			finally
+			{
+				correctServerObject.clients.remove(clientKey);
+				synchronized (correctServerObject.clientIdToServerId) // Terracotta WRITE lock
+				{
+					correctServerObject.clientIdToServerId.remove(clientKey);
+				}
+			}
+			return null;
 		}
 	}
 
+	@TerracottaInstrumentedClass
 	private static class MethodCall
 	{
 

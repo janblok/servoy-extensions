@@ -26,15 +26,29 @@ public interface IHeadlessServer extends Remote
 	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId)
 		throws Exception, RemoteException;
 
-	public Object executeMethod(String clientKey, String contextName, String methodName, Object[] args, String callingClientId) throws Exception,
+	/**
+	 * 
+	 * @param args this is an array of serialized-through-JSON objects.
+	 * @return a serialized-through-JSON (so actually a String) object.
+	 */
+	public Object executeMethod(String clientKey, String contextName, String methodName, String[] args, String callingClientId) throws Exception,
 		RemoteException;
 
 	public boolean isValid(String clientKey) throws RemoteException;
 
+	/**
+	 * 
+	 * @return  a serialized-through-JSON (so actually a String) object or UndefinedMarker.INSTANCE.
+	 */
 	public Object getDataProviderValue(String clientKey, String contextName, String dataprovider, String callingClientId, String methodName)
 		throws RemoteException;
 
-	public Object setDataProviderValue(String clientKey, String contextName, String dataprovider, Object value, String callingClientId, String methodName)
+	/**
+	 * 
+	 * @param value this is a serialized-through-JSON object.
+	 * @return a serialized-through-JSON (so actually a String) object or UndefinedMarker.INSTANCE.
+	 */
+	public Object setDataProviderValue(String clientKey, String contextName, String dataprovider, String value, String callingClientId, String methodName)
 		throws RemoteException;
 
 	public void shutDown(String clientKey, boolean force) throws RemoteException;

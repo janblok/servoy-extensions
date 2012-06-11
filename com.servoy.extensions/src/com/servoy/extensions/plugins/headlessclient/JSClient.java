@@ -99,8 +99,8 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * 
 	 * @sampleas js_getClientID()
 	 * 
-	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
-	 * @param methodName The method name
+	 * @param contextName The context of the given method, null if it is global method or a form name for a form method.
+	 * @param methodName The method name.
 	 * @param args The arguments that should be passed to the method.
 	 * @param notifyCallBackMethod The callback method that is called when the execution is finished.
 	 */
@@ -116,10 +116,10 @@ public class JSClient implements IScriptable, IConstantsObject
 					Object retval = null;
 					try
 					{
-						Object[] convertedArgs = null;
+						String[] convertedArgs = null;
 						if (args != null)
 						{
-							convertedArgs = new Object[args.length];
+							convertedArgs = new String[args.length];
 
 							for (int i = 0; i < args.length; i++)
 							{
@@ -189,7 +189,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	}
 
 	/**
-	 * returns true if this client is still valid/usable
+	 * returns true if this client is still valid/usable.
 	 *
 	 * @sampleas js_getClientID()
 	 */
@@ -225,7 +225,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	}
 
 	/**
-	 * closes the client
+	 * closes the client.
 	 *
 	 * @sampleas js_getClientID()
 	 */
@@ -253,7 +253,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	}
 
 	/**
-	 * Get a dataprovider value.
+	 * Get a data-provider value.
 	 *
 	 * @sample
 	 * if (jsclient && jsclient.isValid())
@@ -274,8 +274,8 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * }
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
-	 * @param dataprovider the dataprovider name as seen in Servoy
-	 * @return the value for the dataprovider
+	 * @param dataprovider the data-provider name as seen in Servoy
+	 * @return the value for the data-provider.
 	 */
 	public Object js_getDataProviderValue(String contextName, String dataprovider)
 	{
@@ -286,10 +286,10 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * @clonedesc js_getDataProviderValue(String, String)
 	 * @sampleas js_getDataProviderValue(String, String)
 	 *
-	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
-	 * @param dataprovider the dataprovider name as seen in Servoy
-	 * @param methodName the methodname that should be running now for this client, if not then undefined is returned.
-	 * @return the value for the dataprovider
+	 * @param contextName The context of the given method; null if it is global method or a form name for a form method.
+	 * @param dataprovider the data-provider name as seen in Servoy.
+	 * @param methodName if this is specified, the data-provider's value will only be returned if the specified method is running in this headless client because the currently running client requested it to. Otherwise undefined is returned.
+	 * @return the value of the data-provider.
 	 */
 	public Object js_getDataProviderValue(String contextName, String dataprovider, String methodName)
 	{
@@ -323,14 +323,14 @@ public class JSClient implements IScriptable, IConstantsObject
 
 
 	/**
-	 * Set a dataprovider value.
+	 * Set a data-provider value.
 	 * 
 	 * @sampleas js_getDataProviderValue(String, String)
 	 * 
-	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
-	 * @param dataprovider the dataprovider name as seen in Servoy
-	 * @param value to set
-	 * @return the old value or null if no change
+	 * @param contextName The context of the given method, null if it is global method or a form name for a form method.
+	 * @param dataprovider the data-provider name as seen in Servoy.
+	 * @param value the value to set.
+	 * @return the old value or null if no change.
 	 */
 	public Object js_setDataProviderValue(String contextName, String dataprovider, Object value)
 	{
@@ -342,9 +342,9 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * @sampleas js_setDataProviderValue(String, String, Object)
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method
-	 * @param dataprovider the dataprovider name as seen in Servoy
-	 * @param value to set
-	 * @param methodName the methodname that should be running now for this client, if not then value wont be set and undefined is returned.
+	 * @param dataprovider the data-provider name as seen in Servoy
+	 * @param value the value to set
+	 * @param methodName if this is specified, the data-provider's value will only be set if the specified method is running in this headless client because the currently running client requested it to. Otherwise the value is not set into the data-provider and undefined is returned.
 	 * @return the old value or null if no change
 	 */
 	public Object js_setDataProviderValue(String contextName, String dataprovider, Object value, String methodName)
