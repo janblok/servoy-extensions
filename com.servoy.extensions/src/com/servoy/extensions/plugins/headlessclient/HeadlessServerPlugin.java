@@ -131,9 +131,8 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class ClearInvalidClients extends Call<HeadlessServerPlugin>
+	private static class ClearInvalidClients implements Call<HeadlessServerPlugin>
 	{
-		@Override
 		@TerracottaAutolockWrite
 		public Object executeCall(HeadlessServerPlugin correctServerObject)
 		{
@@ -195,7 +194,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class ExecuteMethodCall extends Call<HeadlessServerPlugin>
+	private static class ExecuteMethodCall implements Call<HeadlessServerPlugin>
 	{
 
 		private final String clientKey;
@@ -211,7 +210,6 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.args = args;
 		}
 
-		@Override
 		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
 			try
@@ -285,7 +283,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class GetDataProviderCall extends Call<HeadlessServerPlugin>
+	private static class GetDataProviderCall implements Call<HeadlessServerPlugin>
 	{
 
 		private final String clientKey;
@@ -299,7 +297,6 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.dataprovider = dataprovider;
 		}
 
-		@Override
 		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
 
@@ -332,7 +329,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class CheckValidityCall extends Call<HeadlessServerPlugin>
+	private static class CheckValidityCall implements Call<HeadlessServerPlugin>
 	{
 
 		private final String clientKey;
@@ -342,7 +339,6 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.clientKey = clientKey;
 		}
 
-		@Override
 		@TerracottaAutolockWrite
 		public Boolean executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
@@ -379,7 +375,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class SetDataProviderCall extends Call<HeadlessServerPlugin>
+	private static class SetDataProviderCall implements Call<HeadlessServerPlugin>
 	{
 
 		private final String clientKey;
@@ -395,7 +391,6 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.value = value;
 		}
 
-		@Override
 		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
 			IHeadlessClient c = correctServerObject.getClient(clientKey);
@@ -428,7 +423,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class ShutDownCall extends Call<HeadlessServerPlugin>
+	private static class ShutDownCall implements Call<HeadlessServerPlugin>
 	{
 
 		private final String clientKey;
@@ -440,7 +435,6 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.force = force;
 		}
 
-		@Override
 		@TerracottaAutolockWrite
 		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{

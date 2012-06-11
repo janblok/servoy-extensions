@@ -42,18 +42,18 @@ public class ServerPluginDispatcher<E> implements Runnable
 {
 
 	/**
-	 * Children of this class will be in cluster shared memory - so instrument them correctly.
+	 * Classes that implement this interface will be in cluster shared memory - so instrument them with Terracotta correctly.
 	 * @author acostescu
 	 *
 	 * @param <E> the object of target server that a call needs to use in order to execute.
 	 */
 	@TerracottaInstrumentedClass
-	public static abstract class Call<E>
+	public static interface Call<E>
 	{
 		/**
 		 * Return type, and the exception
 		 */
-		public abstract Object executeCall(E correctServerObject) throws Exception;
+		Object executeCall(E correctServerObject) throws Exception;
 	}
 
 	/**
@@ -97,8 +97,21 @@ public class ServerPluginDispatcher<E> implements Runnable
 					Debug.trace(e);
 					exceptionMsg = e.getClass().getCanonicalName() + ": " + e.getMessage(); //$NON-NLS-1$
 				}
-				done = true;
-				notifyAll(); // tell calling server plugin that he's got a value
+				finally
+				{
+					done = true;
+					notifyAll(); // tell calling server plugin that he's got a value
+				}
+			}
+		}
+
+		@TerracottaAutolockWrite
+		public void waitForCall() throws InterruptedException
+		{
+			synchronized (this) // Terracotta WRITE lock (for wait)
+			{
+				while (!done)
+					wait();
 			}
 		}
 
@@ -108,6 +121,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 	@TerracottaRoot
 	private final HashMap<String, List<CallWrapper<E>>> clusterWideCallQueue = new HashMap<String, List<CallWrapper<E>>>();
 	private final List<CallWrapper<E>> callQueueOfThisPlugin; // cache to avoid one more unnecessary readLock on clusterWideCallQueue when dispatching messages
+	private boolean runningInCluster; // true if the plugin is running inside a terracotta cluster; false if it's a stand-alone Servoy app. server
 	private final String thisServerPluginId;
 	private volatile boolean stop = false;
 	private final E thisServerObject;
@@ -117,10 +131,13 @@ public class ServerPluginDispatcher<E> implements Runnable
 	{
 		this.thisServerPluginId = serverPluginId;
 
+		runningInCluster = false;
 		try
 		{
 			// if this class can be found it means application server was started under Terracotta
 			Class.forName("com.tc.cluster.DsoClusterListener"); //$NON-NLS-1$
+			runningInCluster = true;
+
 			Debug.trace("Starting cluster listener for server plugin."); //$NON-NLS-1$
 			new ClusterListener();
 		}
@@ -138,15 +155,18 @@ public class ServerPluginDispatcher<E> implements Runnable
 			clusterWideCallQueue.put(serverPluginId, callQueueOfThisPlugin);
 		}
 
-		try
+		if (runningInCluster)
 		{
-			Thread callScheduler = new Thread(this, "Headless plugin Dispatcher"); //$NON-NLS-1$
-			callScheduler.setDaemon(true);
-			callScheduler.start();
-		}
-		catch (Exception e)
-		{
-			Debug.error(e);
+			try
+			{
+				Thread callScheduler = new Thread(this, "Headless plugin Dispatcher"); //$NON-NLS-1$
+				callScheduler.setDaemon(true);
+				callScheduler.start();
+			}
+			catch (Exception e)
+			{
+				Debug.error(e);
+			}
 		}
 	}
 
@@ -167,16 +187,23 @@ public class ServerPluginDispatcher<E> implements Runnable
 	public void callOnAllServers(Call<E> call)
 	{
 		CallWrapper<E> callWrapper = new CallWrapper<E>(call);
-		synchronized (clusterWideCallQueue) // Terracotta WRITE lock
+		if (runningInCluster)
 		{
-			for (List<CallWrapper<E>> lst : clusterWideCallQueue.values())
+			synchronized (clusterWideCallQueue) // Terracotta WRITE lock
 			{
-				synchronized (lst) // Terracotta WRITE lock
+				for (List<CallWrapper<E>> lst : clusterWideCallQueue.values())
 				{
-					if (lst.size() == 0) lst.notifyAll();
-					lst.add(callWrapper);
+					synchronized (lst) // Terracotta WRITE lock
+					{
+						if (lst.size() == 0) lst.notifyAll();
+						lst.add(callWrapper);
+					}
 				}
 			}
+		}
+		else
+		{
+			callWrapper.executeCall(thisServerObject);
 		}
 	}
 
@@ -187,57 +214,56 @@ public class ServerPluginDispatcher<E> implements Runnable
 	public Object callOnCorrectServer(String serverPluginId, Call<E> call, boolean waitForExecution)
 	{
 		CallWrapper<E> callWrapper = new CallWrapper<E>(call);
-		List<CallWrapper<E>> callList = getCallList(serverPluginId);
-		if (callList != null)
+
+		if (runningInCluster)
 		{
-			synchronized (callList) // Terracotta WRITE lock
+			List<CallWrapper<E>> callList = getCallList(serverPluginId);
+			if (callList != null)
 			{
-				if (callList.size() == 0) callList.notify();
-				callList.add(callWrapper);
-			}
-
-			if (waitForExecution)
-			{
-				try
+				synchronized (callList) // Terracotta WRITE lock
 				{
-					waitForCall(callWrapper); // after this call, the callWrapper should be up to date on the heap (clustering), as it's synchronized when waiting
-					// otherwise, future references like callWrapper.result would need to acquire a terracotta read lock
-				}
-				catch (InterruptedException e)
-				{
-					throw new RuntimeException(e.getClass().getCanonicalName() + ": " + e.getMessage()); //$NON-NLS-1$
+					if (callList.size() == 0) callList.notify();
+					callList.add(callWrapper);
 				}
 
-				if (callWrapper.exception != null)
+				if (waitForExecution)
 				{
-					throw callWrapper.exception;
-				}
-				else if (callWrapper.exceptionMsg != null)
-				{
-					throw new RuntimeException(callWrapper.exceptionMsg);
+					try
+					{
+						callWrapper.waitForCall(); // after this call, the callWrapper should be up to date on the heap (clustering), as it's synchronized when waiting
+						// otherwise, future references like callWrapper.result would need to acquire a terracotta read lock
+					}
+					catch (InterruptedException e)
+					{
+						throw new RuntimeException(e.getClass().getCanonicalName() + ": " + e.getMessage()); //$NON-NLS-1$
+					}
 				}
 			}
-			return callWrapper.result;
+			else
+			{
+				throw new RuntimeException("The client's app. server is no longer running."); //$NON-NLS-1$
+			}
 		}
 		else
 		{
-			throw new RuntimeException("The client's app. server is no longer running."); //$NON-NLS-1$
+			callWrapper.executeCall(thisServerObject);
 		}
-	}
 
-	@TerracottaAutolockWrite
-	private void waitForCall(CallWrapper<E> callWrapper) throws InterruptedException
-	{
-		synchronized (callWrapper) // Terracotta WRITE lock (for wait)
+		if (callWrapper.exception != null)
 		{
-			while (!callWrapper.done)
-				callWrapper.wait();
+			throw callWrapper.exception;
 		}
+		else if (callWrapper.exceptionMsg != null)
+		{
+			throw new RuntimeException(callWrapper.exceptionMsg);
+		}
+		return callWrapper.result;
 	}
 
 	@TerracottaAutolockWrite
 	public void run()
 	{
+		// runs in a separate thread when inside a terracotta cluster
 		List<CallWrapper<E>> copiedCalls = new ArrayList<CallWrapper<E>>();
 		while (!stop)
 		{
