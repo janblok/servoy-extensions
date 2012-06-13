@@ -297,7 +297,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info
 	 * 
-	 * @deprecated
+	 * @deprecated for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info
 	 */
 	@Deprecated
 	public void js_setRoots(Object[] vargs);
@@ -305,7 +305,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setMRelationName(name) instead
 	 */
 	@Deprecated
 	public void js_setMRelationName(String name);
@@ -313,7 +313,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setNRelationName(name) instead
 	 */
 	@Deprecated
 	public void js_setNRelationName(String name);
@@ -321,7 +321,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead
 	 */
 	@Deprecated
 	public void js_bindNodeFontTypeDataProvider(String dp);
@@ -329,7 +329,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead
 	 */
 	@Deprecated
 	public void js_bindNodeImageMediaDataProvider(String dp);
@@ -337,7 +337,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setImageURLDataprovider(imageURLDataprovider) instead
 	 */
 	@Deprecated
 	public void js_bindNodeImageURLDataProvider(String dp);
@@ -345,7 +345,7 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead
 	 */
 	@Deprecated
 	public void js_bindNodeTooltipTextDataProvider(String dp);
@@ -353,13 +353,13 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	/**
 	 * for compatibility, store this in a compatibility Binding instance
 	 * 
-	 * @deprecated
+	 * @deprecated use Binding.setCallBackInfo(f,returnDataprovider)
 	 */
 	@Deprecated
 	public void js_setCallBackInfo(Function f, String returndp);
 
 	/**
-	 * @deprecated
+	 * @deprecated use Binding.setChildSortDataprovider(childSortDataprovider)
 	 */
 	@Deprecated
 	public void js_bindNodeChildSortDataProvider(String dp);

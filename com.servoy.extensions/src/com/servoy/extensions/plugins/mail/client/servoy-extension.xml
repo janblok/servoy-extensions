@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -370,6 +370,7 @@ else
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             <description><![CDATA[Returns a Date instace corresponding to the moment when the message was received.]]></description>
             <summary><![CDATA[Returns a Date instace corresponding to the moment when the message was received.]]></summary>
+            <deprecated><![CDATA[No longer supported. Try using  #getHeaders() for approximate results.]]></deprecated>
             <sample><![CDATA[var msgs = plugins.mail.receiveMail(username, password, true, 0, null, properties);
 if (msgs != null)
 {

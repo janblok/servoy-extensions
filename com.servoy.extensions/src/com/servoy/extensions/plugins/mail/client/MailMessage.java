@@ -142,6 +142,8 @@ public class MailMessage implements Serializable, IScriptable
 	/**
 	 * Returns a Date instace corresponding to the moment when the message was received.
 	 *
+	 * @deprecated No longer supported. Try using  {@link #getHeaders()} for approximate results.
+	 * 
 	 * @sampleas js_getAttachments()
 	 */
 	@Deprecated
