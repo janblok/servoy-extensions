@@ -207,6 +207,22 @@ public class JSClient implements IScriptable, IConstantsObject
 	}
 
 	/**
+	 * @deprecated Replaced by {@link #shutdown(boolean)}
+	 */
+	@Deprecated
+	public void js_shutDown(boolean force)
+	{
+		try
+		{
+			headlessServer.shutDown(clientID, force);
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+		}
+	}
+
+	/**
 	 * closes the client.
 	 *
 	 * @sampleas js_getClientID()

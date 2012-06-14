@@ -258,6 +258,15 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
+          <function deprecated="true" name="shutDown">
+            <argumentsTypes>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #shutdown(boolean)]]></deprecated>
+            <sample/>
+          </function>
           <function name="shutdown">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
