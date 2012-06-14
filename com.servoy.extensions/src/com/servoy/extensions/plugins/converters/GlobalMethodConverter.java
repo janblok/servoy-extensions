@@ -63,12 +63,20 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverte
 
 	public Object convertFromObject(Map<String, String> props, int column_type, Object obj) throws Exception
 	{
-		return executeMethod(props.get(FROM_OBJECT_NAME_PROPERTY), column_type, obj);
+		if (props != null)
+		{
+			return executeMethod(props.get(FROM_OBJECT_NAME_PROPERTY), column_type, obj);
+		}
+		return obj;
 	}
 
 	public Object convertToObject(Map<String, String> props, int column_type, Object dbvalue) throws Exception
 	{
-		return executeMethod(props.get(TO_OBJECT_NAME_PROPERTY), column_type, dbvalue);
+		if (props != null)
+		{
+			return executeMethod(props.get(TO_OBJECT_NAME_PROPERTY), column_type, dbvalue);
+		}
+		return dbvalue;
 	}
 
 	public Map<String, String> getDefaultProperties()
@@ -90,14 +98,17 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverte
 	 */
 	public int getToObjectType(Map<String, String> props)
 	{
-		Object value = props.get(TYPE_NAME_PROPERTY);
-		if (value != null)
+		if (props != null)
 		{
-			if (value.equals("TEXT")) return IColumnTypes.TEXT; //$NON-NLS-1$
-			if (value.equals("INTEGER")) return IColumnTypes.INTEGER; //$NON-NLS-1$
-			if (value.equals("NUMBER")) return IColumnTypes.NUMBER; //$NON-NLS-1$
-			if (value.equals("DATETIME")) return IColumnTypes.DATETIME; //$NON-NLS-1$
-			if (value.equals("MEDIA")) return IColumnTypes.MEDIA; //$NON-NLS-1$
+			Object value = props.get(TYPE_NAME_PROPERTY);
+			if (value != null)
+			{
+				if (value.equals("TEXT")) return IColumnTypes.TEXT; //$NON-NLS-1$
+				if (value.equals("INTEGER")) return IColumnTypes.INTEGER; //$NON-NLS-1$
+				if (value.equals("NUMBER")) return IColumnTypes.NUMBER; //$NON-NLS-1$
+				if (value.equals("DATETIME")) return IColumnTypes.DATETIME; //$NON-NLS-1$
+				if (value.equals("MEDIA")) return IColumnTypes.MEDIA; //$NON-NLS-1$
+			}
 		}
 		return Integer.MAX_VALUE;
 	}

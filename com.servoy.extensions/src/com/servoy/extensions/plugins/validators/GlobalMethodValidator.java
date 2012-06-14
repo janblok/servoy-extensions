@@ -62,21 +62,24 @@ public class GlobalMethodValidator implements IColumnValidator, IPropertyDescrip
 
 	public void validate(Map<String, String> props, Object arg) throws IllegalArgumentException
 	{
-		String globalMethodName = props.get(GLOBAL_METHOD_NAME_PROPERTY);
-		if (globalMethodName != null && globalMethodName.trim().length() != 0)
+		if (props != null)
 		{
-			Object value = new Boolean(false);
-			try
+			String globalMethodName = props.get(GLOBAL_METHOD_NAME_PROPERTY);
+			if (globalMethodName != null && globalMethodName.trim().length() != 0)
 			{
-				value = clientPluginAccess.executeMethod(null, globalMethodName, new Object[] { arg }, false);
-			}
-			catch (Exception e)
-			{
-				Debug.error(e);
-			}
-			if (!Utils.getAsBoolean(value))
-			{
-				throw new IllegalArgumentException();
+				Object value = new Boolean(false);
+				try
+				{
+					value = clientPluginAccess.executeMethod(null, globalMethodName, new Object[] { arg }, false);
+				}
+				catch (Exception e)
+				{
+					Debug.error(e);
+				}
+				if (!Utils.getAsBoolean(value))
+				{
+					throw new IllegalArgumentException();
+				}
 			}
 		}
 	}
