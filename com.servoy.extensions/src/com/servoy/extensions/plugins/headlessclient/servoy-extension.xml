@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -46,9 +46,9 @@
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value for the dataprovider]]></return>
-            <description><![CDATA[Get a dataprovider value.]]></description>
-            <summary><![CDATA[Get a dataprovider value.]]></summary>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value for the data-provider.]]></return>
+            <description><![CDATA[Get a data-provider value.]]></description>
+            <summary><![CDATA[Get a data-provider value.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
@@ -70,7 +70,7 @@
                 <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
               </parameter>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the dataprovider name as seen in Servoy]]></description>
+                <description><![CDATA[the data-provider name as seen in Servoy]]></description>
               </parameter>
             </parameters>
           </function>
@@ -80,9 +80,9 @@
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value for the dataprovider]]></return>
-            <description><![CDATA[Get a dataprovider value.]]></description>
-            <summary><![CDATA[Get a dataprovider value.]]></summary>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value of the data-provider.]]></return>
+            <description><![CDATA[Get a data-provider value.]]></description>
+            <summary><![CDATA[Get a data-provider value.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
@@ -101,21 +101,21 @@
 }]]></sample>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
+                <description><![CDATA[The context of the given method; null if it is global method or a form name for a form method.]]></description>
               </parameter>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the dataprovider name as seen in Servoy]]></description>
+                <description><![CDATA[the data-provider name as seen in Servoy.]]></description>
               </parameter>
               <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the methodname that should be running now for this client, if not then undefined is returned.]]></description>
+                <description><![CDATA[if this is specified, the data-provider's value will only be returned if the specified method is running in this headless client because the currently running client requested it to. Otherwise undefined is returned.]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="isValid">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[returns true if this client is still valid/usable]]></description>
-            <summary><![CDATA[returns true if this client is still valid/usable]]></summary>
+            <description><![CDATA[returns true if this client is still valid/usable.]]></description>
+            <summary><![CDATA[returns true if this client is still valid/usable.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
@@ -167,10 +167,10 @@ The second argument that is give back is the JSClient instance that did the call
 }]]></sample>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
+                <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method.]]></description>
               </parameter>
               <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[The method name]]></description>
+                <description><![CDATA[The method name.]]></description>
               </parameter>
               <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
                 <description><![CDATA[The arguments that should be passed to the method.]]></description>
@@ -186,9 +186,9 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change]]></return>
-            <description><![CDATA[Set a dataprovider value.]]></description>
-            <summary><![CDATA[Set a dataprovider value.]]></summary>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change.]]></return>
+            <description><![CDATA[Set a data-provider value.]]></description>
+            <summary><![CDATA[Set a data-provider value.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
@@ -207,13 +207,13 @@ The second argument that is give back is the JSClient instance that did the call
 }]]></sample>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
+                <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method.]]></description>
               </parameter>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the dataprovider name as seen in Servoy]]></description>
+                <description><![CDATA[the data-provider name as seen in Servoy.]]></description>
               </parameter>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[to set]]></description>
+                <description><![CDATA[the value to set.]]></description>
               </parameter>
             </parameters>
           </function>
@@ -225,8 +225,8 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change]]></return>
-            <description><![CDATA[Set a dataprovider value.]]></description>
-            <summary><![CDATA[Set a dataprovider value.]]></summary>
+            <description><![CDATA[Set a data-provider value.]]></description>
+            <summary><![CDATA[Set a data-provider value.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
@@ -248,49 +248,21 @@ The second argument that is give back is the JSClient instance that did the call
                 <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
               </parameter>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the dataprovider name as seen in Servoy]]></description>
+                <description><![CDATA[the data-provider name as seen in Servoy]]></description>
               </parameter>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[to set]]></description>
+                <description><![CDATA[the value to set]]></description>
               </parameter>
               <parameter name="methodName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the methodname that should be running now for this client, if not then value wont be set and undefined is returned.]]></description>
+                <description><![CDATA[if this is specified, the data-provider's value will only be set if the specified method is running in this headless client because the currently running client requested it to. Otherwise the value is not set into the data-provider and undefined is returned.]]></description>
               </parameter>
-            </parameters>
-          </function>
-          <function deprecated="true" name="shutDown">
-            <argumentsTypes>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[closes the client]]></description>
-            <summary><![CDATA[closes the client]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
-{
-	/*Queue a method where the callback can do something like this
-	if (event.getType() == JSClient.CALLBACK_EVENT)
-	{
-		application.output("callback data, name: " + event.data);
-	}
-	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
-	{
-		application.output("exception callback, name: " + event.data);
-	}*/
-	var x = new Object();
-	x.name = 'remote1';
-	x.number = 10;
-	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
-	jsclient.queueMethod(null, "remoteMethod", [x], callback);
-}]]></sample>
-            <parameters>
-              <parameter name="force" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
           <function name="shutdown">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[closes the client]]></description>
-            <summary><![CDATA[closes the client]]></summary>
+            <description><![CDATA[closes the client.]]></description>
+            <summary><![CDATA[closes the client.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
@@ -314,8 +286,8 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[closes the client]]></description>
-            <summary><![CDATA[closes the client]]></summary>
+            <description><![CDATA[closes the client.]]></description>
+            <summary><![CDATA[closes the client.]]></summary>
             <sample><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
