@@ -843,13 +843,12 @@ public class BindingInfo
 
 	private void removeBinding(Binding binding)
 	{
-		String datasource = binding.getDataSource();
 		Binding b;
 		for (int i = 0; i < bindings.size(); i++)
 		{
 			b = (Binding)bindings.get(i);
 
-			if (datasource.equals(b.getDataSource()))
+			if (Utils.equalObjects(binding.getDataSource(), b.getDataSource()))
 			{
 				bindings.remove(i);
 				return;
