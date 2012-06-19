@@ -713,6 +713,7 @@ public class BindingInfo
 
 	public void addBinding(Binding b)
 	{
+		removeBinding(b); // clear existing binding first
 		bindings.add(b);
 	}
 
@@ -838,5 +839,21 @@ public class BindingInfo
 		}
 
 		return null;
+	}
+
+	private void removeBinding(Binding binding)
+	{
+		String datasource = binding.getDataSource();
+		Binding b;
+		for (int i = 0; i < bindings.size(); i++)
+		{
+			b = (Binding)bindings.get(i);
+
+			if (datasource.equals(b.getDataSource()))
+			{
+				bindings.remove(i);
+				return;
+			}
+		}
 	}
 }
