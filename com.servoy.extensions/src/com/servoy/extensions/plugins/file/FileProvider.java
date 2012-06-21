@@ -179,8 +179,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * application.output('path: ' + f.getAbsolutePath());
 	 * 
 	 * // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+	 * // if filters are specified, "all file" filter will not show up unless "*" filter is present
 	 * /** @type {JSFile[]} *&#47;
-	 * var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif"));
+	 * var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 	 * for (var i = 0; i < files.length; i++)
 	 * {
 	 * 	 application.output('File: ' + files[i].getName());
