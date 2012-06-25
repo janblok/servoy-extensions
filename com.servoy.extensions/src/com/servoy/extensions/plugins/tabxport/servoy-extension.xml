@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -31,8 +31,8 @@ var isEnabled = plugins.textxport.importEnabled;]]></sample>
             <sample><![CDATA[//export with default separator(tab) and no header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);]]></sample>
             <parameters>
-              <parameter name="foundSet"/>
-              <parameter name="dataProviderIds"/>
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
           <function name="textExport">
@@ -47,9 +47,9 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
             <sample><![CDATA[//export with ';' separator and no header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');]]></sample>
             <parameters>
-              <parameter name="foundSet"/>
-              <parameter name="dataProviderIds"/>
-              <parameter name="separator"/>
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+              <parameter name="separator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="textExport">
@@ -65,9 +65,9 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
             <sample><![CDATA[//export with ';' separator and header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';',true);]]></sample>
             <parameters>
-              <parameter name="foundSet"/>
-              <parameter name="dataProviderIds"/>
-              <parameter name="separator"/>
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+              <parameter name="separator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="exportHeader" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>

@@ -118,7 +118,7 @@ public class RawSQLProvider implements IScriptable
 	 * @param serverName 
 	 * @param tableName 
 	 * @param sql
-	 * @param arguments
+	 * @param sql_args
 	 */
 	public boolean js_executeSQL(String serverName, String tableName, String sql, Object[] sql_args)
 	{

@@ -120,7 +120,7 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 * packet.writeUTF('hello world!')
 	 * plugins.udp.sendPacket('10.0.0.1',packet)
 	 *
-	 * @param hostAddress
+	 * @param destIpOrHostname
 	 * @param packet 
 	 */
 	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet)
@@ -136,11 +136,11 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 * packet.writeUTF('hello world!')
 	 * plugins.udp.sendPacket('10.0.0.1',packet, 4321)
 	 *
-	 * @param hostAddress
+	 * @param destIpOrHostname
 	 * @param packet 
 	 * @param port
 	 */
-	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet, int aport)
+	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet, int port)
 	{
 		if (destIpOrHostname != null && packet != null)
 		{
@@ -151,7 +151,7 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 				{
 					DatagramPacket dp = packet.getRealPacket();
 					dp.setAddress(ip);
-					dp.setPort(aport);
+					dp.setPort(port);
 					return listner.send(dp);
 				}
 			}

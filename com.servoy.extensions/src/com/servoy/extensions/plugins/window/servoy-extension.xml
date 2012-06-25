@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -2694,9 +2694,6 @@ menu.addSeparator();
 menu.addRadioButton("radio", feedback_radiobutton);
 // add another separator between the item and the checkbox 
 menu.addSeparator(1);]]></sample>
-            <parameters>
-              <parameter name="index" optional="true"/>
-            </parameters>
           </function>
           <function name="addSeparator">
             <argumentsTypes>
@@ -2722,7 +2719,9 @@ menu.addRadioButton("radio", feedback_radiobutton);
 // add another separator between the item and the checkbox 
 menu.addSeparator(1);]]></sample>
             <parameters>
-              <parameter name="index" optional="true" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the index at which to add the separator]]></description>
+              </parameter>
             </parameters>
           </function>
           <function deprecated="true" name="addSubMenu">
@@ -5344,9 +5343,6 @@ menu.addSeparator();
 menu.addRadioButton("radio", feedback_radiobutton);
 // add another separator between the item and the checkbox 
 menu.addSeparator(1);]]></sample>
-            <parameters>
-              <parameter name="index" optional="true"/>
-            </parameters>
           </function>
           <function name="addSeparator">
             <argumentsTypes>
@@ -5372,7 +5368,9 @@ menu.addRadioButton("radio", feedback_radiobutton);
 // add another separator between the item and the checkbox 
 menu.addSeparator(1);]]></sample>
             <parameters>
-              <parameter name="index" optional="true" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the index at which to add the separator]]></description>
+              </parameter>
             </parameters>
           </function>
           <function deprecated="true" name="addSubMenu">

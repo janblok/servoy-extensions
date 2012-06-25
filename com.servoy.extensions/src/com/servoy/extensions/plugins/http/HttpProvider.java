@@ -340,7 +340,6 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 * var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');
 	 *
 	 * @param url 
-	 * @param http_clientname optional
 	 */
 	public byte[] js_getMediaData(String url)
 	{

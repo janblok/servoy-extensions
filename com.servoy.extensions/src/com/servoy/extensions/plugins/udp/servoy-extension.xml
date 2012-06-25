@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -397,7 +397,7 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
             <parameters>
-              <parameter name="hostAddress"/>
+              <parameter name="destIpOrHostname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             </parameters>
           </function>
@@ -414,9 +414,9 @@ plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
             <parameters>
-              <parameter name="hostAddress"/>
+              <parameter name="destIpOrHostname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
-              <parameter name="port"/>
+              <parameter name="port" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
           <function name="startSocket">

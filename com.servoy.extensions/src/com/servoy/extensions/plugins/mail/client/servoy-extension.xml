@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -956,8 +956,12 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendMail">
@@ -984,8 +988,12 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
@@ -1016,8 +1024,12 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
@@ -1053,15 +1065,21 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
               <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
-              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
+              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment">
+                <description><![CDATA[A single attachment]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendMail">
@@ -1093,16 +1111,24 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
               <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
-              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
-              <parameter name="smtpHost" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment">
+                <description><![CDATA[A single attachment]]></description>
+              </parameter>
+              <parameter name="smtpHost" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The smtp host]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendMail">
@@ -1119,7 +1145,17 @@ if (!success)
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></description>
             <summary><![CDATA[Send a mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).]]></summary>
-            <sample/>
+            <sample><![CDATA[var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+//it is possbile to set all kind of smtp properties
+var properties = new Array()
+properties[0] = 'mail.smtp.host=myserver.com'
+// properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+var success = plugins.mail.sendMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',attachment,properties);
+if (!success) 
+{
+	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
+}]]></sample>
             <parameters>
               <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A string with 1 address or multiply seperated by a comma.]]></description>
@@ -1127,16 +1163,24 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
               <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
-              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment"/>
-              <parameter name="properties"/>
+              <parameter name="attachment" type="com.servoy.extensions.plugins.mail.client.Attachment" typecode="com.servoy.extensions.plugins.mail.client.Attachment">
+                <description><![CDATA[A single attachment]]></description>
+              </parameter>
+              <parameter name="overrideProperties" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[An array of properties]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendMail">
@@ -1167,15 +1211,21 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
               <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
-              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
+              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;">
+                <description><![CDATA[The attachments]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendMail">
@@ -1208,16 +1258,24 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
               <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
-              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
-              <parameter name="smtpHost" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;">
+                <description><![CDATA[The attachments]]></description>
+              </parameter>
+              <parameter name="smtpHost" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The smtp host]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendMail">
@@ -1253,16 +1311,24 @@ if (!success)
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A address string with optional a reply address seperated by a comma.]]></description>
               </parameter>
-              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="subject" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The subject of the mail]]></description>
+              </parameter>
+              <parameter name="msgText" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The message text]]></description>
+              </parameter>
               <parameter name="cc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
               <parameter name="bcc" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[One or more addresses seperated by a comma]]></description>
               </parameter>
-              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
-              <parameter name="properties"/>
+              <parameter name="attachments" type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;">
+                <description><![CDATA[The attachments]]></description>
+              </parameter>
+              <parameter name="overrideProperties" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[An array of properties]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>

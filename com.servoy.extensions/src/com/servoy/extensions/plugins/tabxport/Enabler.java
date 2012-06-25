@@ -116,9 +116,9 @@ public class Enabler implements IScriptable
 	 * @param foundSet 
 	 * @param dataProviderIds 
 	 */
-	public String js_textExport(IFoundSet foundset, String[] dataproviders)
+	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds)
 	{
-		return js_textExport(foundset, dataproviders, "\t", false); //$NON-NLS-1$
+		return js_textExport(foundSet, dataProviderIds, "\t", false); //$NON-NLS-1$
 	}
 
 
@@ -133,9 +133,9 @@ public class Enabler implements IScriptable
 	 * @param dataProviderIds 
 	 * @param separator
 	 */
-	public String js_textExport(IFoundSet foundset, String[] dataproviders, String sep)
+	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds, String separator)
 	{
-		return js_textExport(foundset, dataproviders, sep, false);
+		return js_textExport(foundSet, dataProviderIds, separator, false);
 	}
 
 
@@ -151,13 +151,13 @@ public class Enabler implements IScriptable
 	 * @param separator
 	 * @param exportHeader
 	 */
-	public String js_textExport(IFoundSet foundset, String[] dataproviders, String sep, boolean exportHeader)
+	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds, String separator, boolean exportHeader)
 	{
-		if (foundset != null && dataproviders != null && dataproviders.length > 0)
+		if (foundSet != null && dataProviderIds != null && dataProviderIds.length > 0)
 		{
 			StringBuffer fileData = new StringBuffer();
-			if (exportHeader) fileData.insert(0, ExportSpecifyFilePanel.createHeader(dataproviders, sep));
-			fileData.append(ExportSpecifyFilePanel.populateFileData(foundset, dataproviders, sep));
+			if (exportHeader) fileData.insert(0, ExportSpecifyFilePanel.createHeader(dataProviderIds, separator));
+			fileData.append(ExportSpecifyFilePanel.populateFileData(foundSet, dataProviderIds, separator));
 
 			return fileData.toString();
 		}

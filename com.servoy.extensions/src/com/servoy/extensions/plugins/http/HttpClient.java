@@ -75,71 +75,71 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	 * 	//do something
 	 * }
 	 *
-	 * @param cookieName 
-	 * @param cookieValue 
+	 * @param cookieName the name of the cookie 
+	 * @param cookieValue the value of the cookie
 	 */
-	public boolean js_setCookie(String name, String value)
+	public boolean js_setCookie(String cookieName, String cookieValue)
 	{
-		return js_setCookie(name, value, ""); //$NON-NLS-1$
+		return js_setCookie(cookieName, cookieValue, ""); //$NON-NLS-1$
 	}
 
 	/**
 	 * @clonedesc js_setCookie(String, String)
 	 * @sampleas js_setCookie(String, String)
 	 *
-	 * @param cookieName 
-	 * @param cookieValue 
-	 * @param domain
+	 * @param cookieName the name of the cookie
+	 * @param cookieValue the value of the cookie
+	 * @param domain the domain
 	 */
-	public boolean js_setCookie(String name, String value, String domain)
+	public boolean js_setCookie(String cookieName, String cookieValue, String domain)
 	{
-		return js_setCookie(name, value, domain, ""); //$NON-NLS-1$
+		return js_setCookie(cookieName, cookieValue, domain, ""); //$NON-NLS-1$
 	}
 
 	/**
 	 * @clonedesc js_setCookie(String, String)
 	 * @sampleas js_setCookie(String, String)
 	 *
-	 * @param cookieName 
-	 * @param cookieValue 
-	 * @param domain
-	 * @param path
+	 * @param cookieName the name of the cookie
+	 * @param cookieValue the value of the cookie
+	 * @param domain the domain
+	 * @param path the path
 	 */
-	public boolean js_setCookie(String name, String value, String domain, String path)
+	public boolean js_setCookie(String cookieName, String cookieValue, String domain, String path)
 	{
-		return js_setCookie(name, value, domain, path, -1);
+		return js_setCookie(cookieName, cookieValue, domain, path, -1);
 	}
 
 	/**
 	 * @clonedesc js_setCookie(String, String)
 	 * @sampleas js_setCookie(String, String)
 	 *
-	 * @param cookieName 
-	 * @param cookieValue 
-	 * @param domain
-	 * @param path
-	 * @param maxAge
+	 * @param cookieName the name of the cookie
+	 * @param cookieValue the value of the cookie
+	 * @param domain the domain
+	 * @param path the path
+	 * @param maxAge maximum age of cookie
 	 */
-	public boolean js_setCookie(String name, String value, String domain, String path, int maxAge)
+	public boolean js_setCookie(String cookieName, String cookieValue, String domain, String path, int maxAge)
 	{
-		return js_setCookie(name, value, domain, path, maxAge, false);
+		return js_setCookie(cookieName, cookieValue, domain, path, maxAge, false);
 	}
 
 	/**
 	 * @clonedesc js_setCookie(String, String)
 	 * @sampleas js_setCookie(String, String)
 	 *
-	 * @param cookieName 
-	 * @param cookieValue 
-	 * @param domain
-	 * @param path
-	 * @param maxAge
-	 * @param secure
+	 * @param cookieName the name of the cookie
+	 * @param cookieValue the value of the cookie
+	 * @param domain the domain
+	 * @param path the path
+	 * @param maxAge maximum age of cookie
+	 * @param secure true if it is a secure cookie, false otherwise
 	 */
-	public boolean js_setCookie(String name, String value, String domain, String path, int maxAge, boolean secure)
+	public boolean js_setCookie(String cookieName, String cookieValue, String domain, String path, int maxAge, boolean secure)
 	{
 		//Correct to disallow empty Cookie values? how to clear a Cookie then?
-		if (Utils.stringIsEmpty(name) || Utils.stringIsEmpty(value))
+		if (Utils.stringIsEmpty(cookieName) || Utils.stringIsEmpty(cookieValue))
 		{
 			return false;
 		}
@@ -150,7 +150,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 		}
 
 		BasicClientCookie cookie;
-		cookie = new BasicClientCookie(name, value);
+		cookie = new BasicClientCookie(cookieName, cookieValue);
 		if (!Utils.stringIsEmpty(path))
 		{
 			cookie.setPath(path);

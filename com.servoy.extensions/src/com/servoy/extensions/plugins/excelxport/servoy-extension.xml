@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -38,7 +38,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
-              <parameter name="dataProviderIds"/>
+              <parameter name="dataProvidersIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
           <function name="excelExport">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -76,10 +76,6 @@ var value = cookie.getValue();]]></sample>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -91,8 +87,12 @@ var value = cookie.getValue();]]></sample>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>
@@ -119,10 +119,6 @@ var value = cookie.getValue();]]></sample>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -134,8 +130,12 @@ var value = cookie.getValue();]]></sample>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>
@@ -310,10 +310,6 @@ var value = cookie.getValue();]]></sample>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -325,8 +321,12 @@ var value = cookie.getValue();]]></sample>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>
@@ -495,8 +495,12 @@ if (cookieSet)
 	//do something
 }]]></sample>
             <parameters>
-              <parameter name="cookieName"/>
-              <parameter name="cookieValue"/>
+              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the cookie]]></description>
+              </parameter>
+              <parameter name="cookieValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the value of the cookie]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setCookie">
@@ -514,9 +518,15 @@ if (cookieSet)
 	//do something
 }]]></sample>
             <parameters>
-              <parameter name="cookieName"/>
-              <parameter name="cookieValue"/>
-              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the cookie]]></description>
+              </parameter>
+              <parameter name="cookieValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the value of the cookie]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the domain]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setCookie">
@@ -535,10 +545,18 @@ if (cookieSet)
 	//do something
 }]]></sample>
             <parameters>
-              <parameter name="cookieName"/>
-              <parameter name="cookieValue"/>
-              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the cookie]]></description>
+              </parameter>
+              <parameter name="cookieValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the value of the cookie]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the domain]]></description>
+              </parameter>
+              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setCookie">
@@ -558,11 +576,21 @@ if (cookieSet)
 	//do something
 }]]></sample>
             <parameters>
-              <parameter name="cookieName"/>
-              <parameter name="cookieValue"/>
-              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="maxAge" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the cookie]]></description>
+              </parameter>
+              <parameter name="cookieValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the value of the cookie]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the domain]]></description>
+              </parameter>
+              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path]]></description>
+              </parameter>
+              <parameter name="maxAge" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[maximum age of cookie]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setCookie">
@@ -583,12 +611,24 @@ if (cookieSet)
 	//do something
 }]]></sample>
             <parameters>
-              <parameter name="cookieName"/>
-              <parameter name="cookieValue"/>
-              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="maxAge" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="secure" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the cookie]]></description>
+              </parameter>
+              <parameter name="cookieValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the value of the cookie]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the domain]]></description>
+              </parameter>
+              <parameter name="path" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the path]]></description>
+              </parameter>
+              <parameter name="maxAge" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[maximum age of cookie]]></description>
+              </parameter>
+              <parameter name="secure" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true if it is a secure cookie, false otherwise]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setTimeout">
@@ -632,10 +672,6 @@ if (cookieSet)
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -647,8 +683,12 @@ if (cookieSet)
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="getAllowedMethods">
@@ -781,10 +821,6 @@ var httpCode = poster.doPost()]]></sample>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -796,8 +832,12 @@ var httpCode = poster.doPost()]]></sample>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
           <function deprecated="true" name="getPageData">
@@ -870,10 +910,6 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -885,8 +921,12 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setBodyContent">
@@ -1005,10 +1045,6 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
-            <parameters>
-              <parameter name="username" optional="true"/>
-              <parameter name="password" optional="true"/>
-            </parameters>
           </function>
           <function name="executeRequest">
             <argumentsTypes>
@@ -1020,8 +1056,12 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <summary><![CDATA[Execute the request method.]]></summary>
             <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
-              <parameter name="username"/>
-              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>
@@ -1123,7 +1163,6 @@ if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file
             <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="http_clientname" optional="true"/>
             </parameters>
           </function>
           <function deprecated="true" name="getMediaData">

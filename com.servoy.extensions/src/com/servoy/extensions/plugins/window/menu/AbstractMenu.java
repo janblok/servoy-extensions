@@ -638,7 +638,6 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * // add another separator between the item and the checkbox 
 	 * menu.addSeparator(1);
 	 * 
-	 * @param index optional
 	 */
 	public void js_addSeparator()
 	{
@@ -646,7 +645,10 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @sameas js_addSeparator()
+	 * @sampleas js_addSeparator()
+	 * @clonedesc js_addSeparator()
+	 * 
+	 * @param index the index at which to add the separator
 	 */
 	public void js_addSeparator(int index)
 	{

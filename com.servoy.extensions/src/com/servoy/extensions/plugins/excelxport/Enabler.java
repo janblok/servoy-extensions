@@ -125,7 +125,7 @@ public class Enabler implements IScriptable
 	 * var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
 	 *
 	 * @param foundSet 
-	 * @param dataProviderIds 
+	 * @param dataProvidersIds 
 	 */
 	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds) throws IOException
 	{

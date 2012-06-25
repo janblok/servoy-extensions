@@ -102,8 +102,6 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * @sample
 	 * var response = method.executeRequest()
 	 *
-	 * @param username optional
-	 * @param password optional
 	 */
 	public Response js_executeRequest()
 	{
@@ -114,8 +112,8 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * @clonedesc js_executeRequest()
 	 * @sampleas js_executeRequest()
 	 *
-	 * @param username 
-	 * @param password 
+	 * @param userName the user name
+	 * @param password the password
 	 */
 	public Response js_executeRequest(String userName, String password)
 	{
