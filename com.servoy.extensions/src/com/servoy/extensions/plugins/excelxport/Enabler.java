@@ -124,70 +124,70 @@ public class Enabler implements IScriptable
 	 * //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
 	 * var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
 	 *
-	 * @param foundSet 
-	 * @param dataProvidersIds 
+	 * @param foundSet the foundset on which to export
+	 * @param dataProviderIds the ids of the dataproviders
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds) throws IOException
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds) throws IOException
 	{
-		return js_excelExport(foundSet, dataProvidersIds, null, "Servoy data", 1, 1);
+		return js_excelExport(foundSet, dataProviderIds, null, "Servoy data", 1, 1);
 	}
 
 	/**
 	 * @clonedesc js_excelExport(IFoundSet, String[])
 	 * @sampleas js_excelExport(IFoundSet, String[])
-	 * @param foundSet
-	 * @param dataProvidersIds
-	 * @param templateXLS
+	 * @param foundSet the foundset on which to export
+	 * @param dataProviderIds the ids of the dataproviders
+	 * @param templateXLS the xls template to export in
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS) throws IOException
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS) throws IOException
 	{
-		return js_excelExport(foundSet, dataProvidersIds, templateXLS, "Servoy data", 1, 1);
+		return js_excelExport(foundSet, dataProviderIds, templateXLS, "Servoy data", 1, 1);
 	}
 
 	/**
 	 * @clonedesc js_excelExport(IFoundSet, String[])
 	 * @sampleas js_excelExport(IFoundSet, String[])
-	 * @param foundSet
-	 * @param dataProvidersIds
-	 * @param templateXLS
-	 * @param sheetName
+	 * @param foundSet the foundset on which to export
+	 * @param dataProviderIds the ids of the dataproviders
+	 * @param templateXLS the xls template to export in
+	 * @param sheetName the name of the worksheet 
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS, String sheetName) throws IOException
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName) throws IOException
 	{
-		return js_excelExport(foundSet, dataProvidersIds, templateXLS, sheetName, 1, 1);
+		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, 1, 1);
 	}
 
 	/**
 	 * @clonedesc js_excelExport(IFoundSet, String[])
 	 * @sampleas js_excelExport(IFoundSet, String[])
-	 * @param foundSet
-	 * @param dataProvidersIds
-	 * @param templateXLS
-	 * @param sheetName
-	 * @param startRow
+	 * @param foundSet the foundset on which to export
+	 * @param dataProviderIds the ids of the dataproviders
+	 * @param templateXLS the xls template to export in
+	 * @param sheetName the name of the worksheet 
+	 * @param startRow row in the foundset at which to start the export
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS, String sheetName, int startRow) throws IOException
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, int startRow) throws IOException
 	{
-		return js_excelExport(foundSet, dataProvidersIds, templateXLS, sheetName, startRow, 1);
+		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, startRow, 1);
 	}
 
 	/**
 	 * @clonedesc js_excelExport(IFoundSet, String[])
 	 * @sampleas js_excelExport(IFoundSet, String[])
-	 * @param foundSet
-	 * @param dataProvidersIds
-	 * @param templateXLS
-	 * @param sheetName
-	 * @param startRow
-	 * @param startColumn
+	 *@param foundSet the foundset on which to export
+	 * @param dataProviderIds the ids of the dataproviders
+	 * @param templateXLS the xls template to export in
+	 * @param sheetName the name of the worksheet 
+	 * @param startRow row in the foundset at which to start the export
+	 * @param startColumn column in the foundset at which to start the export
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProvidersIds, byte[] templateXLS, String sheetName, int startRow, int startColumn)
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, int startRow, int startColumn)
 		throws IOException
 	{
-		if (foundSet != null && dataProvidersIds != null && dataProvidersIds.length > 0)
+		if (foundSet != null && dataProviderIds != null && dataProviderIds.length > 0)
 		{
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dataProvidersIds, templateXLS, sheetName, startRow - 1, startColumn - 1);
+			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dataProviderIds, templateXLS, sheetName, startRow - 1, startColumn - 1);
 			wb.write(buffer);
 			return buffer.toByteArray();
 		}

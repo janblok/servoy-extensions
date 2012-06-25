@@ -120,8 +120,8 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 * packet.writeUTF('hello world!')
 	 * plugins.udp.sendPacket('10.0.0.1',packet)
 	 *
-	 * @param destIpOrHostname
-	 * @param packet 
+	 * @param destIpOrHostname the ip of the destination or the hostname
+	 * @param packet the JSPacket to send
 	 */
 	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet)
 	{
@@ -136,9 +136,9 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 * packet.writeUTF('hello world!')
 	 * plugins.udp.sendPacket('10.0.0.1',packet, 4321)
 	 *
-	 * @param destIpOrHostname
-	 * @param packet 
-	 * @param port
+	 * @param destIpOrHostname the ip of the destination or the hostname
+	 * @param packet the JSPacket to send
+	 * @param port the port on which to send the packet
 	 */
 	public boolean js_sendPacket(String destIpOrHostname, JSPacket packet, int port)
 	{

@@ -113,8 +113,8 @@ public class Enabler implements IScriptable
 	 * //export with default separator(tab) and no header
 	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);
 	 *
-	 * @param foundSet 
-	 * @param dataProviderIds 
+	 * @param foundSet the foundset to export with
+	 * @param dataProviderIds the ids of the dataproviders
 	 */
 	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds)
 	{
@@ -129,9 +129,9 @@ public class Enabler implements IScriptable
 	 * //export with ';' separator and no header
 	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');
 	 *
-	 * @param foundSet 
-	 * @param dataProviderIds 
-	 * @param separator
+	 * @param foundSet the foundset to export with
+	 * @param dataProviderIds the ids of the dataproviders
+	 * @param separator the separator of the data
 	 */
 	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds, String separator)
 	{
@@ -146,10 +146,10 @@ public class Enabler implements IScriptable
 	 * //export with ';' separator and header
 	 * var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';',true);
 	 *
-	 * @param foundSet 
-	 * @param dataProviderIds 
-	 * @param separator
-	 * @param exportHeader
+	 * @param foundSet the foundset to export with
+	 * @param dataProviderIds the ids of the dataproviders
+	 * @param separator the separator of the data
+	 * @param exportHeader true for exporting with the table header, false for not
 	 */
 	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds, String separator, boolean exportHeader)
 	{

@@ -101,9 +101,9 @@ public class RawSQLProvider implements IScriptable
 	 * // Note that when this function is used to create a new table in the database, this table will only be seen by
 	 * // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.
 	 * 
-	 * @param serverName 
-	 * @param tableName 
-	 * @param sql
+	 * @param serverName the name of the server 
+	 * @param tableName the name of the table
+	 * @param sql the sql query to execute
 	 */
 	public boolean js_executeSQL(String serverName, String tableName, String sql)
 	{
@@ -115,10 +115,10 @@ public class RawSQLProvider implements IScriptable
 	 *
 	 * @sampleas js_executeSQL(String,String,String)
 	 * 
-	 * @param serverName 
-	 * @param tableName 
-	 * @param sql
-	 * @param sql_args
+	 * @param serverName the name of the server 
+	 * @param tableName the name of the table
+	 * @param sql the sql query to execute
+	 * @param sql_args the arguments for the query
 	 */
 	public boolean js_executeSQL(String serverName, String tableName, String sql, Object[] sql_args)
 	{
