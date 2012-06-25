@@ -215,7 +215,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 					StringBuilder sb = new StringBuilder();
 					for (String sc : shortcuts.values())
 					{
-						CharSequence js = getRegisterShortcutJS(sc);
+						CharSequence js = getRegisterShortcutJS(sc, false);
 						if (js != null)
 						{
 							sb.append(js);
@@ -261,9 +261,16 @@ public class WicketShortcutHandler implements IShortcutHandler
 
 		public CharSequence getRegisterShortcutJS(String sc)
 		{
+			return getRegisterShortcutJS(sc, true);
+		}
+
+		public CharSequence getRegisterShortcutJS(String sc, boolean fillNewShortCutsMap)
+		{
 			if (renderedShortcuts.add(sc))
 			{
-				newShortCuts.add(new StringBuilder().append("registerShortcut('").append(sc).append("');")); //$NON-NLS-1$ //$NON-NLS-2$
+				StringBuilder newShortcutJS = new StringBuilder().append("registerShortcut('").append(sc).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
+				if (fillNewShortCutsMap) newShortCuts.add(newShortcutJS);
+				return newShortcutJS;
 			}
 			return null;
 		}
