@@ -159,42 +159,106 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 		return menuItem.getText();
 	}
 
+	/**
+	 * @param text the text of the menu item/checkbox/radiobutton
+	 * @param method the feedback method for the menu item/checkbox/radiobutton 
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}
+	 */
 	@Deprecated
 	public void js_set(String text, Function method)
 	{
 		set(text, method, null, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+	/**
+	 * @param text the text of the  menu item/checkbox/radiobutton
+	 * @param method the feedback method for the  menu item/checkbox/radiobutton
+	 * @param arguments the arguments for the method
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments)
 	{
 		set(text, method, arguments, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+	/**
+	 * @param text the text of the menu item/checkbox/radiobutton
+	 * @param method the feedback method for the menu item/checkbox/radiobutton
+	 * @param arguments the arguments for the method
+	 * @param icon the image of the menu item/checkbox/radiobutton
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}, {@link #setIcon(Object)} 
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon)
 	{
 		set(text, method, arguments, icon, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+	/**
+	 * @param text the text of the menu item/checkbox/radiobutton
+	 * @param method the feedback method for the menu item/checkbox/radiobutton
+	 * @param arguments the arguments for the method
+	 * @param icon the image of the menu item/checkbox/radiobutton
+	 * @param accelerator an accelerator (key binding) for the menu item/checkbox/radiobutton
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}, {@link #setIcon(Object)}, {@link #setAccelerator(String)}  
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon, String accelerator)
 	{
 		set(text, method, arguments, icon, accelerator, "", true, true); //$NON-NLS-1$ 
 	}
 
+	/**
+	 * @param text the text of the menu item/checkbox/radiobutton
+	 * @param method the feedback method for the menu item/checkbox/radiobutton
+	 * @param arguments the arguments for the method
+	 * @param icon the image of the menu item/checkbox/radiobutton
+	 * @param accelerator an accelerator (key binding) for the menu item/checkbox/radiobutton
+	 * @param mnemonic the mnemonic of the menu item/checkbox/radiobutton
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}, {@link #setIcon(Object)}, {@link #setAccelerator(String)}, {@link #setMnemonic(String)} 
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon, String accelerator, String mnemonic)
 	{
 		set(text, method, arguments, icon, accelerator, mnemonic, true, true);
 	}
 
+	/**
+	 * 
+	 * @param text the text of the menu item/checkbox/radiobutton
+	 * @param method the feedback method for the menu item/checkbox/radiobutton
+	 * @param arguments the arguments for the method
+	 * @param icon the image of the menu item/checkbox/radiobutton
+	 * @param accelerator an accelerator (key binding) for the menu item/checkbox/radiobutton
+	 * @param mnemonic the mnemonic of the menu item/checkbox/radiobutton
+	 * @param enabled the enabled state of this menu item/checkbox/radiobutton
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}, {@link #setIcon(Object)}, {@link #setAccelerator(String)}, {@link #setMnemonic(String)}, {@link #setEnabled(boolean)} 
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled)
 	{
 		set(text, method, arguments, icon, accelerator, mnemonic, enabled, true);
 	}
 
+	/**
+	 * @param text the text of the menu item/checkbox/radiobutton
+	 * @param method the feedback method for the menu item/checkbox/radiobutton
+	 * @param arguments the arguments for the method
+	 * @param icon the image of the menu item/checkbox/radiobutton
+	 * @param accelerator an accelerator (key binding) for the menu item/checkbox/radiobutton
+	 * @param mnemonic the mnemonic of the menu item/checkbox/radiobutton
+	 * @param enabled the enabled state of this menu item/checkbox/radiobutton
+	 * @param visible the visibility of the menu item/checkbox/radiobutton
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)}, {@link #setMethod(Function,Object[])}, {@link #setMethodArguments(Object[])}, {@link #setIcon(Object)}, {@link #setAccelerator(String)}, {@link #setMnemonic(String)}, {@link #setEnabled(boolean)}, {@link #setVisible(boolean)} 
+	 */
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled, boolean visible)
 	{
@@ -265,6 +329,11 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 		return this;
 	}
 
+	/**
+	 * @param arguments the method arguments for the feedback method of this menu item/checkbox/radiobutton.
+	 * 
+	 * @deprecated Replaced by {@link #setMethodArguments(Object[])}
+	 */
 	@Deprecated
 	public void js_setArguments(Object[] arguments)
 	{

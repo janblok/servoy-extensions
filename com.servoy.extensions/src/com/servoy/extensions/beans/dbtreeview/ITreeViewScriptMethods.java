@@ -28,12 +28,36 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScriptable, ITreeView
 {
+	/**
+	 * Property for getting/setting the background color of the bean.
+	 * 
+	 * @sample
+	 * %%elementName%%.bgcolor = "#FFFFFF";
+	 * var x = %%elementName%%.bgcolor;
+	 *  
+	 * @return the background color
+	 */
 	public String js_getBgcolor();
 
+	/**
+	 * @param bg the background color of the bean
+	 */
 	public void js_setBgcolor(String bg);
 
+	/**
+	 * Property for getting/setting the foreground color of the bean.
+	 * 
+	 * @sample
+	 * %%elementName%%.fgcolor = "#000000";
+	 * var y = %%elementName%%.fgcolor;
+	 * 
+	 * @return
+	 */
 	public String js_getFgcolor();
 
+	/**
+	 * @param fg the foreground color of the bean
+	 */
 	public void js_setFgcolor(String fg);
 
 	/**
@@ -120,20 +144,66 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 
 	public void js_setSelectionPath(Object[] path);
 
+	/**
+	 * Property for getting/setting the text of the bean's tooltip
+	 * 
+	 * @sample
+	 * %%elementName%%.toolTipText = 'Hello world!';
+	 * 
+	 * @return the tooltip text of the bean
+	 */
 	public String js_getToolTipText();
 
+	/**
+	 * @param tip the text for the tooltip of the bean
+	 */
 	public void js_setToolTipText(String tip);
 
+	/**
+	 * Property for getting/setting the enabled state of the bean
+	 * 
+	 * @sample
+	 * var b = %%elementName%%.enabled;
+	 * if (b) %%elementName%%.enabled = false;
+	 * 
+	 * @return the enabled state of the bean
+	 */
 	public boolean js_isEnabled();
 
+	/**
+	 * @param enabled the enabled state of the bean
+	 */
 	public void js_setEnabled(boolean enabled);
 
+	/**
+	 * Property for getting/setting the transparent or opaque state of the bean
+	 * 
+	 * @sample
+	 * var t = %%elementName%%.transparent;
+	 * if (!t) %%elementName%%.transparent = true;  
+	 * 
+	 * @return the transparent state of the bean
+	 */
 	public boolean js_isTransparent();
 
+	/**
+	 * @param transparent the transparent state of the bean (true for transparent, false for opaque)
+	 */
 	public void js_setTransparent(boolean transparent);
 
+	/**
+	 * Property for getting/setting the visibility of the bean.
+	 * 
+	 * @sample
+	 * var v = %%elementName%%.visible;
+	 * 
+	 * @return the visibility of the bean
+	 */
 	public boolean js_isVisible();
 
+	/**
+	 * @param visible the visible state of the bean
+	 */
 	public void js_setVisible(boolean visible);
 
 	/**

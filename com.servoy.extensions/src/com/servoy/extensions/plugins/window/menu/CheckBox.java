@@ -122,6 +122,7 @@ public class CheckBox extends AbstractMenuItem
 		return this;
 	}
 
+
 	/**
 	 * @deprecated Replaced by {@link #setText(String)}, {@link #setMethod(Function)} and {@link #setSelected(boolean)}.
 	 */

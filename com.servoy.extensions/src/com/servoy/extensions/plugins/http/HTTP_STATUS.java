@@ -17,13 +17,11 @@
 
 package com.servoy.extensions.plugins.http;
 
-import org.apache.http.HttpStatus;
-
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IPrefixedConstantsObject;
 
 @ServoyDocumented
-public class HTTP_STATUS implements HttpStatus, IPrefixedConstantsObject
+public class HTTP_STATUS implements ServoyHttpStatus, IPrefixedConstantsObject
 {
 	public String getPrefix()
 	{

@@ -29,12 +29,28 @@ import com.servoy.j2db.scripting.IConstantsObject;
 @ServoyDocumented
 public abstract class LANGUAGES implements IConstantsObject
 {
-	/*
-	 * Language Strings
+	/**
+	 * Constant for specifying the English language.
 	 */
 	public static final String ENGLISH = SpellCheckerUtils.ENGLISH;
+
+	/**
+	 * Constant for specifying the Dutch language.
+	 */
 	public static final String DUTCH = SpellCheckerUtils.DUTCH;
+
+	/**
+	 * Constant for specifying the German language.
+	 */
 	public static final String GERMAN = SpellCheckerUtils.GERMAN;
+
+	/**
+	 * Constant for specifying the Italian language.
+	 */
 	public static final String ITALIAN = SpellCheckerUtils.ITALIAN;
+
+	/**
+	 * Constant for specifying the Spanish language.
+	 */
 	public static final String SPANISH = SpellCheckerUtils.SPANISH;
 }

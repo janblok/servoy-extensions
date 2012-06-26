@@ -1,23 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
       <object publicName="LANGUAGES" qualifiedName="com.servoy.extensions.plugins.spellcheck.LANGUAGES">
         <constants>
-          <constant name="DUTCH" undocumented="true">
+          <constant name="DUTCH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Constant for specifying the Dutch language.]]></description>
+            <summary><![CDATA[Constant for specifying the Dutch language.]]></summary>
+            <sample/>
           </constant>
-          <constant name="ENGLISH" undocumented="true">
+          <constant name="ENGLISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Constant for specifying the English language.]]></description>
+            <summary><![CDATA[Constant for specifying the English language.]]></summary>
+            <sample/>
           </constant>
-          <constant name="GERMAN" undocumented="true">
+          <constant name="GERMAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Constant for specifying the German language.]]></description>
+            <summary><![CDATA[Constant for specifying the German language.]]></summary>
+            <sample/>
           </constant>
-          <constant name="ITALIAN" undocumented="true">
+          <constant name="ITALIAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Constant for specifying the Italian language.]]></description>
+            <summary><![CDATA[Constant for specifying the Italian language.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SPANISH" undocumented="true">
+          <constant name="SPANISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Constant for specifying the Spanish language.]]></description>
+            <summary><![CDATA[Constant for specifying the Spanish language.]]></summary>
+            <sample/>
           </constant>
         </constants>
       </object>
