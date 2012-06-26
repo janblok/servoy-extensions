@@ -100,6 +100,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set has checkbox flag dataprovider. Dataprovider returns INTEGER (0 / 1 / 2) or STRING (false / true / disabled) for (does not have / have / have but disabled)
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setHasCheckBoxDataprovider('hasCheckBox');
+	 * 
 	 * @param hasCheckBoxDataprovider
 	 * 
 	 */
@@ -117,6 +121,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set checkbox value dataprovider. Dataprovider returns INTEGER (0 or 1) or STRING (false or true)
 	 *  
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setCheckBoxValueDataprovider('comment_text');
+	 * 
 	 * @param checkBoxValueDataprovider
 	 * 
 	 */
@@ -132,6 +140,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set the dataprovider name to retrieve column name and sort order for the child nodes.\nThe provided data must be a string of form : column_name_used_for_sort sort_order(asc or desc)
+	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
+	 * binding.setChildSortDataprovider('company_sort');
 	 * 
 	 * @param childSortDataprovider
 	 * 
@@ -149,6 +161,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set the dataprovider name to retrieve the node font from
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setFontTypeDataprovider('bean_font');
+	 * 
 	 * @param fontTypeDataprovider
 	 * 
 	 */
@@ -164,6 +180,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set the dataprovider name to retrieve the node image from (blob column)
+	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
+	 * binding.setImageMediaDataprovider('company_icon');
 	 * 
 	 * @param imageMediaDataprovider
 	 * 
@@ -181,6 +201,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set the dataprovider name to retrieve the node image from (via url)
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+	 * binding.setImageURLDataprovider('order_icon');
+	 * 
 	 * @param imageURLDataprovider
 	 */
 	public void js_setImageURLDataprovider(String imageURLDataprovider)
@@ -195,6 +219,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set m-relation name
+	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setMRelationName('m_relation_name');
 	 * 
 	 * @param name
 	 * 
@@ -211,6 +239,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set n-relation name
+	 * 
+	 *  @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setNRelationName('n_relation_name');
 	 * 
 	 * @param name
 	 * 
@@ -311,6 +343,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set text dataprovider
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+	 * binding.setTextDataprovider('orderid');
+	 * 
 	 * @param textDataprovider
 	 * 
 	 */
@@ -327,6 +363,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set the dataprovider name to retrieve the node tooltiptext from
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
+	 * binding.setToolTipTextDataprovider('companyname');
+	 * 
 	 * @param toolTipTextDataprovider
 	 * 
 	 */
@@ -342,6 +382,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY
+	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+	 * binding.setMethodToCallOnRightClick(rightClickMethod,'orderid');
 	 * 
 	 * @param methodToCallOnRightClick
 	 * @param returnDataproviderOnRightClick
@@ -364,6 +408,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+	 * binding.setMethodToCallOnDoubleClick(doubleClickMethod,'orderid');
+	 * 
 	 * @param methodToCallOnDoubleClick
 	 * @param returnDataproviderOnDoubleClick
 	 * 
@@ -384,6 +432,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY
+	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+	 * binding.setMethodToCallOnClick(onClickMethod,'orderid');
 	 * 
 	 * @param methodToCallOnClick
 	 * @param returnDataproviderOnClick
@@ -406,6 +458,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set method to call on check box status change
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+	 * binding.setMethodToCallOnCheckBoxChange(onCheckBoxChangeMethod,'orderdate');
+	 * 
 	 * @param methodToCallOnCheckBoxChange
 	 * @param returnDataproviderOnCheckBoxChange
 	 * 
@@ -426,6 +482,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set callback method for node selection and double click
+	 * 
+	 * @sample 
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setCallBackInfo(globals.node_selected, 'node_id');
 	 * 
 	 * @param f
 	 * @param returnDataprovider
@@ -449,6 +509,10 @@ public class Binding implements IScriptable
 	/**
 	 * Set m-relation dataprovider. Dataprovider returns the name of the m-relation
 	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setMRelationDataprovider('m_relation');
+	 * 
 	 * @param dataprovider
 	 * 
 	 */
@@ -464,6 +528,10 @@ public class Binding implements IScriptable
 
 	/**
 	 * Set n-relation dataprovider. Dataprovider returns the name of the n-relation
+	 * 
+	 * @sample
+	 * var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+	 * binding.setNRelationDataprovider('n_relation');
 	 * 
 	 * @param dataprovider
 	 * 

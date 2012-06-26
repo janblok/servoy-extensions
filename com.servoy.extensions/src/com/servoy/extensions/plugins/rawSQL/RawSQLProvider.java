@@ -63,7 +63,7 @@ public class RawSQLProvider implements IScriptable
 	/**
 	 * If the result from a function was false, it will return the exception object.
 	 *
-	 * @sampleas js_executeSQL(Object[])
+	 * @sampleas js_executeSQL(String,String,String)
 	 */
 	public Exception js_getException()
 	{
@@ -248,7 +248,7 @@ public class RawSQLProvider implements IScriptable
 	/**
 	 * Flush cached database data. Use with extreme care, its affecting the performance of clients!
 	 *
-	 * @sampleas js_executeSQL(Object[])
+	 * @sampleas js_executeSQL(String,String,String)
 	 * 
 	 * @param serverName
 	 * @param tableName

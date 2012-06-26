@@ -450,7 +450,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Remove a shortcut.
 	 *
-	 * @sampleas js_createShortcut(String, Object, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[])
 	 *
 	 * @param shortcut  
 	 */

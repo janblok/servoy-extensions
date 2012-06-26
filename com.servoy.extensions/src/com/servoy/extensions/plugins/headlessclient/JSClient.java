@@ -40,11 +40,15 @@ public class JSClient implements IScriptable, IConstantsObject
 
 	/**
 	 * Constant that is returned as a JSEvent type when in the callback method when it executed normally.
+	 * 
+	 * @sampleas js_getClientID()
 	 */
 	public static final String CALLBACK_EVENT = "headlessCallback"; //$NON-NLS-1$
 
 	/**
 	 * Constant that is returned as a JSEvent type when in the callback method when an exception occured.
+	 * 
+	 * @sampleas js_getClientID()
 	 */
 	public static final String CALLBACK_EXCEPTION_EVENT = "headlessExceptionCallback"; //$NON-NLS-1$
 

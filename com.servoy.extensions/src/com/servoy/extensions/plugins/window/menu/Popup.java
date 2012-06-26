@@ -105,7 +105,7 @@ public class Popup extends AbstractMenu
 	/**
 	 * Show the popup at the mouse coordinates (Smart client only).
 	 * 
-	 * @sampleas js_show()
+	 * @sampleas js_show(IComponent)
 	 * 
 	 */
 	public void js_show() throws PluginException

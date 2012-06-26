@@ -27,6 +27,7 @@ import com.servoy.j2db.dataprocessing.BufferedDataSet;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.scripting.IConstantsObject;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.SafeArrayList;
@@ -35,7 +36,7 @@ import com.servoy.j2db.util.SafeArrayList;
  * @author sebster
  */
 @ServoyDocumented
-public class AmortizationCalculation implements IScriptable
+public class AmortizationCalculation implements IScriptable, IConstantsObject
 {
 
 	/**
@@ -47,22 +48,22 @@ public class AmortizationCalculation implements IScriptable
 	/**
 	 * The string constant used to identify a loan event.
 	 */
-	public static final String EVENT_LOAN = "loan"; //$NON-NLS-1$
+	private static final String EVENT_LOAN = "loan"; //$NON-NLS-1$
 
 	/**
 	 * The string constant used to identify a payment event.
 	 */
-	public static final String EVENT_PAYMENT = "payment"; //$NON-NLS-1$
+	private static final String EVENT_PAYMENT = "payment"; //$NON-NLS-1$
 
 	/**
 	 * The string constant used to identify a rate change event.
 	 */
-	public static final String EVENT_RATE = "rate"; //$NON-NLS-1$
+	private static final String EVENT_RATE = "rate"; //$NON-NLS-1$
 
 	/**
 	 * The string constant used to identify a compounding period change event.
 	 */
-	public static final String EVENT_PERIOD = "period"; //$NON-NLS-1$
+	private static final String EVENT_PERIOD = "period"; //$NON-NLS-1$
 
 
 	/**

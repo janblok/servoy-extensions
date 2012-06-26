@@ -610,7 +610,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * If no radiogroup is added, one is created automatically when the first radiobutton is added.
 	 *
-	 * @sampleas js_addRadioButton(Object[])
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 */
 	public void js_addRadioGroup() throws PluginException
 	{

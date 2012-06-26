@@ -464,6 +464,8 @@ public class JSFile implements IScriptable, IJavaScriptType
 	/**
 	 * Set the content of the file (local or remote) to the bytes provided
 	 * 
+	 * @sampleas js_setBytes(byte[])
+	 * 
 	 * @param bytes the data
 	 * @param createFile true to create a file if it doesn't exist
 	 * 

@@ -86,7 +86,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * Size of the buffer used to stream files to the server
 	 * @since Servoy 5.2
 	 */
-	public static final int CHUNK_BUFFER_SIZE = 64 * 1024;
+	static final int CHUNK_BUFFER_SIZE = 64 * 1024;
 
 	public FileProvider(FilePlugin plugin)
 	{
