@@ -57,7 +57,11 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected)
@@ -67,7 +71,12 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * @param arguments the arguments for the feedback method
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments)
@@ -77,7 +86,13 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * @param arguments the arguments for the feedback method
+	 * @param icon the icon for the button
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon)
@@ -87,7 +102,14 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * @param arguments the arguments for the feedback method
+	 * @param icon the icon for the button
+	 * @param accelerator the accelerator key binding
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator)
@@ -97,7 +119,15 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * @param arguments the arguments for the feedback method
+	 * @param icon the icon for the button
+	 * @param accelerator the accelerator key binding
+	 * @param mnemonic the mnemonic for this button
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic)
@@ -107,7 +137,16 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * @param arguments the arguments for the feedback method
+	 * @param icon the icon for the button
+	 * @param accelerator the accelerator key binding
+	 * @param mnemonic the mnemonic for this button
+	 * @param enabled true for enabled, false otherwise
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled)
@@ -117,7 +156,17 @@ public class RadioButton extends AbstractMenuItem
 	}
 
 	/**
-	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
+	 * @param text the text of the button
+	 * @param method the feedback method for the button
+	 * @param selected true for selected, false otherwise
+	 * @param arguments the arguments for the feedback method
+	 * @param icon the icon for the button
+	 * @param accelerator the accelerator key binding
+	 * @param mnemonic the mnemonic for this button
+	 * @param enabled true for enabled, false otherwise
+	 * @param visible true for visible, false otherwise
+	 * 
+	 * @deprecated Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).
 	 */
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator, String mnemonic, boolean enabled,

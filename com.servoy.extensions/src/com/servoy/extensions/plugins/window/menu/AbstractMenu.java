@@ -666,6 +666,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
+	 * @param index the index at which to add the submenu
+	 * 
 	 * @deprecated Replaced by {@link #addMenu(int)}.
 	 */
 	@Deprecated

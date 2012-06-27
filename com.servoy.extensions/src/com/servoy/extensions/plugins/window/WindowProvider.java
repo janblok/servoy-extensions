@@ -974,9 +974,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @sameas js_getMenuBar()
+	 * @clonedesc js_getMenuBar()
+	 * @sampleas js_getMenuBar()
 	 * 
-	 * @param windowName.
+	 * @param windowName the name of the window
 	 */
 	public MenuBar js_getMenuBar(String windowName)
 	{
@@ -1048,6 +1049,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
+	 * @param index the index at which to add the menu
+	 * 
 	 * @deprecated Replaced by {@link MenuBar#addMenu()}.
 	 */
 	@Deprecated
@@ -1084,6 +1087,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
+	 * @param args array of arguments
+	 * 
 	 * @deprecated Replaced by {@link #createPopupMenu()}.
 	 */
 	@Deprecated

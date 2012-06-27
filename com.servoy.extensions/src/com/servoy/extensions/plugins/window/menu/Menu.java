@@ -66,7 +66,10 @@ public class Menu extends AbstractMenu
 	}
 
 	/**
-	 * @deprecated Replaced by {@link #setText(String)}.
+	 * 
+	 * @param obj the text of the menu or a menu object
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setEnabled(boolean)} and {@link #setMnemonic(String)}.
 	 */
 	@Deprecated
 	public void js_set(Object obj) throws PluginException
@@ -86,7 +89,10 @@ public class Menu extends AbstractMenu
 	}
 
 	/**
-	 * @deprecated Replaced by {@link #setText(String)} and {@link #setEnabled(boolean)}.
+	 * @param text the text of the menu
+	 * @param enabled true for enabled, false otherwise
+	 * 
+	 * @deprecated Replaced by {@link #setText(String)}, {@link #setEnabled(boolean)}
 	 */
 	@Deprecated
 	public void js_set(String text, boolean enabled) throws PluginException
@@ -96,6 +102,10 @@ public class Menu extends AbstractMenu
 	}
 
 	/**
+	 * 
+	 * @param text the text of the menu
+	 * @param mnemonic the mnemonic for this menu
+	 * 
 	 * @deprecated Replaced by {@link #setText(String)} and {@link #setMnemonic(String)}.
 	 */
 	@Deprecated
@@ -106,6 +116,11 @@ public class Menu extends AbstractMenu
 	}
 
 	/**
+	 * 
+	 * @param text the text of the menu
+	 * @param mnemonic the mnemonic for this menu
+	 * @param enabled true for enabled, false otherwise
+	 * 
 	 * @deprecated Replaced by {@link #setText(String)}, {@link #setEnabled(boolean)} and {@link #setMnemonic(String)}.
 	 */
 	@Deprecated

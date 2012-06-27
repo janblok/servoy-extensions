@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -13,6 +13,14 @@
             <description/>
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog title.]]></description>
+              </parameter>
+              <parameter name="dialogMessage" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog message.]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function deprecated="true" name="showDialog" varargs="true">
             <argumentsTypes>
@@ -24,6 +32,17 @@
             <description/>
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog title.]]></description>
+              </parameter>
+              <parameter name="dialogMessage" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog message.]]></description>
+              </parameter>
+              <parameter name="buttonsText" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[Array of button texts.]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function name="showErrorDialog">
             <argumentsTypes>

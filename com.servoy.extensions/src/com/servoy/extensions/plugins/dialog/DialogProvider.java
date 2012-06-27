@@ -47,6 +47,10 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 * @param buttonsText Array of button texts.
+	 * 
 	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated
@@ -56,6 +60,9 @@ public class DialogProvider implements IScriptable
 	}
 
 	/**
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 * 
 	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated

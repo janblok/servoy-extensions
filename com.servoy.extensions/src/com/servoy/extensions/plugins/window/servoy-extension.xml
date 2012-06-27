@@ -313,110 +313,259 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean)]]></deprecated>
             <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments to the feedback method]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments to the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the checkbox]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments to the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the checkbox]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String), #setMnemonic(Function)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments to the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the checkbox]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String), #setMnemonic(Function), #setEnabled(boolean)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments to the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the checkbox]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for enabled, false otherwise]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String), #setMnemonic(Function), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the checkbox]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[feedback method]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for marking as selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments to the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the checkbox]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for enabled, false otherwise]]></description>
+              </parameter>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true if this item is visible, false otherwise]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -424,14 +573,25 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -440,15 +600,28 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -458,16 +631,31 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -478,17 +666,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -500,15 +705,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the visibility of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setAccelerator">
@@ -568,13 +792,18 @@ entry.setAlign(true);]]></sample>
               <parameter name="align" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setArguments" undocumented="true">
+          <function deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the method arguments for the feedback method of this menu item/checkbox/radiobutton.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setBackgroundColor">
@@ -1177,82 +1406,137 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1263,17 +1547,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1285,15 +1586,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the visibility of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setAccelerator">
@@ -1328,13 +1648,18 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function deprecated="true" name="setArguments" undocumented="true">
+          <function deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the method arguments for the feedback method of this menu item/checkbox/radiobutton.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setBackgroundColor">
@@ -2671,7 +2996,40 @@ checked at a time.
 
 If no radiogroup is added, one is created automatically when the first radiobutton is added.]]></description>
             <summary><![CDATA[Add a radiogroup for radiobuttons.]]></summary>
-            <sample/>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+	
+// when you don't define an index the radiobutton will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addRadioButton("radio", feedback_radiobutton);
+// add a radiobutton with an icon
+menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
+	
+// add a new radiobutton group
+// a group will 'bind' all added radiobuttons after the group together
+// as a result checking one item will uncheck the other
+// if no group is added, a group is created automatically when the first radiobutton is added to the menu
+// so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
+menu.addRadioGroup();
+	
+// add a radiobutton with a mnemonic
+menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
+// add a disabled radiobutton
+menu.addRadioButton("disabled radio", feedback_radiobutton, "media:///yourimage.gif", "d", false);
+// add a radiobutton with text aligned to the right
+menu.addRadioButton("align right", feedback_radiobutton, null, null, true, SM_ALIGNMENT.RIGHT);
+// add a radiobutton at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var rd = menu.addRadioButton(2);
+rd.text = "radio at index";
+rd.setMethod(feedback_item);]]></sample>
           </function>
           <function name="addSeparator">
             <argumentsTypes/>
@@ -2739,6 +3097,11 @@ menu.addSeparator(1);]]></sample>
             <description/>
             <deprecated><![CDATA[Replaced by #addMenu(int).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the index at which to add the submenu]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function name="doClick">
             <argumentsTypes/>
@@ -3192,8 +3555,13 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description/>
-            <deprecated><![CDATA[Replaced by #setText(String).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #setText(String), #setEnabled(boolean) and #setMnemonic(String).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the text of the menu or a menu object]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function deprecated="true" name="set">
             <argumentsTypes>
@@ -3202,8 +3570,16 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description/>
-            <deprecated><![CDATA[Replaced by #setText(String) and #setEnabled(boolean).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #setText(String), #setEnabled(boolean)]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for enabled, false otherwise]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function deprecated="true" name="set">
             <argumentsTypes>
@@ -3214,6 +3590,14 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             <description/>
             <deprecated><![CDATA[Replaced by #setText(String) and #setMnemonic(String).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic for this menu]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function deprecated="true" name="set">
             <argumentsTypes>
@@ -3225,6 +3609,17 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             <description/>
             <deprecated><![CDATA[Replaced by #setText(String), #setEnabled(boolean) and #setMnemonic(String).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic for this menu]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for enabled, false otherwise]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function name="setEnabled">
             <argumentsTypes>
@@ -3844,82 +4239,137 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -3930,17 +4380,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -3952,15 +4419,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the visibility of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setAccelerator">
@@ -3995,13 +4481,18 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function deprecated="true" name="setArguments" undocumented="true">
+          <function deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the method arguments for the feedback method of this menu item/checkbox/radiobutton.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setBackgroundColor">
@@ -5320,7 +5811,40 @@ checked at a time.
 
 If no radiogroup is added, one is created automatically when the first radiobutton is added.]]></description>
             <summary><![CDATA[Add a radiogroup for radiobuttons.]]></summary>
-            <sample/>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+	
+// when you don't define an index the radiobutton will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addRadioButton("radio", feedback_radiobutton);
+// add a radiobutton with an icon
+menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
+	
+// add a new radiobutton group
+// a group will 'bind' all added radiobuttons after the group together
+// as a result checking one item will uncheck the other
+// if no group is added, a group is created automatically when the first radiobutton is added to the menu
+// so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
+menu.addRadioGroup();
+	
+// add a radiobutton with a mnemonic
+menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
+// add a disabled radiobutton
+menu.addRadioButton("disabled radio", feedback_radiobutton, "media:///yourimage.gif", "d", false);
+// add a radiobutton with text aligned to the right
+menu.addRadioButton("align right", feedback_radiobutton, null, null, true, SM_ALIGNMENT.RIGHT);
+// add a radiobutton at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var rd = menu.addRadioButton(2);
+rd.text = "radio at index";
+rd.setMethod(feedback_item);]]></sample>
           </function>
           <function name="addSeparator">
             <argumentsTypes/>
@@ -5388,6 +5912,11 @@ menu.addSeparator(1);]]></sample>
             <description/>
             <deprecated><![CDATA[Replaced by #addMenu(int).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the index at which to add the submenu]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function name="getCheckBox">
             <argumentsTypes>
@@ -5829,7 +6358,26 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Show the popup at the mouse coordinates (Smart client only).]]></description>
             <summary><![CDATA[Show the popup at the mouse coordinates (Smart client only).]]></summary>
-            <sample/>
+            <sample><![CDATA[// NOTE: usually this code is placed in a handler of an event (e.g. right click on some component)
+// create a popup menu
+var menu = plugins.window.createPopupMenu();
+// add a menu item
+menu.addMenuItem("item", feedback_item);
+// add another menu item
+menu.addMenuItem("item 2", feedback_item);
+
+if (event.getSource())
+{
+	// display the popup over the component which is the source of the event
+	menu.show(event.getSource());
+	// display the popup over the components, at specified coordinates relative to the component
+	//menu.show(event.getSource(), 10, 10);
+	// display the popup at specified coordinates relative to the main window
+	//menu.show(100, 100);
+}
+
+// in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
+//menu.show();]]></sample>
           </function>
           <function name="show">
             <argumentsTypes>
@@ -6243,110 +6791,259 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description/>
-            <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
-            <sample/>
-          </function>
-          <function deprecated="true" name="set" undocumented="true">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="[Ljava.lang.Object;"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the feedback method]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the button]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the button]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the button]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic for this button]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the button]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic for this button]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for enabled, false otherwise]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the button]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the button]]></description>
+              </parameter>
+              <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for selected, false otherwise]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the feedback method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the icon for the button]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the accelerator key binding]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic for this button]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for enabled, false otherwise]]></description>
+              </parameter>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true for visible, false otherwise]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the  menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6354,14 +7051,25 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6370,15 +7078,28 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6388,16 +7109,31 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6408,17 +7144,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set" undocumented="true">
+          <function deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6430,15 +7183,34 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the feedback method for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the method]]></description>
+              </parameter>
+              <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the image of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="accelerator" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[an accelerator (key binding) for the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="mnemonic" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mnemonic of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the enabled state of this menu item/checkbox/radiobutton]]></description>
+              </parameter>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[the visibility of the menu item/checkbox/radiobutton]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setAccelerator">
@@ -6498,13 +7270,18 @@ entry.setAlign(true);]]></sample>
               <parameter name="align" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setArguments" undocumented="true">
+          <function deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
+            <description/>
+            <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
+            <sample/>
             <parameters>
-              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the method arguments for the feedback method of this menu item/checkbox/radiobutton.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="setBackgroundColor">
@@ -7560,6 +8337,11 @@ toolbar.visibleItem(1, false);]]></sample>
             <description/>
             <deprecated><![CDATA[Replaced by MenuBar#addMenu().]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the index at which to add the menu]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function deprecated="true" name="addServoyToolBar">
             <argumentsTypes>
@@ -8216,6 +8998,11 @@ var mainMenubar = plugins.window.getMenuBar();
 var menuMain = mainMenubar.addMenu();
 menuMain.text = "New Menu in Main Menubar";
 menuMain.addMenuItem("another entry", feedback);]]></sample>
+            <parameters>
+              <parameter name="windowName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the window]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function deprecated="true" name="getMenuCount">
             <argumentsTypes/>
@@ -8353,7 +9140,37 @@ plugins.window.maximize("windowName");]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Remove a shortcut.]]></description>
             <summary><![CDATA[Remove a shortcut.]]></summary>
-            <sample/>
+            <sample><![CDATA[// this plugin uses the java keystroke parser
+// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
+// global handler
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
+// form method called when shortcut is used
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
+// form method called when shortcut is used and arguments are passed to the method
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// remove global shortcut and form-level shortcut
+plugins.window.removeShortcut('menu 1');
+plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+// shortcut handlers are called with an JSEvent argument
+///* 
+// * Handle keyboard shortcut.
+// * 
+// * @param {JSEvent} event the event that triggered the action
+// */
+//function handleShortcut(event)
+//{
+//  application.output(event.getType()) // returns 'menu 1'
+//  application.output(event.getFormName()) // returns 'frm_contacts'
+//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
+//}
+// NOTE: shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -8366,7 +9183,37 @@ plugins.window.maximize("windowName");]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Remove a shortcut.]]></description>
             <summary><![CDATA[Remove a shortcut.]]></summary>
-            <sample/>
+            <sample><![CDATA[// this plugin uses the java keystroke parser
+// see http://java.sun.com/j2se/1.5.0/docs/api/javax/swing/KeyStroke.html#getKeyStroke(java.lang.String)
+// global handler
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut);
+// global handler with a form context filter
+plugins.window.createShortcut('control shift I', scopes.globals.handleOrdersShortcut, 'frm_contacts');
+// form method called when shortcut is used
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut);
+// form method called when shortcut is used and arguments are passed to the method
+plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortcut, new Array(argument1, argument2));
+// Passing the method argument as a string prevents unnecessary form loading
+//plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
+// Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
+plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// remove global shortcut and form-level shortcut
+plugins.window.removeShortcut('menu 1');
+plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+// shortcut handlers are called with an JSEvent argument
+///* 
+// * Handle keyboard shortcut.
+// * 
+// * @param {JSEvent} event the event that triggered the action
+// */
+//function handleShortcut(event)
+//{
+//  application.output(event.getType()) // returns 'menu 1'
+//  application.output(event.getFormName()) // returns 'frm_contacts'
+//  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
+//}
+// NOTE: shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts careful to make sure they work in all clients.]]></sample>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8450,6 +9297,11 @@ plugins.window.setFullScreen(true);]]></sample>
             <description/>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
+            <parameters>
+              <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[array of arguments]]></description>
+              </parameter>
+            </parameters>
           </function>
           <function name="setStatusBarVisible">
             <argumentsTypes>
