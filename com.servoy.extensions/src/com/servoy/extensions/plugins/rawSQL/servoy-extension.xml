@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -73,9 +73,15 @@ else
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
             <parameters>
-              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="sql" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the server]]></description>
+              </parameter>
+              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the table]]></description>
+              </parameter>
+              <parameter name="sql" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the sql query to execute]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeSQL">
@@ -115,10 +121,18 @@ else
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
             <parameters>
-              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="sql" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="sql_args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the server]]></description>
+              </parameter>
+              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the table]]></description>
+              </parameter>
+              <parameter name="sql" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the sql query to execute]]></description>
+              </parameter>
+              <parameter name="sql_args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[the arguments for the query]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeStoredProcedure">
@@ -169,7 +183,32 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Flush cached database data. Use with extreme care, its affecting the performance of clients!]]></description>
             <summary><![CDATA[Flush cached database data.]]></summary>
-            <sample/>
+            <sample><![CDATA[/**************************************************************************** 
+WARNING! You can cause data loss or serious data integrity compromises!
+You should have a THOROUGH understanding of both SQL and your backend
+database (and other interfaces that may use that backend) BEFORE YOU USE
+ANY OF THESE COMMANDS.
+You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+
+Note that when server names have been switched (databasemanager.switchServer),the 
+real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+****************************************************************************/
+
+var country = 'NL'
+var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
+if (done)
+{
+	//flush is required when changes are made in db
+	plugins.rawSQL.flushAllClientsCache("example_data","employees")
+}
+else
+{
+	var msg = plugins.rawSQL.getException().getMessage(); //see exception node for more info about the exception obj
+	plugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')
+}
+
+// Note that when this function is used to create a new table in the database, this table will only be seen by
+// the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -180,7 +219,32 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
             <return type="com.servoy.j2db.util.ServoyException" typecode="java.lang.Exception"/>
             <description><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
             <summary><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
-            <sample/>
+            <sample><![CDATA[/**************************************************************************** 
+WARNING! You can cause data loss or serious data integrity compromises!
+You should have a THOROUGH understanding of both SQL and your backend
+database (and other interfaces that may use that backend) BEFORE YOU USE
+ANY OF THESE COMMANDS.
+You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+
+Note that when server names have been switched (databasemanager.switchServer),the 
+real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+****************************************************************************/
+
+var country = 'NL'
+var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
+if (done)
+{
+	//flush is required when changes are made in db
+	plugins.rawSQL.flushAllClientsCache("example_data","employees")
+}
+else
+{
+	var msg = plugins.rawSQL.getException().getMessage(); //see exception node for more info about the exception obj
+	plugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')
+}
+
+// Note that when this function is used to create a new table in the database, this table will only be seen by
+// the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
           </function>
           <function deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>

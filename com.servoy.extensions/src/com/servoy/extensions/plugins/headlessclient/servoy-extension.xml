@@ -8,13 +8,45 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
             <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
-            <sample/>
+            <sample><![CDATA[if (jsclient && jsclient.isValid())
+{
+	/*Queue a method where the callback can do something like this
+	if (event.getType() == JSClient.CALLBACK_EVENT)
+	{
+		application.output("callback data, name: " + event.data);
+	}
+	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
+	{
+		application.output("exception callback, name: " + event.data);
+	}*/
+	var x = new Object();
+	x.name = 'remote1';
+	x.number = 10;
+	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
+	jsclient.queueMethod(null, "remoteMethod", [x], callback);
+}]]></sample>
           </constant>
           <constant name="CALLBACK_EXCEPTION_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occured.]]></description>
             <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occured.]]></summary>
-            <sample/>
+            <sample><![CDATA[if (jsclient && jsclient.isValid())
+{
+	/*Queue a method where the callback can do something like this
+	if (event.getType() == JSClient.CALLBACK_EVENT)
+	{
+		application.output("callback data, name: " + event.data);
+	}
+	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
+	{
+		application.output("exception callback, name: " + event.data);
+	}*/
+	var x = new Object();
+	x.name = 'remote1';
+	x.number = 10;
+	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
+	jsclient.queueMethod(null, "remoteMethod", [x], callback);
+}]]></sample>
           </constant>
         </constants>
         <functions>

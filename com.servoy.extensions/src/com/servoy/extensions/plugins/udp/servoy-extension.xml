@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -397,8 +397,12 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
             <parameters>
-              <parameter name="destIpOrHostname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
+              <parameter name="destIpOrHostname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the ip of the destination or the hostname]]></description>
+              </parameter>
+              <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket">
+                <description><![CDATA[the JSPacket to send]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="sendPacket">
@@ -414,9 +418,15 @@ plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
             <parameters>
-              <parameter name="destIpOrHostname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
-              <parameter name="port" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="destIpOrHostname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the ip of the destination or the hostname]]></description>
+              </parameter>
+              <parameter name="packet" type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket">
+                <description><![CDATA[the JSPacket to send]]></description>
+              </parameter>
+              <parameter name="port" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the port on which to send the packet]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="startSocket">

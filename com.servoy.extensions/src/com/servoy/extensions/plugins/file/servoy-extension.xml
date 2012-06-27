@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -481,7 +481,10 @@ var success = file.setBytes(blobDataProvider, true);]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
             <description><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></description>
             <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></summary>
-            <sample/>
+            <sample><![CDATA[var file = plugins.file.convertToJSFile('/pathTo/file.jpg');
+// or for a remote file:
+// var file = plugins.file.convertToRemoteJSFile('/remotePathTo/file.jpg');
+var success = file.setBytes(blobDataProvider, true);]]></sample>
             <parameters>
               <parameter name="bytes" type="byte[]" typecode="[B">
                 <description><![CDATA[the data]]></description>
@@ -732,14 +735,6 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
         </functions>
       </object>
       <object publicName="file" qualifiedName="com.servoy.extensions.plugins.file.FileProvider" scriptingName="plugins.file">
-        <constants>
-          <constant name="CHUNK_BUFFER_SIZE" since="Servoy 5.2">
-            <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Size of the buffer used to stream files to the server]]></description>
-            <summary><![CDATA[Size of the buffer used to stream files to the server]]></summary>
-            <sample/>
-          </constant>
-        </constants>
         <functions>
           <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>

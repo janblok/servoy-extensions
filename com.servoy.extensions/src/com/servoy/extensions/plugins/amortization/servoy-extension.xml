@@ -4,30 +4,6 @@
     <plugins>
       <object publicName="AmortizationCalculation" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationCalculation">
         <constants>
-          <constant name="EVENT_LOAN">
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[The string constant used to identify a loan event.]]></description>
-            <summary><![CDATA[The string constant used to identify a loan event.]]></summary>
-            <sample/>
-          </constant>
-          <constant name="EVENT_PAYMENT">
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[The string constant used to identify a payment event.]]></description>
-            <summary><![CDATA[The string constant used to identify a payment event.]]></summary>
-            <sample/>
-          </constant>
-          <constant name="EVENT_PERIOD">
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[The string constant used to identify a compounding period change event.]]></description>
-            <summary><![CDATA[The string constant used to identify a compounding period change event.]]></summary>
-            <sample/>
-          </constant>
-          <constant name="EVENT_RATE">
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[The string constant used to identify a rate change event.]]></description>
-            <summary><![CDATA[The string constant used to identify a rate change event.]]></summary>
-            <sample/>
-          </constant>
           <constant name="NUMBER_UNLIMITED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></description>
