@@ -142,149 +142,301 @@ var value = cookie.getValue();]]></sample>
       </object>
       <object publicName="HTTP_STATUS" qualifiedName="com.servoy.extensions.plugins.http.HTTP_STATUS">
         <constants>
-          <constant name="SC_ACCEPTED" undocumented="true">
+          <constant name="SC_ACCEPTED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>202 Accepted</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>202 Accepted</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_BAD_GATEWAY" undocumented="true">
+          <constant name="SC_BAD_GATEWAY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>502 Bad Gateway</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>502 Bad Gateway</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_BAD_REQUEST" undocumented="true">
+          <constant name="SC_BAD_REQUEST">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>400 Bad Request</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>400 Bad Request</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_CONFLICT" undocumented="true">
+          <constant name="SC_CONFLICT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>409 Conflict</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>409 Conflict</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_CONTINUE" undocumented="true">
+          <constant name="SC_CONTINUE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>100 Continue</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>100 Continue</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_CREATED" undocumented="true">
+          <constant name="SC_CREATED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>201 Created</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>201 Created</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_EXPECTATION_FAILED" undocumented="true">
+          <constant name="SC_EXPECTATION_FAILED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>417 Expectation Failed</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>417 Expectation Failed</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_FAILED_DEPENDENCY" undocumented="true">
+          <constant name="SC_FAILED_DEPENDENCY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>424 Failed Dependency</tt> (WebDAV - RFC 2518)]]></description>
+            <summary><![CDATA[<tt>424 Failed Dependency</tt> (WebDAV - RFC 2518)]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_FORBIDDEN" undocumented="true">
+          <constant name="SC_FORBIDDEN">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>403 Forbidden</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>403 Forbidden</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_GATEWAY_TIMEOUT" undocumented="true">
+          <constant name="SC_GATEWAY_TIMEOUT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>504 Gateway Timeout</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>504 Gateway Timeout</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_GONE" undocumented="true">
+          <constant name="SC_GONE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>410 Gone</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>410 Gone</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_HTTP_VERSION_NOT_SUPPORTED" undocumented="true">
+          <constant name="SC_HTTP_VERSION_NOT_SUPPORTED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>505 HTTP Version Not Supported</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>505 HTTP Version Not Supported</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_INSUFFICIENT_SPACE_ON_RESOURCE" undocumented="true">
+          <constant name="SC_INSUFFICIENT_SPACE_ON_RESOURCE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Static constant for a 419 error.
+<tt>419 Insufficient Space on Resource</tt>
+(WebDAV - draft-ietf-webdav-protocol-05?)
+or <tt>419 Proxy Reauthentication Required</tt>
+(HTTP/1.1 drafts?)]]></description>
+            <summary><![CDATA[Static constant for a 419 error.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_INSUFFICIENT_STORAGE" undocumented="true">
+          <constant name="SC_INSUFFICIENT_STORAGE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>507 Insufficient Storage</tt> (WebDAV - RFC 2518)]]></description>
+            <summary><![CDATA[<tt>507 Insufficient Storage</tt> (WebDAV - RFC 2518)]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_INTERNAL_SERVER_ERROR" undocumented="true">
+          <constant name="SC_INTERNAL_SERVER_ERROR">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>500 Server Error</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>500 Server Error</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_LENGTH_REQUIRED" undocumented="true">
+          <constant name="SC_LENGTH_REQUIRED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>411 Length Required</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>411 Length Required</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_LOCKED" undocumented="true">
+          <constant name="SC_LOCKED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>423 Locked</tt> (WebDAV - RFC 2518)]]></description>
+            <summary><![CDATA[<tt>423 Locked</tt> (WebDAV - RFC 2518)]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_METHOD_FAILURE" undocumented="true">
+          <constant name="SC_METHOD_FAILURE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[Static constant for a 420 error.
+<tt>420 Method Failure</tt>
+(WebDAV - draft-ietf-webdav-protocol-05?)]]></description>
+            <summary><![CDATA[Static constant for a 420 error.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_METHOD_NOT_ALLOWED" undocumented="true">
+          <constant name="SC_METHOD_NOT_ALLOWED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>405 Method Not Allowed</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>405 Method Not Allowed</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_MOVED_PERMANENTLY" undocumented="true">
+          <constant name="SC_MOVED_PERMANENTLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>301 Moved Permanently</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>301 Moved Permanently</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_MOVED_TEMPORARILY" undocumented="true">
+          <constant name="SC_MOVED_TEMPORARILY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>302 Moved Temporarily</tt> (Sometimes <tt>Found</tt>) (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>302 Moved Temporarily</tt> (Sometimes <tt>Found</tt>) (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_MULTIPLE_CHOICES" undocumented="true">
+          <constant name="SC_MULTIPLE_CHOICES">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>300 Mutliple Choices</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>300 Mutliple Choices</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_MULTI_STATUS" undocumented="true">
+          <constant name="SC_MULTI_STATUS">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>207 Multi-Status</tt> (WebDAV - RFC 2518) or <tt>207 Partial Update
+OK</tt> (HTTP/1.1 - draft-ietf-http-v11-spec-rev-01?)]]></description>
+            <summary><![CDATA[<tt>207 Multi-Status</tt> (WebDAV - RFC 2518) or <tt>207 Partial Update
+OK</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_NON_AUTHORITATIVE_INFORMATION" undocumented="true">
+          <constant name="SC_NON_AUTHORITATIVE_INFORMATION">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>203 Non Authoritative Information</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>203 Non Authoritative Information</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_NOT_ACCEPTABLE" undocumented="true">
+          <constant name="SC_NOT_ACCEPTABLE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>406 Not Acceptable</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>406 Not Acceptable</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_NOT_FOUND" undocumented="true">
+          <constant name="SC_NOT_FOUND">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>404 Not Found</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>404 Not Found</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_NOT_IMPLEMENTED" undocumented="true">
+          <constant name="SC_NOT_IMPLEMENTED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>501 Not Implemented</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>501 Not Implemented</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_NOT_MODIFIED" undocumented="true">
+          <constant name="SC_NOT_MODIFIED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>304 Not Modified</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>304 Not Modified</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_NO_CONTENT" undocumented="true">
+          <constant name="SC_NO_CONTENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>204 No Content</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>204 No Content</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_OK" undocumented="true">
+          <constant name="SC_OK">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>200 OK</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>200 OK</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_PARTIAL_CONTENT" undocumented="true">
+          <constant name="SC_PARTIAL_CONTENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>206 Partial Content</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>206 Partial Content</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_PAYMENT_REQUIRED" undocumented="true">
+          <constant name="SC_PAYMENT_REQUIRED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>402 Payment Required</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>402 Payment Required</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_PRECONDITION_FAILED" undocumented="true">
+          <constant name="SC_PRECONDITION_FAILED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>412 Precondition Failed</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>412 Precondition Failed</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_PROCESSING" undocumented="true">
+          <constant name="SC_PROCESSING">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>102 Processing</tt> (WebDAV - RFC 2518)]]></description>
+            <summary><![CDATA[<tt>102 Processing</tt> (WebDAV - RFC 2518)]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_PROXY_AUTHENTICATION_REQUIRED" undocumented="true">
+          <constant name="SC_PROXY_AUTHENTICATION_REQUIRED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>407 Proxy Authentication Required</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>407 Proxy Authentication Required</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_REQUESTED_RANGE_NOT_SATISFIABLE" undocumented="true">
+          <constant name="SC_REQUESTED_RANGE_NOT_SATISFIABLE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>416 Requested Range Not Satisfiable</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>416 Requested Range Not Satisfiable</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_REQUEST_TIMEOUT" undocumented="true">
+          <constant name="SC_REQUEST_TIMEOUT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>408 Request Timeout</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>408 Request Timeout</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_REQUEST_TOO_LONG" undocumented="true">
+          <constant name="SC_REQUEST_TOO_LONG">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>413 Request Entity Too Large</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>413 Request Entity Too Large</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_REQUEST_URI_TOO_LONG" undocumented="true">
+          <constant name="SC_REQUEST_URI_TOO_LONG">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>414 Request-URI Too Long</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>414 Request-URI Too Long</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_RESET_CONTENT" undocumented="true">
+          <constant name="SC_RESET_CONTENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>205 Reset Content</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>205 Reset Content</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_SEE_OTHER" undocumented="true">
+          <constant name="SC_SEE_OTHER">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>303 See Other</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>303 See Other</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_SERVICE_UNAVAILABLE" undocumented="true">
+          <constant name="SC_SERVICE_UNAVAILABLE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>503 Service Unavailable</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>503 Service Unavailable</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_SWITCHING_PROTOCOLS" undocumented="true">
+          <constant name="SC_SWITCHING_PROTOCOLS">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>101 Switching Protocols</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>101 Switching Protocols</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_TEMPORARY_REDIRECT" undocumented="true">
+          <constant name="SC_TEMPORARY_REDIRECT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>307 Temporary Redirect</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>307 Temporary Redirect</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_UNAUTHORIZED" undocumented="true">
+          <constant name="SC_UNAUTHORIZED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>401 Unauthorized</tt> (HTTP/1.0 - RFC 1945)]]></description>
+            <summary><![CDATA[<tt>401 Unauthorized</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_UNPROCESSABLE_ENTITY" undocumented="true">
+          <constant name="SC_UNPROCESSABLE_ENTITY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>422 Unprocessable Entity</tt> (WebDAV - RFC 2518)]]></description>
+            <summary><![CDATA[<tt>422 Unprocessable Entity</tt> (WebDAV - RFC 2518)]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_UNSUPPORTED_MEDIA_TYPE" undocumented="true">
+          <constant name="SC_UNSUPPORTED_MEDIA_TYPE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>415 Unsupported Media Type</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>415 Unsupported Media Type</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
-          <constant name="SC_USE_PROXY" undocumented="true">
+          <constant name="SC_USE_PROXY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            <description><![CDATA[<tt>305 Use Proxy</tt> (HTTP/1.1 - RFC 2616)]]></description>
+            <summary><![CDATA[<tt>305 Use Proxy</tt> (HTTP/1.]]></summary>
+            <sample/>
           </constant>
         </constants>
       </object>
