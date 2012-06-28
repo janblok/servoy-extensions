@@ -137,7 +137,7 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	{
 		if (serializerWrapper == null)
 		{
-			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(true, true, true), true);
+			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(true, true, false), false);
 		}
 		return serializerWrapper;
 	}
