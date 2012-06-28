@@ -32,7 +32,7 @@ public class OptionsRequest extends BaseRequest
 	/**
 	 * Constant for specifying the options header 
 	 */
-	public static String OPTIONS_HEADER = "Allow"; //$NON-NLS-1$
+	protected static String OPTIONS_HEADER = "Allow"; //$NON-NLS-1$
 
 	//only used by script engine
 	public OptionsRequest()

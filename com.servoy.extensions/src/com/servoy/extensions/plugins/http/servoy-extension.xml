@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -798,14 +798,6 @@ if (cookieSet)
         </functions>
       </object>
       <object publicName="OptionsRequest" qualifiedName="com.servoy.extensions.plugins.http.OptionsRequest">
-        <constants>
-          <constant name="OPTIONS_HEADER">
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant for specifying the options header]]></description>
-            <summary><![CDATA[Constant for specifying the options header]]></summary>
-            <sample/>
-          </constant>
-        </constants>
         <functions>
           <function name="addHeader">
             <argumentsTypes>
