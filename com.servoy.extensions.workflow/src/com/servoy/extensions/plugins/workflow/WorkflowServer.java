@@ -143,19 +143,24 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		}
 
 		String scontent = xml.toLowerCase().replace('\'', '"');
-		int idx1 = scontent.indexOf("candidate-groups");
-		if (idx1 == -1) return;
-		int idx2 = scontent.indexOf('"',idx1);
-		int idx3 = scontent.indexOf('"',idx2+1);
-		String groups = xml.substring(idx2+1,idx3).trim();
-		String[] grps = groups.split(",");
-		for (int i = 0; i < grps.length; i++) 
+		
+		int idx1 = 0;
+		while ((idx1 = scontent.indexOf("candidate-groups",idx1)) != -1)
 		{
-			String group = grps[i].trim();
-			if (!servoyGroupNames.contains(group))
+			int idx2 = scontent.indexOf('"',idx1);
+			int idx3 = scontent.indexOf('"',idx2+1);
+			idx1++; //to pass into next iteration
+
+			String groups = xml.substring(idx2+1,idx3).trim();
+			String[] grps = groups.split(",");
+			for (int i = 0; i < grps.length; i++) 
 			{
-				userManager.createGroup(clientId, group);
-				servoyGroupNames.add(group);
+				String group = grps[i].trim();
+				if (!servoyGroupNames.contains(group))
+				{
+					userManager.createGroup(clientId, group);
+					servoyGroupNames.add(group);
+				}
 			}
 		}
 	}
