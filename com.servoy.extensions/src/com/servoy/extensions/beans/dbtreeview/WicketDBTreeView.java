@@ -1045,7 +1045,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
 		}
 
-		return false;
+		return true;
 	}
 
 	/*

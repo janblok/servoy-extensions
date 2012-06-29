@@ -187,7 +187,7 @@ public class SwingDBTreeTable extends JTable implements ICompositeDragNDrop
 			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
 		}
 
-		return false;
+		return true;
 	}
 
 	public boolean onDrop(JSDNDEvent event)
