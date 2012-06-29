@@ -201,7 +201,7 @@ public class SwingDBTree extends JTree implements TableCellRenderer, ICompositeD
 			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
 		}
 
-		return false;
+		return true;
 	}
 
 	public boolean onDrop(JSDNDEvent event)
