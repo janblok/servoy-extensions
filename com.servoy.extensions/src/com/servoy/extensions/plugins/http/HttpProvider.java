@@ -106,7 +106,10 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @param url 
 	 * @param httpClientName 
+	 * 
+	 * @deprecated Replaced by HttpClient.createGetRequest(String)
 	 */
+	@Deprecated
 	public String js_getPageData(String url, String httpClientName)
 	{
 		return getPageData(url, httpClientName, null, null);
@@ -123,7 +126,10 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 * @param httpClientName 
 	 * @param username 
 	 * @param password
+	 * 
+	 * @deprecated Replaced by HttpClient.createGetRequest(String)
 	 */
+	@Deprecated
 	public String js_getPageData(String url, String httpClientName, String username, String password)
 	{
 		return getPageData(url, httpClientName, username, password);
@@ -277,12 +283,12 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Set the proxy username and password. Used for named http clients (else use implicit java data).
 	 * 
-	 * @deprecated Replaced by {@link #setClientProxyCredentials(String,String)}
-	 * 
 	 * @sample plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');
 	 *
 	 * @param username 
 	 * @param password 
+	 * 
+	 * @deprecated Replaced by HttpClient.setClientProxyCredentials(String,String)
 	 */
 	@Deprecated
 	public void js_setClientProxyUserNamePassword(String userName, String password)
@@ -297,7 +303,10 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @param username 
 	 * @param password 
+	 * 
+	 * @deprecated Replaced by HttpClient.setClientProxyCredentials(String,String)
 	 */
+	@Deprecated
 	public void js_setClientProxyCredentials(String username, String password)
 	{
 		if (!Utils.stringIsEmpty(username))
@@ -437,7 +446,10 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 * @param url 
 	 * @param fileName 
 	 * @param filePath 
+	 * 
+	 * @deprecated Replaced by HttpClient.createPutRequest(String)
 	 */
+	@Deprecated
 	public boolean js_put(String clientName, String url, String fileName, String filePath)
 	{
 		return put(clientName, url, fileName, filePath, null, null);
@@ -455,7 +467,10 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 * @param filePath 
 	 * @param username 
 	 * @param password
+	 * 
+	 * @deprecated Replaced by HttpClient.createPutRequest(String)
 	 */
+	@Deprecated
 	public boolean js_put(String clientName, String url, String fileName, String filePath, String username, String password)
 	{
 		return put(clientName, url, fileName, filePath, username, password);
