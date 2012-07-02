@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -8,31 +8,31 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the Dutch language.]]></description>
             <summary><![CDATA[Constant for specifying the Dutch language.]]></summary>
-            <sample/>
+            <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInDutch', plugins.spellcheck.LANGUAGES.DUTCH);]]></sample>
           </constant>
           <constant name="ENGLISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the English language.]]></description>
             <summary><![CDATA[Constant for specifying the English language.]]></summary>
-            <sample/>
+            <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInEnglish', plugins.spellcheck.LANGUAGES.ENGLISH);]]></sample>
           </constant>
           <constant name="GERMAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the German language.]]></description>
             <summary><![CDATA[Constant for specifying the German language.]]></summary>
-            <sample/>
+            <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInGerman', plugins.spellcheck.LANGUAGES.GERMAN);]]></sample>
           </constant>
           <constant name="ITALIAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the Italian language.]]></description>
             <summary><![CDATA[Constant for specifying the Italian language.]]></summary>
-            <sample/>
+            <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInItalian', plugins.spellcheck.LANGUAGES.ITALIAN);]]></sample>
           </constant>
           <constant name="SPANISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the Spanish language.]]></description>
             <summary><![CDATA[Constant for specifying the Spanish language.]]></summary>
-            <sample/>
+            <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInSpanish', plugins.spellcheck.LANGUAGES.SPANISH);]]></sample>
           </constant>
         </constants>
       </object>

@@ -31,26 +31,41 @@ public abstract class LANGUAGES implements IConstantsObject
 {
 	/**
 	 * Constant for specifying the English language.
+	 * 
+	 * @sample
+	 * plugins.spellcheck.checkTextComponent('textInEnglish', plugins.spellcheck.LANGUAGES.ENGLISH);
 	 */
 	public static final String ENGLISH = SpellCheckerUtils.ENGLISH;
 
 	/**
 	 * Constant for specifying the Dutch language.
+	 * 
+	 * @sample
+	 * plugins.spellcheck.checkTextComponent('textInDutch', plugins.spellcheck.LANGUAGES.DUTCH);
 	 */
 	public static final String DUTCH = SpellCheckerUtils.DUTCH;
 
 	/**
 	 * Constant for specifying the German language.
+	 * 
+	 * @sample
+	 * plugins.spellcheck.checkTextComponent('textInGerman', plugins.spellcheck.LANGUAGES.GERMAN);
 	 */
 	public static final String GERMAN = SpellCheckerUtils.GERMAN;
 
 	/**
 	 * Constant for specifying the Italian language.
+	 * 
+	 * @sample
+	 * plugins.spellcheck.checkTextComponent('textInItalian', plugins.spellcheck.LANGUAGES.ITALIAN);
 	 */
 	public static final String ITALIAN = SpellCheckerUtils.ITALIAN;
 
 	/**
 	 * Constant for specifying the Spanish language.
+	 * 
+	 * @sample
+	 * plugins.spellcheck.checkTextComponent('textInSpanish', plugins.spellcheck.LANGUAGES.SPANISH);
 	 */
 	public static final String SPANISH = SpellCheckerUtils.SPANISH;
 }

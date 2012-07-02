@@ -436,7 +436,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * Add a radio button.
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @return a radio button menu item 
 	 */
@@ -448,7 +448,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	/**
 	 * Add a radio button with given name.
 	 * 
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text
 	 * 
@@ -461,7 +461,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the radio button
 	 * 
@@ -481,7 +481,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu 
@@ -495,7 +495,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -510,7 +510,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu  
@@ -526,7 +526,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @samples js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text  
 	 * @param feedback_item this can be either a method or an array representing a submenu  
