@@ -1331,4 +1331,49 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	{
 		setBorder(border);
 	}
+
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.scripting.IScriptObject#getSample(java.lang.String)
+	 */
+	public String getSample(String methodName)
+	{
+		//IGNORED
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.scripting.IScriptObject#getToolTip(java.lang.String)
+	 */
+	public String getToolTip(String methodName)
+	{
+		//IGNORED
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.scripting.IScriptObject#getParameterNames(java.lang.String)
+	 */
+	public String[] getParameterNames(String methodName)
+	{
+		//IGNORED
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.servoy.j2db.scripting.IScriptObject#isDeprecated(java.lang.String)
+	 */
+	public boolean isDeprecated(String methodName)
+	{
+		//IGNORED
+		return false;
+	}
 }
