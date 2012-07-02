@@ -18,14 +18,15 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
 
-import com.servoy.j2db.scripting.IScriptObject;
+import com.servoy.j2db.scripting.IReturnedTypesProvider;
+import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * Interface to enforce the swing and web bean instance to be the same
  * 
  * @author jblok
  */
-public interface ITreeViewScriptMethods extends IScriptObject, ITreeView
+public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScriptable, ITreeView
 {
 	/**
 	 * Property for getting/setting the background color of the bean.
