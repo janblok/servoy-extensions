@@ -821,7 +821,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 			if (dragOverReturn instanceof Boolean) return ((Boolean)dragOverReturn).booleanValue();
 		}
 
-		return true;
+		return fOnDrop != null;
 	}
 
 	/*
