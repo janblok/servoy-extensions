@@ -23,6 +23,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JTree;
@@ -713,6 +714,19 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	{
 		super.renderHead(response);
 		response.renderCSSReference(CSS);
+		Iterator selectedNodesIte = getTreeState().getSelectedNodes().iterator();
+		if (selectedNodesIte.hasNext())
+		{
+			TreeNode firstSelectedNode = (TreeNode)selectedNodesIte.next();
+			Component nodeComponent = getTree().getNodeComponent(firstSelectedNode);
+			if (nodeComponent != null)
+			{
+				String treeId = getMarkupId();
+				String nodeId = nodeComponent.getMarkupId();
+				response.renderOnDomReadyJavascript("document.getElementById('" + treeId + "').scrollTop = document.getElementById('" + nodeId +
+					"').offsetTop;\n");
+			}
+		}
 	}
 
 
