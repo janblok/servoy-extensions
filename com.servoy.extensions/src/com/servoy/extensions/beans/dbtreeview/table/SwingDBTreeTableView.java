@@ -21,6 +21,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -336,7 +337,11 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 	{
 		super.js_setSelectionPath(selectionPath);
 		int[] selectedRows = tree.getSelectionRows();
-		if (selectedRows != null && selectedRows.length > 0) treeTable.getSelectionModel().setSelectionInterval(selectedRows[0], selectedRows[0]);
+		if (selectedRows != null && selectedRows.length > 0)
+		{
+			treeTable.getSelectionModel().setSelectionInterval(selectedRows[0], selectedRows[0]);
+			treeTable.scrollRectToVisible(new Rectangle(treeTable.getCellRect(selectedRows[0], 0, true)));
+		}
 	}
 
 	/*
