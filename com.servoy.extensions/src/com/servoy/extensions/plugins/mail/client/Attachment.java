@@ -19,14 +19,14 @@ package com.servoy.extensions.plugins.mail.client;
 import java.io.Serializable;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IScriptable;
+import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.util.ImageLoader;
 
 /**
  * @author jblok
  */
 @ServoyDocumented
-public class Attachment implements Serializable, IScriptable
+public class Attachment implements Serializable, IJavaScriptType
 {
 	private final String name;
 	private String mimeType;

@@ -22,14 +22,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IScriptable;
+import com.servoy.j2db.scripting.IJavaScriptType;
 
 /**
  * Container class for an email
  * @author jblok
  */
 @ServoyDocumented
-public class MailMessage implements Serializable, IScriptable
+public class MailMessage implements Serializable, IJavaScriptType
 {
 	public List<Attachment> attachments = new ArrayList<Attachment>();
 	public String fromAddresses;
