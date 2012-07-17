@@ -159,7 +159,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
           <property name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></description>
+            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
@@ -1270,7 +1270,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
           <property name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></description>
+            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
@@ -2042,7 +2042,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2083,7 +2083,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2128,7 +2128,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2177,7 +2177,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2230,7 +2230,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2287,7 +2287,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2412,7 +2412,7 @@ submenu0.text = "submenu 0";
 submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the text of the submenu]]></description>
+                <description><![CDATA[the text of the submenu; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2525,7 +2525,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2566,7 +2566,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2611,7 +2611,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2660,7 +2660,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2713,7 +2713,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2770,7 +2770,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -2919,7 +2919,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2967,7 +2967,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -3019,7 +3019,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -3075,7 +3075,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -3135,7 +3135,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -3199,7 +3199,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -4334,7 +4334,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
           <property name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></description>
+            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
@@ -5088,7 +5088,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -5129,7 +5129,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5174,7 +5174,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5223,7 +5223,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5276,7 +5276,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5333,7 +5333,7 @@ chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the checkbox text]]></description>
+                <description><![CDATA[the checkbox text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5458,7 +5458,7 @@ submenu0.text = "submenu 0";
 submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the text of the submenu]]></description>
+                <description><![CDATA[the text of the submenu; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -5571,7 +5571,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -5612,7 +5612,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5657,7 +5657,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5706,7 +5706,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5759,7 +5759,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5816,7 +5816,7 @@ item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the menu item text]]></description>
+                <description><![CDATA[the menu item text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -5965,7 +5965,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
             </parameters>
           </function>
@@ -6013,7 +6013,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -6065,7 +6065,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -6121,7 +6121,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -6181,7 +6181,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -6245,7 +6245,7 @@ rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the radio button text]]></description>
+                <description><![CDATA[the radio button text; this can be also html if enclosed between html tags]]></description>
               </parameter>
               <parameter name="feedback_item" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[this can be either a method or an array representing a submenu]]></description>
@@ -7099,7 +7099,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
           <property name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></description>
+            <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
             <sample><![CDATA[// add a new menu to the menubar
 var menubar = plugins.window.getMenuBar();
