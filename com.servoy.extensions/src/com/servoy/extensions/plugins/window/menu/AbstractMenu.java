@@ -764,15 +764,15 @@ public abstract class AbstractMenu implements IScriptObject, IJavaScriptType
 		}
 		if ("addMenuItem".equals(methodName))
 		{
-			return "Add the item at the selected index (starting at 0) or add it at the end (empty).";
+			return "Add the item at the selected index (starting at 0) or add it at the end (empty).\nThe name can be an html text if it is enclosed between html tags.";
 		}
 		if ("addCheckBox".equals(methodName))
 		{
-			return "Add the Checkbox at the selected index (starting at 0) or add it at the end (empty).";
+			return "Add the Checkbox at the selected index (starting at 0) or add it at the end (empty).\nThe name can be an html text if it is enclosed between html tags.";
 		}
 		if ("addRadioButton".equals(methodName))
 		{
-			return "Add the Radiobutton at the selected index (starting at 0) or add it at the end (empty).";
+			return "Add the Radiobutton at the selected index (starting at 0) or add it at the end (empty).\nThe name can be an html text if it is enclosed between html tags.";
 		}
 		if ("addRadioGroup".equals(methodName))
 		{
@@ -804,7 +804,7 @@ public abstract class AbstractMenu implements IScriptObject, IJavaScriptType
 		}
 		if ("addMenu".equals(methodName))
 		{
-			return "Add the submenu at the selected index (starting at 0) or add it at the end (empty).";
+			return "Add the submenu at the selected index (starting at 0) or add it at the end (empty).\nThe name can be an html text if it is enclosed between html tags.";
 		}
 		if ("getMenu".equals(methodName))
 		{

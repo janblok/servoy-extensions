@@ -530,7 +530,7 @@ public abstract class AbstractMenuItem implements IScriptObject, IJavaScriptType
 		}
 		if ("setText".equals(methodName)) //$NON-NLS-1$ 
 		{
-			return "Set the text of the item."; //$NON-NLS-1$ 
+			return "Set the text of the item. This can be an html text if it is enclosed between html tags."; //$NON-NLS-1$ 
 		}
 		if ("setVisible".equals(methodName)) //$NON-NLS-1$ 
 		{
