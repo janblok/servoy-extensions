@@ -166,7 +166,18 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				}
 
 				String text = elem.getText();
-				if (text != null) text = HtmlUtils.escapeMarkup(text).toString();
+				if (text != null)
+				{
+					if (HtmlUtils.startsWithHtml(text) && text.length() > 13)
+					{
+						text = text.substring(6, text.length() - 7);
+					}
+					else
+					{
+						text = HtmlUtils.escapeMarkup(text).toString();
+					}
+				}
+
 				if (controlClass != null || imageIcon != null)
 				{
 					StringBuilder labelText = new StringBuilder("<html><table><tr>"); //$NON-NLS-1$ 
