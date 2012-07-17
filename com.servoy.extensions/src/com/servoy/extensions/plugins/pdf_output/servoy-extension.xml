@@ -2,6 +2,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
+      <object publicName="PrinterJob" qualifiedName="com.servoy.extensions.plugins.pdf_output.PrinterJob"/>
       <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider" scriptingName="plugins.pdf_output">
         <functions>
           <function name="addMetaData">
