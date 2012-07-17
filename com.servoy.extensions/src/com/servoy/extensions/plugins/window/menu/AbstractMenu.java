@@ -91,7 +91,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the checkbox text
+	 * @param name the checkbox text; this can be also html if enclosed between html tags
 	 * 
 	 * @return checkbox
 	 */
@@ -119,7 +119,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the checkbox text 
+	 * @param name the checkbox text; this can be also html if enclosed between html tags 
 	 * @param feedback_item this can be either a method or an array representing a submenu
 	 * 
 	 * @return checkbox
@@ -133,7 +133,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the checkbox text 
+	 * @param name the checkbox text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * 
@@ -148,7 +148,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the checkbox text 
+	 * @param name the checkbox text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * @param mnemonic the checkbox mnemonic 
@@ -164,7 +164,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the checkbox text 
+	 * @param name the checkbox text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * @param mnemonic the checkbox mnemonic  
@@ -209,7 +209,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * chk.text = "checkbox at index";
 	 * chk.setMethod(feedback_checkbox);
 	 *
-	 * @param name the checkbox text 
+	 * @param name the checkbox text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * @param mnemonic the checkbox mnemonic  
@@ -297,7 +297,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the menu item text
+	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * 
 	 * @return menu item
 	 */
@@ -325,7 +325,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the menu item text
+	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu
 	 * 
 	 * @return menu item
@@ -339,7 +339,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the menu item text
+	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)
 	 * 
@@ -354,7 +354,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the menu item text
+	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the menu item mnemonic
@@ -370,7 +370,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the menu item text
+	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the menu item mnemonic
@@ -415,7 +415,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * item.text = "item at index";
 	 * item.setMethod(feedback_item);
 	 *
-	 * @param name the menu item text
+	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the menu item mnemonic
@@ -450,7 +450,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the radio button text
+	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * 
 	 * @return a radio button menu item 
 	 */
@@ -483,7 +483,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the radio button text  
+	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu 
 	 * 
 	 * @return a radio button menu item 
@@ -497,7 +497,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the radio button text  
+	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)
 	 * 
@@ -512,7 +512,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the radio button text  
+	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the radio button mnemonic
@@ -528,7 +528,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
 	 * 
-	 * @param name the radio button text  
+	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the radio button mnemonic
@@ -580,7 +580,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * rd.text = "radio at index";
 	 * rd.setMethod(feedback_item);
 	 *
-	 * @param name the radio button text  
+	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * @param feedback_item this can be either a method or an array representing a submenu  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the radio button mnemonic
@@ -705,7 +705,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * submenu0.text = "submenu 0";
 	 * submenu0.addMenuItem("sub item 0 - 1", feedback_item);
 	 *
-	 * @param name the text of the submenu
+	 * @param name the text of the submenu; this can be also html if enclosed between html tags
 	 * 
 	 * @return the submenu
 	 */

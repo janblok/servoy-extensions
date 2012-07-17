@@ -150,7 +150,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * Get/set the text of the menu item/checkbox/radiobutton.
+	 * Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags
 	 * 
 	 * @sampleas js_isEnabled()
 	 */
