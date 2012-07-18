@@ -887,6 +887,8 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	{
 		DraggableBehavior dragBehavior = new DraggableBehavior()
 		{
+			private boolean isHoverAcceptDrop;
+
 			@Override
 			protected void onDragEnd(String id, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
@@ -911,13 +913,14 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 				if (dragOp == DRAGNDROP.NONE) return false;
 				setCurrentDragOperation(dragOp);
 				setDragData(event.getData(), event.getDataMimeType());
+				isHoverAcceptDrop = false;
 				return true;
 			}
 
 			@Override
 			protected void onDrop(String id, final String targetid, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
-				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				if (getCurrentDragOperation() != DRAGNDROP.NONE && isHoverAcceptDrop)
 				{
 					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDrop, new Point(x, y), m, row);
 					event.setData(getDragData());
@@ -934,7 +937,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 					JSDNDEvent event = InmethodDBTreeTableView.this.createScriptEvent(EventType.onDragOver, null, m, row);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
-					InmethodDBTreeTableView.this.onDragOver(event);
+					isHoverAcceptDrop = InmethodDBTreeTableView.this.onDragOver(event);
 				}
 			}
 

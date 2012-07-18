@@ -1097,6 +1097,8 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 	{
 		DraggableBehavior dragBehavior = new DraggableBehavior()
 		{
+			private boolean isHoverAcceptDrop;
+
 			@Override
 			protected void onDragEnd(String id, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
@@ -1121,13 +1123,14 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 				if (dragOp == DRAGNDROP.NONE) return false;
 				setCurrentDragOperation(dragOp);
 				setDragData(event.getData(), event.getDataMimeType());
+				isHoverAcceptDrop = false;
 				return true;
 			}
 
 			@Override
 			protected void onDrop(String id, final String targetid, int x, int y, int m, AjaxRequestTarget ajaxRequestTarget)
 			{
-				if (getCurrentDragOperation() != DRAGNDROP.NONE)
+				if (getCurrentDragOperation() != DRAGNDROP.NONE && isHoverAcceptDrop)
 				{
 					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDrop, new Point(x, y), m, node);
 					event.setData(getDragData());
@@ -1144,7 +1147,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 					JSDNDEvent event = WicketDBTreeView.this.createScriptEvent(EventType.onDragOver, null, m, node);
 					event.setData(getDragData());
 					event.setDataMimeType(getDragDataMimeType());
-					WicketDBTreeView.this.onDragOver(event);
+					isHoverAcceptDrop = WicketDBTreeView.this.onDragOver(event);
 				}
 			}
 
