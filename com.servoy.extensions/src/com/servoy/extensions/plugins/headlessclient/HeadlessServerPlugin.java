@@ -28,6 +28,8 @@ import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.NativeError;
 import org.mozilla.javascript.RhinoException;
 
+import com.servoy.j2db.IServiceProvider;
+import com.servoy.j2db.persistence.Solution;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.preference.PreferencePanel;
@@ -88,7 +90,8 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		return null;
 	}
 
-	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
+	public String getOrCreateClient(String clientKey, String solutionname, String username, String password, Object[] solutionOpenMethodArgs,
+		String callingClientId) throws Exception
 	{
 		if (!application.isServerProcess(callingClientId) && !application.isAuthenticated(callingClientId))
 		{
@@ -103,10 +106,36 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 				clientsIterator.remove();
 			}
 		}
+
+		WeakReference<IHeadlessClient> clientRef = clients.get(clientKey);
+		if (clientRef != null)
+		{
+			IHeadlessClient c = clientRef.get();
+			if (c != null && c.isValid())
+			{
+				if (c instanceof IServiceProvider)
+				{
+					Solution sol = ((IServiceProvider)c).getSolution();
+					if (sol == null || !sol.getName().equals(solutionname))
+					{
+						String name = sol == null ? "<null>" : sol.getName();
+						throw new ClientNotFoundException(clientKey, name);
+					}
+				}
+				return clientKey;
+			}
+		}
+
 		IHeadlessClient c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
-		WeakReference<IHeadlessClient> clientRef = new WeakReference<IHeadlessClient>(c);
+		clientRef = new WeakReference<IHeadlessClient>(c);
+		clients.put(clientKey, clientRef);
+		return clientKey;
+	}
+
+	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
+	{
 		String newClientKey = UUID.randomUUID().toString();
-		clients.put(newClientKey, clientRef);
+		getOrCreateClient(newClientKey, solutionname, username, password, solutionOpenMethodArgs, callingClientId);
 		return newClientKey;
 	}
 

@@ -23,6 +23,10 @@ public interface IHeadlessServer extends Remote
 {
 	public static final String SERVICE_NAME = "servoy.IHeadlessServer"; //$NON-NLS-1$
 
+
+	public String getOrCreateClient(String clientKey, String solutionname, String username, String password, Object[] solutionOpenMethodArgs,
+		String callingClientId) throws Exception, RemoteException;
+
 	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId)
 		throws Exception, RemoteException;
 

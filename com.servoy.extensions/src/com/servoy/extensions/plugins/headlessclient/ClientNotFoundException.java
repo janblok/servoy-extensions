@@ -13,7 +13,7 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.headlessclient;
 
 import java.io.Serializable;
@@ -21,8 +21,24 @@ import java.io.Serializable;
 
 public class ClientNotFoundException extends IllegalStateException implements Serializable
 {
+	private final String info;
+
 	ClientNotFoundException(String clientID)
 	{
+		this("Client '" + clientID + "' not found", null);
+	}
+
+	ClientNotFoundException(String clientID, String info)
+	{
 		super("Client '" + clientID + "' not found");
+		this.info = info;
+	}
+
+	/**
+	 * @return the info
+	 */
+	public String getInfo()
+	{
+		return info;
 	}
 }
