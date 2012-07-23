@@ -362,8 +362,13 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
-            <description><![CDATA[Creates a headless client that will open the given solution.]]></description>
-            <summary><![CDATA[Creates a headless client that will open the given solution.]]></summary>
+            <description><![CDATA[Creates a headless client on the server that will open the given solution.
+The clientId of this client can be stored in the database to be shared between clients so that that specific client can be used 
+over multiply clients later on or picked up later on by this client. (Even after restart of this client) 
+
+NOTE: in the developer this will only load the solution in debug mode when it is the current active solution or a module of the active solution,
+you can load a solution from the workspace when you pass "nodebug" as last argument in the arguments list. Then you won't be able to debug this, breakpoints won't hit.]]></description>
+            <summary><![CDATA[Creates a headless client on the server that will open the given solution.]]></summary>
             <sample><![CDATA[// Creates a headless client that will open the given solution.
 var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 if (headlessClient != null && headlessClient.isValid()) { 
@@ -393,6 +398,51 @@ if (headlessClient != null && headlessClient.isValid()) {
 }]]></sample>
             <parameters>
               <parameter name="clientID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="getOrCreateClient">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"><![CDATA[An existing JSClient or the JSClient that is created.]]></return>
+            <description><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution,
+it will create a headless client on the server that will open the given solution if it didn't exists yet.
+
+If the client does exist but it is not loaded with that solution an exception will be thrown.
+
+NOTE: in the developer this will only load the solution in debug mode when it is the current active solution or a module of the active solution,
+you can load a solution from the workspace when you pass "nodebug" as last argument in the arguments list. Then you won't be able to debug this, breakpoints won't hit.]]></description>
+            <summary><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution,
+it will create a headless client on the server that will open the given solution if it didn't exists yet.]]></summary>
+            <sample><![CDATA[// Creates a headless client that will open the given solution.
+var storedSolutionSpecificID = "aaaabbbbccccc1111";
+var headlessClient = plugins.headlessclient.getOrCreateClient(storedSolutionSpecificID, "someSolution", "user", "pass", null);
+if (headlessClient != null && headlessClient.isValid()) { 
+	var x = new Object();
+	x.name = 'remote1';
+	x.number = 10;
+	headlessClient.queueMethod(null, "remoteMethod", [x], callback);
+}]]></sample>
+            <parameters>
+              <parameter name="clientId" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The id of the client if it already exists, or it will be the id of the client if it will be created.]]></description>
+              </parameter>
+              <parameter name="solutionname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The solution to load]]></description>
+              </parameter>
+              <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The user name that is used to login to the solution]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The password for the user]]></description>
+              </parameter>
+              <parameter name="solutionOpenMethodArgs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
+                <description><![CDATA[The arguments that will be passed to the solution open method.]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>

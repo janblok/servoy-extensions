@@ -29,6 +29,8 @@ import org.mozilla.javascript.NativeError;
 import org.mozilla.javascript.RhinoException;
 
 import com.servoy.extensions.plugins.headlessclient.ServerPluginDispatcher.Call;
+import com.servoy.j2db.IServiceProvider;
+import com.servoy.j2db.persistence.Solution;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.preference.PreferencePanel;
@@ -112,6 +114,15 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 	@TerracottaAutolockWrite
 	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
 	{
+		String newClientKey = UUID.randomUUID().toString();
+		getOrCreateClient(newClientKey, solutionname, username, password, solutionOpenMethodArgs, callingClientId);
+		return newClientKey;
+	}
+
+	@TerracottaAutolockWrite
+	public String getOrCreateClient(String clientKey, String solutionname, String username, String password, Object[] solutionOpenMethodArgs,
+		String callingClientId) throws Exception
+	{
 		if (!application.isServerProcess(callingClientId) && !application.isAuthenticated(callingClientId))
 		{
 			throw new SecurityException("Rejected unauthenticated access");
@@ -119,14 +130,28 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 		// clear references to all invalid clients
 		serverPluginDispatcher.callOnAllServers(new ClearInvalidClients());
-		IHeadlessClient c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
-		String newClientKey = UUID.randomUUID().toString();
-		clients.put(newClientKey, c);
+
+		IHeadlessClient c = clients.get(clientKey);
+		if (c != null && c.isValid())
+		{
+			if (c instanceof IServiceProvider)
+			{
+				Solution sol = ((IServiceProvider)c).getSolution();
+				if (sol == null || !sol.getName().equals(solutionname))
+				{
+					String name = sol == null ? "<null>" : sol.getName();
+					throw new ClientNotFoundException(clientKey, name);
+				}
+			}
+			return clientKey;
+		}
+		c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
+		clients.put(clientKey, c);
 		synchronized (clientIdToServerId) // Terracotta WRITE lock
 		{
-			clientIdToServerId.put(newClientKey, serverPluginID);
+			clientIdToServerId.put(clientKey, serverPluginID);
 		}
-		return newClientKey;
+		return clientKey;
 	}
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory

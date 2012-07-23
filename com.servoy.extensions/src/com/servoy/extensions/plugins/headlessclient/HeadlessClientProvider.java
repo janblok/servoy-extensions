@@ -50,8 +50,66 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 	}
 
 	/**
-	 * Creates a headless client that will open the given solution.
+	 * This will try to get a existing client by the given id if that client is already created for that specific solution,
+	 * it will create a headless client on the server that will open the given solution if it didn't exists yet.
+	 * 
+	 * If the client does exist but it is not loaded with that solution an exception will be thrown.
+	 * 
+	 * NOTE: in the developer this will only load the solution in debug mode when it is the current active solution or a module of the active solution,
+	 * you can load a solution from the workspace when you pass "nodebug" as last argument in the arguments list. Then you won't be able to debug this, breakpoints won't hit. 
 	 *
+	 * @sample
+	 * // Creates a headless client that will open the given solution.
+	 * var storedSolutionSpecificID = "aaaabbbbccccc1111";
+	 * var headlessClient = plugins.headlessclient.getOrCreateClient(storedSolutionSpecificID, "someSolution", "user", "pass", null);
+	 * if (headlessClient != null && headlessClient.isValid()) { 
+	 * 	var x = new Object();
+	 * 	x.name = 'remote1';
+	 * 	x.number = 10;
+	 * 	headlessClient.queueMethod(null, "remoteMethod", [x], callback);
+	 * }
+	 * 
+	 * @param clientId The id of the client if it already exists, or it will be the id of the client if it will be created.
+	 * @param solutionname The solution to load
+	 * @param username The user name that is used to login to the solution
+	 * @param password The password for the user
+	 * @param solutionOpenMethodArgs The arguments that will be passed to the solution open method.
+	 * 
+	 * @return An existing JSClient or the JSClient that is created.
+	 */
+	public JSClient js_getOrCreateClient(String clientId, String solutionname, String username, String password, Object[] solutionOpenMethodArgs)
+	{
+		//create if not yet created
+		createService();
+
+		try
+		{
+			String clientID = headlessServer.getOrCreateClient(clientId, solutionname, username, password, solutionOpenMethodArgs,
+				plugin.getPluginAccess().getClientID());
+			if (clientID != null)
+			{
+				return new JSClient(clientID, headlessServer, plugin);
+			}
+		}
+		catch (ClientNotFoundException ex)
+		{
+			throw new RuntimeException("The client with the clientId: " + clientId + " was loaded with another solution", ex);
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+		}
+		return null;
+	}
+
+	/**
+	 * Creates a headless client on the server that will open the given solution.
+	 * The clientId of this client can be stored in the database to be shared between clients so that that specific client can be used 
+	 * over multiply clients later on or picked up later on by this client. (Even after restart of this client) 
+	 *
+	 * NOTE: in the developer this will only load the solution in debug mode when it is the current active solution or a module of the active solution,
+	 * you can load a solution from the workspace when you pass "nodebug" as last argument in the arguments list. Then you won't be able to debug this, breakpoints won't hit.
+	 *  
 	 * @sample
 	 * // Creates a headless client that will open the given solution.
 	 * var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);

@@ -23,8 +23,24 @@ import com.servoy.j2db.server.annotations.TerracottaInstrumentedClass;
 @TerracottaInstrumentedClass
 public class ClientNotFoundException extends IllegalStateException implements Serializable
 {
+	private final String info;
+
 	ClientNotFoundException(String clientID)
 	{
+		this(clientID, null);
+	}
+
+	ClientNotFoundException(String clientID, String info)
+	{
 		super("Client '" + clientID + "' not found");
+		this.info = info;
+	}
+
+	/**
+	 * @return the info
+	 */
+	public String getInfo()
+	{
+		return info;
 	}
 }
