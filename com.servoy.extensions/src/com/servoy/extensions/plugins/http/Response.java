@@ -143,7 +143,10 @@ public class Response implements IScriptable, IJavaScriptType
 	 * Gets the headers of the response as name/value arrays.
 	 *
 	 * @sample
-	 * var allHeaders = response.getResponseHeaders(null);
+	 * var allHeaders = response.getResponseHeaders();
+	 * var header;
+	 * 
+	 * for (header in allHeaders) application.output(header + ': ' + allHeaders[header]);
 	 */
 	public JSMap js_getResponseHeaders()
 	{
@@ -152,7 +155,8 @@ public class Response implements IScriptable, IJavaScriptType
 
 	/**
 	 * @clonedesc js_getResponseHeaders()
-	 * @sampleas js_getResponseHeaders()
+	 * @sample
+	 * var contentLength = response.getResponseHeaders("Content-Length");
 	 *
 	 * @param headerName 
 	 */
