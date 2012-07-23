@@ -25,7 +25,7 @@ public class ClientNotFoundException extends IllegalStateException implements Se
 
 	ClientNotFoundException(String clientID)
 	{
-		this("Client '" + clientID + "' not found", null);
+		this(clientID, null);
 	}
 
 	ClientNotFoundException(String clientID, String info)
