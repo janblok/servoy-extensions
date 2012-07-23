@@ -13,8 +13,6 @@
 
 <project name="servoy_plugins" basedir="." default="all_plugins">
 
-	<import file="../eclipse_build/build_installer_properties.xml"/>
-	
 	<property name="src.dir" value="src"/>
 	<property name="bin.dir" value="bin"/>
 	<property name="lib.dir" value="lib"/>
@@ -144,8 +142,6 @@
 			 	   xmlreader.jar,serialize.jar,default_validators.jar,converters.jar,rest_ws.jar,headlessclient.jar"
 	>
 		<!--<ant target="clean"/>-->
-		
-			<sign_dir dirname="${plugins.dir}" />
 	</target>
 	
 	<target	name="all_extensions"
