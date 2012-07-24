@@ -41,6 +41,7 @@ import com.servoy.j2db.server.annotations.TerracottaRoot;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.UUID;
 import com.servoy.j2db.util.serialize.JSONConverter;
 
@@ -111,7 +112,6 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		return null;
 	}
 
-	@TerracottaAutolockWrite
 	public String createClient(String solutionname, String username, String password, Object[] solutionOpenMethodArgs, String callingClientId) throws Exception
 	{
 		String newClientKey = UUID.randomUUID().toString();
@@ -131,32 +131,41 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		// clear references to all invalid clients
 		serverPluginDispatcher.callOnAllServers(new ClearInvalidClients());
 
-		IHeadlessClient c = clients.get(clientKey);
-		if (c != null && c.isValid())
+		// search for an existing client
+		boolean createNewClient = true;
+		String serverId = getServerId(clientKey);
+		if (serverId != null)
 		{
-			if (c instanceof IServiceProvider)
+			// client exists; we need to know if the solution is the same one
+			Pair<String, Boolean> solutionNameAndValidity = serverPluginDispatcher.callOnCorrectServer(serverId, new GetSolutionNameCall(clientKey), true);
+
+			if (solutionNameAndValidity.getRight().booleanValue())
 			{
-				Solution sol = ((IServiceProvider)c).getSolution();
-				if (sol == null || !sol.getName().equals(solutionname))
+				String loadedSolutionName = solutionNameAndValidity.getLeft();
+				if (loadedSolutionName == null || !loadedSolutionName.equals(solutionname))
 				{
-					String name = sol == null ? "<null>" : sol.getName();
+					String name = (loadedSolutionName == null ? "<null>" : loadedSolutionName);
 					throw new ClientNotFoundException(clientKey, name);
 				}
+				createNewClient = false;
 			}
-			return clientKey;
 		}
-		c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
-		clients.put(clientKey, c);
-		synchronized (clientIdToServerId) // Terracotta WRITE lock
+
+		if (createNewClient)
 		{
-			clientIdToServerId.put(clientKey, serverPluginID);
+			IHeadlessClient c = HeadlessClientFactory.createHeadlessClient(solutionname, username, password, solutionOpenMethodArgs);
+			clients.put(clientKey, c);
+			synchronized (clientIdToServerId) // Terracotta WRITE lock
+			{
+				clientIdToServerId.put(clientKey, serverPluginID);
+			}
 		}
 		return clientKey;
 	}
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class ClearInvalidClients implements Call<HeadlessServerPlugin>
+	private static class ClearInvalidClients implements Call<HeadlessServerPlugin, Object>
 	{
 		@TerracottaAutolockWrite
 		public Object executeCall(HeadlessServerPlugin correctServerObject)
@@ -176,6 +185,35 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			}
 			return null;
 		}
+	}
+
+	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
+	@TerracottaInstrumentedClass
+	private static class GetSolutionNameCall implements Call<HeadlessServerPlugin, Pair<String, Boolean>>
+	{
+		private final String clientKey;
+
+		public GetSolutionNameCall(String clientKey)
+		{
+			this.clientKey = clientKey;
+		}
+
+		public Pair<String, Boolean> executeCall(HeadlessServerPlugin correctServerObject) throws Exception
+		{
+			Pair<String, Boolean> solutionNameAndValidity = new Pair<String, Boolean>(null, Boolean.FALSE);
+			IHeadlessClient c = correctServerObject.getClient(clientKey);
+			if (c != null && c.isValid())
+			{
+				solutionNameAndValidity.setRight(Boolean.TRUE);
+				if (c instanceof IServiceProvider)
+				{
+					Solution sol = ((IServiceProvider)c).getSolution();
+					solutionNameAndValidity.setLeft(sol != null ? sol.getName() : null);
+				}
+			}
+			return solutionNameAndValidity;
+		}
+
 	}
 
 	private IHeadlessClient getClient(String clientKey) throws ClientNotFoundException
@@ -205,7 +243,8 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 		try
 		{
-			return serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new ExecuteMethodCall(clientKey, contextName, methodName, args), true);
+			return serverPluginDispatcher.callOnCorrectServer(getNonNullServerId(clientKey), new ExecuteMethodCall(clientKey, contextName, methodName, args),
+				true);
 		}
 		finally
 		{
@@ -219,7 +258,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class ExecuteMethodCall implements Call<HeadlessServerPlugin>
+	private static class ExecuteMethodCall implements Call<HeadlessServerPlugin, String>
 	{
 
 		private final String clientKey;
@@ -235,7 +274,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.args = args;
 		}
 
-		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
+		public String executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
 			try
 			{
@@ -269,18 +308,22 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 	}
 
 	/**
-	 * Will either return a non-null server id or throw an exception.
+	 * It will either return a non-null server id or throw an exception.
 	 */
+	private String getNonNullServerId(String clientKey)
+	{
+		String serverId = getServerId(clientKey);
+		if (serverId == null) throw new ClientNotFoundException(clientKey);
+		return serverId;
+	}
+
 	@TerracottaAutolockRead
 	private String getServerId(String clientKey)
 	{
-		String serverId;
 		synchronized (clientIdToServerId) // Terracotta READ lock
 		{
-			serverId = clientIdToServerId.get(clientKey);
+			return clientIdToServerId.get(clientKey);
 		}
-		if (serverId == null) throw new ClientNotFoundException(clientKey);
-		return serverId;
 	}
 
 	private JSONConverter getJSONConverter()
@@ -303,12 +346,12 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			}
 		}
 
-		return serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new GetDataProviderCall(clientKey, contextName, dataprovider), true);
+		return serverPluginDispatcher.callOnCorrectServer(getNonNullServerId(clientKey), new GetDataProviderCall(clientKey, contextName, dataprovider), true);
 	}
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class GetDataProviderCall implements Call<HeadlessServerPlugin>
+	private static class GetDataProviderCall implements Call<HeadlessServerPlugin, String>
 	{
 
 		private final String clientKey;
@@ -322,9 +365,8 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.dataprovider = dataprovider;
 		}
 
-		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
+		public String executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
-
 			IHeadlessClient c = correctServerObject.getClient(clientKey);
 			Object dataProviderValue = c.getDataProviderValue(contextName, dataprovider);
 			try
@@ -344,7 +386,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		String serverId = getServerId(clientKey);
 		if (serverId != null)
 		{
-			Boolean validB = (Boolean)serverPluginDispatcher.callOnCorrectServer(serverId, new CheckValidityCall(clientKey), true);
+			Boolean validB = serverPluginDispatcher.callOnCorrectServer(serverId, new CheckValidityCall(clientKey), true);
 			valid = (validB != null ? validB.booleanValue() : false);
 		}
 		else valid = false;
@@ -354,7 +396,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class CheckValidityCall implements Call<HeadlessServerPlugin>
+	private static class CheckValidityCall implements Call<HeadlessServerPlugin, Boolean>
 	{
 
 		private final String clientKey;
@@ -395,12 +437,13 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 				}
 			}
 		}
-		return serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new SetDataProviderCall(clientKey, contextName, dataprovider, value), true);
+		return serverPluginDispatcher.callOnCorrectServer(getNonNullServerId(clientKey), new SetDataProviderCall(clientKey, contextName, dataprovider, value),
+			true);
 	}
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class SetDataProviderCall implements Call<HeadlessServerPlugin>
+	private static class SetDataProviderCall implements Call<HeadlessServerPlugin, String>
 	{
 
 		private final String clientKey;
@@ -416,7 +459,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 			this.value = value;
 		}
 
-		public Object executeCall(HeadlessServerPlugin correctServerObject) throws Exception
+		public String executeCall(HeadlessServerPlugin correctServerObject) throws Exception
 		{
 			IHeadlessClient c = correctServerObject.getClient(clientKey);
 			Object retValue;
@@ -443,12 +486,12 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 
 	public void shutDown(String clientKey, boolean force)
 	{
-		serverPluginDispatcher.callOnCorrectServer(getServerId(clientKey), new ShutDownCall(clientKey, force), true);
+		serverPluginDispatcher.callOnCorrectServer(getNonNullServerId(clientKey), new ShutDownCall(clientKey, force), true);
 	}
 
 	// must be static otherwise it would have a back-reference that would make everything (try to) go into shared cluster memory
 	@TerracottaInstrumentedClass
-	private static class ShutDownCall implements Call<HeadlessServerPlugin>
+	private static class ShutDownCall implements Call<HeadlessServerPlugin, Object>
 	{
 
 		private final String clientKey;

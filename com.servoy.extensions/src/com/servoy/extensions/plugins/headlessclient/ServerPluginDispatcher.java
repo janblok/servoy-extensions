@@ -48,12 +48,12 @@ public class ServerPluginDispatcher<E> implements Runnable
 	 * @param <E> the object of target server that a call needs to use in order to execute.
 	 */
 	@TerracottaInstrumentedClass
-	public static interface Call<E>
+	public static interface Call<E, R>
 	{
 		/**
 		 * Return type, and the exception
 		 */
-		Object executeCall(E correctServerObject) throws Exception;
+		R executeCall(E correctServerObject) throws Exception;
 	}
 
 	/**
@@ -61,15 +61,15 @@ public class ServerPluginDispatcher<E> implements Runnable
 	 * @author acostescu
 	 */
 	@TerracottaInstrumentedClass
-	private static class CallWrapper<E>
+	private static class CallWrapper<E, R>
 	{
 		private boolean done = false;
-		private final Call<E> call;
+		private final Call<E, R> call;
 		private String exceptionMsg = null;
 		private RuntimeException exception = null;
-		private Object result = null;
+		private R result = null;
 
-		public CallWrapper(Call<E> call)
+		public CallWrapper(Call<E, R> call)
 		{
 			this.call = call;
 		}
@@ -119,8 +119,8 @@ public class ServerPluginDispatcher<E> implements Runnable
 
 	// serverPluginId -> calls to be executed by that server plugin
 	@TerracottaRoot
-	private final HashMap<String, List<CallWrapper<E>>> clusterWideCallQueue = new HashMap<String, List<CallWrapper<E>>>();
-	private final List<CallWrapper<E>> callQueueOfThisPlugin; // cache to avoid one more unnecessary readLock on clusterWideCallQueue when dispatching messages
+	private final HashMap<String, List<CallWrapper<E, ? >>> clusterWideCallQueue = new HashMap<String, List<CallWrapper<E, ? >>>();
+	private final List<CallWrapper<E, ? >> callQueueOfThisPlugin; // cache to avoid one more unnecessary readLock on clusterWideCallQueue when dispatching messages
 	private boolean runningInCluster; // true if the plugin is running inside a terracotta cluster; false if it's a stand-alone Servoy app. server
 	private final String thisServerPluginId;
 	private volatile boolean stop = false;
@@ -148,7 +148,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 
 		this.thisServerObject = thisServerObject;
 
-		callQueueOfThisPlugin = new ArrayList<CallWrapper<E>>();
+		callQueueOfThisPlugin = new ArrayList<CallWrapper<E, ? >>();
 
 		synchronized (clusterWideCallQueue) // Terracotta WRITE lock
 		{
@@ -184,14 +184,14 @@ public class ServerPluginDispatcher<E> implements Runnable
 	}
 
 	@TerracottaAutolockWrite
-	public void callOnAllServers(Call<E> call)
+	public <R> void callOnAllServers(Call<E, R> call)
 	{
-		CallWrapper<E> callWrapper = new CallWrapper<E>(call);
+		CallWrapper<E, R> callWrapper = new CallWrapper<E, R>(call);
 		if (runningInCluster)
 		{
 			synchronized (clusterWideCallQueue) // Terracotta WRITE lock
 			{
-				for (List<CallWrapper<E>> lst : clusterWideCallQueue.values())
+				for (List<CallWrapper<E, ? >> lst : clusterWideCallQueue.values())
 				{
 					synchronized (lst) // Terracotta WRITE lock
 					{
@@ -211,13 +211,13 @@ public class ServerPluginDispatcher<E> implements Runnable
 	 * @return if waitForExecution is false it will return null, otherwise it will wait for the method to get called and return it's result.
 	 */
 	@TerracottaAutolockWrite
-	public Object callOnCorrectServer(String serverPluginId, Call<E> call, boolean waitForExecution)
+	public <R> R callOnCorrectServer(String serverPluginId, Call<E, R> call, boolean waitForExecution)
 	{
-		CallWrapper<E> callWrapper = new CallWrapper<E>(call);
+		CallWrapper<E, R> callWrapper = new CallWrapper<E, R>(call);
 
 		if (runningInCluster)
 		{
-			List<CallWrapper<E>> callList = getCallList(serverPluginId);
+			List<CallWrapper<E, ? >> callList = getCallList(serverPluginId);
 			if (callList != null)
 			{
 				synchronized (callList) // Terracotta WRITE lock
@@ -264,7 +264,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 	public void run()
 	{
 		// runs in a separate thread when inside a terracotta cluster
-		List<CallWrapper<E>> copiedCalls = new ArrayList<CallWrapper<E>>();
+		List<CallWrapper<E, ? >> copiedCalls = new ArrayList<CallWrapper<E, ? >>();
 		while (!stop)
 		{
 			try
@@ -279,7 +279,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 					copiedCalls.addAll(callQueueOfThisPlugin);
 					callQueueOfThisPlugin.clear();
 				}
-				for (CallWrapper<E> callWrapper : copiedCalls)
+				for (CallWrapper<E, ? > callWrapper : copiedCalls)
 				{
 					callWrapper.executeCall(thisServerObject);
 				}
@@ -302,9 +302,9 @@ public class ServerPluginDispatcher<E> implements Runnable
 	}
 
 	@TerracottaAutolockRead
-	private List<CallWrapper<E>> getCallList(String serverPluginId)
+	private List<CallWrapper<E, ? >> getCallList(String serverPluginId)
 	{
-		List<CallWrapper<E>> callList;
+		List<CallWrapper<E, ? >> callList;
 		if (serverPluginId == this.thisServerPluginId)
 		{
 			// call is to be sent to this server
