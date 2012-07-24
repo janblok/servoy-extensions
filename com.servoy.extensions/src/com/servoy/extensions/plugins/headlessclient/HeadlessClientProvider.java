@@ -94,7 +94,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 		}
 		catch (ClientNotFoundException ex)
 		{
-			throw new RuntimeException("The client with the clientId: " + clientId + " was loaded with another solution: " + ex.getInfo(), ex);
+			throw new RuntimeException("The client with the clientId: " + clientId + " was loaded with another solution: " + ex.getInfo());
 		}
 		catch (Exception ex)
 		{
