@@ -1156,6 +1156,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 
 		};
 		dragBehavior.setUseProxy(true);
+		node.add(dragBehavior);
 	}
 
 	/*
