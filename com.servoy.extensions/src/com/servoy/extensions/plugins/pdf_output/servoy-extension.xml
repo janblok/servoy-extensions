@@ -393,7 +393,7 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           </function>
           <function name="getPDFPrinter">
             <argumentsTypes/>
-            <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.PrinterJob" typecode="java.awt.print.PrinterJob"/>
             <description><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
             <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
             <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
@@ -403,7 +403,7 @@ controller.print(true,false,plugins.pdf_output.getPDFPrinter());]]></sample>
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="java.awt.print.PrinterJob" typecode="java.awt.print.PrinterJob"/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.PrinterJob" typecode="java.awt.print.PrinterJob"/>
             <description><![CDATA[Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.]]></description>
             <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
             <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
