@@ -991,7 +991,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 	protected void onRowPopulated(final WebMarkupContainer rowComponent)
 	{
 		super.onRowPopulated(rowComponent);
-		if (dragEnabled) addDragNDropBehavior(rowComponent);
+		if (dragEnabled && js_isEnabled()) addDragNDropBehavior(rowComponent);
 		rowComponent.add(new MouseEventBehavior(new MouseAction(this)
 		{
 			@Override

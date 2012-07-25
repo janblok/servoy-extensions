@@ -335,7 +335,10 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 
 		}
 
-		if (dragEnabled) addDragNDropBehavior(nodeComp);
+		if (dragEnabled && js_isEnabled())
+		{
+			addDragNDropBehavior(nodeComp);
+		}
 
 		nodeComp.add(new MouseEventBehavior(new MouseAction(this)
 		{
@@ -1153,10 +1156,6 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 
 		};
 		dragBehavior.setUseProxy(true);
-		if (js_isEnabled())
-		{
-			node.add(dragBehavior);
-		}
 	}
 
 	/*
