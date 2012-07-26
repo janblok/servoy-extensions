@@ -2437,7 +2437,35 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
             <description><![CDATA[Add a menu item.]]></description>
             <summary><![CDATA[Add a menu item.]]></summary>
-            <sample/>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the item will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addMenuItem("item", feedback_item);
+// add an item with an icon
+menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+//var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+//menu.addMenuItem("item with icon", feedback_item, pic_bytes);
+// add an item with a mnemonic
+menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+// add a disabled item
+menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+// add an item with text aligned to the right
+menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+
+// add an item at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var item = menu.addMenuItem(2);
+item.text = "item at index";
+item.setMethod(feedback_item);]]></sample>
           </function>
           <function name="addMenuItem">
             <argumentsTypes>
@@ -3247,7 +3275,42 @@ checked at a time.
 
 If no radiogroup is added, one is created automatically when the first radiobutton is added.]]></description>
             <summary><![CDATA[Add a radiogroup for radiobuttons.]]></summary>
-            <sample/>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+	
+// when you don't define an index the radiobutton will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addRadioButton("radio", feedback_radiobutton);
+// add a radiobutton with an icon
+menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
+//var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+//menu.addRadioButton("radio with icon", feedback_radiobutton, pic_bytes);
+	
+// add a new radiobutton group
+// a group will 'bind' all added radiobuttons after the group together
+// as a result checking one item will uncheck the other
+// if no group is added, a group is created automatically when the first radiobutton is added to the menu
+// so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
+menu.addRadioGroup();
+	
+// add a radiobutton with a mnemonic
+menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
+// add a disabled radiobutton
+menu.addRadioButton("disabled radio", feedback_radiobutton, "media:///yourimage.gif", "d", false);
+// add a radiobutton with text aligned to the right
+menu.addRadioButton("align right", feedback_radiobutton, null, null, true, SM_ALIGNMENT.RIGHT);
+// add a radiobutton at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var rd = menu.addRadioButton(2);
+rd.text = "radio at index";
+rd.setMethod(feedback_item);]]></sample>
           </function>
           <function name="addSeparator">
             <argumentsTypes/>
@@ -5470,7 +5533,35 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
             <description><![CDATA[Add a menu item.]]></description>
             <summary><![CDATA[Add a menu item.]]></summary>
-            <sample/>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+
+// when you don't define an index the item will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addMenuItem("item", feedback_item);
+// add an item with an icon
+menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+//var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+//menu.addMenuItem("item with icon", feedback_item, pic_bytes);
+// add an item with a mnemonic
+menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
+// add a disabled item
+menu.addMenuItem("disabled item", feedback_item, "media:///yourimage.gif", "d", false);
+// add an item with text aligned to the right
+menu.addMenuItem("align right", feedback_item, null, null, true, SM_ALIGNMENT.RIGHT);
+
+// add an item at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var item = menu.addMenuItem(2);
+item.text = "item at index";
+item.setMethod(feedback_item);]]></sample>
           </function>
           <function name="addMenuItem">
             <argumentsTypes>
@@ -6280,7 +6371,42 @@ checked at a time.
 
 If no radiogroup is added, one is created automatically when the first radiobutton is added.]]></description>
             <summary><![CDATA[Add a radiogroup for radiobuttons.]]></summary>
-            <sample/>
+            <sample><![CDATA[// add a new menu to the menubar
+var menubar = plugins.window.getMenuBar();
+var menu = menubar.addMenu();
+menu.text = "New Menu";
+// alternatively create a popup menu
+//var menu = plugins.window.createPopupMenu();
+	
+// when you don't define an index the radiobutton will be added at the last position
+// this is what you usually do to build a new menu
+// minimum settings are the text and method
+// the method can be a global or form method
+// be sure to enter the method WITHOUT '()' at the end
+menu.addRadioButton("radio", feedback_radiobutton);
+// add a radiobutton with an icon
+menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
+//var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+//menu.addRadioButton("radio with icon", feedback_radiobutton, pic_bytes);
+	
+// add a new radiobutton group
+// a group will 'bind' all added radiobuttons after the group together
+// as a result checking one item will uncheck the other
+// if no group is added, a group is created automatically when the first radiobutton is added to the menu
+// so in this case we will have two groups, one with the radiobuttons added until now and one with the ones added from now on
+menu.addRadioGroup();
+	
+// add a radiobutton with a mnemonic
+menu.addRadioButton("radio with mnemonic", feedback_radiobutton, "media:///yourimage.gif", "i");
+// add a disabled radiobutton
+menu.addRadioButton("disabled radio", feedback_radiobutton, "media:///yourimage.gif", "d", false);
+// add a radiobutton with text aligned to the right
+menu.addRadioButton("align right", feedback_radiobutton, null, null, true, SM_ALIGNMENT.RIGHT);
+// add a radiobutton at a given index (item properties must be configured after creation)
+// indexes start at 0 (zero) so index 2 is in fact position 3
+var rd = menu.addRadioButton(2);
+rd.text = "radio at index";
+rd.setMethod(feedback_item);]]></sample>
           </function>
           <function name="addSeparator">
             <argumentsTypes/>
