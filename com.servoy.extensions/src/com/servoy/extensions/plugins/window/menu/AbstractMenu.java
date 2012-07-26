@@ -77,7 +77,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	/**
 	 * Add a checkbox.
 	 * 
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @return checkbox
 	 */
@@ -89,7 +89,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	/**
 	 * Add a checkbox with given name.
 	 * 
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text; this can be also html if enclosed between html tags
 	 * 
@@ -101,8 +101,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the checkbox
 	 * 
@@ -116,63 +116,63 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text; this can be also html if enclosed between html tags 
-	 * @param feedback_item this can be either a method or an array representing a submenu
+	 * @param feedback_item the feedback function
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item) throws PluginException
+	public CheckBox js_addCheckBox(String name, Function feedback_item) throws PluginException
 	{
 		return js_addCheckBox(name, feedback_item, null, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu
+	 * @param feedback_item the feedback function
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon) throws PluginException
+	public CheckBox js_addCheckBox(String name, Function feedback_item, Object icon) throws PluginException
 	{
 		return js_addCheckBox(name, feedback_item, icon, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu
+	 * @param feedback_item the feedback function
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * @param mnemonic the checkbox mnemonic 
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, String mnemonic) throws PluginException
+	public CheckBox js_addCheckBox(String name, Function feedback_item, Object icon, String mnemonic) throws PluginException
 	{
 		return js_addCheckBox(name, feedback_item, icon, mnemonic, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addCheckBox(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addCheckBox(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addCheckBox(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addCheckBox(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the checkbox text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu
+	 * @param feedback_item the feedback function
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * @param mnemonic the checkbox mnemonic  
 	 * @param enabled the enabled state of the checkbox
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
+	public CheckBox js_addCheckBox(String name, Function feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
 	{
 		return js_addCheckBox(name, feedback_item, icon, mnemonic, enabled, -1);
 	}
@@ -196,6 +196,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * menu.addCheckBox("checkbox", feedback_checkbox);
 	 * // add a checkbox with an icon
 	 * menu.addCheckBox("checkbox with icon", feedback_checkbox, "media:///yourimage.gif");
+	 * //var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+	 * //menu.addCheckBox("checkbox with icon", feedback_checkbox, pic_bytes);
 	 * // add a checkbox with a mnemonic
 	 * menu.addCheckBox("checkbox with mnemonic", feedback_checkbox, "media:///yourimage.gif", "c");
 	 * // add a disabled checkbox
@@ -210,7 +212,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * chk.setMethod(feedback_checkbox);
 	 *
 	 * @param name the checkbox text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu
+	 * @param feedback_item the feedback function
 	 * @param icon the checkbox icon (can be an image URL or the image content byte array)
 	 * @param mnemonic the checkbox mnemonic  
 	 * @param enabled the enabled state of the checkbox
@@ -218,7 +220,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * @return checkbox
 	 */
-	public CheckBox js_addCheckBox(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
+	public CheckBox js_addCheckBox(String name, Function feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
 	{
 		int index = -1;
 		IMenuItem menuItem = menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_CHECK);
@@ -295,7 +297,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	/**
 	 * Add a menu item with given name.
 	 * 
-	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text; this can be also html if enclosed between html tags
 	 * 
@@ -307,8 +309,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the menu item
 	 * 
@@ -322,63 +324,63 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu
+	 * @param feedback_item the feedback function
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item) throws PluginException
+	public MenuItem js_addMenuItem(String name, Function feedback_item) throws PluginException
 	{
 		return js_addMenuItem(name, feedback_item, null, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon) throws PluginException
+	public MenuItem js_addMenuItem(String name, Function feedback_item, Object icon) throws PluginException
 	{
 		return js_addMenuItem(name, feedback_item, icon, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the menu item mnemonic
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, String mnemonic) throws PluginException
+	public MenuItem js_addMenuItem(String name, Function feedback_item, Object icon, String mnemonic) throws PluginException
 	{
 		return js_addMenuItem(name, feedback_item, icon, mnemonic, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addMenuItem(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addMenuItem(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addMenuItem(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addMenuItem(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the menu item text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the menu item mnemonic
 	 * @param enabled the enabled state of the menu item
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
+	public MenuItem js_addMenuItem(String name, Function feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
 	{
 		return js_addMenuItem(name, feedback_item, icon, mnemonic, enabled, -1);
 	}
@@ -402,6 +404,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * menu.addMenuItem("item", feedback_item);
 	 * // add an item with an icon
 	 * menu.addMenuItem("item with icon", feedback_item, "media:///yourimage.gif");
+	 * //var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+	 * //menu.addMenuItem("item with icon", feedback_item, pic_bytes);
 	 * // add an item with a mnemonic
 	 * menu.addMenuItem("item with mnemonic", feedback_item, "media:///yourimage.gif", "i");
 	 * // add a disabled item
@@ -416,7 +420,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * item.setMethod(feedback_item);
 	 *
 	 * @param name the menu item text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the menu item icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the menu item mnemonic
 	 * @param enabled the enabled state of the menu item
@@ -424,7 +428,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * @return menu item
 	 */
-	public MenuItem js_addMenuItem(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
+	public MenuItem js_addMenuItem(String name, Function feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
 	{
 		int index = -1;
 		IMenuItem menuItem = menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_BUTTON);
@@ -436,7 +440,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 	/**
 	 * Add a radio button.
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @return a radio button menu item 
 	 */
@@ -448,7 +452,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	/**
 	 * Add a radio button with given name.
 	 * 
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text; this can be also html if enclosed between html tags
 	 * 
@@ -460,8 +464,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param index the index at which to add the radio button
 	 * 
@@ -480,63 +484,63 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu 
+	 * @param feedback_item the feedback function 
 	 * 
 	 * @return a radio button menu item 
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item) throws PluginException
+	public RadioButton js_addRadioButton(String name, Function feedback_item) throws PluginException
 	{
 		return js_addRadioButton(name, feedback_item, null, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)
 	 * 
 	 * @return a radio button menu item
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon) throws PluginException
+	public RadioButton js_addRadioButton(String name, Function feedback_item, Object icon) throws PluginException
 	{
 		return js_addRadioButton(name, feedback_item, icon, null, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the radio button mnemonic
 	 * 
 	 * @return a radio button menu item 
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, String mnemonic) throws PluginException
+	public RadioButton js_addRadioButton(String name, Function feedback_item, Object icon, String mnemonic) throws PluginException
 	{
 		return js_addRadioButton(name, feedback_item, icon, mnemonic, true, -1);
 	}
 
 	/**
-	 * @clonedesc js_addRadioButton(String,Object,Object,String,boolean,int)
-	 * @sampleas js_addRadioButton(String,Object,Object,String,boolean,int)
+	 * @clonedesc js_addRadioButton(String,Function,Object,String,boolean,int)
+	 * @sampleas js_addRadioButton(String,Function,Object,String,boolean,int)
 	 * 
 	 * @param name the radio button text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the radio button mnemonic
 	 * @param enabled the enabled state of radio button 
 	 * 
 	 * @return a radio button menu item
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
+	public RadioButton js_addRadioButton(String name, Function feedback_item, Object icon, String mnemonic, boolean enabled) throws PluginException
 	{
 		return js_addRadioButton(name, feedback_item, icon, mnemonic, enabled, -1);
 	}
@@ -560,6 +564,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * menu.addRadioButton("radio", feedback_radiobutton);
 	 * // add a radiobutton with an icon
 	 * menu.addRadioButton("radio with icon", feedback_radiobutton, "media:///yourimage.gif");
+	 * //var pic_bytes = plugins.file.readFile("/path/to/image.jpg");
+	 * //menu.addRadioButton("radio with icon", feedback_radiobutton, pic_bytes);
 	 * 	
 	 * // add a new radiobutton group
 	 * // a group will 'bind' all added radiobuttons after the group together
@@ -581,7 +587,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * rd.setMethod(feedback_item);
 	 *
 	 * @param name the radio button text; this can be also html if enclosed between html tags
-	 * @param feedback_item this can be either a method or an array representing a submenu  
+	 * @param feedback_item the feedback function  
 	 * @param icon the radio button icon (can be an image URL or the image content byte array)  
 	 * @param mnemonic the radio button mnemonic
 	 * @param enabled the enabled state of radio button  
@@ -589,7 +595,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 * 
 	 * @return a radio button menu item
 	 */
-	public RadioButton js_addRadioButton(String name, Object feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
+	public RadioButton js_addRadioButton(String name, Function feedback_item, Object icon, String mnemonic, boolean enabled, int align) throws PluginException
 	{
 		int index = -1;
 		IRadioButtonMenuItem menuItem = (IRadioButtonMenuItem)menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_RADIO);

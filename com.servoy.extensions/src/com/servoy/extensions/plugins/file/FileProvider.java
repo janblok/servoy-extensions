@@ -195,7 +195,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog()
 	{
-		return js_showFileOpenDialog(1, null, false, null, null, null);
+		return js_showFileOpenDialog(1, (String)null, false, null, null, null);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Function callbackmethod)
 	{
-		return js_showFileOpenDialog(1, null, false, null, callbackmethod, null);
+		return js_showFileOpenDialog(1, (String)null, false, null, callbackmethod, null);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(int selectionMode)
 	{
-		return js_showFileOpenDialog(selectionMode, null, false, null, null, null);
+		return js_showFileOpenDialog(selectionMode, (String)null, false, null, null, null);
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(int selectionMode, Function callbackmethod)
 	{
-		return js_showFileOpenDialog(selectionMode, null, false, null, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, (String)null, false, null, callbackmethod, null);
 	}
 
 	/**
@@ -237,9 +237,12 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous 
+	 * @param startDirectory File instance of default folder, null=default/previous 
+	 * 
+	 * @deprecated use showFileOpenDialog(int, JSFile) instead
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory)
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
 	}
@@ -249,10 +252,37 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory File or path to default folder,null=default/previous 
-	 * @param callbackmethod
+	 * @param startDirectory JSFile instance of default folder; null=default/previous 
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder; null=default/previous 
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory File instance of default folder, null=default/previous 
+	 * @param callbackmethod
+	 * 
+	 * @deprecated use showFileOpenDialog(int, JSFile, Function) instead
+	 */
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory, Function callbackmethod)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackmethod, null);
 	}
@@ -262,10 +292,39 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory File or path to default folder,null=default/previous
-	 * @param multiselect true/false 
+	 * @param startDirectory JSFile instance of default folder,null=default/previous 
+	 * @param callbackmethod
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder,null=default/previous 
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory File instance of default folder, null=default/previous
+	 * @param multiselect true/false 
+	 * 
+	 * @deprecated use showFileOpenDialog(int, JSFile, boolean) instead
+	 */
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory, boolean multiselect)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
 	}
@@ -275,11 +334,40 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory File or path to default folder,null=default/previous
+	 * @param startDirectory JSFile instance of default folder, null=default/previous
+	 * @param multiselect true/false 
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder, null=default/previous
+	 * @param multiselect true/false 
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory File instance of default folder, null=default/previous
 	 * @param multiselect true/false 
 	 * @param callbackmethod
+	 * 
+	 * @deprecated use showFileOpenDialog(int, Object, boolean, Function) instead
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Function callbackmethod)
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory, boolean multiselect, Function callbackmethod)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackmethod, null);
 	}
@@ -289,11 +377,42 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory File or path to default folder,null=default/previous
+	 * @param startDirectory JSFile instance of default folder,null=default/previous
+	 * @param multiselect true/false 
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder,null=default/previous
+	 * @param multiselect true/false 
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory File instance of default folder,null=default/previous
 	 * @param multiselect true/false 
 	 * @param filter
+	 * 
+	 * @deprecated use showFileOpenDialog(int,JSFile,boolean,Object) instead
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter)
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory, boolean multiselect, Object filter)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
 	}
@@ -303,12 +422,43 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory File or path to default folder,null=default/previous
+	 * @param startDirectory JSFile instance of default folder,null=default/previous
+	 * @param multiselect true/false 
+	 * @param filter
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder,null=default/previous
+	 * @param multiselect true/false 
+	 * @param filter
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory File instance of default folder,null=default/previous
 	 * @param multiselect true/false
 	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackmethod
+	 * 
+	 * @deprecated use showFileOpenDialog(int, JSFile, boolean, Object, Function) instead
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod)
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory, boolean multiselect, Object filter, Function callbackmethod)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, null);
 	}
@@ -318,13 +468,84 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param startDirectory null=default/previous
+	 * @param startDirectory JSFile instance of default folder,null=default/previous
+	 * @param multiselect true/false
+	 * @param filter A filter or array of filters on the folder files.
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder,null=default/previous
+	 * @param multiselect true/false
+	 * @param filter A filter or array of filters on the folder files.
+	 * @param callbackmethod
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackmethod)
+	{
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory File instance of default folder, null=default/previous
+	 * @param multiselect true/false
+	 * @param filter A filter or array of filters on the folder files.
+	 * @param callbackmethod
+	 * @param title
+	 * 
+	 * @deprecated use showFileOpenDialog(int, JSFile, boolean, Object, Function, String)
+	 */
+	@Deprecated
+	public Object js_showFileOpenDialog(int selectionMode, File startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	{
+		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, title);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory JSFile instance of default folder, null=default/previous
 	 * @param multiselect true/false
 	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackmethod
 	 * @param title
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	{
+		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, title);
+	}
+
+	/**
+	 * @clonedesc js_showFileOpenDialog()
+	 * @sampleas js_showFileOpenDialog()
+	 * 
+	 * @param selectionMode 0=both,1=Files,2=Dirs
+	 * @param startDirectory Path to default folder, null=default/previous
+	 * @param multiselect true/false
+	 * @param filter A filter or array of filters on the folder files.
+	 * @param callbackmethod
+	 * @param title
+	 */
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	{
+		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, title);
+	}
+
+
+	private Object showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
 	{
 
 		int selection;
@@ -417,6 +638,24 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
+	 * @clonedesc js_getFolderContents(JSFile, Object, int, int, int)
+	 * @sampleas js_getFolderContents(JSFile, Object, int, int, int)
+	 *
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @param lockedOption 1=locked, 2=nonlocked 
+	 * 
+	 * @deprecated use getFolderContents(JSFile, Object, int, int, int)
+	 */
+	@Deprecated
+	public JSFile[] js_getFolderContents(File targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	{
+		return getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
+	}
+
+	/**
 	 * Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.
 	 *
 	 * @sample
@@ -424,13 +663,33 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * for (var i=0; i<files.length; i++)
 	 * 	application.output(files[i].getAbsolutePath());
 	 *
-	 * @param targetFolder File or path object.
+	 * @param targetFolder JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 * @param lockedOption 1=locked, 2=nonlocked 
 	 */
-	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	{
+		return getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile, Object, int, int, int)
+	 * @sampleas js_getFolderContents(JSFile, Object, int, int, int)
+	 *
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @param lockedOption 1=locked, 2=nonlocked 
+	 */
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	{
+		return getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
+	}
+
+	private JSFile[] getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
 	{
 		if (targetFolder == null) return EMPTY;
 
@@ -501,51 +760,163 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
-	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
 	 *  
-	 * @param targetFolder File or path object.
+	 * @param targetFolder File object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * 
+	 * @deprecated use getFolderContents(JSFile, Object, int, int) instead
 	 */
-	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
+	@Deprecated
+	public JSFile[] js_getFolderContents(File targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
-	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
 	 *  
-	 * @param targetFolder File or path object.
+	 * @param targetFolder JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
 	 */
-	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter, final int fileOption)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 */
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * 
+	 * @deprecated use getFolderContents(JSFile, Object, int)
+	 */
+	@Deprecated
+	public JSFile[] js_getFolderContents(File targetFolder, Object fileFilter, final int fileOption)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
-	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
 	 *  
-	 * @param targetFolder File or path object.
+	 * @param targetFolder JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
 	 */
-	public JSFile[] js_getFolderContents(Object targetFolder, Object fileFilter)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final int fileOption)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 */
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final int fileOption)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * 
+	 * @deprecated use getFolderContents(File, Object)
+	 */
+	@Deprecated
+	public JSFile[] js_getFolderContents(File targetFolder, Object fileFilter)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(Object,Object,int,int,int)
-	 * @sampleas js_getFolderContents(Object,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
 	 *  
-	 * @param targetFolder File or path object.
+	 * @param targetFolder JSFile object.
+	 * @param fileFilter Filter or array of filters for files in folder.
 	 */
-	public JSFile[] js_getFolderContents(Object targetFolder)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 */
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter)
+	{
+		return js_getFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File object.
+	 * 
+	 * @deprecated use getFolderContents(JSFile)
+	 */
+	@Deprecated
+	public JSFile[] js_getFolderContents(File targetFolder)
+	{
+		return js_getFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder JSFile object.
+	 */
+	public JSFile[] js_getFolderContents(JSFile targetFolder)
+	{
+		return js_getFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
+	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 *  
+	 * @param targetFolder File path.
+	 */
+	public JSFile[] js_getFolderContents(String targetFolder)
 	{
 		return js_getFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
 	}
@@ -995,6 +1366,23 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
+	 * @clonedesc js_writeTXTFile(JSFile,String) 
+	 * @samplas js_writeTXTFile(JSFile,String)
+	 * 
+	 * @param file JSFile or path.
+	 * @param text_data Text to be written.
+	 * 
+	 * @return Success boolean.
+	 *  
+	 * @deprecated use writeTXTFile(JSFile,String)
+	 */
+	@Deprecated
+	public boolean js_writeTXTFile(File file, String text_data)
+	{
+		return js_writeTXTFile(file, text_data, null, null);
+	}
+
+	/**
 	 * Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
 	 *
 	 * @sample
@@ -1005,34 +1393,77 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
 	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
 	 * 
-	 *  @param file JSFile or path.
-	 *  @param text_data Text to be written.
-	 *  
-	 *  @return Success boolean.
+	 * @param file JSFile
+	 * @param text_data Text to be written.
+	 * 
+	 * @return Success boolean.
 	 */
-	public boolean js_writeTXTFile(Object file, String text_data)
+	public boolean js_writeTXTFile(JSFile file, String text_data)
 	{
 		return js_writeTXTFile(file, text_data, null, null);
 	}
 
 	/**
-	 * @clonedesc js_writeTXTFile(Object, String)
-	 * @sampleas js_writeTXTFile(Object, String)
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
+	 * 
+	 * @param file The file path.
+	 * @param text_data Text to be written.
+	 */
+	public boolean js_writeTXTFile(String file, String text_data)
+	{
+		return js_writeTXTFile(file, text_data, null, null);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
 	 * 
 	 * @param file JSFile or path.
 	 * @param text_data Text to be written.
 	 * @param charsetname Charset name.
 	 * 
 	 * @return Success boolean.
+	 * 
+	 * @deprecated use writeTXTFile(JSFile,String,String) instead
 	 */
-	public boolean js_writeTXTFile(Object file, String text_data, String charsetname)
+	@Deprecated
+	public boolean js_writeTXTFile(File file, String text_data, String charsetname)
 	{
 		return js_writeTXTFile(file, text_data, charsetname, null);
 	}
 
 	/**
-	 * @clonedesc js_writeTXTFile(Object, String)
-	 * @sampleas js_writeTXTFile(Object, String)
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
+	 * 
+	 * @param file JSFile
+	 * @param text_data Text to be written.
+	 * @param charsetname Charset name.
+	 * 
+	 * @return Success boolean.
+	 */
+	public boolean js_writeTXTFile(JSFile file, String text_data, String charsetname)
+	{
+		return js_writeTXTFile(file, text_data, charsetname, null);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
+	 * 
+	 * @param file The file path.
+	 * @param text_data Text to be written.
+	 * @param charsetname Charset name.
+	 */
+	public boolean js_writeTXTFile(String file, String text_data, String charsetname)
+	{
+		return js_writeTXTFile(file, text_data, charsetname, null);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
 	 * 
 	 * @param file JSFile or path.
 	 * @param text_data Text to be written.
@@ -1040,9 +1471,47 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param mimeType Content type (used only on web).
 	 * 
 	 * @return Success boolean.
+	 * 
+	 * @deprecated use writeTXTFile(File, String, String, String)
 	 */
+	@Deprecated
+	public boolean js_writeTXTFile(File file, String text_data, String charsetname, String mimeType)
+	{
+		return writeTXTFile(file, text_data, charsetname, mimeType);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
+	 * 
+	 * @param file JSFile
+	 * @param text_data Text to be written.
+	 * @param charsetname Charset name.
+	 * @param mimeType Content type (used only on web).
+	 * 
+	 * @return Success boolean.
+	 */
+	public boolean js_writeTXTFile(JSFile file, String text_data, String charsetname, String mimeType)
+	{
+		return writeTXTFile(file, text_data, charsetname, mimeType);
+	}
+
+	/**
+	 * @clonedesc js_writeTXTFile(JSFile, String)
+	 * @sampleas js_writeTXTFile(JSFile, String)
+	 * 
+	 * @param file The file path.
+	 * @param text_data Text to be written.
+	 * @param charsetname Charset name.
+	 * @param mimeType Content type (used only on web).
+	 */
+	public boolean js_writeTXTFile(String file, String text_data, String charsetname, String mimeType)
+	{
+		return writeTXTFile(file, text_data, charsetname, mimeType);
+	}
+
 	@SuppressWarnings("nls")
-	public boolean js_writeTXTFile(Object file, String text_data, String charsetname, String mimeType)
+	private boolean writeTXTFile(Object file, String text_data, String charsetname, String mimeType)
 	{
 		if (file == null) return false;
 		return writeTXT(file, text_data == null ? "" : text_data, charsetname, mimeType == null ? "text/plain" : mimeType);
@@ -1129,18 +1598,67 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_writeXMLFile(Object, String)
-	 * @sampleas js_writeXMLFile(Object, String)
+	 * @clonedesc js_writeXMLFile(JSFile, String)
+	 * @sampleas js_writeXMLFile(JSFile, String)
 	 * 
-	 * @param file
-	 * @param xml_data
-	 * @param encoding
+	 * @param file a local JSFile or a the file path as a String
+	 * @param xml_data the xml data to write
+	 * @param encoding the specified encoding
+	 * 
+	 * @deprecated use writeXMLFile(JSFile, String, String) instead
 	 */
+	@Deprecated
+	public boolean js_writeXMLFile(File file, String xml_data, String encoding)
+	{
+		return writeXMLFile(file, xml_data, encoding);
+	}
+
+	/**
+	 * @clonedesc js_writeXMLFile(JSFile, String)
+	 * @sampleas js_writeXMLFile(JSFile, String)
+	 * 
+	 * @param file a local JSFile
+	 * @param xml_data the xml data to write
+	 * @param encoding the specified encoding
+	 */
+	public boolean js_writeXMLFile(JSFile file, String xml_data, String encoding)
+	{
+		return writeXMLFile(file, xml_data, encoding);
+	}
+
+	/**
+	 * @clonedesc js_writeXMLFile(JSFile, String)
+	 * @sampleas js_writeXMLFile(JSFile, String)
+	 * 
+	 * @param file the file path as a String
+	 * @param xml_data the xml data to write
+	 * @param encoding the specified encoding
+	 */
+	public boolean js_writeXMLFile(String file, String xml_data, String encoding)
+	{
+		return writeXMLFile(file, xml_data, encoding);
+	}
+
 	@SuppressWarnings("nls")
-	public boolean js_writeXMLFile(Object file, String xml_data, String encoding)
+	private boolean writeXMLFile(Object file, String xml_data, String encoding)
 	{
 		if (xml_data == null) return false;
 		return writeTXT(file == null ? "file.xml" : file, xml_data, encoding, "text/xml");
+	}
+
+	/**
+	 * @clonedesc js_writeXMLFile(JSFile, String)
+	 * @sampleas js_writeXMLFile(JSFile, String)
+	 *
+	 * @param file a local JSFile or a the file path as a String
+	 * @param xml_data the xml data to write
+	 * 
+	 * @deprecated use writeXMLFile(JSFile, String) instead
+	 */
+	@Deprecated
+	public boolean js_writeXMLFile(File file, String xml_data)
+	{
+		return writeXMLFile(file, xml_data);
 	}
 
 	/**
@@ -1151,12 +1669,29 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var xml = controller.printXML()
 	 * var success = plugins.file.writeXMLFile(fileName, xml);
 	 * if (!success) application.output('Could not write file.');
-	 *
-	 * @param file 
-	 * @param xml_data 
+	 * 
+	 * @param file a local JSFile
+	 * @param xml_data the xml data to write
 	 */
+	public boolean js_writeXMLFile(JSFile file, String xml_data)
+	{
+		return writeXMLFile(file, xml_data);
+	}
+
+	/**
+	 * @clonedesc js_writeXMLFile(JSFile,String)
+	 * @sampleas js_writeXMLFile(JSFile,String)
+	 * 
+	 * @param file the file path as a String
+	 * @param xml_data the xml data to write
+	 */
+	public boolean js_writeXMLFile(String file, String xml_data)
+	{
+		return writeXMLFile(file, xml_data);
+	}
+
 	@SuppressWarnings("nls")
-	public boolean js_writeXMLFile(Object file, String xml_data)
+	private boolean writeXMLFile(Object file, String xml_data)
 	{
 		if (xml_data == null) return false;
 
@@ -1176,6 +1711,21 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
+	 * @clonedesc js_writeFile(JSFile,byte[]) 
+	 * @sampleas js_writeFile(JSFile,byte[])
+	 *
+	 * @param f a local JSFile or a the file path as a String
+	 * @param data the data to be written
+	 * 
+	 * @deprecated use writeFile(JSFile,byte[]) instead
+	 */
+	@Deprecated
+	public boolean js_writeFile(File f, byte[] data)
+	{
+		return js_writeFile(f, data, null);
+	}
+
+	/**
 	 * Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
 	 *
 	 * @sample
@@ -1191,23 +1741,69 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * if (!plugins.file.writeFile(f, bytes, mimeType))
 	 * 	application.output('Failed to write the file.');
 	 *
-	 * @param f 
-	 * @param data 
+	 * @param f a local JSFile
+	 * @param data the data to be written
 	 */
-	public boolean js_writeFile(Object f, byte[] data)
+	public boolean js_writeFile(JSFile f, byte[] data)
 	{
 		return js_writeFile(f, data, null);
 	}
 
 	/**
-	 * @clonedesc js_writeFile(Object, byte[])
-	 * @sampleas js_writeFile(Object, byte[])
+	 * @clondesc js_writeFile(JSFile,byte[])
+	 * @sampleas js_writeFile(JSFile,byte[])
 	 * 
-	 * @param f
-	 * @param data
-	 * @param mimeType
+	 * @param f the file path as a String
+	 * @param data the data to be written
 	 */
-	public boolean js_writeFile(Object f, byte[] data, @SuppressWarnings("unused")
+	public boolean js_writeFile(String f, byte[] data)
+	{
+		return js_writeFile(f, data, null);
+	}
+
+	/**
+	 * @clonedesc js_writeFile(JSFile,byte[])
+	 * @sampleas js_writeFile(JSFile,byte[])
+	 * 
+	 * @param f a local JSFile or a the file path as a String
+	 * @param data the data to be written
+	 * @param mimeType the mime type
+	 * 
+	 * @deprecated use writeFile(JSFile,byte[],String) instead
+	 */
+	@Deprecated
+	public boolean js_writeFile(File f, byte[] data, String mimeType)
+	{
+		return writeFile(f, data, mimeType);
+	}
+
+	/**
+	 * @clonedesc js_writeFile(JSFile, byte[])
+	 * @sampleas js_writeFile(JSFile, byte[])
+	 * 
+	 * @param f a local JSFile
+	 * @param data the data to be written
+	 * @param mimeType the mime type
+	 */
+	public boolean js_writeFile(JSFile f, byte[] data, String mimeType)
+	{
+		return writeFile(f, data, mimeType);
+	}
+
+	/**
+	 * @clonedesc js_writeFile(JSFile, byte[])
+	 * @sampleas js_writeFile(JSFile, byte[])
+	 * 
+	 * @param f the file path as a String
+	 * @param data the data to be written
+	 * @param mimeType the mime type
+	 */
+	public boolean js_writeFile(String f, byte[] data, String mimeType)
+	{
+		return writeFile(f, data, mimeType);
+	}
+
+	private boolean writeFile(Object f, byte[] data, @SuppressWarnings("unused")
 	String mimeType)
 	{
 		if (data == null) return false;
@@ -1254,16 +1850,19 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	public String js_readTXTFile()
 	{
-		return js_readTXTFile(null, null);
+		return js_readTXTFile((String)null, null);
 	}
 
 	/**
 	 * @clonedesc js_readTXTFile()
 	 * @sampleas js_readTXTFile()
 	 * 
-	 * @param file JSFile or path.
+	 * @param file File.
+	 * 
+	 * @deprecated use readTXTFile(JSFile)
 	 */
-	public String js_readTXTFile(Object file)
+	@Deprecated
+	public String js_readTXTFile(File file)
 	{
 		return js_readTXTFile(file, null);
 	}
@@ -1272,10 +1871,64 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc js_readTXTFile()
 	 * @sampleas js_readTXTFile()
 	 * 
-	 * @param file JSFile or path.
+	 * @param file JSFile.
+	 */
+	public String js_readTXTFile(JSFile file)
+	{
+		return js_readTXTFile(file, null);
+	}
+
+	/**
+	 * @clonedesc js_readTXTFile()
+	 * @sampleas js_readTXTFile()
+	 * 
+	 * @param file the file path.
+	 */
+	public String js_readTXTFile(String file)
+	{
+		return js_readTXTFile(file, null);
+	}
+
+	/**
+	 * @clonedesc js_readTXTFile()
+	 * @sampleas js_readTXTFile()
+	 * 
+	 * @param file File.
+	 * @param charsetname Charset name.
+	 * 
+	 * @deprecated use readTXTFile(JSFile, String)
+	 */
+	@Deprecated
+	public String js_readTXTFile(File file, String charsetname)
+	{
+		return readTXTFile(file, charsetname);
+	}
+
+	/**
+	 * @clonedesc js_readTXTFile()
+	 * @sampleas js_readTXTFile()
+	 * 
+	 * @param file JSFile.
 	 * @param charsetname Charset name.
 	 */
-	public String js_readTXTFile(Object file, String charsetname)
+	public String js_readTXTFile(JSFile file, String charsetname)
+	{
+		return readTXTFile(file, charsetname);
+	}
+
+	/**
+	 * @clonedesc js_readTXTFile()
+	 * @sampleas js_readTXTFile()
+	 * 
+	 * @param file the file path.
+	 * @param charsetname Charset name.
+	 */
+	public String js_readTXTFile(String file, String charsetname)
+	{
+		return readTXTFile(file, charsetname);
+	}
+
+	private String readTXTFile(Object file, String charsetname)
 	{
 		try
 		{
@@ -1358,7 +2011,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	public JSFile js_showFileSaveDialog()
 	{
-		return js_showFileSaveDialog(null, null);
+		return js_showFileSaveDialog((String)null, null);
 	}
 
 	/**
@@ -1366,8 +2019,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileSaveDialog()
 	 * 
 	 * @param fileNameDir File to save.
+	 * 
+	 * @deprecated use showFileSaveDialog(JSFile)
 	 */
-	public JSFile js_showFileSaveDialog(Object fileNameDir)
+	@Deprecated
+	public JSFile js_showFileSaveDialog(File fileNameDir)
 	{
 		return js_showFileSaveDialog(fileNameDir, null);
 	}
@@ -1375,10 +2031,61 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFileSaveDialog()
 	 * @sampleas js_showFileSaveDialog()
-	 * @param fileNameDir
+	 * 
+	 * @param fileNameDir JSFile to save.
+	 */
+	public JSFile js_showFileSaveDialog(JSFile fileNameDir)
+	{
+		return js_showFileSaveDialog(fileNameDir, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileSaveDialog()
+	 * @sampleas js_showFileSaveDialog()
+	 * 
+	 * @param fileNameDir File (give as file path) to save.
+	 */
+	public JSFile js_showFileSaveDialog(String fileNameDir)
+	{
+		return js_showFileSaveDialog(fileNameDir, null);
+	}
+
+	/**
+	 * @clonedesc js_showFileSaveDialog()
+	 * @sampleas js_showFileSaveDialog()
+	 * @param fileNameDir File to save
+	 * @param title Dialog title.
+	 * @deprecated use showFileSaveDialog(JSFile)
+	 */
+	@Deprecated
+	public JSFile js_showFileSaveDialog(File fileNameDir, String title)
+	{
+		return showFileSaveDialog(fileNameDir, title);
+	}
+
+	/**
+	 * @clonedesc js_showFileSaveDialog()
+	 * @sampleas js_showFileSaveDialog()
+	 * @param fileNameDir JSFile to save
 	 * @param title Dialog title.
 	 */
-	public JSFile js_showFileSaveDialog(Object fileNameDir, String title)
+	public JSFile js_showFileSaveDialog(JSFile fileNameDir, String title)
+	{
+		return showFileSaveDialog(fileNameDir, title);
+	}
+
+	/**
+	 * @clonedesc js_showFileSaveDialog()
+	 * @sampleas js_showFileSaveDialog()
+	 * @param fileNameDir File to save (specified as file path)
+	 * @param title Dialog title.
+	 */
+	public JSFile js_showFileSaveDialog(String fileNameDir, String title)
+	{
+		return showFileSaveDialog(fileNameDir, title);
+	}
+
+	private JSFile showFileSaveDialog(Object fileNameDir, String title)
 	{
 		File file = null;
 		if (fileNameDir != null)
@@ -1408,16 +2115,19 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	public JSFile js_showDirectorySelectDialog()
 	{
-		return js_showDirectorySelectDialog(null, null);
+		return js_showDirectorySelectDialog((String)null, null);
 	}
 
 	/**
 	 * @clonedesc js_showDirectorySelectDialog()
 	 * @sampleas js_showDirectorySelectDialog()
 	 * 
-	 * @param directory Default directory.
+	 * @param directory Default directory as File.
+	 * 
+	 * @deprecated use showDirectorySelectDialog(JSFile)
 	 */
-	public JSFile js_showDirectorySelectDialog(Object directory)
+	@Deprecated
+	public JSFile js_showDirectorySelectDialog(File directory)
 	{
 		return js_showDirectorySelectDialog(directory, null);
 	}
@@ -1426,10 +2136,64 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc js_showDirectorySelectDialog()
 	 * @sampleas js_showDirectorySelectDialog()
 	 * 
-	 * @param directory Default directory.
+	 * @param directory Default directory as JSFile.
+	 */
+	public JSFile js_showDirectorySelectDialog(JSFile directory)
+	{
+		return js_showDirectorySelectDialog(directory, null);
+	}
+
+	/**
+	 * @clonedesc js_showDirectorySelectDialog()
+	 * @sampleas js_showDirectorySelectDialog()
+	 * 
+	 * @param directory Default directory as file path.
+	 */
+	public JSFile js_showDirectorySelectDialog(String directory)
+	{
+		return js_showDirectorySelectDialog(directory, null);
+	}
+
+	/**
+	 * @clonedesc js_showDirectorySelectDialog()
+	 * @sampleas js_showDirectorySelectDialog()
+	 * 
+	 * @param directory Default directory as File.
+	 * @param title Dialog title.
+	 * 
+	 * @deprecated use showDirectorySelectDialog(JSFile, String)
+	 */
+	@Deprecated
+	public JSFile js_showDirectorySelectDialog(File directory, String title)
+	{
+		return showDirectorySelectDialog(directory, title);
+	}
+
+	/**
+	 * @clonedesc js_showDirectorySelectDialog()
+	 * @sampleas js_showDirectorySelectDialog()
+	 * 
+	 * @param directory Default directory as JSFile.
 	 * @param title Dialog title.
 	 */
-	public JSFile js_showDirectorySelectDialog(Object directory, String title)
+	public JSFile js_showDirectorySelectDialog(JSFile directory, String title)
+	{
+		return showDirectorySelectDialog(directory, title);
+	}
+
+	/**
+	 * @clonedesc js_showDirectorySelectDialog()
+	 * @sampleas js_showDirectorySelectDialog()
+	 * 
+	 * @param directory Default directory as file path.
+	 * @param title Dialog title.
+	 */
+	public JSFile js_showDirectorySelectDialog(String directory, String title)
+	{
+		return showDirectorySelectDialog(directory, title);
+	}
+
+	private JSFile showDirectorySelectDialog(Object directory, String title)
 	{
 		File f = null;
 		if (directory != null)
@@ -1468,16 +2232,19 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public byte[] js_readFile()
 	{
-		return js_readFile(null, -1);
+		return js_readFile((String)null, -1);
 	}
 
 	/**
 	 * @clonedesc js_readFile()
 	 * @sampleas js_readFile()
 	 * 
-	 * @param file JSFile or path.
+	 * @param file File.
+	 * 
+	 * @deprecated use readFile(JSFile)
 	 */
-	public byte[] js_readFile(Object file)
+	@Deprecated
+	public byte[] js_readFile(File file)
 	{
 		return js_readFile(file, -1);
 	}
@@ -1486,10 +2253,64 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc js_readFile()
 	 * @sampleas js_readFile()
 	 * 
-	 * @param file JSFile or path.
+	 * @param file JSFile.
+	 */
+	public byte[] js_readFile(JSFile file)
+	{
+		return js_readFile(file, -1);
+	}
+
+	/**
+	 * @clonedesc js_readFile()
+	 * @sampleas js_readFile()
+	 * 
+	 * @param file the file path.
+	 */
+	public byte[] js_readFile(String file)
+	{
+		return js_readFile(file, -1);
+	}
+
+	/**
+	 * @clonedesc js_readFile()
+	 * @sampleas js_readFile()
+	 * 
+	 * @param file File.
+	 * @param size Number of bytes to read.
+	 * 
+	 * @deprecated use readFile(JSFile,size)
+	 */
+	@Deprecated
+	public byte[] js_readFile(File file, long size)
+	{
+		return readFile(file, size);
+	}
+
+	/**
+	 * @clonedesc js_readFile()
+	 * @sampleas js_readFile()
+	 * 
+	 * @param file JSFile.
 	 * @param size Number of bytes to read.
 	 */
-	public byte[] js_readFile(Object file, long size)
+	public byte[] js_readFile(JSFile file, long size)
+	{
+		return readFile(file, size);
+	}
+
+	/**
+	 * @clonedesc js_readFile()
+	 * @sampleas js_readFile()
+	 * 
+	 * @param file the file path.
+	 * @param size Number of bytes to read.
+	 */
+	public byte[] js_readFile(String file, long size)
+	{
+		return readFile(file, size);
+	}
+
+	private byte[] readFile(Object file, long size)
 	{
 		try
 		{
@@ -1533,6 +2354,24 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 
 	/**
+	 * @clonedesc js_appendToTXTFile(JSFile,String)
+	 * @sampleas js_appendToTXTFile(JSFile,String)
+	 * 
+	 * @since Servoy 5.2
+	 * 
+	 * @param file a local {@link JSFile} or a the file path as a String
+	 * @param text the text to append to the file
+	 * @return true if appending worked
+	 * 
+	 * @deprecated use appendToTXTFile(JSFile,String) instead
+	 */
+	@Deprecated
+	public boolean js_appendToTXTFile(File file, String text)
+	{
+		return js_appendToTXTFile(file, text, null);
+	}
+
+	/**
 	 * Appends a string given in parameter to a file, using default platform encoding.
 	 * 
 	 * @sample
@@ -1541,30 +2380,83 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @since Servoy 5.2
 	 * 
-	 * @param file either a {@link File}, a local {@link JSFile} or a the file path as a String
+	 * @param file a local {@link JSFile}
 	 * @param text the text to append to the file
 	 * @return true if appending worked
 	 */
-	public boolean js_appendToTXTFile(Object file, String text)
+	public boolean js_appendToTXTFile(JSFile file, String text)
 	{
 		return js_appendToTXTFile(file, text, null);
 	}
 
 	/**
-	 * Appends a string given in parameter to a file, using the specified encoding.
-	 * 
-	 * @sampleas js_appendToTXTFile(Object, String)
+	 * @clonedesc js_appendToTXTFile(JSFile,String)
+	 * @sampleas js_appendToTXTFile(JSFile,String)
 	 * 
 	 * @since Servoy 5.2
 	 * 
-	 * @param file either a {@link File}, a local {@link JSFile} or a the file path as a String
+	 * @param file the file path as a String
+	 * @param text the text to append to the file
+	 * @return true if appending worked
+	 */
+	public boolean js_appendToTXTFile(String file, String text)
+	{
+		return js_appendToTXTFile(file, text, null);
+	}
+
+	/**
+	 * @clonedesc js_appendToTXTFile(JSFile, String)
+	 * @sampleas js_appendToTXTFile(JSFile, String)
+	 * 
+	 * @since Servoy 5.2
+	 * 
+	 * @param file a local {@link JSFile} or a the file path as a String
+	 * @param text the text to append to the file
+	 * @param encoding the encoding to use
+	 * 
+	 * @return true if appending worked
+	 * 
+	 * @deprecated use appendToTXTFile(JSFile, String, String)
+	 */
+	@Deprecated
+	public boolean js_appendToTXTFile(File file, String text, String encoding)
+	{
+		return appendToTXTFile(file, text, encoding);
+	}
+
+	/**
+	 * Appends a string given in parameter to a file, using the specified encoding.
+	 * 
+	 * @sampleas js_appendToTXTFile(JSFile, String)
+	 * 
+	 * @since Servoy 5.2
+	 * 
+	 * @param file a local {@link JSFile}
 	 * @param text the text to append to the file
 	 * @param encoding the encoding to use
 	 * 
 	 * @return true if appending worked
 	 */
+	public boolean js_appendToTXTFile(JSFile file, String text, String encoding)
+	{
+		return appendToTXTFile(file, text, encoding);
+	}
+
+	/**
+	 * @clondesc js_appendToTXTFile(JSFile,String,String)
+	 * @sampleas js_appendToTXTFile(JSFile,String,String)
+	 * 
+	 * @param file the file path as a String
+	 * @param text the text to append to the file
+	 * @param encoding the encoding to use
+	 */
+	public boolean js_appendToTXTFile(String file, String text, String encoding)
+	{
+		return appendToTXTFile(file, text, encoding);
+	}
+
 	@SuppressWarnings("nls")
-	public boolean js_appendToTXTFile(Object file, String text, String encoding)
+	private boolean appendToTXTFile(Object file, String text, String encoding)
 	{
 		if (text != null)
 		{
@@ -1647,62 +2539,207 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param targetFolder  
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(Object targetFolder)
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder)
 	{
 		return js_getRemoteFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getRemoteFolderContents(Object)
-	 * @sampleas js_getRemoteFolderContents(Object)
-	 * @param targetFolder
-	 * @param fileFilter
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File object.
+	 * @return the array of file names
+	 * @deprecated use getRemoteFolderContents(JSFile)
+	 */
+	@Deprecated
+	public JSFile[] js_getRemoteFolderContents(File targetFolder)
+	{
+		return js_getRemoteFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File object.
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter)
+	public JSFile[] js_getRemoteFolderContents(String targetFolder)
+	{
+		return js_getRemoteFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @return the array of file names
+	 * @deprecated use getRemoteFolderContents(JSFile, Object)
+	 */
+	@Deprecated
+	public JSFile[] js_getRemoteFolderContents(File targetFolder, Object fileFilter)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getRemoteFolderContents(Object)
-	 * @sampleas js_getRemoteFolderContents(Object)
-	 * @param targetFolder
-	 * @param fileFilter
-	 * @param fileOption
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder JSFile object.
+	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption)
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs
+	 * @return the array of file names
+	 * @deprecated use getRemoteFolderContents(JSFile, Object, int)
+	 */
+	@Deprecated
+	public JSFile[] js_getRemoteFolderContents(File targetFolder, Object fileFilter, int fileOption)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getRemoteFolderContents(Object)
-	 * @sampleas js_getRemoteFolderContents(Object)
-	 * @param targetFolder
-	 * @param fileFilter
-	 * @param fileOption
-	 * @param visibleOption
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder JSFile object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption, int visibleOption)
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, int fileOption)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, int fileOption)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @return the array of file names
+	 * @deprecated use getRemoteFolderContents(JSFile, Object, int, int)
+	 */
+	@Deprecated
+	public JSFile[] js_getRemoteFolderContents(File targetFolder, Object fileFilter, int fileOption, int visibleOption)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
 	}
 
 	/**
-	 * @clonedesc js_getRemoteFolderContents(Object)
-	 * @sampleas js_getRemoteFolderContents(Object)
-	 * @param targetFolder
-	 * @param fileFilter
-	 * @param fileOption
-	 * @param visibleOption
-	 * @param lockedOption
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder JSFile object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
 	 * @return the array of file names
 	 */
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, int fileOption, int visibleOption)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, int fileOption, int visibleOption)
+	{
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @param lockedOption 1=locked, 2=nonlocked
+	 * @return the array of file names
+	 * @deprecated use getRemoteFolderContents(JSFile, Object, int, int, int)
+	 */
+	@Deprecated
+	public JSFile[] js_getRemoteFolderContents(File targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	{
+		return getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder JSFile object.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @param lockedOption 1=locked, 2=nonlocked
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	{
+		return getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
+	}
+
+	/**
+	 * @clonedesc js_getRemoteFolderContents(JSFile)
+	 * @sampleas js_getRemoteFolderContents(JSFile)
+	 * @param targetFolder File path.
+	 * @param fileFilter Filter or array of filters for files in folder.
+	 * @param fileOption 1=files, 2=dirs 
+	 * @param visibleOption 1=visible, 2=nonvisible 
+	 * @param lockedOption 1=locked, 2=nonlocked
+	 * @return the array of file names
+	 */
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	{
+		return getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
+	}
+
 	@SuppressWarnings("nls")
-	public JSFile[] js_getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	private JSFile[] getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
 	{
 		if (targetFolder == null) return EMPTY;
 
@@ -1801,7 +2838,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	public JSFile[] js_getRemoteList(final Object serverPath, final boolean filesOnly)
 	{
 		final int fileOption = (filesOnly) ? AbstractFile.FILES : AbstractFile.ALL;
-		return js_getRemoteFolderContents(new Object[] { serverPath, null, new Integer(fileOption) });
+		return js_getRemoteFolderContents(getFileFromArg(serverPath, false), null, (new Integer(fileOption)).intValue());
 	}
 
 	/**

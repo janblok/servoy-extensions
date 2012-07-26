@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -738,7 +738,7 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
         <functions>
           <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
@@ -747,8 +747,8 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
             <sample><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[either a File, a local JSFile or a the file path as a String]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[a local JSFile]]></description>
               </parameter>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the text to append to the file]]></description>
@@ -757,7 +757,7 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
           </function>
           <function name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -767,8 +767,93 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
             <sample><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[either a File, a local JSFile or a the file path as a String]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[a local JSFile]]></description>
+              </parameter>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text to append to the file]]></description>
+              </parameter>
+              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the encoding to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="appendToTXTFile" since="Servoy 5.2">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
+            <description><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
+            <summary><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            <deprecated><![CDATA[use appendToTXTFile(JSFile,String) instead]]></deprecated>
+            <sample><![CDATA[// append some text to a text file:
+	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[a local JSFile or a the file path as a String]]></description>
+              </parameter>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text to append to the file]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="appendToTXTFile" since="Servoy 5.2">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
+            <description><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
+            <summary><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            <deprecated><![CDATA[use appendToTXTFile(JSFile, String, String)]]></deprecated>
+            <sample><![CDATA[// append some text to a text file:
+	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[a local JSFile or a the file path as a String]]></description>
+              </parameter>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text to append to the file]]></description>
+              </parameter>
+              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the encoding to use]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="appendToTXTFile" since="Servoy 5.2">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
+            <description><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
+            <summary><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            <sample><![CDATA[// append some text to a text file:
+	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path as a String]]></description>
+              </parameter>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the text to append to the file]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="appendToTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description/>
+            <sample><![CDATA[// append some text to a text file:
+	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path as a String]]></description>
               </parameter>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the text to append to the file]]></description>
@@ -977,7 +1062,7 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
           </function>
           <function name="getFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
             <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
@@ -986,14 +1071,14 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
 for (var i=0; i<files.length; i++)
 	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path object.]]></description>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="getFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
@@ -1003,8 +1088,8 @@ for (var i=0; i<files.length; i++)
 for (var i=0; i<files.length; i++)
 	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path object.]]></description>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1013,7 +1098,7 @@ for (var i=0; i<files.length; i++)
           </function>
           <function name="getFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -1024,8 +1109,8 @@ for (var i=0; i<files.length; i++)
 for (var i=0; i<files.length; i++)
 	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path object.]]></description>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1037,7 +1122,7 @@ for (var i=0; i<files.length; i++)
           </function>
           <function name="getFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -1049,8 +1134,8 @@ for (var i=0; i<files.length; i++)
 for (var i=0; i<files.length; i++)
 	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path object.]]></description>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1065,7 +1150,7 @@ for (var i=0; i<files.length; i++)
           </function>
           <function name="getFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -1078,8 +1163,253 @@ for (var i=0; i<files.length; i++)
 for (var i=0; i<files.length; i++)
 	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path object.]]></description>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+              <parameter name="lockedOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=locked, 2=nonlocked]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <deprecated><![CDATA[use getFolderContents(JSFile)]]></deprecated>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <deprecated><![CDATA[use getFolderContents(File, Object)]]></deprecated>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <deprecated><![CDATA[use getFolderContents(JSFile, Object, int)]]></deprecated>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <deprecated><![CDATA[use getFolderContents(JSFile, Object, int, int) instead]]></deprecated>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <deprecated><![CDATA[use getFolderContents(JSFile, Object, int, int, int)]]></deprecated>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+              <parameter name="lockedOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=locked, 2=nonlocked]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1125,7 +1455,7 @@ application.output('last changed: ' + plugins.file.getModificationDate(f));]]></
           </function>
           <function name="getRemoteFolderContents" since="Servoy 5.2.1">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
             <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
@@ -1133,12 +1463,12 @@ application.output('last changed: ' + plugins.file.getModificationDate(f));]]></
             <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </parameters>
           </function>
           <function name="getRemoteFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
@@ -1147,13 +1477,17 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="getRemoteFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -1163,14 +1497,20 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="getRemoteFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -1181,15 +1521,23 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="getRemoteFolderContents">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -1201,11 +1549,256 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
-              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="lockedOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+              <parameter name="lockedOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=locked, 2=nonlocked]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <deprecated><![CDATA[use getRemoteFolderContents(JSFile)]]></deprecated>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <deprecated><![CDATA[use getRemoteFolderContents(JSFile, Object)]]></deprecated>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <deprecated><![CDATA[use getRemoteFolderContents(JSFile, Object, int)]]></deprecated>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <deprecated><![CDATA[use getRemoteFolderContents(JSFile, Object, int, int)]]></deprecated>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <deprecated><![CDATA[use getRemoteFolderContents(JSFile, Object, int, int, int)]]></deprecated>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+              <parameter name="lockedOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=locked, 2=nonlocked]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File object.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="getRemoteFolderContents">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <sample><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
+var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
+            <parameters>
+              <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File path.]]></description>
+              </parameter>
+              <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[Filter or array of filters for files in folder.]]></description>
+              </parameter>
+              <parameter name="fileOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=files, 2=dirs]]></description>
+              </parameter>
+              <parameter name="visibleOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=visible, 2=nonvisible]]></description>
+              </parameter>
+              <parameter name="lockedOption" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[1=locked, 2=nonlocked]]></description>
+              </parameter>
             </parameters>
           </function>
           <function deprecated="true" name="getRemoteList" since="Servoy 5.2">
@@ -1215,7 +1808,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
             <description><![CDATA[Retrieves an array of files/folders from the server]]></description>
             <summary><![CDATA[Retrieves an array of files/folders from the server]]></summary>
-            <deprecated><![CDATA[Replaced by #getRemoteFolderContents(Object[]).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #getRemoteFolderContents(Object,Object,int,int,int).]]></deprecated>
             <sample/>
             <parameters>
               <parameter name="serverPath" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
@@ -1231,7 +1824,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
             <description><![CDATA[Retrieves an array of files/folders from the server]]></description>
             <summary><![CDATA[Retrieves an array of files/folders from the server]]></summary>
-            <deprecated><![CDATA[Replaced by #getRemoteFolderContents(Object[]).]]></deprecated>
+            <deprecated><![CDATA[Replaced by #getRemoteFolderContents(Object,Object,int,int,int).]]></deprecated>
             <sample/>
             <parameters>
               <parameter name="serverPath" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
@@ -1280,7 +1873,7 @@ application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
           </function>
           <function name="readFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
@@ -1295,14 +1888,14 @@ application.output('partial file size: ' + bytesPartial.length);
 var bytesUnknownFile = plugins.file.readFile();
 application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[JSFile or path.]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile.]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="readFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="long"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
@@ -1318,8 +1911,106 @@ application.output('partial file size: ' + bytesPartial.length);
 var bytesUnknownFile = plugins.file.readFile();
 application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[JSFile or path.]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile.]]></description>
+              </parameter>
+              <parameter name="size" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long">
+                <description><![CDATA[Number of bytes to read.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="readFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <deprecated><![CDATA[use readFile(JSFile)]]></deprecated>
+            <sample><![CDATA[// Read all content from the file.
+var bytes = plugins.file.readFile('big.jpg');
+application.output('file size: ' + bytes.length);
+// Read only the first 1KB from the file.
+var bytesPartial = plugins.file.readFile('big.jpg', 1024);
+application.output('partial file size: ' + bytesPartial.length);
+// Read all content from a file selected from the file open dialog.
+var bytesUnknownFile = plugins.file.readFile();
+application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="readFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="long"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <deprecated><![CDATA[use readFile(JSFile,size)]]></deprecated>
+            <sample><![CDATA[// Read all content from the file.
+var bytes = plugins.file.readFile('big.jpg');
+application.output('file size: ' + bytes.length);
+// Read only the first 1KB from the file.
+var bytesPartial = plugins.file.readFile('big.jpg', 1024);
+application.output('partial file size: ' + bytesPartial.length);
+// Read all content from a file selected from the file open dialog.
+var bytesUnknownFile = plugins.file.readFile();
+application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File.]]></description>
+              </parameter>
+              <parameter name="size" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long">
+                <description><![CDATA[Number of bytes to read.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="readFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <sample><![CDATA[// Read all content from the file.
+var bytes = plugins.file.readFile('big.jpg');
+application.output('file size: ' + bytes.length);
+// Read only the first 1KB from the file.
+var bytesPartial = plugins.file.readFile('big.jpg', 1024);
+application.output('partial file size: ' + bytesPartial.length);
+// Read all content from a file selected from the file open dialog.
+var bytesUnknownFile = plugins.file.readFile();
+application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="readFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="long"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <sample><![CDATA[// Read all content from the file.
+var bytes = plugins.file.readFile('big.jpg');
+application.output('file size: ' + bytes.length);
+// Read only the first 1KB from the file.
+var bytesPartial = plugins.file.readFile('big.jpg', 1024);
+application.output('partial file size: ' + bytesPartial.length);
+// Read all content from a file selected from the file open dialog.
+var bytesUnknownFile = plugins.file.readFile();
+application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path.]]></description>
               </parameter>
               <parameter name="size" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long">
                 <description><![CDATA[Number of bytes to read.]]></description>
@@ -1340,7 +2031,7 @@ application.output(txtUnknown);]]></sample>
           </function>
           <function name="readTXTFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
@@ -1352,14 +2043,14 @@ application.output(txt);
 var txtUnknown = plugins.file.readTXTFile();
 application.output(txtUnknown);]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[JSFile or path.]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile.]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="readTXTFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1372,8 +2063,94 @@ application.output(txt);
 var txtUnknown = plugins.file.readTXTFile();
 application.output(txtUnknown);]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[JSFile or path.]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile.]]></description>
+              </parameter>
+              <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Charset name.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="readTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <deprecated><![CDATA[use readTXTFile(JSFile)]]></deprecated>
+            <sample><![CDATA[// Read content from a known text file.
+var txt = plugins.file.readTXTFile('story.txt');
+application.output(txt);
+// Read content from a text file selected from the file open dialog.
+var txtUnknown = plugins.file.readTXTFile();
+application.output(txtUnknown);]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="readTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <deprecated><![CDATA[use readTXTFile(JSFile, String)]]></deprecated>
+            <sample><![CDATA[// Read content from a known text file.
+var txt = plugins.file.readTXTFile('story.txt');
+application.output(txt);
+// Read content from a text file selected from the file open dialog.
+var txtUnknown = plugins.file.readTXTFile();
+application.output(txtUnknown);]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File.]]></description>
+              </parameter>
+              <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Charset name.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="readTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <sample><![CDATA[// Read content from a known text file.
+var txt = plugins.file.readTXTFile('story.txt');
+application.output(txt);
+// Read content from a text file selected from the file open dialog.
+var txtUnknown = plugins.file.readTXTFile();
+application.output(txtUnknown);]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="readTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <sample><![CDATA[// Read content from a known text file.
+var txt = plugins.file.readTXTFile('story.txt');
+application.output(txt);
+// Read content from a text file selected from the file open dialog.
+var txtUnknown = plugins.file.readTXTFile();
+application.output(txtUnknown);]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path.]]></description>
               </parameter>
               <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Charset name.]]></description>
@@ -1390,7 +2167,7 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
           </function>
           <function name="showDirectorySelectDialog">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <description><![CDATA[Shows a directory selector dialog.]]></description>
@@ -1398,14 +2175,14 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
             <sample><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="directory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[Default directory.]]></description>
+              <parameter name="directory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[Default directory as JSFile.]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="showDirectorySelectDialog">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
@@ -1414,8 +2191,78 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
             <sample><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="directory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[Default directory.]]></description>
+              <parameter name="directory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[Default directory as JSFile.]]></description>
+              </parameter>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog title.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showDirectorySelectDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a directory selector dialog.]]></description>
+            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <deprecated><![CDATA[use showDirectorySelectDialog(JSFile)]]></deprecated>
+            <sample><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
+application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="directory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[Default directory as File.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showDirectorySelectDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a directory selector dialog.]]></description>
+            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <deprecated><![CDATA[use showDirectorySelectDialog(JSFile, String)]]></deprecated>
+            <sample><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
+application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="directory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[Default directory as File.]]></description>
+              </parameter>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog title.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="showDirectorySelectDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a directory selector dialog.]]></description>
+            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <sample><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
+application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="directory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Default directory as file path.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="showDirectorySelectDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a directory selector dialog.]]></description>
+            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <sample><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
+application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="directory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Default directory as file path.]]></description>
               </parameter>
               <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Dialog title.]]></description>
@@ -1488,7 +2335,7 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
@@ -1519,15 +2366,15 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder; null=default/previous]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
@@ -1559,8 +2406,8 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path to default folder,null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder, null=default/previous]]></description>
               </parameter>
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
@@ -1570,7 +2417,7 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -1603,8 +2450,8 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path to default folder,null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder,null=default/previous]]></description>
               </parameter>
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
@@ -1615,7 +2462,7 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1649,8 +2496,8 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path to default folder,null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder,null=default/previous]]></description>
               </parameter>
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
@@ -1664,7 +2511,7 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1699,8 +2546,8 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder, null=default/previous]]></description>
               </parameter>
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
@@ -1715,7 +2562,7 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1748,8 +2595,8 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path to default folder,null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder,null=default/previous]]></description>
               </parameter>
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
@@ -1760,6 +2607,496 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
           <function name="showFileOpenDialog">
             <argumentsTypes>
               <argumentType typecode="int"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile instance of default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int, JSFile) instead]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder, null=default/previous]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int, JSFile, boolean) instead]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder, null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int,JSFile,boolean,Object) instead]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int, JSFile, boolean, Object, Function) instead]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[A filter or array of filters on the folder files.]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int, JSFile, boolean, Object, Function, String)]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder, null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[A filter or array of filters on the folder files.]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int, Object, boolean, Function) instead]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder, null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <deprecated><![CDATA[use showFileOpenDialog(int, JSFile, Function) instead]]></deprecated>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File instance of default folder, null=default/previous]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder; null=default/previous]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder, null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Object"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1792,8 +3129,151 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File or path to default folder,null=default/previous]]></description>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[A filter or array of filters on the folder files.]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder, null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[A filter or array of filters on the folder files.]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder,null=default/previous]]></description>
               </parameter>
               <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -1878,7 +3358,7 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
           </function>
           <function name="showFileSaveDialog">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <description><![CDATA[Shows a file save dialog.]]></description>
@@ -1886,14 +3366,14 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
             <sample><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="fileNameDir" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[File to save.]]></description>
+              <parameter name="fileNameDir" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile to save.]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="showFileSaveDialog">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
@@ -1902,7 +3382,79 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
             <sample><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             <parameters>
-              <parameter name="fileNameDir" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="fileNameDir" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile to save]]></description>
+              </parameter>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog title.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileSaveDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a file save dialog.]]></description>
+            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <deprecated><![CDATA[use showFileSaveDialog(JSFile)]]></deprecated>
+            <sample><![CDATA[var file = plugins.file.showFileSaveDialog();
+application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="fileNameDir" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File to save.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="showFileSaveDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a file save dialog.]]></description>
+            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <deprecated><![CDATA[use showFileSaveDialog(JSFile)]]></deprecated>
+            <sample><![CDATA[var file = plugins.file.showFileSaveDialog();
+application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="fileNameDir" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[File to save]]></description>
+              </parameter>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Dialog title.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="showFileSaveDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a file save dialog.]]></description>
+            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <sample><![CDATA[var file = plugins.file.showFileSaveDialog();
+application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="fileNameDir" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File (give as file path) to save.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="showFileSaveDialog">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            <description><![CDATA[Shows a file save dialog.]]></description>
+            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <sample><![CDATA[var file = plugins.file.showFileSaveDialog();
+application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
+            <parameters>
+              <parameter name="fileNameDir" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[File to save (specified as file path)]]></description>
+              </parameter>
               <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Dialog title.]]></description>
               </parameter>
@@ -2056,7 +3608,7 @@ if (folder) {
           </function>
           <function name="writeFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -2074,13 +3626,17 @@ var mimeType = 'application/vnd.ms-excel'
 if (!plugins.file.writeFile(f, bytes, mimeType))
 	application.output('Failed to write the file.');]]></sample>
             <parameters>
-              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="data" type="byte[]" typecode="[B"/>
+              <parameter name="f" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[a local JSFile]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the data to be written]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="writeFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -2099,14 +3655,141 @@ var mimeType = 'application/vnd.ms-excel'
 if (!plugins.file.writeFile(f, bytes, mimeType))
 	application.output('Failed to write the file.');]]></sample>
             <parameters>
-              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="data" type="byte[]" typecode="[B"/>
-              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="f" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[a local JSFile]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the data to be written]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mime type]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="[B"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a binary file.]]></summary>
+            <deprecated><![CDATA[use writeFile(JSFile,byte[]) instead]]></deprecated>
+            <sample><![CDATA[/**@type {Array<byte>}*/
+var bytes = new Array();
+for (var i=0; i<1024; i++)
+	bytes[i] = i % 100;
+var f = plugins.file.convertToJSFile('bin.dat');
+if (!plugins.file.writeFile(f, bytes))
+	application.output('Failed to write the file.');
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+var mimeType = 'application/vnd.ms-excel'
+if (!plugins.file.writeFile(f, bytes, mimeType))
+	application.output('Failed to write the file.');]]></sample>
+            <parameters>
+              <parameter name="f" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[a local JSFile or a the file path as a String]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the data to be written]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a binary file.]]></summary>
+            <deprecated><![CDATA[use writeFile(JSFile,byte[],String) instead]]></deprecated>
+            <sample><![CDATA[/**@type {Array<byte>}*/
+var bytes = new Array();
+for (var i=0; i<1024; i++)
+	bytes[i] = i % 100;
+var f = plugins.file.convertToJSFile('bin.dat');
+if (!plugins.file.writeFile(f, bytes))
+	application.output('Failed to write the file.');
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+var mimeType = 'application/vnd.ms-excel'
+if (!plugins.file.writeFile(f, bytes, mimeType))
+	application.output('Failed to write the file.');]]></sample>
+            <parameters>
+              <parameter name="f" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[a local JSFile or a the file path as a String]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the data to be written]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mime type]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[B"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description/>
+            <sample><![CDATA[/**@type {Array<byte>}*/
+var bytes = new Array();
+for (var i=0; i<1024; i++)
+	bytes[i] = i % 100;
+var f = plugins.file.convertToJSFile('bin.dat');
+if (!plugins.file.writeFile(f, bytes))
+	application.output('Failed to write the file.');
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+var mimeType = 'application/vnd.ms-excel'
+if (!plugins.file.writeFile(f, bytes, mimeType))
+	application.output('Failed to write the file.');]]></sample>
+            <parameters>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path as a String]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the data to be written]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a binary file.]]></summary>
+            <sample><![CDATA[/**@type {Array<byte>}*/
+var bytes = new Array();
+for (var i=0; i<1024; i++)
+	bytes[i] = i % 100;
+var f = plugins.file.convertToJSFile('bin.dat');
+if (!plugins.file.writeFile(f, bytes))
+	application.output('Failed to write the file.');
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+var mimeType = 'application/vnd.ms-excel'
+if (!plugins.file.writeFile(f, bytes, mimeType))
+	application.output('Failed to write the file.');]]></sample>
+            <parameters>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path as a String]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the data to be written]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the mime type]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="writeTXTFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
@@ -2119,8 +3802,8 @@ if (!success) application.output('Could not write file.');
 // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
 // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[JSFile or path.]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile]]></description>
               </parameter>
               <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Text to be written.]]></description>
@@ -2129,7 +3812,7 @@ if (!success) application.output('Could not write file.');
           </function>
           <function name="writeTXTFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -2143,8 +3826,8 @@ if (!success) application.output('Could not write file.');
 // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
 // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[JSFile or path.]]></description>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile]]></description>
               </parameter>
               <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Text to be written.]]></description>
@@ -2156,7 +3839,7 @@ if (!success) application.output('Could not write file.');
           </function>
           <function name="writeTXTFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -2171,8 +3854,168 @@ if (!success) application.output('Could not write file.');
 // For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
 // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[JSFile]]></description>
+              </parameter>
+              <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Text to be written.]]></description>
+              </parameter>
+              <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Charset name.]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Content type (used only on web).]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
+            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <deprecated><![CDATA[use writeTXTFile(JSFile,String)]]></deprecated>
+            <sample/>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
                 <description><![CDATA[JSFile or path.]]></description>
+              </parameter>
+              <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Text to be written.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
+            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <deprecated><![CDATA[use writeTXTFile(JSFile,String,String) instead]]></deprecated>
+            <sample><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
+var textData = 'load of data...'
+var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+if (!success) application.output('Could not write file.');
+// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[JSFile or path.]]></description>
+              </parameter>
+              <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Text to be written.]]></description>
+              </parameter>
+              <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Charset name.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
+            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <deprecated><![CDATA[use writeTXTFile(File, String, String, String)]]></deprecated>
+            <sample><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
+var textData = 'load of data...'
+var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+if (!success) application.output('Could not write file.');
+// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[JSFile or path.]]></description>
+              </parameter>
+              <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Text to be written.]]></description>
+              </parameter>
+              <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Charset name.]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Content type (used only on web).]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <sample><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
+var textData = 'load of data...'
+var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+if (!success) application.output('Could not write file.');
+// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The file path.]]></description>
+              </parameter>
+              <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Text to be written.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <sample><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
+var textData = 'load of data...'
+var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+if (!success) application.output('Could not write file.');
+// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The file path.]]></description>
+              </parameter>
+              <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Text to be written.]]></description>
+              </parameter>
+              <parameter name="charsetname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Charset name.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeTXTFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <sample><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
+var textData = 'load of data...'
+var success = plugins.file.writeTXTFile(fileNameSuggestion, textData);
+if (!success) application.output('Could not write file.');
+// For file-encoding parameter options (default OS encoding is used), http://download.oracle.com/javase/1.4.2/docs/guide/intl/encoding.doc.html
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp']]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The file path.]]></description>
               </parameter>
               <parameter name="text_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Text to be written.]]></description>
@@ -2187,7 +4030,7 @@ if (!success) application.output('Could not write file.');
           </function>
           <function name="writeXMLFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -2198,13 +4041,17 @@ var xml = controller.printXML()
 var success = plugins.file.writeXMLFile(fileName, xml);
 if (!success) application.output('Could not write file.');]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[a local JSFile]]></description>
+              </parameter>
+              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the xml data to write]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="writeXMLFile">
             <argumentsTypes>
-              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -2216,9 +4063,109 @@ var xml = controller.printXML()
 var success = plugins.file.writeXMLFile(fileName, xml);
 if (!success) application.output('Could not write file.');]]></sample>
             <parameters>
-              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[a local JSFile]]></description>
+              </parameter>
+              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the xml data to write]]></description>
+              </parameter>
+              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the specified encoding]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeXMLFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <deprecated><![CDATA[use writeXMLFile(JSFile, String) instead]]></deprecated>
+            <sample><![CDATA[var fileName = 'form.xml'
+var xml = controller.printXML()
+var success = plugins.file.writeXMLFile(fileName, xml);
+if (!success) application.output('Could not write file.');]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[a local JSFile or a the file path as a String]]></description>
+              </parameter>
+              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the xml data to write]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function deprecated="true" name="writeXMLFile">
+            <argumentsTypes>
+              <argumentType typecode="java.io.File"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <deprecated><![CDATA[use writeXMLFile(JSFile, String, String) instead]]></deprecated>
+            <sample><![CDATA[var fileName = 'form.xml'
+var xml = controller.printXML()
+var success = plugins.file.writeXMLFile(fileName, xml);
+if (!success) application.output('Could not write file.');]]></sample>
+            <parameters>
+              <parameter name="file" type="java.io.File" typecode="java.io.File">
+                <description><![CDATA[a local JSFile or a the file path as a String]]></description>
+              </parameter>
+              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the xml data to write]]></description>
+              </parameter>
+              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the specified encoding]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeXMLFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <sample><![CDATA[var fileName = 'form.xml'
+var xml = controller.printXML()
+var success = plugins.file.writeXMLFile(fileName, xml);
+if (!success) application.output('Could not write file.');]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path as a String]]></description>
+              </parameter>
+              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the xml data to write]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="writeXMLFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <sample><![CDATA[var fileName = 'form.xml'
+var xml = controller.printXML()
+var success = plugins.file.writeXMLFile(fileName, xml);
+if (!success) application.output('Could not write file.');]]></sample>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the file path as a String]]></description>
+              </parameter>
+              <parameter name="xml_data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the xml data to write]]></description>
+              </parameter>
+              <parameter name="encoding" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the specified encoding]]></description>
+              </parameter>
             </parameters>
           </function>
         </functions>

@@ -50,9 +50,26 @@ public class WebFileProvider extends FileProvider
 		super(plugin);
 	}
 
-	@SuppressWarnings("nls")
 	@Override
-	public boolean js_writeFile(Object f, byte[] data, String mimeType)
+	public boolean js_writeFile(File f, byte[] data, String mimeType)
+	{
+		return writeFile(f, data, mimeType);
+	}
+
+	@Override
+	public boolean js_writeFile(JSFile f, byte[] data, String mimeType)
+	{
+		return writeFile(f, data, mimeType);
+	}
+
+	@Override
+	public boolean js_writeFile(String f, byte[] data, String mimeType)
+	{
+		return writeFile(f, data, mimeType);
+	}
+
+	@SuppressWarnings("nls")
+	private boolean writeFile(Object f, byte[] data, String mimeType)
 	{
 		if (data == null) return false;
 		File file = getFileFromArg(f, false);
@@ -74,8 +91,19 @@ public class WebFileProvider extends FileProvider
 	}
 
 	@Override
+	public String js_readTXTFile(JSFile file, String charsetname)
+	{
+		return readTXTFile(file, charsetname);
+	}
+
+	@Override
+	public String js_readTXTFile(String file, String charsetname)
+	{
+		return readTXTFile(file, charsetname);
+	}
+
 	@SuppressWarnings("nls")
-	public String js_readTXTFile(Object file, String charsetname)
+	private String readTXTFile(Object file, String charsetname)
 	{
 		if (file instanceof JSFile)
 		{
@@ -96,18 +124,29 @@ public class WebFileProvider extends FileProvider
 		}
 		else
 		{
-			return super.js_readTXTFile(file, charsetname);
+			return super.js_readTXTFile((String)file, charsetname);
 		}
 	}
 
 	@Override
-	public byte[] js_readFile(Object file, long size)
+	public byte[] js_readFile(JSFile file, long size)
+	{
+		return readFile(file, size);
+	}
+
+	@Override
+	public byte[] js_readFile(String file, long size)
+	{
+		return readFile(file, size);
+	}
+
+	private byte[] readFile(Object file, long size)
 	{
 		if (file instanceof JSFile)
 		{
 			return ((JSFile)file).jsFunction_getBytes();
 		}
-		return super.js_readFile(file, size);
+		else return super.js_readFile((String)file, size);
 	}
 
 	/**
