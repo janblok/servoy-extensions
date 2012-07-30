@@ -51,12 +51,6 @@ public class WebFileProvider extends FileProvider
 	}
 
 	@Override
-	public boolean js_writeFile(File f, byte[] data, String mimeType)
-	{
-		return writeFile(f, data, mimeType);
-	}
-
-	@Override
 	public boolean js_writeFile(JSFile f, byte[] data, String mimeType)
 	{
 		return writeFile(f, data, mimeType);
@@ -68,8 +62,9 @@ public class WebFileProvider extends FileProvider
 		return writeFile(f, data, mimeType);
 	}
 
+	@Override
 	@SuppressWarnings("nls")
-	private boolean writeFile(Object f, byte[] data, String mimeType)
+	protected boolean writeFile(Object f, byte[] data, String mimeType)
 	{
 		if (data == null) return false;
 		File file = getFileFromArg(f, false);
@@ -86,7 +81,7 @@ public class WebFileProvider extends FileProvider
 		}
 		else
 		{
-			return super.js_writeFile(file, data, mimeType);
+			return super.writeFile(file, data, mimeType);
 		}
 	}
 
