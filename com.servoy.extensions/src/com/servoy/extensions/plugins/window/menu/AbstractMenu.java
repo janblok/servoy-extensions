@@ -223,11 +223,19 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 */
 	public CheckBox js_addCheckBox(String name, Function feedback_item, Object icon, String mnemonic, Boolean enabled, Number align) throws PluginException
 	{
-		IMenuItem menuItem = menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_CHECK);
-		menu.addMenuItem(menuItem, -1);
+		try
+		{
+			IMenuItem menuItem = menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_CHECK);
+			menu.addMenuItem(menuItem, -1);
 
-		MenuItemArgs menuItemArgs = getMenuItemArgs(name, feedback_item, icon, mnemonic, enabled, align);
-		return (CheckBox)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, menuItemArgs, true);
+			MenuItemArgs menuItemArgs = getMenuItemArgs(name, feedback_item, icon, mnemonic, enabled, align);
+			return (CheckBox)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, menuItemArgs, true);
+		}
+		catch (Exception e)
+		{
+			Debug.error("ERROR ADDING CHECKBOX", e);
+			throw new PluginException(e);
+		}
 	}
 
 	private MenuItemArgs getMenuItemArgs(String name, Object feedback_item, Object icon, String mnemonic, Boolean enabled_state, Number alignment)
@@ -598,15 +606,24 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	public RadioButton js_addRadioButton(String name, Function feedback_item, Object icon, String mnemonic, Boolean enabled, Number align)
 		throws PluginException
 	{
-		IRadioButtonMenuItem menuItem = (IRadioButtonMenuItem)menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_RADIO);
-		if (buttonGroup == null)
+		try
 		{
-			buttonGroup = menuHandler.createButtonGroup();
+			IRadioButtonMenuItem menuItem = (IRadioButtonMenuItem)menuHandler.createMenuItem(menu, IMenuItem.MENU_ITEM_RADIO);
+			if (buttonGroup == null)
+			{
+				buttonGroup = menuHandler.createButtonGroup();
+			}
+			buttonGroup.add(menuItem);
+			menu.addMenuItem(menuItem, -1);
+			MenuItemArgs menuItemArgs = getMenuItemArgs(name, feedback_item, icon, mnemonic, enabled, align);
+			return (RadioButton)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, menuItemArgs, true);
 		}
-		buttonGroup.add(menuItem);
-		menu.addMenuItem(menuItem, -1);
-		MenuItemArgs menuItemArgs = getMenuItemArgs(name, feedback_item, icon, mnemonic, enabled, align);
-		return (RadioButton)AbstractMenuItem.createmenuItem(pluginAccess, getMenuHandler(), menuItem, menuItemArgs, true);
+		catch (Exception e)
+		{
+			Debug.error("ERROR ADDING RADIO BUTTON", e);
+			throw new PluginException(e);
+		}
+
 	}
 
 	/**
