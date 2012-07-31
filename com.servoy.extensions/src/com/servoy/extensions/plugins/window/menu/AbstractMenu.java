@@ -242,7 +242,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	{
 		String text = name;
 		if (name == null) text = "noname"; //$NON-NLS-1$
-		if (name.startsWith("i18n:")) text = pluginAccess.getI18NMessage(name, null); //$NON-NLS-1$
+		else if (name.startsWith("i18n:")) text = pluginAccess.getI18NMessage(name, null); //$NON-NLS-1$
 
 		MenuItemArgs menuItemArgs = null;
 
