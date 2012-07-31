@@ -24,12 +24,14 @@ import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.tree.AbstractTree;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 
 import com.inmethod.grid.column.tree.AbstractTreeColumn;
 import com.inmethod.icon.Icon;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.WicketTree;
 import com.servoy.extensions.beans.dbtreeview.WicketTreeNodeStyleAdapter;
+import com.servoy.j2db.server.headlessclient.dataui.StyleAppendingModifier;
 
 /**
  * Class representing the tree column in the web based tree table
@@ -92,6 +94,12 @@ public class DBTreeTableTreeColumn extends AbstractTreeColumn
 				treeNodeStyleAdapter.setTooltip(wicketTree.bindingInfo.getToolTipText(un));
 				treeNodeStyleAdapter.setContentFont(wicketTree.bindingInfo.getFont(un));
 
+			}
+
+			int rowHeight = wicketTree.getRowHeight();
+			if (rowHeight > 0)
+			{
+				nodeComp.getTreeNodeLabel().add(new StyleAppendingModifier(new Model<String>("line-height: " + rowHeight + "px;")));
 			}
 		}
 

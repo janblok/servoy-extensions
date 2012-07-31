@@ -705,6 +705,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 
 	public void js_setRowHeight(int height)
 	{
+		wicketTree.js_setRowHeight(height);
 	}
 
 	private static final CompressedResourceReference CSS = new CompressedResourceReference(InmethodDBTreeTableView.class, "res/style.css"); //$NON-NLS-1$
