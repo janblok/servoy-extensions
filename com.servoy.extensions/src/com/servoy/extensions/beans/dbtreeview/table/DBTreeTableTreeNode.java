@@ -73,6 +73,11 @@ public abstract class DBTreeTableTreeNode extends Panel
 		addComponents(model, treeColumn.getTreeGrid().getTree());
 	}
 
+	public Label getTreeNodeLabel()
+	{
+		return nodeLabel;
+	}
+
 	protected void addComponents(final IModel model, final AbstractTree tree)
 	{
 		BaseTree.ILinkCallback callback = new BaseTree.ILinkCallback()

@@ -31,3 +31,10 @@ table.imxt-tree-content a:hover {
 	text-decoration: none;
 	color: #000000;
 }
+
+table.imxt-body td {
+	vertical-align: middle;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+}

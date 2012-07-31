@@ -46,6 +46,7 @@ import org.apache.wicket.markup.html.resources.CompressedResourceReference;
 import org.apache.wicket.markup.html.tree.BaseTree;
 import org.apache.wicket.markup.html.tree.ITreeStateListener;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.mozilla.javascript.Function;
 
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
@@ -58,6 +59,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.JSEvent.EventType;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.dataui.StyleAppendingModifier;
 import com.servoy.j2db.server.headlessclient.dataui.StyleAttributeModifierModel;
 import com.servoy.j2db.server.headlessclient.dnd.DraggableBehavior;
 import com.servoy.j2db.ui.IStylePropertyChanges;
@@ -311,6 +313,12 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			}
 
 		};
+
+		int rowHeight = wicketTree.getRowHeight();
+		if (rowHeight > 0)
+		{
+			nodeComp.getTreeNodeLabel().add(new StyleAppendingModifier(new Model<String>("line-height: " + rowHeight + "px;")));
+		}
 
 		WicketTreeNodeStyleAdapter treeNodeStyleAdapter = new WicketTreeNodeStyleAdapter(nodeComp);
 
@@ -898,6 +906,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 
 	public void js_setRowHeight(int rowHeight)
 	{
+		wicketTree.js_setRowHeight(rowHeight);
 	}
 
 	public Class[] getAllReturnedTypes()

@@ -83,6 +83,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	private boolean editState;
 	private boolean opaque;
 	private boolean jsVisible = true;
+	private int rowHeight;
 
 
 	private final boolean accessible = true;
@@ -270,6 +271,12 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 
 	public void js_setRowHeight(int rowHeight)
 	{
+		this.rowHeight = rowHeight;
+	}
+
+	public int getRowHeight()
+	{
+		return rowHeight;
 	}
 
 	public void js_setBgcolor(String bg)

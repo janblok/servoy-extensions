@@ -26,6 +26,7 @@ table.wicket-tree-content tr,
 table.wicket-tree-content th {
 	padding: 0px;
 	margin: 0px;
+	vertical-align: middle;
 }
 
 table.wicket-tree-content td.spacer {
