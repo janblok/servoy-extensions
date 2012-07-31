@@ -238,15 +238,10 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 		MenuItemArgs menuItemArgs = null;
 
-		Object[] submenu = null;
 		Function function = null;
 		if (feedback_item instanceof Function)
 		{
 			function = (Function)feedback_item;
-		}
-		else if (feedback_item != null && feedback_item.getClass().isArray())
-		{
-			submenu = (Object[])feedback_item;
 		}
 
 		char mnemo = 0;
@@ -261,11 +256,11 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 		if (icon instanceof String && ((String)icon).length() > 0)
 		{
-			menuItemArgs = new MenuItemArgs(text, submenu, function, (String)icon, null, mnemo, align, enabled);
+			menuItemArgs = new MenuItemArgs(text, null, function, (String)icon, null, mnemo, align, enabled);
 		}
 		else
 		{
-			menuItemArgs = new MenuItemArgs(text, submenu, function, null, (icon instanceof byte[]) ? (byte[])icon : null, mnemo, align, enabled);
+			menuItemArgs = new MenuItemArgs(text, null, function, null, (icon instanceof byte[]) ? (byte[])icon : null, mnemo, align, enabled);
 		}
 
 		return menuItemArgs;
