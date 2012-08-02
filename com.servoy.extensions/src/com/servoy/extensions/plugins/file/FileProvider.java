@@ -190,7 +190,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	 application.output('size: ' + files[i].size());
 	 * }
 	 * //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-	 * plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')
+	 * plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')
 	 * 
 	 */
 	public Object js_showFileOpenDialog()
@@ -202,11 +202,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc js_showFileOpenDialog()
 	 * @sampleas js_showFileOpenDialog()
 	 * 
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(Function callbackmethod)
+	public Object js_showFileOpenDialog(Function callbackfunction)
 	{
-		return js_showFileOpenDialog(1, (String)null, false, null, callbackmethod, null);
+		return js_showFileOpenDialog(1, (String)null, false, null, callbackfunction, null);
 	}
 
 	/**
@@ -225,11 +225,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_showFileOpenDialog()
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, (String)null, false, null, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, (String)null, false, null, callbackfunction, null);
 	}
 
 	/**
@@ -262,11 +262,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory JSFile instance of default folder,null=default/previous 
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackfunction, null);
 	}
 
 	/**
@@ -275,11 +275,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory Path to default folder,null=default/previous 
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackfunction, null);
 	}
 
 	/**
@@ -315,11 +315,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory JSFile instance of default folder,null=default/previous
 	 * @param multiselect true/false 
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackfunction, null);
 	}
 
 	/**
@@ -329,11 +329,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory Path to default folder,null=default/previous
 	 * @param multiselect true/false 
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackfunction, null);
 	}
 
 	/**
@@ -343,7 +343,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory JSFile instance of default folder,null=default/previous
 	 * @param multiselect true/false 
-	 * @param filter
+	 * @param filter A filter or array of filters on the folder files.
 	 */
 	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter)
 	{
@@ -357,7 +357,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory Path to default folder,null=default/previous
 	 * @param multiselect true/false 
-	 * @param filter
+	 * @param filter A filter or array of filters on the folder files.
 	 */
 	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter)
 	{
@@ -372,11 +372,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory JSFile instance of default folder,null=default/previous
 	 * @param multiselect true/false
 	 * @param filter A filter or array of filters on the folder files.
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, null);
 	}
 
 	/**
@@ -387,11 +387,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory Path to default folder,null=default/previous
 	 * @param multiselect true/false
 	 * @param filter A filter or array of filters on the folder files.
-	 * @param callbackmethod
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackmethod)
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, null);
 	}
 
 	/**
@@ -402,12 +402,12 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory JSFile instance of default folder, null=default/previous
 	 * @param multiselect true/false
 	 * @param filter A filter or array of filters on the folder files.
-	 * @param callbackmethod
-	 * @param title
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
+	 * @param title The tile of the dialog
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
-		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, title);
+		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, title);
 	}
 
 	/**
@@ -418,16 +418,16 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory Path to default folder, null=default/previous
 	 * @param multiselect true/false
 	 * @param filter A filter or array of filters on the folder files.
-	 * @param callbackmethod
-	 * @param title
+	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
+	 * @param title The tile of the dialog
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
-		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackmethod, title);
+		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, title);
 	}
 
 
-	private Object showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackmethod, String title)
+	private Object showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
 
 		int selection;
@@ -444,7 +444,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		}
 
 		File file = startDirectory != null ? getFileFromArg(startDirectory, true) : null;
-		FunctionDefinition fd = callbackmethod != null ? new FunctionDefinition(callbackmethod) : null;
+		FunctionDefinition fd = callbackfunction != null ? new FunctionDefinition(callbackfunction) : null;
 		String[] filterA = null;
 
 		if (filter instanceof String)
@@ -2360,7 +2360,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param s can be a JSFile or JSFile[], a String or String[]
-	 * @param callback the {@link Function} to be called back at the end of the process
+	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object s, final Function callback)
@@ -2428,7 +2428,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param s of the files on the server that will be transfered to the client, can be a String or a String[]
+	 * @param s the files on the server that will be transfered to the client, can be a String or a String[]
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	public JSProgressMonitor js_streamFilesFromServer(final Object f, final Object s)
@@ -2446,7 +2446,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
 	 * @param s the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
-	 * @param callback the {@link Function} to be called back at the end of the process (after every file)
+	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	@SuppressWarnings("nls")

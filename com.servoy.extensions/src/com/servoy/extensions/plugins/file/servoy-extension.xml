@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -1876,7 +1876,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
           </function>
           <function name="showFileOpenDialog">
             <argumentsTypes>
@@ -1906,7 +1906,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -1942,7 +1942,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -1982,7 +1982,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2026,7 +2026,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2037,7 +2037,9 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
               </parameter>
-              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[A filter or array of filters on the folder files.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2072,7 +2074,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2086,7 +2088,9 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[A filter or array of filters on the folder files.]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2122,7 +2126,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2136,8 +2140,12 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[A filter or array of filters on the folder files.]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The tile of the dialog]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2171,7 +2179,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2182,7 +2190,9 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2215,7 +2225,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2223,7 +2233,9 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="startDirectory" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
                 <description><![CDATA[JSFile instance of default folder,null=default/previous]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2255,7 +2267,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2295,7 +2307,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2339,53 +2351,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
-            <parameters>
-              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
-                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
-              </parameter>
-              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Path to default folder,null=default/previous]]></description>
-              </parameter>
-              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
-                <description><![CDATA[true/false]]></description>
-              </parameter>
-              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            </parameters>
-          </function>
-          <function name="showFileOpenDialog">
-            <argumentsTypes>
-              <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="java.lang.Object"/>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
-            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
-// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} */
-var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
-application.output('File: ' + f.getName());
-application.output('is dir: ' + f.isDirectory());
-application.output('is file: ' + f.isFile());
-application.output('path: ' + f.getAbsolutePath());
-
-// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
-// if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} */
-var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
-for (var i = 0; i < files.length; i++)
-{
-	 application.output('File: ' + files[i].getName());
-	 application.output('content type: ' + files[i].getContentType());
-	 application.output('last modified: ' + files[i].lastModified());
-	 application.output('size: ' + files[i].size());
-}
-//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2399,7 +2365,57 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[A filter or array of filters on the folder files.]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
+          </function>
+          <function name="showFileOpenDialog">
+            <argumentsTypes>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <sample><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
+// the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
+/** @type {JSFile} */
+var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
+application.output('File: ' + f.getName());
+application.output('is dir: ' + f.isDirectory());
+application.output('is file: ' + f.isFile());
+application.output('path: ' + f.getAbsolutePath());
+
+// This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
+// if filters are specified, "all file" filter will not show up unless "*" filter is present
+/** @type {JSFile[]} */
+var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
+for (var i = 0; i < files.length; i++)
+{
+	 application.output('File: ' + files[i].getName());
+	 application.output('content type: ' + files[i].getContentType());
+	 application.output('last modified: ' + files[i].lastModified());
+	 application.output('size: ' + files[i].size());
+}
+//for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+            <parameters>
+              <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
+              </parameter>
+              <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Path to default folder,null=default/previous]]></description>
+              </parameter>
+              <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
+                <description><![CDATA[true/false]]></description>
+              </parameter>
+              <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[A filter or array of filters on the folder files.]]></description>
+              </parameter>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2435,7 +2451,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2449,8 +2465,12 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="filter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[A filter or array of filters on the folder files.]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
+              <parameter name="title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The tile of the dialog]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2484,7 +2504,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2495,7 +2515,9 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="multiselect" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[true/false]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2528,7 +2550,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
@@ -2536,7 +2558,9 @@ plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some ni
               <parameter name="startDirectory" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Path to default folder,null=default/previous]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2568,12 +2592,14 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
                 <description><![CDATA[0=both,1=Files,2=Dirs]]></description>
               </parameter>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileOpenDialog">
@@ -2604,9 +2630,11 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,myCallbackMethod,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
             <parameters>
-              <parameter name="callbackmethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[A function that takes the (JSFile) array of the selected files as first argument]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="showFileSaveDialog">
@@ -2706,7 +2734,7 @@ if (dir) {
                 <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[of the files on the server that will be transfered to the client, can be a String or a String[]]]></description>
+                <description><![CDATA[the files on the server that will be transfered to the client, can be a String or a String[]]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2737,7 +2765,7 @@ if (dir) {
                 <description><![CDATA[the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]]]></description>
               </parameter>
               <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[the Function to be called back at the end of the process (after every file)]]></description>
+                <description><![CDATA[the Function to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2827,7 +2855,7 @@ if (folder) {
                 <description><![CDATA[can be a JSFile or JSFile[], a String or String[]]]></description>
               </parameter>
               <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[the Function to be called back at the end of the process]]></description>
+                <description><![CDATA[the Function to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured]]></description>
               </parameter>
             </parameters>
           </function>
