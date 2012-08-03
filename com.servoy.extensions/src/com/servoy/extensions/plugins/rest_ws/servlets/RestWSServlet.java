@@ -396,7 +396,8 @@ public class RestWSServlet extends HttpServlet
 			Object[] args = null;
 			if (fixedArgs != null || wsRequest.args.length > 0 || request.getParameterMap().size() > 0)
 			{
-				args = new Object[((fixedArgs == null) ? 0 : fixedArgs.length) + wsRequest.args.length + (request.getParameterMap().size() > 0 ? 1 : 0)];
+				args = new Object[((fixedArgs == null) ? 0 : fixedArgs.length) + wsRequest.args.length +
+					((request.getParameterMap().size() > 0 || ws_authenticate_result != null) ? 1 : 0)];
 				int idx = 0;
 				if (fixedArgs != null)
 				{
