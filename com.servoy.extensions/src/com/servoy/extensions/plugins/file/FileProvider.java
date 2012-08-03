@@ -2081,7 +2081,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder File object.
+	 * @param targetFolder Folder path.
 	 * @return the array of file names
 	 */
 	public JSFile[] js_getRemoteFolderContents(String targetFolder)
@@ -2092,7 +2092,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder JSFile object.
+	 * @param targetFolder Folder as JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @return the array of file names
 	 */
@@ -2104,7 +2104,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder File path.
+	 * @param targetFolder Folder path.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @return the array of file names
 	 */
@@ -2116,7 +2116,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder JSFile object.
+	 * @param targetFolder Folder as JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs
 	 * @return the array of file names
@@ -2129,7 +2129,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder File path.
+	 * @param targetFolder Folder path.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs
 	 * @return the array of file names
@@ -2142,7 +2142,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder JSFile object.
+	 * @param targetFolder Folder as JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
@@ -2156,7 +2156,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder File path.
+	 * @param targetFolder Folder path.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
@@ -2170,7 +2170,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder JSFile object.
+	 * @param targetFolder Folder as JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
@@ -2185,7 +2185,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getRemoteFolderContents(JSFile)
 	 * @sampleas js_getRemoteFolderContents(JSFile)
-	 * @param targetFolder File path.
+	 * @param targetFolder Folder path.
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
@@ -2320,7 +2320,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	}
 	 * }
 	 * 
-	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	public JSProgressMonitor js_streamFilesToServer(final Object f)
@@ -2335,20 +2335,29 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
 	 * 
-	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param o can be a JSFile or JSFile[], a String or String[] or the {@link Function} to be called back at the end of the process
+	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
+	 * @param o can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object o)
 	{
-		if (o instanceof Function)
-		{
-			return js_streamFilesToServer(f, null, (Function)o);
-		}
-		else
-		{
-			return js_streamFilesToServer(f, o, null);
-		}
+		return js_streamFilesToServer(f, o, null);
+	}
+
+	/**
+	 * Overloaded method, defines file(s) to be streamed and a callback function
+	 * 
+	 * @since Servoy 5.2
+	 * 
+	 * @sampleas js_streamFilesToServer(Object)
+	 * 
+	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
+	 * @param o the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
+	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
+	 */
+	public JSProgressMonitor js_streamFilesToServer(final Object f, final Function callback)
+	{
+		return js_streamFilesToServer(f, null, callback);
 	}
 
 	/**
@@ -2358,8 +2367,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
 	 * 
-	 * @param f file(s) to be streamed (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
-	 * @param s can be a JSFile or JSFile[], a String or String[]
+	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these)
+	 * @param s can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server
 	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
@@ -2427,7 +2436,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	}
 	 * }
 	 * 
-	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param f file(s) to be streamed into (can be a String path a {@link JSFile}) or an Array of these
 	 * @param s the files on the server that will be transfered to the client, can be a String or a String[]
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
@@ -2444,7 +2453,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesFromServer(Object, Object)
 	 * 
-	 * @param f file(s) to be streamed into (can be a String path, a {@link File} or a {@link JSFile}) or an Array of these
+	 * @param f file(s) to be streamed into (can be a String path or a {@link JSFile}) or an Array of these
 	 * @param s the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
 	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications

@@ -1309,7 +1309,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[JSFile object.]]></description>
+                <description><![CDATA[Folder as JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1329,7 +1329,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[JSFile object.]]></description>
+                <description><![CDATA[Folder as JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1353,7 +1353,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[JSFile object.]]></description>
+                <description><![CDATA[Folder as JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1381,7 +1381,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
-                <description><![CDATA[JSFile object.]]></description>
+                <description><![CDATA[Folder as JSFile object.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1408,7 +1408,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[File object.]]></description>
+                <description><![CDATA[Folder path.]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1424,7 +1424,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[File path.]]></description>
+                <description><![CDATA[Folder path.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1444,7 +1444,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[File path.]]></description>
+                <description><![CDATA[Folder path.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1468,7 +1468,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[File path.]]></description>
+                <description><![CDATA[Folder path.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -1496,7 +1496,7 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[File path.]]></description>
+                <description><![CDATA[Folder path.]]></description>
               </parameter>
               <parameter name="fileFilter" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[Filter or array of filters for files in folder.]]></description>
@@ -2731,7 +2731,7 @@ if (dir) {
 }]]></sample>
             <parameters>
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
+                <description><![CDATA[file(s) to be streamed into (can be a String path a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[the files on the server that will be transfered to the client, can be a String or a String[]]]></description>
@@ -2759,7 +2759,7 @@ if (dir) {
 }]]></sample>
             <parameters>
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[file(s) to be streamed into (can be a String path, a File or a JSFile) or an Array of these]]></description>
+                <description><![CDATA[file(s) to be streamed into (can be a String path or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]]]></description>
@@ -2791,7 +2791,7 @@ if (folder) {
 }]]></sample>
             <parameters>
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
+                <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2818,10 +2818,10 @@ if (folder) {
 }]]></sample>
             <parameters>
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
+                <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>
               </parameter>
               <parameter name="o" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[can be a JSFile or JSFile[], a String or String[] or the Function to be called back at the end of the process]]></description>
+                <description><![CDATA[can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2849,12 +2849,42 @@ if (folder) {
 }]]></sample>
             <parameters>
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[file(s) to be streamed (can be a String path, a File or a JSFile) or an Array of these]]></description>
+                <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these)]]></description>
               </parameter>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
-                <description><![CDATA[can be a JSFile or JSFile[], a String or String[]]]></description>
+                <description><![CDATA[can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server]]></description>
               </parameter>
               <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[the Function to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="streamFilesToServer" since="Servoy 5.2">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
+            <description><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
+            <summary><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
+            <sample><![CDATA[// send one file:
+var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
+if (file) {
+	plugins.file.streamFilesToServer( file, callbackFunction );
+}
+// send an array of files:
+var folder = plugins.file.showDirectorySelectDialog();
+if (folder) {
+	var files = plugins.file.getFolderContents(folder);
+	if (files) {
+		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
+	}
+}]]></sample>
+            <parameters>
+              <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>
+              </parameter>
+              <parameter name="o">
                 <description><![CDATA[the Function to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured]]></description>
               </parameter>
             </parameters>
