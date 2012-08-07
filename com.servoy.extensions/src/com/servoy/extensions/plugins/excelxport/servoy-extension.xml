@@ -113,7 +113,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <argumentType typecode="[Ljava.lang.String;"/>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Export to Excel data]]></description>
@@ -139,7 +139,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the worksheet]]></description>
               </parameter>
-              <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+              <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
                 <description><![CDATA[row in the foundset at which to start the export]]></description>
               </parameter>
             </parameters>
@@ -150,8 +150,8 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <argumentType typecode="[Ljava.lang.String;"/>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="int"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.Number"/>
+              <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Export to Excel data]]></description>
@@ -177,10 +177,10 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the worksheet]]></description>
               </parameter>
-              <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+              <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
                 <description><![CDATA[row in the foundset at which to start the export]]></description>
               </parameter>
-              <parameter name="startColumn" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+              <parameter name="startColumn" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
                 <description><![CDATA[column in the foundset at which to start the export]]></description>
               </parameter>
             </parameters>

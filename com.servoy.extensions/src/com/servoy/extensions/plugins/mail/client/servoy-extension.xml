@@ -725,7 +725,7 @@ application.output(plainArray[0]) //will return 'from_me@example.com']]></sample
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
+              <argumentType typecode="java.lang.Boolean"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
             <description><![CDATA[Receive mails from pop3 account.]]></description>
@@ -760,15 +760,15 @@ if (msgs != null) //if is null error occurred!
             <parameters>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="java.lang.Boolean"/>
             </parameters>
           </function>
           <function name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.Boolean"/>
+              <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
             <description><![CDATA[Receive mails from pop3 account.]]></description>
@@ -791,16 +791,16 @@ if (msgs != null) //if is null error occurred!
             <parameters>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="java.lang.Boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number"/>
             </parameters>
           </function>
           <function name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.Boolean"/>
+              <argumentType typecode="java.lang.Number"/>
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
@@ -825,8 +825,8 @@ if (msgs != null) //if is null error occurred!
             <parameters>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="java.lang.Boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number"/>
               <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
@@ -834,8 +834,8 @@ if (msgs != null) //if is null error occurred!
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.Boolean"/>
+              <argumentType typecode="java.lang.Number"/>
               <argumentType typecode="java.util.Date"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -875,8 +875,8 @@ if (msgs != null) //if is null error occurred!
             <parameters>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="java.lang.Boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number"/>
               <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
               <parameter name="pop3Host" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -885,8 +885,8 @@ if (msgs != null) //if is null error occurred!
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.Boolean"/>
+              <argumentType typecode="java.lang.Number"/>
               <argumentType typecode="java.util.Date"/>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
@@ -918,8 +918,8 @@ if (msgs != null) //if is null error occurred!
             <parameters>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="java.lang.Boolean"/>
+              <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number"/>
               <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
               <parameter name="properties" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
@@ -930,7 +930,7 @@ if (msgs != null) //if is null error occurred!
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
             <description/>
-            <deprecated><![CDATA[Replaced by #receiveMail(String,String,boolean,int,Date,String[])]]></deprecated>
+            <deprecated><![CDATA[Replaced by #receiveMail(String,String,Boolean,Number,Date,String[])]]></deprecated>
             <sample/>
           </function>
           <function name="sendMail">
