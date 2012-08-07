@@ -166,9 +166,10 @@ public class Enabler implements IScriptable
 	 * @param sheetName the name of the worksheet 
 	 * @param startRow row in the foundset at which to start the export
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, int startRow) throws IOException
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, Number startRow) throws IOException
 	{
-		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, startRow, 1);
+		int _startRow = (startRow == null ? 1 : startRow.intValue());
+		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, _startRow, 1);
 	}
 
 	/**
@@ -181,13 +182,16 @@ public class Enabler implements IScriptable
 	 * @param startRow row in the foundset at which to start the export
 	 * @param startColumn column in the foundset at which to start the export
 	 */
-	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, int startRow, int startColumn)
+	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, Number startRow, Number startColumn)
 		throws IOException
 	{
+		int _startRow = (startRow == null ? 1 : startRow.intValue());
+		int _startColumn = (startColumn == null ? 1 : startColumn.intValue());
+
 		if (foundSet != null && dataProviderIds != null && dataProviderIds.length > 0)
 		{
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dataProviderIds, templateXLS, sheetName, startRow - 1, startColumn - 1);
+			HSSFWorkbook wb = ExportSpecifyFilePanel.populateWb(foundSet, dataProviderIds, templateXLS, sheetName, _startRow - 1, _startColumn - 1);
 			wb.write(buffer);
 			return buffer.toByteArray();
 		}

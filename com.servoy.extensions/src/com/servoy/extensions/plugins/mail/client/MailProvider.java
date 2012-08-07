@@ -118,7 +118,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param password 
 	 * @param leaveMsgsOnServer 
 	 */
-	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer)
+	public MailMessage[] js_receiveMail(String username, String password, Boolean leaveMsgsOnServer)
 	{
 		return receiveMail(username, password, leaveMsgsOnServer, 0, null, null);
 	}
@@ -148,7 +148,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param leaveMsgsOnServer 
 	 * @param receiveMode 
 	 */
-	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode)
+	public MailMessage[] js_receiveMail(String username, String password, Boolean leaveMsgsOnServer, Number receiveMode)
 	{
 		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, null, null);
 	}
@@ -180,7 +180,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param receiveMode 
 	 * @param onlyReceiveMsgWithSentDate 
 	 */
-	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate)
+	public MailMessage[] js_receiveMail(String username, String password, Boolean leaveMsgsOnServer, Number receiveMode, Date onlyReceiveMsgWithSentDate)
 	{
 		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, onlyReceiveMsgWithSentDate, null);
 	}
@@ -227,7 +227,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param onlyReceiveMsgWithSentDate 
 	 * @param pop3Host 
 	 */
-	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate,
+	public MailMessage[] js_receiveMail(String username, String password, Boolean leaveMsgsOnServer, Number receiveMode, Date onlyReceiveMsgWithSentDate,
 		String pop3Host)
 	{
 		String[] overrideProperties = null;
@@ -272,15 +272,18 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param onlyReceiveMsgWithSentDate  
 	 * @param properties  
 	 */
-	public MailMessage[] js_receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate,
+	public MailMessage[] js_receiveMail(String username, String password, Boolean leaveMsgsOnServer, Number receiveMode, Date onlyReceiveMsgWithSentDate,
 		String[] properties)
 	{
 		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, onlyReceiveMsgWithSentDate, properties);
 	}
 
-	private MailMessage[] receiveMail(String username, String password, boolean leaveMsgsOnServer, int receiveMode, Date onlyReceiveMsgWithSentDate,
+	private MailMessage[] receiveMail(String username, String password, Boolean leaveMsgsOnServer, Number receiveMode, Date onlyReceiveMsgWithSentDate,
 		String[] properties)
 	{
+		boolean _leaveMsgsOnServer = (leaveMsgsOnServer == null ? true : leaveMsgsOnServer.booleanValue());
+		int _receiveMode = (receiveMode == null ? 0 : receiveMode.intValue());
+
 		if (username == null || password == null) return null;
 
 		//create if not yet created
@@ -291,7 +294,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			//receive mail
 			try
 			{
-				return mailService.receiveMail(plugin.getClientPluginAccess().getClientID(), username, password, leaveMsgsOnServer, receiveMode,
+				return mailService.receiveMail(plugin.getClientPluginAccess().getClientID(), username, password, _leaveMsgsOnServer, _receiveMode,
 					onlyReceiveMsgWithSentDate, properties);
 			}
 			catch (Exception e)

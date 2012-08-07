@@ -66,6 +66,7 @@ import com.servoy.j2db.util.FileChooserUtils;
  * @author jcompagner
  * @author Servoy Stuff
  */
+@SuppressWarnings("boxing")
 @ServoyDocumented(publicName = FilePlugin.PLUGIN_NAME, scriptingName = "plugins." + FilePlugin.PLUGIN_NAME)
 public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
@@ -215,7 +216,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs 
 	 */
-	public Object js_showFileOpenDialog(int selectionMode)
+	public Object js_showFileOpenDialog(Number selectionMode)
 	{
 		return js_showFileOpenDialog(selectionMode, (String)null, false, null, null, null);
 	}
@@ -227,7 +228,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, (String)null, false, null, callbackfunction, null);
 	}
@@ -239,7 +240,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory JSFile instance of default folder; null=default/previous 
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
 	}
@@ -251,7 +252,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory Path to default folder; null=default/previous 
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
 	}
@@ -264,7 +265,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory JSFile instance of default folder,null=default/previous 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackfunction, null);
 	}
@@ -277,7 +278,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory Path to default folder,null=default/previous 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackfunction, null);
 	}
@@ -290,7 +291,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory JSFile instance of default folder, null=default/previous
 	 * @param multiselect true/false 
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
 	}
@@ -303,7 +304,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory Path to default folder, null=default/previous
 	 * @param multiselect true/false 
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
 	}
@@ -317,7 +318,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackfunction, null);
 	}
@@ -331,7 +332,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackfunction, null);
 	}
@@ -345,7 +346,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param filter A filter or array of filters on the folder files.
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Object filter)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
 	}
@@ -359,8 +360,9 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param filter A filter or array of filters on the folder files.
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Object filter)
 	{
+
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
 	}
 
@@ -374,7 +376,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Object filter, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, null);
 	}
@@ -389,7 +391,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackfunction)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Object filter, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, null);
 	}
@@ -405,7 +407,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 * @param title The tile of the dialog
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, JSFile startDirectory, boolean multiselect, Object filter, Function callbackfunction, String title)
+	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
 		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, title);
 	}
@@ -421,17 +423,19 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 * @param title The tile of the dialog
 	 */
-	public Object js_showFileOpenDialog(int selectionMode, String startDirectory, boolean multiselect, Object filter, Function callbackfunction, String title)
+	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
 		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, title);
 	}
 
 
-	private Object showFileOpenDialog(int selectionMode, Object startDirectory, boolean multiselect, Object filter, Function callbackfunction, String title)
+	private Object showFileOpenDialog(Number selectionMode, Object startDirectory, Boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
+		int _selectionMode = getNumberAsInt(selectionMode, 1);
+		boolean _multiselect = getBooleanAsbool(multiselect, false);
 
-		int selection;
-		switch (selectionMode)
+		int selection = 1;
+		switch (_selectionMode)
 		{
 			case 0 :
 				selection = JFileChooser.FILES_AND_DIRECTORIES;
@@ -487,7 +491,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 					// submit without uploaded files 
 				}
 			};
-			access.showFileOpenDialog(callback, file != null ? file.getAbsolutePath() : null, multiselect, filterA, selection, title);
+			access.showFileOpenDialog(callback, file != null ? file.getAbsolutePath() : null, _multiselect, filterA, selection, title);
 			if (returnList.size() > 0) return returnList.toArray(new JSFile[returnList.size()]);
 		}
 		else
@@ -501,7 +505,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			Window currentWindow = null;
 			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 
-			if (multiselect)
+			if (_multiselect)
 			{
 				File[] files = FileChooserUtils.getFiles(currentWindow, file, selection, filterA, title);
 				JSFile[] convertedFiles = convertToJSFiles(files);
@@ -533,7 +537,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 * @param lockedOption 1=locked, 2=nonlocked 
 	 */
-	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption, final Number lockedOption)
 	{
 		return getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
 	}
@@ -548,13 +552,17 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 * @param lockedOption 1=locked, 2=nonlocked 
 	 */
-	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption, final Number lockedOption)
 	{
 		return getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
 	}
 
-	private JSFile[] getFolderContents(Object targetFolder, Object fileFilter, final int fileOption, final int visibleOption, final int lockedOption)
+	private JSFile[] getFolderContents(Object targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption, final Number lockedOption)
 	{
+		final int _fileOption = getNumberAsInt(fileOption, AbstractFile.ALL);
+		final int _visibleOption = getNumberAsInt(visibleOption, AbstractFile.ALL);
+		final int _lockedOption = getNumberAsInt(lockedOption, AbstractFile.ALL);
+
 		if (targetFolder == null) return EMPTY;
 
 		final String[] fileFilterOptions;
@@ -599,24 +607,24 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 				if (!retVal) return retVal;
 
 				// file or folder
-				if (fileOption == AbstractFile.FILES)
+				if (_fileOption == AbstractFile.FILES)
 				{
 					retVal = pathname.isFile();
 				}
-				else if (fileOption == AbstractFile.FOLDERS)
+				else if (_fileOption == AbstractFile.FOLDERS)
 				{
 					retVal = pathname.isDirectory();
 				}
 				if (!retVal) return false;
 
 				boolean hidden = pathname.isHidden();
-				if (visibleOption == AbstractFile.VISIBLE) retVal = !hidden;
-				else if (visibleOption == AbstractFile.NON_VISIBLE) retVal = hidden;
+				if (_visibleOption == AbstractFile.VISIBLE) retVal = !hidden;
+				else if (_visibleOption == AbstractFile.NON_VISIBLE) retVal = hidden;
 				if (!retVal) return false;
 
 				boolean canWrite = pathname.canWrite();
-				if (lockedOption == AbstractFile.LOCKED) retVal = !canWrite;
-				else if (lockedOption == AbstractFile.NON_LOCKED) retVal = canWrite;
+				if (_lockedOption == AbstractFile.LOCKED) retVal = !canWrite;
+				else if (_lockedOption == AbstractFile.NON_LOCKED) retVal = canWrite;
 				return retVal;
 			}
 		};
@@ -632,7 +640,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 */
-	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
 	}
@@ -646,7 +654,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileOption 1=files, 2=dirs 
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 */
-	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final int fileOption, final int visibleOption)
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
 	}
@@ -659,7 +667,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 */
-	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final int fileOption)
+	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final Number fileOption)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
 	}
@@ -672,7 +680,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileFilter Filter or array of filters for files in folder.
 	 * @param fileOption 1=files, 2=dirs 
 	 */
-	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final int fileOption)
+	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final Number fileOption)
 	{
 		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
 	}
@@ -2121,7 +2129,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileOption 1=files, 2=dirs
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, int fileOption)
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, Number fileOption)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
 	}
@@ -2134,7 +2142,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileOption 1=files, 2=dirs
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, int fileOption)
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, Number fileOption)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
 	}
@@ -2148,7 +2156,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, int fileOption, int visibleOption)
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, Number fileOption, Number visibleOption)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
 	}
@@ -2162,7 +2170,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param visibleOption 1=visible, 2=nonvisible 
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, int fileOption, int visibleOption)
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, Number fileOption, Number visibleOption)
 	{
 		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
 	}
@@ -2177,7 +2185,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param lockedOption 1=locked, 2=nonlocked
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, Number fileOption, Number visibleOption, Number lockedOption)
 	{
 		return getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
 	}
@@ -2192,14 +2200,18 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param lockedOption 1=locked, 2=nonlocked
 	 * @return the array of file names
 	 */
-	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, Number fileOption, Number visibleOption, Number lockedOption)
 	{
 		return getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
 	}
 
 	@SuppressWarnings("nls")
-	private JSFile[] getRemoteFolderContents(Object targetFolder, Object fileFilter, int fileOption, int visibleOption, int lockedOption)
+	private JSFile[] getRemoteFolderContents(Object targetFolder, Object fileFilter, Number fileOption, Number visibleOption, Number lockedOption)
 	{
+		final int _fileOption = getNumberAsInt(fileOption, AbstractFile.ALL);
+		final int _visibleOption = getNumberAsInt(visibleOption, AbstractFile.ALL);
+		final int _lockedOption = getNumberAsInt(lockedOption, AbstractFile.ALL);
+
 		if (targetFolder == null) return EMPTY;
 
 		String[] fileFilterA = null;
@@ -2240,7 +2252,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		{
 			final IFileService service = getFileService();
 			final String clientId = plugin.getClientPluginAccess().getClientID();
-			final RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, serverFileName, fileFilterA, fileOption, visibleOption, lockedOption);
+			final RemoteFileData[] remoteList = service.getRemoteFolderContent(clientId, serverFileName, fileFilterA, _fileOption, _visibleOption,
+				_lockedOption);
 			if (remoteList != null)
 			{
 				final JSFile[] files = new JSFile[remoteList.length];
@@ -2925,4 +2938,25 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	/**
+	 * helper function to get int value of java.lang.Numeber object or default value in case of null
+	 * @param numberObject
+	 * @param defaultValue 
+	 * @return 
+	 */
+	private int getNumberAsInt(Number numberObject, int defaultValue)
+	{
+		return numberObject == null ? defaultValue : numberObject.intValue();
+	}
+
+	/**
+	 * helper function to get boolean value of java.lang.Boolean object or default value in case of null
+	 * @param booleanObject
+	 * @param defaultValue 
+	 * @return 
+	 */
+	private boolean getBooleanAsbool(Boolean booleanObject, boolean defaultValue)
+	{
+		return booleanObject == null ? defaultValue : booleanObject.booleanValue();
+	}
 }
