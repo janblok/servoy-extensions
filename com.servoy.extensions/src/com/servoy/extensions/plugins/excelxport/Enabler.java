@@ -129,7 +129,7 @@ public class Enabler implements IScriptable
 	 */
 	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds) throws IOException
 	{
-		return js_excelExport(foundSet, dataProviderIds, null, "Servoy data", 1, 1);
+		return js_excelExport(foundSet, dataProviderIds, null, "Servoy data", Integer.valueOf(1), Integer.valueOf(1));
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class Enabler implements IScriptable
 	 */
 	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName) throws IOException
 	{
-		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, 1, 1);
+		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, Integer.valueOf(1), Integer.valueOf(1));
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class Enabler implements IScriptable
 	public byte[] js_excelExport(IFoundSet foundSet, String[] dataProviderIds, byte[] templateXLS, String sheetName, Number startRow) throws IOException
 	{
 		int _startRow = (startRow == null ? 1 : startRow.intValue());
-		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, _startRow, 1);
+		return js_excelExport(foundSet, dataProviderIds, templateXLS, sheetName, Integer.valueOf(_startRow), Integer.valueOf(1));
 	}
 
 	/**

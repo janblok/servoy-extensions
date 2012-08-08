@@ -66,7 +66,6 @@ import com.servoy.j2db.util.FileChooserUtils;
  * @author jcompagner
  * @author Servoy Stuff
  */
-@SuppressWarnings("boxing")
 @ServoyDocumented(publicName = FilePlugin.PLUGIN_NAME, scriptingName = "plugins." + FilePlugin.PLUGIN_NAME)
 public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
@@ -196,7 +195,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog()
 	{
-		return js_showFileOpenDialog(1, (String)null, false, null, null, null);
+		return js_showFileOpenDialog(Integer.valueOf(1), (String)null, Boolean.FALSE, null, null, null);
 	}
 
 	/**
@@ -207,7 +206,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Function callbackfunction)
 	{
-		return js_showFileOpenDialog(1, (String)null, false, null, callbackfunction, null);
+		return js_showFileOpenDialog(Integer.valueOf(1), (String)null, Boolean.FALSE, null, callbackfunction, null);
 	}
 
 	/**
@@ -218,7 +217,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Number selectionMode)
 	{
-		return js_showFileOpenDialog(selectionMode, (String)null, false, null, null, null);
+		return js_showFileOpenDialog(selectionMode, (String)null, Boolean.FALSE, null, null, null);
 	}
 
 	/**
@@ -230,7 +229,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Number selectionMode, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, (String)null, false, null, callbackfunction, null);
+		return js_showFileOpenDialog(selectionMode, (String)null, Boolean.FALSE, null, callbackfunction, null);
 	}
 
 	/**
@@ -242,7 +241,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, null, null);
 	}
 
 	/**
@@ -254,7 +253,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, null, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, null, null);
 	}
 
 	/**
@@ -267,7 +266,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackfunction, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, callbackfunction, null);
 	}
 
 	/**
@@ -280,7 +279,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Function callbackfunction)
 	{
-		return js_showFileOpenDialog(selectionMode, startDirectory, false, null, callbackfunction, null);
+		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, callbackfunction, null);
 	}
 
 	/**
@@ -642,7 +641,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption)
 	{
-		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -656,7 +655,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final Number fileOption, final Number visibleOption)
 	{
-		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, visibleOption, Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -669,7 +668,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter, final Number fileOption)
 	{
-		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -682,7 +681,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter, final Number fileOption)
 	{
-		return js_getFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, fileFilter, fileOption, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -694,7 +693,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(JSFile targetFolder, Object fileFilter)
 	{
-		return js_getFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, fileFilter, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL),
+			Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -706,7 +706,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(String targetFolder, Object fileFilter)
 	{
-		return js_getFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, fileFilter, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL),
+			Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -717,7 +718,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(JSFile targetFolder)
 	{
-		return js_getFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, null, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -728,7 +729,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getFolderContents(String targetFolder)
 	{
-		return js_getFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getFolderContents(targetFolder, null, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2083,7 +2084,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder)
 	{
-		return js_getRemoteFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, null, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL),
+			Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2094,7 +2096,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(String targetFolder)
 	{
-		return js_getRemoteFolderContents(targetFolder, null, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, null, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL),
+			Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2106,7 +2109,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter)
 	{
-		return js_getRemoteFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, fileFilter, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL),
+			Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2118,7 +2122,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter)
 	{
-		return js_getRemoteFolderContents(targetFolder, fileFilter, AbstractFile.ALL, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, fileFilter, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL),
+			Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2131,7 +2136,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, Number fileOption)
 	{
-		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2144,7 +2149,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, Number fileOption)
 	{
-		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, AbstractFile.ALL, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2158,7 +2163,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(JSFile targetFolder, Object fileFilter, Number fileOption, Number visibleOption)
 	{
-		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2172,7 +2177,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile[] js_getRemoteFolderContents(String targetFolder, Object fileFilter, Number fileOption, Number visibleOption)
 	{
-		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, AbstractFile.ALL);
+		return js_getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**
@@ -2310,7 +2315,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	public JSFile[] js_getRemoteList(final Object serverPath, final boolean filesOnly)
 	{
 		final int fileOption = (filesOnly) ? AbstractFile.FILES : AbstractFile.ALL;
-		return getRemoteFolderContents(serverPath, null, (new Integer(fileOption)).intValue(), AbstractFile.ALL, AbstractFile.ALL);
+		return getRemoteFolderContents(serverPath, null, (new Integer(fileOption)), Integer.valueOf(AbstractFile.ALL), Integer.valueOf(AbstractFile.ALL));
 	}
 
 	/**

@@ -78,7 +78,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 				overrideProperties = new String[] { "mail.pop3.host=" + args[5] }; //$NON-NLS-1$
 			}
 		}
-		return receiveMail(userName, password, leaveMsgsOnServer, receiveMode, onlyreceiveMsgWithSentDate, overrideProperties);
+		return receiveMail(userName, password, Boolean.valueOf(leaveMsgsOnServer), Integer.valueOf(receiveMode), onlyreceiveMsgWithSentDate, overrideProperties);
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public MailMessage[] js_receiveMail(String username, String password, Boolean leaveMsgsOnServer)
 	{
-		return receiveMail(username, password, leaveMsgsOnServer, 0, null, null);
+		return receiveMail(username, password, leaveMsgsOnServer, Integer.valueOf(0), null, null);
 	}
 
 	/**
