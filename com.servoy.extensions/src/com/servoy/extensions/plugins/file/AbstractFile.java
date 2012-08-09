@@ -36,6 +36,7 @@ public abstract class AbstractFile implements IAbstractFile
 {
 
 	public final static int ALL = 0;
+	public final static Integer ALL_INTEGER = Integer.valueOf(ALL);
 
 	public final static int FILES = 1;
 	public final static int FOLDERS = 2;
