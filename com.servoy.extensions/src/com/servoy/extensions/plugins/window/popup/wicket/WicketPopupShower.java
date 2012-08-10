@@ -19,10 +19,14 @@ package com.servoy.extensions.plugins.window.popup.wicket;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
+import org.apache.wicket.ResourceReference;
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.protocol.http.ClientProperties;
+import org.apache.wicket.protocol.http.request.WebClientInfo;
 import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
@@ -47,6 +51,8 @@ public class WicketPopupShower implements IPopupShower
 	private final IForm form;
 	private final Scriptable scope;
 	private final String dataprovider;
+
+	private static final ResourceReference TRANSPARENT_GIF = new ResourceReference(WicketPopupShower.class, "res/transparent.gif"); //$NON-NLS-1$
 
 	/**
 	 * @param elementToShowRelatedTo
@@ -86,7 +92,14 @@ public class WicketPopupShower implements IPopupShower
 		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo));
 
 		final WebMarkupContainer container = new WebMarkupContainer(repeatingView.newChildId());
-		container.add(new SimpleAttributeModifier("style", "position:absolute;z-index:990;top:0px;right:0px;bottom:0px;left:0px"));
+		StringBuilder containerStyle = new StringBuilder("position:absolute;z-index:990;top:0px;right:0px;bottom:0px;left:0px;");
+		// for IE we need to set a transparent image, else input fields under the div will get the click, not the div (case: SVY-2700)
+		ClientProperties clp = ((WebClientInfo)Session.get().getClientInfo()).getProperties();
+		if (clp.isBrowserInternetExplorer())
+		{
+			containerStyle.append("background-image:url(").append(container.urlFor(TRANSPARENT_GIF)).append(");background-size: contain;");
+		}
+		container.add(new SimpleAttributeModifier("style", containerStyle.toString()));
 		container.add(new AjaxEventBehavior("onclick")
 		{
 			@Override
@@ -99,7 +112,6 @@ public class WicketPopupShower implements IPopupShower
 		});
 		repeatingView.addComponent("blocker", container);
 	}
-
 
 	/*
 	 * (non-Javadoc)
