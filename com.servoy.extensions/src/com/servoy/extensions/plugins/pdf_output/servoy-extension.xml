@@ -23,7 +23,7 @@ if (pdf) {
               <parameter name="data" type="byte[]" typecode="[B">
                 <description><![CDATA[the PDF]]></description>
               </parameter>
-              <parameter name="metaData" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
+              <parameter name="metaData" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="org.mozilla.javascript.Scriptable">
                 <description><![CDATA[a JavaScript object (Scriptable) that contains the metadata as property/value pairs]]></description>
               </parameter>
             </parameters>
@@ -357,7 +357,7 @@ if (unEncryptedFile) {
               <parameter name="is128bit" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean">
                 <description><![CDATA[whether to use 128-bit encryption]]></description>
               </parameter>
-              <parameter name="metaData" type="org.mozilla.javascript.Scriptable" typecode="org.mozilla.javascript.Scriptable">
+              <parameter name="metaData" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="org.mozilla.javascript.Scriptable">
                 <description><![CDATA[a JavaScript object (Scriptable) that contains the metadata as property/value pairs]]></description>
               </parameter>
             </parameters>

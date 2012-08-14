@@ -37,7 +37,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
             <parameters>
-              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
                 <description><![CDATA[the foundset on which to export]]></description>
               </parameter>
               <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
@@ -63,7 +63,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
             <parameters>
-              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
                 <description><![CDATA[the foundset on which to export]]></description>
               </parameter>
               <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
@@ -93,7 +93,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
             <parameters>
-              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
                 <description><![CDATA[the foundset on which to export]]></description>
               </parameter>
               <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
@@ -127,7 +127,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
             <parameters>
-              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
                 <description><![CDATA[the foundset on which to export]]></description>
               </parameter>
               <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
@@ -165,7 +165,7 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
             <parameters>
-              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.IFoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
                 <description><![CDATA[the foundset on which to export]]></description>
               </parameter>
               <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">

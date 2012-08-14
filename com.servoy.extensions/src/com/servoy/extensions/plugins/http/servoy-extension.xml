@@ -1672,7 +1672,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
           </function>
           <function name="getResponseHeaders">
             <argumentsTypes/>
-            <return type="com.servoy.j2db.scripting.JSMap" typecode="com.servoy.j2db.scripting.JSMap"/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="com.servoy.j2db.scripting.JSMap"/>
             <description><![CDATA[Gets the headers of the response as name/value arrays.]]></description>
             <summary><![CDATA[Gets the headers of the response as name/value arrays.]]></summary>
             <sample><![CDATA[var allHeaders = response.getResponseHeaders();
@@ -1684,7 +1684,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="com.servoy.j2db.scripting.JSMap" typecode="com.servoy.j2db.scripting.JSMap"/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="com.servoy.j2db.scripting.JSMap"/>
             <description><![CDATA[Gets the headers of the response as name/value arrays.]]></description>
             <summary><![CDATA[Gets the headers of the response as name/value arrays.]]></summary>
             <sample><![CDATA[var contentLength = response.getResponseHeaders("Content-Length");]]></sample>
