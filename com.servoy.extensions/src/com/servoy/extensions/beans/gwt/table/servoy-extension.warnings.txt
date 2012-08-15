@@ -1,7 +1,0 @@
-5 warnings
-
-EmptyTag - com.servoy.j2db.ui.IComponent com.servoy.extensions.beans.gwt.table.GwtTable.getWicketGwtComponent(Object[] cargs, IClientPluginAccess access): @return is empty.
-ParamTagWithoutContent - com.servoy.extensions.beans.gwt.table.WicketGwtComponent.WicketGwtComponent(String id, IClientPluginAccess access): @param tag without text: 'access'.
-ParamTagWithoutContent - com.servoy.extensions.beans.gwt.table.WicketGwtComponent.WicketGwtComponent(String id, IClientPluginAccess access): @param tag without text: 'id'.
-ParamTagWithoutContent - com.servoy.j2db.ui.IComponent com.servoy.extensions.beans.gwt.table.GwtTable.getWicketGwtComponent(Object[] cargs, IClientPluginAccess access): @param tag without text: 'access'.
-ParamTagWithoutContent - com.servoy.j2db.ui.IComponent com.servoy.extensions.beans.gwt.table.GwtTable.getWicketGwtComponent(Object[] cargs, IClientPluginAccess access): @param tag without text: 'cargs'.
