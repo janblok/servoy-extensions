@@ -76,7 +76,7 @@ public class HeadlessClientProvider implements IScriptObject
 		}
 		catch (ClientNotFoundException ex)
 		{
-			throw new RuntimeException("The client with the clientId: " + clientId + " was loaded with another solution", ex);
+			throw new RuntimeException("The client with the clientId: " + clientId + " was loaded with another solution: " + ex.getInfo(), ex);
 		}
 		catch (Exception ex)
 		{
