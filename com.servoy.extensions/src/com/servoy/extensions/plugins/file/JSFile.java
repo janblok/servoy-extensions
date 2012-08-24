@@ -480,8 +480,14 @@ public class JSFile implements IScriptable, IJavaScriptType
 	@Override
 	public String toString()
 	{
+		// for backward compatibility we will return to toString() of a File object if it is a File object.
+		if (file instanceof File)
+		{
+			return file.toString();
+		}
 		String fName = file.getAbsolutePath() != null ? file.getAbsolutePath() : (file.getName() != null ? file.getName() : ""); //$NON-NLS-1$
-		return "JSFile[name:" + fName + ",contenttype:" + file.getContentType() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+		return "JSFile[name:" + fName + ",contenttype:" + file.getContentType() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
 	}
 
 	/**
