@@ -542,8 +542,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile, Object, int, int, int)
-	 * @sampleas js_getFolderContents(JSFile, Object, int, int, int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *
 	 * @param targetFolder File path.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -631,8 +631,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -645,8 +645,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder File path.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -659,8 +659,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -672,8 +672,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder File path.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -685,8 +685,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder JSFile object.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -697,8 +697,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder File path.
 	 * @param fileFilter Filter or array of filters for files in folder.
@@ -709,8 +709,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder JSFile object.
 	 */
@@ -720,8 +720,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_getFolderContents(JSFile,Object,int,int,int)
-	 * @sampleas js_getFolderContents(JSFile,Object,int,int,int)
+	 * @clonedesc js_getFolderContents(JSFile,Object,Number,Number,Number)
+	 * @sampleas js_getFolderContents(JSFile,Object,Number,Number,Number)
 	 *  
 	 * @param targetFolder File path.
 	 */
@@ -2364,7 +2364,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_streamFilesToServer(Object)
 	 * 
 	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
-	 * @param o the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
+	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	public JSProgressMonitor js_streamFilesToServer(final Object f, final Function callback)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -1021,8 +1021,11 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
                 <description><![CDATA[JSFile object.]]></description>
@@ -1035,8 +1038,11 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
                 <description><![CDATA[JSFile object.]]></description>
@@ -1053,8 +1059,11 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
                 <description><![CDATA[JSFile object.]]></description>
@@ -1075,8 +1084,11 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
                 <description><![CDATA[JSFile object.]]></description>
@@ -1129,8 +1141,11 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[File path.]]></description>
@@ -1143,8 +1158,11 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[File path.]]></description>
@@ -1161,8 +1179,11 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[File path.]]></description>
@@ -1183,8 +1204,11 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[File path.]]></description>
@@ -1209,8 +1233,11 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <sample><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
+for (var i=0; i<files.length; i++)
+	application.output(files[i].getAbsolutePath());]]></sample>
             <parameters>
               <parameter name="targetFolder" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[File path.]]></description>
@@ -2857,7 +2884,7 @@ if (folder) {
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>
               </parameter>
-              <parameter name="o">
+              <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[the Function to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured]]></description>
               </parameter>
             </parameters>
