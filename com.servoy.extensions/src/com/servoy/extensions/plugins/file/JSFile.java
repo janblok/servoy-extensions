@@ -481,7 +481,7 @@ public class JSFile implements IScriptable, IJavaScriptType
 	public String toString()
 	{
 		// for backward compatibility we will return to toString() of a File object if it is a File object.
-		if (file instanceof File)
+		if (file instanceof LocalFile)
 		{
 			return file.toString();
 		}
