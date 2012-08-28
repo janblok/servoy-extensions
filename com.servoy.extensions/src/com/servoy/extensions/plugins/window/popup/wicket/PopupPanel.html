@@ -13,8 +13,8 @@ function centerPopup(popupId) {
 	}
 	var width = Wicket.Window.getViewportWidth();
 	var height = Wicket.Window.getViewportHeight();
-	var modalWidth = popup.offsetWidth;
-	var modalHeight = popup.offsetHeight;
+	var modalWidth = parseInt(popup.style.width.substring(0, popup.style.width.indexOf("px")));
+	var modalHeight = parseInt(popup.style.height.substring(0, popup.style.height.indexOf("px")));
 	var left = (width / 2) - (modalWidth / 2) + scLeft;
 	var top = (height / 2) - (modalHeight / 2) + scTop;
 	if (left < 0) left = 0;
@@ -30,8 +30,8 @@ function positionPopup(popupId, elementId) {
 	var popup = document.getElementById(popupId);
 	var width = Wicket.Window.getViewportWidth();
 	var height = Wicket.Window.getViewportHeight();
-	var modalWidth = popup.offsetWidth;
-	var modalHeight = popup.offsetHeight;
+	var modalWidth = parseInt(popup.style.width.substring(0, popup.style.width.indexOf("px")));
+	var modalHeight = parseInt(popup.style.height.substring(0, popup.style.height.indexOf("px")));
 	var modalTop = jsCompReg.top + element.clientHeight + element.clientTop + 2;
 	var modalLeft = jsCompReg.left;
 	var scTop = 0;
