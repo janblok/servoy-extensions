@@ -109,7 +109,7 @@ public class DialogProvider implements IScriptable
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
-			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
+			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.WARNING_MESSAGE);
 	}
@@ -143,7 +143,7 @@ public class DialogProvider implements IScriptable
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
-			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
+			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -177,7 +177,7 @@ public class DialogProvider implements IScriptable
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
-			return (buttonsText != null ? getButtonTexts(buttonsText)[0] : "OK");
+			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.ERROR_MESSAGE);
 	}

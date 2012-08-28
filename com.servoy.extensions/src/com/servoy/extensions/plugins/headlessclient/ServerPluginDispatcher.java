@@ -339,6 +339,15 @@ public class ServerPluginDispatcher<E> implements Runnable
 		@InjectedDsoInstance
 		private DsoCluster cluster;
 
+		public ClusterListener()
+		{
+			if (cluster == null) throw new RuntimeException(
+				"Please remove the tim-api.jar from classpath if not running clustered! Classes from it are available but not functional...");
+
+			// cluster is set by Terracotta
+			cluster.addClusterListener(this);
+		}
+
 		@TerracottaAutolockWrite
 		public void nodeJoined(DsoClusterEvent event)
 		{
