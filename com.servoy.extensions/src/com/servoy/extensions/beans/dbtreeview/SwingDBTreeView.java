@@ -744,7 +744,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			cb.setOpaque(false);
 			img.setOpaque(false);
 
-			Color clr = new Color(0, 0, 0, Transparency.TRANSLUCENT);
+			Color clr = new Color(0, 0, 0, Transparency.BITMASK);
 //			setBackground(clr);
 			setBackgroundNonSelectionColor(clr);
 		}
