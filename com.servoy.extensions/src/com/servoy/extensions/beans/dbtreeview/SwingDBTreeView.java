@@ -21,7 +21,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -744,7 +743,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			cb.setOpaque(false);
 			img.setOpaque(false);
 
-			Color clr = new Color(0, 0, 0, Transparency.BITMASK);
+			Color clr = new Color(0, 0, 0, 0);
 //			setBackground(clr);
 			setBackgroundNonSelectionColor(clr);
 		}
