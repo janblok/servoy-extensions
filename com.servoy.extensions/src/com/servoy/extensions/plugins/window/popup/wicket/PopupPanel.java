@@ -26,6 +26,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
+import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.yui.YUILoader;
 
 /**
@@ -35,14 +36,18 @@ import com.servoy.j2db.server.headlessclient.yui.YUILoader;
 public class PopupPanel extends Panel
 {
 	private final Component elementToShowRelatedTo;
+	private final String formName;
+	private final IClientPluginAccess clientPluginAccess;
 
 	/**
 	 * @param id
 	 */
-	public PopupPanel(String id, IForm form, Component elementToShowRelatedTo)
+	public PopupPanel(String id, IForm form, Component elementToShowRelatedTo, IClientPluginAccess clientPluginAccess)
 	{
 		super(id);
 		this.elementToShowRelatedTo = elementToShowRelatedTo;
+		this.formName = form.getName();
+		this.clientPluginAccess = clientPluginAccess;
 		add((Component)form.getFormUI());
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
@@ -76,5 +81,20 @@ public class PopupPanel extends Panel
 			js.append("');");
 		}
 		container.getHeaderResponse().renderOnDomReadyJavascript(js.toString());
+	}
+
+	@Override
+	protected void onBeforeRender()
+	{
+		super.onBeforeRender();
+		if (size() == 0 && formName != null && clientPluginAccess != null && clientPluginAccess.getFormManager() != null)
+		{
+			IForm form = clientPluginAccess.getFormManager().getForm(formName);
+			if (form != null)
+			{
+				form.setView(form.getView());
+				add((Component)form.getFormUI());
+			}
+		}
 	}
 }

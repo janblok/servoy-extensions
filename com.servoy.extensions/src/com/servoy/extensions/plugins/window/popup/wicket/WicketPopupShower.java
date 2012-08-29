@@ -89,7 +89,7 @@ public class WicketPopupShower implements IPopupShower
 		{
 			repeatingView.removeComponent("popup");
 		}
-		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo));
+		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo, clientPluginAccess));
 
 		final WebMarkupContainer container = new WebMarkupContainer(repeatingView.newChildId());
 		StringBuilder containerStyle = new StringBuilder("position:absolute;z-index:990;top:0px;right:0px;bottom:0px;left:0px;");
