@@ -28,6 +28,7 @@ import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.yui.YUILoader;
+import com.servoy.j2db.util.ServoyException;
 
 /**
  * @author jcompagner
@@ -92,7 +93,14 @@ public class PopupPanel extends Panel
 			IForm form = clientPluginAccess.getFormManager().getForm(formName);
 			if (form != null)
 			{
-				form.setView(form.getView());
+				try
+				{
+					form.setUsingAsExternalComponent(true);
+				}
+				catch (ServoyException e)
+				{
+					System.err.println(e.getMessage());
+				}
 				add((Component)form.getFormUI());
 			}
 		}
