@@ -219,11 +219,9 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 	private IHeadlessClient getClient(String clientKey) throws ClientNotFoundException
 	{
 		IHeadlessClient c = clients.get(clientKey);
+		if (c != null && c.isValid())
 		{
-			if (c != null && c.isValid())
-			{
-				return c;
-			}
+			return c;
 		}
 		throw new ClientNotFoundException(clientKey);
 	}

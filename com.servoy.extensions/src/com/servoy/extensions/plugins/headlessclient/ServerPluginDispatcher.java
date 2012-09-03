@@ -93,8 +93,8 @@ public class ServerPluginDispatcher<E> implements Runnable
 				}
 				catch (Throwable e)
 				{
-					// we can't be sure that this exception class is instrumented and can be shared with terracotta DSO
-					Debug.error(e);
+					// we can't be sure that this exception's class is instrumented and can be shared with terracotta DSO
+					Debug.warn(e);
 					exceptionMsg = e.getClass().getCanonicalName() + ": " + e.getMessage(); //$NON-NLS-1$
 				}
 				finally
