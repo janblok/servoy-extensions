@@ -182,7 +182,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 			stop = true;
 			callQueueOfThisPlugin.notifyAll();
 		}
-		clusterListener.shutdown();
+		if (clusterListener != null) clusterListener.shutdown();
 	}
 
 	@TerracottaAutolockWrite
