@@ -125,6 +125,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 	private final String thisServerPluginId;
 	private volatile boolean stop = false;
 	private final E thisServerObject;
+	private ClusterListener clusterListener;
 
 	@TerracottaAutolockWrite
 	public ServerPluginDispatcher(String serverPluginId, E thisServerObject)
@@ -139,7 +140,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 			runningInCluster = true;
 
 			Debug.trace("Starting cluster listener for server plugin."); //$NON-NLS-1$
-			new ClusterListener();
+			clusterListener = new ClusterListener();
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -181,6 +182,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 			stop = true;
 			callQueueOfThisPlugin.notifyAll();
 		}
+		clusterListener.shutdown();
 	}
 
 	@TerracottaAutolockWrite
@@ -346,6 +348,11 @@ public class ServerPluginDispatcher<E> implements Runnable
 
 			// cluster is set by Terracotta
 			cluster.addClusterListener(this);
+		}
+
+		public void shutdown()
+		{
+			cluster.removeClusterListener(this);
 		}
 
 		@TerracottaAutolockWrite
