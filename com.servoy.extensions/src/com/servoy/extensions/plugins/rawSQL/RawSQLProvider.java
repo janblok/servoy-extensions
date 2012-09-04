@@ -20,6 +20,7 @@ import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
+import com.servoy.j2db.util.DataSourceUtils;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.UUID;
@@ -124,7 +125,8 @@ public class RawSQLProvider implements IScriptable
 	{
 		try
 		{
-			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName);
+			String originalServerName = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName);
+			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(originalServerName);
 			return getSQLService().executeSQL(plugin.getClientPluginAccess().getClientID(), serverName, tableName, sql, sql_args, tid);
 		}
 		catch (Exception ex)
@@ -189,7 +191,8 @@ public class RawSQLProvider implements IScriptable
 
 		try
 		{
-			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName);
+			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(
+				plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName));
 			String cid = plugin.getClientPluginAccess().getClientID();
 			// TODO HOW TO HANDLE ARGS WITH NULL?? sHOULD BE CONVERTED TO NullValue?????
 			IDataSet set = getSQLService().executeStoredProcedure(cid, serverName, tid, procedureDeclaration, args, inOutType, 0, maxNumberOfRowsToRetrieve);
@@ -257,8 +260,15 @@ public class RawSQLProvider implements IScriptable
 	{
 		try
 		{
-			return getSQLService().flushAllClientsCache(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName,
-				plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName));
+			String originalServerName = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName);
+			String transactionID = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(originalServerName);
+			if (transactionID != null)
+			{
+				// flush data locally within the transaction
+				plugin.getClientPluginAccess().getDatabaseManager().notifyDataChange(DataSourceUtils.createDBTableDataSource(originalServerName, tableName),
+					null, 0);
+			}
+			return getSQLService().flushAllClientsCache(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, transactionID);
 		}
 		catch (Exception ex)
 		{
@@ -300,8 +310,16 @@ public class RawSQLProvider implements IScriptable
 
 		try
 		{
+			String originalServerName = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName);
+			String transactionID = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(originalServerName);
+			if (transactionID != null)
+			{
+				// flush data locally within the transaction
+				plugin.getClientPluginAccess().getDatabaseManager().notifyDataChange(DataSourceUtils.createDBTableDataSource(originalServerName, tableName),
+					pksDataset, action);
+			}
 			return getSQLService().notifyDataChange(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, pksDataset, action,
-				plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(serverName));
+				transactionID);
 		}
 		catch (Exception ex)
 		{
