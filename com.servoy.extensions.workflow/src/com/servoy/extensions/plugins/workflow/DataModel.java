@@ -409,7 +409,7 @@ public class DataModel
 
 	public boolean checkIFModelExists() throws Exception
 	{
-		return (server.getTable("JBPM4_VARIABLE") != null);
+		return (server.getTable("jbpm4_variable") != null);
 	}
 	
 	public static void createIndex(IServerInternal server, String indexName, String tableName, String singleColumnName) throws Exception 
