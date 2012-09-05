@@ -432,7 +432,7 @@ public class DataModel
 //		sb.append(");");
 //		Debug.trace(sb);
 
-		Table t = (Table) server.getTable(tableName);
+		Table t = (Table) server.getTable(tableName.toLowerCase());
 		Column[] cols = new Column[columnNames.length];
 		for (int i = 0; i < columnNames.length; i++) 
 		{
