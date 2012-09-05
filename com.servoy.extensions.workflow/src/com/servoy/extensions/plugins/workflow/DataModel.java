@@ -453,13 +453,17 @@ public class DataModel
 	public static void addForeignKeyConstraint(IServerInternal server,String table, String name, String key, String reftable) throws Exception
 	{
 		StringBuffer sb = new StringBuffer("alter table ");
+		sb.append("\"");
 		sb.append(table);
+		sb.append("\"");
 		sb.append(" add constraint ");
 		sb.append(name);
 		sb.append(" foreign key (");
 		sb.append(key);
 		sb.append(") references ");
+		sb.append("\"");
 		sb.append(reftable);
+		sb.append("\"");
 		sb.append(" (DBID_)");
 		Debug.trace(sb);
 		
