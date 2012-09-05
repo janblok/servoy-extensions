@@ -466,7 +466,7 @@ public class DataModel
 		sb.append("\"");
 		sb.append(reftable);
 		sb.append("\"");
-		sb.append(" (DBID_)");
+		sb.append(" (\"DBID_\")");
 		Debug.trace(sb);
 		
 		Connection c = server.getRawConnection();
