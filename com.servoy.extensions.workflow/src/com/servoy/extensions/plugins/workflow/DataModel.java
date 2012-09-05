@@ -459,7 +459,9 @@ public class DataModel
 		sb.append(" add constraint ");
 		sb.append(name);
 		sb.append(" foreign key (");
+		sb.append("\"");
 		sb.append(key);
+		sb.append("\"");
 		sb.append(") references ");
 		sb.append("\"");
 		sb.append(reftable);
