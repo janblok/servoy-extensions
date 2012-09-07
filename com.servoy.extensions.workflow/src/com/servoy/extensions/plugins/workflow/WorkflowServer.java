@@ -250,6 +250,8 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 
 			ExecutionService executionService = processEngine.getExecutionService();
 			variables.put(SOLUTION_PROPERTY_NAME, solutionName);
+			
+			VariablesTypeHelper.convertToJBPMTypes(variables);
 			ProcessInstance processInstance = executionService.startProcessInstanceByKey(processName, variables);
 			return processInstance.getId();
 		} 
@@ -475,6 +477,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 			Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
 
 			TaskService taskService = processEngine.getTaskService();
+			VariablesTypeHelper.convertToJBPMTypes(variables);
 			taskService.completeTask(tid, outcome, variables);
 		} 
 		catch (Exception e) 

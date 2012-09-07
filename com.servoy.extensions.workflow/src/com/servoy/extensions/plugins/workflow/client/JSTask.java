@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.Map;
 
 import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
+import com.servoy.extensions.plugins.workflow.VariablesTypeHelper;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.util.Debug;
@@ -62,6 +63,7 @@ public class JSTask
 			try 
 			{
 				Map<String,Object> variables = workflowService.getTaskVariables(td.taskId);
+				VariablesTypeHelper.convertToServoyTypes(variables);
 				variablesObject = MapSerializer.convertFromMap(variables);
 			} 
 			catch (RemoteException e) 
@@ -77,6 +79,7 @@ public class JSTask
 		try 
 		{
 			Map<String,Object> variables = MapSerializer.convertToMap(jsVariablesObject);
+			VariablesTypeHelper.convertToJBPMTypes(variables);
 			workflowService.save(td,variables);
 		} 
 		catch (Exception e) 
