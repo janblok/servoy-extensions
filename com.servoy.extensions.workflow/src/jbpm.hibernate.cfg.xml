@@ -4,6 +4,7 @@
           "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping resource="jbpm.repository.hbm.xml" />
 		<mapping resource="jbpm.execution.hbm.xml" />
 		<mapping resource="jbpm.history.hbm.xml" />

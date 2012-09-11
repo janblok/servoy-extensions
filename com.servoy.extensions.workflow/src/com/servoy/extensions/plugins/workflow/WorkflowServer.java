@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -90,20 +89,6 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 			throw new PluginException("jbpm database server not found, config the server plugin properties and restart");
 		}
 		jbpm_server = (IServerInternal)js;
-		
-		try
-		{
-			DataModel m = new DataModel(jbpm_server);
-			if (!m.checkIFModelExists())
-			{
-				m.create();
-			}
-		}
-		catch (Exception e)
-		{
-			Debug.error(e);
-			throw new PluginException(e);
-		}
 
 		try
 		{
