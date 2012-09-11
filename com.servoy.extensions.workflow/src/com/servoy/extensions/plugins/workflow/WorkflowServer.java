@@ -598,4 +598,9 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		}
 		return retval;
 	}
+
+	public void suspendDeployment(String deploymentId)
+	{
+		processEngine.getRepositoryService().suspendDeployment(deploymentId);
+	}
 }

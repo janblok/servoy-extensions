@@ -37,6 +37,7 @@ public interface IWorkflowPluginService extends Remote
 	public static final String SOLUTION_PROPERTY_NAME = "servoySolutionName";
 
 	public List<Deployment> getDeploymentList() throws RemoteException;
+	public void suspendDeployment(String deploymentId) throws RemoteException;
 	public String addProcessDefinition(String content) throws RemoteException;
 	public String addProcessDefinition(String content, long timestamp) throws RemoteException;
 	
