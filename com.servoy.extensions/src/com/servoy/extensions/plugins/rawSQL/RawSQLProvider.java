@@ -160,7 +160,7 @@ public class RawSQLProvider implements IScriptable
 	 * var args = [java.sql.Types.NUMERIC, 3000]
 	 * // A dataset is returned, when no output-parameters defined, the last select-result in the procedure will be returned.
 	 * // When one or more output-parameters are defined, the dataset will contain 1 row with the output data.
-	 * var dataset = plugins.rawSQL.executeStoredProcedure(controller.getServerName(), procedure_declaration, args, typesArray, maxReturnedRows);
+	 * var dataset = plugins.rawSQL.executeStoredProcedure(databaseManager.getDataSourceServerName(controller.getDataSource()), procedure_declaration, args, typesArray, maxReturnedRows);
 	 * var interest_rate = dataset.getValue(1, 1);
 	 *
 	 * @param serverName 
@@ -228,7 +228,7 @@ public class RawSQLProvider implements IScriptable
 	 * ****************************************************************************&#47;
 	 * 
 	 * var uuid = application.getNewUUID();
-	 * plugins.rawSQL.executeSQL(controller.getServerName(), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);
+	 * plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);
 	 */
 	@Deprecated
 	public byte[] js_convertUUIDToBytes(String uuid)
@@ -297,7 +297,7 @@ public class RawSQLProvider implements IScriptable
 	 * //var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted
 	 * //var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates
 	 * var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))
-	 * var ok = plugins.rawSQL.notifyDataChange(controller.getServerName(), 'employees', pksdataset,action)
+	 * var ok = plugins.rawSQL.notifyDataChange(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', pksdataset,action)
 	 *
 	 * @param serverName 
 	 * @param tableName 
