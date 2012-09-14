@@ -110,6 +110,18 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		String origin = request.getHeader("Origin");
+		if (origin != null)
+		{
+			response.setHeader("Access-Control-Allow-Origin", origin);
+		}
+
+		super.service(request, response);
+	}
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		try
@@ -346,12 +358,6 @@ public class RestWSServlet extends HttpServlet
 	 */
 	protected Object wsService(String methodName, Object[] fixedArgs, HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
-		String origin = request.getHeader("Origin");
-		if (origin != null)
-		{
-			response.setHeader("Access-Control-Allow-Origin", origin);
-		}
-
 		String path = request.getPathInfo(); //without servlet name
 
 		plugin.log.debug("Request '" + path + '\'');
