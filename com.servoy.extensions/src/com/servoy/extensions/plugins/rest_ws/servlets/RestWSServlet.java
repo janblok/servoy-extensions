@@ -107,6 +107,18 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		String origin = request.getHeader("Origin");
+		if (origin != null)
+		{
+			response.setHeader("Access-Control-Allow-Origin", origin);
+		}
+
+		super.service(request, response);
+	}
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		try
