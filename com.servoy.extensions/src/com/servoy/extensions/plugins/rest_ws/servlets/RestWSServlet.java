@@ -117,6 +117,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			response.setHeader("Access-Control-Allow-Origin", value);
 			response.setHeader("Access-Control-Max-Age", "1728000");
+			response.setHeader("Access-Control-Allow-Credentials", "true");
 
 			if (request.getHeader("Access-Control-Request-Method") != null)
 			{
