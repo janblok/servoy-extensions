@@ -299,7 +299,6 @@ public class RestWSServlet extends HttpServlet
 			wsRequest = parsePath(request);
 
 			client = plugin.getClient(wsRequest.solutionName);
-			checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
 
 			String retval = "TRACE, OPTIONS";
 			if (new FunctionDefinition(wsRequest.formName, WS_READ).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
