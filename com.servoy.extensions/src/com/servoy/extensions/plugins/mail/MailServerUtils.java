@@ -243,7 +243,7 @@ public class MailServerUtils
 		return new Attachment(messagePart.getFileName(), baos.toByteArray(), isAttachmentEmbedded(messagePart));
 	}
 
-	private static String createAddressString(Address[] addresses)
+	public static String createAddressString(Address[] addresses)
 	{
 		if (addresses == null) return null;
 		StringBuffer retval = new StringBuffer();
