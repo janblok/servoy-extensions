@@ -113,22 +113,23 @@ public class RestWSServlet extends HttpServlet
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String value = request.getHeader("Origin");
+		if (value == null)
+		{
+			value = "*";
+		}
+		response.setHeader("Access-Control-Allow-Origin", value);
+		response.setHeader("Access-Control-Max-Age", "1728000");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+
+		if (request.getHeader("Access-Control-Request-Method") != null)
+		{
+			response.setHeader("Access-Control-Allow-Methods", "GET, DELETE, POST, PUT, OPTIONS");
+		}
+
+		value = request.getHeader("Access-Control-Request-Headers");
 		if (value != null)
 		{
-			response.setHeader("Access-Control-Allow-Origin", value);
-			response.setHeader("Access-Control-Max-Age", "1728000");
-			response.setHeader("Access-Control-Allow-Credentials", "true");
-
-			if (request.getHeader("Access-Control-Request-Method") != null)
-			{
-				response.setHeader("Access-Control-Allow-Methods", "GET, DELETE, POST, PUT, OPTIONS");
-			}
-
-			value = request.getHeader("Access-Control-Request-Headers");
-			if (value != null)
-			{
-				response.setHeader("Access-Control-Allow-Headers", value);
-			}
+			response.setHeader("Access-Control-Allow-Headers", value);
 		}
 
 		super.service(request, response);
