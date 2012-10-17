@@ -24,6 +24,7 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.plugins.IClientPluginAccess;
 
 /**
  * @author pbakker
@@ -38,9 +39,9 @@ public class PutRequest extends BaseEntityEnclosingRequest
 		super();
 	}
 
-	public PutRequest(String url, DefaultHttpClient hc)
+	public PutRequest(String url, DefaultHttpClient hc, IClientPluginAccess plugin)
 	{
-		super(url, hc, new HttpPut(url));
+		super(url, hc, new HttpPut(url), plugin);
 	}
 
 	/**

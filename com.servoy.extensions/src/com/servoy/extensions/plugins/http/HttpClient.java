@@ -30,6 +30,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Utils;
@@ -41,13 +42,15 @@ public class HttpClient implements IScriptable, IJavaScriptType
 
 	private String proxyUser = null;
 	private String proxyPassword = null;
+	private final IClientPluginAccess plugin;
 
-	public HttpClient()
+	public HttpClient(IClientPluginAccess plugin)
 	{
 		client = new DefaultHttpClient();
 		client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, Boolean.TRUE);
 		client.getAuthSchemes().register(AuthPolicy.NTLM, new NTLMSchemeFactory());
 		client.getAuthSchemes().register(AuthPolicy.SPNEGO, new NegotiateSchemeFactory());
+		this.plugin = plugin;
 	}
 
 	/**
@@ -219,7 +222,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public PostRequest js_createPostRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new PostRequest(url, client);
+		return new PostRequest(url, client, plugin);
 	}
 
 	/**
@@ -237,7 +240,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public GetRequest js_createGetRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new GetRequest(url, client);
+		return new GetRequest(url, client, plugin);
 	}
 
 	/**
@@ -255,7 +258,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public DeleteRequest js_createDeleteRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new DeleteRequest(url, client);
+		return new DeleteRequest(url, client, plugin);
 	}
 
 	/**
@@ -272,7 +275,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public PutRequest js_createPutRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new PutRequest(url, client);
+		return new PutRequest(url, client, plugin);
 	}
 
 	/**
@@ -288,7 +291,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public OptionsRequest js_createOptionsRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new OptionsRequest(url, client);
+		return new OptionsRequest(url, client, plugin);
 	}
 
 	/**
@@ -306,7 +309,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public HeadRequest js_createHeadRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new HeadRequest(url, client);
+		return new HeadRequest(url, client, plugin);
 	}
 
 	/**
@@ -323,7 +326,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	public TraceRequest js_createTraceRequest(String url)
 	{
 		HttpProvider.setHttpClientProxy(client, url, proxyUser, proxyPassword);
-		return new TraceRequest(url, client);
+		return new TraceRequest(url, client, plugin);
 	}
 
 	/**

@@ -28,7 +28,10 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
+import org.mozilla.javascript.Function;
 
+import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
@@ -45,13 +48,14 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	protected String url;
 	protected HttpContext context;
 	protected Map<String, String[]> headers;
+	private IClientPluginAccess plugin;
 
 	public BaseRequest()
 	{
 		method = null;
 	}//only used by script engine
 
-	public BaseRequest(String url, DefaultHttpClient hc, HttpRequestBase method)
+	public BaseRequest(String url, DefaultHttpClient hc, HttpRequestBase method, IClientPluginAccess plugin)
 	{
 		this.url = url;
 		if (hc == null)
@@ -64,6 +68,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		}
 		headers = new HashMap<String, String[]>();
 		this.method = method;
+		this.plugin = plugin;
 	}
 
 	/**
@@ -147,4 +152,40 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		}
 	}
 
+	/**
+	 * Execute the request method asynchronous. Callback method will be called when response is received. Response is sent as parameter in callback.
+	 *
+	 * @sample
+	 * var response = method.executeAsyncRequest(globals.callback)
+	 * 
+	 * @param callBackMethod callBackMethod to be called after response is received
+	 *
+	 */
+	public void js_executeAsyncRequest(Function callBackMethod)
+	{
+		js_executeAsyncRequest(null, null, callBackMethod);
+	}
+
+	/**
+	 * @clonedesc js_executeAsyncRequest(Function)
+	 * @sampleas js_executeAsyncRequest(Function)
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 * @param callBackMethod callBackMethod to be called after response is received
+	 */
+
+	public void js_executeAsyncRequest(final String username, final String password, Function callBackMethod)
+	{
+		final FunctionDefinition functionDef = new FunctionDefinition(callBackMethod);
+		Runnable runnable = new Runnable()
+		{
+			public void run()
+			{
+				Response response = js_executeRequest(username, password);
+				functionDef.executeAsync(plugin, new Object[] { response });
+			}
+		};
+		plugin.getExecutor().execute(runnable);
+	}
 }

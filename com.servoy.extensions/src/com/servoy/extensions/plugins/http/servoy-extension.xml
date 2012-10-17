@@ -70,6 +70,42 @@ var value = cookie.getValue();]]></sample>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function name="executeRequest">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
@@ -111,6 +147,42 @@ var value = cookie.getValue();]]></sample>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeRequest">
@@ -984,6 +1056,42 @@ switch(httpCode) {
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function name="executeRequest">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
@@ -1341,6 +1449,42 @@ if (cookieSet)
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function name="executeRequest">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
@@ -1490,6 +1634,42 @@ var httpCode = poster.doPost()]]></sample>
               <parameter name="password" optional="true"/>
             </parameters>
           </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function name="executeRequest">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
@@ -1577,6 +1757,42 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeRequest">
@@ -1715,6 +1931,42 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <parameters>
+              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeRequest">

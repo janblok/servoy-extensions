@@ -25,6 +25,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 
+import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
@@ -41,9 +42,9 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 	{
 	}
 
-	public BaseEntityEnclosingRequest(String url, DefaultHttpClient hc, HttpRequestBase method)
+	public BaseEntityEnclosingRequest(String url, DefaultHttpClient hc, HttpRequestBase method, IClientPluginAccess plugin)
 	{
-		super(url, hc, method);
+		super(url, hc, method, plugin);
 	}
 
 	/**

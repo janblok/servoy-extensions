@@ -671,7 +671,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		{
 			client = getOrCreateHTTPclient(clientname, a_url);
 		}
-		return new PostRequest(a_url, client);
+		return new PostRequest(a_url, client, access);
 	}
 
 	@Deprecated
@@ -701,7 +701,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public HttpClient js_createNewHttpClient()
 	{
-		return new HttpClient();
+		return new HttpClient(access);
 	}
 
 	/**

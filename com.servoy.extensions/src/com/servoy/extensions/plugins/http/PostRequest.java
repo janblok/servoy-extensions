@@ -44,6 +44,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
 
@@ -61,9 +62,9 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		super();
 	}//only used by script engine
 
-	public PostRequest(String url, DefaultHttpClient hc)
+	public PostRequest(String url, DefaultHttpClient hc, IClientPluginAccess plugin)
 	{
-		super(url, hc, new HttpPost(url));
+		super(url, hc, new HttpPost(url), plugin);
 		files = new HashMap<Pair<String, String>, File>();
 	}
 

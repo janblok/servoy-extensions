@@ -21,6 +21,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.plugins.IClientPluginAccess;
 
 /**
  * @author pbakker
@@ -35,8 +36,8 @@ public class GetRequest extends BaseRequest
 		super();
 	}
 
-	public GetRequest(String url, DefaultHttpClient hc)
+	public GetRequest(String url, DefaultHttpClient hc, IClientPluginAccess plugin)
 	{
-		super(url, hc, new HttpGet(url));
+		super(url, hc, new HttpGet(url), plugin);
 	}
 }
