@@ -35,6 +35,7 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -122,6 +123,12 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 */
 	public Response js_executeRequest(String userName, String password)
 	{
+		Object returnValue = executeRequest(userName, password);
+		return returnValue instanceof Response ? (Response)returnValue : null;
+	}
+
+	private Object executeRequest(String userName, String password)
+	{
 		try
 		{
 			Iterator<String> it = headers.keySet().iterator();
@@ -148,42 +155,60 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		catch (Exception ex)
 		{
 			Debug.error(ex);
-			return null;
+			return ex;
 		}
 	}
 
 	/**
-	 * Execute the request method asynchronous. Callback method will be called when response is received. Response is sent as parameter in callback.
+	 * Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.
 	 *
 	 * @sample
-	 * var response = method.executeAsyncRequest(globals.callback)
+	 * var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)
 	 * 
-	 * @param callBackMethod callBackMethod to be called after response is received
+	 * @param successCallbackMethod callbackMethod to be called after response is received
+	 * @param errorCallbackMethod callbackMethod to be called if request errors out
 	 *
 	 */
-	public void js_executeAsyncRequest(Function callBackMethod)
+	public void js_executeAsyncRequest(Function successCallbackMethod, Function errorCallbackMethod)
 	{
-		js_executeAsyncRequest(null, null, callBackMethod);
+		js_executeAsyncRequest(null, null, successCallbackMethod, errorCallbackMethod);
 	}
 
 	/**
-	 * @clonedesc js_executeAsyncRequest(Function)
-	 * @sampleas js_executeAsyncRequest(Function)
+	 * @clonedesc js_executeAsyncRequest(Function,Function)
+	 * @sampleas js_executeAsyncRequest(Function,Function)
 	 *
 	 * @param userName the user name
 	 * @param password the password
-	 * @param callBackMethod callBackMethod to be called after response is received
+	 * @param successCallbackMethod callbackMethod to be called after response is received
+	 * @param errorCallbackMethod callbackMethod to be called if request errors out
 	 */
 
-	public void js_executeAsyncRequest(final String username, final String password, Function callBackMethod)
+	public void js_executeAsyncRequest(final String username, final String password, Function successCallbackMethod, Function errorCallbackMethod)
 	{
-		final FunctionDefinition functionDef = new FunctionDefinition(callBackMethod);
+		final FunctionDefinition successFunctionDef = new FunctionDefinition(successCallbackMethod);
+		final FunctionDefinition errorFunctionDef = new FunctionDefinition(errorCallbackMethod);
+
 		Runnable runnable = new Runnable()
 		{
 			public void run()
 			{
-				Response response = js_executeRequest(username, password);
-				functionDef.executeAsync(plugin, new Object[] { response });
+				final Object returnValue = executeRequest(username, password);
+				if (returnValue instanceof Response)
+				{
+					successFunctionDef.executeAsync(plugin, new Object[] { returnValue });
+				}
+				else if (returnValue instanceof Exception)
+				{
+					errorFunctionDef.executeAsync(plugin, new Object[] { new ServoyException()
+					{
+						@Override
+						public String getMessage()
+						{
+							return ((Exception)returnValue).getMessage();
+						}
+					} });
+				}
 			}
 		};
 		plugin.getExecutor().execute(runnable);

@@ -75,11 +75,12 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -87,22 +88,29 @@ var value = cookie.getValue();]]></sample>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
@@ -154,11 +162,12 @@ var value = cookie.getValue();]]></sample>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -166,22 +175,29 @@ var value = cookie.getValue();]]></sample>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1061,11 +1077,12 @@ switch(httpCode) {
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1073,22 +1090,29 @@ switch(httpCode) {
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1454,11 +1478,12 @@ if (cookieSet)
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1466,22 +1491,29 @@ if (cookieSet)
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1639,11 +1671,12 @@ var httpCode = poster.doPost()]]></sample>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1651,22 +1684,29 @@ var httpCode = poster.doPost()]]></sample>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1764,11 +1804,12 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1776,22 +1817,29 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1938,11 +1986,12 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1950,22 +1999,29 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
               </parameter>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Execute the request method asynchronous. Callback method will be called when response is received.]]></description>
+            <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.callback)]]></sample>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="callBackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
-                <description><![CDATA[callBackMethod to be called after response is received]]></description>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
               </parameter>
             </parameters>
           </function>
