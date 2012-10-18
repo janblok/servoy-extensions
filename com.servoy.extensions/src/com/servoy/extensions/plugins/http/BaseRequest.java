@@ -17,6 +17,7 @@
 
 package com.servoy.extensions.plugins.http;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -35,7 +37,6 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -123,44 +124,43 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 */
 	public Response js_executeRequest(String userName, String password)
 	{
-		Object returnValue = executeRequest(userName, password);
-		return returnValue instanceof Response ? (Response)returnValue : null;
-	}
-
-	private Object executeRequest(String userName, String password)
-	{
 		try
 		{
-			Iterator<String> it = headers.keySet().iterator();
-			while (it.hasNext())
-			{
-				String name = it.next();
-				String[] values = headers.get(name);
-				for (String value : values)
-				{
-					method.addHeader(name, value);
-				}
-			}
-
-			if (!Utils.stringIsEmpty(userName))
-			{
-				BasicCredentialsProvider bcp = new BasicCredentialsProvider();
-				URL _url = new URL(url);
-				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(userName, password));
-				client.setCredentialsProvider(bcp);
-			}
-
-			return new Response(client.execute(method, context));
+			return executeRequest(userName, password);
 		}
 		catch (Exception ex)
 		{
 			Debug.error(ex);
-			return ex;
+			return null;
 		}
 	}
 
+	private Response executeRequest(String userName, String password) throws ClientProtocolException, IOException
+	{
+		Iterator<String> it = headers.keySet().iterator();
+		while (it.hasNext())
+		{
+			String name = it.next();
+			String[] values = headers.get(name);
+			for (String value : values)
+			{
+				method.addHeader(name, value);
+			}
+		}
+
+		if (!Utils.stringIsEmpty(userName))
+		{
+			BasicCredentialsProvider bcp = new BasicCredentialsProvider();
+			URL _url = new URL(url);
+			bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(userName, password));
+			client.setCredentialsProvider(bcp);
+		}
+
+		return new Response(client.execute(method, context));
+	}
+
 	/**
-	 * Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception as parameter.
+	 * Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.
 	 *
 	 * @sample
 	 * var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)
@@ -186,28 +186,28 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 
 	public void js_executeAsyncRequest(final String username, final String password, Function successCallbackMethod, Function errorCallbackMethod)
 	{
-		final FunctionDefinition successFunctionDef = new FunctionDefinition(successCallbackMethod);
-		final FunctionDefinition errorFunctionDef = new FunctionDefinition(errorCallbackMethod);
+		final FunctionDefinition successFunctionDef = successCallbackMethod != null ? new FunctionDefinition(successCallbackMethod) : null;
+		final FunctionDefinition errorFunctionDef = errorCallbackMethod != null ? new FunctionDefinition(errorCallbackMethod) : null;
 
 		Runnable runnable = new Runnable()
 		{
 			public void run()
 			{
-				final Object returnValue = executeRequest(username, password);
-				if (returnValue instanceof Response)
+				try
 				{
-					successFunctionDef.executeAsync(plugin, new Object[] { returnValue });
-				}
-				else if (returnValue instanceof Exception)
-				{
-					errorFunctionDef.executeAsync(plugin, new Object[] { new ServoyException()
+					final Response response = executeRequest(username, password);
+
+					if (successFunctionDef != null)
 					{
-						@Override
-						public String getMessage()
-						{
-							return ((Exception)returnValue).getMessage();
-						}
-					} });
+						successFunctionDef.executeAsync(plugin, new Object[] { response });
+					}
+				}
+				catch (final Exception ex)
+				{
+					if (errorFunctionDef != null)
+					{
+						errorFunctionDef.executeAsync(plugin, new Object[] { ex.getMessage() });
+					}
 				}
 			}
 		};
