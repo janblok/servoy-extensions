@@ -204,6 +204,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 				}
 				catch (final Exception ex)
 				{
+					Debug.error(ex);
 					if (errorFunctionDef != null)
 					{
 						errorFunctionDef.executeAsync(plugin, new Object[] { ex.getMessage() });
