@@ -208,7 +208,7 @@ public class SwingDBTreeTable extends JTable implements ICompositeDragNDrop
 		if (dragSourceName == null) dragSourceName = parent.getId();
 		event.setElementName(dragSourceName);
 
-		Object dragSource = getDragSource(new Point(event.js_getX(), event.js_getY()));
+		Object dragSource = getDragSource(new Point(event.getX(), event.getY()));
 		if (dragSource instanceof UserNode)
 		{
 			IRecord dragRecord = ((UserNode)dragSource).getRecord();
