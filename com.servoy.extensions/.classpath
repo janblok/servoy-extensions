@@ -16,5 +16,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.dltk.javascript.rhino"/>
 	<classpathentry kind="lib" path="lib/openid4java.jar" sourcepath="libsrc/openid4java-src.zip"/>
 	<classpathentry kind="lib" path="/servoy_shared/lib/tim-api.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/servoy_base"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
