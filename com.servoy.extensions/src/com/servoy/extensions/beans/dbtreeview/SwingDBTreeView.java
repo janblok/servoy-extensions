@@ -20,7 +20,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,6 +76,7 @@ import com.servoy.j2db.util.DataSourceUtils;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.EnableScrollPanel;
 import com.servoy.j2db.util.PersistHelper;
+import com.servoy.j2db.util.UIUtils;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -854,7 +854,6 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		}
 	}
 
-	protected final static int clickInterval = ((Integer)Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval")).intValue();
 	protected Timer clickTimer;
 
 	/*
@@ -874,7 +873,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 
 			if (e.getClickCount() == 1)
 			{
-				clickTimer = new Timer(clickInterval, new ActionListener()
+				clickTimer = new Timer(UIUtils.getClickInterval(), new ActionListener()
 				{
 					public void actionPerformed(ActionEvent ev)
 					{
