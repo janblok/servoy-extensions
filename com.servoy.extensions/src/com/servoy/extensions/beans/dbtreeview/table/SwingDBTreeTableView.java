@@ -53,6 +53,7 @@ import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
+import com.servoy.j2db.util.UIUtils;
 
 /**
  * Class representing the smart client db tree table view
@@ -485,7 +486,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 
 			if (e.getClickCount() == 1)
 			{
-				clickTimer = new Timer(clickInterval, new ActionListener()
+				clickTimer = new Timer(UIUtils.getClickInterval(), new ActionListener()
 				{
 					public void actionPerformed(ActionEvent ev)
 					{
