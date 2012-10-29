@@ -386,7 +386,7 @@ public class RestWSServlet extends HttpServlet
 			Exist functionExists = fd.exists(client.getPluginAccess());
 			if (functionExists == FunctionDefinition.Exist.NO_SOLUTION)
 			{
-				throw new WebServiceException("Solution " + wsRequest.solutionName + "not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+				throw new WebServiceException("Solution " + wsRequest.solutionName + " not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE);
 			}
 			if (functionExists == FunctionDefinition.Exist.FORM_NOT_FOUND)
 			{
@@ -394,7 +394,7 @@ public class RestWSServlet extends HttpServlet
 			}
 			if (functionExists != FunctionDefinition.Exist.METHOD_FOUND)
 			{
-				throw new WebServiceException("Method " + methodName + "not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""),
+				throw new WebServiceException("Method " + methodName + " not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""),
 					HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			}
 
