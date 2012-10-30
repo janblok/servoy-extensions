@@ -38,7 +38,7 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final UDPPlugin plugin;
 	private DatagramHandler listner;
-	private List buffer;
+	private List<JSPacket> buffer;
 	private FunctionDefinition functionDef;
 	private int port;
 	private boolean hasSeenEmpty;//special flag to prevent starting while lastone is processing last packet
@@ -54,14 +54,16 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 * @sample
 	 * plugins.udp.startSocket(1234,my_packet_process_method)
 	 *
-	 * @param port_number 
-	 * @param method_to_call_when_packet_received_and_buffer_is_empty 
+	 * @param port_number the local port that this UDP socket will bind to.
+	 * @param method_to_call_when_packet_received_and_buffer_is_empty when the socket receives one or more packages, it calls this method once.
+	 * The method will no longer be called even if new packages are received - until a call to {@link UDPProvider#js_getReceivedPacket()} returns null. So you should
+	 * consume all available packets before you expect this method to be called again. 
 	 */
 	public boolean js_startSocket(int port_number, Object method_to_call_when_packet_received_and_buffer_is_empty)
 	{
 		//clear if restart
 		hasSeenEmpty = true;
-		buffer = Collections.synchronizedList(new LinkedList());
+		buffer = Collections.synchronizedList(new LinkedList<JSPacket>());
 
 		this.port = port_number;
 		if (listner == null)
@@ -204,22 +206,30 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 	 */
 	public JSPacket js_getReceivedPacket()
 	{
-		if (buffer.size() > 0)
+		synchronized (buffer)
 		{
-			return (JSPacket)buffer.remove(0);
-		}
-		else
-		{
-			hasSeenEmpty = true;
-			return null;
+			if (buffer.size() > 0)
+			{
+				return buffer.remove(0);
+			}
+			else
+			{
+				hasSeenEmpty = true;
+				return null;
+			}
 		}
 	}
 
 	void addPacket(DatagramPacket dp)
 	{
-		buffer.add(new JSPacket(dp));
+		boolean mustTrigger;
+		synchronized (buffer)
+		{
+			buffer.add(new JSPacket(dp));
+			mustTrigger = hasSeenEmpty;
+		}
 
-		if (hasSeenEmpty)
+		if (mustTrigger)
 		{
 			hasSeenEmpty = false;
 			if (functionDef != null)

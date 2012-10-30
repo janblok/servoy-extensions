@@ -13,11 +13,13 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.udp;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
+
 import com.servoy.j2db.util.Debug;
 
 public class DatagramHandler extends Thread
@@ -25,16 +27,17 @@ public class DatagramHandler extends Thread
 	private boolean listen = true;
 	private UDPProvider provider;
 	private DatagramSocket socket;
-	
+
 	DatagramHandler(UDPProvider provider, DatagramSocket socket)
 	{
 		this.provider = provider;
 		this.socket = socket;
 	}
-	
+
+	@Override
 	public void run()
 	{
-		while(listen)
+		while (listen)
 		{
 			try
 			{
@@ -44,7 +47,8 @@ public class DatagramHandler extends Thread
 			}
 			catch (Throwable e)
 			{
-				Debug.error(e);
+				// only log the exception if it wasn't caused by an intentional close of the socket by setListen(false)... "SocketException: socket closed"
+				if (listen || !(e instanceof SocketException)) Debug.error(e);
 			}
 		}
 	}

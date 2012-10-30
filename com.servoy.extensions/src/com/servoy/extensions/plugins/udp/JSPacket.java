@@ -44,6 +44,7 @@ public class JSPacket implements IScriptable
 
 	/**
 	 * Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.
+	 * This is a 0 based index.
 	 *
 	 * @sample
 	 * var packet;
@@ -182,7 +183,7 @@ public class JSPacket implements IScriptable
 	}
 
 	/**
-	 * Reads a UTF string from the packet, starting from the current index. If an argument is specified, then it represents the length of the string to read. If no argument is specified, then first a 32 bits int is read from the packet and that will be the length of the string. Advances the index with a number of positions that depends on the length of the read string.
+	 * Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.
 	 * 
 	 * @sampleas js_getHost()
 	 */
@@ -258,7 +259,7 @@ public class JSPacket implements IScriptable
 	}
 
 	/**
-	 * Writes an UTF encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.
+	 * Writes an UTF-8 encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.
 	 *
 	 * @sampleas js_writeByte(int)
 	 * 
@@ -404,7 +405,7 @@ public class JSPacket implements IScriptable
 				utflen = length.intValue();
 			}
 
-			if (utflen > 0 && utflen < enclosed.getLength())
+			if (utflen > 0 && (index + utflen) <= enclosed.getLength())
 			{
 				byte[] bytearr = enclosed.getData();
 				char[] chararr = new char[utflen];
@@ -463,7 +464,7 @@ public class JSPacket implements IScriptable
 				}
 				index += utflen;
 				// The number of chars produced may be less than utflen
-				return new String(chararr, 0, chararr_count).trim();
+				return new String(chararr, 0, chararr_count);
 			}
 		}
 		catch (Exception e)
