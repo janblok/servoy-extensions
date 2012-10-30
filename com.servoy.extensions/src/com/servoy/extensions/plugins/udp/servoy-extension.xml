@@ -6,7 +6,8 @@
         <properties>
           <property name="index">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.]]></description>
+            <description><![CDATA[Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.
+This is a 0 based index.]]></description>
             <summary><![CDATA[Returns the current position in the byte array of the packet.]]></summary>
             <sample><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
@@ -175,8 +176,8 @@ while (packet = plugins.udp.getReceivedPacket()) {
           <function name="readUTF">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Reads a UTF string from the packet, starting from the current index. If an argument is specified, then it represents the length of the string to read. If no argument is specified, then first a 32 bits int is read from the packet and that will be the length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
-            <summary><![CDATA[Reads a UTF string from the packet, starting from the current index.]]></summary>
+            <description><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
+            <summary><![CDATA[Reads a UTF-8 string from the packet, starting from the current index.]]></summary>
             <sample><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
@@ -194,8 +195,8 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Reads a UTF string from the packet, starting from the current index. If an argument is specified, then it represents the length of the string to read. If no argument is specified, then first a 32 bits int is read from the packet and that will be the length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
-            <summary><![CDATA[Reads a UTF string from the packet, starting from the current index.]]></summary>
+            <description><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
+            <summary><![CDATA[Reads a UTF-8 string from the packet, starting from the current index.]]></summary>
             <sample><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
@@ -328,8 +329,8 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Writes an UTF encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.]]></description>
-            <summary><![CDATA[Writes an UTF encoded string into the packet, at the current index.]]></summary>
+            <description><![CDATA[Writes an UTF-8 encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.]]></description>
+            <summary><![CDATA[Writes an UTF-8 encoded string into the packet, at the current index.]]></summary>
             <sample><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
 	application.output('Failed to start socket.');
 } else {
@@ -439,8 +440,14 @@ plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
             <summary><![CDATA[Start a UDP socket for a port.]]></summary>
             <sample><![CDATA[plugins.udp.startSocket(1234,my_packet_process_method)]]></sample>
             <parameters>
-              <parameter name="port_number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="method_to_call_when_packet_received_and_buffer_is_empty" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
+              <parameter name="port_number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[the local port that this UDP socket will bind to.]]></description>
+              </parameter>
+              <parameter name="method_to_call_when_packet_received_and_buffer_is_empty" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[when the socket receives one or more packages, it calls this method once.
+The method will no longer be called even if new packages are received - until a call to UDPProvider#js_getReceivedPacket() returns null. So you should
+consume all available packets before you expect this method to be called again.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="stopSocket">
