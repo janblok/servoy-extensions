@@ -26,7 +26,5 @@ import com.servoy.j2db.scripting.annotations.ServoyMobile;
 @ServoyMobile
 public interface IMobileDialogProvider
 {
-	public String js_showWarningDialog(String dialogTitle, String dialogMessage);
-
 	public String js_showWarningDialog(String dialogTitle, String dialogMessage, String... buttonsText);
 }

@@ -117,19 +117,6 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	/**
 	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
-	 * @sampleas js_showWarningDialog(String,String,String[])
-	 *
-	 * @param dialogTitle Dialog title.
-	 * @param dialogMessage Dialog message.
-	 */
-	public String js_showWarningDialog(String dialogTitle, String dialogMessage)
-	{
-		return js_showWarningDialog(dialogTitle, dialogMessage, (String[])null);
-	}
-
-	/**
-	 * @clonedesc js_showErrorDialog(String,String,String[])
-	 *
 	 * @sample
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');
@@ -146,19 +133,6 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.INFORMATION_MESSAGE);
-	}
-
-	/**
-	 * @clonedesc js_showErrorDialog(String,String,String[])
-	 *
-	 * @sampleas js_showInfoDialog(String,String,String[])
-	 *
-	 * @param dialogTitle Dialog title.
-	 * @param dialogMessage Dialog message.
-	 */
-	public String js_showInfoDialog(String dialogTitle, String dialogMessage)
-	{
-		return js_showInfoDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	/**
@@ -180,19 +154,6 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
 		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.ERROR_MESSAGE);
-	}
-
-	/**
-	 * @clonedesc js_showErrorDialog(String,String,String[])
-	 *
-	 * @sampleas js_showErrorDialog(String,String,String[])
-	 *
-	 * @param dialogTitle Dialog title.
-	 * @param dialogMessage Dialog message.
-	 */
-	public String js_showErrorDialog(String dialogTitle, String dialogMessage)
-	{
-		return js_showErrorDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	/**

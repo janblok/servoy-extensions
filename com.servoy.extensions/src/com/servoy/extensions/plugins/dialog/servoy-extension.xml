@@ -44,25 +44,6 @@
               </parameter>
             </parameters>
           </function>
-          <function name="showErrorDialog">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
-            <sample><![CDATA[//show dialog
-var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allowed','OK');]]></sample>
-            <parameters>
-              <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Dialog title.]]></description>
-              </parameter>
-              <parameter name="dialogMessage" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Dialog message.]]></description>
-              </parameter>
-            </parameters>
-          </function>
           <function name="showErrorDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
@@ -83,25 +64,6 @@ var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allow
               </parameter>
               <parameter name="buttonsText" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
                 <description><![CDATA[Array of button texts.]]></description>
-              </parameter>
-            </parameters>
-          </function>
-          <function name="showInfoDialog">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
-            <sample><![CDATA[//show dialog
-var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');]]></sample>
-            <parameters>
-              <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Dialog title.]]></description>
-              </parameter>
-              <parameter name="dialogMessage" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Dialog message.]]></description>
               </parameter>
             </parameters>
           </function>
@@ -259,25 +221,6 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="dialog_title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="msg" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="options" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-            </parameters>
-          </function>
-          <function name="showWarningDialog">
-            <argumentsTypes>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
-            <sample><![CDATA[//show dialog
-var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');]]></sample>
-            <parameters>
-              <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Dialog title.]]></description>
-              </parameter>
-              <parameter name="dialogMessage" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[Dialog message.]]></description>
-              </parameter>
             </parameters>
           </function>
           <function name="showWarningDialog" varargs="true">
