@@ -20,6 +20,7 @@ package com.servoy.extensions.plugins.window.popup.swing;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.DefaultFocusTraversalPolicy;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Insets;
@@ -136,10 +137,18 @@ public class SwingPopupShower implements IPopupShower
 			this.window.setUndecorated(true);
 			this.window.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
-			IFormUI formUI = form.getFormUI();
+			final IFormUI formUI = form.getFormUI();
 
 			window.getContentPane().setLayout(new BorderLayout(0, 0));
 			window.getContentPane().add((Component)formUI, BorderLayout.CENTER);
+			window.setFocusTraversalPolicy(new DefaultFocusTraversalPolicy()
+			{
+				@Override
+				public Component getComponentBefore(Container aContainer, Component aComponent)
+				{
+					return ((Container)formUI).getFocusTraversalPolicy().getComponentBefore((Container)formUI, (Component)formUI);
+				}
+			});
 			window.pack();
 			if (elementToShowRelatedTo != null)
 			{
