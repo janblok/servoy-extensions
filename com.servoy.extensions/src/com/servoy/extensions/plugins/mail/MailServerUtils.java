@@ -32,6 +32,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
+import javax.mail.internet.MimeUtility;
 
 import com.servoy.extensions.plugins.mail.client.Attachment;
 import com.servoy.extensions.plugins.mail.client.MailMessage;
@@ -240,7 +241,9 @@ public class MailServerUtils
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		Utils.streamCopy(is, baos);
 		is.close();
-		return new Attachment(messagePart.getFileName(), baos.toByteArray(), isAttachmentEmbedded(messagePart));
+		// currenty seems to be enough for deconding attachment file name;
+		// we might have to use Normalizer.normalize(decoded, Normalizer.Form.NFC) in the future
+		return new Attachment(MimeUtility.decodeText(messagePart.getFileName()), baos.toByteArray(), isAttachmentEmbedded(messagePart));
 	}
 
 	public static String createAddressString(Address[] addresses)
