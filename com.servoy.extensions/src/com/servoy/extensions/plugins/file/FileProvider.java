@@ -1607,7 +1607,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			File fileObj = FileChooserUtils.getAReadFile(currentWindow, f, JFileChooser.FILES_ONLY, null);
 
-			if (file != null) // !cancelled
+			if (fileObj != null) // !cancelled
 			{
 				return readTXTFile(charsetname, new FileInputStream(fileObj));
 			}
