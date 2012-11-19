@@ -41,14 +41,14 @@ public class JSClient implements IScriptable, IConstantsObject
 	/**
 	 * Constant that is returned as a JSEvent type when in the callback method when it executed normally.
 	 * 
-	 * @sampleas js_getClientID()
+	 * @sampleas js_shutdown()
 	 */
 	public static final String CALLBACK_EVENT = "headlessCallback"; //$NON-NLS-1$
 
 	/**
-	 * Constant that is returned as a JSEvent type when in the callback method when an exception occured.
+	 * Constant that is returned as a JSEvent type when in the callback method when an exception occurred.
 	 * 
-	 * @sampleas js_getClientID()
+	 * @sampleas js_shutdown()
 	 */
 	public static final String CALLBACK_EXCEPTION_EVENT = "headlessExceptionCallback"; //$NON-NLS-1$
 
@@ -66,26 +66,20 @@ public class JSClient implements IScriptable, IConstantsObject
 	}
 
 	/**
-	 * gets the id of the client
-	 *
+	 * Gets the id of the client.
+	 * 
+	 * This client id can be used to find the client from the headless client plugin.
+	 * Note that this client id is not the same id as the id displayed on the Aplicationb Server admin page.
+	 * 
 	 * @sample
-	 * if (jsclient && jsclient.isValid())
-	 * {
-	 * 	/*Queue a method where the callback can do something like this
-	 * 	if (event.getType() == JSClient.CALLBACK_EVENT)
-	 * 	{
-	 * 		application.output("callback data, name: " + event.data);
-	 * 	}
-	 * 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
-	 * 	{
-	 * 		application.output("exception callback, name: " + event.data);
-	 * 	}*&#47;
-	 * 	var x = new Object();
-	 * 	x.name = 'remote1';
-	 * 	x.number = 10;
-	 * 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
-	 * 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
+	 * var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
+	 * var clientID = headlessClient.getClientID()
+	 * ....
+	 * headlessClient = plugins.headlessclient.getClient(clientID);
+	 * if (headlessClient != null && headlessClient.isValid()) {
+	 * 	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
 	 * }
+	 *
 	 */
 	public String js_getClientID()
 	{
@@ -101,7 +95,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * the exception as the JSEvent data object with the JSEvent.getType() value of JSClient.CALLBACK_EXCEPTION_EVENT
 	 * The second argument that is give back is the JSClient instance that did the call.
 	 * 
-	 * @sampleas js_getClientID()
+	 * @sampleas js_shutdown()
 	 * 
 	 * @param contextName The context of the given method, null if it is global method or a form name for a form method.
 	 * @param methodName The method name.
@@ -195,7 +189,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	/**
 	 * returns true if this client is still valid/usable.
 	 *
-	 * @sampleas js_getClientID()
+	 * @sampleas js_shutdown()
 	 */
 	public boolean js_isValid()
 	{
@@ -216,20 +210,30 @@ public class JSClient implements IScriptable, IConstantsObject
 	@Deprecated
 	public void js_shutDown(boolean force)
 	{
-		try
-		{
-			headlessServer.shutDown(clientID, force);
-		}
-		catch (Exception ex)
-		{
-			Debug.error(ex);
-		}
+		js_shutdown(force);
 	}
 
 	/**
 	 * closes the client.
 	 *
-	 * @sampleas js_getClientID()
+	 * @sample
+	 * if (jsclient && jsclient.isValid())
+	 * {
+	 * 	/*Queue a method where the callback can do something like this
+	 * 	if (event.getType() == JSClient.CALLBACK_EVENT)
+	 * 	{
+	 * 		application.output("callback data, name: " + event.data);
+	 * 	}
+	 * 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
+	 * 	{
+	 * 		application.output("exception callback, name: " + event.data);
+	 * 	}*&#47;
+	 * 	var x = new Object();
+	 * 	x.name = 'remote1';
+	 * 	x.number = 10;
+	 * 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
+	 * 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
+	 * }
 	 */
 	public void js_shutdown()
 	{
