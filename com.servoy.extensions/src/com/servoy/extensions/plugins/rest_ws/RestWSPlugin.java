@@ -37,7 +37,6 @@ import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
-import com.servoy.j2db.util.serialize.NativeObjectSerializer;
 
 /**
  * Servoy Server plugin for the RESTfull webservices servlet.
@@ -129,7 +128,7 @@ public class RestWSPlugin implements IServerPlugin
 	{
 		if (serializerWrapper == null)
 		{
-			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(false, false, true), true);
+			serializerWrapper = new JSONSerializerWrapper(false);
 		}
 		return serializerWrapper;
 	}

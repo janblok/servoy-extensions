@@ -30,7 +30,6 @@ import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
-import com.servoy.j2db.util.serialize.NativeObjectSerializer;
 
 public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 {
@@ -144,7 +143,7 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	{
 		if (serializerWrapper == null)
 		{
-			serializerWrapper = new JSONSerializerWrapper(new NativeObjectSerializer(true, true, false), false);
+			serializerWrapper = new JSONSerializerWrapper(false);
 		}
 		return serializerWrapper;
 	}
