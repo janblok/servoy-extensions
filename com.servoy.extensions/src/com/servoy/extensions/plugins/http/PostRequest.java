@@ -244,7 +244,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 				}
 				else
 				{
-					entity = new StringEntity(content, charset);
+					entity = new StringEntity(content != null ? content : "", charset);
 				}
 				content = null;
 			}
