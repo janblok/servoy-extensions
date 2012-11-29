@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.validators;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
 import com.servoy.j2db.dataprocessing.IColumnValidator;
 import com.servoy.j2db.persistence.IColumnTypes;
 

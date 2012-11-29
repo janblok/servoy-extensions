@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.validators;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.servoy.j2db.dataprocessing.IColumnValidator;
 import com.servoy.j2db.persistence.IColumnTypes;
 import com.servoy.j2db.util.Utils;
