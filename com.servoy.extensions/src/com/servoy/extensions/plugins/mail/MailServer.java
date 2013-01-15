@@ -45,6 +45,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import com.servoy.base.util.ITagResolver;
 import com.servoy.extensions.plugins.mail.client.Attachment;
 import com.servoy.extensions.plugins.mail.client.MailMessage;
 import com.servoy.j2db.Messages;
@@ -52,7 +53,6 @@ import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.ITagResolver;
 import com.servoy.j2db.util.Text;
 import com.servoy.j2db.util.UUID;
 

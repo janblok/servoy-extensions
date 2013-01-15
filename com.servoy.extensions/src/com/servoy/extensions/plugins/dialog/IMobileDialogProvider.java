@@ -17,7 +17,7 @@
 
 package com.servoy.extensions.plugins.dialog;
 
-import com.servoy.j2db.scripting.annotations.ServoyMobile;
+import com.servoy.base.scripting.annotations.ServoyMobile;
 
 /**
  * @author acostache
