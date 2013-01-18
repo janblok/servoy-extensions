@@ -68,68 +68,103 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 
 	/**
 	 * The numeric constant used to identify a daily period.
+	 * 
+	 * @sample
+	 * var c = plugins.amortization.newCalculation();
+	 * c.addPayment(500, new Date(2005, 1, 28), null, 
+	 * 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+	 * 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+	 * 
+	 * var c2 = plugins.amortization.newCalculation();
+	 * c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+	 * 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+	 * 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);
 	 */
 	public static final int PERIOD_DAILY = 365;
 
 	/**
 	 * The numeric constant used to identify a weekly period.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_WEEKLY = 52;
 
 	/**
 	 * The numeric constant used to identify a two-weekly period (once every two weeks).
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_TWO_WEEKLY = 26;
 
 	/**
 	 * The numeric constant used to identify a bi-monthly period (twice every month).
 	 * TODO: this period is not supported yet.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_BI_MONTHLY = 24;
 
 	/**
 	 * The numeric constant used to identify a four-weekly period (once every four weeks).
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_FOUR_WEEKLY = 13;
 
 	/**
 	 * The numeric constant used to identify a monthly period.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_MONTHLY = 12;
 
 	/**
 	 * The numeric constant used to identify a two-monthly period (once every two months).
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_TWO_MONTHLY = 6;
 
 	/**
 	 * The numeric constant used to identify a quarterly period (once every three months).
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_QUARTERLY = 4;
 
 	/**
 	 * The numeric constant used to identify a four-monthly period (once every four months).
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_FOUR_MONTHLY = 3;
 
 	/**
 	 * The numeric constant used to identify a bi-annual period (twice every year).
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_BI_ANNUALLY = 2;
 
 	/**
 	 * The numeric constant used to identify an annual period.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_ANNUALY = 1;
 
 	/**
 	 * The numeric constant used to identify that there is no period.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int PERIOD_NONE = 0;
 
 
 	/**
 	 * The numeric constant used to identify an unlimited number of repeated events.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int NUMBER_UNLIMITED = -1;
 
@@ -137,6 +172,8 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	/**
 	 * The numeric constant used to identify that the same start day should be used as
 	 * the day of the month of the starting date of the event.
+	 * 
+	 * @sampleas {@link #PERIOD_DAILY}
 	 */
 	public static final int STARTDAY_NORMAL = -1;
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -82,7 +82,7 @@ var value = cookie.getValue();]]></sample>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -169,7 +169,7 @@ var value = cookie.getValue();]]></sample>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1084,7 +1084,7 @@ switch(httpCode) {
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1485,7 +1485,7 @@ if (cookieSet)
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1678,7 +1678,7 @@ var httpCode = poster.doPost()]]></sample>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1811,7 +1811,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1993,7 +1993,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
             <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
-              <parameter name="userName">
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">

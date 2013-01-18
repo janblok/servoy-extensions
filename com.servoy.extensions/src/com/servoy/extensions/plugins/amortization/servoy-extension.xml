@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <servoyextension>
   <servoydoc>
     <plugins>
@@ -8,80 +8,184 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></description>
             <summary><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_ANNUALY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify an annual period.]]></description>
             <summary><![CDATA[The numeric constant used to identify an annual period.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_BI_ANNUALLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></description>
             <summary><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_BI_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).
 TODO: this period is not supported yet.]]></description>
             <summary><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_DAILY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a daily period.]]></description>
             <summary><![CDATA[The numeric constant used to identify a daily period.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_FOUR_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></description>
             <summary><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_FOUR_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></description>
             <summary><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a monthly period.]]></description>
             <summary><![CDATA[The numeric constant used to identify a monthly period.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_NONE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify that there is no period.]]></description>
             <summary><![CDATA[The numeric constant used to identify that there is no period.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_QUARTERLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></description>
             <summary><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_TWO_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></description>
             <summary><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_TWO_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></description>
             <summary><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="PERIOD_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a weekly period.]]></description>
             <summary><![CDATA[The numeric constant used to identify a weekly period.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
           <constant name="STARTDAY_NORMAL">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -89,7 +193,15 @@ TODO: this period is not supported yet.]]></description>
 the day of the month of the starting date of the event.]]></description>
             <summary><![CDATA[The numeric constant used to identify that the same start day should be used as
 the day of the month of the starting date of the event.]]></summary>
-            <sample/>
+            <sample><![CDATA[var c = plugins.amortization.newCalculation();
+c.addPayment(500, new Date(2005, 1, 28), null, 
+			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
+			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
+
+var c2 = plugins.amortization.newCalculation();
+c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
+			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
+			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
         </constants>
         <functions>

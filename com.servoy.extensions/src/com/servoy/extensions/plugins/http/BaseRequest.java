@@ -184,7 +184,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * @param errorCallbackMethod callbackMethod to be called if request errors out
 	 */
 
-	public void js_executeAsyncRequest(final String username, final String password, Function successCallbackMethod, Function errorCallbackMethod)
+	public void js_executeAsyncRequest(final String userName, final String password, Function successCallbackMethod, Function errorCallbackMethod)
 	{
 		final FunctionDefinition successFunctionDef = successCallbackMethod != null ? new FunctionDefinition(successCallbackMethod) : null;
 		final FunctionDefinition errorFunctionDef = errorCallbackMethod != null ? new FunctionDefinition(errorCallbackMethod) : null;
@@ -195,7 +195,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 			{
 				try
 				{
-					final Response response = executeRequest(username, password);
+					final Response response = executeRequest(userName, password);
 
 					if (successFunctionDef != null)
 					{
