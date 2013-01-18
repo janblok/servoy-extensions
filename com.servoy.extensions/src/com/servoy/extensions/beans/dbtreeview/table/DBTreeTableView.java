@@ -23,6 +23,7 @@ import java.util.Hashtable;
 import com.servoy.extensions.beans.dbtreeview.Binding;
 import com.servoy.extensions.beans.dbtreeview.DBTreeView;
 import com.servoy.extensions.beans.dbtreeview.IWicketTree;
+import com.servoy.extensions.beans.dbtreeview.RelationInfo;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 
@@ -52,7 +53,7 @@ public class DBTreeTableView extends DBTreeView
 
 	public static Class[] getAllReturnedTypes()
 	{
-		return new Class[] { Binding.class, Column.class };
+		return new Class[] { Binding.class, Column.class, RelationInfo.class };
 	}
 
 	public void addColumn(Column column)
