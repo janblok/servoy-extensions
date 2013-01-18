@@ -2477,7 +2477,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		{
 			final Object[] fileObjects = unwrap(f);
 			final Object[] serverObjects = unwrap(s);
-			if (fileObjects != null && serverObjects != null)
+			if (fileObjects != null && serverObjects != null && serverObjects.length > 0)
 			{
 				final File firstFile = getFileFromArg(fileObjects[0], true);
 				if (fileObjects.length != serverObjects.length)
@@ -2506,7 +2506,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 					final IFileService service = getFileService();
 					final String clientId = plugin.getClientPluginAccess().getClientID();
 					final RemoteFile[] remoteFiles = new RemoteFile[serverObjects.length];
-					if (serverObjects instanceof JSFile[])
+					if (serverObjects[0] instanceof JSFile)
 					{
 						for (int i = 0; i < serverObjects.length; i++)
 						{
