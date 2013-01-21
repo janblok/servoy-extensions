@@ -37,6 +37,7 @@ import org.apache.wicket.ajax.calldecorator.AjaxPostprocessingCallDecorator;
 import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.resources.CompressedResourceReference;
 import org.apache.wicket.model.IModel;
@@ -125,6 +126,34 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		if (bodyContainer != null)
 		{
 			bodyContainer.add(new StyleAppendingModifier(new Model<String>("height: 100%;"))); //$NON-NLS-1$
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.inmethod.grid.treegrid.TreeGrid#onJunctionLinkClicked(org.apache.wicket.ajax.AjaxRequestTarget, java.lang.Object)
+	 */
+	@Override
+	protected void onJunctionLinkClicked(AjaxRequestTarget target, Object node)
+	{
+		super.onJunctionLinkClicked(target, node);
+
+		// we need to clear all inputs of the form,
+		// because this onjunctionclicked is done by a form submit so all 
+		// fields have there rawInput set.
+		Form< ? > form = getForm();
+		if (form != null)
+		{
+			Form< ? > rootForm = form.getRootForm();
+			if (rootForm != null)
+			{
+				form = rootForm;
+			}
+			if (!form.hasError())
+			{
+				form.clearInput();
+			}
 		}
 	}
 
