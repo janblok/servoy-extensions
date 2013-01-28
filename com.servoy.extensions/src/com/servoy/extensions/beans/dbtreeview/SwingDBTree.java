@@ -18,6 +18,7 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetListener;
@@ -256,10 +257,9 @@ public class SwingDBTree extends JTree implements TableCellRenderer, ICompositeD
 
 	private void initDragAndDrop()
 	{
-		if (!dragEnabled)
+		if (!dragEnabled && !GraphicsEnvironment.isHeadless())
 		{
 			setDragEnabled(true);
-
 			TransferHandler treeTransferHandler = new CompositeTransferHandler();
 			setTransferHandler(treeTransferHandler);
 			new DropTarget(this, (DropTargetListener)treeTransferHandler);
