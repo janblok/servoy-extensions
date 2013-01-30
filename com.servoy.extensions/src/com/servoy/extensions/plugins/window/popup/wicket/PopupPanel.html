@@ -46,7 +46,8 @@ function positionPopup(popupId, elementId) {
 	//if necessary right align popup on related component
 	if (modalLeft + modalWidth > width) 
 	{ 
-		modalLeft= width - modalWidth +2 +scLeft; 
+		// automaticaly anchor left if it does not have room in right 
+		modalLeft = modalLeft - modalWidth + element.clientWidth + scLeft;
 	}
 	
 	//if necessary popup on the top of the related component
