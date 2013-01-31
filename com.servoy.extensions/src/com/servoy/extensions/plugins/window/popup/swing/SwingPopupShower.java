@@ -159,10 +159,20 @@ public class SwingPopupShower implements IPopupShower
 				Rectangle bounds = window.getGraphicsConfiguration().getBounds();
 
 				int screenWidth = (bounds.width + bounds.x - screenInsets.left - screenInsets.right);
+				int borerWidth = parent.getWidth() - elementToShowRelatedTo.getRootPane().getContentPane().getWidth();
+				int parentRightEdge = parent.getLocation().x + parent.getWidth() - borerWidth;
 				//if necessary right align popup on related component
-				if ((locationOnScreen.x + window.getSize().width) > screenWidth)
+				if ((locationOnScreen.x + window.getSize().width) > parentRightEdge)
 				{
-					locationOnScreen.x = screenWidth - window.getSize().width;
+					//element to show related to is half off screen or completely off screen to the right
+					if (locationOnScreen.x + elementToShowRelatedTo.getWidth() > screenWidth)
+					{
+						locationOnScreen.x = screenWidth - window.getWidth();
+					}
+					else
+					{// normal case 
+						locationOnScreen.x = parentRightEdge - window.getSize().width - borerWidth;
+					}
 				}
 
 				int screenHeight = (bounds.height + bounds.y - screenInsets.top - screenInsets.bottom);
