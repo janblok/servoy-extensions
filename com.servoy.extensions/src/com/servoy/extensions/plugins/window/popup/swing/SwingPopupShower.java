@@ -159,9 +159,10 @@ public class SwingPopupShower implements IPopupShower
 				Rectangle bounds = window.getGraphicsConfiguration().getBounds();
 
 				int screenWidth = (bounds.width + bounds.x - screenInsets.left - screenInsets.right);
-				int borerWidth = parent.getWidth() - elementToShowRelatedTo.getRootPane().getContentPane().getWidth();
+				int borerWidth = (parent.getWidth() - elementToShowRelatedTo.getRootPane().getContentPane().getWidth()) / 2;
 				int parentRightEdge = parent.getLocation().x + parent.getWidth() - borerWidth;
 				//if necessary right align popup on related component
+				if (locationOnScreen.x > parentRightEdge) locationOnScreen.x = parentRightEdge - elementToShowRelatedTo.getWidth();
 				if ((locationOnScreen.x + window.getSize().width) > parentRightEdge)
 				{
 					//element to show related to is half off screen or completely off screen to the right
@@ -170,14 +171,20 @@ public class SwingPopupShower implements IPopupShower
 						locationOnScreen.x = screenWidth - window.getWidth();
 					}
 					else
-					{// normal case 
-						locationOnScreen.x = parentRightEdge - window.getSize().width - borerWidth;
+					{// normal case , parent frame  is within the bounds of the screen
+						int elementRight = elementToShowRelatedTo.getLocationOnScreen().x + elementToShowRelatedTo.getWidth();
+						int halfOfRelatedElementInViewPort = 0;
+						//half ot he element is in the viewport , the rest you have to scroll to the right to see it 
+						if ((elementRight > parentRightEdge) && (elementToShowRelatedTo.getLocationOnScreen().x < parentRightEdge)) halfOfRelatedElementInViewPort = elementToShowRelatedTo.getLocationOnScreen().x +
+							elementToShowRelatedTo.getWidth() - parentRightEdge;
+						locationOnScreen.x = locationOnScreen.x - window.getSize().width + elementToShowRelatedTo.getWidth() - halfOfRelatedElementInViewPort;
 					}
 				}
 
 				int screenHeight = (bounds.height + bounds.y - screenInsets.top - screenInsets.bottom);
+				int parentBottomEdge = parent.getLocation().y + parent.getHeight() - borerWidth;
 				//if necessary popup on the top of the related component
-				if (window.getSize().height + locationOnScreen.y > screenHeight)
+				if (window.getSize().height + locationOnScreen.y > parentBottomEdge)
 				{
 					if (locationOnScreen.y - elementToShowRelatedTo.getHeight() - window.getSize().height > screenInsets.top)
 					{
@@ -185,13 +192,14 @@ public class SwingPopupShower implements IPopupShower
 					}
 					else
 					{
-						locationOnScreen.y = screenHeight - window.getSize().height;
+						locationOnScreen.y = parentBottomEdge - window.getSize().height;
 					}
 				}
 
 				if (locationOnScreen.x < bounds.x) locationOnScreen.x = bounds.x;
-
 				if (locationOnScreen.y < bounds.y) locationOnScreen.y = bounds.y;
+				//if the related element is way below screen still show the popup on the screen
+				if (locationOnScreen.y + window.getSize().height > screenHeight) locationOnScreen.y = screenHeight - window.getSize().height;
 
 				window.setLocation(locationOnScreen);
 			}
