@@ -167,7 +167,6 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
-	@Deprecated
 	private String getPageDataOldImplementation(String input)
 	{
 		Pair<String, String> data = getPageDataOldImpl(input, timeout);
@@ -175,7 +174,6 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		return data.getLeft();
 	}
 
-	@Deprecated
 	public static Pair<String, String> getPageDataOldImpl(String input, int timeout)
 	{
 		StringBuffer sb = new StringBuffer();
