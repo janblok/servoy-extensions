@@ -141,6 +141,31 @@ public class MailServer implements IMailService, IServerPlugin
 		return req;
 	}
 
+	public void sendBulkMail(String clientId, String to, String from, String subject, String rawMsgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties) throws RemoteException, Exception
+	{
+		if (!checkAccess(clientId)) return;
+
+		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
+		try
+		{
+			Thread.currentThread().setContextClassLoader(application.getPluginManager().getClassLoader());
+
+			MimeMessage message = createMessage(to, from, subject, rawMsgText, cc, bcc, attachments, overrideProperties);
+			message.setHeader("Precedence", "bulk");
+			Transport.send(message);
+		}
+		catch (Exception ex)
+		{
+			Debug.error("sendBulkMail " + ex.getMessage(), ex);
+			throw new Exception(ex.getMessage()); //not all exceptions are serializable
+		}
+		finally
+		{
+			Thread.currentThread().setContextClassLoader(saveCl);
+		}
+	}
+
 	public void sendMail(String clientId, String to, String from, String subject, String rawMsgText, String cc, String bcc, Attachment[] attachments,
 		String[] overrideProperties) throws RemoteException, Exception
 	{
@@ -149,188 +174,194 @@ public class MailServer implements IMailService, IServerPlugin
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
 		try
 		{
-
 			Thread.currentThread().setContextClassLoader(application.getPluginManager().getClassLoader());
-			// create a new Session object
-			Properties properties = overrideProperties(settings, overrideProperties);
-			Session session = Session.getInstance(properties, new SMTPAuthenticator(properties));
 
-			String encoding = properties.getProperty("mail.mime.encoding");
-			String charset = properties.getProperty("mail.mime.charset");
-			if (charset == null) charset = "UTF-8";
-
-			String plainTextContentType = "text/plain; charset=" + charset;
-			String htmlContentType = "text/html; charset=" + charset;
-
-			// create a new MimeMessage object (using the Session created above)
-			MimeMessage message = new MimeMessage(session);
-			String reply = null;
-			if (from == null)
-			{
-				message.setFrom();//defaults to "mail.from" mail property
-			}
-			else
-			{
-				String[] from_array = from.split(",");
-				message.setFrom(new InternetAddress(from_array[0]));
-				if (from_array.length > 1) reply = from_array[1];
-			}
-			if (reply != null) message.setReplyTo(new InternetAddress[] { new InternetAddress(reply) });
-			message.setSentDate(new Date());
-			String overrideAddress = properties.getProperty("mail.development.override.address");
-			String overrideFeedback = null;
-			if (overrideAddress != null)
-			{
-				addRecipients(message, overrideAddress, Message.RecipientType.TO);
-				overrideFeedback = " (Override: TO=" + to + ", CC: " + (cc == null ? cc : "") + ", BCC: " + (bcc == null ? bcc : "") + ")";
-			}
-			else
-			{
-				addRecipients(message, to, Message.RecipientType.TO);
-				addRecipients(message, cc, Message.RecipientType.CC);
-				addRecipients(message, bcc, Message.RecipientType.BCC);
-			}
-
-			String sub = (subject == null ? Messages.getString("servoy.plugin.mailserver.defaultsubject") : subject);
-			if (overrideFeedback != null) sub = sub + overrideFeedback;
-			message.setSubject(sub, charset);
-
-			String msgText = (rawMsgText == null) ? "" : rawMsgText.trim();
-
-			int htmlIndex = msgText.toLowerCase().indexOf("<html");
-			boolean hasHTML = (htmlIndex != -1);
-			boolean hasPlain = !hasHTML || htmlIndex > 0;
-
-			String plain = hasHTML ? msgText.substring(0, htmlIndex) : msgText;
-			String html = hasHTML ? msgText.substring(htmlIndex) : null;
-
-			// Make html multipart if it contains embedded images.
-			MimeMultipart htmlMultipart = null;
-			if (hasHTML && attachments != null && attachments.length > 0)
-			{
-				// Add embedded attachments.
-				EmbeddedImageTagResolver resolver = new EmbeddedImageTagResolver(attachments);
-				html = Text.processTags(html, resolver);
-				List<MimeBodyPart> embeddedImages = resolver.getMimeBodyParts();
-				if (embeddedImages.size() > 0)
-				{
-					htmlMultipart = new MimeMultipart("related");
-					MimeBodyPart htmlBodyPart = new MimeBodyPart();
-
-					htmlBodyPart.setContent(html, htmlContentType);
-					if (encoding != null)
-					{
-						htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding);
-					}
-					htmlMultipart.addBodyPart(htmlBodyPart);
-
-					Iterator<MimeBodyPart> iterator = embeddedImages.iterator();
-					while (iterator.hasNext())
-					{
-						htmlMultipart.addBodyPart(iterator.next());
-					}
-				}
-			}
-
-			// Make message multipart if needed (only html with embeded images or combined plain + html messages).
-			MimeMultipart messageMultipart = null;
-			if (htmlMultipart != null && !hasPlain)
-			{
-				messageMultipart = htmlMultipart;
-			}
-			else if (hasPlain && hasHTML)
-			{
-				messageMultipart = new MimeMultipart("alternative");
-
-				MimeBodyPart textBodyPart = new MimeBodyPart();
-				textBodyPart.setContent(plain, plainTextContentType);
-				if (encoding != null)
-				{
-					textBodyPart.setHeader("Content-Transfer-Encoding", encoding);
-				}
-				messageMultipart.addBodyPart(textBodyPart);
-
-				MimeBodyPart htmlBodyPart = new MimeBodyPart();
-				if (htmlMultipart != null)
-				{
-					htmlBodyPart.setContent(htmlMultipart);
-				}
-				else
-				{
-					htmlBodyPart.setContent(html, htmlContentType);
-					if (encoding != null)
-					{
-						htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding);
-					}
-				}
-				messageMultipart.addBodyPart(htmlBodyPart);
-			}
-
-			// Add attachments that were not embedded.
-			MimeMultipart mixedMultipart = null;
-
-			for (int i = 0; attachments != null && i < attachments.length; i++)
-			{
-				Attachment attachment = attachments[i];
-				if (attachment == null || attachment.isEmbedded()) continue;
-
-				if (mixedMultipart == null)
-				{
-					mixedMultipart = new MimeMultipart("mixed");
-					MimeBodyPart messageBodyPart = new MimeBodyPart();
-					if (messageMultipart != null)
-					{
-						messageBodyPart.setContent(messageMultipart);
-					}
-					else
-					{
-						messageBodyPart.setContent(msgText, hasHTML ? htmlContentType : plainTextContentType);
-						if (encoding != null)
-						{
-							messageBodyPart.setHeader("Content-Transfer-Encoding", encoding);
-						}
-					}
-					mixedMultipart.addBodyPart(messageBodyPart);
-				}
-
-				MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-				attachmentBodyPart.setDisposition(Part.ATTACHMENT);
-				attachmentBodyPart.setDataHandler(new DataHandler(new AttachmentDataSource(attachment)));
-				String fileName = attachment.getName();
-				fileName = MimeUtility.encodeText(fileName, charset, null);
-				attachmentBodyPart.setFileName(fileName);
-				mixedMultipart.addBodyPart(attachmentBodyPart);
-			}
-
-
-			if (mixedMultipart != null)
-			{
-				message.setContent(mixedMultipart);
-			}
-			else if (messageMultipart != null)
-			{
-				message.setContent(messageMultipart);
-			}
-			else
-			{
-				message.setContent(msgText, hasHTML ? htmlContentType : plainTextContentType);
-				if (encoding != null)
-				{
-					message.setHeader("Content-Transfer-Encoding", encoding);
-				}
-			}
-
+			MimeMessage message = createMessage(to, from, subject, rawMsgText, cc, bcc, attachments, overrideProperties);
 			Transport.send(message);
 		}
 		catch (Exception ex)
 		{
-			Debug.error("SMTPSend " + ex.getMessage(), ex);
+			Debug.error("sendMail " + ex.getMessage(), ex);
 			throw new Exception(ex.getMessage()); //not all exceptions are serializable
 		}
 		finally
 		{
 			Thread.currentThread().setContextClassLoader(saveCl);
 		}
+	}
+
+	private MimeMessage createMessage(String to, String from, String subject, String rawMsgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties) throws Exception
+	{
+		// create a new Session object
+		Properties properties = overrideProperties(settings, overrideProperties);
+		Session session = Session.getInstance(properties, new SMTPAuthenticator(properties));
+
+		String encoding = properties.getProperty("mail.mime.encoding");
+		String charset = properties.getProperty("mail.mime.charset");
+		if (charset == null) charset = "UTF-8";
+
+		String plainTextContentType = "text/plain; charset=" + charset;
+		String htmlContentType = "text/html; charset=" + charset;
+
+		// create a new MimeMessage object (using the Session created above)
+		MimeMessage message = new MimeMessage(session);
+		String reply = null;
+		if (from == null)
+		{
+			message.setFrom();//defaults to "mail.from" mail property
+		}
+		else
+		{
+			String[] from_array = from.split(",");
+			message.setFrom(new InternetAddress(from_array[0]));
+			if (from_array.length > 1) reply = from_array[1];
+		}
+		if (reply != null) message.setReplyTo(new InternetAddress[] { new InternetAddress(reply) });
+		message.setSentDate(new Date());
+		String overrideAddress = properties.getProperty("mail.development.override.address");
+		String overrideFeedback = null;
+		if (overrideAddress != null)
+		{
+			addRecipients(message, overrideAddress, Message.RecipientType.TO);
+			overrideFeedback = " (Override: TO=" + to + ", CC: " + (cc == null ? cc : "") + ", BCC: " + (bcc == null ? bcc : "") + ")";
+		}
+		else
+		{
+			addRecipients(message, to, Message.RecipientType.TO);
+			addRecipients(message, cc, Message.RecipientType.CC);
+			addRecipients(message, bcc, Message.RecipientType.BCC);
+		}
+
+		String sub = (subject == null ? Messages.getString("servoy.plugin.mailserver.defaultsubject") : subject);
+		if (overrideFeedback != null) sub = sub + overrideFeedback;
+		message.setSubject(sub, charset);
+
+		String msgText = (rawMsgText == null) ? "" : rawMsgText.trim();
+
+		int htmlIndex = msgText.toLowerCase().indexOf("<html");
+		boolean hasHTML = (htmlIndex != -1);
+		boolean hasPlain = !hasHTML || htmlIndex > 0;
+
+		String plain = hasHTML ? msgText.substring(0, htmlIndex) : msgText;
+		String html = hasHTML ? msgText.substring(htmlIndex) : null;
+
+		// Make html multipart if it contains embedded images.
+		MimeMultipart htmlMultipart = null;
+		if (hasHTML && attachments != null && attachments.length > 0)
+		{
+			// Add embedded attachments.
+			EmbeddedImageTagResolver resolver = new EmbeddedImageTagResolver(attachments);
+			html = Text.processTags(html, resolver);
+			List<MimeBodyPart> embeddedImages = resolver.getMimeBodyParts();
+			if (embeddedImages.size() > 0)
+			{
+				htmlMultipart = new MimeMultipart("related");
+				MimeBodyPart htmlBodyPart = new MimeBodyPart();
+
+				htmlBodyPart.setContent(html, htmlContentType);
+				if (encoding != null)
+				{
+					htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding);
+				}
+				htmlMultipart.addBodyPart(htmlBodyPart);
+
+				Iterator<MimeBodyPart> iterator = embeddedImages.iterator();
+				while (iterator.hasNext())
+				{
+					htmlMultipart.addBodyPart(iterator.next());
+				}
+			}
+		}
+
+		// Make message multipart if needed (only html with embeded images or combined plain + html messages).
+		MimeMultipart messageMultipart = null;
+		if (htmlMultipart != null && !hasPlain)
+		{
+			messageMultipart = htmlMultipart;
+		}
+		else if (hasPlain && hasHTML)
+		{
+			messageMultipart = new MimeMultipart("alternative");
+
+			MimeBodyPart textBodyPart = new MimeBodyPart();
+			textBodyPart.setContent(plain, plainTextContentType);
+			if (encoding != null)
+			{
+				textBodyPart.setHeader("Content-Transfer-Encoding", encoding);
+			}
+			messageMultipart.addBodyPart(textBodyPart);
+
+			MimeBodyPart htmlBodyPart = new MimeBodyPart();
+			if (htmlMultipart != null)
+			{
+				htmlBodyPart.setContent(htmlMultipart);
+			}
+			else
+			{
+				htmlBodyPart.setContent(html, htmlContentType);
+				if (encoding != null)
+				{
+					htmlBodyPart.setHeader("Content-Transfer-Encoding", encoding);
+				}
+			}
+			messageMultipart.addBodyPart(htmlBodyPart);
+		}
+
+		// Add attachments that were not embedded.
+		MimeMultipart mixedMultipart = null;
+
+		for (int i = 0; attachments != null && i < attachments.length; i++)
+		{
+			Attachment attachment = attachments[i];
+			if (attachment == null || attachment.isEmbedded()) continue;
+
+			if (mixedMultipart == null)
+			{
+				mixedMultipart = new MimeMultipart("mixed");
+				MimeBodyPart messageBodyPart = new MimeBodyPart();
+				if (messageMultipart != null)
+				{
+					messageBodyPart.setContent(messageMultipart);
+				}
+				else
+				{
+					messageBodyPart.setContent(msgText, hasHTML ? htmlContentType : plainTextContentType);
+					if (encoding != null)
+					{
+						messageBodyPart.setHeader("Content-Transfer-Encoding", encoding);
+					}
+				}
+				mixedMultipart.addBodyPart(messageBodyPart);
+			}
+
+			MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+			attachmentBodyPart.setDisposition(Part.ATTACHMENT);
+			attachmentBodyPart.setDataHandler(new DataHandler(new AttachmentDataSource(attachment)));
+			String fileName = attachment.getName();
+			fileName = MimeUtility.encodeText(fileName, charset, null);
+			attachmentBodyPart.setFileName(fileName);
+			mixedMultipart.addBodyPart(attachmentBodyPart);
+		}
+
+
+		if (mixedMultipart != null)
+		{
+			message.setContent(mixedMultipart);
+		}
+		else if (messageMultipart != null)
+		{
+			message.setContent(messageMultipart);
+		}
+		else
+		{
+			message.setContent(msgText, hasHTML ? htmlContentType : plainTextContentType);
+			if (encoding != null)
+			{
+				message.setHeader("Content-Transfer-Encoding", encoding);
+			}
+		}
+		return message;
 	}
 
 	private void addRecipients(Message message, String recp, Message.RecipientType type) throws Exception

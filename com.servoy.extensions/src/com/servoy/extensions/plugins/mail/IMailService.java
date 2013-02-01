@@ -38,6 +38,12 @@ public interface IMailService extends Remote
 	public void sendMail(String clientId, String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
 		String[] overrideProperties) throws RemoteException, Exception;
 
+	/**
+	 * Same as sendMail but marked as buld, so no "out of office" replies are sent
+	 */
+	public void sendBulkMail(String clientId, String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties) throws RemoteException, Exception;
+
 	public MailMessage[] receiveMail(String clientId, String userName, String password, boolean leaveMsgsOnServer, int recieveMode,
 		Date onlyRecieveMsgWithSentDate, String[] overrideProperties) throws RemoteException;
 
