@@ -168,7 +168,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	@Deprecated
-	public String getPageDataOldImplementation(String input)
+	private String getPageDataOldImplementation(String input)
 	{
 		Pair<String, String> data = getPageDataOldImpl(input, timeout);
 		lastPageEncoding = data.getRight();
