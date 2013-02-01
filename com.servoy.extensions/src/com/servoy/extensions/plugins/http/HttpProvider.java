@@ -62,6 +62,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -166,9 +167,19 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
+	@Deprecated
 	public String getPageDataOldImplementation(String input)
 	{
+		Pair<String, String> data = getPageDataOldImpl(input, timeout);
+		lastPageEncoding = data.getRight();
+		return data.getLeft();
+	}
+
+	@Deprecated
+	public static Pair<String, String> getPageDataOldImpl(String input, int timeout)
+	{
 		StringBuffer sb = new StringBuffer();
+		String charset = null;
 		try
 		{
 			URL url = new URL(input);
@@ -176,7 +187,6 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 			if (timeout >= 0) connection.setConnectTimeout(timeout);
 			InputStream is = connection.getInputStream();
 			final String type = connection.getContentType();
-			String charset = null;
 			if (type != null)
 			{
 				final String[] parts = type.split(";");
@@ -187,7 +197,6 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 					if (index != -1) charset = t.substring(index + 8);
 				}
 			}
-			lastPageEncoding = charset;
 			InputStreamReader isr = null;
 			if (charset != null) isr = new InputStreamReader(is, charset);
 			else isr = new InputStreamReader(is);
@@ -205,7 +214,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		{
 			Debug.error(e);
 		}
-		return sb.toString();
+		return new Pair(sb.toString(), charset);
 	}
 
 	private DefaultHttpClient getOrCreateHTTPclient(String name, String url)
