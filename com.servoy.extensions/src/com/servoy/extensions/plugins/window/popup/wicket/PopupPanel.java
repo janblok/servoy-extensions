@@ -26,7 +26,10 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
+import com.servoy.j2db.dataprocessing.IFoundSet;
+import com.servoy.j2db.persistence.Part;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.WebRuntimeWindow;
 import com.servoy.j2db.server.headlessclient.yui.YUILoader;
 import com.servoy.j2db.util.ServoyException;
 
@@ -52,7 +55,25 @@ public class PopupPanel extends Panel
 		add((Component)form.getFormUI());
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
-		add(new SimpleAttributeModifier("style", "display:none;position:absolute;z-index:999;width:" + size.width + "px;height:" + size.height + "px"));
+		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:999;"); //$NON-NLS-1$
+		int height = size.height;
+		int formView = form.getView();
+		if (formView == IForm.LIST_VIEW || formView == FormController.LOCKED_LIST_VIEW)
+		{
+			IFoundSet formModel = ((FormController)form).getFormModel();
+			if (formModel != null)
+			{
+				FormController fc = (FormController)form;
+				int extraHeight = fc.getPartHeight(Part.HEADER) + fc.getPartHeight(Part.TITLE_HEADER) + fc.getPartHeight(Part.FOOTER) +
+					fc.getPartHeight(Part.TITLE_FOOTER);
+				height = (height - extraHeight) * formModel.getSize() + extraHeight;
+				WebRuntimeWindow window = (WebRuntimeWindow)clientPluginAccess.getCurrentRuntimeWindow();
+				if (height > window.getHeight()) height = window.getHeight();
+			}
+		}
+
+		style.append("width:").append(size.width).append("px;height:").append(height).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		add(new SimpleAttributeModifier("style", style.toString())); //$NON-NLS-1$
 	}
 
 	/*
