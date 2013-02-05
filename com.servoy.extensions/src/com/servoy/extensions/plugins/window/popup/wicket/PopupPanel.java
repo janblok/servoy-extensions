@@ -31,6 +31,7 @@ import com.servoy.j2db.persistence.Part;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.WebRuntimeWindow;
 import com.servoy.j2db.server.headlessclient.yui.YUILoader;
+import com.servoy.j2db.ui.ISupportWebBounds;
 import com.servoy.j2db.util.ServoyException;
 
 /**
@@ -46,7 +47,7 @@ public class PopupPanel extends Panel
 	/**
 	 * @param id
 	 */
-	public PopupPanel(String id, IForm form, Component elementToShowRelatedTo, IClientPluginAccess clientPluginAccess)
+	public PopupPanel(String id, IForm form, Component elementToShowRelatedTo, IClientPluginAccess clientPluginAccess, int width, int height)
 	{
 		super(id);
 		this.elementToShowRelatedTo = elementToShowRelatedTo;
@@ -55,24 +56,33 @@ public class PopupPanel extends Panel
 		add((Component)form.getFormUI());
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
-		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:999;"); //$NON-NLS-1$
-		int height = size.height;
-		int formView = form.getView();
-		if (formView == IForm.LIST_VIEW || formView == FormController.LOCKED_LIST_VIEW)
+
+		StringBuilder style = new StringBuilder("display:none;background-color:white;position:absolute;z-index:999;"); //$NON-NLS-1$
+		int popupHeight;
+		if (height > -1) popupHeight = height;
+		else
 		{
-			IFoundSet formModel = ((FormController)form).getFormModel();
-			if (formModel != null)
+			popupHeight = size.height;
+			int formView = form.getView();
+			if (formView == IForm.LIST_VIEW || formView == FormController.LOCKED_LIST_VIEW)
 			{
-				FormController fc = (FormController)form;
-				int extraHeight = fc.getPartHeight(Part.HEADER) + fc.getPartHeight(Part.TITLE_HEADER) + fc.getPartHeight(Part.FOOTER) +
-					fc.getPartHeight(Part.TITLE_FOOTER);
-				height = (height - extraHeight) * formModel.getSize() + extraHeight;
-				WebRuntimeWindow window = (WebRuntimeWindow)clientPluginAccess.getCurrentRuntimeWindow();
-				if (height > window.getHeight()) height = window.getHeight();
+				IFoundSet formModel = ((FormController)form).getFormModel();
+				if (formModel != null)
+				{
+					FormController fc = (FormController)form;
+					int extraHeight = fc.getPartHeight(Part.HEADER) + fc.getPartHeight(Part.TITLE_HEADER) + fc.getPartHeight(Part.FOOTER) +
+						fc.getPartHeight(Part.TITLE_FOOTER);
+					popupHeight = (popupHeight - extraHeight) * formModel.getSize() + extraHeight;
+					WebRuntimeWindow window = (WebRuntimeWindow)clientPluginAccess.getCurrentRuntimeWindow();
+					int maxHeight = elementToShowRelatedTo instanceof ISupportWebBounds ? window.getHeight() -
+						(int)((ISupportWebBounds)elementToShowRelatedTo).getWebBounds().getY() -
+						(int)((ISupportWebBounds)elementToShowRelatedTo).getWebBounds().getHeight() : window.getHeight();
+					if (popupHeight > maxHeight) popupHeight = maxHeight;
+				}
 			}
 		}
 
-		style.append("width:").append(size.width).append("px;height:").append(height).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		style.append("width:").append(width > -1 ? width : size.width).append("px;height:").append(popupHeight).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		add(new SimpleAttributeModifier("style", style.toString())); //$NON-NLS-1$
 	}
 

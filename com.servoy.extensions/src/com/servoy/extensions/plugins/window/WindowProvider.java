@@ -653,8 +653,25 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @param form the form to show
 	 * @param scope the scope to put retval into
 	 * @param dataproviderID the dataprovider of scope to fill
+	 * 
 	 */
 	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Object scope, String dataproviderID)
+	{
+		js_showFormPopup(elementToShowRelatedTo, form, scope, dataproviderID, -1, -1);
+	}
+
+	/**
+	 * @clonedesc js_showFormPopup(IComponent, IForm, Object, String)
+	 * @sampleas js_showFormPopup(IComponent, IForm, Object, String)
+	 * 
+	 * @param elementToShowRelatedTo element to show related to or null to center in screen
+	 * @param form the form to show
+	 * @param scope the scope to put retval into
+	 * @param dataproviderID the dataprovider of scope to fill
+	 * @param width popup width
+	 * @param height popup height
+	 */
+	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Object scope, String dataproviderID, int width, int height)
 	{
 		Scriptable scriptable = null;
 		if (scope instanceof Scriptable)
@@ -669,11 +686,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		{
 			if (getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
-				popupShower = new WicketPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scriptable, dataproviderID);
+				popupShower = new WicketPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scriptable, dataproviderID, width, height);
 			}
 			else if (plugin.isSwingClient())
 			{
-				popupShower = new SwingPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scriptable, dataproviderID);
+				popupShower = new SwingPopupShower(getClientPluginAccess(), elementToShowRelatedTo, form, scriptable, dataproviderID, width, height);
 			}
 			else
 			{

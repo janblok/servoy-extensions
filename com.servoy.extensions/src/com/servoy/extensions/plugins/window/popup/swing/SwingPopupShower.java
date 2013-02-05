@@ -70,6 +70,7 @@ public class SwingPopupShower implements IPopupShower
 	private Component glassPane;
 	private PopupMouseListener mouseListener;
 	private WindowListener windowListener;
+	private final int width, height;
 
 	/**
 	 * @param elementToShowRelatedTo
@@ -78,7 +79,8 @@ public class SwingPopupShower implements IPopupShower
 	 * @param dataprovider
 	 */
 	@SuppressWarnings("nls")
-	public SwingPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
+	public SwingPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider,
+		int width, int height)
 	{
 		this.clientPluginAccess = clientPluginAccess;
 		if (elementToShowRelatedTo instanceof JComponent)
@@ -88,6 +90,8 @@ public class SwingPopupShower implements IPopupShower
 		this.form = form;
 		this.scope = scope;
 		this.dataprovider = dataprovider;
+		this.width = width;
+		this.height = height;
 	}
 
 	/*
@@ -149,7 +153,12 @@ public class SwingPopupShower implements IPopupShower
 					return ((Container)formUI).getFocusTraversalPolicy().getComponentBefore((Container)formUI, (Component)formUI);
 				}
 			});
-			window.pack();
+
+			if (width > -1 && height > -1) window.setSize(width, height);
+			else if (width > -1) window.setSize(width, window.getPreferredSize().height);
+			else if (height > -1) window.setSize(window.getPreferredSize().width, height);
+			else window.pack();
+
 			if (elementToShowRelatedTo != null)
 			{
 				Point locationOnScreen = elementToShowRelatedTo.getLocationOnScreen();
