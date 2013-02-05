@@ -51,6 +51,7 @@ public class WicketPopupShower implements IPopupShower
 	private final IForm form;
 	private final Scriptable scope;
 	private final String dataprovider;
+	private final int width, height;
 
 	private static final ResourceReference TRANSPARENT_GIF = new ResourceReference(WicketPopupShower.class, "res/transparent.gif"); //$NON-NLS-1$
 
@@ -62,7 +63,8 @@ public class WicketPopupShower implements IPopupShower
 	 * @param clientPluginAccess 
 	 */
 	@SuppressWarnings("nls")
-	public WicketPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider)
+	public WicketPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider,
+		int width, int height)
 	{
 		this.clientPluginAccess = clientPluginAccess;
 		if (elementToShowRelatedTo instanceof Component)
@@ -72,6 +74,8 @@ public class WicketPopupShower implements IPopupShower
 		this.form = form;
 		this.scope = scope;
 		this.dataprovider = dataprovider;
+		this.width = width;
+		this.height = height;
 	}
 
 	/*
@@ -89,7 +93,7 @@ public class WicketPopupShower implements IPopupShower
 		{
 			repeatingView.removeComponent("popup");
 		}
-		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo, clientPluginAccess));
+		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo, clientPluginAccess, width, height));
 
 		final WebMarkupContainer container = new WebMarkupContainer(repeatingView.newChildId());
 		StringBuilder containerStyle = new StringBuilder("position:absolute;z-index:990;top:0px;right:0px;bottom:0px;left:0px;");
