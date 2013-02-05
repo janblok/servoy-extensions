@@ -26,14 +26,23 @@ function centerPopup(popupId) {
 }
 function positionPopup(popupId, elementId) {
 	var element = document.getElementById(elementId);
+	if(element.parentElement.id == (element.id + "_wrapper"))
+	{// button has a wrapper div with extra width due to borders 
+		element = element.parentElement;
+	}
 	var jsCompReg = YAHOO.util.Dom.getRegion(element);
 	var popup = document.getElementById(popupId);
+	var navBar =  $(popup).find('div[id^="default__navigator"]')[0]
+	var navBarWidth = 0;
+	if(navBar != undefined){
+	navBarWidth = navBar.offsetWidth;
+	}
 	var width = Wicket.Window.getViewportWidth();
 	var height = Wicket.Window.getViewportHeight();
-	var modalWidth = parseInt(popup.style.width.substring(0, popup.style.width.indexOf("px")));
+	var modalWidth = navBarWidth + parseInt(popup.style.width.substring(0, popup.style.width.indexOf("px")));
 	var modalHeight = parseInt(popup.style.height.substring(0, popup.style.height.indexOf("px")));
-	var modalTop = jsCompReg.top + element.clientHeight + element.clientTop + 2;
-	var modalLeft = jsCompReg.left;
+	var modalTop = jsCompReg.top + element.offsetHeight;
+	var modalLeft = jsCompReg.left ;
 	var scTop = 0;
 	var scLeft = 0;
 	
@@ -47,17 +56,17 @@ function positionPopup(popupId, elementId) {
 	if (modalLeft + modalWidth > width) 
 	{ 
 		// automaticaly anchor left if it does not have room in right 
-		modalLeft = modalLeft - modalWidth + element.clientWidth + scLeft;
+		modalLeft = modalLeft - modalWidth + element.offsetWidth + scLeft ;
 	}
 	
 	//if necessary popup on the top of the related component
 	if (modalTop + modalHeight > height) 
 	{ 
-		if (modalTop - element.clientHeight - modalHeight -6 +scTop > 0) {
-			modalTop = modalTop - element.clientHeight - modalHeight -6 +scTop;
+		if (modalTop - element.clientHeight - modalHeight + scTop > 0) {
+			modalTop = modalTop - element.offsetHeight - modalHeight + scTop;
 		}
 		else {
-			modalTop = height - modalHeight -6 +scTop;
+			modalTop = height - modalHeight +scTop;
 		} 
 		
 	}
