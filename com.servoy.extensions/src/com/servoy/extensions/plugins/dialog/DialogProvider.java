@@ -94,11 +94,25 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	}
 
 	/**
+	 * @clonedesc js_showWarningDialog(String,String,String[])
+	 *
+	 * @sampleas js_showWarningDialog(String,String,String[])
+	 *
+	 * @param dialogTitle Dialog title.
+	 * @param dialogMessage Dialog message.
+	 */
+	public String js_showWarningDialog(String dialogTitle, String dialogMessage)
+	{
+		return js_showWarningDialog(dialogTitle, dialogMessage, (String[])null);
+	}
+
+	/**
 	 * @clonedesc js_showErrorDialog(String,String,String[])
 	 *
 	 * @sample
 	 * //show dialog
 	 * var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');
+	 * //var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed');
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
