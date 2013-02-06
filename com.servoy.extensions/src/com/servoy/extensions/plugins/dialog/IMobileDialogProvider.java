@@ -27,4 +27,6 @@ import com.servoy.base.scripting.annotations.ServoyMobile;
 public interface IMobileDialogProvider
 {
 	public String js_showWarningDialog(String dialogTitle, String dialogMessage, String... buttonsText);
+
+	public String js_showQuestionDialog(String dialogTitle, String dialogMessage, String... buttonsText);
 }
