@@ -146,6 +146,11 @@ public class WicketPopupShower implements IPopupShower
 	{
 		IPageContributor pageContributor = ((IWebClientPluginAccess)clientPluginAccess).getPageContributor();
 		IRepeatingView repeatingView = pageContributor.getRepeatingView();
+		Component popupComponent;
+		if ((popupComponent = repeatingView.getComponent("popup")) instanceof PopupPanel)
+		{
+			((PopupPanel)popupComponent).cleanup();
+		}
 		repeatingView.removeComponent("popup");
 		repeatingView.removeComponent("blocker");
 		try
