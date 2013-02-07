@@ -46,6 +46,7 @@ public class PopupPanel extends Panel
 	private final Component elementToShowRelatedTo;
 	private final String formName;
 	private final IClientPluginAccess clientPluginAccess;
+	private Component enclosingFormComponent;
 	private StyleAppendingModifier enclosingFormSizeBehavior;
 
 	/**
@@ -97,6 +98,7 @@ public class PopupPanel extends Panel
 		if (height < size.height) formStyle.append("min-height:").append(height).append("px;"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		enclosingFormSizeBehavior = null;
+		enclosingFormComponent = null;
 		if (formStyle.length() > 0)
 		{
 			((MarkupContainer)formUI).visitChildren(new IVisitor<Component>()
@@ -106,7 +108,8 @@ public class PopupPanel extends Panel
 				{
 					if ("servoywebform".equals(component.getId())) //$NON-NLS-1$
 					{
-						component.add(enclosingFormSizeBehavior = new StyleAppendingModifier(new Model<String>()
+						enclosingFormComponent = component;
+						enclosingFormComponent.add(enclosingFormSizeBehavior = new StyleAppendingModifier(new Model<String>()
 						{
 							private static final long serialVersionUID = 1L;
 
@@ -179,10 +182,11 @@ public class PopupPanel extends Panel
 
 	public void cleanup()
 	{
-		if (enclosingFormSizeBehavior != null)
+		if (enclosingFormSizeBehavior != null && enclosingFormComponent != null)
 		{
-			remove(enclosingFormSizeBehavior);
+			enclosingFormComponent.remove(enclosingFormSizeBehavior);
 			enclosingFormSizeBehavior = null;
+			enclosingFormComponent = null;
 		}
 	}
 }
