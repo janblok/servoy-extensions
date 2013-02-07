@@ -20,9 +20,11 @@ package com.servoy.extensions.plugins.window.popup.wicket;
 import java.awt.Dimension;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.behavior.SimpleAttributeModifier;
 import org.apache.wicket.markup.html.internal.HtmlHeaderContainer;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 
 import com.servoy.j2db.FormController;
 import com.servoy.j2db.IForm;
@@ -30,6 +32,7 @@ import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.persistence.Part;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.WebRuntimeWindow;
+import com.servoy.j2db.server.headlessclient.dataui.StyleAppendingModifier;
 import com.servoy.j2db.server.headlessclient.yui.YUILoader;
 import com.servoy.j2db.ui.ISupportWebBounds;
 import com.servoy.j2db.util.ServoyException;
@@ -53,11 +56,13 @@ public class PopupPanel extends Panel
 		this.elementToShowRelatedTo = elementToShowRelatedTo;
 		this.formName = form.getName();
 		this.clientPluginAccess = clientPluginAccess;
-		add((Component)form.getFormUI());
+		Component formUI = (Component)form.getFormUI();
+		add(formUI);
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
+		boolean isTransparent = ((FormController)form).getForm().getTransparent();
 
-		StringBuilder style = new StringBuilder("display:none;background-color:white;position:absolute;z-index:999;"); //$NON-NLS-1$
+		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:999;"); //$NON-NLS-1$
 		int popupHeight;
 		if (height > -1) popupHeight = height;
 		else
@@ -81,9 +86,41 @@ public class PopupPanel extends Panel
 				}
 			}
 		}
-
 		style.append("width:").append(width > -1 ? width : size.width).append("px;height:").append(popupHeight).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+		if (!isTransparent) style.append(";background-color:white;"); //$NON-NLS-1$
 		add(new SimpleAttributeModifier("style", style.toString())); //$NON-NLS-1$
+
+		final StringBuilder formStyle = new StringBuilder();
+		if (width < size.width) formStyle.append("min-width:").append(width).append("px;"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (height < size.height) formStyle.append("min-height:").append(height).append("px;"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (formStyle.length() > 0)
+		{
+			((MarkupContainer)formUI).visitChildren(new IVisitor<Component>()
+			{
+				@Override
+				public Object component(Component component)
+				{
+					if ("servoywebform".equals(component.getId())) //$NON-NLS-1$
+					{
+						component.add(new StyleAppendingModifier(new Model<String>()
+						{
+							private static final long serialVersionUID = 1L;
+
+							@Override
+							public String getObject()
+							{
+								return formStyle.toString();
+							}
+						}));
+
+						return IVisitor.STOP_TRAVERSAL;
+					}
+
+					return IVisitor.CONTINUE_TRAVERSAL;
+				}
+			});
+		}
 	}
 
 	/*
