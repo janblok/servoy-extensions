@@ -9928,6 +9928,42 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               </parameter>
             </parameters>
           </function>
+          <function name="showFormPopup">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
+              <argumentType typecode="com.servoy.j2db.IForm"/>
+              <argumentType typecode="java.lang.Object"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.]]></description>
+            <summary><![CDATA[Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.]]></summary>
+            <sample><![CDATA[//Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
+//do call closeFormPopup(ordervalue) from the orderPicker form]]></sample>
+            <parameters>
+              <parameter name="elementToShowRelatedTo" type="com.servoy.j2db.documentation.scripting.docs.IRuntimeComponent" typecode="com.servoy.j2db.ui.IComponent">
+                <description><![CDATA[element to show related to or null to center in screen]]></description>
+              </parameter>
+              <parameter name="form" type="com.servoy.j2db.documentation.scripting.docs.Form" typecode="com.servoy.j2db.IForm">
+                <description><![CDATA[the form to show]]></description>
+              </parameter>
+              <parameter name="scope" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
+                <description><![CDATA[the scope to put retval into]]></description>
+              </parameter>
+              <parameter name="dataproviderID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the dataprovider of scope to fill]]></description>
+              </parameter>
+              <parameter name="width" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[popup width]]></description>
+              </parameter>
+              <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
+                <description><![CDATA[popup height]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function deprecated="true" name="showPopupMenu">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
