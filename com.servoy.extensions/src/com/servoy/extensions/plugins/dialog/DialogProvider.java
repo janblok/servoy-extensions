@@ -25,6 +25,9 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import org.mozilla.javascript.annotations.JSFunction;
+
+import com.servoy.base.plugins.IMobileDialogProvider;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -33,7 +36,8 @@ import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.scripting.IScriptable;
 
 /**
- * Scritptable object for dialog plugin
+ * Scriptable object for dialog plugin
+ * 
  * @author jblok
  */
 @ServoyDocumented(publicName = DialogPlugin.PLUGIN_NAME, scriptingName = "plugins." + DialogPlugin.PLUGIN_NAME)
@@ -56,7 +60,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage, String... buttonsText)//old one
 	{
-		return js_showWarningDialog(dialogTitle, dialogMessage, buttonsText);
+		return showWarningDialog(dialogTitle, dialogMessage, buttonsText);
 	}
 
 	/**
@@ -68,7 +72,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	@Deprecated
 	public String js_showDialog(String dialogTitle, String dialogMessage)//old one
 	{
-		return js_showWarningDialog(dialogTitle, dialogMessage, (String[])null);
+		return showWarningDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	private String[] getButtonTexts(Object buttonsText)
@@ -94,7 +98,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	}
 
 	/**
-	 * @clonedesc js_showWarningDialog(String,String,String[])
+	 * @clonedesc showWarningDialog(String,String,String[])
 	 *
 	 * @sample
 	 * //show dialog
@@ -103,13 +107,14 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
 	 */
-	public String js_showWarningDialog(String dialogTitle, String dialogMessage)
+	@JSFunction
+	public String showWarningDialog(String dialogTitle, String dialogMessage)
 	{
-		return js_showWarningDialog(dialogTitle, dialogMessage, (String[])null);
+		return showWarningDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,String[])
+	 * @clonedesc showErrorDialog(String,String,String[])
 	 *
 	 * @sample
 	 * //show dialog
@@ -119,18 +124,19 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showWarningDialog(String dialogTitle, String dialogMessage, String... buttonsText)
+	@JSFunction
+	public String showWarningDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
 			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
-		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.WARNING_MESSAGE);
+		return showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.WARNING_MESSAGE);
 	}
 
 	/**
-	 * @clonedesc js_showErrorDialog(String,String,String[])
+	 * @clonedesc showErrorDialog(String,String,String[])
 	 *
 	 * @sample
 	 * //show dialog
@@ -140,14 +146,15 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showInfoDialog(String dialogTitle, String dialogMessage, String... buttonsText)
+	@JSFunction
+	public String showInfoDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
 			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
-		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.INFORMATION_MESSAGE);
+		return showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -161,14 +168,15 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showErrorDialog(String dialogTitle, String dialogMessage, String... buttonsText)
+	@JSFunction
+	public String showErrorDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 		{
 			BrowserDialog.alert(plugin.getClientPluginAccess(), dialogTitle + '\n' + dialogMessage);
 			return ((buttonsText != null && buttonsText.length > 0) ? getButtonTexts(buttonsText)[0] : "OK");
 		}
-		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.ERROR_MESSAGE);
+		return showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
@@ -182,25 +190,27 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogMessage Dialog message.
 	 * @param buttonsText Array of button texts.
 	 */
-	public String js_showQuestionDialog(String dialogTitle, String dialogMessage, String... buttonsText)
+	@JSFunction
+	public String showQuestionDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
-		return js_showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.QUESTION_MESSAGE);
+		return showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.QUESTION_MESSAGE);
 	}
 
 	/**
-	 * @clonedesc js_showQuestionDialog(String,String,String[])
+	 * @clonedesc showQuestionDialog(String,String,String[])
 	 *
-	 * @sampleas js_showQuestionDialog(String,String,String[])
+	 * @sampleas showQuestionDialog(String,String,String[])
 	 *
 	 * @param dialogTitle Dialog title.
 	 * @param dialogMessage Dialog message.
 	 */
-	public String js_showQuestionDialog(String dialogTitle, String dialogMessage)
+	@JSFunction
+	public String showQuestionDialog(String dialogTitle, String dialogMessage)
 	{
-		return js_showQuestionDialog(dialogTitle, dialogMessage, (String[])null);
+		return showQuestionDialog(dialogTitle, dialogMessage, (String[])null);
 	}
 
-	private String js_showDialogEx(String dialogTitle, String dialogMessage, Object buttonsText, int type)
+	private String showDialogEx(String dialogTitle, String dialogMessage, Object buttonsText, int type)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
@@ -298,7 +308,8 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param msg 
 	 * @param options 
 	 */
-	public String js_showSelectDialog(String dialog_title, String msg, String... options)
+	@JSFunction
+	public String showSelectDialog(String dialog_title, String msg, String... options)
 	{
 		Vector<String> buttons = new Vector<String>();
 		if (options != null)
@@ -310,7 +321,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		}
 		Object[] optionsCopy = new String[buttons.size()];
 		buttons.copyInto(optionsCopy);
-		return showSelectDialog(dialog_title, msg, optionsCopy);
+		return showSelectDialogEx(dialog_title, msg, optionsCopy);
 	}
 
 	/**
@@ -319,7 +330,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param options
 	 * @return
 	 */
-	public String showSelectDialog(String dialog_title, String msg, Object[] options)
+	private String showSelectDialogEx(String dialog_title, String msg, Object[] options)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
@@ -352,7 +363,8 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param msg 
 	 * @param optionArray 
 	 */
-	public String js_showSelectDialog(String dialog_title, String msg, Object[] optionArray)
+	@JSFunction
+	public String showSelectDialog(String dialog_title, String msg, Object[] optionArray)
 	{
 		Vector<String> buttons = new Vector<String>();
 		if (optionArray != null)
@@ -364,7 +376,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		}
 		Object[] options = new String[buttons.size()];
 		buttons.copyInto(options);
-		return showSelectDialog(dialog_title, msg, options);
+		return showSelectDialogEx(dialog_title, msg, options);
 	}
 
 	/**
@@ -374,41 +386,44 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * //show input dialog ,returns nothing when canceled 
 	 * var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');
 	 */
-
-	public String js_showInputDialog()
+	@JSFunction
+	public String showInputDialog()
 	{
-		return js_showInputDialog(null, null, null);
+		return showInputDialog(null, null, null);
 	}
 
 	/**
-	 * @clonedesc js_showInputDialog()
-	 * @sampleas js_showInputDialog()
+	 * @clonedesc showInputDialog()
+	 * @sampleas showInputDialog()
 	 * @param dialog_title
 	 */
-	public String js_showInputDialog(String dialog_title)
+	@JSFunction
+	public String showInputDialog(String dialog_title)
 	{
-		return js_showInputDialog(dialog_title, null, null);
+		return showInputDialog(dialog_title, null, null);
 	}
 
 	/**
-	 * @clonedesc js_showInputDialog()
-	 * @sampleas js_showInputDialog()
+	 * @clonedesc showInputDialog()
+	 * @sampleas showInputDialog()
 	 * @param dialog_title
 	 * @param msg
 	 */
-	public String js_showInputDialog(String dialog_title, String msg)
+	@JSFunction
+	public String showInputDialog(String dialog_title, String msg)
 	{
-		return js_showInputDialog(dialog_title, msg, null);
+		return showInputDialog(dialog_title, msg, null);
 	}
 
 	/**
-	 * @clonedesc js_showInputDialog()
-	 * @sampleas js_showInputDialog()
+	 * @clonedesc showInputDialog()
+	 * @sampleas showInputDialog()
 	 * @param dialog_title
 	 * @param msg
 	 * @param initialValue
 	 */
-	public String js_showInputDialog(String dialog_title, String msg, String initialValue)
+	@JSFunction
+	public String showInputDialog(String dialog_title, String msg, String initialValue)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
 		{
