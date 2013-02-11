@@ -17,11 +17,21 @@
 
 package com.servoy.extensions.plugins.http;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.security.cert.X509Certificate;
 import java.sql.Date;
 import java.util.List;
 
+import javax.net.ssl.SSLPeerUnverifiedException;
+
 import org.apache.http.client.params.AuthPolicy;
 import org.apache.http.client.params.ClientPNames;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.auth.NTLMSchemeFactory;
 import org.apache.http.impl.auth.NegotiateSchemeFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -31,8 +41,10 @@ import org.apache.http.params.HttpParams;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
+import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
 @ServoyDocumented
@@ -51,6 +63,65 @@ public class HttpClient implements IScriptable, IJavaScriptType
 		client.getAuthSchemes().register(AuthPolicy.NTLM, new NTLMSchemeFactory());
 		client.getAuthSchemes().register(AuthPolicy.SPNEGO, new NegotiateSchemeFactory());
 		this.plugin = plugin;
+
+
+		try
+		{
+			final AllowedCertTrustStrategy allowedCertTrustStrategy = new AllowedCertTrustStrategy();
+			SSLSocketFactory sf = new SSLSocketFactory(allowedCertTrustStrategy)
+			{
+				@Override
+				public Socket connectSocket(Socket socket, InetSocketAddress remoteAddress, InetSocketAddress localAddress, HttpParams params)
+					throws IOException, UnknownHostException, ConnectTimeoutException
+				{
+					try
+					{
+						return super.connectSocket(socket, remoteAddress, localAddress, params);
+					}
+					catch (SSLPeerUnverifiedException ex)
+					{
+						X509Certificate[] lastCertificates = allowedCertTrustStrategy.getAndClearLastCertificates();
+						if (lastCertificates != null)
+						{
+							// allow for next time
+							if (HttpClient.this.plugin.getApplicationType() == IClientPluginAccess.CLIENT)
+							{
+								// show dialog
+								CertificateDialog dialog = new CertificateDialog(
+									((ISmartRuntimeWindow)HttpClient.this.plugin.getCurrentRuntimeWindow()).getWindow(), remoteAddress, lastCertificates);
+								if (dialog.shouldAccept())
+								{
+									allowedCertTrustStrategy.add(lastCertificates);
+									// try it again now with the new chain.
+									return super.connectSocket(socket, remoteAddress, localAddress, params);
+								}
+								dialog.dispose();
+							}
+							else
+							{
+								Debug.error("Couldn't connect to " + remoteAddress +
+									", please make sure that the ssl certificates of that site are added to the java keystore." +
+									"Download the keystore in the browser and update the java cacerts file in jre/lib/security: " +
+									"keytool -import -file downloaded.crt -keystore cacerts");
+							}
+						}
+						throw ex;
+					}
+					finally
+					{
+						// always just clear the last request.
+						allowedCertTrustStrategy.getAndClearLastCertificates();
+					}
+
+				}
+			};
+			Scheme https = new Scheme("https", 443, sf); //$NON-NLS-1$
+			client.getConnectionManager().getSchemeRegistry().register(https);
+		}
+		catch (Exception e)
+		{
+			Debug.error("Can't register a https scheme", e); //$NON-NLS-1$
+		}
 	}
 
 	/**
@@ -208,6 +279,11 @@ public class HttpClient implements IScriptable, IJavaScriptType
 
 	/**
 	 * Create a new post request ( Origin server should accept/process the submitted data.)
+	 * If this url is a https ssl encrypted url which certificates are not in the java certificate store.
+	 * (Like a self signed certificate or a none existing root certificate)
+	 * Then for a smart client a dialog will be given, to give the user the ability to accept this certificate for the next time.
+	 * For a Web or Headless client the system administrator does have to add that certificate (chain) to the java install on the server.
+	 * See http://letmehelpyougeeks.blogspot.nl/2009/07/adding-servers-certificate-to-javas.html 
 	 *
 	 * @sample
 	 * var client = plugins.http.createNewHttpClient();
@@ -227,6 +303,11 @@ public class HttpClient implements IScriptable, IJavaScriptType
 
 	/**
 	 * Creates a new get request (retrieves whatever information is stored on specified url).
+	 * If this url is a https ssl encrypted url which certificates are not in the java certificate store.
+	 * (Like a self signed certificate or a none existing root certificate)
+	 * Then for a smart client a dialog will be given, to give the user the ability to accept this certificate for the next time.
+	 * For a Web or Headless client the system administrator does have to add that certificate (chain) to the java install on the server.
+	 * See http://letmehelpyougeeks.blogspot.nl/2009/07/adding-servers-certificate-to-javas.html 
 	 *
 	 * @sample
 	 * var client = plugins.http.createNewHttpClient();
