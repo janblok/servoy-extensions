@@ -84,7 +84,8 @@ public class HttpClient implements IScriptable, IJavaScriptType
 						if (lastCertificates != null)
 						{
 							// allow for next time
-							if (HttpClient.this.plugin.getApplicationType() == IClientPluginAccess.CLIENT)
+							if (HttpClient.this.plugin.getApplicationType() == IClientPluginAccess.CLIENT ||
+								HttpClient.this.plugin.getApplicationType() == IClientPluginAccess.RUNTIME)
 							{
 								// show dialog
 								CertificateDialog dialog = new CertificateDialog(
