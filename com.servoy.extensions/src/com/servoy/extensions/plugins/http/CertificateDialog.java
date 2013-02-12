@@ -33,6 +33,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.WindowConstants;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -51,6 +52,7 @@ public class CertificateDialog extends JDialog
 	public CertificateDialog(Window owner, InetSocketAddress remoteAddress, X509Certificate[] lastCertificates)
 	{
 		super(owner, ModalityType.APPLICATION_MODAL);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Unknown certificate encountered when connecting to " + remoteAddress.getHostName() + ", accept it?");
 		setLayout(new BorderLayout(2, 2));
 		getRootPane().setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));

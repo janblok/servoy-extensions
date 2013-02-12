@@ -96,7 +96,6 @@ public class HttpClient implements IScriptable, IJavaScriptType
 									// try it again now with the new chain.
 									return super.connectSocket(socket, remoteAddress, localAddress, params);
 								}
-								dialog.dispose();
 							}
 							else
 							{
@@ -284,7 +283,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	 * (Like a self signed certificate or a none existing root certificate)
 	 * Then for a smart client a dialog will be given, to give the user the ability to accept this certificate for the next time.
 	 * For a Web or Headless client the system administrator does have to add that certificate (chain) to the java install on the server.
-	 * See http://letmehelpyougeeks.blogspot.nl/2009/07/adding-servers-certificate-to-javas.html 
+	 * See http://wiki.servoy.com/display/tutorials/Import+a+%28Root%29+certificate+in+the+java+cacerts+file 
 	 *
 	 * @sample
 	 * var client = plugins.http.createNewHttpClient();
@@ -308,7 +307,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	 * (Like a self signed certificate or a none existing root certificate)
 	 * Then for a smart client a dialog will be given, to give the user the ability to accept this certificate for the next time.
 	 * For a Web or Headless client the system administrator does have to add that certificate (chain) to the java install on the server.
-	 * See http://letmehelpyougeeks.blogspot.nl/2009/07/adding-servers-certificate-to-javas.html 
+	 * See http://wiki.servoy.com/display/tutorials/Import+a+%28Root%29+certificate+in+the+java+cacerts+file 
 	 *
 	 * @sample
 	 * var client = plugins.http.createNewHttpClient();
