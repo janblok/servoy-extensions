@@ -29,7 +29,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author sebster
  */
-@ServoyDocumented
+@ServoyDocumented(scriptingName = "Polynomial")
 public class Polynomial implements IScriptable
 {
 	/**

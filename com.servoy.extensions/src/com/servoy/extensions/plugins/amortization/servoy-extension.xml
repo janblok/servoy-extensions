@@ -521,7 +521,7 @@ var rm = plugins.amortization.roundMoney(34.349384);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="Polynomial" qualifiedName="com.servoy.extensions.plugins.amortization.Polynomial">
+      <object publicName="Polynomial" qualifiedName="com.servoy.extensions.plugins.amortization.Polynomial" scriptingName="Polynomial">
         <functions>
           <function name="addPolynomial">
             <argumentsTypes>

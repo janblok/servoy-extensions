@@ -1125,7 +1125,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="RelationInfo" qualifiedName="com.servoy.extensions.beans.dbtreeview.RelationInfo">
+      <object publicName="RelationInfo" qualifiedName="com.servoy.extensions.beans.dbtreeview.RelationInfo" scriptingName="RelationInfo">
         <functions>
           <function name="setLabel">
             <argumentsTypes>

@@ -32,7 +32,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jcompagner
  * @author Servoy Stuff
  */
-@ServoyDocumented
+@ServoyDocumented(scriptingName = "JSFile")
 public class JSFile implements IScriptable, IJavaScriptType
 {
 	private final IAbstractFile file;

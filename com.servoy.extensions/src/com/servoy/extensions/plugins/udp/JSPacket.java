@@ -23,7 +23,7 @@ import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
-@ServoyDocumented
+@ServoyDocumented(scriptingName = "JSPacket")
 public class JSPacket implements IScriptable
 {
 	static final int MAX_PACKET_LENGTH = 64000;

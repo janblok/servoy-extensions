@@ -25,7 +25,7 @@ import com.servoy.j2db.util.ImageLoader;
 /**
  * @author jblok
  */
-@ServoyDocumented
+@ServoyDocumented(scriptingName = "Attachment")
 public class Attachment implements Serializable, IJavaScriptType
 {
 	private final String name;
