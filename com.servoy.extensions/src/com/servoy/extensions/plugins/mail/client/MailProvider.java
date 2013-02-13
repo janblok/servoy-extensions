@@ -503,8 +503,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 * 
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 */
@@ -524,8 +524,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 * 
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -547,8 +547,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 *
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -572,8 +572,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 * 
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -603,8 +603,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 *
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -632,8 +632,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -658,8 +658,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -687,8 +687,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -714,8 +714,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string with 1 address or multiply seperated by a comma.
-	 * @param from  A address string with optional a reply address seperated by a comma.
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -726,6 +726,252 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	public boolean js_sendMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment, String smtpHost)
 	{
 		return sendMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), getOverrideProperties(smtpHost));
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 *
+	 * @sample
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>,replyTo@example.com', 'subject', msgText);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 * 
+	 * @param A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText)
+	{
+		return sendBulkMail(to, from, subject, msgText, null, null, null, null);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 *
+	 * @sample
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,'cc1@example.com,cc2@example.com');
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 * 
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, null, null, null);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com');
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 * 
+	 *
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, null, null);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com,bcc2@example.com',[attachment1,attachment2]);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 * 
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments The attachments
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, null);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * //it is possbile to set all kind of smtp properties
+	 * var properties = new Array()
+	 * properties[0] = 'mail.smtp.host=myserver.com'
+	 * // properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],properties);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 * 
+	 *
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments The attachments
+	 * @param overrideProperties An array of properties
+	 */
+	public boolean js_senBulkdMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var smtphost = 'myserver.com';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],smtphost);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 *
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments The attachments
+	 * @param smtpHost The smtp host
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments, String smtpHost)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, getOverrideProperties(smtpHost));
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'bcc1@example.com,bcc2@example.com',attachment);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 *
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachment A single attachment
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), null);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * //it is possbile to set all kind of smtp properties
+	 * var properties = new Array()
+	 * properties[0] = 'mail.smtp.host=myserver.com'
+	 * // properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',attachment,properties);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 *
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachment A single attachment
+	 * @param overrideProperties An array of properties
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment,
+		String[] overrideProperties)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), overrideProperties);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * var smtphost = 'myserver.com';
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',attachment,smtphost);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 *
+	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachment A single attachment
+	 * @param smtpHost The smtp host
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment attachment, String smtpHost)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, getAttachments(attachment), getOverrideProperties(smtpHost));
 	}
 
 	/**
@@ -773,6 +1019,43 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			try
 			{
 				mailService.sendMail(plugin.getClientPluginAccess().getClientID(), to, fromAndReply, subject, msgText, cc, bcc, attachments, overrideProperties);
+				return true;
+			}
+			catch (Exception mex)
+			{
+				Debug.error(mex);
+				sendMailException = mex.getMessage();
+				if (mex.getCause() != null)
+				{
+					String nested = mex.getCause().getMessage();
+					if (!("".equals(nested))) sendMailException = sendMailException + "; " + nested; //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				return false;
+			}
+		}
+		else
+		{
+			return false;//Todo throw app execption here? with "mail server not running"?
+		}
+	}
+
+	public boolean sendBulkMail(String to, String fromAndReply, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties)
+	{
+		sendMailException = null;
+		if (to == null || subject == null || msgText == null) return false;
+
+		//create if not yet created
+		createMailService();
+
+		//incase the server is not started in developer		
+		if (mailService != null)
+		{
+			//send mail
+			try
+			{
+				mailService.sendBulkMail(plugin.getClientPluginAccess().getClientID(), to, fromAndReply, subject, msgText, cc, bcc, attachments,
+					overrideProperties);
 				return true;
 			}
 			catch (Exception mex)
