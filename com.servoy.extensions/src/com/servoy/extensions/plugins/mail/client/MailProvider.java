@@ -504,7 +504,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 * @param to A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 */
@@ -524,8 +524,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 * 
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -547,8 +547,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -572,8 +572,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 * 
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -603,8 +603,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -632,8 +632,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -658,8 +658,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -687,8 +687,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -714,8 +714,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -740,8 +740,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 * 
-	 * @param A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 */
@@ -762,8 +762,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 * 
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -786,8 +786,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -812,8 +812,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 * 
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -844,8 +844,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * }
 	 * 
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -874,8 +874,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -901,8 +901,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -931,8 +931,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
@@ -960,8 +960,8 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 	 * }
 	 *
-	 * @param to  A string containing 1 or multiple addresses seperated by a comma.
-	 * @param from  A string containing an address and an optional reply address, seperated by a comma.
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
 	 * @param subject The subject of the bulk mail
 	 * @param msgText The message text
 	 * @param cc One or more addresses seperated by a comma
