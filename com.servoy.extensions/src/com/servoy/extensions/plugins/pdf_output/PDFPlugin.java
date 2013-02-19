@@ -53,7 +53,10 @@ public class PDFPlugin implements IClientPlugin
 	public void initialize(IClientPluginAccess app) throws PluginException
 	{
 		access = app;
-		PrintServiceLookup.registerService(new PDFPrintService(access));
+		if (access.getApplicationType() == IClientPluginAccess.CLIENT || access.getApplicationType() == IClientPluginAccess.RUNTIME)
+		{
+			PrintServiceLookup.registerService(new PDFPrintService(access));
+		}
 	}
 
 	/*
