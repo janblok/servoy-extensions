@@ -71,7 +71,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
 
 	protected final FilePlugin plugin;
-	private final FileSystemView fsf = FileSystemView.getFileSystemView();
 	private final Map<String, File> tempFiles = new HashMap<String, File>(); //check this map when saving (txt/binary) files
 	private static final JSFile[] EMPTY = new JSFile[0];
 	private final Timer timer = new Timer();
@@ -102,6 +101,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile js_getDesktopFolder()
 	{
+		FileSystemView fsf = FileSystemView.getFileSystemView();
 		// in Unix-based systems, the root directory is "/", not ~<user>/Desktop => old implementation not correct
 		// in Windows the root directory is indeed the desktop directory, but it's also <user.home>\Desktop 
 		File homeDir = fsf.getHomeDirectory();
