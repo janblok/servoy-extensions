@@ -67,7 +67,8 @@ public class AgentPlugin implements IClientPlugin
 	{
 		access = app;
 
-		if (!GraphicsEnvironment.isHeadless())
+		if (!GraphicsEnvironment.isHeadless() &&
+			(app.getApplicationType() == IClientPluginAccess.CLIENT || app.getApplicationType() == IClientPluginAccess.RUNTIME))
 		{
 			impl = new AgentImpl();
 

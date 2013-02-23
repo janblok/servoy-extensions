@@ -29,8 +29,6 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.swing.filechooser.FileSystemView;
-
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
@@ -120,7 +118,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 				{
 					Debug.log("Servoy root webapps directory '" + parent + "' not found -- falling back to home directory");
 					// fall back to home directory
-					parent = FileSystemView.getFileSystemView().getHomeDirectory();
+					parent = new File(System.getProperty("user.home"));
 				}
 				// then tries to locate (or create) an 'uploads" folder.
 				if (parent != null && parent.exists() && parent.isDirectory())
