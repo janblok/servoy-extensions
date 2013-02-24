@@ -1005,8 +1005,8 @@ if (!success)
 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
 }]]></sample>
             <parameters>
-              <parameter name="A">
-                <description><![CDATA[string containing 1 or multiple addresses seperated by a comma.]]></description>
+              <parameter name="to" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[A string containing 1 or multiple addresses seperated by a comma.]]></description>
               </parameter>
               <parameter name="from" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[A string containing an address and an optional reply address, seperated by a comma.]]></description>
