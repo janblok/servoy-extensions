@@ -2,7 +2,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="dialogs" qualifiedName="com.servoy.extensions.plugins.dialog.DialogProvider" scriptingName="plugins.dialogs" servoyMobile="true">
+      <object clientSupport="mc,wc,sc" publicName="dialogs" qualifiedName="com.servoy.extensions.plugins.dialog.DialogProvider" scriptingName="plugins.dialogs">
         <functions>
           <function deprecated="true" name="showDialog">
             <argumentsTypes>
@@ -143,7 +143,7 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="initialValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="showQuestionDialog" servoyMobile="true">
+          <function clientSupport="mc,wc,sc" name="showQuestionDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -223,7 +223,7 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="options" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function name="showWarningDialog" servoyMobile="true">
+          <function clientSupport="mc,wc,sc" name="showWarningDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
