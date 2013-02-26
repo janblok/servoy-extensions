@@ -18,6 +18,7 @@
 package com.servoy.extensions.plugins.window.popup.swing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.DefaultFocusTraversalPolicy;
@@ -142,6 +143,12 @@ public class SwingPopupShower implements IPopupShower
 			this.window.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
 			final IFormUI formUI = form.getFormUI();
+
+			if (!formUI.isOpaque())
+			{
+				this.window.getRootPane().setOpaque(false);
+				this.window.setBackground(new Color(0, 0, 0, 0));
+			}
 
 			window.getContentPane().setLayout(new BorderLayout(0, 0));
 			window.getContentPane().add((Component)formUI, BorderLayout.CENTER);
