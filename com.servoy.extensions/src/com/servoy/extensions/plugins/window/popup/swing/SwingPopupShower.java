@@ -54,6 +54,7 @@ import com.servoy.j2db.ui.IWindowVisibleChangeListener;
 import com.servoy.j2db.ui.IWindowVisibleChangeNotifier;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ServoyException;
+import com.servoy.j2db.util.Utils;
 
 /**
  * @author jcompagner
@@ -141,6 +142,7 @@ public class SwingPopupShower implements IPopupShower
 			this.window.setFocusable(true);
 			this.window.setUndecorated(true);
 			this.window.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+			if (Utils.isAppleMacOS()) this.window.getRootPane().putClientProperty("Window.shadow", Boolean.FALSE); //$NON-NLS-1$
 
 			final IFormUI formUI = form.getFormUI();
 
