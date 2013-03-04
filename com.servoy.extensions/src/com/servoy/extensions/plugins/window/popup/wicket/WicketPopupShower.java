@@ -19,14 +19,8 @@ package com.servoy.extensions.plugins.window.popup.wicket;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
-import org.apache.wicket.ResourceReference;
-import org.apache.wicket.Session;
-import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.behavior.SimpleAttributeModifier;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.protocol.http.ClientProperties;
-import org.apache.wicket.protocol.http.request.WebClientInfo;
+import org.apache.wicket.markup.html.IHeaderResponse;
 import org.mozilla.javascript.Scriptable;
 
 import com.servoy.extensions.plugins.window.popup.IPopupShower;
@@ -35,6 +29,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.server.headlessclient.IPageContributor;
 import com.servoy.j2db.server.headlessclient.IRepeatingView;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
+import com.servoy.j2db.server.headlessclient.dataui.AbstractServoyDefaultAjaxBehavior;
 import com.servoy.j2db.server.headlessclient.dataui.WebEventExecutor;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.Debug;
@@ -52,8 +47,6 @@ public class WicketPopupShower implements IPopupShower
 	private final Scriptable scope;
 	private final String dataprovider;
 	private final int width, height;
-
-	private static final ResourceReference TRANSPARENT_GIF = new ResourceReference(WicketPopupShower.class, "res/transparent.gif"); //$NON-NLS-1$
 
 	/**
 	 * @param elementToShowRelatedTo
@@ -93,28 +86,25 @@ public class WicketPopupShower implements IPopupShower
 		{
 			repeatingView.removeComponent("popup");
 		}
-		repeatingView.addComponent("popup", new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo, clientPluginAccess, width, height));
-
-		final WebMarkupContainer container = new WebMarkupContainer(repeatingView.newChildId());
-		StringBuilder containerStyle = new StringBuilder("position:absolute;z-index:990;top:0px;right:0px;bottom:0px;left:0px;");
-		// for IE we need to set a transparent image, else input fields under the div will get the click, not the div (case: SVY-2700)
-		ClientProperties clp = ((WebClientInfo)Session.get().getClientInfo()).getProperties();
-		if (clp.isBrowserInternetExplorer())
-		{
-			containerStyle.append("background-image:url(").append(container.urlFor(TRANSPARENT_GIF)).append(");background-size: contain;");
-		}
-		container.add(new SimpleAttributeModifier("style", containerStyle.toString()));
-		container.add(new AjaxEventBehavior("onclick")
+		final PopupPanel popupPanel = new PopupPanel(repeatingView.newChildId(), form, elementToShowRelatedTo, clientPluginAccess, width, height);
+		popupPanel.add(new AbstractServoyDefaultAjaxBehavior()
 		{
 			@Override
-			protected void onEvent(AjaxRequestTarget target)
+			public void renderHead(IHeaderResponse response)
 			{
-				Page page = container.getPage();
+				response.renderOnDomReadyJavascript("ServoyPopup.setup('" + popupPanel.getMarkupId() + "', '" + getCallbackUrl() + "');");
+			}
+
+			@Override
+			protected void respond(AjaxRequestTarget target)
+			{
+				Page page = popupPanel.getPage();
 				close();
 				WebEventExecutor.generateResponse(target, page);
 			}
+
 		});
-		repeatingView.addComponent("blocker", container);
+		repeatingView.addComponent("popup", popupPanel);
 	}
 
 	/*
@@ -152,7 +142,6 @@ public class WicketPopupShower implements IPopupShower
 			((PopupPanel)popupComponent).cleanup();
 		}
 		repeatingView.removeComponent("popup");
-		repeatingView.removeComponent("blocker");
 		try
 		{
 			form.setUsingAsExternalComponent(false);
