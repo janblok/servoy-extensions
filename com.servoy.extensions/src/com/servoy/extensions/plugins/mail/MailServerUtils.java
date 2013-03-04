@@ -232,7 +232,7 @@ public class MailServerUtils
 		is.close();
 		// currenty seems to be enough for deconding attachment file name;
 		// we might have to use Normalizer.normalize(decoded, Normalizer.Form.NFC) in the future
-		return new Attachment(MimeUtility.decodeText(messagePart.getFileName()), baos.toByteArray());
+		return new Attachment(messagePart.getFileName() != null ? MimeUtility.decodeText(messagePart.getFileName()) : null, baos.toByteArray());
 	}
 
 	private static String createAddressString(Address[] addresses)
