@@ -183,7 +183,7 @@ public class MailServer implements IMailService, IServerPlugin
 			if (overrideAddress != null)
 			{
 				addRecipients(message, overrideAddress, Message.RecipientType.TO);
-				overrideFeedback = " (Override: TO=" + to + ", CC: " + (cc == null ? cc : "") + ", BCC: " + (bcc == null ? bcc : "") + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+				overrideFeedback = " (Override: TO=" + to + ", CC: " + (cc == null ? "" : cc) + ", BCC: " + (bcc == null ? "" : bcc) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 			}
 			else
 			{
