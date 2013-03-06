@@ -143,7 +143,7 @@ public class PopupPanel extends Panel
 		{
 			container.getHeaderResponse().renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
 
-			js.append("positionPopup('");
+			js.append("ServoyPopup.position('");
 			js.append(getMarkupId());
 			js.append("','");
 			js.append(elementToShowRelatedTo.getMarkupId());
@@ -151,7 +151,7 @@ public class PopupPanel extends Panel
 		}
 		else
 		{
-			js.append("centerPopup('");
+			js.append("ServoyPopup.center('");
 			js.append(getMarkupId());
 			js.append("');");
 		}
