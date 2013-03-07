@@ -53,6 +53,7 @@ import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
+import com.servoy.j2db.util.DataSourceUtils;
 import com.servoy.j2db.util.UIUtils;
 
 /**
@@ -120,7 +121,7 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 							for (int i = 0; i < sameHeaderColumns.size(); i++)
 							{
 								column = sameHeaderColumns.get(i);
-								cellValue = SwingDBTreeTableView.this.bindingInfo.getText(un, column.getDataprovider(), column.getTableName());
+								cellValue = SwingDBTreeTableView.this.bindingInfo.getText(un, column.getDataprovider(), column.getDatasource());
 								if (!"".equals(cellValue)) break;
 							}
 
@@ -294,17 +295,28 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		if (treeTable != null) treeTable.setFont(f);
 	}
 
+	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname)
 	{
 		return js_createColumn(servername, tablename, header, fieldname, -1);
 	}
 
+	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth)
+	{
+		return js_createColumn(DataSourceUtils.createDBTableDataSource(servername, tablename), header, fieldname, preferredWidth);
+	}
+
+	public Column js_createColumn(String datasource, String header, String fieldname)
+	{
+		return js_createColumn(datasource, header, fieldname, -1);
+	}
+
+	public Column js_createColumn(String datasource, String header, String fieldname, int preferredWidth)
 	{
 		Column column = new Column();
 		column.setDBTreeTableView(dbTreeTableView);
-		column.setServerName(servername);
-		column.setTableName(tablename);
+		column.setDatasource(datasource);
 		column.setPreferredWidth(preferredWidth);
 		column.js_setHeader(header);
 		column.js_setDataprovider(fieldname);

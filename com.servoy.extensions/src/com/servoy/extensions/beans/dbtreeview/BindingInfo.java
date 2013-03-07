@@ -37,7 +37,6 @@ import com.servoy.j2db.persistence.Media;
 import com.servoy.j2db.plugins.ClientPluginAccessProvider;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.util.DataSourceUtils;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.PersistHelper;
 import com.servoy.j2db.util.Utils;
@@ -111,21 +110,14 @@ public class BindingInfo
 		return "<unknown>"; //$NON-NLS-1$		
 	}
 
-	public String getText(FoundSetTreeModel.UserNode tn, String textDataprovider, String tableName)
+	public String getText(FoundSetTreeModel.UserNode tn, String textDataprovider, String datasource)
 	{
 		String textDP = textDataprovider;
 
 		if (textDP != null)
 		{
-			if (tableName == null)
-			{
-				String[] server_table = DataSourceUtils.getDBServernameTablename(tn.getFoundSet().getDataSource());
-				tableName = (server_table == null ? null : server_table[1]);
-			}
-
 			IRecord record = tn.getRecord();
-			String[] server_table = DataSourceUtils.getDBServernameTablename(tn.getFoundSet().getDataSource());
-			if (record != null && server_table != null && server_table[1] != null && server_table[1].equals(tableName))
+			if (record != null && (datasource == null || datasource.equals(tn.getFoundSet().getDataSource())))
 			{
 				Object obj = record.getValue(textDP);
 				if (obj != null && !obj.equals(Scriptable.NOT_FOUND)) return obj.toString();

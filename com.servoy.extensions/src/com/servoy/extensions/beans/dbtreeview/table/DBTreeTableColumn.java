@@ -63,7 +63,7 @@ public class DBTreeTableColumn extends AbstractLightWeightColumn
 			for (int i = 0; i < columns.size(); i++)
 			{
 				column = columns.get(i);
-				nodeValue = bindingInfo.getText(un, column.getDataprovider(), column.getTableName());
+				nodeValue = bindingInfo.getText(un, column.getDataprovider(), column.getDatasource());
 				if (!"".equals(nodeValue)) break;
 			}
 		}
