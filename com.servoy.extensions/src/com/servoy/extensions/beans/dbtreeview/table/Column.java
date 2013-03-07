@@ -28,8 +28,7 @@ import com.servoy.j2db.scripting.IScriptable;
 @ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "Column")
 public class Column implements IReturnedTypesProvider, IScriptable
 {
-	private String serverName;
-	private String tableName;
+	private String datasource;
 
 	private String header;
 	private String dataprovider;
@@ -42,14 +41,9 @@ public class Column implements IReturnedTypesProvider, IScriptable
 		this.dbTreeTableView = dbTreeTableView;
 	}
 
-	public void setServerName(String serverName)
+	public void setDatasource(String datasource)
 	{
-		this.serverName = serverName;
-	}
-
-	public void setTableName(String tableName)
-	{
-		this.tableName = tableName;
+		this.datasource = datasource;
 	}
 
 	public void setPreferredWidth(int preferredWidth)
@@ -101,14 +95,9 @@ public class Column implements IReturnedTypesProvider, IScriptable
 		if (dbTreeTableView != null) dbTreeTableView.flagColumnsChanged();
 	}
 
-	public String getServerName()
+	public String getDatasource()
 	{
-		return serverName;
-	}
-
-	public String getTableName()
-	{
-		return tableName;
+		return datasource;
 	}
 
 	public Class[] getAllReturnedTypes()

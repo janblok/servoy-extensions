@@ -437,6 +437,40 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
+            <description><![CDATA[Create and add new column to the tree table]]></description>
+            <summary><![CDATA[Create and add new column to the tree table]]></summary>
+            <sample><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
+            <parameters>
+              <parameter name="datasource" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="createColumn">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
+            <description><![CDATA[Create and add new column to the tree table]]></description>
+            <summary><![CDATA[Create and add new column to the tree table]]></summary>
+            <sample><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
+            <parameters>
+              <parameter name="datasource" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="preferredWidth" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function deprecated="true" name="createColumn">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
@@ -450,7 +484,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="createColumn">
+          <function deprecated="true" name="createColumn">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>

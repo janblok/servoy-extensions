@@ -48,6 +48,7 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	/**
 	 * @clonedesc js_createColumn(String, String, String, String, int)
 	 * @sampleas js_createColumn(String, String, String, String, int)
+	 * @deprecated
 	 * 
 	 * @param servername
 	 * @param tablename
@@ -56,6 +57,7 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 *   
 	 * @return Column object
 	 */
+	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname);
 
 	/**
@@ -63,6 +65,7 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 * 
 	 * @sample
 	 * %%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);
+	 * @deprecated
 	 * 
 	 * @param servername
 	 * @param tablename
@@ -72,7 +75,36 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 *   
 	 * @return Column object
 	 */
+	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth);
+
+
+	/**
+	 * @clonedesc js_createColumn(String, String, String, int)
+	 * @sampleas js_createColumn(String, String, String, int)
+	 * 
+	 * @param datasource
+	 * @param header
+	 * @param fieldname
+	 *   
+	 * @return Column object
+	 */
+	public Column js_createColumn(String datasource, String header, String fieldname);
+
+	/**
+	 * Create and add new column to the tree table
+	 * 
+	 * @sample
+	 * %%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);
+	 * 
+	 * @param datasource
+	 * @param header
+	 * @param fieldname
+	 * @param preferredWidth
+	 *   
+	 * @return Column object
+	 */
+	public Column js_createColumn(String datasource, String header, String fieldname, int preferredWidth);
 
 	/**
 	 * Remove all columns but the tree column from the tree table

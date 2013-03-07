@@ -663,17 +663,28 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		wicketTree.js_removeAllRoots();
 	}
 
+	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname)
 	{
 		return js_createColumn(servername, tablename, header, fieldname, -1);
 	}
 
+	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth)
+	{
+		return js_createColumn(DataSourceUtils.createDBTableDataSource(servername, tablename), header, fieldname, preferredWidth);
+	}
+
+	public Column js_createColumn(String datasource, String header, String fieldname)
+	{
+		return js_createColumn(datasource, header, fieldname, -1);
+	}
+
+	public Column js_createColumn(String datasource, String header, String fieldname, int preferredWidth)
 	{
 		Column column = new Column();
 		column.setDBTreeTableView(dbTreeTableView);
-		column.setServerName(servername);
-		column.setTableName(tablename);
+		column.setDatasource(datasource);
 		column.setPreferredWidth(preferredWidth);
 		column.js_setHeader(header);
 		column.js_setDataprovider(fieldname);
