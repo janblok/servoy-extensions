@@ -853,7 +853,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param attachments The attachments
 	 * @param overrideProperties An array of properties
 	 */
-	public boolean js_senBulkdMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
 		String[] overrideProperties)
 	{
 		return sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
