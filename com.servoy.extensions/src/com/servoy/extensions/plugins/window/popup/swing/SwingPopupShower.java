@@ -256,7 +256,7 @@ public class SwingPopupShower implements IPopupShower
 	 */
 	public void cancel()
 	{
-		closeWindow(true);
+		if (window != null && window.isVisible()) closeWindow(true);
 	}
 
 	/**
