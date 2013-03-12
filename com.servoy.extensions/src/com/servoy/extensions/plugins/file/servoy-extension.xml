@@ -2719,8 +2719,8 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Stream 1 or more file from the server to the client.]]></description>
-            <summary><![CDATA[Stream 1 or more file from the server to the client.]]></summary>
+            <description><![CDATA[Stream 1 or more files from the server to the client.]]></description>
+            <summary><![CDATA[Stream 1 or more files from the server to the client.]]></summary>
             <sample><![CDATA[// transfer all the files of a chosen server folder to a directory on the client
 var dir = plugins.file.showDirectorySelectDialog();
 if (dir) {
@@ -2728,7 +2728,19 @@ if (dir) {
 	if (list) {
 		var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 	}
-}]]></sample>
+}
+
+// transfer one file on the client
+var monitor = plugins.file.streamFilesFromServer('/path/to/file', 'path/to/serverFile', callbackFunction);
+
+// transfer an array of serverFiles to an array of files on the client
+var files = new Array();
+files[0] = '/path/to/file1';
+files[1] = '/path/to/file2';
+var serverFiles = new Array();
+serverFiles[0] = '/path/to/serverFile1';
+serverFiles[1] = '/path/to/serverFile2';
+var monitor = plugins.file.streamFilesFromServer(files, serverFiles, callbackFunction);]]></sample>
             <parameters>
               <parameter name="files" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed into (can be a String path a JSFile) or an Array of these]]></description>
@@ -2756,7 +2768,19 @@ if (dir) {
 	if (list) {
 		var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 	}
-}]]></sample>
+}
+
+// transfer one file on the client
+var monitor = plugins.file.streamFilesFromServer('/path/to/file', 'path/to/serverFile', callbackFunction);
+
+// transfer an array of serverFiles to an array of files on the client
+var files = new Array();
+files[0] = '/path/to/file1';
+files[1] = '/path/to/file2';
+var serverFiles = new Array();
+serverFiles[0] = '/path/to/serverFile1';
+serverFiles[1] = '/path/to/serverFile2';
+var monitor = plugins.file.streamFilesFromServer(files, serverFiles, callbackFunction);]]></sample>
             <parameters>
               <parameter name="files" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed into (can be a String path or a JSFile) or an Array of these]]></description>
@@ -2781,6 +2805,8 @@ var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose 
 if (file) {
 	plugins.file.streamFilesToServer( file, callbackFunction );
 }
+//plugins.file.streamFilesToServer( 'servoy.txt', callbackFunction );
+
 // send an array of files:
 var folder = plugins.file.showDirectorySelectDialog();
 if (folder) {
@@ -2788,7 +2814,11 @@ if (folder) {
 	if (files) {
 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	}
-}]]></sample>
+}
+// var files = new Array()
+// files[0] = 'file1.txt';
+// files[1] = 'file2.txt';
+// var monitor = plugins.file.streamFilesToServer( files, callbackFunction );]]></sample>
             <parameters>
               <parameter name="files" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>
@@ -2808,6 +2838,8 @@ var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose 
 if (file) {
 	plugins.file.streamFilesToServer( file, callbackFunction );
 }
+//plugins.file.streamFilesToServer( 'servoy.txt', callbackFunction );
+
 // send an array of files:
 var folder = plugins.file.showDirectorySelectDialog();
 if (folder) {
@@ -2815,7 +2847,11 @@ if (folder) {
 	if (files) {
 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	}
-}]]></sample>
+}
+// var files = new Array()
+// files[0] = 'file1.txt';
+// files[1] = 'file2.txt';
+// var monitor = plugins.file.streamFilesToServer( files, callbackFunction );]]></sample>
             <parameters>
               <parameter name="files" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>
@@ -2839,6 +2875,8 @@ var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose 
 if (file) {
 	plugins.file.streamFilesToServer( file, callbackFunction );
 }
+//plugins.file.streamFilesToServer( 'servoy.txt', callbackFunction );
+
 // send an array of files:
 var folder = plugins.file.showDirectorySelectDialog();
 if (folder) {
@@ -2846,7 +2884,11 @@ if (folder) {
 	if (files) {
 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	}
-}]]></sample>
+}
+// var files = new Array()
+// files[0] = 'file1.txt';
+// files[1] = 'file2.txt';
+// var monitor = plugins.file.streamFilesToServer( files, callbackFunction );]]></sample>
             <parameters>
               <parameter name="files" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these)]]></description>
@@ -2872,6 +2914,8 @@ var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose 
 if (file) {
 	plugins.file.streamFilesToServer( file, callbackFunction );
 }
+//plugins.file.streamFilesToServer( 'servoy.txt', callbackFunction );
+
 // send an array of files:
 var folder = plugins.file.showDirectorySelectDialog();
 if (folder) {
@@ -2879,7 +2923,11 @@ if (folder) {
 	if (files) {
 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	}
-}]]></sample>
+}
+// var files = new Array()
+// files[0] = 'file1.txt';
+// files[1] = 'file2.txt';
+// var monitor = plugins.file.streamFilesToServer( files, callbackFunction );]]></sample>
             <parameters>
               <parameter name="files" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[file(s) to be streamed (can be a String path or a JSFile) or an Array of these]]></description>

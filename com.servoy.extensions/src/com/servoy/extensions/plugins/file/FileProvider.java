@@ -2323,6 +2323,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * if (file) {
 	 * 	plugins.file.streamFilesToServer( file, callbackFunction );
 	 * }
+	 * //plugins.file.streamFilesToServer( 'servoy.txt', callbackFunction );
+	 * 
 	 * // send an array of files:
 	 * var folder = plugins.file.showDirectorySelectDialog();
 	 * if (folder) {
@@ -2331,6 +2333,10 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	 * 	}
 	 * }
+	 * // var files = new Array()
+	 * // files[0] = 'file1.txt';
+	 * // files[1] = 'file2.txt';
+	 * // var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	 * 
 	 * @param files file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
@@ -2435,7 +2441,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Stream 1 or more file from the server to the client.
+	 * Stream 1 or more files from the server to the client.
 	 * 
 	 * @since Servoy 5.2
 	 * 
@@ -2448,6 +2454,18 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 		var monitor = plugins.file.streamFilesFromServer(dir, list, callbackFunction);
 	 * 	}
 	 * }
+	 * 
+	 * // transfer one file on the client
+	 * var monitor = plugins.file.streamFilesFromServer('/path/to/file', 'path/to/serverFile', callbackFunction);
+	 * 
+	 * // transfer an array of serverFiles to an array of files on the client
+	 * var files = new Array();
+	 * files[0] = '/path/to/file1';
+	 * files[1] = '/path/to/file2';
+	 * var serverFiles = new Array();
+	 * serverFiles[0] = '/path/to/serverFile1';
+	 * serverFiles[1] = '/path/to/serverFile2';
+	 * var monitor = plugins.file.streamFilesFromServer(files, serverFiles, callbackFunction);
 	 * 
 	 * @param files file(s) to be streamed into (can be a String path a {@link JSFile}) or an Array of these
 	 * @param serverFiles the files on the server that will be transfered to the client, can be a String or a String[]
