@@ -209,7 +209,7 @@ public class ToolBar implements IToolBar, IScriptable, IJavaScriptType
 		_jToolBar = bar;
 	}
 
-	public ToolBar(IClientPluginAccess app, String name, String displayname, int row, boolean add, boolean remove) throws PluginException
+	public ToolBar(IClientPluginAccess app, IToolbarPanel panel, String name, String displayname, int row, boolean add, boolean remove) throws PluginException
 	{
 		if ((name == null) || (name == ""))
 		{
@@ -218,8 +218,6 @@ public class ToolBar implements IToolBar, IScriptable, IJavaScriptType
 
 		_application = app;
 		_internalName = name;
-
-		IToolbarPanel panel = _application.getToolbarPanel();
 
 		if (add)
 		{

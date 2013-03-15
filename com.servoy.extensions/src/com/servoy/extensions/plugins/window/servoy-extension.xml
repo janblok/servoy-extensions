@@ -8917,6 +8917,162 @@ toolbar.visibleItem(1, false);]]></sample>
           </function>
           <function name="addToolBar">
             <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
+            <description><![CDATA[A toolbar for a specific window.]]></description>
+            <summary><![CDATA[A toolbar for a specific window.]]></summary>
+            <sample><![CDATA[// Note: method addToolBar only works in the smart client.
+
+// create a window
+var win = application.createWindow("myWindow", JSWindow.WINDOW);
+
+// add a toolbar with only a name
+var toolbar0 = plugins.window.addToolBar(win,"toolbar_0");
+toolbar0.addButton("click me 0", callback_function);
+
+// add a toolbar with a name and the row you want it to show at
+// row number starts at 0
+var toolbar1 = plugins.window.addToolBar(win,"toolbar_1", 2);
+toolbar1.addButton("click me 1", callback_function);
+
+// add a toolbar with a name and display name
+var toolbar2 = plugins.window.addToolBar(win,"toolbar_2", "toolbar_2_internal_name");
+toolbar2.addButton("click me 2", callback_function);
+
+// add a toolbar with a name, display name and the row you want the
+// toolbar to show at. row number starts at 0 
+var toolbar3 = plugins.window.addToolBar(win,"toolbar_3", "toolbar_3_internal_name", 3);
+toolbar3.addButton("click me 3", callback_function);
+
+win.show(forms.Myform)]]></sample>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="addToolBar">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
+            <description><![CDATA[A toolbar for a specific window.]]></description>
+            <summary><![CDATA[A toolbar for a specific window.]]></summary>
+            <sample><![CDATA[// Note: method addToolBar only works in the smart client.
+
+// create a window
+var win = application.createWindow("myWindow", JSWindow.WINDOW);
+
+// add a toolbar with only a name
+var toolbar0 = plugins.window.addToolBar(win,"toolbar_0");
+toolbar0.addButton("click me 0", callback_function);
+
+// add a toolbar with a name and the row you want it to show at
+// row number starts at 0
+var toolbar1 = plugins.window.addToolBar(win,"toolbar_1", 2);
+toolbar1.addButton("click me 1", callback_function);
+
+// add a toolbar with a name and display name
+var toolbar2 = plugins.window.addToolBar(win,"toolbar_2", "toolbar_2_internal_name");
+toolbar2.addButton("click me 2", callback_function);
+
+// add a toolbar with a name, display name and the row you want the
+// toolbar to show at. row number starts at 0 
+var toolbar3 = plugins.window.addToolBar(win,"toolbar_3", "toolbar_3_internal_name", 3);
+toolbar3.addButton("click me 3", callback_function);
+
+win.show(forms.Myform)]]></sample>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="row" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function name="addToolBar">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
+            <description><![CDATA[A toolbar for a specific window.]]></description>
+            <summary><![CDATA[A toolbar for a specific window.]]></summary>
+            <sample><![CDATA[// Note: method addToolBar only works in the smart client.
+
+// create a window
+var win = application.createWindow("myWindow", JSWindow.WINDOW);
+
+// add a toolbar with only a name
+var toolbar0 = plugins.window.addToolBar(win,"toolbar_0");
+toolbar0.addButton("click me 0", callback_function);
+
+// add a toolbar with a name and the row you want it to show at
+// row number starts at 0
+var toolbar1 = plugins.window.addToolBar(win,"toolbar_1", 2);
+toolbar1.addButton("click me 1", callback_function);
+
+// add a toolbar with a name and display name
+var toolbar2 = plugins.window.addToolBar(win,"toolbar_2", "toolbar_2_internal_name");
+toolbar2.addButton("click me 2", callback_function);
+
+// add a toolbar with a name, display name and the row you want the
+// toolbar to show at. row number starts at 0 
+var toolbar3 = plugins.window.addToolBar(win,"toolbar_3", "toolbar_3_internal_name", 3);
+toolbar3.addButton("click me 3", callback_function);
+
+win.show(forms.Myform)]]></sample>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="displayname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="addToolBar">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
+            <description><![CDATA[A toolbar for a specific window.]]></description>
+            <summary><![CDATA[A toolbar for a specific window.]]></summary>
+            <sample><![CDATA[// Note: method addToolBar only works in the smart client.
+
+// create a window
+var win = application.createWindow("myWindow", JSWindow.WINDOW);
+
+// add a toolbar with only a name
+var toolbar0 = plugins.window.addToolBar(win,"toolbar_0");
+toolbar0.addButton("click me 0", callback_function);
+
+// add a toolbar with a name and the row you want it to show at
+// row number starts at 0
+var toolbar1 = plugins.window.addToolBar(win,"toolbar_1", 2);
+toolbar1.addButton("click me 1", callback_function);
+
+// add a toolbar with a name and display name
+var toolbar2 = plugins.window.addToolBar(win,"toolbar_2", "toolbar_2_internal_name");
+toolbar2.addButton("click me 2", callback_function);
+
+// add a toolbar with a name, display name and the row you want the
+// toolbar to show at. row number starts at 0 
+var toolbar3 = plugins.window.addToolBar(win,"toolbar_3", "toolbar_3_internal_name", 3);
+toolbar3.addButton("click me 3", callback_function);
+
+win.show(forms.Myform)]]></sample>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="displayname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="row" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function name="addToolBar">
+            <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
@@ -9584,6 +9740,34 @@ menuMain.addMenuItem("another entry", feedback);]]></sample>
           </function>
           <function name="getToolBar">
             <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
+            <description><![CDATA[Get the toolbar of a specific window  from the toolbar panel by name.]]></description>
+            <summary><![CDATA[Get the toolbar of a specific window  from the toolbar panel by name.]]></summary>
+            <sample><![CDATA[// Note: method getToolBar only works in the smart client.
+
+//create a window
+	var win = application.createWindow("myWindow", JSWindow.WINDOW);
+// the toolbar must first be create with a call to addToolbar
+plugins.window.addToolBar(win,"toolbar_0");
+
+//show the empty toolbar and wait 4 seconds  
+win.show(forms.MyForm)
+application.updateUI(4000)
+
+// get the toolbar at the panel by name
+var toolbar = plugins.window.getToolBar(win,"toolbar_0");
+// add a button to the toolbar
+toolbar.addButton("button", callback_function);]]></sample>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="getToolBar">
+            <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.swing.ToolBar" typecode="com.servoy.extensions.plugins.window.menu.swing.ToolBar"/>
@@ -9623,6 +9807,15 @@ for (var i = 0 ; i < names.length ; i++) {
 
 // show the message
 plugins.dialogs.showInfoDialog("toolbar names", message);]]></sample>
+          </function>
+          <function name="getToolbarNames" undocumented="true">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+            </parameters>
           </function>
           <function name="maximize">
             <argumentsTypes/>
@@ -9781,6 +9974,36 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="contextFilter" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[only triggers the shortcut when on this form]]></description>
               </parameter>
+            </parameters>
+          </function>
+          <function name="removeToolBar">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Remove the toolbar from the toolbar panel of a specific window.]]></description>
+            <summary><![CDATA[Remove the toolbar from the toolbar panel of a specific window.]]></summary>
+            <sample><![CDATA[// Note: method removeToolBar only works in the smart client.
+//create a window 
+	var win = application.createWindow("myWindow", JSWindow.WINDOW);
+// the toolbar must first be create with a call to addToolbar
+var toolbar = plugins.window.addToolBar(win,"toolbar_0");
+
+// add a button to the toolbar
+toolbar.addButton("button", callcbackMethod);
+
+//show the toolbar with the button and wait 4 seconds, then remove it
+win.show(forms.MyForm)
+application.updateUI(4000)
+
+// removing a toolbar from the toolbar panel is done by name
+// the plugin checks the existence of the toolbar
+// when the toolbar does not exist it will not throw an error though.
+plugins.window.removeToolBar(win,"toolbar_0");]]></sample>
+            <parameters>
+              <parameter name="win" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
+              <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function name="removeToolBar">

@@ -72,14 +72,18 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.scripting.JSEvent;
+import com.servoy.j2db.scripting.JSWindow;
+import com.servoy.j2db.scripting.RuntimeWindow;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IContainer;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ServoyException;
+import com.servoy.j2db.util.Settings;
 import com.servoy.j2db.util.Utils;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
+import com.servoy.j2db.util.toolbar.ToolbarPanel;
 
 /**
  * Provider for the Window plugin.
@@ -876,7 +880,101 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public ToolBar js_addToolBar(String name, String displayname, int row) throws Exception
 	{
-		return new ToolBar(plugin.getClientPluginAccess(), name, displayname, row, true, false);
+		IClientPluginAccess clientAccess = plugin.getClientPluginAccess();
+		return new ToolBar(clientAccess, clientAccess.getToolbarPanel(), name, displayname, row, true, false);
+	}
+
+	/**
+	 * A toolbar for a specific window.
+	 *
+	 * @sample
+	 * // Note: method addToolBar only works in the smart client.
+	 * 
+	 * // create a window
+	 * var win = application.createWindow("myWindow", JSWindow.WINDOW);
+	 * 
+	 * // add a toolbar with only a name
+	 * var toolbar0 = plugins.window.addToolBar(win,"toolbar_0");
+	 * toolbar0.addButton("click me 0", callback_function);
+	 * 
+	 * // add a toolbar with a name and the row you want it to show at
+	 * // row number starts at 0
+	 * var toolbar1 = plugins.window.addToolBar(win,"toolbar_1", 2);
+	 * toolbar1.addButton("click me 1", callback_function);
+	 * 
+	 * // add a toolbar with a name and display name
+	 * var toolbar2 = plugins.window.addToolBar(win,"toolbar_2", "toolbar_2_internal_name");
+	 * toolbar2.addButton("click me 2", callback_function);
+	 * 
+	 * // add a toolbar with a name, display name and the row you want the
+	 * // toolbar to show at. row number starts at 0 
+	 * var toolbar3 = plugins.window.addToolBar(win,"toolbar_3", "toolbar_3_internal_name", 3);
+	 * toolbar3.addButton("click me 3", callback_function);
+	 * 
+	 * win.show(forms.Myform)
+	 * 
+	 * @param win 
+	 * @param name
+	 */
+	public ToolBar js_addToolBar(JSWindow win, String name) throws Exception
+	{
+		return js_addToolBar(win, name, name);
+	}
+
+	/**
+	 * @clonedesc js_addToolBar(JSWindow,String)
+	 * 
+	 * @sampleas js_addToolBar(JSWindow,String)
+	 * 
+	 * @param win 
+	 * @param name
+	 * @param row
+	 */
+	public ToolBar js_addToolBar(JSWindow win, String name, int row) throws Exception
+	{
+		return js_addToolBar(win, name, name, row);
+	}
+
+	/**
+	 * @clonedesc js_addToolBar(JSWindow,String)
+	 * 
+	 * @sampleas js_addToolBar(JSWindow,String)
+	 * 
+	 * @param win 
+	 * @param name
+	 * @param displayname
+	 */
+	public ToolBar js_addToolBar(JSWindow win, String name, String displayname) throws Exception
+	{
+		return js_addToolBar(win, name, displayname, -1);
+	}
+
+	/**
+	 * @clonedesc js_addToolBar(JSWindow,String)
+	 * 
+	 * @sampleas js_addToolBar(JSWindow,String)
+	 * 
+	 * @param win 
+	 * @param name
+	 * @param displayname
+	 * @param row
+	 */
+	public ToolBar js_addToolBar(JSWindow win, String name, String displayname, int row) throws Exception
+	{
+		RuntimeWindow runtimeWin = win.getImpl();
+		if (runtimeWin instanceof ISmartRuntimeWindow)
+		{
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)runtimeWin;
+			ToolbarPanel toolbarsPanel = null;
+			if (smartWin.getToolbarPanel() == null)
+			{
+				toolbarsPanel = new ToolbarPanel(Settings.INITIAL_CLIENT_WIDTH - 200);
+				smartWin.setToolbarPanel(toolbarsPanel);
+			}
+			IClientPluginAccess clientAccess = plugin.getClientPluginAccess();
+			return new ToolBar(clientAccess, toolbarsPanel, name, displayname, row, true, false);
+		}
+		return null;
 	}
 
 	/**
@@ -897,7 +995,42 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public ToolBar js_getToolBar(String name) throws Exception
 	{
-		return new ToolBar(plugin.getClientPluginAccess(), name, null, -1, false, false);
+		IClientPluginAccess clientAccess = plugin.getClientPluginAccess();
+		return new ToolBar(clientAccess, clientAccess.getToolbarPanel(), name, null, -1, false, false);
+	}
+
+	/**
+	 * Get the toolbar of a specific window  from the toolbar panel by name.
+	 *
+	 * @sample
+	 * // Note: method getToolBar only works in the smart client.
+	 * 
+	 * //create a window
+	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
+	 * // the toolbar must first be create with a call to addToolbar
+	 * plugins.window.addToolBar(win,"toolbar_0");
+	 * 
+	 * //show the empty toolbar and wait 4 seconds  
+	 * win.show(forms.MyForm)
+	 * application.updateUI(4000)
+	 * 
+	 * // get the toolbar at the panel by name
+	 * var toolbar = plugins.window.getToolBar(win,"toolbar_0");
+	 * // add a button to the toolbar
+	 * toolbar.addButton("button", callback_function);
+	 * 
+	 * @param win
+	 * @param name
+	 */
+	public ToolBar js_getToolBar(JSWindow win, String name) throws Exception
+	{
+		if (win.getImpl() instanceof ISmartRuntimeWindow)
+		{
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
+			if (smartWin.getToolbarPanel() == null) return null;
+			return new ToolBar(plugin.getClientPluginAccess(), smartWin.getToolbarPanel(), name, null, -1, false, false);
+		}
+		return null;
 	}
 
 	/**
@@ -939,6 +1072,45 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
+	 * Remove the toolbar from the toolbar panel of a specific window.
+	 *
+	 * @sample
+	 * // Note: method removeToolBar only works in the smart client.
+	 * //create a window 
+	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
+	 * // the toolbar must first be create with a call to addToolbar
+	 * var toolbar = plugins.window.addToolBar(win,"toolbar_0");
+	 * 
+	 * // add a button to the toolbar
+	 * toolbar.addButton("button", callcbackMethod);
+	 * 
+	 * //show the toolbar with the button and wait 4 seconds, then remove it
+	 * win.show(forms.MyForm)
+	 * application.updateUI(4000)
+	 * 
+	 * // removing a toolbar from the toolbar panel is done by name
+	 * // the plugin checks the existence of the toolbar
+	 * // when the toolbar does not exist it will not throw an error though.
+	 * plugins.window.removeToolBar(win,"toolbar_0");
+	 * 
+	 * @param win
+	 * @param name
+	 */
+	public void js_removeToolBar(JSWindow win, String name) throws Exception
+	{
+		if (win.getImpl() instanceof ISmartRuntimeWindow)
+		{
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
+			if (smartWin.getToolbarPanel() == null) return;
+			if (smartWin.getToolbarPanel().getToolBar(name) != null)
+			{
+				smartWin.getToolbarPanel().removeToolBar(name);
+			}
+			smartWin.getWindow().validate();
+		}
+	}
+
+	/**
 	 * Get all toolbar names from the toolbar panel.
 	 *
 	 * @sample
@@ -962,6 +1134,17 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	public String[] js_getToolbarNames()
 	{
 		return plugin.getClientPluginAccess().getToolbarPanel().getToolBarNames();
+	}
+
+	public String[] js_getToolbarNames(JSWindow win)
+	{
+		if (win.getImpl() instanceof ISmartRuntimeWindow)
+		{
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
+			if (smartWin.getToolbarPanel() == null) return null;
+			return smartWin.getToolbarPanel().getToolBarNames();
+		}
+		return null;
 	}
 
 	/**
