@@ -885,7 +885,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * A toolbar for a specific window.
+	 * Creates and returns a toolbar for a specific window.
 	 *
 	 * @sample
 	 * // Note: method addToolBar only works in the smart client.
@@ -913,12 +913,15 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * win.show(forms.Myform)
 	 * 
-	 * @param win 
-	 * @param name
+	 * @param window
+	 * @param toolBarName
 	 */
-	public ToolBar js_addToolBar(JSWindow win, String name) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String toolBarName) throws Exception
 	{
-		return js_addToolBar(win, name, name);
+		{
+			int i = 0;
+		}
+		return js_addToolBar(window, toolBarName, toolBarName);
 	}
 
 	/**
@@ -926,13 +929,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_addToolBar(JSWindow,String)
 	 * 
-	 * @param win 
-	 * @param name
-	 * @param row
+	 * @param window
+	 * @param toolBarName
+	 * @param row the row at which to create this toolbar in the toolbar panel 
 	 */
-	public ToolBar js_addToolBar(JSWindow win, String name, int row) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String toolBarName, int row) throws Exception
 	{
-		return js_addToolBar(win, name, name, row);
+		return js_addToolBar(window, toolBarName, toolBarName, row);
 	}
 
 	/**
@@ -940,13 +943,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_addToolBar(JSWindow,String)
 	 * 
-	 * @param win 
-	 * @param name
-	 * @param displayname
+	 * @param window
+	 * @param toolBarName
+	 * @param displayname The display text shown in the form view. 
 	 */
-	public ToolBar js_addToolBar(JSWindow win, String name, String displayname) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String toolBarName, String displayname) throws Exception
 	{
-		return js_addToolBar(win, name, displayname, -1);
+		return js_addToolBar(window, toolBarName, displayname, -1);
 	}
 
 	/**
@@ -954,25 +957,27 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_addToolBar(JSWindow,String)
 	 * 
-	 * @param win 
-	 * @param name
-	 * @param displayname
-	 * @param row
+	 * @param window
+	 * @param toolBarName
+	 * @param displayname The display text shown in the form view. 
+	 * @param row the row at which to create this toolbar in the toolbar panel 
 	 */
-	public ToolBar js_addToolBar(JSWindow win, String name, String displayname, int row) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String toolBarName, String displayname, int row) throws Exception
 	{
-		RuntimeWindow runtimeWin = win.getImpl();
+		if (window == null) return js_addToolBar(toolBarName, displayname, row);
+
+		RuntimeWindow runtimeWin = window.getImpl();
 		if (runtimeWin instanceof ISmartRuntimeWindow)
 		{
 			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)runtimeWin;
-			ToolbarPanel toolbarsPanel = null;
-			if (smartWin.getToolbarPanel() == null)
+			ToolbarPanel toolbarsPanel = smartWin.getToolbarPanel();
+			if (toolbarsPanel == null)
 			{
 				toolbarsPanel = new ToolbarPanel(Settings.INITIAL_CLIENT_WIDTH - 200);
 				smartWin.setToolbarPanel(toolbarsPanel);
 			}
 			IClientPluginAccess clientAccess = plugin.getClientPluginAccess();
-			return new ToolBar(clientAccess, toolbarsPanel, name, displayname, row, true, false);
+			return new ToolBar(clientAccess, toolbarsPanel, toolBarName, displayname, row, true, false);
 		}
 		return null;
 	}
@@ -1000,7 +1005,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Get the toolbar of a specific window  from the toolbar panel by name.
+	 * Get the toolbar of a specific window from the toolbar panel by name.
 	 *
 	 * @sample
 	 * // Note: method getToolBar only works in the smart client.
@@ -1024,6 +1029,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public ToolBar js_getToolBar(JSWindow win, String name) throws Exception
 	{
+		if (win == null) return js_getToolBar(name);
+
 		if (win.getImpl() instanceof ISmartRuntimeWindow)
 		{
 			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
@@ -1039,7 +1046,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * // Note: method removeToolBar only works in the smart client.
 	 * 
-	 * // the toolbar must first be create with a call to addToolbar
+	 * // the toolbar must first be created with a call to addToolbar
 	 * var toolbar = plugins.window.addToolBar("toolbar_0");
 	 * 
 	 * // add a button to the toolbar
@@ -1136,11 +1143,38 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		return plugin.getClientPluginAccess().getToolbarPanel().getToolBarNames();
 	}
 
-	public String[] js_getToolbarNames(JSWindow win)
+	/**
+	 * Get all toolbar names from the toolbar panel of a specific window.
+	 *
+	 * @sample
+	 * // Note: method getToolbarNames only works in the smart client.
+	 * //create a window 
+	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
+	 * // the toolbar must first be created with a call to addToolbar
+	 * 	 plugins.window.addToolBar(win,"toolbar_0");
+	 *   plugins.window.addToolBar(win,"toolbar_1");
+	 * // create an array of toolbar names
+	 * var names = plugins.window.getToolbarNames(win);
+	 * 
+	 * // create an empty message variable
+	 * var message = "";
+	 * 
+	 * // loop through the array
+	 * for (var i = 0 ; i < names.length ; i++) {
+	 * 	//add the name(s) to the message
+	 * 	message += names[i] + "\n";
+	 * }
+	 * 
+	 * // show the message
+	 * plugins.dialogs.showInfoDialog("toolbar names", message);
+	 * @param window
+	 */
+	public String[] js_getToolbarNames(JSWindow window)
 	{
-		if (win.getImpl() instanceof ISmartRuntimeWindow)
+		if (window == null) return js_getToolbarNames();
+		if (window.getImpl() instanceof ISmartRuntimeWindow)
 		{
-			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)window.getImpl();
 			if (smartWin.getToolbarPanel() == null) return null;
 			return smartWin.getToolbarPanel().getToolBarNames();
 		}
