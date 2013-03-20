@@ -918,9 +918,6 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String toolBarName) throws Exception
 	{
-		{
-			int i = 0;
-		}
 		return js_addToolBar(window, toolBarName, toolBarName);
 	}
 
