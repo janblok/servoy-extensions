@@ -852,8 +852,44 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 	 * @param bcc One or more addresses seperated by a comma 
 	 * @param attachments The attachments
 	 * @param overrideProperties An array of properties
+	 * @deprecated replaced with plugins.mail.sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties)
 	 */
+	@Deprecated
 	public boolean js_senBulkdMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
+		String[] overrideProperties)
+	{
+		return sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);
+	}
+
+	/**
+	 * Send a bulk mail, if you make the msgText start with <html> the message will be sent in html (and you can use all html formatting).
+	 * A bulk email makes it possible for one to not receive "out of office" emails back from receiver.
+	 * 
+	 * @sample
+	 * var attachment1 = plugins.mail.createBinaryAttachment('embedded',plugins.file.readFile('c:/temp/a_logo.gif'));
+	 * var attachment2 = plugins.mail.createTextAttachment('embedded','A text attachement');
+	 * var msgText = 'plain msg<html>styled html msg<img src="%%embedded%%"></html>';
+	 * //it is possbile to set all kind of smtp properties
+	 * var properties = new Array()
+	 * properties[0] = 'mail.smtp.host=myserver.com'
+	 * // properties specification can be found at:http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+	 * var success = plugins.mail.sendBulkMail('to_someone@example.com,to_someone_else@example.net', 'John Cobb <from_me@example.com>', 'subject', msgText,null,'unnamed@example.com',[attachment1,attachement2],properties);
+	 * if (!success) 
+	 * {
+	 * 	plugins.dialogs.showWarningDialog('Alert','Failed to send bulk mail','OK');
+	 * }
+	 * 
+	 *
+	 * @param to A string containing 1 or multiple addresses seperated by a comma.
+	 * @param from A string containing an address and an optional reply address, seperated by a comma.
+	 * @param subject The subject of the bulk mail
+	 * @param msgText The message text
+	 * @param cc One or more addresses seperated by a comma
+	 * @param bcc One or more addresses seperated by a comma 
+	 * @param attachments The attachments
+	 * @param overrideProperties An array of properties
+	 */
+	public boolean js_sendBulkMail(String to, String from, String subject, String msgText, String cc, String bcc, Attachment[] attachments,
 		String[] overrideProperties)
 	{
 		return sendBulkMail(to, from, subject, msgText, cc, bcc, attachments, overrideProperties);

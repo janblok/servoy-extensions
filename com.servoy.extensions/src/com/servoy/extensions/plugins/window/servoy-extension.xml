@@ -909,39 +909,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -954,39 +922,7 @@ entry.methodArguments = [17, "data"];]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
@@ -1765,39 +1701,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -1810,39 +1714,7 @@ entry.methodArguments = [17, "data"];]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
@@ -4879,39 +4751,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -4924,39 +4764,7 @@ entry.methodArguments = [17, "data"];]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
@@ -7201,39 +7009,7 @@ entry.methodArguments = [17, "data"];]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
           </property>
         </properties>
         <functions>
@@ -7949,39 +7725,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -7994,39 +7738,7 @@ entry.methodArguments = [17, "data"];]]></sample>
             <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"/>
             <description><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Set the method for the menu item/checkbox/radiobutton.]]></summary>
-            <sample><![CDATA[// add a new menu to the menubar
-var menubar = plugins.window.getMenuBar();
-var menu = menubar.addMenu();
-menu.text = "New Menu";
-// alternatively create a popup menu
-//var menu = plugins.window.createPopupMenu();
-
-// add a menu item at the first position in the menu
-var entry = menu.addMenuItem(0);
-// alternatively add a checkbox at the first position
-//var entry = menu.addCheckBox(0);
-// or alternatively add a radiobutton at the first position
-//var entry = menu.addRadioButton(0);
-
-// disable the newly added entry
-entry.enabled = false;
-// give a name to the entry (the name is not visible anywhere)
-entry.name = "my_name";
-// make the entry selected (affects checkboxes and radiobuttons)
-entry.selected = true;
-// set the text of the entry
-entry.text = "menu entry";
-// set the callback method
-entry.setMethod(feedback);
-// set the arguments to be sent to the callback method
-// (an array of elements which will be passed as arguments 5, 6 and so on to the callback method)
-// the first 5 arguments are fixed: 
-//	[0] item index
-//	[1] parent item index
-//	[2] isSelected boolean
-//	[3] parent menu text
-//	[4] menu text
-entry.methodArguments = [17, "data"];]]></sample>
+            <sample/>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>

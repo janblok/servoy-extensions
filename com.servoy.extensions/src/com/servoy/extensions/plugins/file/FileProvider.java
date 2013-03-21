@@ -1450,50 +1450,50 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * if (!plugins.file.writeFile(f, bytes, mimeType))
 	 * 	application.output('Failed to write the file.');
 	 *
-	 * @param f a local JSFile
+	 * @param file a local JSFile
 	 * @param data the data to be written
 	 */
-	public boolean js_writeFile(JSFile f, byte[] data)
+	public boolean js_writeFile(JSFile file, byte[] data)
 	{
-		return js_writeFile(f, data, null);
+		return js_writeFile(file, data, null);
 	}
 
 	/**
 	 * @clondesc js_writeFile(JSFile,byte[])
 	 * @sampleas js_writeFile(JSFile,byte[])
 	 * 
-	 * @param f the file path as a String
+	 * @param file the file path as a String
 	 * @param data the data to be written
 	 */
-	public boolean js_writeFile(String f, byte[] data)
+	public boolean js_writeFile(String file, byte[] data)
 	{
-		return js_writeFile(f, data, null);
+		return js_writeFile(file, data, null);
 	}
 
 	/**
 	 * @clonedesc js_writeFile(JSFile, byte[])
 	 * @sampleas js_writeFile(JSFile, byte[])
 	 * 
-	 * @param f a local JSFile
+	 * @param file a local JSFile
 	 * @param data the data to be written
 	 * @param mimeType the mime type
 	 */
-	public boolean js_writeFile(JSFile f, byte[] data, String mimeType)
+	public boolean js_writeFile(JSFile file, byte[] data, String mimeType)
 	{
-		return writeFile(f, data, mimeType);
+		return writeFile(file, data, mimeType);
 	}
 
 	/**
 	 * @clonedesc js_writeFile(JSFile, byte[])
 	 * @sampleas js_writeFile(JSFile, byte[])
 	 * 
-	 * @param f the file path as a String
+	 * @param file the file path as a String
 	 * @param data the data to be written
 	 * @param mimeType the mime type
 	 */
-	public boolean js_writeFile(String f, byte[] data, String mimeType)
+	public boolean js_writeFile(String file, byte[] data, String mimeType)
 	{
-		return writeFile(f, data, mimeType);
+		return writeFile(file, data, mimeType);
 	}
 
 	protected boolean writeFile(Object f, byte[] data, @SuppressWarnings("unused")
@@ -2323,6 +2323,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * if (file) {
 	 * 	plugins.file.streamFilesToServer( file, callbackFunction );
 	 * }
+	 * //plugins.file.streamFilesToServer( 'servoy.txt', callbackFunction );
+	 * 
 	 * // send an array of files:
 	 * var folder = plugins.file.showDirectorySelectDialog();
 	 * if (folder) {
@@ -2331,13 +2333,17 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 		var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	 * 	}
 	 * }
+	 * // var files = new Array()
+	 * // files[0] = 'file1.txt';
+	 * // files[1] = 'file2.txt';
+	 * // var monitor = plugins.file.streamFilesToServer( files, callbackFunction );
 	 * 
-	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
+	 * @param files file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public JSProgressMonitor js_streamFilesToServer(final Object f)
+	public JSProgressMonitor js_streamFilesToServer(final Object files)
 	{
-		return js_streamFilesToServer(f, null, null);
+		return js_streamFilesToServer(files, null, null);
 	}
 
 	/**
@@ -2347,13 +2353,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
 	 * 
-	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
-	 * @param o can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server
+	 * @param files file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
+	 * @param serverFiles can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object o)
+	public JSProgressMonitor js_streamFilesToServer(final Object files, final Object serverFiles)
 	{
-		return js_streamFilesToServer(f, o, null);
+		return js_streamFilesToServer(files, serverFiles, null);
 	}
 
 	/**
@@ -2363,13 +2369,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
 	 * 
-	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
+	 * @param files file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these
 	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public JSProgressMonitor js_streamFilesToServer(final Object f, final Function callback)
+	public JSProgressMonitor js_streamFilesToServer(final Object files, final Function callback)
 	{
-		return js_streamFilesToServer(f, null, callback);
+		return js_streamFilesToServer(files, null, callback);
 	}
 
 	/**
@@ -2379,22 +2385,22 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesToServer(Object)
 	 * 
-	 * @param f file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these)
-	 * @param s can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server
+	 * @param files file(s) to be streamed (can be a String path or a {@link JSFile}) or an Array of these)
+	 * @param serverFiles can be a JSFile or JSFile[], a String or String[], representing the file name(s) to use on the server
 	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object s, final Function callback)
+	public JSProgressMonitor js_streamFilesToServer(final Object files, final Object serverFiles, final Function callback)
 	{
-		if (f != null)
+		if (files != null)
 		{
-			final Object[] fileObjects = unwrap(f);
-			final Object[] serverFiles = unwrap(s);
+			final Object[] fileObjects = unwrap(files);
+			final Object[] serverObjects = unwrap(serverFiles);
 			if (fileObjects != null)
 			{
 				// the FunctionDefinition is only created once for all files:
 				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
-				final File[] files = new File[fileObjects.length];
+				final File[] filesToBeStreamed = new File[fileObjects.length];
 				long totalBytes = 0;
 				for (int i = 0; i < fileObjects.length; i++)
 				{
@@ -2402,7 +2408,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 					if (file != null && file.canRead())
 					{
 						totalBytes += file.length();
-						files[i] = file;
+						filesToBeStreamed[i] = file;
 					}
 					else if (fileObjects[i] instanceof JSFile)
 					{
@@ -2412,14 +2418,15 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 							throw new RuntimeException(
 								"Using streamFilesToServer with an uploadData in the web client makes no sense since the process is already on the server-side, consider using writeFile(), writeTXTFile() or writeXMLFile() instead!"); //$NON-NLS-1$
 						}
-						files[i] = null;
+						filesToBeStreamed[i] = null;
 					}
 				}
-				final JSProgressMonitor progressMonitor = new JSProgressMonitor(this, totalBytes, files.length);
+				final JSProgressMonitor progressMonitor = new JSProgressMonitor(this, totalBytes, filesToBeStreamed.length);
 				try
 				{
 					final IFileService service = getFileService();
-					plugin.getClientPluginAccess().getExecutor().execute(new ToServerWorker(files, serverFiles, function, progressMonitor, service));
+					plugin.getClientPluginAccess().getExecutor().execute(
+						new ToServerWorker(filesToBeStreamed, serverObjects, function, progressMonitor, service));
 
 					return progressMonitor;
 				}
@@ -2434,7 +2441,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Stream 1 or more file from the server to the client.
+	 * Stream 1 or more files from the server to the client.
 	 * 
 	 * @since Servoy 5.2
 	 * 
@@ -2448,13 +2455,25 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 	}
 	 * }
 	 * 
-	 * @param f file(s) to be streamed into (can be a String path a {@link JSFile}) or an Array of these
-	 * @param s the files on the server that will be transfered to the client, can be a String or a String[]
+	 * // transfer one file on the client
+	 * var monitor = plugins.file.streamFilesFromServer('/path/to/file', 'path/to/serverFile', callbackFunction);
+	 * 
+	 * // transfer an array of serverFiles to an array of files on the client
+	 * var files = new Array();
+	 * files[0] = '/path/to/file1';
+	 * files[1] = '/path/to/file2';
+	 * var serverFiles = new Array();
+	 * serverFiles[0] = '/path/to/serverFile1';
+	 * serverFiles[1] = '/path/to/serverFile2';
+	 * var monitor = plugins.file.streamFilesFromServer(files, serverFiles, callbackFunction);
+	 * 
+	 * @param files file(s) to be streamed into (can be a String path a {@link JSFile}) or an Array of these
+	 * @param serverFiles the files on the server that will be transfered to the client, can be a String or a String[]
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	public JSProgressMonitor js_streamFilesFromServer(final Object f, final Object s)
+	public JSProgressMonitor js_streamFilesFromServer(final Object files, final Object serverFiles)
 	{
-		return js_streamFilesFromServer(f, s, null);
+		return js_streamFilesFromServer(files, serverFiles, null);
 	}
 
 	/**
@@ -2465,18 +2484,18 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_streamFilesFromServer(Object, Object)
 	 * 
-	 * @param f file(s) to be streamed into (can be a String path or a {@link JSFile}) or an Array of these
-	 * @param s the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
+	 * @param files file(s) to be streamed into (can be a String path or a {@link JSFile}) or an Array of these
+	 * @param serverFiles the files on the server that will be transfered to the client, can be a JSFile or JSFile[], a String or String[]
 	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
 	@SuppressWarnings("nls")
-	public JSProgressMonitor js_streamFilesFromServer(final Object f, final Object s, final Function callback)
+	public JSProgressMonitor js_streamFilesFromServer(final Object files, final Object serverFiles, final Function callback)
 	{
-		if (f != null && s != null)
+		if (files != null && serverFiles != null)
 		{
-			final Object[] fileObjects = unwrap(f);
-			final Object[] serverObjects = unwrap(s);
+			final Object[] fileObjects = unwrap(files);
+			final Object[] serverObjects = unwrap(serverFiles);
 			if (fileObjects != null && serverObjects != null && serverObjects.length > 0)
 			{
 				final File firstFile = getFileFromArg(fileObjects[0], true);
@@ -2498,7 +2517,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 				}
 				// the FunctionDefinition is only created once for all files:
 				final FunctionDefinition function = (callback == null) ? null : new FunctionDefinition(callback);
-				final File[] files = new File[serverObjects.length];
+				final File[] filesToBeStreamed = new File[serverObjects.length];
 				long totalBytes = 0;
 
 				try
@@ -2527,8 +2546,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 							{
 								totalBytes += remoteFiles[i].size();
 								// we can have a related local file, else a folder has been provided, thus we create a related local file to receive the transfer:
-								files[i] = (i < fileObjects.length && !firstFile.isDirectory()) ? getFileFromArg(fileObjects[i], true) : new File(firstFile,
-									remoteFiles[i].getName());
+								filesToBeStreamed[i] = (i < fileObjects.length && !firstFile.isDirectory()) ? getFileFromArg(fileObjects[i], true) : new File(
+									firstFile, remoteFiles[i].getName());
 							}
 						}
 					}
@@ -2544,12 +2563,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 						{
 							remoteFiles[i] = new RemoteFile(datas[i], service, clientId);
 							totalBytes += datas[i].size();
-							files[i] = (i < fileObjects.length && !firstFile.isDirectory()) ? getFileFromArg(fileObjects[i], true) : new File(firstFile,
-								remoteFiles[i].getName());
+							filesToBeStreamed[i] = (i < fileObjects.length && !firstFile.isDirectory()) ? getFileFromArg(fileObjects[i], true) : new File(
+								firstFile, remoteFiles[i].getName());
 						}
 					}
 					JSProgressMonitor progressMonitor = new JSProgressMonitor(this, totalBytes, remoteFiles.length);
-					plugin.getClientPluginAccess().getExecutor().execute(new FromServerWorker(files, remoteFiles, function, progressMonitor, service));
+					plugin.getClientPluginAccess().getExecutor().execute(
+						new FromServerWorker(filesToBeStreamed, remoteFiles, function, progressMonitor, service));
 					return progressMonitor;
 				}
 				catch (Exception ex)

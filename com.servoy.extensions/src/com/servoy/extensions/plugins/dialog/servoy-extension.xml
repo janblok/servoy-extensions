@@ -143,7 +143,7 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="initialValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="mc,wc,sc" name="showQuestionDialog">
+          <function name="showQuestionDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -223,7 +223,7 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="options" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function clientSupport="mc,wc,sc" name="showWarningDialog">
+          <function name="showWarningDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
