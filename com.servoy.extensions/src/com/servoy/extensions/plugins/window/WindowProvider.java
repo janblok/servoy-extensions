@@ -649,9 +649,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
 	 * 
 	 * @sample
-	 * //Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
+	 * // Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
 	 * plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
-	 * //do call closeFormPopup(ordervalue) from the orderPicker form
+	 * // do call closeFormPopup(ordervalue) from the orderPicker form
 	 * 
 	 * @param elementToShowRelatedTo element to show related to or null to center in screen
 	 * @param form the form to show
@@ -836,7 +836,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * var toolbar3 = plugins.window.addToolBar("toolbar_3", "toolbar_3_internal_name", 3);
 	 * toolbar3.addButton("click me 3", feedback_button);
 	 * 
-	 * @param name
+	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
 	 */
 	public ToolBar js_addToolBar(String name) throws Exception
 	{
@@ -848,8 +848,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_addToolBar(String)
 	 * 
-	 * @param name
-	 * @param row
+	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
+	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
 	 */
 	public ToolBar js_addToolBar(String name, int row) throws Exception
 	{
@@ -861,8 +861,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_addToolBar(String)
 	 * 
-	 * @param name
-	 * @param displayname
+	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
 	 */
 	public ToolBar js_addToolBar(String name, String displayname) throws Exception
 	{
@@ -874,9 +874,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @sampleas js_addToolBar(String)
 	 * 
-	 * @param name
-	 * @param displayname
-	 * @param row
+	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
+	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
 	 */
 	public ToolBar js_addToolBar(String name, String displayname, int row) throws Exception
 	{
@@ -928,7 +928,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param window
 	 * @param toolBarName
-	 * @param row the row at which to create this toolbar in the toolbar panel 
+	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String toolBarName, int row) throws Exception
 	{
@@ -942,7 +942,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param window
 	 * @param toolBarName
-	 * @param displayname The display text shown in the form view. 
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String toolBarName, String displayname) throws Exception
 	{
@@ -956,8 +956,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param window
 	 * @param toolBarName
-	 * @param displayname The display text shown in the form view. 
-	 * @param row the row at which to create this toolbar in the toolbar panel 
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
+	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String toolBarName, String displayname, int row) throws Exception
 	{
@@ -985,7 +985,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * // Note: method getToolBar only works in the smart client.
 	 * 
-	 * // the toolbar must first be create with a call to addToolbar
+	 * // the toolbar must first be created with a call to addToolbar
 	 * plugins.window.addToolBar("toolbar_0");
 	 * 
 	 * // get the toolbar at the panel by name
@@ -1007,12 +1007,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * // Note: method getToolBar only works in the smart client.
 	 * 
-	 * //create a window
+	 * // create a window
 	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
-	 * // the toolbar must first be create with a call to addToolbar
+	 * // the toolbar must first be created with a call to addToolbar
 	 * plugins.window.addToolBar(win,"toolbar_0");
 	 * 
-	 * //show the empty toolbar and wait 4 seconds  
+	 * // show the empty toolbar and wait 4 seconds  
 	 * win.show(forms.MyForm)
 	 * application.updateUI(4000)
 	 * 
@@ -1080,15 +1080,15 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method removeToolBar only works in the smart client.
-	 * //create a window 
+	 * // create a window 
 	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
-	 * // the toolbar must first be create with a call to addToolbar
+	 * // the toolbar must first be created with a call to addToolbar
 	 * var toolbar = plugins.window.addToolBar(win,"toolbar_0");
 	 * 
 	 * // add a button to the toolbar
 	 * toolbar.addButton("button", callcbackMethod);
 	 * 
-	 * //show the toolbar with the button and wait 4 seconds, then remove it
+	 * // show the toolbar with the button and wait 4 seconds, then remove it
 	 * win.show(forms.MyForm)
 	 * application.updateUI(4000)
 	 * 
@@ -1145,7 +1145,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method getToolbarNames only works in the smart client.
-	 * //create a window 
+	 * // create a window 
 	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
 	 * // the toolbar must first be created with a call to addToolbar
 	 * 	 plugins.window.addToolBar(win,"toolbar_0");
