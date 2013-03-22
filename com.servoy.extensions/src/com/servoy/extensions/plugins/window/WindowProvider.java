@@ -914,11 +914,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * win.show(forms.Myform)
 	 * 
 	 * @param window
-	 * @param toolBarName
+	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
 	 */
-	public ToolBar js_addToolBar(JSWindow window, String toolBarName) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String name) throws Exception
 	{
-		return js_addToolBar(window, toolBarName, toolBarName);
+		return js_addToolBar(window, name, name);
 	}
 
 	/**
@@ -927,12 +927,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_addToolBar(JSWindow,String)
 	 * 
 	 * @param window
-	 * @param toolBarName
+	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
 	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
 	 */
-	public ToolBar js_addToolBar(JSWindow window, String toolBarName, int row) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String name, int row) throws Exception
 	{
-		return js_addToolBar(window, toolBarName, toolBarName, row);
+		return js_addToolBar(window, name, name, row);
 	}
 
 	/**
@@ -941,12 +941,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_addToolBar(JSWindow,String)
 	 * 
 	 * @param window
-	 * @param toolBarName
+	 * @param name the name by which this toolbar is identified in code
 	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
 	 */
-	public ToolBar js_addToolBar(JSWindow window, String toolBarName, String displayname) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String name, String displayname) throws Exception
 	{
-		return js_addToolBar(window, toolBarName, displayname, -1);
+		return js_addToolBar(window, name, displayname, -1);
 	}
 
 	/**
@@ -955,13 +955,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sampleas js_addToolBar(JSWindow,String)
 	 * 
 	 * @param window
-	 * @param toolBarName
+	 * @param name the name by which this toolbar is identified in code.
 	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
 	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
 	 */
-	public ToolBar js_addToolBar(JSWindow window, String toolBarName, String displayname, int row) throws Exception
+	public ToolBar js_addToolBar(JSWindow window, String name, String displayname, int row) throws Exception
 	{
-		if (window == null) return js_addToolBar(toolBarName, displayname, row);
+		if (window == null) return js_addToolBar(name, displayname, row);
 
 		RuntimeWindow runtimeWin = window.getImpl();
 		if (runtimeWin instanceof ISmartRuntimeWindow)
@@ -974,7 +974,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 				smartWin.setToolbarPanel(toolbarsPanel);
 			}
 			IClientPluginAccess clientAccess = plugin.getClientPluginAccess();
-			return new ToolBar(clientAccess, toolbarsPanel, toolBarName, displayname, row, true, false);
+			return new ToolBar(clientAccess, toolbarsPanel, name, displayname, row, true, false);
 		}
 		return null;
 	}
@@ -1021,16 +1021,16 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * // add a button to the toolbar
 	 * toolbar.addButton("button", callback_function);
 	 * 
-	 * @param win
-	 * @param name
+	 * @param window
+	 * @param name 
 	 */
-	public ToolBar js_getToolBar(JSWindow win, String name) throws Exception
+	public ToolBar js_getToolBar(JSWindow window, String name) throws Exception
 	{
-		if (win == null) return js_getToolBar(name);
+		if (window == null) return js_getToolBar(name);
 
-		if (win.getImpl() instanceof ISmartRuntimeWindow)
+		if (window.getImpl() instanceof ISmartRuntimeWindow)
 		{
-			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)window.getImpl();
 			if (smartWin.getToolbarPanel() == null) return null;
 			return new ToolBar(plugin.getClientPluginAccess(), smartWin.getToolbarPanel(), name, null, -1, false, false);
 		}
@@ -1097,14 +1097,14 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * // when the toolbar does not exist it will not throw an error though.
 	 * plugins.window.removeToolBar(win,"toolbar_0");
 	 * 
-	 * @param win
+	 * @param window
 	 * @param name
 	 */
-	public void js_removeToolBar(JSWindow win, String name) throws Exception
+	public void js_removeToolBar(JSWindow window, String name) throws Exception
 	{
-		if (win.getImpl() instanceof ISmartRuntimeWindow)
+		if (window.getImpl() instanceof ISmartRuntimeWindow)
 		{
-			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)win.getImpl();
+			ISmartRuntimeWindow smartWin = (ISmartRuntimeWindow)window.getImpl();
 			if (smartWin.getToolbarPanel() == null) return;
 			if (smartWin.getToolbarPanel().getToolBar(name) != null)
 			{
