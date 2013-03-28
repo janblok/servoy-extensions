@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="JSPacket" qualifiedName="com.servoy.extensions.plugins.udp.JSPacket" scriptingName="JSPacket">
+      <object clientSupport="wc,sc" publicName="JSPacket" qualifiedName="com.servoy.extensions.plugins.udp.JSPacket" scriptingName="JSPacket">
         <properties>
-          <property name="index">
+          <property clientSupport="wc,sc" name="index">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.
 This is a 0 based index.]]></description>
@@ -30,7 +30,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
           </property>
         </properties>
         <functions>
-          <function name="getByteArray">
+          <function clientSupport="wc,sc" name="getByteArray">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Returns the content of the package into a byte array.]]></description>
@@ -50,7 +50,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="getHost">
+          <function clientSupport="wc,sc" name="getHost">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the name of the host that sent the packet.]]></description>
@@ -67,7 +67,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="getLength">
+          <function clientSupport="wc,sc" name="getLength">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Returns the length of the packet in bytes.]]></description>
@@ -84,7 +84,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="getPort">
+          <function clientSupport="wc,sc" name="getPort">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Returns the port where the packet originated from.]]></description>
@@ -101,7 +101,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="readByte">
+          <function clientSupport="wc,sc" name="readByte">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Reads an 8 bits byte value from the packet, starting from the current index. Advances the index with one position.]]></description>
@@ -125,7 +125,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="readInt">
+          <function clientSupport="wc,sc" name="readInt">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Reads a 32 bits int value from the packet, starting from the current index. Advances the index with 4 positions.]]></description>
@@ -149,7 +149,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="readShort">
+          <function clientSupport="wc,sc" name="readShort">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Reads a 32 bits short value from the packet, starting from the current index. Advances the index with 2 positions.]]></description>
@@ -173,7 +173,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="readUTF">
+          <function clientSupport="wc,sc" name="readUTF">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
@@ -190,7 +190,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
 	}
 }]]></sample>
           </function>
-          <function name="readUTF">
+          <function clientSupport="wc,sc" name="readUTF">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -212,7 +212,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="writeByte">
+          <function clientSupport="wc,sc" name="writeByte">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -240,7 +240,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="writeBytes">
+          <function clientSupport="wc,sc" name="writeBytes">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
@@ -268,7 +268,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="bytes" type="byte[]" typecode="[B"/>
             </parameters>
           </function>
-          <function name="writeInt">
+          <function clientSupport="wc,sc" name="writeInt">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -296,7 +296,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="writeShort">
+          <function clientSupport="wc,sc" name="writeShort">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -324,7 +324,7 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="writeUTF">
+          <function clientSupport="wc,sc" name="writeUTF">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -354,9 +354,9 @@ while (packet = plugins.udp.getReceivedPacket()) {
           </function>
         </functions>
       </object>
-      <object publicName="udp" qualifiedName="com.servoy.extensions.plugins.udp.UDPProvider" scriptingName="plugins.udp">
+      <object clientSupport="wc,sc" publicName="udp" qualifiedName="com.servoy.extensions.plugins.udp.UDPProvider" scriptingName="plugins.udp">
         <functions>
-          <function name="createNewPacket">
+          <function clientSupport="wc,sc" name="createNewPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             <description><![CDATA[Create a new empty packet.]]></description>
@@ -367,7 +367,7 @@ packet.writeInt(12348293)//writes 4 bytes
 packet.writeShort(14823)//writes 2 bytes
 packet.writeByte(123)//writes 1 byte]]></sample>
           </function>
-          <function name="getReceivedPacket">
+          <function clientSupport="wc,sc" name="getReceivedPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             <description><![CDATA[Get a packet from receive buffer, read buffer until empty (null is returned).]]></description>
@@ -379,14 +379,14 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 	var count = packet.readInt()
 }]]></sample>
           </function>
-          <function deprecated="true" name="getRecievedPacket">
+          <function clientSupport="wc,sc" deprecated="true" name="getRecievedPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             <description/>
             <deprecated><![CDATA[Replaced by #getReceivedPacket().]]></deprecated>
             <sample/>
           </function>
-          <function name="sendPacket">
+          <function clientSupport="wc,sc" name="sendPacket">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
@@ -406,7 +406,7 @@ plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="sendPacket">
+          <function clientSupport="wc,sc" name="sendPacket">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
@@ -430,7 +430,7 @@ plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="startSocket">
+          <function clientSupport="wc,sc" name="startSocket">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="java.lang.Object"/>
@@ -450,14 +450,14 @@ consume all available packets before you expect this method to be called again.]
               </parameter>
             </parameters>
           </function>
-          <function name="stopSocket">
+          <function clientSupport="wc,sc" name="stopSocket">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Stop the UDP socket for a port.]]></description>
             <summary><![CDATA[Stop the UDP socket for a port.]]></summary>
             <sample><![CDATA[plugins.udp.stopSocket()]]></sample>
           </function>
-          <function name="testPacket">
+          <function clientSupport="wc,sc" name="testPacket">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             </argumentsTypes>

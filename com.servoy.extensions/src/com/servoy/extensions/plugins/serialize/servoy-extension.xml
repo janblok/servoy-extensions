@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="serialize" qualifiedName="com.servoy.extensions.plugins.serialize.SerializeProvider" scriptingName="plugins.serialize">
+      <object clientSupport="wc,sc" publicName="serialize" qualifiedName="com.servoy.extensions.plugins.serialize.SerializeProvider" scriptingName="plugins.serialize">
         <functions>
-          <function name="fromJSON">
+          <function clientSupport="wc,sc" name="fromJSON">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -19,7 +19,7 @@ application.output(new_array.join('#'));]]></sample>
               <parameter name="data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="toJSON">
+          <function clientSupport="wc,sc" name="toJSON">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>

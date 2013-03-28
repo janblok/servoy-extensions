@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="AmortizationCalculation" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationCalculation">
+      <object clientSupport="wc,sc" publicName="AmortizationCalculation" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationCalculation">
         <constants>
-          <constant name="NUMBER_UNLIMITED">
+          <constant clientSupport="wc,sc" name="NUMBER_UNLIMITED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></description>
             <summary><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></summary>
@@ -18,7 +18,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_ANNUALY">
+          <constant clientSupport="wc,sc" name="PERIOD_ANNUALY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify an annual period.]]></description>
             <summary><![CDATA[The numeric constant used to identify an annual period.]]></summary>
@@ -32,7 +32,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_BI_ANNUALLY">
+          <constant clientSupport="wc,sc" name="PERIOD_BI_ANNUALLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></description>
             <summary><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></summary>
@@ -46,7 +46,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_BI_MONTHLY">
+          <constant clientSupport="wc,sc" name="PERIOD_BI_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).
 TODO: this period is not supported yet.]]></description>
@@ -61,7 +61,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_DAILY">
+          <constant clientSupport="wc,sc" name="PERIOD_DAILY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a daily period.]]></description>
             <summary><![CDATA[The numeric constant used to identify a daily period.]]></summary>
@@ -75,7 +75,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_FOUR_MONTHLY">
+          <constant clientSupport="wc,sc" name="PERIOD_FOUR_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></description>
             <summary><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></summary>
@@ -89,7 +89,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_FOUR_WEEKLY">
+          <constant clientSupport="wc,sc" name="PERIOD_FOUR_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></description>
             <summary><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></summary>
@@ -103,7 +103,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_MONTHLY">
+          <constant clientSupport="wc,sc" name="PERIOD_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a monthly period.]]></description>
             <summary><![CDATA[The numeric constant used to identify a monthly period.]]></summary>
@@ -117,7 +117,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_NONE">
+          <constant clientSupport="wc,sc" name="PERIOD_NONE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify that there is no period.]]></description>
             <summary><![CDATA[The numeric constant used to identify that there is no period.]]></summary>
@@ -131,7 +131,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_QUARTERLY">
+          <constant clientSupport="wc,sc" name="PERIOD_QUARTERLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></description>
             <summary><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></summary>
@@ -145,7 +145,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_TWO_MONTHLY">
+          <constant clientSupport="wc,sc" name="PERIOD_TWO_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></description>
             <summary><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></summary>
@@ -159,7 +159,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_TWO_WEEKLY">
+          <constant clientSupport="wc,sc" name="PERIOD_TWO_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></description>
             <summary><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></summary>
@@ -173,7 +173,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="PERIOD_WEEKLY">
+          <constant clientSupport="wc,sc" name="PERIOD_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify a weekly period.]]></description>
             <summary><![CDATA[The numeric constant used to identify a weekly period.]]></summary>
@@ -187,7 +187,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.PERIOD_BI_MONTHLY, 
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
           </constant>
-          <constant name="STARTDAY_NORMAL">
+          <constant clientSupport="wc,sc" name="STARTDAY_NORMAL">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[The numeric constant used to identify that the same start day should be used as
 the day of the month of the starting date of the event.]]></description>
@@ -205,7 +205,7 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
           </constant>
         </constants>
         <functions>
-          <function name="addCompoundPeriodChange">
+          <function clientSupport="wc,sc" name="addCompoundPeriodChange">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="java.util.Date"/>
@@ -223,7 +223,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="addLoan">
+          <function clientSupport="wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -241,7 +241,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="addLoan">
+          <function clientSupport="wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -263,7 +263,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="period" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addLoan">
+          <function clientSupport="wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -287,7 +287,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addLoan">
+          <function clientSupport="wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -313,7 +313,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="startday" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addPayment">
+          <function clientSupport="wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -331,7 +331,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="addPayment">
+          <function clientSupport="wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -353,7 +353,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="period" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addPayment">
+          <function clientSupport="wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -377,7 +377,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addPayment">
+          <function clientSupport="wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -403,7 +403,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="startday" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addRateChange">
+          <function clientSupport="wc,sc" name="addRateChange">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -421,21 +421,21 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="calculateAmortizationSchedule">
+          <function clientSupport="wc,sc" name="calculateAmortizationSchedule">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Calculates the amortization schedule.]]></description>
             <summary><![CDATA[Calculates the amortization schedule.]]></summary>
             <sample><![CDATA[plugins.amortization.calculateAmortizationSchedule();]]></sample>
           </function>
-          <function name="getAmortizationSchedule">
+          <function clientSupport="wc,sc" name="getAmortizationSchedule">
             <argumentsTypes/>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
             <description><![CDATA[Gets the amortization schedule as a JSDataSet.]]></description>
             <summary><![CDATA[Gets the amortization schedule as a JSDataSet.]]></summary>
             <sample><![CDATA[plugins.amortization.getAmortizationSchedule();]]></sample>
           </function>
-          <function name="getError">
+          <function clientSupport="wc,sc" name="getError">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <description><![CDATA[Returns the error that remains when solving for the unknown.
@@ -459,28 +459,28 @@ c.solveForUnknown();
 var r = c.getUnknown();
 var e = c.getError();]]></sample>
           </function>
-          <function name="getEvents">
+          <function clientSupport="wc,sc" name="getEvents">
             <argumentsTypes/>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
             <description><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></description>
             <summary><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></summary>
             <sample><![CDATA[plugins.amortization.getEvents();]]></sample>
           </function>
-          <function name="getRestBalance">
+          <function clientSupport="wc,sc" name="getRestBalance">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <description><![CDATA[Gets the rest balance after the amortization schedule.]]></description>
             <summary><![CDATA[Gets the rest balance after the amortization schedule.]]></summary>
             <sample><![CDATA[var rb = plugins.amortization.getRestBalance();]]></sample>
           </function>
-          <function name="getUnknown">
+          <function clientSupport="wc,sc" name="getUnknown">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <description><![CDATA[Returns the solveForUnknown value.]]></description>
             <summary><![CDATA[Returns the solveForUnknown value.]]></summary>
             <sample><![CDATA[plugins.amortization.getUnknown();]]></sample>
           </function>
-          <function name="isValidPeriod">
+          <function clientSupport="wc,sc" name="isValidPeriod">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -492,7 +492,7 @@ var e = c.getError();]]></sample>
               <parameter name="period" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="roundMoney">
+          <function clientSupport="wc,sc" name="roundMoney">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
@@ -505,14 +505,14 @@ var rm = plugins.amortization.roundMoney(34.349384);]]></sample>
               <parameter name="amount" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             </parameters>
           </function>
-          <function name="solveForUnknown">
+          <function clientSupport="wc,sc" name="solveForUnknown">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Returns true if successful or false if the call failed.]]></description>
             <summary><![CDATA[Returns true if successful or false if the call failed.]]></summary>
             <sample><![CDATA[plugins.amortization.solveForUnknown();]]></sample>
           </function>
-          <function name="sortEvents">
+          <function clientSupport="wc,sc" name="sortEvents">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sorts the amortization events ascending by date.]]></description>
@@ -521,9 +521,9 @@ var rm = plugins.amortization.roundMoney(34.349384);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="Polynomial" qualifiedName="com.servoy.extensions.plugins.amortization.Polynomial" scriptingName="Polynomial">
+      <object clientSupport="wc,sc" publicName="Polynomial" qualifiedName="com.servoy.extensions.plugins.amortization.Polynomial" scriptingName="Polynomial">
         <functions>
-          <function name="addPolynomial">
+          <function clientSupport="wc,sc" name="addPolynomial">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
@@ -546,7 +546,7 @@ application.output(eq.getValue(2));]]></sample>
               <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
-          <function name="addTerm">
+          <function clientSupport="wc,sc" name="addTerm">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="int"/>
@@ -571,7 +571,7 @@ application.output(eq.getValue(2));]]></sample>
               <parameter name="exponent" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="findRoot">
+          <function clientSupport="wc,sc" name="findRoot">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="double"/>
@@ -603,7 +603,7 @@ else application.output("Min point.");]]></sample>
               <parameter name="iterations" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getDerivative">
+          <function clientSupport="wc,sc" name="getDerivative">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             <description><![CDATA[Returns a polynomial that holds the derivative of this polynomial.]]></description>
@@ -626,7 +626,7 @@ application.output("Min/max value: " + eq.getValue(rd));
 if (deriv.getDerivativeValue(rd) < 0) application.output("Max point.");
 else application.output("Min point.");]]></sample>
           </function>
-          <function name="getDerivativeValue">
+          <function clientSupport="wc,sc" name="getDerivativeValue">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
@@ -654,7 +654,7 @@ else application.output("Min point.");]]></sample>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             </parameters>
           </function>
-          <function name="getValue">
+          <function clientSupport="wc,sc" name="getValue">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
@@ -682,7 +682,7 @@ else application.output("Min point.");]]></sample>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             </parameters>
           </function>
-          <function name="multiplyByPolynomial">
+          <function clientSupport="wc,sc" name="multiplyByPolynomial">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
@@ -706,7 +706,7 @@ application.output("eq(" + r2 + ")=" + eq.getValue(r2));]]></sample>
               <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
-          <function name="multiplyByTerm">
+          <function clientSupport="wc,sc" name="multiplyByTerm">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="int"/>
@@ -731,7 +731,7 @@ application.output(eq.getValue(2));]]></sample>
               <parameter name="exponent" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setToZero">
+          <function clientSupport="wc,sc" name="setToZero">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets this polynomial to zero.]]></description>
@@ -744,9 +744,9 @@ application.output(eq.getValue(1.1));]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="amortization" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationProvider" scriptingName="plugins.amortization">
+      <object clientSupport="wc,sc" publicName="amortization" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationProvider" scriptingName="plugins.amortization">
         <functions>
-          <function name="newCalculation">
+          <function clientSupport="wc,sc" name="newCalculation">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.amortization.AmortizationCalculation" typecode="com.servoy.extensions.plugins.amortization.AmortizationCalculation"/>
             <description><![CDATA[Creates a new amortization calculation.]]></description>
@@ -817,7 +817,7 @@ var s = "<html>" + c.getAmortizationSchedule().getAsHTML();
 // than 1 or 2 cents due to rounding).
 var rb = c.getRestBalance();]]></sample>
           </function>
-          <function name="newPolynomial">
+          <function clientSupport="wc,sc" name="newPolynomial">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             <description><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
@@ -876,7 +876,7 @@ plugins.dialogs.showInfoDialog(
 	"Ok"
 );]]></sample>
           </function>
-          <function name="newPolynomial">
+          <function clientSupport="wc,sc" name="newPolynomial">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
@@ -940,7 +940,7 @@ plugins.dialogs.showInfoDialog(
               <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
-          <function name="nextDate">
+          <function clientSupport="wc,sc" name="nextDate">
             <argumentsTypes>
               <argumentType typecode="java.util.Date"/>
               <argumentType typecode="int"/>

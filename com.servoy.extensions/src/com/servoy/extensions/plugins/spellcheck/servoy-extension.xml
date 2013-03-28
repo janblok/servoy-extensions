@@ -2,33 +2,33 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="LANGUAGES" qualifiedName="com.servoy.extensions.plugins.spellcheck.LANGUAGES">
+      <object clientSupport="wc,sc" publicName="LANGUAGES" qualifiedName="com.servoy.extensions.plugins.spellcheck.LANGUAGES">
         <constants>
-          <constant name="DUTCH">
+          <constant clientSupport="wc,sc" name="DUTCH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the Dutch language.]]></description>
             <summary><![CDATA[Constant for specifying the Dutch language.]]></summary>
             <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInDutch', plugins.spellcheck.LANGUAGES.DUTCH);]]></sample>
           </constant>
-          <constant name="ENGLISH">
+          <constant clientSupport="wc,sc" name="ENGLISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the English language.]]></description>
             <summary><![CDATA[Constant for specifying the English language.]]></summary>
             <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInEnglish', plugins.spellcheck.LANGUAGES.ENGLISH);]]></sample>
           </constant>
-          <constant name="GERMAN">
+          <constant clientSupport="wc,sc" name="GERMAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the German language.]]></description>
             <summary><![CDATA[Constant for specifying the German language.]]></summary>
             <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInGerman', plugins.spellcheck.LANGUAGES.GERMAN);]]></sample>
           </constant>
-          <constant name="ITALIAN">
+          <constant clientSupport="wc,sc" name="ITALIAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the Italian language.]]></description>
             <summary><![CDATA[Constant for specifying the Italian language.]]></summary>
             <sample><![CDATA[plugins.spellcheck.checkTextComponent('textInItalian', plugins.spellcheck.LANGUAGES.ITALIAN);]]></sample>
           </constant>
-          <constant name="SPANISH">
+          <constant clientSupport="wc,sc" name="SPANISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant for specifying the Spanish language.]]></description>
             <summary><![CDATA[Constant for specifying the Spanish language.]]></summary>
@@ -36,9 +36,9 @@
           </constant>
         </constants>
       </object>
-      <object publicName="spellcheck" qualifiedName="com.servoy.extensions.plugins.spellcheck.SpellCheckClientProvider" scriptingName="plugins.spellcheck">
+      <object clientSupport="wc,sc" publicName="spellcheck" qualifiedName="com.servoy.extensions.plugins.spellcheck.SpellCheckClientProvider" scriptingName="plugins.spellcheck">
         <functions>
-          <function name="checkTextComponent">
+          <function clientSupport="wc,sc" name="checkTextComponent">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -56,7 +56,7 @@ plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
               <parameter name="textComponent" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="checkTextComponent">
+          <function clientSupport="wc,sc" name="checkTextComponent">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>

@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="XmlNode" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlNode">
+      <object clientSupport="wc,sc" publicName="XmlNode" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlNode">
         <functions>
-          <function name="getAttributeNames">
+          <function clientSupport="wc,sc" name="getAttributeNames">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Return all the attribute names of the current node.]]></description>
@@ -17,7 +17,7 @@ application.output(attributes[1])
 val1 = rootNode.getAttributeValue('attr1');
 application.output(val1)]]></sample>
           </function>
-          <function name="getAttributeValue">
+          <function clientSupport="wc,sc" name="getAttributeValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -35,7 +35,7 @@ application.output(val1)]]></sample>
               <parameter name="attributeName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getChildNodes">
+          <function clientSupport="wc,sc" name="getChildNodes">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
             <description><![CDATA[Return the child nodes of the current node.]]></description>
@@ -53,7 +53,7 @@ application.output(subChilds[0].getName())
 application.output(subChilds[0].getTextValue())
 application.output(subChilds[0].getType())]]></sample>
           </function>
-          <function name="getName">
+          <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Return the name of the XML node element.]]></description>
@@ -71,7 +71,7 @@ application.output(subChilds[0].getName())
 application.output(subChilds[0].getTextValue())
 application.output(subChilds[0].getType())]]></sample>
           </function>
-          <function name="getTextValue">
+          <function clientSupport="wc,sc" name="getTextValue">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Return the text-value of the XML node element.]]></description>
@@ -89,7 +89,7 @@ application.output(subChilds[0].getName())
 application.output(subChilds[0].getTextValue())
 application.output(subChilds[0].getType())]]></sample>
           </function>
-          <function name="getType">
+          <function clientSupport="wc,sc" name="getType">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Return the type of the XML node element.]]></description>
@@ -109,9 +109,9 @@ application.output(subChilds[0].getType())]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="XmlReader" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlReaderProvider" scriptingName="plugins.XmlReader">
+      <object clientSupport="wc,sc" publicName="XmlReader" qualifiedName="com.servoy.extensions.plugins.xmlreader.XmlReaderProvider" scriptingName="plugins.XmlReader">
         <functions>
-          <function deprecated="true" name="readXmlDocument">
+          <function clientSupport="wc,sc" deprecated="true" name="readXmlDocument">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -120,7 +120,7 @@ application.output(subChilds[0].getType())]]></sample>
             <deprecated><![CDATA[Replaced by #readXmlDocumentFromString(String) and #readXmlDocumentFromFile(Object)]]></deprecated>
             <sample/>
           </function>
-          <function name="readXmlDocumentFromFile">
+          <function clientSupport="wc,sc" name="readXmlDocumentFromFile">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -138,7 +138,7 @@ var childNodes = xmlNodes[0].getChildNodes();]]></sample>
               <parameter name="argument" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="readXmlDocumentFromString">
+          <function clientSupport="wc,sc" name="readXmlDocumentFromString">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>

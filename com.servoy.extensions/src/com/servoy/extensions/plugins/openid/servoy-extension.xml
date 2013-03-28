@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="JSAuthenticateRequest" qualifiedName="com.servoy.extensions.plugins.openid.JSAuthenticateRequest">
+      <object clientSupport="wc,sc" publicName="JSAuthenticateRequest" qualifiedName="com.servoy.extensions.plugins.openid.JSAuthenticateRequest">
         <functions>
-          <function name="addAttributeRequest">
+          <function clientSupport="wc,sc" name="addAttributeRequest">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -20,7 +20,7 @@
               <parameter name="required" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="execute">
+          <function clientSupport="wc,sc" name="execute">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description/>
@@ -49,9 +49,9 @@ authenticateRequest.execute();
           </function>
         </functions>
       </object>
-      <object publicName="JSAuthenticateResult" qualifiedName="com.servoy.extensions.plugins.openid.JSAuthenticateResult">
+      <object clientSupport="wc,sc" publicName="JSAuthenticateResult" qualifiedName="com.servoy.extensions.plugins.openid.JSAuthenticateResult">
         <functions>
-          <function name="getAttributeValue">
+          <function clientSupport="wc,sc" name="getAttributeValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -63,7 +63,7 @@ authenticateRequest.execute();
               <parameter name="alias" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getAttributeValues">
+          <function clientSupport="wc,sc" name="getAttributeValues">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -80,9 +80,9 @@ for (var i = 0; i < namesArray.length; i++) {
           </function>
         </functions>
       </object>
-      <object publicName="openid" qualifiedName="com.servoy.extensions.plugins.openid.OpenIDProvider" scriptingName="plugins.openid">
+      <object clientSupport="wc,sc" publicName="openid" qualifiedName="com.servoy.extensions.plugins.openid.OpenIDProvider" scriptingName="plugins.openid">
         <functions>
-          <function name="createAuthenticateRequest">
+          <function clientSupport="wc,sc" name="createAuthenticateRequest">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>

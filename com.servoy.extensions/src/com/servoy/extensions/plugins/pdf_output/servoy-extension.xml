@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider" scriptingName="plugins.pdf_output">
+      <object clientSupport="wc,sc" publicName="pdf_output" qualifiedName="com.servoy.extensions.plugins.pdf_output.PDFProvider" scriptingName="plugins.pdf_output">
         <functions>
-          <function name="addMetaData">
+          <function clientSupport="wc,sc" name="addMetaData">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="org.mozilla.javascript.Scriptable"/>
@@ -28,7 +28,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="combinePDFDocuments">
+          <function clientSupport="wc,sc" name="combinePDFDocuments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -42,7 +42,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="combineProtectedPDFDocuments">
+          <function clientSupport="wc,sc" name="combineProtectedPDFDocuments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
@@ -60,7 +60,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="convertPDFFormToPDFDocument">
+          <function clientSupport="wc,sc" name="convertPDFFormToPDFDocument">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.Object"/>
@@ -87,7 +87,7 @@ if (result_pdf_doc != null)
               </parameter>
             </parameters>
           </function>
-          <function name="convertProtectedPDFFormToPDFDocument">
+          <function clientSupport="wc,sc" name="convertProtectedPDFFormToPDFDocument">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -118,7 +118,7 @@ if (result_pdf_doc != null)
               </parameter>
             </parameters>
           </function>
-          <function name="encrypt">
+          <function clientSupport="wc,sc" name="encrypt">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -142,7 +142,7 @@ if (unEncryptedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="encrypt">
+          <function clientSupport="wc,sc" name="encrypt">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -170,7 +170,7 @@ if (unEncryptedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="encrypt">
+          <function clientSupport="wc,sc" name="encrypt">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -230,7 +230,7 @@ if (unEncryptedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="encrypt">
+          <function clientSupport="wc,sc" name="encrypt">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -294,7 +294,7 @@ if (unEncryptedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="encrypt">
+          <function clientSupport="wc,sc" name="encrypt">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -362,7 +362,7 @@ if (unEncryptedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="endMetaPrintJob">
+          <function clientSupport="wc,sc" name="endMetaPrintJob">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Ends a previously started meta print job. For meta print jobs that were stored in memory, not in a file on disk, also returns the content of the generated PDF document.]]></description>
@@ -391,7 +391,7 @@ if (success)
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           </function>
-          <function name="getPDFPrinter">
+          <function clientSupport="wc,sc" name="getPDFPrinter">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.PrinterJob" typecode="java.awt.print.PrinterJob"/>
             <description><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
@@ -399,7 +399,7 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
             <sample><![CDATA[//to print current record without printdialog to pdf file in temp dir.
 controller.print(true,false,plugins.pdf_output.getPDFPrinter());]]></sample>
           </function>
-          <function name="getPDFPrinter">
+          <function clientSupport="wc,sc" name="getPDFPrinter">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -414,7 +414,7 @@ controller.print(true,false,plugins.pdf_output.getPDFPrinter('c:/temp/out.pdf'))
               </parameter>
             </parameters>
           </function>
-          <function name="getPagesPrinted">
+          <function clientSupport="wc,sc" name="getPagesPrinted">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></description>
@@ -443,7 +443,7 @@ if (success)
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           </function>
-          <function name="getTotalPagesPrinted">
+          <function clientSupport="wc,sc" name="getTotalPagesPrinted">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Returns the total number of pages printed in the context of a meta print job. Call this method before ending the meta print job.]]></description>
@@ -472,7 +472,7 @@ if (success)
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           </function>
-          <function name="insertFontDirectory">
+          <function clientSupport="wc,sc" name="insertFontDirectory">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -490,7 +490,7 @@ plugins.pdf_output.insertFontDirectory('/Library/Fonts');]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="numberPages">
+          <function clientSupport="wc,sc" name="numberPages">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
@@ -509,7 +509,7 @@ if (unNumberedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="numberPages">
+          <function clientSupport="wc,sc" name="numberPages">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="int"/>
@@ -548,7 +548,7 @@ if (unNumberedFile) {
               </parameter>
             </parameters>
           </function>
-          <function name="overlay">
+          <function clientSupport="wc,sc" name="overlay">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="[B"/>
@@ -582,7 +582,7 @@ if (input1) {
               </parameter>
             </parameters>
           </function>
-          <function name="overlay">
+          <function clientSupport="wc,sc" name="overlay">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="[B"/>
@@ -620,7 +620,7 @@ if (input1) {
               </parameter>
             </parameters>
           </function>
-          <function name="overlay">
+          <function clientSupport="wc,sc" name="overlay">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="[B"/>
@@ -662,7 +662,7 @@ if (input1) {
               </parameter>
             </parameters>
           </function>
-          <function name="overlay">
+          <function clientSupport="wc,sc" name="overlay">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="[B"/>
@@ -700,7 +700,7 @@ if (input1) {
               </parameter>
             </parameters>
           </function>
-          <function name="overlayText">
+          <function clientSupport="wc,sc" name="overlayText">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -723,7 +723,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="overlayText">
+          <function clientSupport="wc,sc" name="overlayText">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -770,7 +770,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="startMetaPrintJob">
+          <function clientSupport="wc,sc" name="startMetaPrintJob">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.]]></description>
@@ -799,7 +799,7 @@ if (success)
 application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           </function>
-          <function name="startMetaPrintJob">
+          <function clientSupport="wc,sc" name="startMetaPrintJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -835,7 +835,7 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="watermark">
+          <function clientSupport="wc,sc" name="watermark">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -859,7 +859,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="watermark">
+          <function clientSupport="wc,sc" name="watermark">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>
@@ -895,7 +895,7 @@ if (pdf) {
               </parameter>
             </parameters>
           </function>
-          <function name="watermark">
+          <function clientSupport="wc,sc" name="watermark">
             <argumentsTypes>
               <argumentType typecode="[B"/>
               <argumentType typecode="java.lang.String"/>

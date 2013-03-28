@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="JSImage" qualifiedName="com.servoy.extensions.plugins.images.JSImage">
+      <object clientSupport="wc,sc" publicName="JSImage" qualifiedName="com.servoy.extensions.plugins.images.JSImage">
         <functions>
-          <function name="flip">
+          <function clientSupport="wc,sc" name="flip">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -19,7 +19,7 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <parameter name="type" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getContentType">
+          <function clientSupport="wc,sc" name="getContentType">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Gets the contenttype (image/jpeg) of this image.]]></description>
@@ -29,7 +29,7 @@ var width = image.getWidth();
 var height = image.getHeight();
 var contentType = image.getContentType();]]></sample>
           </function>
-          <function name="getData">
+          <function clientSupport="wc,sc" name="getData">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Gets the bytes of this image, so that they can be saved to disk or stored the database.]]></description>
@@ -39,7 +39,7 @@ image = image.resize(200,200);//resizes it to 200,200
 var bytes = image.getData();//gets the image bytes
 plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
           </function>
-          <function name="getHeight">
+          <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets the height of this image.]]></description>
@@ -49,7 +49,7 @@ var width = image.getWidth();
 var height = image.getHeight();
 var contentType = image.getContentType();]]></sample>
           </function>
-          <function name="getMetaDataDescription">
+          <function clientSupport="wc,sc" name="getMetaDataDescription">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -72,7 +72,7 @@ thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail 
               <parameter name="property" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getMetaDataObject">
+          <function clientSupport="wc,sc" name="getMetaDataObject">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -95,7 +95,7 @@ thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail 
               <parameter name="property" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getMetaDataProperties">
+          <function clientSupport="wc,sc" name="getMetaDataProperties">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Gets the available metadata properties from the image. Currently only jpg is supported.]]></description>
@@ -113,7 +113,7 @@ for(var i=0;i<propertiesArray.length;i++)
 // Thumbnail data is stored under property 'Exif - Thumbnail Data', extract that and set it in a dataprovider
 thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail data from the image]]></sample>
           </function>
-          <function name="getWidth">
+          <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets the width of this image.]]></description>
@@ -123,7 +123,7 @@ var width = image.getWidth();
 var height = image.getHeight();
 var contentType = image.getContentType();]]></sample>
           </function>
-          <function name="resize">
+          <function clientSupport="wc,sc" name="resize">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -140,7 +140,7 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="rotate">
+          <function clientSupport="wc,sc" name="rotate">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
@@ -157,9 +157,9 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="images" qualifiedName="com.servoy.extensions.plugins.images.ImageProvider" scriptingName="plugins.images">
+      <object clientSupport="wc,sc" publicName="images" qualifiedName="com.servoy.extensions.plugins.images.ImageProvider" scriptingName="plugins.images">
         <functions>
-          <function deprecated="true" name="createJPGImage">
+          <function clientSupport="wc,sc" deprecated="true" name="createJPGImage">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -174,7 +174,7 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="createJPGImage">
+          <function clientSupport="wc,sc" deprecated="true" name="createJPGImage">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="int"/>
@@ -193,7 +193,7 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getImage">
+          <function clientSupport="wc,sc" name="getImage">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>

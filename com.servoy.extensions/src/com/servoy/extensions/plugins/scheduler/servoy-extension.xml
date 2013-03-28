@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="scheduler" qualifiedName="com.servoy.extensions.plugins.scheduler.SchedulerProvider" scriptingName="plugins.scheduler">
+      <object clientSupport="wc,sc" publicName="scheduler" qualifiedName="com.servoy.extensions.plugins.scheduler.SchedulerProvider" scriptingName="plugins.scheduler">
         <functions>
-          <function name="addCronJob">
+          <function clientSupport="wc,sc" name="addCronJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -31,7 +31,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               </link>
             </links>
           </function>
-          <function name="addCronJob">
+          <function clientSupport="wc,sc" name="addCronJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -55,7 +55,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="addCronJob">
+          <function clientSupport="wc,sc" name="addCronJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -81,7 +81,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <parameter name="endDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="addCronJob">
+          <function clientSupport="wc,sc" name="addCronJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -109,7 +109,7 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="addJob">
+          <function clientSupport="wc,sc" name="addJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.util.Date"/>
@@ -130,7 +130,7 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="addJob">
+          <function clientSupport="wc,sc" name="addJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.util.Date"/>
@@ -155,7 +155,7 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               </parameter>
             </parameters>
           </function>
-          <function name="addJob">
+          <function clientSupport="wc,sc" name="addJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.util.Date"/>
@@ -182,7 +182,7 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <parameter name="repeatCount" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="addJob">
+          <function clientSupport="wc,sc" name="addJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.util.Date"/>
@@ -211,7 +211,7 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <parameter name="endDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="addJob">
+          <function clientSupport="wc,sc" name="addJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.util.Date"/>
@@ -242,7 +242,7 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="addJob">
+          <function clientSupport="wc,sc" name="addJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.util.Date"/>
@@ -265,28 +265,28 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="getCurrentJobNames">
+          <function clientSupport="wc,sc" name="getCurrentJobNames">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Returns an array with the current jobs.]]></description>
             <summary><![CDATA[Returns an array with the current jobs.]]></summary>
             <sample><![CDATA[plugins.scheduler.getCurrentJobNames()]]></sample>
           </function>
-          <function name="getLastRunJobName">
+          <function clientSupport="wc,sc" name="getLastRunJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the last job run from the scheduler.]]></description>
             <summary><![CDATA[Returns the last job run from the scheduler.]]></summary>
             <sample><![CDATA[plugins.scheduler.getLastRunJobName();]]></sample>
           </function>
-          <function deprecated="true" name="getLastRunnedJobName">
+          <function clientSupport="wc,sc" deprecated="true" name="getLastRunnedJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Replaced by #getLastRunJobName().]]></deprecated>
             <sample/>
           </function>
-          <function name="removeJob">
+          <function clientSupport="wc,sc" name="removeJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>

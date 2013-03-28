@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="agent" qualifiedName="com.servoy.extensions.plugins.agent.DummyAgentImpl" scriptingName="plugins.agent">
+      <object clientSupport="wc,sc" publicName="agent" qualifiedName="com.servoy.extensions.plugins.agent.DummyAgentImpl" scriptingName="plugins.agent">
         <properties>
-          <property name="x">
+          <property clientSupport="wc,sc" name="x">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets or sets the x position of the agent.]]></description>
             <summary><![CDATA[Gets or sets the x position of the agent.]]></summary>
@@ -12,7 +12,7 @@
 plugins.agent.x = plugins.agent.x-10;
 plugins.agent.y = plugins.agent.y-10;]]></sample>
           </property>
-          <property name="y">
+          <property clientSupport="wc,sc" name="y">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets or sets the y position of the agent.]]></description>
             <summary><![CDATA[Gets or sets the y position of the agent.]]></summary>
@@ -22,7 +22,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
           </property>
         </properties>
         <functions>
-          <function deprecated="true" name="hide">
+          <function clientSupport="wc,sc" deprecated="true" name="hide">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Hides the agent.]]></description>
@@ -30,7 +30,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <deprecated><![CDATA[Replaced by #setVisible(boolean)]]></deprecated>
             <sample><![CDATA[plugins.agent.hide();]]></sample>
           </function>
-          <function name="setBalloonSize">
+          <function clientSupport="wc,sc" name="setBalloonSize">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -44,7 +44,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setImageURL">
+          <function clientSupport="wc,sc" name="setImageURL">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -56,7 +56,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setLocation">
+          <function clientSupport="wc,sc" name="setLocation">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -70,7 +70,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setVisible">
+          <function clientSupport="wc,sc" name="setVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -82,7 +82,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="show">
+          <function clientSupport="wc,sc" deprecated="true" name="show">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Shows the agent.]]></description>
@@ -90,7 +90,7 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <deprecated><![CDATA[Replaced by #setVisible(boolean)]]></deprecated>
             <sample><![CDATA[plugins.agent.show();]]></sample>
           </function>
-          <function name="speak">
+          <function clientSupport="wc,sc" name="speak">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>

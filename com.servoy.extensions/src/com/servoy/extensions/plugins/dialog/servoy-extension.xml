@@ -4,7 +4,7 @@
     <plugins>
       <object clientSupport="mc,wc,sc" publicName="dialogs" qualifiedName="com.servoy.extensions.plugins.dialog.DialogProvider" scriptingName="plugins.dialogs">
         <functions>
-          <function deprecated="true" name="showDialog">
+          <function clientSupport="wc,sc" deprecated="true" name="showDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -22,7 +22,7 @@
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="showDialog" varargs="true">
+          <function clientSupport="wc,sc" deprecated="true" name="showDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -44,7 +44,7 @@
               </parameter>
             </parameters>
           </function>
-          <function name="showErrorDialog" varargs="true">
+          <function clientSupport="wc,sc" name="showErrorDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -67,7 +67,7 @@ var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allow
               </parameter>
             </parameters>
           </function>
-          <function name="showInfoDialog" varargs="true">
+          <function clientSupport="wc,sc" name="showInfoDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -90,7 +90,7 @@ var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowe
               </parameter>
             </parameters>
           </function>
-          <function name="showInputDialog">
+          <function clientSupport="wc,sc" name="showInputDialog">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
@@ -98,7 +98,7 @@ var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowe
             <sample><![CDATA[//show input dialog ,returns nothing when canceled 
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
           </function>
-          <function name="showInputDialog">
+          <function clientSupport="wc,sc" name="showInputDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -111,7 +111,7 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="dialog_title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="showInputDialog">
+          <function clientSupport="wc,sc" name="showInputDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -126,7 +126,7 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="msg" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="showInputDialog">
+          <function clientSupport="wc,sc" name="showInputDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -143,7 +143,7 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="initialValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="showQuestionDialog">
+          <function clientSupport="mc,wc,sc" name="showQuestionDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -162,7 +162,7 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               </parameter>
             </parameters>
           </function>
-          <function name="showQuestionDialog" varargs="true">
+          <function clientSupport="wc,sc" name="showQuestionDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -185,7 +185,7 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               </parameter>
             </parameters>
           </function>
-          <function name="showSelectDialog">
+          <function clientSupport="wc,sc" name="showSelectDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -204,7 +204,7 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="optionArray" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="showSelectDialog" varargs="true">
+          <function clientSupport="wc,sc" name="showSelectDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -223,7 +223,7 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="options" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function name="showWarningDialog">
+          <function clientSupport="mc,wc,sc" name="showWarningDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -242,7 +242,7 @@ var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not all
               </parameter>
             </parameters>
           </function>
-          <function name="showWarningDialog" varargs="true">
+          <function clientSupport="wc,sc" name="showWarningDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>

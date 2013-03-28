@@ -2,16 +2,16 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="textxport" qualifiedName="com.servoy.extensions.plugins.tabxport.Enabler" scriptingName="plugins.textxport">
+      <object clientSupport="wc,sc" publicName="textxport" qualifiedName="com.servoy.extensions.plugins.tabxport.Enabler" scriptingName="plugins.textxport">
         <properties>
-          <property name="exportEnabled">
+          <property clientSupport="wc,sc" name="exportEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Enable the export feature of this plugin.]]></description>
             <summary><![CDATA[Enable the export feature of this plugin.]]></summary>
             <sample><![CDATA[plugins.textxport.exportEnabled = true;
 var isEnabled = plugins.textxport.exportEnabled;]]></sample>
           </property>
-          <property name="importEnabled">
+          <property clientSupport="wc,sc" name="importEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Enable the import feature of this plugin.]]></description>
             <summary><![CDATA[Enable the import feature of this plugin.]]></summary>
@@ -20,7 +20,7 @@ var isEnabled = plugins.textxport.importEnabled;]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="textExport">
+          <function clientSupport="wc,sc" name="textExport">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
               <argumentType typecode="[Ljava.lang.String;"/>
@@ -39,7 +39,7 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
               </parameter>
             </parameters>
           </function>
-          <function name="textExport">
+          <function clientSupport="wc,sc" name="textExport">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
               <argumentType typecode="[Ljava.lang.String;"/>
@@ -62,7 +62,7 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
               </parameter>
             </parameters>
           </function>
-          <function name="textExport">
+          <function clientSupport="wc,sc" name="textExport">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
               <argumentType typecode="[Ljava.lang.String;"/>

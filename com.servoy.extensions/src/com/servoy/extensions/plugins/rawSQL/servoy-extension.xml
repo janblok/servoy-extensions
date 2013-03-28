@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="rawSQL" qualifiedName="com.servoy.extensions.plugins.rawSQL.RawSQLProvider" scriptingName="plugins.rawSQL">
+      <object clientSupport="wc,sc" publicName="rawSQL" qualifiedName="com.servoy.extensions.plugins.rawSQL.RawSQLProvider" scriptingName="plugins.rawSQL">
         <functions>
-          <function deprecated="true" name="convertUUIDToBytes">
+          <function clientSupport="wc,sc" deprecated="true" name="convertUUIDToBytes">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -25,7 +25,7 @@ real server names must be used here, plugins.rawSQL is not transparent to switch
 var uuid = application.getNewUUID();
 plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);]]></sample>
           </function>
-          <function deprecated="true" name="convertUUIDToString">
+          <function clientSupport="wc,sc" deprecated="true" name="convertUUIDToString">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
@@ -37,7 +37,7 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
               <parameter name="data" type="byte[]" typecode="[B"/>
             </parameters>
           </function>
-          <function name="executeSQL">
+          <function clientSupport="wc,sc" name="executeSQL">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -84,7 +84,7 @@ else
               </parameter>
             </parameters>
           </function>
-          <function name="executeSQL">
+          <function clientSupport="wc,sc" name="executeSQL">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -135,7 +135,7 @@ else
               </parameter>
             </parameters>
           </function>
-          <function name="executeStoredProcedure">
+          <function clientSupport="wc,sc" name="executeStoredProcedure">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -175,7 +175,7 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
               <parameter name="maxNumberOfRowsToRetrieve" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="flushAllClientsCache">
+          <function clientSupport="wc,sc" name="flushAllClientsCache">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -214,7 +214,7 @@ else
               <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getException">
+          <function clientSupport="wc,sc" name="getException">
             <argumentsTypes/>
             <return type="com.servoy.j2db.util.ServoyException" typecode="java.lang.Exception"/>
             <description><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
@@ -246,14 +246,14 @@ else
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
           </function>
-          <function deprecated="true" name="getExceptionMsg">
+          <function clientSupport="wc,sc" deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Replaced by #getException().]]></deprecated>
             <sample/>
           </function>
-          <function name="notifyDataChange">
+          <function clientSupport="wc,sc" name="notifyDataChange">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>

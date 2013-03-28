@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="CheckBox" qualifiedName="com.servoy.extensions.plugins.window.menu.CheckBox">
+      <object clientSupport="wc,sc" publicName="CheckBox" qualifiedName="com.servoy.extensions.plugins.window.menu.CheckBox">
         <properties>
-          <property name="enabled">
+          <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></summary>
@@ -42,7 +42,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="methodArguments">
+          <property clientSupport="wc,sc" name="methodArguments">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Set arguments that are sent to the callback method.]]></description>
             <summary><![CDATA[Set arguments that are sent to the callback method.]]></summary>
@@ -80,7 +80,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="name">
+          <property clientSupport="wc,sc" name="name">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[The name of the menu item/checkbox/radiobutton. The name is used only internally, it is not
 visible in the user interface.]]></description>
@@ -119,7 +119,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="selected">
+          <property clientSupport="wc,sc" name="selected">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Select/unselect the checkbox/radiobutton.]]></description>
             <summary><![CDATA[Select/unselect the checkbox/radiobutton.]]></summary>
@@ -157,7 +157,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="text">
+          <property clientSupport="wc,sc" name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
@@ -197,7 +197,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="doClick">
+          <function clientSupport="wc,sc" name="doClick">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Script the selection (emulate a mouse click) of the item.]]></description>
@@ -219,7 +219,7 @@ var entry = menu.addMenuItem("menu entry", feedback);
 // simulate a click on the entry
 entry.doClick();]]></sample>
           </function>
-          <function name="getClientProperty">
+          <function clientSupport="wc,sc" name="getClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -256,7 +256,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="key" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="putClientProperty">
+          <function clientSupport="wc,sc" name="putClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
@@ -295,7 +295,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -305,7 +305,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -327,7 +327,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -353,7 +353,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -383,7 +383,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -417,7 +417,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -455,7 +455,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -497,7 +497,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -543,7 +543,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -565,7 +565,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -591,7 +591,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -621,7 +621,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -655,7 +655,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -693,7 +693,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -735,7 +735,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function name="setAccelerator">
+          <function clientSupport="wc,sc" name="setAccelerator">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -767,7 +767,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setAlign">
+          <function clientSupport="wc,sc" name="setAlign">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -792,7 +792,7 @@ entry.setAlign(true);]]></sample>
               <parameter name="align" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setArguments">
+          <function clientSupport="wc,sc" deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -806,7 +806,7 @@ entry.setAlign(true);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setBackgroundColor">
+          <function clientSupport="wc,sc" name="setBackgroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -838,7 +838,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setForegroundColor">
+          <function clientSupport="wc,sc" name="setForegroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -870,7 +870,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setIcon">
+          <function clientSupport="wc,sc" name="setIcon">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -902,7 +902,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -914,7 +914,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
@@ -928,7 +928,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="setMnemonic">
+          <function clientSupport="wc,sc" name="setMnemonic">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -960,7 +960,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setVisible">
+          <function clientSupport="wc,sc" name="setVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -993,9 +993,9 @@ entry_three.setVisible(false);]]></sample>
           </function>
         </functions>
       </object>
-      <object deprecated="true" publicName="JSMenuItem" qualifiedName="com.servoy.extensions.plugins.window.menu.JSMenuItem">
+      <object clientSupport="wc,sc" deprecated="true" publicName="JSMenuItem" qualifiedName="com.servoy.extensions.plugins.window.menu.JSMenuItem">
         <constants>
-          <constant name="ALIGN_CENTER">
+          <constant clientSupport="wc,sc" name="ALIGN_CENTER">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Constant for centering menu items/checkbox/radiobuttons at creation.]]></description>
             <summary><![CDATA[Constant for centering menu items/checkbox/radiobuttons at creation.]]></summary>
@@ -1013,7 +1013,7 @@ menu.addCheckBox("a bit shorter", feedback, null, null, true, MenuItem.ALIGN_CEN
 // add a right aligned radiobutton
 menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);]]></sample>
           </constant>
-          <constant name="ALIGN_LEFT">
+          <constant clientSupport="wc,sc" name="ALIGN_LEFT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Constant for left aligning menu items/checkbox/radiobuttons at creation.]]></description>
             <summary><![CDATA[Constant for left aligning menu items/checkbox/radiobuttons at creation.]]></summary>
@@ -1031,7 +1031,7 @@ menu.addCheckBox("a bit shorter", feedback, null, null, true, MenuItem.ALIGN_CEN
 // add a right aligned radiobutton
 menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);]]></sample>
           </constant>
-          <constant name="ALIGN_RIGHT">
+          <constant clientSupport="wc,sc" name="ALIGN_RIGHT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Constant for right aligning menu items/checkbox/radiobuttons at creation.]]></description>
             <summary><![CDATA[Constant for right aligning menu items/checkbox/radiobuttons at creation.]]></summary>
@@ -1051,7 +1051,7 @@ menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);]
           </constant>
         </constants>
         <properties>
-          <property name="enabled">
+          <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></summary>
@@ -1089,7 +1089,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="methodArguments">
+          <property clientSupport="wc,sc" name="methodArguments">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Set arguments that are sent to the callback method.]]></description>
             <summary><![CDATA[Set arguments that are sent to the callback method.]]></summary>
@@ -1127,7 +1127,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="name">
+          <property clientSupport="wc,sc" name="name">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[The name of the menu item/checkbox/radiobutton. The name is used only internally, it is not
 visible in the user interface.]]></description>
@@ -1166,7 +1166,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="selected">
+          <property clientSupport="wc,sc" name="selected">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Select/unselect the checkbox/radiobutton.]]></description>
             <summary><![CDATA[Select/unselect the checkbox/radiobutton.]]></summary>
@@ -1204,7 +1204,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="text">
+          <property clientSupport="wc,sc" name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
@@ -1244,7 +1244,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="doClick">
+          <function clientSupport="wc,sc" name="doClick">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Script the selection (emulate a mouse click) of the item.]]></description>
@@ -1266,7 +1266,7 @@ var entry = menu.addMenuItem("menu entry", feedback);
 // simulate a click on the entry
 entry.doClick();]]></sample>
           </function>
-          <function name="getClientProperty">
+          <function clientSupport="wc,sc" name="getClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -1303,7 +1303,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="key" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="putClientProperty">
+          <function clientSupport="wc,sc" name="putClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
@@ -1342,7 +1342,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1360,7 +1360,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1382,7 +1382,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1408,7 +1408,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1438,7 +1438,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1472,7 +1472,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1510,7 +1510,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1552,7 +1552,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function name="setAccelerator">
+          <function clientSupport="wc,sc" name="setAccelerator">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1584,7 +1584,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function deprecated="true" name="setArguments">
+          <function clientSupport="wc,sc" deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -1598,7 +1598,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setBackgroundColor">
+          <function clientSupport="wc,sc" name="setBackgroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1630,7 +1630,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setForegroundColor">
+          <function clientSupport="wc,sc" name="setForegroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1662,7 +1662,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setIcon">
+          <function clientSupport="wc,sc" name="setIcon">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -1694,7 +1694,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1706,7 +1706,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
@@ -1720,7 +1720,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="setMnemonic">
+          <function clientSupport="wc,sc" name="setMnemonic">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1752,7 +1752,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setVisible">
+          <function clientSupport="wc,sc" name="setVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -1785,9 +1785,9 @@ entry_three.setVisible(false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="Menu" qualifiedName="com.servoy.extensions.plugins.window.menu.Menu">
+      <object clientSupport="wc,sc" publicName="Menu" qualifiedName="com.servoy.extensions.plugins.window.menu.Menu">
         <properties>
-          <property name="text">
+          <property clientSupport="wc,sc" name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Retrieve/set the text.]]></description>
             <summary><![CDATA[Retrieve/set the text.]]></summary>
@@ -1805,7 +1805,7 @@ menu.setIcon("media:///yourimage.gif");]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"><![CDATA[checkbox]]></return>
             <description><![CDATA[Add a checkbox.]]></description>
@@ -1840,7 +1840,7 @@ var chk = menu.addCheckBox(2);
 chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -1882,7 +1882,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1924,7 +1924,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -1970,7 +1970,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2020,7 +2020,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2074,7 +2074,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2132,7 +2132,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2194,7 +2194,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="addItem">
+          <function clientSupport="wc,sc" deprecated="true" name="addItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -2203,7 +2203,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
             <deprecated><![CDATA[Replaced by #addMenuItem(String,Function,Object,String,Boolean,Integer).]]></deprecated>
             <sample/>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
             <description><![CDATA[Add a submenu at the end.]]></description>
@@ -2232,7 +2232,7 @@ var submenu0 = menu.addMenu(0);
 submenu0.text = "submenu 0";
 submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -2268,7 +2268,7 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -2304,7 +2304,7 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
             <description><![CDATA[Add a menu item.]]></description>
@@ -2339,7 +2339,7 @@ var item = menu.addMenuItem(2);
 item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -2381,7 +2381,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -2423,7 +2423,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2469,7 +2469,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2519,7 +2519,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2573,7 +2573,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2631,7 +2631,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2693,7 +2693,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"><![CDATA[a radio button menu item]]></return>
             <description><![CDATA[Add a radio button.]]></description>
@@ -2735,7 +2735,7 @@ var rd = menu.addRadioButton(2);
 rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -2784,7 +2784,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -2833,7 +2833,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2886,7 +2886,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -2943,7 +2943,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -3004,7 +3004,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -3069,7 +3069,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -3138,7 +3138,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioGroup">
+          <function clientSupport="wc,sc" name="addRadioGroup">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Add a radiogroup for radiobuttons. A radiogroup groups together all radiobuttons that are added
@@ -3184,7 +3184,7 @@ var rd = menu.addRadioButton(2);
 rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
           </function>
-          <function name="addSeparator">
+          <function clientSupport="wc,sc" name="addSeparator">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Add the separator at the selected index (starting at 0) or at the end (empty).]]></description>
@@ -3206,7 +3206,7 @@ menu.addRadioButton("radio", feedback_radiobutton);
 // add another separator between the item and the checkbox 
 menu.addSeparator(1);]]></sample>
           </function>
-          <function name="addSeparator">
+          <function clientSupport="wc,sc" name="addSeparator">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3235,14 +3235,14 @@ menu.addSeparator(1);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="addSubMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description/>
             <deprecated><![CDATA[Replaced by #addMenu(String).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="addSubMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3256,7 +3256,7 @@ menu.addSeparator(1);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="doClick">
+          <function clientSupport="wc,sc" name="doClick">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Script the selection (emulate a mouse click) of the menu.]]></description>
@@ -3267,7 +3267,7 @@ var menu = menubar.getMenu(0);
 // simulate a click on the File menu
 menu.doClick();]]></sample>
           </function>
-          <function name="getCheckBox">
+          <function clientSupport="wc,sc" name="getCheckBox">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3323,7 +3323,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getClientProperty">
+          <function clientSupport="wc,sc" name="getClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -3354,7 +3354,7 @@ menu.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="key" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="getItem">
+          <function clientSupport="wc,sc" name="getItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3410,7 +3410,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getItemCount">
+          <function clientSupport="wc,sc" name="getItemCount">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Get the number of items in the menu.]]></description>
@@ -3437,7 +3437,7 @@ menu.addMenuItem("item 2", feedback_item);
 // remove the last item
 menu.removeItem(menu.getItemCount() - 1);]]></sample>
           </function>
-          <function name="getItemIndexByText">
+          <function clientSupport="wc,sc" name="getItemIndexByText">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -3475,7 +3475,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getMenu">
+          <function clientSupport="wc,sc" name="getMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3531,7 +3531,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getRadioButton">
+          <function clientSupport="wc,sc" name="getRadioButton">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3587,7 +3587,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getSubMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="getSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3596,7 +3596,7 @@ else {
             <deprecated><![CDATA[Replaced by #getMenu().]]></deprecated>
             <sample/>
           </function>
-          <function name="putClientProperty">
+          <function clientSupport="wc,sc" name="putClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
@@ -3629,7 +3629,7 @@ menu.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="removeAllItems">
+          <function clientSupport="wc,sc" name="removeAllItems">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all items from the menu.]]></description>
@@ -3662,7 +3662,7 @@ menu.removeAllItems();
 // add back an item
 menu.addMenuItem("new item", feedback_item);]]></sample>
           </function>
-          <function name="removeItem">
+          <function clientSupport="wc,sc" name="removeItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -3702,7 +3702,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -3716,7 +3716,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="boolean"/>
@@ -3734,7 +3734,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -3752,7 +3752,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -3774,7 +3774,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setEnabled">
+          <function clientSupport="wc,sc" name="setEnabled">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -3793,7 +3793,7 @@ menu.setMnemonic("u");
 // add an icon to the menu
 menu.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setIcon">
+          <function clientSupport="wc,sc" name="setIcon">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -3812,7 +3812,7 @@ menu.setMnemonic("u");
 // add an icon to the menu
 menu.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setMnemonic">
+          <function clientSupport="wc,sc" name="setMnemonic">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -3833,9 +3833,9 @@ menu.setIcon("media:///yourimage.gif");]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="MenuBar" qualifiedName="com.servoy.extensions.plugins.window.menu.MenuBar">
+      <object clientSupport="wc,sc" publicName="MenuBar" qualifiedName="com.servoy.extensions.plugins.window.menu.MenuBar">
         <functions>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description><![CDATA[Add a menu to the menubar.]]></description>
@@ -3858,7 +3858,7 @@ another_menu.setMnemonic("t")
 // this example will show no menu items for now!
 // IMPORTANT: Working with menu's on developer and client can differ]]></sample>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3886,7 +3886,7 @@ another_menu.setMnemonic("t")
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getMenu">
+          <function clientSupport="wc,sc" name="getMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -3919,7 +3919,7 @@ menu.setEnabled(false);
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getMenuCount">
+          <function clientSupport="wc,sc" name="getMenuCount">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Get the number of (top level) menu's.]]></description>
@@ -3932,7 +3932,7 @@ var count = menubar.getMenuCount();
 var menu = menubar.addMenu(count-1);
 menu.text = 'new menu';]]></sample>
           </function>
-          <function name="getMenuIndexByText">
+          <function clientSupport="wc,sc" name="getMenuIndexByText">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -3951,7 +3951,7 @@ menu.text = "new menu";]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="removeAllMenus">
+          <function clientSupport="wc,sc" name="removeAllMenus">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all menus from the menubar.]]></description>
@@ -3963,7 +3963,7 @@ menu.text = "new menu";]]></sample>
 var menubar = plugins.window.getMenuBar();
 menubar.removeAllMenus();]]></sample>
           </function>
-          <function name="removeMenu">
+          <function clientSupport="wc,sc" name="removeMenu">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -3997,7 +3997,7 @@ menubar.removeMenu(index, index-1, index-2);
               </parameter>
             </parameters>
           </function>
-          <function name="reset">
+          <function clientSupport="wc,sc" name="reset">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Reset the menubar to the default.]]></description>
@@ -4018,7 +4018,7 @@ menu.text = "new menu";
 // reset the menubar, the newly added menu will dissapear
 menubar.reset();]]></sample>
           </function>
-          <function name="setVisible">
+          <function clientSupport="wc,sc" name="setVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -4034,7 +4034,7 @@ menubar.setVisible(false);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="validate">
+          <function clientSupport="wc,sc" deprecated="true" name="validate">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description/>
@@ -4043,9 +4043,9 @@ menubar.setVisible(false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="MenuItem" qualifiedName="com.servoy.extensions.plugins.window.menu.MenuItem">
+      <object clientSupport="wc,sc" publicName="MenuItem" qualifiedName="com.servoy.extensions.plugins.window.menu.MenuItem">
         <constants>
-          <constant name="ALIGN_CENTER">
+          <constant clientSupport="wc,sc" name="ALIGN_CENTER">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Constant for centering menu items/checkbox/radiobuttons at creation.]]></description>
             <summary><![CDATA[Constant for centering menu items/checkbox/radiobuttons at creation.]]></summary>
@@ -4063,7 +4063,7 @@ menu.addCheckBox("a bit shorter", feedback, null, null, true, MenuItem.ALIGN_CEN
 // add a right aligned radiobutton
 menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);]]></sample>
           </constant>
-          <constant name="ALIGN_LEFT">
+          <constant clientSupport="wc,sc" name="ALIGN_LEFT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Constant for left aligning menu items/checkbox/radiobuttons at creation.]]></description>
             <summary><![CDATA[Constant for left aligning menu items/checkbox/radiobuttons at creation.]]></summary>
@@ -4081,7 +4081,7 @@ menu.addCheckBox("a bit shorter", feedback, null, null, true, MenuItem.ALIGN_CEN
 // add a right aligned radiobutton
 menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);]]></sample>
           </constant>
-          <constant name="ALIGN_RIGHT">
+          <constant clientSupport="wc,sc" name="ALIGN_RIGHT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Constant for right aligning menu items/checkbox/radiobuttons at creation.]]></description>
             <summary><![CDATA[Constant for right aligning menu items/checkbox/radiobuttons at creation.]]></summary>
@@ -4101,7 +4101,7 @@ menu.addRadioButton("short", feedback, null, null, true, MenuItem.ALIGN_RIGHT);]
           </constant>
         </constants>
         <properties>
-          <property name="enabled">
+          <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></summary>
@@ -4139,7 +4139,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="methodArguments">
+          <property clientSupport="wc,sc" name="methodArguments">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Set arguments that are sent to the callback method.]]></description>
             <summary><![CDATA[Set arguments that are sent to the callback method.]]></summary>
@@ -4177,7 +4177,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="name">
+          <property clientSupport="wc,sc" name="name">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[The name of the menu item/checkbox/radiobutton. The name is used only internally, it is not
 visible in the user interface.]]></description>
@@ -4216,7 +4216,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="selected">
+          <property clientSupport="wc,sc" name="selected">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Select/unselect the checkbox/radiobutton.]]></description>
             <summary><![CDATA[Select/unselect the checkbox/radiobutton.]]></summary>
@@ -4254,7 +4254,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="text">
+          <property clientSupport="wc,sc" name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
@@ -4294,7 +4294,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="doClick">
+          <function clientSupport="wc,sc" name="doClick">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Script the selection (emulate a mouse click) of the item.]]></description>
@@ -4316,7 +4316,7 @@ var entry = menu.addMenuItem("menu entry", feedback);
 // simulate a click on the entry
 entry.doClick();]]></sample>
           </function>
-          <function name="getClientProperty">
+          <function clientSupport="wc,sc" name="getClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -4353,7 +4353,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="key" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="putClientProperty">
+          <function clientSupport="wc,sc" name="putClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
@@ -4392,7 +4392,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4410,7 +4410,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4432,7 +4432,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4458,7 +4458,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4488,7 +4488,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4522,7 +4522,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4560,7 +4560,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -4602,7 +4602,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function name="setAccelerator">
+          <function clientSupport="wc,sc" name="setAccelerator">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -4634,7 +4634,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function deprecated="true" name="setArguments">
+          <function clientSupport="wc,sc" deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -4648,7 +4648,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setBackgroundColor">
+          <function clientSupport="wc,sc" name="setBackgroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -4680,7 +4680,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setForegroundColor">
+          <function clientSupport="wc,sc" name="setForegroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -4712,7 +4712,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setIcon">
+          <function clientSupport="wc,sc" name="setIcon">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -4744,7 +4744,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -4756,7 +4756,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
@@ -4770,7 +4770,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="setMnemonic">
+          <function clientSupport="wc,sc" name="setMnemonic">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -4802,7 +4802,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setVisible">
+          <function clientSupport="wc,sc" name="setVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -4835,9 +4835,9 @@ entry_three.setVisible(false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="Popup" qualifiedName="com.servoy.extensions.plugins.window.menu.Popup">
+      <object clientSupport="wc,sc" publicName="Popup" qualifiedName="com.servoy.extensions.plugins.window.menu.Popup">
         <functions>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"><![CDATA[checkbox]]></return>
             <description><![CDATA[Add a checkbox.]]></description>
@@ -4872,7 +4872,7 @@ var chk = menu.addCheckBox(2);
 chk.text = "checkbox at index";
 chk.setMethod(feedback_checkbox);]]></sample>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -4914,7 +4914,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -4956,7 +4956,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5002,7 +5002,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5052,7 +5052,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5106,7 +5106,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5164,7 +5164,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5226,7 +5226,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="addItem">
+          <function clientSupport="wc,sc" deprecated="true" name="addItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -5235,7 +5235,7 @@ chk.setMethod(feedback_checkbox);]]></sample>
             <deprecated><![CDATA[Replaced by #addMenuItem(String,Function,Object,String,Boolean,Integer).]]></deprecated>
             <sample/>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"><![CDATA[the submenu]]></return>
             <description><![CDATA[Add a submenu at the end.]]></description>
@@ -5264,7 +5264,7 @@ var submenu0 = menu.addMenu(0);
 submenu0.text = "submenu 0";
 submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -5300,7 +5300,7 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenu">
+          <function clientSupport="wc,sc" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -5336,7 +5336,7 @@ submenu0.addMenuItem("sub item 0 - 1", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"><![CDATA[menu item]]></return>
             <description><![CDATA[Add a menu item.]]></description>
@@ -5371,7 +5371,7 @@ var item = menu.addMenuItem(2);
 item.text = "item at index";
 item.setMethod(feedback_item);]]></sample>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -5413,7 +5413,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -5455,7 +5455,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5501,7 +5501,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5551,7 +5551,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5605,7 +5605,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5663,7 +5663,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addMenuItem">
+          <function clientSupport="wc,sc" name="addMenuItem">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5725,7 +5725,7 @@ item.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"><![CDATA[a radio button menu item]]></return>
             <description><![CDATA[Add a radio button.]]></description>
@@ -5767,7 +5767,7 @@ var rd = menu.addRadioButton(2);
 rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
@@ -5816,7 +5816,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -5865,7 +5865,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5918,7 +5918,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -5975,7 +5975,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6036,7 +6036,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6101,7 +6101,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioButton">
+          <function clientSupport="wc,sc" name="addRadioButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -6170,7 +6170,7 @@ rd.setMethod(feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addRadioGroup">
+          <function clientSupport="wc,sc" name="addRadioGroup">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Add a radiogroup for radiobuttons. A radiogroup groups together all radiobuttons that are added
@@ -6216,7 +6216,7 @@ var rd = menu.addRadioButton(2);
 rd.text = "radio at index";
 rd.setMethod(feedback_item);]]></sample>
           </function>
-          <function name="addSeparator">
+          <function clientSupport="wc,sc" name="addSeparator">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Add the separator at the selected index (starting at 0) or at the end (empty).]]></description>
@@ -6238,7 +6238,7 @@ menu.addRadioButton("radio", feedback_radiobutton);
 // add another separator between the item and the checkbox 
 menu.addSeparator(1);]]></sample>
           </function>
-          <function name="addSeparator">
+          <function clientSupport="wc,sc" name="addSeparator">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6267,14 +6267,14 @@ menu.addSeparator(1);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="addSubMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description/>
             <deprecated><![CDATA[Replaced by #addMenu(String).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="addSubMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6288,7 +6288,7 @@ menu.addSeparator(1);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="getCheckBox">
+          <function clientSupport="wc,sc" name="getCheckBox">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6344,7 +6344,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getClientProperty">
+          <function clientSupport="wc,sc" name="getClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -6375,7 +6375,7 @@ menu.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="key" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="getItem">
+          <function clientSupport="wc,sc" name="getItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6431,7 +6431,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getItemCount">
+          <function clientSupport="wc,sc" name="getItemCount">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Get the number of items in the menu.]]></description>
@@ -6458,7 +6458,7 @@ menu.addMenuItem("item 2", feedback_item);
 // remove the last item
 menu.removeItem(menu.getItemCount() - 1);]]></sample>
           </function>
-          <function name="getItemIndexByText">
+          <function clientSupport="wc,sc" name="getItemIndexByText">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -6496,7 +6496,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getMenu">
+          <function clientSupport="wc,sc" name="getMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6552,7 +6552,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="getRadioButton">
+          <function clientSupport="wc,sc" name="getRadioButton">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6608,7 +6608,7 @@ else {
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getSubMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="getSubMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -6617,7 +6617,7 @@ else {
             <deprecated><![CDATA[Replaced by #getMenu().]]></deprecated>
             <sample/>
           </function>
-          <function name="putClientProperty">
+          <function clientSupport="wc,sc" name="putClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
@@ -6650,7 +6650,7 @@ menu.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="removeAllItems">
+          <function clientSupport="wc,sc" name="removeAllItems">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all items from the menu.]]></description>
@@ -6683,7 +6683,7 @@ menu.removeAllItems();
 // add back an item
 menu.addMenuItem("new item", feedback_item);]]></sample>
           </function>
-          <function name="removeItem">
+          <function clientSupport="wc,sc" name="removeItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -6723,7 +6723,7 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="show">
+          <function clientSupport="wc,sc" name="show">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Show the popup at the mouse coordinates (Smart client only).]]></description>
@@ -6749,7 +6749,7 @@ if (event.getSource())
 // in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
 //menu.show();]]></sample>
           </function>
-          <function name="show">
+          <function clientSupport="wc,sc" name="show">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
             </argumentsTypes>
@@ -6780,7 +6780,7 @@ if (event.getSource())
               <parameter name="component" type="com.servoy.j2db.documentation.scripting.docs.IRuntimeComponent" typecode="com.servoy.j2db.ui.IComponent"/>
             </parameters>
           </function>
-          <function name="show">
+          <function clientSupport="wc,sc" name="show">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
               <argumentType typecode="int"/>
@@ -6815,7 +6815,7 @@ if (event.getSource())
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="show">
+          <function clientSupport="wc,sc" name="show">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -6850,9 +6850,9 @@ if (event.getSource())
           </function>
         </functions>
       </object>
-      <object publicName="RadioButton" qualifiedName="com.servoy.extensions.plugins.window.menu.RadioButton">
+      <object clientSupport="wc,sc" publicName="RadioButton" qualifiedName="com.servoy.extensions.plugins.window.menu.RadioButton">
         <properties>
-          <property name="enabled">
+          <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></description>
             <summary><![CDATA[Enable/disable the menu item/checkbox/radiobutton.]]></summary>
@@ -6890,7 +6890,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="methodArguments">
+          <property clientSupport="wc,sc" name="methodArguments">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Set arguments that are sent to the callback method.]]></description>
             <summary><![CDATA[Set arguments that are sent to the callback method.]]></summary>
@@ -6928,7 +6928,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="name">
+          <property clientSupport="wc,sc" name="name">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[The name of the menu item/checkbox/radiobutton. The name is used only internally, it is not
 visible in the user interface.]]></description>
@@ -6967,7 +6967,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="selected">
+          <property clientSupport="wc,sc" name="selected">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Select/unselect the checkbox/radiobutton.]]></description>
             <summary><![CDATA[Select/unselect the checkbox/radiobutton.]]></summary>
@@ -7005,7 +7005,7 @@ entry.setMethod(feedback);
 //	[4] menu text
 entry.methodArguments = [17, "data"];]]></sample>
           </property>
-          <property name="text">
+          <property clientSupport="wc,sc" name="text">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.; This can be also html if enclosed between html tags]]></description>
             <summary><![CDATA[Get/set the text of the menu item/checkbox/radiobutton.]]></summary>
@@ -7013,7 +7013,7 @@ entry.methodArguments = [17, "data"];]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="doClick">
+          <function clientSupport="wc,sc" name="doClick">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Script the selection (emulate a mouse click) of the item.]]></description>
@@ -7035,7 +7035,7 @@ var entry = menu.addMenuItem("menu entry", feedback);
 // simulate a click on the entry
 entry.doClick();]]></sample>
           </function>
-          <function name="getClientProperty">
+          <function clientSupport="wc,sc" name="getClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -7072,7 +7072,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="key" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="putClientProperty">
+          <function clientSupport="wc,sc" name="putClientProperty">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.Object"/>
@@ -7111,7 +7111,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7121,7 +7121,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
             <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7143,7 +7143,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7169,7 +7169,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7199,7 +7199,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7233,7 +7233,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7271,7 +7271,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7313,7 +7313,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7359,7 +7359,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7381,7 +7381,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7407,7 +7407,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7437,7 +7437,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7471,7 +7471,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7509,7 +7509,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="set">
+          <function clientSupport="wc,sc" deprecated="true" name="set">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7551,7 +7551,7 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               </parameter>
             </parameters>
           </function>
-          <function name="setAccelerator">
+          <function clientSupport="wc,sc" name="setAccelerator">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -7583,7 +7583,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setAlign">
+          <function clientSupport="wc,sc" name="setAlign">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -7608,7 +7608,7 @@ entry.setAlign(true);]]></sample>
               <parameter name="align" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setArguments">
+          <function clientSupport="wc,sc" deprecated="true" name="setArguments">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -7622,7 +7622,7 @@ entry.setAlign(true);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setBackgroundColor">
+          <function clientSupport="wc,sc" name="setBackgroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -7654,7 +7654,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setForegroundColor">
+          <function clientSupport="wc,sc" name="setForegroundColor">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -7686,7 +7686,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setIcon">
+          <function clientSupport="wc,sc" name="setIcon">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -7718,7 +7718,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -7730,7 +7730,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setMethod">
+          <function clientSupport="wc,sc" name="setMethod">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
@@ -7744,7 +7744,7 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="setMnemonic">
+          <function clientSupport="wc,sc" name="setMnemonic">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -7776,7 +7776,7 @@ entry.setForegroundColor("#EE5555");
 // set an icon
 entry.setIcon("media:///yourimage.gif");]]></sample>
           </function>
-          <function name="setVisible">
+          <function clientSupport="wc,sc" name="setVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -7809,9 +7809,9 @@ entry_three.setVisible(false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="ToolBar" qualifiedName="com.servoy.extensions.plugins.window.menu.swing.ToolBar">
+      <object clientSupport="wc,sc" publicName="ToolBar" qualifiedName="com.servoy.extensions.plugins.window.menu.swing.ToolBar">
         <functions>
-          <function name="addButton">
+          <function clientSupport="wc,sc" name="addButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7838,7 +7838,7 @@ toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="addButton">
+          <function clientSupport="wc,sc" name="addButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7867,7 +7867,7 @@ toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="addButton">
+          <function clientSupport="wc,sc" name="addButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7898,7 +7898,7 @@ toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.
               <parameter name="icon" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function name="addButton">
+          <function clientSupport="wc,sc" name="addButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7931,7 +7931,7 @@ toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.
               <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="addButton">
+          <function clientSupport="wc,sc" name="addButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -7966,7 +7966,7 @@ toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.
               <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addButton">
+          <function clientSupport="wc,sc" name="addButton">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -8003,7 +8003,7 @@ toolbar.addButton(null, feedback_button, [1, "2", "three"], "media:///yourimage.
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -8028,7 +8028,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip", false, fals
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -8055,7 +8055,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip", false, fals
               <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -8084,7 +8084,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip", false, fals
               <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -8115,7 +8115,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip", false, fals
               <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addCheckBox">
+          <function clientSupport="wc,sc" name="addCheckBox">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -8148,7 +8148,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox, false, "tooltip", false, fals
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addComboBox">
+          <function clientSupport="wc,sc" name="addComboBox">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="int"/>
@@ -8173,7 +8173,7 @@ toolbar.addComboBox(feedback_combobox, 3, ["input","array","combobox",4], "toolt
               <parameter name="values" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function name="addComboBox">
+          <function clientSupport="wc,sc" name="addComboBox">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="int"/>
@@ -8200,42 +8200,12 @@ toolbar.addComboBox(feedback_combobox, 3, ["input","array","combobox",4], "toolt
               <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="addComboBox">
+          <function clientSupport="wc,sc" name="addComboBox">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="int"/>
               <argumentType typecode="[Ljava.lang.String;"/>
               <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Add a ComboBox to the toolbar.]]></description>
-            <summary><![CDATA[Add a ComboBox to the toolbar.]]></summary>
-            <sample><![CDATA[// add a toolbar
-var toolbar = plugins.window.addToolBar("toolbar_2");
-// add a combobox with the attached method, selected index and input (list) array
-toolbar.addComboBox(feedback_combobox, 0, ["input","array","combobox",1]);
-// add a tooltip to the combobox
-toolbar.addComboBox(feedback_combobox, 1, ["input","array","combobox",2], "tooltip");
-// disable the combobox
-toolbar.addComboBox(feedback_combobox, 2, ["input","array","combobox",3], "tooltip", false);
-// make the combobox non visible
-toolbar.addComboBox(feedback_combobox, 3, ["input","array","combobox",4], "tooltip", false, false);]]></sample>
-            <parameters>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="values" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-              <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
-          </function>
-          <function name="addComboBox">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="int"/>
-              <argumentType typecode="[Ljava.lang.String;"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
@@ -8257,160 +8227,190 @@ toolbar.addComboBox(feedback_combobox, 3, ["input","array","combobox",4], "toolt
               <parameter name="values" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
               <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addField">
+          <function clientSupport="wc,sc" name="addComboBox">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Add a Field to the toolbar.]]></description>
-            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
-            <sample><![CDATA[// add a toolbar
-var toolbar = plugins.window.addToolBar("toolbar_3");
-// add a field with the attached method and a default text
-toolbar.addField(feedback_field, null);
-// set the length of the field. 
-// default length = 8 when length is not set or set to 0
-toolbar.addField(feedback_field, "field", 0, "tooltip");
-// add a tooltip to the field
-toolbar.addField(feedback_field, null, 10, "tooltip");
-// disable the field
-toolbar.addField(feedback_field, "field", 5, "tooltip", false);
-// make the field non visible
-toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
-            <parameters>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function name="addField">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="int"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Add a Field to the toolbar.]]></description>
-            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
-            <sample><![CDATA[// add a toolbar
-var toolbar = plugins.window.addToolBar("toolbar_3");
-// add a field with the attached method and a default text
-toolbar.addField(feedback_field, null);
-// set the length of the field. 
-// default length = 8 when length is not set or set to 0
-toolbar.addField(feedback_field, "field", 0, "tooltip");
-// add a tooltip to the field
-toolbar.addField(feedback_field, null, 10, "tooltip");
-// disable the field
-toolbar.addField(feedback_field, "field", 5, "tooltip", false);
-// make the field non visible
-toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
-            <parameters>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            </parameters>
-          </function>
-          <function name="addField">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.String"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Add a Field to the toolbar.]]></description>
-            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
-            <sample><![CDATA[// add a toolbar
-var toolbar = plugins.window.addToolBar("toolbar_3");
-// add a field with the attached method and a default text
-toolbar.addField(feedback_field, null);
-// set the length of the field. 
-// default length = 8 when length is not set or set to 0
-toolbar.addField(feedback_field, "field", 0, "tooltip");
-// add a tooltip to the field
-toolbar.addField(feedback_field, null, 10, "tooltip");
-// disable the field
-toolbar.addField(feedback_field, "field", 5, "tooltip", false);
-// make the field non visible
-toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
-            <parameters>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            </parameters>
-          </function>
-          <function name="addField">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="int"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="boolean"/>
-            </argumentsTypes>
-            <return type="void" typecode="void"/>
-            <description><![CDATA[Add a Field to the toolbar.]]></description>
-            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
-            <sample><![CDATA[// add a toolbar
-var toolbar = plugins.window.addToolBar("toolbar_3");
-// add a field with the attached method and a default text
-toolbar.addField(feedback_field, null);
-// set the length of the field. 
-// default length = 8 when length is not set or set to 0
-toolbar.addField(feedback_field, "field", 0, "tooltip");
-// add a tooltip to the field
-toolbar.addField(feedback_field, null, 10, "tooltip");
-// disable the field
-toolbar.addField(feedback_field, "field", 5, "tooltip", false);
-// make the field non visible
-toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
-            <parameters>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-              <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            </parameters>
-          </function>
-          <function name="addField">
-            <argumentsTypes>
-              <argumentType typecode="org.mozilla.javascript.Function"/>
-              <argumentType typecode="java.lang.String"/>
-              <argumentType typecode="int"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="boolean"/>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Add a Field to the toolbar.]]></description>
-            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
+            <description><![CDATA[Add a ComboBox to the toolbar.]]></description>
+            <summary><![CDATA[Add a ComboBox to the toolbar.]]></summary>
             <sample><![CDATA[// add a toolbar
-var toolbar = plugins.window.addToolBar("toolbar_3");
-// add a field with the attached method and a default text
-toolbar.addField(feedback_field, null);
-// set the length of the field. 
-// default length = 8 when length is not set or set to 0
-toolbar.addField(feedback_field, "field", 0, "tooltip");
-// add a tooltip to the field
-toolbar.addField(feedback_field, null, 10, "tooltip");
-// disable the field
-toolbar.addField(feedback_field, "field", 5, "tooltip", false);
-// make the field non visible
-toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
+var toolbar = plugins.window.addToolBar("toolbar_2");
+// add a combobox with the attached method, selected index and input (list) array
+toolbar.addComboBox(feedback_combobox, 0, ["input","array","combobox",1]);
+// add a tooltip to the combobox
+toolbar.addComboBox(feedback_combobox, 1, ["input","array","combobox",2], "tooltip");
+// disable the combobox
+toolbar.addComboBox(feedback_combobox, 2, ["input","array","combobox",3], "tooltip", false);
+// make the combobox non visible
+toolbar.addComboBox(feedback_combobox, 3, ["input","array","combobox",4], "tooltip", false, false);]]></sample>
             <parameters>
               <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="values" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
               <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="addSeparator">
+          <function clientSupport="wc,sc" name="addField">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Add a Field to the toolbar.]]></description>
+            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
+            <sample><![CDATA[// add a toolbar
+var toolbar = plugins.window.addToolBar("toolbar_3");
+// add a field with the attached method and a default text
+toolbar.addField(feedback_field, null);
+// set the length of the field. 
+// default length = 8 when length is not set or set to 0
+toolbar.addField(feedback_field, "field", 0, "tooltip");
+// add a tooltip to the field
+toolbar.addField(feedback_field, null, 10, "tooltip");
+// disable the field
+toolbar.addField(feedback_field, "field", 5, "tooltip", false);
+// make the field non visible
+toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
+            <parameters>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="addField">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Add a Field to the toolbar.]]></description>
+            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
+            <sample><![CDATA[// add a toolbar
+var toolbar = plugins.window.addToolBar("toolbar_3");
+// add a field with the attached method and a default text
+toolbar.addField(feedback_field, null);
+// set the length of the field. 
+// default length = 8 when length is not set or set to 0
+toolbar.addField(feedback_field, "field", 0, "tooltip");
+// add a tooltip to the field
+toolbar.addField(feedback_field, null, 10, "tooltip");
+// disable the field
+toolbar.addField(feedback_field, "field", 5, "tooltip", false);
+// make the field non visible
+toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
+            <parameters>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="addField">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Add a Field to the toolbar.]]></description>
+            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
+            <sample><![CDATA[// add a toolbar
+var toolbar = plugins.window.addToolBar("toolbar_3");
+// add a field with the attached method and a default text
+toolbar.addField(feedback_field, null);
+// set the length of the field. 
+// default length = 8 when length is not set or set to 0
+toolbar.addField(feedback_field, "field", 0, "tooltip");
+// add a tooltip to the field
+toolbar.addField(feedback_field, null, 10, "tooltip");
+// disable the field
+toolbar.addField(feedback_field, "field", 5, "tooltip", false);
+// make the field non visible
+toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
+            <parameters>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="addField">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Add a Field to the toolbar.]]></description>
+            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
+            <sample><![CDATA[// add a toolbar
+var toolbar = plugins.window.addToolBar("toolbar_3");
+// add a field with the attached method and a default text
+toolbar.addField(feedback_field, null);
+// set the length of the field. 
+// default length = 8 when length is not set or set to 0
+toolbar.addField(feedback_field, "field", 0, "tooltip");
+// add a tooltip to the field
+toolbar.addField(feedback_field, null, 10, "tooltip");
+// disable the field
+toolbar.addField(feedback_field, "field", 5, "tooltip", false);
+// make the field non visible
+toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
+            <parameters>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="addField">
+            <argumentsTypes>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="int"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="boolean"/>
+              <argumentType typecode="boolean"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Add a Field to the toolbar.]]></description>
+            <summary><![CDATA[Add a Field to the toolbar.]]></summary>
+            <sample><![CDATA[// add a toolbar
+var toolbar = plugins.window.addToolBar("toolbar_3");
+// add a field with the attached method and a default text
+toolbar.addField(feedback_field, null);
+// set the length of the field. 
+// default length = 8 when length is not set or set to 0
+toolbar.addField(feedback_field, "field", 0, "tooltip");
+// add a tooltip to the field
+toolbar.addField(feedback_field, null, 10, "tooltip");
+// disable the field
+toolbar.addField(feedback_field, "field", 5, "tooltip", false);
+// make the field non visible
+toolbar.addField(feedback_field, "field", 0, "tooltip", false, false);]]></sample>
+            <parameters>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+              <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+              <parameter name="tooltip" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+              <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="addSeparator">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Add a Separator to the toolbar.]]></description>
@@ -8424,7 +8424,7 @@ toolbar.addSeparator();
 // add a checkbox
 toolbar.addCheckBox("checkbox", feedback_checkbox);]]></sample>
           </function>
-          <function name="enableItem">
+          <function clientSupport="wc,sc" name="enableItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="boolean"/>
@@ -8445,7 +8445,7 @@ toolbar.enableItem(1, false);]]></sample>
               <parameter name="enabled" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="removeAllItems">
+          <function clientSupport="wc,sc" name="removeAllItems">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all Buttons, Checkboxes etc. from the toolbar.]]></description>
@@ -8459,7 +8459,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox);
 // remove all items from the toolbar
 toolbar.removeAllItems();]]></sample>
           </function>
-          <function name="removeItem">
+          <function clientSupport="wc,sc" name="removeItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -8480,7 +8480,7 @@ toolbar.removeItem(1);]]></sample>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="selectCheckBox">
+          <function clientSupport="wc,sc" name="selectCheckBox">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="boolean"/>
@@ -8504,7 +8504,7 @@ toolbar.selectCheckBox(2, true);]]></sample>
               <parameter name="selected" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="selectComboBox">
+          <function clientSupport="wc,sc" name="selectComboBox">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -8528,7 +8528,7 @@ toolbar.selectComboBox(2, 3); // entry 4 will be selected in the second combobox
               <parameter name="selection" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setFieldText">
+          <function clientSupport="wc,sc" name="setFieldText">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="java.lang.String"/>
@@ -8552,7 +8552,7 @@ toolbar.setFieldText(2, "new text 2");]]></sample>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="validate">
+          <function clientSupport="wc,sc" deprecated="true" name="validate">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[You need to call this method after adding or removing items to/from the toolbar.]]></description>
@@ -8569,7 +8569,7 @@ toolbar.addCheckBox("checkbox", feedback_checkbox);
 // position 0 is reserved for the toolbar handle!
 toolbar.removeItem(1);]]></sample>
           </function>
-          <function name="visibleItem">
+          <function clientSupport="wc,sc" name="visibleItem">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="boolean"/>
@@ -8594,16 +8594,16 @@ toolbar.visibleItem(1, false);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="window" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider" scriptingName="plugins.window">
+      <object clientSupport="wc,sc" publicName="window" qualifiedName="com.servoy.extensions.plugins.window.WindowProvider" scriptingName="plugins.window">
         <functions>
-          <function deprecated="true" name="addMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="addMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description/>
             <deprecated><![CDATA[Replaced by MenuBar#addMenu().]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="addMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="addMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -8617,7 +8617,7 @@ toolbar.visibleItem(1, false);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="addServoyToolBar">
+          <function clientSupport="wc,sc" deprecated="true" name="addServoyToolBar">
             <argumentsTypes>
               <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
@@ -8627,7 +8627,7 @@ toolbar.visibleItem(1, false);]]></sample>
             <deprecated><![CDATA[Replaced by #addToolBar(String).]]></deprecated>
             <sample/>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
               <argumentType typecode="java.lang.String"/>
@@ -8666,7 +8666,7 @@ win.show(forms.Myform)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
               <argumentType typecode="java.lang.String"/>
@@ -8709,7 +8709,7 @@ win.show(forms.Myform)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
               <argumentType typecode="java.lang.String"/>
@@ -8752,7 +8752,7 @@ win.show(forms.Myform)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
               <argumentType typecode="java.lang.String"/>
@@ -8799,7 +8799,7 @@ win.show(forms.Myform)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -8831,7 +8831,7 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="int"/>
@@ -8867,7 +8867,7 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -8903,7 +8903,7 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="addToolBar">
+          <function clientSupport="wc,sc" name="addToolBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -8943,7 +8943,7 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="cancelFormPopup">
+          <function clientSupport="wc,sc" name="cancelFormPopup">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Close the current form popup panel without assigning a value to the configured data provider.]]></description>
@@ -8952,7 +8952,7 @@ toolbar3.addButton("click me 3", feedback_button);]]></sample>
 plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
 // do call closeFormPopup(ordervalue) from the orderPicker form]]></sample>
           </function>
-          <function name="closeFormPopup">
+          <function clientSupport="wc,sc" name="closeFormPopup">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -8968,7 +8968,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="createCheckboxMenuItem">
+          <function clientSupport="wc,sc" deprecated="true" name="createCheckboxMenuItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -8977,7 +8977,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="createMenuItem">
+          <function clientSupport="wc,sc" deprecated="true" name="createMenuItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -8986,7 +8986,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
             <sample/>
           </function>
-          <function name="createPopupMenu">
+          <function clientSupport="wc,sc" name="createPopupMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
             <description><![CDATA[Creates a new popup menu that can be populated with items and displayed.]]></description>
@@ -9005,7 +9005,7 @@ if (event.getSource()) {
 	//menu.show(100, 100);
 }]]></sample>
           </function>
-          <function deprecated="true" name="createRadioButtonMenuItem">
+          <function clientSupport="wc,sc" deprecated="true" name="createRadioButtonMenuItem">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -9014,7 +9014,7 @@ if (event.getSource()) {
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
             <sample/>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -9060,7 +9060,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               </parameter>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -9108,7 +9108,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -9158,7 +9158,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               </parameter>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -9210,7 +9210,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -9256,7 +9256,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               </parameter>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -9304,7 +9304,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -9354,7 +9354,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               </parameter>
             </parameters>
           </function>
-          <function name="createShortcut">
+          <function clientSupport="wc,sc" name="createShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
@@ -9406,7 +9406,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="getMenu">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -9415,7 +9415,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
             <deprecated><![CDATA[Replaced by MenuBar#getMenu(int).]]></deprecated>
             <sample/>
           </function>
-          <function name="getMenuBar">
+          <function clientSupport="wc,sc" name="getMenuBar">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.MenuBar" typecode="com.servoy.extensions.plugins.window.menu.MenuBar"/>
             <description><![CDATA[Get the menubar of the main window, or of a named window.]]></description>
@@ -9437,7 +9437,7 @@ var menuMain = mainMenubar.addMenu();
 menuMain.text = "New Menu in Main Menubar";
 menuMain.addMenuItem("another entry", feedback);]]></sample>
           </function>
-          <function name="getMenuBar">
+          <function clientSupport="wc,sc" name="getMenuBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -9466,14 +9466,14 @@ menuMain.addMenuItem("another entry", feedback);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="getMenuCount">
+          <function clientSupport="wc,sc" deprecated="true" name="getMenuCount">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description/>
             <deprecated><![CDATA[Replaced by MenuBar#getMenuCount().]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="getMenuIndexByText">
+          <function clientSupport="wc,sc" deprecated="true" name="getMenuIndexByText">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -9482,7 +9482,7 @@ menuMain.addMenuItem("another entry", feedback);]]></sample>
             <deprecated><![CDATA[Replaced by MenuBar#getMenuIndexByText(String).]]></deprecated>
             <sample/>
           </function>
-          <function name="getToolBar">
+          <function clientSupport="wc,sc" name="getToolBar">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
               <argumentType typecode="java.lang.String"/>
@@ -9510,7 +9510,7 @@ toolbar.addButton("button", callback_function);]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getToolBar">
+          <function clientSupport="wc,sc" name="getToolBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -9530,7 +9530,7 @@ toolbar.addButton("button", feedback_button);]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getToolbarNames">
+          <function clientSupport="wc,sc" name="getToolbarNames">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Get all toolbar names from the toolbar panel.]]></description>
@@ -9552,7 +9552,7 @@ for (var i = 0 ; i < names.length ; i++) {
 // show the message
 plugins.dialogs.showInfoDialog("toolbar names", message);]]></sample>
           </function>
-          <function name="getToolbarNames">
+          <function clientSupport="wc,sc" name="getToolbarNames">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
             </argumentsTypes>
@@ -9583,7 +9583,7 @@ plugins.dialogs.showInfoDialog("toolbar names", message);]]></sample>
               <parameter name="window" type="com.servoy.j2db.scripting.JSWindow" typecode="com.servoy.j2db.scripting.JSWindow"/>
             </parameters>
           </function>
-          <function name="maximize">
+          <function clientSupport="wc,sc" name="maximize">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Maximize the current window or the window with the specified name (Smart client only).]]></description>
@@ -9598,7 +9598,7 @@ forms.my_form.controller.show(win);
 // maximize the window
 plugins.window.maximize("windowName");]]></sample>
           </function>
-          <function name="maximize">
+          <function clientSupport="wc,sc" name="maximize">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -9618,7 +9618,7 @@ plugins.window.maximize("windowName");]]></sample>
               <parameter name="windowName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="register">
+          <function clientSupport="wc,sc" deprecated="true" name="register">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -9628,14 +9628,14 @@ plugins.window.maximize("windowName");]]></sample>
             <deprecated><![CDATA[Obsolete method.]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="removeAllMenus">
+          <function clientSupport="wc,sc" deprecated="true" name="removeAllMenus">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
             <description/>
             <deprecated><![CDATA[Replaced by MenuBar#removeAllMenus().]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="removeMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="removeMenu">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -9644,7 +9644,7 @@ plugins.window.maximize("windowName");]]></sample>
             <deprecated><![CDATA[Replaced by MenuBar#removeMenu(int).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="removeServoyToolBar">
+          <function clientSupport="wc,sc" deprecated="true" name="removeServoyToolBar">
             <argumentsTypes>
               <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
@@ -9654,7 +9654,7 @@ plugins.window.maximize("windowName");]]></sample>
             <deprecated><![CDATA[Replaced by #removeToolBar(String).]]></deprecated>
             <sample/>
           </function>
-          <function name="removeShortcut">
+          <function clientSupport="wc,sc" name="removeShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -9696,7 +9696,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="removeShortcut">
+          <function clientSupport="wc,sc" name="removeShortcut">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -9742,7 +9742,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               </parameter>
             </parameters>
           </function>
-          <function name="removeToolBar">
+          <function clientSupport="wc,sc" name="removeToolBar">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.scripting.JSWindow"/>
               <argumentType typecode="java.lang.String"/>
@@ -9772,7 +9772,7 @@ plugins.window.removeToolBar(win,"toolbar_0");]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="removeToolBar">
+          <function clientSupport="wc,sc" name="removeToolBar">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -9795,14 +9795,14 @@ plugins.window.removeToolBar("toolbar_0");]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="resetMenuBar">
+          <function clientSupport="wc,sc" deprecated="true" name="resetMenuBar">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description/>
             <deprecated><![CDATA[Replaced by MenuBar#reset().]]></deprecated>
             <sample/>
           </function>
-          <function name="setFullScreen">
+          <function clientSupport="wc,sc" name="setFullScreen">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -9815,7 +9815,7 @@ plugins.window.setFullScreen(true);]]></sample>
               <parameter name="full" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setMenuVisible">
+          <function clientSupport="wc,sc" deprecated="true" name="setMenuVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -9824,7 +9824,7 @@ plugins.window.setFullScreen(true);]]></sample>
             <deprecated><![CDATA[Replaced by Menu#setVisible(boolean).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="setMouseOverPopup">
+          <function clientSupport="wc,sc" deprecated="true" name="setMouseOverPopup">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -9833,14 +9833,14 @@ plugins.window.setFullScreen(true);]]></sample>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="setPopup">
+          <function clientSupport="wc,sc" deprecated="true" name="setPopup">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
             <description/>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="setPopup">
+          <function clientSupport="wc,sc" deprecated="true" name="setPopup">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -9854,7 +9854,7 @@ plugins.window.setFullScreen(true);]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function name="setStatusBarVisible">
+          <function clientSupport="wc,sc" name="setStatusBarVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -9867,7 +9867,7 @@ plugins.window.setStatusBarVisible(false);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="setToolBarAreaVisible">
+          <function clientSupport="wc,sc" name="setToolBarAreaVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -9880,7 +9880,7 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setToolBarVisible">
+          <function clientSupport="wc,sc" deprecated="true" name="setToolBarVisible">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -9889,7 +9889,7 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
             <deprecated><![CDATA[Replaced by #setToolBarAreaVisible(boolean).]]></deprecated>
             <sample/>
           </function>
-          <function name="showFormPopup">
+          <function clientSupport="wc,sc" name="showFormPopup">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
               <argumentType typecode="com.servoy.j2db.IForm"/>
@@ -9917,7 +9917,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               </parameter>
             </parameters>
           </function>
-          <function name="showFormPopup">
+          <function clientSupport="wc,sc" name="showFormPopup">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
               <argumentType typecode="com.servoy.j2db.IForm"/>
@@ -9953,7 +9953,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="showPopupMenu">
+          <function clientSupport="wc,sc" deprecated="true" name="showPopupMenu">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -9962,7 +9962,7 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="validateMenuBar">
+          <function clientSupport="wc,sc" deprecated="true" name="validateMenuBar">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description/>

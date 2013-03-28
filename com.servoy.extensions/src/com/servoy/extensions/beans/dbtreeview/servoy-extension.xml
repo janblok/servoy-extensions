@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <beans>
-      <object publicName="Binding" qualifiedName="com.servoy.extensions.beans.dbtreeview.Binding">
+      <object clientSupport="wc,sc" publicName="Binding" qualifiedName="com.servoy.extensions.beans.dbtreeview.Binding">
         <functions>
-          <function name="setCallBackInfo">
+          <function clientSupport="wc,sc" name="setCallBackInfo">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -19,7 +19,7 @@ binding.setCallBackInfo(globals.node_selected, 'node_id');]]></sample>
               <parameter name="returnDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setCheckBoxValueDataprovider">
+          <function clientSupport="wc,sc" name="setCheckBoxValueDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -32,7 +32,7 @@ binding.setCheckBoxValueDataprovider('comment_text');]]></sample>
               <parameter name="checkBoxValueDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setChildSortDataprovider">
+          <function clientSupport="wc,sc" name="setChildSortDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -45,7 +45,7 @@ binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="childSortDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setConfigurationDataprovider">
+          <function clientSupport="wc,sc" name="setConfigurationDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -65,7 +65,7 @@ config.checkBoxValue = 'true';]]></sample>
               <parameter name="configurationDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setFontTypeDataprovider">
+          <function clientSupport="wc,sc" name="setFontTypeDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -78,7 +78,7 @@ binding.setFontTypeDataprovider('bean_font');]]></sample>
               <parameter name="fontTypeDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setHasCheckBoxDataprovider">
+          <function clientSupport="wc,sc" name="setHasCheckBoxDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -91,7 +91,7 @@ binding.setHasCheckBoxDataprovider('hasCheckBox');]]></sample>
               <parameter name="hasCheckBoxDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setImageMediaDataprovider">
+          <function clientSupport="wc,sc" name="setImageMediaDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -104,7 +104,7 @@ binding.setImageMediaDataprovider('company_icon');]]></sample>
               <parameter name="imageMediaDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setImageURLDataprovider">
+          <function clientSupport="wc,sc" name="setImageURLDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -117,7 +117,7 @@ binding.setImageURLDataprovider('order_icon');]]></sample>
               <parameter name="imageURLDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setMRelationDataprovider">
+          <function clientSupport="wc,sc" name="setMRelationDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -130,7 +130,7 @@ binding.setMRelationDataprovider('m_relation');]]></sample>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setMRelationName">
+          <function clientSupport="wc,sc" name="setMRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -143,7 +143,7 @@ binding.setMRelationName('m_relation_name');]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setMethodToCallOnCheckBoxChange">
+          <function clientSupport="wc,sc" name="setMethodToCallOnCheckBoxChange">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -158,7 +158,7 @@ binding.setMethodToCallOnCheckBoxChange(onCheckBoxChangeMethod,'orderdate');]]><
               <parameter name="returnDataproviderOnCheckBoxChange" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setMethodToCallOnClick">
+          <function clientSupport="wc,sc" name="setMethodToCallOnClick">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -173,7 +173,7 @@ binding.setMethodToCallOnClick(onClickMethod,'orderid');]]></sample>
               <parameter name="returnDataproviderOnClick" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setMethodToCallOnDoubleClick">
+          <function clientSupport="wc,sc" name="setMethodToCallOnDoubleClick">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -188,7 +188,7 @@ binding.setMethodToCallOnDoubleClick(doubleClickMethod,'orderid');]]></sample>
               <parameter name="returnDataproviderOnDoubleClick" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setMethodToCallOnRightClick">
+          <function clientSupport="wc,sc" name="setMethodToCallOnRightClick">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -203,7 +203,7 @@ binding.setMethodToCallOnRightClick(rightClickMethod,'orderid');]]></sample>
               <parameter name="returnDataproviderOnRightClick" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setNRelationDataprovider">
+          <function clientSupport="wc,sc" name="setNRelationDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -216,7 +216,7 @@ binding.setNRelationDataprovider('n_relation');]]></sample>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setNRelationInfos">
+          <function clientSupport="wc,sc" name="setNRelationInfos">
             <argumentsTypes>
               <argumentType typecode="[Lcom.servoy.extensions.beans.dbtreeview.RelationInfo;"/>
             </argumentsTypes>
@@ -235,7 +235,7 @@ binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="relationInfos" type="com.servoy.extensions.beans.dbtreeview.RelationInfo[]" typecode="[Lcom.servoy.extensions.beans.dbtreeview.RelationInfo;"/>
             </parameters>
           </function>
-          <function name="setNRelationName">
+          <function clientSupport="wc,sc" name="setNRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -248,7 +248,7 @@ binding.setNRelationName('n_relation_name');]]></sample>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setTextDataprovider">
+          <function clientSupport="wc,sc" name="setTextDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -261,7 +261,7 @@ binding.setTextDataprovider('orderid');]]></sample>
               <parameter name="textDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setToolTipTextDataprovider">
+          <function clientSupport="wc,sc" name="setToolTipTextDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -276,9 +276,9 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="Column" qualifiedName="com.servoy.extensions.beans.dbtreeview.table.Column">
+      <object clientSupport="wc,sc" publicName="Column" qualifiedName="com.servoy.extensions.beans.dbtreeview.table.Column">
         <functions>
-          <function name="setDataprovider">
+          <function clientSupport="wc,sc" name="setDataprovider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -290,7 +290,7 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
               <parameter name="fieldName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setHeader">
+          <function clientSupport="wc,sc" name="setHeader">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -304,50 +304,50 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
           </function>
         </functions>
       </object>
-      <object extendsComponent="com.servoy.extensions.beans.dbtreeview.SwingDBTreeView" publicName="DB Tree Table View" qualifiedName="com.servoy.extensions.beans.dbtreeview.table.SwingDBTreeTableView">
+      <object clientSupport="wc,sc" extendsComponent="com.servoy.extensions.beans.dbtreeview.SwingDBTreeView" publicName="DB Tree Table View" qualifiedName="com.servoy.extensions.beans.dbtreeview.table.SwingDBTreeTableView">
         <properties>
-          <property name="bgcolor">
+          <property clientSupport="wc,sc" name="bgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the background color]]></return>
             <description><![CDATA[Property for getting/setting the background color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
             <sample><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
 var x = %%elementName%%.bgcolor;]]></sample>
           </property>
-          <property name="enabled">
+          <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the enabled state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
             <sample><![CDATA[var b = %%elementName%%.enabled;
 if (b) %%elementName%%.enabled = false;]]></sample>
           </property>
-          <property name="fgcolor">
+          <property clientSupport="wc,sc" name="fgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
             <sample><![CDATA[%%elementName%%.fgcolor = "#000000";
 var y = %%elementName%%.fgcolor;]]></sample>
           </property>
-          <property name="selectionPath">
+          <property clientSupport="wc,sc" name="selectionPath">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
             <summary><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
             <sample><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
 var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
           </property>
-          <property name="toolTipText">
+          <property clientSupport="wc,sc" name="toolTipText">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the tooltip text of the bean]]></return>
             <description><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
             <summary><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
             <sample><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
           </property>
-          <property name="transparent">
+          <property clientSupport="wc,sc" name="transparent">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the transparent state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
             <sample><![CDATA[var t = %%elementName%%.transparent;
 if (!t) %%elementName%%.transparent = true;]]></sample>
           </property>
-          <property name="visible">
+          <property clientSupport="wc,sc" name="visible">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the visibility of the bean]]></return>
             <description><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
@@ -355,7 +355,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="addRoots">
+          <function clientSupport="wc,sc" name="addRoots">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -367,7 +367,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <parameter name="foundSet" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="bindNodeChildSortDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeChildSortDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -376,7 +376,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeFontTypeDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -386,7 +386,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeImageMediaDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageMediaDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -396,7 +396,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeImageURLDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageURLDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -406,7 +406,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setImageURLDataprovider(imageURLDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeTooltipTextDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeTooltipTextDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -416,7 +416,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function name="createBinding" varargs="true">
+          <function clientSupport="wc,sc" name="createBinding" varargs="true">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
@@ -432,7 +432,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function name="createColumn">
+          <function clientSupport="wc,sc" name="createColumn">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -448,7 +448,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="createColumn">
+          <function clientSupport="wc,sc" name="createColumn">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -466,7 +466,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="preferredWidth" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="createColumn">
+          <function clientSupport="wc,sc" deprecated="true" name="createColumn">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -484,7 +484,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="fieldname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="createColumn">
+          <function clientSupport="wc,sc" deprecated="true" name="createColumn">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -504,7 +504,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="preferredWidth" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="createRelationInfo">
+          <function clientSupport="wc,sc" name="createRelationInfo">
             <argumentsTypes/>
             <return type="com.servoy.extensions.beans.dbtreeview.RelationInfo" typecode="com.servoy.extensions.beans.dbtreeview.RelationInfo"><![CDATA[RelationInfo object]]></return>
             <description><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
@@ -518,42 +518,42 @@ company_relations[1].setLabel('Customers');
 company_relations[1].setNRelationName('companies_to_customers');
 companies_binding.setNRelationInfos(company_relations);]]></sample>
           </function>
-          <function name="getHeight">
+          <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The height]]></return>
             <description><![CDATA[Returns the height of the tree.]]></description>
             <summary><![CDATA[Returns the height of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getHeight();]]></sample>
           </function>
-          <function name="getLocationX">
+          <function clientSupport="wc,sc" name="getLocationX">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The x coordinate]]></return>
             <description><![CDATA[Get the x coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getLocationX();]]></sample>
           </function>
-          <function name="getLocationY">
+          <function clientSupport="wc,sc" name="getLocationY">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The y coordinate]]></return>
             <description><![CDATA[Get the y coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getLocationY();]]></sample>
           </function>
-          <function name="getName">
+          <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the name of the tree.]]></description>
             <summary><![CDATA[Returns the name of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getName();]]></sample>
           </function>
-          <function name="getWidth">
+          <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The width]]></return>
             <description><![CDATA[Returns the width of the tree.]]></description>
             <summary><![CDATA[Returns the width of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getWidth();]]></sample>
           </function>
-          <function name="isNodeExpanded">
+          <function clientSupport="wc,sc" name="isNodeExpanded">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -566,28 +566,28 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="refresh">
+          <function clientSupport="wc,sc" name="refresh">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Refresh the tree display]]></description>
             <summary><![CDATA[Refresh the tree display]]></summary>
             <sample><![CDATA[%%elementName%%.refresh();]]></sample>
           </function>
-          <function name="removeAllColumns">
+          <function clientSupport="wc,sc" name="removeAllColumns">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all columns but the tree column from the tree table]]></description>
             <summary><![CDATA[Remove all columns but the tree column from the tree table]]></summary>
             <sample><![CDATA[%%elementName%%.removeAllColumns();]]></sample>
           </function>
-          <function name="removeAllRoots">
+          <function clientSupport="wc,sc" name="removeAllRoots">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all root foundsets]]></description>
             <summary><![CDATA[Remove all root foundsets]]></summary>
             <sample><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
           </function>
-          <function deprecated="true" name="setCallBackInfo">
+          <function clientSupport="wc,sc" deprecated="true" name="setCallBackInfo">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -598,7 +598,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[use Binding.setCallBackInfo(f,returnDataprovider)]]></deprecated>
             <sample/>
           </function>
-          <function name="setExpandNode">
+          <function clientSupport="wc,sc" name="setExpandNode">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="boolean"/>
@@ -613,7 +613,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="expand_collapse" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="setFont">
+          <function clientSupport="wc,sc" name="setFont">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -625,7 +625,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setLocation">
+          <function clientSupport="wc,sc" name="setLocation">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -639,7 +639,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setMRelationName">
+          <function clientSupport="wc,sc" deprecated="true" name="setMRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -649,7 +649,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[use Binding.setMRelationName(name) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="setNRelationName">
+          <function clientSupport="wc,sc" deprecated="true" name="setNRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -659,7 +659,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[use Binding.setNRelationName(name) instead]]></deprecated>
             <sample/>
           </function>
-          <function name="setNodeLevelVisible">
+          <function clientSupport="wc,sc" name="setNodeLevelVisible">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="boolean"/>
@@ -673,7 +673,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="setOnDrag">
+          <function clientSupport="wc,sc" name="setOnDrag">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -685,7 +685,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDrag" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setOnDragEnd">
+          <function clientSupport="wc,sc" name="setOnDragEnd">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -697,7 +697,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDragEnd" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setOnDragOver">
+          <function clientSupport="wc,sc" name="setOnDragOver">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -709,7 +709,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDragOver" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setOnDrop">
+          <function clientSupport="wc,sc" name="setOnDrop">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -721,7 +721,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDrop" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setRoots">
+          <function clientSupport="wc,sc" deprecated="true" name="setRoots">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -731,7 +731,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></deprecated>
             <sample/>
           </function>
-          <function name="setRowHeight">
+          <function clientSupport="wc,sc" name="setRowHeight">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -743,7 +743,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setSize">
+          <function clientSupport="wc,sc" name="setSize">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -757,7 +757,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="h" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setTreeColumnHeader">
+          <function clientSupport="wc,sc" name="setTreeColumnHeader">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -769,7 +769,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="treeColumnHeader" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setTreeColumnPreferredWidth">
+          <function clientSupport="wc,sc" name="setTreeColumnPreferredWidth">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -783,50 +783,50 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="DB Tree View" qualifiedName="com.servoy.extensions.beans.dbtreeview.SwingDBTreeView">
+      <object clientSupport="wc,sc" publicName="DB Tree View" qualifiedName="com.servoy.extensions.beans.dbtreeview.SwingDBTreeView">
         <properties>
-          <property name="bgcolor">
+          <property clientSupport="wc,sc" name="bgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the background color]]></return>
             <description><![CDATA[Property for getting/setting the background color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
             <sample><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
 var x = %%elementName%%.bgcolor;]]></sample>
           </property>
-          <property name="enabled">
+          <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the enabled state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
             <sample><![CDATA[var b = %%elementName%%.enabled;
 if (b) %%elementName%%.enabled = false;]]></sample>
           </property>
-          <property name="fgcolor">
+          <property clientSupport="wc,sc" name="fgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
             <sample><![CDATA[%%elementName%%.fgcolor = "#000000";
 var y = %%elementName%%.fgcolor;]]></sample>
           </property>
-          <property name="selectionPath">
+          <property clientSupport="wc,sc" name="selectionPath">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
             <summary><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
             <sample><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
 var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
           </property>
-          <property name="toolTipText">
+          <property clientSupport="wc,sc" name="toolTipText">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the tooltip text of the bean]]></return>
             <description><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
             <summary><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
             <sample><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
           </property>
-          <property name="transparent">
+          <property clientSupport="wc,sc" name="transparent">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the transparent state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
             <sample><![CDATA[var t = %%elementName%%.transparent;
 if (!t) %%elementName%%.transparent = true;]]></sample>
           </property>
-          <property name="visible">
+          <property clientSupport="wc,sc" name="visible">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the visibility of the bean]]></return>
             <description><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
@@ -834,7 +834,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
           </property>
         </properties>
         <functions>
-          <function name="addRoots">
+          <function clientSupport="wc,sc" name="addRoots">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -846,7 +846,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <parameter name="foundSet" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function deprecated="true" name="bindNodeChildSortDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeChildSortDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -855,7 +855,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeFontTypeDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -865,7 +865,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeImageMediaDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageMediaDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -875,7 +875,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeImageURLDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageURLDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -885,7 +885,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setImageURLDataprovider(imageURLDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="bindNodeTooltipTextDataProvider">
+          <function clientSupport="wc,sc" deprecated="true" name="bindNodeTooltipTextDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -895,7 +895,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
             <sample/>
           </function>
-          <function name="createBinding" varargs="true">
+          <function clientSupport="wc,sc" name="createBinding" varargs="true">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
@@ -911,7 +911,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function name="createRelationInfo">
+          <function clientSupport="wc,sc" name="createRelationInfo">
             <argumentsTypes/>
             <return type="com.servoy.extensions.beans.dbtreeview.RelationInfo" typecode="com.servoy.extensions.beans.dbtreeview.RelationInfo"><![CDATA[RelationInfo object]]></return>
             <description><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
@@ -925,42 +925,42 @@ company_relations[1].setLabel('Customers');
 company_relations[1].setNRelationName('companies_to_customers');
 companies_binding.setNRelationInfos(company_relations);]]></sample>
           </function>
-          <function name="getHeight">
+          <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The height]]></return>
             <description><![CDATA[Returns the height of the tree.]]></description>
             <summary><![CDATA[Returns the height of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getHeight();]]></sample>
           </function>
-          <function name="getLocationX">
+          <function clientSupport="wc,sc" name="getLocationX">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The x coordinate]]></return>
             <description><![CDATA[Get the x coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getLocationX();]]></sample>
           </function>
-          <function name="getLocationY">
+          <function clientSupport="wc,sc" name="getLocationY">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The y coordinate]]></return>
             <description><![CDATA[Get the y coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getLocationY();]]></sample>
           </function>
-          <function name="getName">
+          <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the name of the tree.]]></description>
             <summary><![CDATA[Returns the name of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getName();]]></sample>
           </function>
-          <function name="getWidth">
+          <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The width]]></return>
             <description><![CDATA[Returns the width of the tree.]]></description>
             <summary><![CDATA[Returns the width of the tree.]]></summary>
             <sample><![CDATA[%%elementName%%.getWidth();]]></sample>
           </function>
-          <function name="isNodeExpanded">
+          <function clientSupport="wc,sc" name="isNodeExpanded">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -973,21 +973,21 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="refresh">
+          <function clientSupport="wc,sc" name="refresh">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Refresh the tree display]]></description>
             <summary><![CDATA[Refresh the tree display]]></summary>
             <sample><![CDATA[%%elementName%%.refresh();]]></sample>
           </function>
-          <function name="removeAllRoots">
+          <function clientSupport="wc,sc" name="removeAllRoots">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all root foundsets]]></description>
             <summary><![CDATA[Remove all root foundsets]]></summary>
             <sample><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
           </function>
-          <function deprecated="true" name="setCallBackInfo">
+          <function clientSupport="wc,sc" deprecated="true" name="setCallBackInfo">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="java.lang.String"/>
@@ -998,7 +998,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[use Binding.setCallBackInfo(f,returnDataprovider)]]></deprecated>
             <sample/>
           </function>
-          <function name="setExpandNode">
+          <function clientSupport="wc,sc" name="setExpandNode">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="boolean"/>
@@ -1013,7 +1013,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="expand_collapse" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="setFont">
+          <function clientSupport="wc,sc" name="setFont">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1025,7 +1025,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setLocation">
+          <function clientSupport="wc,sc" name="setLocation">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -1039,7 +1039,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setMRelationName">
+          <function clientSupport="wc,sc" deprecated="true" name="setMRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1049,7 +1049,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[use Binding.setMRelationName(name) instead]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="setNRelationName">
+          <function clientSupport="wc,sc" deprecated="true" name="setNRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1059,7 +1059,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[use Binding.setNRelationName(name) instead]]></deprecated>
             <sample/>
           </function>
-          <function name="setNodeLevelVisible">
+          <function clientSupport="wc,sc" name="setNodeLevelVisible">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="boolean"/>
@@ -1073,7 +1073,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
           </function>
-          <function name="setOnDrag">
+          <function clientSupport="wc,sc" name="setOnDrag">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1085,7 +1085,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDrag" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setOnDragEnd">
+          <function clientSupport="wc,sc" name="setOnDragEnd">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1097,7 +1097,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDragEnd" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setOnDragOver">
+          <function clientSupport="wc,sc" name="setOnDragOver">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1109,7 +1109,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDragOver" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function name="setOnDrop">
+          <function clientSupport="wc,sc" name="setOnDrop">
             <argumentsTypes>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1121,7 +1121,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="fOnDrop" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
           </function>
-          <function deprecated="true" name="setRoots">
+          <function clientSupport="wc,sc" deprecated="true" name="setRoots">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -1131,7 +1131,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <deprecated><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></deprecated>
             <sample/>
           </function>
-          <function name="setRowHeight">
+          <function clientSupport="wc,sc" name="setRowHeight">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
@@ -1143,7 +1143,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function name="setSize">
+          <function clientSupport="wc,sc" name="setSize">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="int"/>
@@ -1159,9 +1159,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           </function>
         </functions>
       </object>
-      <object publicName="RelationInfo" qualifiedName="com.servoy.extensions.beans.dbtreeview.RelationInfo" scriptingName="RelationInfo">
+      <object clientSupport="wc,sc" publicName="RelationInfo" qualifiedName="com.servoy.extensions.beans.dbtreeview.RelationInfo" scriptingName="RelationInfo">
         <functions>
-          <function name="setLabel">
+          <function clientSupport="wc,sc" name="setLabel">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -1178,7 +1178,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <parameter name="label" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="setNRelationName">
+          <function clientSupport="wc,sc" name="setNRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>

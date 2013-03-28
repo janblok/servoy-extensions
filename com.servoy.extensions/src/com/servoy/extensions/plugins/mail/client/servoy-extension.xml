@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="Attachment" qualifiedName="com.servoy.extensions.plugins.mail.client.Attachment" scriptingName="Attachment">
+      <object clientSupport="wc,sc" publicName="Attachment" qualifiedName="com.servoy.extensions.plugins.mail.client.Attachment" scriptingName="Attachment">
         <functions>
-          <function name="getData">
+          <function clientSupport="wc,sc" name="getData">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Returns a byte array with the content of this attachment.]]></description>
@@ -30,7 +30,7 @@ else
 	application.output('invoice attachment embedded state: ' + invoice.isEmbedded());
 }]]></sample>
           </function>
-          <function name="getMimeType">
+          <function clientSupport="wc,sc" name="getMimeType">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the Mime type of this attachment.]]></description>
@@ -56,7 +56,7 @@ else
 	application.output('invoice attachment embedded state: ' + invoice.isEmbedded());
 }]]></sample>
           </function>
-          <function name="getName">
+          <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the name of this attachment.]]></description>
@@ -82,7 +82,7 @@ else
 	application.output('invoice attachment embedded state: ' + invoice.isEmbedded());
 }]]></sample>
           </function>
-          <function name="isEmbedded">
+          <function clientSupport="wc,sc" name="isEmbedded">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Returns true if this attachment is embedded, false otherwise. Attachments become embedded 
@@ -111,9 +111,9 @@ else
           </function>
         </functions>
       </object>
-      <object publicName="MailMessage" qualifiedName="com.servoy.extensions.plugins.mail.client.MailMessage">
+      <object clientSupport="wc,sc" publicName="MailMessage" qualifiedName="com.servoy.extensions.plugins.mail.client.MailMessage">
         <functions>
-          <function name="getAttachments">
+          <function clientSupport="wc,sc" name="getAttachments">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.mail.client.Attachment[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.Attachment;"/>
             <description><![CDATA[Returns an array of Attachment instances corresponding to the attachments of this message.]]></description>
@@ -155,7 +155,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getCCAddresses">
+          <function clientSupport="wc,sc" name="getCCAddresses">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with all addresses present in the CC field of this message.]]></description>
@@ -197,7 +197,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getFromAddresses">
+          <function clientSupport="wc,sc" name="getFromAddresses">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with all addresses present in the From field of this message.]]></description>
@@ -239,7 +239,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getHeaders">
+          <function clientSupport="wc,sc" name="getHeaders">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with all headers of this message.]]></description>
@@ -281,7 +281,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getHtmlMsg">
+          <function clientSupport="wc,sc" name="getHtmlMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with the HTML content of this message.]]></description>
@@ -323,7 +323,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getPlainMsg">
+          <function clientSupport="wc,sc" name="getPlainMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with the plain content of this message.]]></description>
@@ -365,7 +365,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function deprecated="true" name="getReceivedDate">
+          <function clientSupport="wc,sc" deprecated="true" name="getReceivedDate">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             <description><![CDATA[Returns a Date instace corresponding to the moment when the message was received.]]></description>
@@ -408,7 +408,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getRecipientAddresses">
+          <function clientSupport="wc,sc" name="getRecipientAddresses">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with all addresses in the To field of this message.]]></description>
@@ -450,7 +450,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getReplyAddresses">
+          <function clientSupport="wc,sc" name="getReplyAddresses">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with all addresses in the Reply-To field of this message.]]></description>
@@ -492,7 +492,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getSentDate">
+          <function clientSupport="wc,sc" name="getSentDate">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             <description><![CDATA[Returns a Date instance corresponding to the moment when this message was sent.]]></description>
@@ -534,7 +534,7 @@ else
 	application.output("Failed to retrieve messages.");
 }]]></sample>
           </function>
-          <function name="getSubject">
+          <function clientSupport="wc,sc" name="getSubject">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns a String with the subject of this message.]]></description>
@@ -578,9 +578,9 @@ else
           </function>
         </functions>
       </object>
-      <object publicName="mail" qualifiedName="com.servoy.extensions.plugins.mail.client.MailProvider" scriptingName="plugins.mail">
+      <object clientSupport="wc,sc" publicName="mail" qualifiedName="com.servoy.extensions.plugins.mail.client.MailProvider" scriptingName="plugins.mail">
         <functions>
-          <function name="createBinaryAttachment">
+          <function clientSupport="wc,sc" name="createBinaryAttachment">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="[B"/>
@@ -600,7 +600,7 @@ if (!success)
               <parameter name="binarydata" type="byte[]" typecode="[B"/>
             </parameters>
           </function>
-          <function name="createBinaryAttachment">
+          <function clientSupport="wc,sc" name="createBinaryAttachment">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="[B"/>
@@ -622,7 +622,7 @@ if (!success)
               <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="createTextAttachment">
+          <function clientSupport="wc,sc" name="createTextAttachment">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -641,7 +641,7 @@ if (!success)
               <parameter name="textdata" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="createTextAttachment">
+          <function clientSupport="wc,sc" name="createTextAttachment">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -662,14 +662,14 @@ if (!success)
               <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function deprecated="true" name="getLastSendMailException">
+          <function clientSupport="wc,sc" deprecated="true" name="getLastSendMailException">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Replaced by #getLastSendMailExceptionMsg()]]></deprecated>
             <sample/>
           </function>
-          <function name="getLastSendMailExceptionMsg">
+          <function clientSupport="wc,sc" name="getLastSendMailExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get the exception that occurred in the last sendMail attempt (null if no exception occurred).]]></description>
@@ -680,7 +680,7 @@ if (!success)
 	plugins.dialogs.showWarningDialog('Alert',plugins.mail.getLastSendMailExceptionMsg(),'OK');
 }]]></sample>
           </function>
-          <function name="getMailMessage">
+          <function clientSupport="wc,sc" name="getMailMessage">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
@@ -696,7 +696,7 @@ if (msg != null) //if is null error occurred!
               <parameter name="binaryblob/string"/>
             </parameters>
           </function>
-          <function name="getPlainMailAddresses">
+          <function clientSupport="wc,sc" name="getPlainMailAddresses">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -709,7 +709,7 @@ application.output(plainArray[0]) //will return 'from_me@example.com']]></sample
               <parameter name="addressesString"/>
             </parameters>
           </function>
-          <function name="isValidEmailAddress">
+          <function clientSupport="wc,sc" name="isValidEmailAddress">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -721,7 +721,7 @@ application.output(plainArray[0]) //will return 'from_me@example.com']]></sample
               <parameter name="email" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="receiveMail">
+          <function clientSupport="wc,sc" name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -763,7 +763,7 @@ if (msgs != null) //if is null error occurred!
               <parameter name="leaveMsgsOnServer" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="java.lang.Boolean"/>
             </parameters>
           </function>
-          <function name="receiveMail">
+          <function clientSupport="wc,sc" name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -795,7 +795,7 @@ if (msgs != null) //if is null error occurred!
               <parameter name="receiveMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number"/>
             </parameters>
           </function>
-          <function name="receiveMail">
+          <function clientSupport="wc,sc" name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -830,7 +830,7 @@ if (msgs != null) //if is null error occurred!
               <parameter name="onlyReceiveMsgWithSentDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function name="receiveMail">
+          <function clientSupport="wc,sc" name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -881,7 +881,7 @@ if (msgs != null) //if is null error occurred!
               <parameter name="pop3Host" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="receiveMail">
+          <function clientSupport="wc,sc" name="receiveMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -924,7 +924,7 @@ if (msgs != null) //if is null error occurred!
               <parameter name="properties" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function deprecated="true" name="recieveMail">
+          <function clientSupport="wc,sc" deprecated="true" name="recieveMail">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
@@ -933,7 +933,7 @@ if (msgs != null) //if is null error occurred!
             <deprecated><![CDATA[Replaced by #receiveMail(String,String,Boolean,Number,Date,String[])]]></deprecated>
             <sample/>
           </function>
-          <function deprecated="true" name="senBulkdMail">
+          <function clientSupport="wc,sc" deprecated="true" name="senBulkdMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -988,7 +988,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1020,7 +1020,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1056,7 +1056,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1096,7 +1096,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1141,7 +1141,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1191,7 +1191,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1244,7 +1244,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1290,7 +1290,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1341,7 +1341,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendBulkMail">
+          <function clientSupport="wc,sc" name="sendBulkMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1395,7 +1395,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1426,7 +1426,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1461,7 +1461,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1500,7 +1500,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1544,7 +1544,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1593,7 +1593,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1645,7 +1645,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1690,7 +1690,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -1740,7 +1740,7 @@ if (!success)
               </parameter>
             </parameters>
           </function>
-          <function name="sendMail">
+          <function clientSupport="wc,sc" name="sendMail">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>

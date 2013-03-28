@@ -2,9 +2,9 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object publicName="JSClient" qualifiedName="com.servoy.extensions.plugins.headlessclient.JSClient">
+      <object clientSupport="wc,sc" publicName="JSClient" qualifiedName="com.servoy.extensions.plugins.headlessclient.JSClient">
         <constants>
-          <constant name="CALLBACK_EVENT">
+          <constant clientSupport="wc,sc" name="CALLBACK_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
             <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
@@ -26,7 +26,7 @@
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
           </constant>
-          <constant name="CALLBACK_EXCEPTION_EVENT">
+          <constant clientSupport="wc,sc" name="CALLBACK_EXCEPTION_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></description>
             <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></summary>
@@ -50,7 +50,7 @@
           </constant>
         </constants>
         <functions>
-          <function name="getClientID">
+          <function clientSupport="wc,sc" name="getClientID">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Gets the id of the client.
@@ -66,7 +66,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
 }]]></sample>
           </function>
-          <function name="getDataProviderValue">
+          <function clientSupport="wc,sc" name="getDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -99,7 +99,7 @@ if (headlessClient != null && headlessClient.isValid()) {
               </parameter>
             </parameters>
           </function>
-          <function name="getDataProviderValue">
+          <function clientSupport="wc,sc" name="getDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -136,7 +136,7 @@ if (headlessClient != null && headlessClient.isValid()) {
               </parameter>
             </parameters>
           </function>
-          <function name="isValid">
+          <function clientSupport="wc,sc" name="isValid">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[returns true if this client is still valid/usable.]]></description>
@@ -159,7 +159,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
           </function>
-          <function name="queueMethod">
+          <function clientSupport="wc,sc" name="queueMethod">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -205,7 +205,7 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
-          <function name="setDataProviderValue">
+          <function clientSupport="wc,sc" name="setDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -242,7 +242,7 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
-          <function name="setDataProviderValue">
+          <function clientSupport="wc,sc" name="setDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -283,7 +283,7 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
-          <function deprecated="true" name="shutDown">
+          <function clientSupport="wc,sc" deprecated="true" name="shutDown">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -292,7 +292,7 @@ The second argument that is give back is the JSClient instance that did the call
             <deprecated><![CDATA[Replaced by #shutdown(boolean)]]></deprecated>
             <sample/>
           </function>
-          <function name="shutdown">
+          <function clientSupport="wc,sc" name="shutdown">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[closes the client.]]></description>
@@ -315,7 +315,7 @@ The second argument that is give back is the JSClient instance that did the call
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
           </function>
-          <function name="shutdown">
+          <function clientSupport="wc,sc" name="shutdown">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
@@ -345,9 +345,9 @@ The second argument that is give back is the JSClient instance that did the call
           </function>
         </functions>
       </object>
-      <object publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider" scriptingName="plugins.headlessclient">
+      <object clientSupport="wc,sc" publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider" scriptingName="plugins.headlessclient">
         <functions>
-          <function name="createClient">
+          <function clientSupport="wc,sc" name="createClient">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -378,7 +378,7 @@ if (headlessClient != null && headlessClient.isValid()) {
               <parameter name="solutionOpenMethodArgs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function name="getClient">
+          <function clientSupport="wc,sc" name="getClient">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
@@ -394,7 +394,7 @@ if (headlessClient != null && headlessClient.isValid()) {
               <parameter name="clientID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function name="getOrCreateClient">
+          <function clientSupport="wc,sc" name="getOrCreateClient">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
