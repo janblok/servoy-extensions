@@ -1733,8 +1733,9 @@ var httpCode = poster.doPost()]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Execute the request method.]]></description>
+            <summary><![CDATA[Execute the request method.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1865,8 +1866,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
-            <description/>
-            <sample/>
+            <description><![CDATA[Execute the request method.]]></description>
+            <summary><![CDATA[Execute the request method.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest()]]></sample>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
