@@ -142,7 +142,11 @@ public class SwingPopupShower implements IPopupShower
 			this.window.setFocusable(true);
 			this.window.setUndecorated(true);
 			this.window.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-			if (Utils.isAppleMacOS()) this.window.getRootPane().putClientProperty("Window.shadow", Boolean.FALSE); //$NON-NLS-1$
+			if (Utils.isAppleMacOS())
+			{
+				this.window.getRootPane().putClientProperty("Window.shadow", Boolean.FALSE); //$NON-NLS-1$
+				this.window.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
+			}
 
 			final IFormUI formUI = form.getFormUI();
 
