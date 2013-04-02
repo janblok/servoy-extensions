@@ -22,6 +22,8 @@ import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxCallDecorator;
 
+import com.servoy.j2db.util.Utils;
+
 
 /**
  * Wicket mouse event behavior.
@@ -46,7 +48,7 @@ public class MouseEventBehavior extends AjaxEventBehavior
 	{
 		String mx = getComponent().getRequest().getParameter("mx");
 		String my = getComponent().getRequest().getParameter("my");
-		mouseAction.execute(target, Integer.parseInt(mx), Integer.parseInt(my));
+		mouseAction.execute(target, Utils.getAsInteger(mx), Utils.getAsInteger(my));
 	}
 
 	@Override
