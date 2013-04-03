@@ -735,6 +735,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	public Menu js_addMenu(String name) throws PluginException
 	{
 		String text = (name == null ? "noname" : name); //$NON-NLS-1$
+		if (text.startsWith("i18n:")) text = pluginAccess.getI18NMessage(text, null); //$NON-NLS-1$
 		MenuItemArgs menuItemArgs = new MenuItemArgs(text, null, null, null, null, (char)0, -1, true);
 		IMenu subMenu = menuHandler.createMenu(menu);
 		menu.addMenuItem(subMenu, -1);
