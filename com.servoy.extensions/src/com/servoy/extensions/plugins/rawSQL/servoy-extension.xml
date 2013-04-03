@@ -11,7 +11,8 @@
             <return type="byte[]" typecode="[B"/>
             <description/>
             <deprecated><![CDATA[Replaced by application#getUUID(String)]]></deprecated>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -20,10 +21,11 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var uuid = application.getNewUUID();
 plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="convertUUIDToString">
             <argumentsTypes>
@@ -32,7 +34,7 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Replaced by application#getUUID(byte[])]]></deprecated>
-            <sample/>
+            <samples/>
             <parameters>
               <parameter name="data" type="byte[]" typecode="[B"/>
             </parameters>
@@ -46,7 +48,8 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Execute any SQL, returns true if successful.]]></description>
             <summary><![CDATA[Execute any SQL, returns true if successful.]]></summary>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -55,7 +58,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -72,6 +75,7 @@ else
 
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
+            </samples>
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the server]]></description>
@@ -94,7 +98,8 @@ else
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Execute any SQL, returns true if successful.]]></description>
             <summary><![CDATA[Execute any SQL, returns true if successful.]]></summary>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -103,7 +108,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -120,6 +125,7 @@ else
 
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
+            </samples>
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the server]]></description>
@@ -146,7 +152,8 @@ else
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
             <description><![CDATA[Execute a stored procedure.]]></description>
             <summary><![CDATA[Execute a stored procedure.]]></summary>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -155,7 +162,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var maxReturnedRows = 10; //useful to limit number of rows
 var procedure_declaration = '{?=calculate_interest_rate(?)}'
@@ -167,6 +174,7 @@ var args = [java.sql.Types.NUMERIC, 3000]
 // When one or more output-parameters are defined, the dataset will contain 1 row with the output data.
 var dataset = plugins.rawSQL.executeStoredProcedure(databaseManager.getDataSourceServerName(controller.getDataSource()), procedure_declaration, args, typesArray, maxReturnedRows);
 var interest_rate = dataset.getValue(1, 1);]]></sample>
+            </samples>
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="procedureDeclaration" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -183,7 +191,8 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Flush cached database data. Use with extreme care, its affecting the performance of clients!]]></description>
             <summary><![CDATA[Flush cached database data.]]></summary>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -192,7 +201,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -209,6 +218,7 @@ else
 
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
+            </samples>
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -219,7 +229,8 @@ else
             <return type="com.servoy.j2db.util.ServoyException" typecode="java.lang.Exception"/>
             <description><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
             <summary><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -228,7 +239,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -245,13 +256,14 @@ else
 
 // Note that when this function is used to create a new table in the database, this table will only be seen by
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Replaced by #getException().]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="notifyDataChange">
             <argumentsTypes>
@@ -263,7 +275,8 @@ else
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!]]></description>
             <summary><![CDATA[Notify clients about changes in records, based on pk(s).]]></summary>
-            <sample><![CDATA[/**************************************************************************** 
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -272,13 +285,14 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************/
+****************************************************************************&#47;
 
 var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
 //var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted
 //var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates
 var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))
 var ok = plugins.rawSQL.notifyDataChange(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', pksdataset,action)]]></sample>
+            </samples>
             <parameters>
               <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>

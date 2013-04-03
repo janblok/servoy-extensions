@@ -12,8 +12,10 @@
             <return type="void" typecode="void"/>
             <description><![CDATA[Set callback method for node selection and double click]]></description>
             <summary><![CDATA[Set callback method for node selection and double click]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setCallBackInfo(globals.node_selected, 'node_id');]]></sample>
+            </samples>
             <parameters>
               <parameter name="f" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="returnDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -26,8 +28,10 @@ binding.setCallBackInfo(globals.node_selected, 'node_id');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set checkbox value dataprovider. Dataprovider returns INTEGER (0 or 1) or STRING (false or true)]]></description>
             <summary><![CDATA[Set checkbox value dataprovider.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setCheckBoxValueDataprovider('comment_text');]]></sample>
+            </samples>
             <parameters>
               <parameter name="checkBoxValueDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -39,8 +43,10 @@ binding.setCheckBoxValueDataprovider('comment_text');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the dataprovider name to retrieve column name and sort order for the child nodes.\nThe provided data must be a string of form : column_name_used_for_sort sort_order(asc or desc)]]></description>
             <summary><![CDATA[Set the dataprovider name to retrieve column name and sort order for the child nodes.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
 binding.setChildSortDataprovider('company_sort');]]></sample>
+            </samples>
             <parameters>
               <parameter name="childSortDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -52,7 +58,8 @@ binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set configuration dataprovider. Dataprovider must be MEDIA type and returns a configuration object]]></description>
             <summary><![CDATA[Set configuration dataprovider.]]></summary>
-            <sample><![CDATA[var config = new Object();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var config = new Object();
 config.text = 'my_text';
 config.nRelation = 'my_n_relation';
 config.mRelation = 'my_m_relation';
@@ -61,6 +68,7 @@ config.fontType = 'my_font';
 config.toolTipText = 'my_tooltip';
 config.hasCheckBox = 'true';
 config.checkBoxValue = 'true';]]></sample>
+            </samples>
             <parameters>
               <parameter name="configurationDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -72,8 +80,10 @@ config.checkBoxValue = 'true';]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the dataprovider name to retrieve the node font from]]></description>
             <summary><![CDATA[Set the dataprovider name to retrieve the node font from]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setFontTypeDataprovider('bean_font');]]></sample>
+            </samples>
             <parameters>
               <parameter name="fontTypeDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -85,8 +95,10 @@ binding.setFontTypeDataprovider('bean_font');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set has checkbox flag dataprovider. Dataprovider returns INTEGER (0 / 1 / 2) or STRING (false / true / disabled) for (does not have / have / have but disabled)]]></description>
             <summary><![CDATA[Set has checkbox flag dataprovider.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setHasCheckBoxDataprovider('hasCheckBox');]]></sample>
+            </samples>
             <parameters>
               <parameter name="hasCheckBoxDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -98,8 +110,10 @@ binding.setHasCheckBoxDataprovider('hasCheckBox');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the dataprovider name to retrieve the node image from (blob column)]]></description>
             <summary><![CDATA[Set the dataprovider name to retrieve the node image from (blob column)]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
 binding.setImageMediaDataprovider('company_icon');]]></sample>
+            </samples>
             <parameters>
               <parameter name="imageMediaDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -111,8 +125,10 @@ binding.setImageMediaDataprovider('company_icon');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the dataprovider name to retrieve the node image from (via url)]]></description>
             <summary><![CDATA[Set the dataprovider name to retrieve the node image from (via url)]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setImageURLDataprovider('order_icon');]]></sample>
+            </samples>
             <parameters>
               <parameter name="imageURLDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -124,8 +140,10 @@ binding.setImageURLDataprovider('order_icon');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set m-relation dataprovider. Dataprovider returns the name of the m-relation]]></description>
             <summary><![CDATA[Set m-relation dataprovider.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setMRelationDataprovider('m_relation');]]></sample>
+            </samples>
             <parameters>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -137,8 +155,10 @@ binding.setMRelationDataprovider('m_relation');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set m-relation name]]></description>
             <summary><![CDATA[Set m-relation name]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setMRelationName('m_relation_name');]]></sample>
+            </samples>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -151,8 +171,10 @@ binding.setMRelationName('m_relation_name');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to call on check box status change]]></description>
             <summary><![CDATA[Set method to call on check box status change]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnCheckBoxChange(onCheckBoxChangeMethod,'orderdate');]]></sample>
+            </samples>
             <parameters>
               <parameter name="methodToCallOnCheckBoxChange" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="returnDataproviderOnCheckBoxChange" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -166,8 +188,10 @@ binding.setMethodToCallOnCheckBoxChange(onCheckBoxChangeMethod,'orderdate');]]><
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
             <summary><![CDATA[Set method to call on click.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnClick(onClickMethod,'orderid');]]></sample>
+            </samples>
             <parameters>
               <parameter name="methodToCallOnClick" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="returnDataproviderOnClick" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -181,8 +205,10 @@ binding.setMethodToCallOnClick(onClickMethod,'orderid');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
             <summary><![CDATA[Set method to call on double click.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnDoubleClick(doubleClickMethod,'orderid');]]></sample>
+            </samples>
             <parameters>
               <parameter name="methodToCallOnDoubleClick" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="returnDataproviderOnDoubleClick" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -196,8 +222,10 @@ binding.setMethodToCallOnDoubleClick(doubleClickMethod,'orderid');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
             <summary><![CDATA[Set method to call on right click.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnRightClick(rightClickMethod,'orderid');]]></sample>
+            </samples>
             <parameters>
               <parameter name="methodToCallOnRightClick" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
               <parameter name="returnDataproviderOnRightClick" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -210,8 +238,10 @@ binding.setMethodToCallOnRightClick(rightClickMethod,'orderid');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set n-relation dataprovider. Dataprovider returns the name of the n-relation]]></description>
             <summary><![CDATA[Set n-relation dataprovider.]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setNRelationDataprovider('n_relation');]]></sample>
+            </samples>
             <parameters>
               <parameter name="dataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -223,7 +253,8 @@ binding.setNRelationDataprovider('n_relation');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.createRelationInfo() for having multiple child relations for one node)]]></description>
             <summary><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.]]></summary>
-            <sample><![CDATA[var company_relations = new Array();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var company_relations = new Array();
 company_relations[0] = tree.createRelationInfo();
 company_relations[0].setLabel('Employees');
 company_relations[0].setNRelationName('companies_to_employees');
@@ -231,6 +262,7 @@ company_relations[1] = tree.createRelationInfo();
 company_relations[1].setLabel('Customers');
 company_relations[1].setNRelationName('companies_to_customers');
 binding.setNRelationInfos(company_relations);]]></sample>
+            </samples>
             <parameters>
               <parameter name="relationInfos" type="com.servoy.extensions.beans.dbtreeview.RelationInfo[]" typecode="[Lcom.servoy.extensions.beans.dbtreeview.RelationInfo;"/>
             </parameters>
@@ -242,8 +274,10 @@ binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set n-relation name]]></description>
             <summary><![CDATA[Set n-relation name]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setNRelationName('n_relation_name');]]></sample>
+            </samples>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -255,8 +289,10 @@ binding.setNRelationName('n_relation_name');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set text dataprovider]]></description>
             <summary><![CDATA[Set text dataprovider]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setTextDataprovider('orderid');]]></sample>
+            </samples>
             <parameters>
               <parameter name="textDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -268,8 +304,10 @@ binding.setTextDataprovider('orderid');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the dataprovider name to retrieve the node tooltiptext from]]></description>
             <summary><![CDATA[Set the dataprovider name to retrieve the node tooltiptext from]]></summary>
-            <sample><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
 binding.setToolTipTextDataprovider('companyname');]]></sample>
+            </samples>
             <parameters>
               <parameter name="toolTipTextDataprovider" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -285,7 +323,9 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set column dataprovider]]></description>
             <summary><![CDATA[Set column dataprovider]]></summary>
-            <sample><![CDATA[column.setDataprovider('fieldName');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[column.setDataprovider('fieldName');]]></sample>
+            </samples>
             <parameters>
               <parameter name="fieldName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -297,7 +337,9 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set column header text]]></description>
             <summary><![CDATA[Set column header text]]></summary>
-            <sample><![CDATA[column.setHeader('header text');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[column.setHeader('header text');]]></sample>
+            </samples>
             <parameters>
               <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -310,48 +352,62 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the background color]]></return>
             <description><![CDATA[Property for getting/setting the background color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
-            <sample><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
 var x = %%elementName%%.bgcolor;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the enabled state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
-            <sample><![CDATA[var b = %%elementName%%.enabled;
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var b = %%elementName%%.enabled;
 if (b) %%elementName%%.enabled = false;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="fgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
-            <sample><![CDATA[%%elementName%%.fgcolor = "#000000";
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.fgcolor = "#000000";
 var y = %%elementName%%.fgcolor;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="selectionPath">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
             <summary><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
-            <sample><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
 var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="toolTipText">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the tooltip text of the bean]]></return>
             <description><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
             <summary><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
-            <sample><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="transparent">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the transparent state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
-            <sample><![CDATA[var t = %%elementName%%.transparent;
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var t = %%elementName%%.transparent;
 if (!t) %%elementName%%.transparent = true;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="visible">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the visibility of the bean]]></return>
             <description><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
-            <sample><![CDATA[var v = %%elementName%%.visible;]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var v = %%elementName%%.visible;]]></sample>
+            </samples>
           </property>
         </properties>
         <functions>
@@ -362,7 +418,9 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The number of added root nodes]]></return>
             <description><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.]]></description>
             <summary><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.]]></summary>
-            <sample><![CDATA[var addedRootNodes = %%elementName%%.addRoots(foundset);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var addedRootNodes = %%elementName%%.addRoots(foundset);]]></sample>
+            </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
@@ -374,7 +432,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <return type="void" typecode="void"/>
             <description/>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
             <argumentsTypes>
@@ -384,7 +442,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageMediaDataProvider">
             <argumentsTypes>
@@ -394,7 +452,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageURLDataProvider">
             <argumentsTypes>
@@ -404,7 +462,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setImageURLDataprovider(imageURLDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeTooltipTextDataProvider">
             <argumentsTypes>
@@ -414,7 +472,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="createBinding" varargs="true">
             <argumentsTypes>
@@ -423,11 +481,13 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
             <description><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></description>
             <summary><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></summary>
-            <sample><![CDATA[var companies_binding = %%elementName%%.createBinding('example_data', 'companies');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var companies_binding = %%elementName%%.createBinding('example_data', 'companies');
 companies_binding.setTextDataprovider('company_name');
 companies_binding.setNRelationName('companies_to_companies');
 companies_binding.setImageURLDataprovider('type_icon');
 companies_binding.setChildSortDataprovider('company_sort');]]></sample>
+            </samples>
             <parameters>
               <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
@@ -441,7 +501,9 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
             <description><![CDATA[Create and add new column to the tree table]]></description>
             <summary><![CDATA[Create and add new column to the tree table]]></summary>
-            <sample><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
+            </samples>
             <parameters>
               <parameter name="datasource" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -458,7 +520,9 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
             <description><![CDATA[Create and add new column to the tree table]]></description>
             <summary><![CDATA[Create and add new column to the tree table]]></summary>
-            <sample><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
+            </samples>
             <parameters>
               <parameter name="datasource" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="header" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -476,7 +540,9 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
             <description><![CDATA[Create and add new column to the tree table]]></description>
             <summary><![CDATA[Create and add new column to the tree table]]></summary>
-            <sample><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
+            </samples>
             <parameters>
               <parameter name="servername" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="tablename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -495,7 +561,9 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
             <description><![CDATA[Create and add new column to the tree table]]></description>
             <summary><![CDATA[Create and add new column to the tree table]]></summary>
-            <sample><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
+            </samples>
             <parameters>
               <parameter name="servername" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="tablename" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -509,7 +577,8 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.RelationInfo" typecode="com.servoy.extensions.beans.dbtreeview.RelationInfo"><![CDATA[RelationInfo object]]></return>
             <description><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
             <summary><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></summary>
-            <sample><![CDATA[var company_relations = new Array();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var company_relations = new Array();
 company_relations[0] = %%elementName%%.createRelationInfo();
 company_relations[0].setLabel('Employees');
 company_relations[0].setNRelationName('companies_to_employees');
@@ -517,41 +586,52 @@ company_relations[1] = %%elementName%%.createRelationInfo();
 company_relations[1].setLabel('Customers');
 company_relations[1].setNRelationName('companies_to_customers');
 companies_binding.setNRelationInfos(company_relations);]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The height]]></return>
             <description><![CDATA[Returns the height of the tree.]]></description>
             <summary><![CDATA[Returns the height of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getHeight();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getHeight();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getLocationX">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The x coordinate]]></return>
             <description><![CDATA[Get the x coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getLocationX();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationX();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getLocationY">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The y coordinate]]></return>
             <description><![CDATA[Get the y coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getLocationY();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationY();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the name of the tree.]]></description>
             <summary><![CDATA[Returns the name of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getName();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getName();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The width]]></return>
             <description><![CDATA[Returns the width of the tree.]]></description>
             <summary><![CDATA[Returns the width of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getWidth();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getWidth();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="isNodeExpanded">
             <argumentsTypes>
@@ -560,8 +640,10 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[True if the node is expanded, False otherwise]]></return>
             <description><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></description>
             <summary><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></summary>
-            <sample><![CDATA[var pathArray = new Array(14,24,45,67);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.isNodeExpanded(pathArray);]]></sample>
+            </samples>
             <parameters>
               <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
@@ -571,21 +653,27 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Refresh the tree display]]></description>
             <summary><![CDATA[Refresh the tree display]]></summary>
-            <sample><![CDATA[%%elementName%%.refresh();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.refresh();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="removeAllColumns">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all columns but the tree column from the tree table]]></description>
             <summary><![CDATA[Remove all columns but the tree column from the tree table]]></summary>
-            <sample><![CDATA[%%elementName%%.removeAllColumns();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.removeAllColumns();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="removeAllRoots">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all root foundsets]]></description>
             <summary><![CDATA[Remove all root foundsets]]></summary>
-            <sample><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setCallBackInfo">
             <argumentsTypes>
@@ -596,7 +684,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setCallBackInfo(f,returnDataprovider)]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setExpandNode">
             <argumentsTypes>
@@ -606,8 +694,10 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></description>
             <summary><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></summary>
-            <sample><![CDATA[var pathArray = new Array(14,24,45,67);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.setExpandNode(pathArray, true);]]></sample>
+            </samples>
             <parameters>
               <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
               <parameter name="expand_collapse" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -620,7 +710,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the specified font as the font of the tree.]]></description>
             <summary><![CDATA[Sets the specified font as the font of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setFont('Times New Roman, 1, 22');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setFont('Times New Roman, 1, 22');]]></sample>
+            </samples>
             <parameters>
               <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -633,7 +725,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the location of the tree.]]></description>
             <summary><![CDATA[Sets the location of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setLocation(120,80);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setLocation(120,80);]]></sample>
+            </samples>
             <parameters>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -647,7 +741,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setMRelationName(name) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setNRelationName">
             <argumentsTypes>
@@ -657,7 +751,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setNRelationName(name) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setNodeLevelVisible">
             <argumentsTypes>
@@ -667,7 +761,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
             <summary><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
-            <sample><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
+            </samples>
             <parameters>
               <parameter name="level" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -680,7 +776,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called when a drag is started on the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDrag(onDrag);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrag(onDrag);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDrag" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -692,7 +790,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called when a drag of on the tree is ended.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDragEnd(onDragEnd);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragEnd(onDragEnd);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDragEnd" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -704,7 +804,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called during a drag over the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDragOver(onDragOver);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragOver(onDragOver);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDragOver" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -716,7 +818,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called on a drop on the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDrop(onDrop);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrop(onDrop);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDrop" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -729,7 +833,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></description>
             <summary><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></summary>
             <deprecated><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setRowHeight">
             <argumentsTypes>
@@ -738,7 +842,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set row height]]></description>
             <summary><![CDATA[Set row height]]></summary>
-            <sample><![CDATA[%%elementName%%.setRowHeight(40);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setRowHeight(40);]]></sample>
+            </samples>
             <parameters>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
@@ -751,7 +857,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the size of the tree.]]></description>
             <summary><![CDATA[Sets the size of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setSize(400,300);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setSize(400,300);]]></sample>
+            </samples>
             <parameters>
               <parameter name="w" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="h" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -764,7 +872,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the header text for the tree column]]></description>
             <summary><![CDATA[Set the header text for the tree column]]></summary>
-            <sample><![CDATA[%%elementName%%.setTreeColumnHeader('Tree Column Header');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setTreeColumnHeader('Tree Column Header');]]></sample>
+            </samples>
             <parameters>
               <parameter name="treeColumnHeader" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -776,7 +886,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the preferred width in pixels for the tree column]]></description>
             <summary><![CDATA[Set the preferred width in pixels for the tree column]]></summary>
-            <sample><![CDATA[%%elementName%%.setTreeColumnPreferredWidth(200);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setTreeColumnPreferredWidth(200);]]></sample>
+            </samples>
             <parameters>
               <parameter name="preferredWidth" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
@@ -789,48 +901,62 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the background color]]></return>
             <description><![CDATA[Property for getting/setting the background color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
-            <sample><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
 var x = %%elementName%%.bgcolor;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the enabled state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
-            <sample><![CDATA[var b = %%elementName%%.enabled;
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var b = %%elementName%%.enabled;
 if (b) %%elementName%%.enabled = false;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="fgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
-            <sample><![CDATA[%%elementName%%.fgcolor = "#000000";
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.fgcolor = "#000000";
 var y = %%elementName%%.fgcolor;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="selectionPath">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             <description><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
             <summary><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
-            <sample><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
 var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="toolTipText">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the tooltip text of the bean]]></return>
             <description><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
             <summary><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
-            <sample><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="transparent">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the transparent state of the bean]]></return>
             <description><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
             <summary><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
-            <sample><![CDATA[var t = %%elementName%%.transparent;
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var t = %%elementName%%.transparent;
 if (!t) %%elementName%%.transparent = true;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="visible">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the visibility of the bean]]></return>
             <description><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
             <summary><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
-            <sample><![CDATA[var v = %%elementName%%.visible;]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var v = %%elementName%%.visible;]]></sample>
+            </samples>
           </property>
         </properties>
         <functions>
@@ -841,7 +967,9 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The number of added root nodes]]></return>
             <description><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.]]></description>
             <summary><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.]]></summary>
-            <sample><![CDATA[var addedRootNodes = %%elementName%%.addRoots(foundset);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var addedRootNodes = %%elementName%%.addRoots(foundset);]]></sample>
+            </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
@@ -853,7 +981,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <return type="void" typecode="void"/>
             <description/>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
             <argumentsTypes>
@@ -863,7 +991,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageMediaDataProvider">
             <argumentsTypes>
@@ -873,7 +1001,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageURLDataProvider">
             <argumentsTypes>
@@ -883,7 +1011,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setImageURLDataprovider(imageURLDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeTooltipTextDataProvider">
             <argumentsTypes>
@@ -893,7 +1021,7 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="createBinding" varargs="true">
             <argumentsTypes>
@@ -902,11 +1030,13 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
             <description><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></description>
             <summary><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></summary>
-            <sample><![CDATA[var companies_binding = %%elementName%%.createBinding('example_data', 'companies');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var companies_binding = %%elementName%%.createBinding('example_data', 'companies');
 companies_binding.setTextDataprovider('company_name');
 companies_binding.setNRelationName('companies_to_companies');
 companies_binding.setImageURLDataprovider('type_icon');
 companies_binding.setChildSortDataprovider('company_sort');]]></sample>
+            </samples>
             <parameters>
               <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
@@ -916,7 +1046,8 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <return type="com.servoy.extensions.beans.dbtreeview.RelationInfo" typecode="com.servoy.extensions.beans.dbtreeview.RelationInfo"><![CDATA[RelationInfo object]]></return>
             <description><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
             <summary><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></summary>
-            <sample><![CDATA[var company_relations = new Array();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var company_relations = new Array();
 company_relations[0] = %%elementName%%.createRelationInfo();
 company_relations[0].setLabel('Employees');
 company_relations[0].setNRelationName('companies_to_employees');
@@ -924,41 +1055,52 @@ company_relations[1] = %%elementName%%.createRelationInfo();
 company_relations[1].setLabel('Customers');
 company_relations[1].setNRelationName('companies_to_customers');
 companies_binding.setNRelationInfos(company_relations);]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The height]]></return>
             <description><![CDATA[Returns the height of the tree.]]></description>
             <summary><![CDATA[Returns the height of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getHeight();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getHeight();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getLocationX">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The x coordinate]]></return>
             <description><![CDATA[Get the x coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getLocationX();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationX();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getLocationY">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The y coordinate]]></return>
             <description><![CDATA[Get the y coordinate of the location of the tree.]]></description>
             <summary><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getLocationY();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationY();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the name of the tree.]]></description>
             <summary><![CDATA[Returns the name of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getName();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getName();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The width]]></return>
             <description><![CDATA[Returns the width of the tree.]]></description>
             <summary><![CDATA[Returns the width of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.getWidth();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getWidth();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="isNodeExpanded">
             <argumentsTypes>
@@ -967,8 +1109,10 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[True if the node is expanded, False otherwise]]></return>
             <description><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></description>
             <summary><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></summary>
-            <sample><![CDATA[var pathArray = new Array(14,24,45,67);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.isNodeExpanded(pathArray);]]></sample>
+            </samples>
             <parameters>
               <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
@@ -978,14 +1122,18 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Refresh the tree display]]></description>
             <summary><![CDATA[Refresh the tree display]]></summary>
-            <sample><![CDATA[%%elementName%%.refresh();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.refresh();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="removeAllRoots">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[Remove all root foundsets]]></description>
             <summary><![CDATA[Remove all root foundsets]]></summary>
-            <sample><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setCallBackInfo">
             <argumentsTypes>
@@ -996,7 +1144,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setCallBackInfo(f,returnDataprovider)]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setExpandNode">
             <argumentsTypes>
@@ -1006,8 +1154,10 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></description>
             <summary><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></summary>
-            <sample><![CDATA[var pathArray = new Array(14,24,45,67);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.setExpandNode(pathArray, true);]]></sample>
+            </samples>
             <parameters>
               <parameter name="nodePath" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
               <parameter name="expand_collapse" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -1020,7 +1170,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the specified font as the font of the tree.]]></description>
             <summary><![CDATA[Sets the specified font as the font of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setFont('Times New Roman, 1, 22');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setFont('Times New Roman, 1, 22');]]></sample>
+            </samples>
             <parameters>
               <parameter name="font" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1033,7 +1185,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the location of the tree.]]></description>
             <summary><![CDATA[Sets the location of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setLocation(120,80);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setLocation(120,80);]]></sample>
+            </samples>
             <parameters>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -1047,7 +1201,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setMRelationName(name) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setNRelationName">
             <argumentsTypes>
@@ -1057,7 +1211,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
             <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
             <deprecated><![CDATA[use Binding.setNRelationName(name) instead]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setNodeLevelVisible">
             <argumentsTypes>
@@ -1067,7 +1221,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
             <summary><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
-            <sample><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
+            </samples>
             <parameters>
               <parameter name="level" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
@@ -1080,7 +1236,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called when a drag is started on the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDrag(onDrag);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrag(onDrag);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDrag" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -1092,7 +1250,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called when a drag of on the tree is ended.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDragEnd(onDragEnd);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragEnd(onDragEnd);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDragEnd" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -1104,7 +1264,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called during a drag over the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDragOver(onDragOver);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragOver(onDragOver);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDragOver" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -1116,7 +1278,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
             <summary><![CDATA[Set method to be called on a drop on the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setOnDrop(onDrop);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrop(onDrop);]]></sample>
+            </samples>
             <parameters>
               <parameter name="fOnDrop" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
             </parameters>
@@ -1129,7 +1293,7 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <description><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></description>
             <summary><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></summary>
             <deprecated><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setRowHeight">
             <argumentsTypes>
@@ -1138,7 +1302,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set row height]]></description>
             <summary><![CDATA[Set row height]]></summary>
-            <sample><![CDATA[%%elementName%%.setRowHeight(40);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setRowHeight(40);]]></sample>
+            </samples>
             <parameters>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
@@ -1151,7 +1317,9 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the size of the tree.]]></description>
             <summary><![CDATA[Sets the size of the tree.]]></summary>
-            <sample><![CDATA[%%elementName%%.setSize(400,300);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setSize(400,300);]]></sample>
+            </samples>
             <parameters>
               <parameter name="w" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="h" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -1168,12 +1336,14 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the label of a relation info object used to set multiple child relations for a tree node.]]></description>
             <summary><![CDATA[Sets the label of a relation info object used to set multiple child relations for a tree node.]]></summary>
-            <sample><![CDATA[var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
 var company_relations = new Array();
 company_relations[0] = elements.myDbTreeView.createRelationInfo();
 company_relations[0].setLabel('Employees');
 company_relations[0].setNRelationName('companies_to_employees');
 companies_binding.setNRelationInfos(company_relations);]]></sample>
+            </samples>
             <parameters>
               <parameter name="label" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1185,12 +1355,14 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the name of a relation info object used to set multiple child relations for a tree node.]]></description>
             <summary><![CDATA[Sets the name of a relation info object used to set multiple child relations for a tree node.]]></summary>
-            <sample><![CDATA[var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
 var company_relations = new Array();
 company_relations[0] = elements.myDbTreeView.createRelationInfo();
 company_relations[0].setLabel('Employees');
 company_relations[0].setNRelationName('companies_to_employees');
 companies_binding.setNRelationInfos(company_relations);]]></sample>
+            </samples>
             <parameters>
               <parameter name="relationName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>

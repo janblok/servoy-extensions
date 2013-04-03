@@ -11,10 +11,12 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             <description><![CDATA[Deserialize from JSON text to an object.]]></description>
             <summary><![CDATA[Deserialize from JSON text to an object.]]></summary>
-            <sample><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
 var string_data = plugins.serialize.toJSON(org_array);
 var new_array = plugins.serialize.fromJSON(string_data);
 application.output(new_array.join('#'));]]></sample>
+            </samples>
             <parameters>
               <parameter name="data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -26,10 +28,12 @@ application.output(new_array.join('#'));]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Serialize an object to JSON text.]]></description>
             <summary><![CDATA[Serialize an object to JSON text.]]></summary>
-            <sample><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
 var string_data = plugins.serialize.toJSON(org_array);
 var new_array = plugins.serialize.fromJSON(string_data);
 application.output(new_array.join('#'));]]></sample>
+            </samples>
             <parameters>
               <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>

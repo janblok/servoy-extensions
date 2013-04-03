@@ -13,7 +13,9 @@
             <return type="void" typecode="void"/>
             <description><![CDATA[Add attribute request]]></description>
             <summary><![CDATA[Add attribute request]]></summary>
-            <sample><![CDATA[authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);]]></sample>
+            </samples>
             <parameters>
               <parameter name="alias" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="schemaURI" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -24,7 +26,8 @@
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description/>
-            <sample><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
 authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);
 //see http://www.axschema.org/types/ for more attributes, not all are supported by all providers!
 authenticateRequest.execute();
@@ -46,6 +49,7 @@ authenticateRequest.execute();
 //		application.output('Login failed')
 //	}
 //}]]></sample>
+            </samples>
           </function>
         </functions>
       </object>
@@ -58,7 +62,9 @@ authenticateRequest.execute();
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get attribute value]]></description>
             <summary><![CDATA[Get attribute value]]></summary>
-            <sample><![CDATA[var email = authenticateResult.getAttributeValue('email')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var email = authenticateResult.getAttributeValue('email')]]></sample>
+            </samples>
             <parameters>
               <parameter name="alias" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -70,10 +76,12 @@ authenticateRequest.execute();
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Get an array of attribute values]]></description>
             <summary><![CDATA[Get an array of attribute values]]></summary>
-            <sample><![CDATA[var namesArray = authenticateResult.getAttributeValues('names')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var namesArray = authenticateResult.getAttributeValues('names')
 for (var i = 0; i < namesArray.length; i++) { 
 	application.output(namesArray[i]); 
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="alias" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -90,7 +98,8 @@ for (var i = 0; i < namesArray.length; i++) {
             <return type="com.servoy.extensions.plugins.openid.JSAuthenticateRequest" typecode="com.servoy.extensions.plugins.openid.JSAuthenticateRequest"/>
             <description><![CDATA[Redirect to openID provider to login, callback method will receive answer.]]></description>
             <summary><![CDATA[Redirect to openID provider to login, callback method will receive answer.]]></summary>
-            <sample><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
 authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);
 //see http://www.axschema.org/types/ for more attributes, not all are supported by all providers!
 authenticateRequest.execute();
@@ -112,6 +121,7 @@ authenticateRequest.execute();
 //		application.output('Login failed')
 //	}
 //}]]></sample>
+            </samples>
             <parameters>
               <parameter name="identifier" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>

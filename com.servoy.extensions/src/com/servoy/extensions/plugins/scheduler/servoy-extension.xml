@@ -13,23 +13,25 @@
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
-            <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
 plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',method)
 // add a job that runs every day at 23:30 between now and 5 days from now
 var dateNow = new Date();
 var date5Days = new Date(dateNow.getTime()+5*24*60*60*1000);
 plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]></sample>
-            <parameters>
-              <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="cronTimings" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
-            </parameters>
+            </samples>
             <links>
               <link>
                 <url>http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html</url>
               </link>
             </links>
+            <parameters>
+              <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="cronTimings" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="method" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function"/>
+            </parameters>
           </function>
           <function clientSupport="wc,sc" name="addCronJob">
             <argumentsTypes>
@@ -41,13 +43,15 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
-            <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
 plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',method)
 // add a job that runs every day at 23:30 between now and 5 days from now
 var dateNow = new Date();
 var date5Days = new Date(dateNow.getTime()+5*24*60*60*1000);
 plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="cronTimings" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -66,13 +70,15 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
-            <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
 plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',method)
 // add a job that runs every day at 23:30 between now and 5 days from now
 var dateNow = new Date();
 var date5Days = new Date(dateNow.getTime()+5*24*60*60*1000);
 plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="cronTimings" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -93,13 +99,15 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
             <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
-            <sample><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
 plugins.scheduler.addCronJob('20mins','0 0/20 * * * ?',method)
 // add a job that runs every day at 23:30 between now and 5 days from now
 var dateNow = new Date();
 var date5Days = new Date(dateNow.getTime()+5*24*60*60*1000);
 plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="cronTimings" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -118,12 +126,14 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a job to the scheduler.]]></description>
             <summary><![CDATA[Adds a job to the scheduler.]]></summary>
-            <sample><![CDATA[// add a job that runs at the given date (20 seconds in the future)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
 var startDate = new Date();
 startDate.setTime(startDate.getTime()+20000);
 var endDate = new Date(startDate.getTime()+100000);
 plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
@@ -140,12 +150,14 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a job to the scheduler.]]></description>
             <summary><![CDATA[Adds a job to the scheduler.]]></summary>
-            <sample><![CDATA[// add a job that runs at the given date (20 seconds in the future)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
 var startDate = new Date();
 startDate.setTime(startDate.getTime()+20000);
 var endDate = new Date(startDate.getTime()+100000);
 plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
@@ -166,12 +178,14 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a job to the scheduler.]]></description>
             <summary><![CDATA[Adds a job to the scheduler.]]></summary>
-            <sample><![CDATA[// add a job that runs at the given date (20 seconds in the future)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
 var startDate = new Date();
 startDate.setTime(startDate.getTime()+20000);
 var endDate = new Date(startDate.getTime()+100000);
 plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
@@ -194,12 +208,14 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a job to the scheduler.]]></description>
             <summary><![CDATA[Adds a job to the scheduler.]]></summary>
-            <sample><![CDATA[// add a job that runs at the given date (20 seconds in the future)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
 var startDate = new Date();
 startDate.setTime(startDate.getTime()+20000);
 var endDate = new Date(startDate.getTime()+100000);
 plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
@@ -224,12 +240,14 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a job to the scheduler.]]></description>
             <summary><![CDATA[Adds a job to the scheduler.]]></summary>
-            <sample><![CDATA[// add a job that runs at the given date (20 seconds in the future)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
 var startDate = new Date();
 startDate.setTime(startDate.getTime()+20000);
 var endDate = new Date(startDate.getTime()+100000);
 plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
@@ -252,12 +270,14 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="void" typecode="void"/>
             <description><![CDATA[Adds a job to the scheduler.]]></description>
             <summary><![CDATA[Adds a job to the scheduler.]]></summary>
-            <sample><![CDATA[// add a job that runs at the given date (20 seconds in the future)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
 var startDate = new Date();
 startDate.setTime(startDate.getTime()+20000);
 var endDate = new Date(startDate.getTime()+100000);
 plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="startDate" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
@@ -270,21 +290,25 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Returns an array with the current jobs.]]></description>
             <summary><![CDATA[Returns an array with the current jobs.]]></summary>
-            <sample><![CDATA[plugins.scheduler.getCurrentJobNames()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.scheduler.getCurrentJobNames()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getLastRunJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the last job run from the scheduler.]]></description>
             <summary><![CDATA[Returns the last job run from the scheduler.]]></summary>
-            <sample><![CDATA[plugins.scheduler.getLastRunJobName();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.scheduler.getLastRunJobName();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="getLastRunnedJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Replaced by #getLastRunJobName().]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="removeJob">
             <argumentsTypes>
@@ -293,8 +317,10 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Removes a job from the scheduler.]]></description>
             <summary><![CDATA[Removes a job from the scheduler.]]></summary>
-            <sample><![CDATA[// removes a job 'myjob' from the scheduler
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// removes a job 'myjob' from the scheduler
 plugins.scheduler.removeJob('myjob');]]></sample>
+            </samples>
             <parameters>
               <parameter name="jobname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>

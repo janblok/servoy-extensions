@@ -8,17 +8,21 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets or sets the x position of the agent.]]></description>
             <summary><![CDATA[Gets or sets the x position of the agent.]]></summary>
-            <sample><![CDATA[//move the agent diagonaly
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[//move the agent diagonaly
 plugins.agent.x = plugins.agent.x-10;
 plugins.agent.y = plugins.agent.y-10;]]></sample>
+            </samples>
           </property>
           <property clientSupport="wc,sc" name="y">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets or sets the y position of the agent.]]></description>
             <summary><![CDATA[Gets or sets the y position of the agent.]]></summary>
-            <sample><![CDATA[//move the agent diagonaly
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[//move the agent diagonaly
 plugins.agent.x = plugins.agent.x-10;
 plugins.agent.y = plugins.agent.y-10;]]></sample>
+            </samples>
           </property>
         </properties>
         <functions>
@@ -28,7 +32,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <description><![CDATA[Hides the agent.]]></description>
             <summary><![CDATA[Hides the agent.]]></summary>
             <deprecated><![CDATA[Replaced by #setVisible(boolean)]]></deprecated>
-            <sample><![CDATA[plugins.agent.hide();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.hide();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="setBalloonSize">
             <argumentsTypes>
@@ -38,7 +44,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the size of the balloon.]]></description>
             <summary><![CDATA[Sets the size of the balloon.]]></summary>
-            <sample><![CDATA[plugins.agent.setBalloonSize(width,height)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setBalloonSize(width,height)]]></sample>
+            </samples>
             <parameters>
               <parameter name="width" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="height" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -51,7 +59,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets a new image for the agent.]]></description>
             <summary><![CDATA[Sets a new image for the agent.]]></summary>
-            <sample><![CDATA[plugins.agent.setImageURL("url")]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setImageURL("url")]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -64,7 +74,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets the location of the agent.]]></description>
             <summary><![CDATA[Sets the location of the agent.]]></summary>
-            <sample><![CDATA[plugins.agent.setLocation(100,100);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setLocation(100,100);]]></sample>
+            </samples>
             <parameters>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
               <parameter name="y" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -77,7 +89,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Show/hides the agent.]]></description>
             <summary><![CDATA[Show/hides the agent.]]></summary>
-            <sample><![CDATA[plugins.agent.setVisible(true);]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setVisible(true);]]></sample>
+            </samples>
             <parameters>
               <parameter name="visible" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
@@ -88,7 +102,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <description><![CDATA[Shows the agent.]]></description>
             <summary><![CDATA[Shows the agent.]]></summary>
             <deprecated><![CDATA[Replaced by #setVisible(boolean)]]></deprecated>
-            <sample><![CDATA[plugins.agent.show();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.show();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="speak">
             <argumentsTypes>
@@ -97,7 +113,9 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Makes the agent speak.]]></description>
             <summary><![CDATA[Makes the agent speak.]]></summary>
-            <sample><![CDATA[plugins.agent.speak('hello nerd');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.agent.speak('hello nerd');]]></sample>
+            </samples>
             <parameters>
               <parameter name="message" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>

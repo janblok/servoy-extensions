@@ -9,48 +9,60 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the cookie comment.]]></description>
             <summary><![CDATA[Returns the cookie comment.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('cookieName')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var path = cookie.getComment();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getDomain">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the cookie domain.]]></description>
             <summary><![CDATA[Returns the cookie domain.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('cookieName')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var domain = cookie.getDomain();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the cookie name.]]></description>
             <summary><![CDATA[Returns the cookie name.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('cookieName')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var name = cookie.getName();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getPath">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the cookie path.]]></description>
             <summary><![CDATA[Returns the cookie path.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('cookieName')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var path = cookie.getPath();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getSecure">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Returns the cookie secure attribute.]]></description>
             <summary><![CDATA[Returns the cookie secure attribute.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('cookieName')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var path = cookie.getSecure();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getValue">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Returns the cookie value.]]></description>
             <summary><![CDATA[Returns the cookie value.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('cookieName')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var value = cookie.getValue();]]></sample>
+            </samples>
           </function>
         </functions>
       </object>
@@ -64,7 +76,9 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -80,7 +94,9 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -104,7 +120,9 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -119,7 +137,9 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -129,7 +149,9 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -151,7 +173,9 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -167,7 +191,9 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -191,7 +217,9 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -206,7 +234,9 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -216,7 +246,9 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -234,7 +266,8 @@ var value = cookie.getValue();]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>202 Accepted</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>202 Accepted</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -246,12 +279,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_BAD_GATEWAY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>502 Bad Gateway</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>502 Bad Gateway</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -263,12 +298,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_BAD_REQUEST">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>400 Bad Request</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>400 Bad Request</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -280,12 +317,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_CONFLICT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>409 Conflict</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>409 Conflict</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -297,12 +336,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_CONTINUE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>100 Continue</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>100 Continue</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -314,12 +355,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_CREATED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>201 Created</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>201 Created</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -331,12 +374,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_EXPECTATION_FAILED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>417 Expectation Failed</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>417 Expectation Failed</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -348,12 +393,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_FAILED_DEPENDENCY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>424 Failed Dependency</tt> (WebDAV - RFC 2518)]]></description>
             <summary><![CDATA[<tt>424 Failed Dependency</tt> (WebDAV - RFC 2518)]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -365,12 +412,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_FORBIDDEN">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>403 Forbidden</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>403 Forbidden</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -382,12 +431,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_GATEWAY_TIMEOUT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>504 Gateway Timeout</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>504 Gateway Timeout</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -399,12 +450,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_GONE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>410 Gone</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>410 Gone</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -416,12 +469,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_HTTP_VERSION_NOT_SUPPORTED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>505 HTTP Version Not Supported</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>505 HTTP Version Not Supported</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -433,6 +488,7 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_INSUFFICIENT_SPACE_ON_RESOURCE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -442,7 +498,8 @@ switch(httpCode) {
 or <tt>419 Proxy Reauthentication Required</tt>
 (HTTP/1.1 drafts?)]]></description>
             <summary><![CDATA[Static constant for a 419 error.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -454,12 +511,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_INSUFFICIENT_STORAGE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>507 Insufficient Storage</tt> (WebDAV - RFC 2518)]]></description>
             <summary><![CDATA[<tt>507 Insufficient Storage</tt> (WebDAV - RFC 2518)]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -471,12 +530,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_INTERNAL_SERVER_ERROR">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>500 Server Error</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>500 Server Error</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -488,12 +549,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_LENGTH_REQUIRED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>411 Length Required</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>411 Length Required</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -505,12 +568,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_LOCKED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>423 Locked</tt> (WebDAV - RFC 2518)]]></description>
             <summary><![CDATA[<tt>423 Locked</tt> (WebDAV - RFC 2518)]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -522,6 +587,7 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_METHOD_FAILURE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -529,7 +595,8 @@ switch(httpCode) {
 <tt>420 Method Failure</tt>
 (WebDAV - draft-ietf-webdav-protocol-05?)]]></description>
             <summary><![CDATA[Static constant for a 420 error.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -541,12 +608,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_METHOD_NOT_ALLOWED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>405 Method Not Allowed</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>405 Method Not Allowed</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -558,12 +627,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_MOVED_PERMANENTLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>301 Moved Permanently</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>301 Moved Permanently</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -575,12 +646,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_MOVED_TEMPORARILY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>302 Moved Temporarily</tt> (Sometimes <tt>Found</tt>) (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>302 Moved Temporarily</tt> (Sometimes <tt>Found</tt>) (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -592,12 +665,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_MULTIPLE_CHOICES">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>300 Mutliple Choices</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>300 Mutliple Choices</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -609,6 +684,7 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_MULTI_STATUS">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
@@ -616,7 +692,8 @@ switch(httpCode) {
 OK</tt> (HTTP/1.1 - draft-ietf-http-v11-spec-rev-01?)]]></description>
             <summary><![CDATA[<tt>207 Multi-Status</tt> (WebDAV - RFC 2518) or <tt>207 Partial Update
 OK</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -628,12 +705,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_NON_AUTHORITATIVE_INFORMATION">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>203 Non Authoritative Information</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>203 Non Authoritative Information</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -645,12 +724,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_NOT_ACCEPTABLE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>406 Not Acceptable</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>406 Not Acceptable</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -662,12 +743,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_NOT_FOUND">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>404 Not Found</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>404 Not Found</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -679,12 +762,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_NOT_IMPLEMENTED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>501 Not Implemented</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>501 Not Implemented</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -696,12 +781,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_NOT_MODIFIED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>304 Not Modified</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>304 Not Modified</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -713,12 +800,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_NO_CONTENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>204 No Content</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>204 No Content</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -730,12 +819,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_OK">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>200 OK</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>200 OK</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -747,12 +838,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_PARTIAL_CONTENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>206 Partial Content</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>206 Partial Content</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -764,12 +857,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_PAYMENT_REQUIRED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>402 Payment Required</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>402 Payment Required</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -781,12 +876,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_PRECONDITION_FAILED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>412 Precondition Failed</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>412 Precondition Failed</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -798,12 +895,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_PROCESSING">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>102 Processing</tt> (WebDAV - RFC 2518)]]></description>
             <summary><![CDATA[<tt>102 Processing</tt> (WebDAV - RFC 2518)]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -815,12 +914,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_PROXY_AUTHENTICATION_REQUIRED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>407 Proxy Authentication Required</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>407 Proxy Authentication Required</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -832,12 +933,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_REQUESTED_RANGE_NOT_SATISFIABLE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>416 Requested Range Not Satisfiable</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>416 Requested Range Not Satisfiable</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -849,12 +952,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_REQUEST_TIMEOUT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>408 Request Timeout</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>408 Request Timeout</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -866,12 +971,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_REQUEST_TOO_LONG">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>413 Request Entity Too Large</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>413 Request Entity Too Large</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -883,12 +990,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_REQUEST_URI_TOO_LONG">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>414 Request-URI Too Long</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>414 Request-URI Too Long</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -900,12 +1009,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_RESET_CONTENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>205 Reset Content</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>205 Reset Content</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -917,12 +1028,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_SEE_OTHER">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>303 See Other</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>303 See Other</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -934,12 +1047,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_SERVICE_UNAVAILABLE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>503 Service Unavailable</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>503 Service Unavailable</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -951,12 +1066,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_SWITCHING_PROTOCOLS">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>101 Switching Protocols</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>101 Switching Protocols</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -968,12 +1085,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_TEMPORARY_REDIRECT">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>307 Temporary Redirect</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>307 Temporary Redirect</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -985,12 +1104,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_UNAUTHORIZED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>401 Unauthorized</tt> (HTTP/1.0 - RFC 1945)]]></description>
             <summary><![CDATA[<tt>401 Unauthorized</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -1002,12 +1123,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_UNPROCESSABLE_ENTITY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>422 Unprocessable Entity</tt> (WebDAV - RFC 2518)]]></description>
             <summary><![CDATA[<tt>422 Unprocessable Entity</tt> (WebDAV - RFC 2518)]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -1019,12 +1142,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_UNSUPPORTED_MEDIA_TYPE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>415 Unsupported Media Type</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>415 Unsupported Media Type</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -1036,12 +1161,14 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SC_USE_PROXY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[<tt>305 Use Proxy</tt> (HTTP/1.1 - RFC 2616)]]></description>
             <summary><![CDATA[<tt>305 Use Proxy</tt> (HTTP/1.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode();
@@ -1053,6 +1180,7 @@ switch(httpCode) {
 		case plugins.http.HTTP_STATUS.SC_PROCESSING: application.output("Processing request."); break;
 		case plugins.http.HTTP_STATUS.SC_REQUEST_TOO_LONG: application.output("The request is too long."); break;
 }]]></sample>
+            </samples>
           </constant>
         </constants>
       </object>
@@ -1066,7 +1194,9 @@ switch(httpCode) {
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1082,7 +1212,9 @@ switch(httpCode) {
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1106,7 +1238,9 @@ switch(httpCode) {
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1121,7 +1255,9 @@ switch(httpCode) {
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -1131,7 +1267,9 @@ switch(httpCode) {
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1152,11 +1290,13 @@ switch(httpCode) {
             <return type="com.servoy.extensions.plugins.http.DeleteRequest" typecode="com.servoy.extensions.plugins.http.DeleteRequest"/>
             <description><![CDATA[Creates a new delete request (a request to delete a resource on server).]]></description>
             <summary><![CDATA[Creates a new delete request (a request to delete a resource on server).]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createDeleteRequest('http://www.servoy.com/delete.me');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode(); // httpCode 200 is ok"
 var content = response.getResponseBody();]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1173,11 +1313,13 @@ Then for a smart client a dialog will be given, to give the user the ability to 
 For a Web or Headless client the system administrator does have to add that certificate (chain) to the java install on the server.
 See http://wiki.servoy.com/display/tutorials/Import+a+%28Root%29+certificate+in+the+java+cacerts+file]]></description>
             <summary><![CDATA[Creates a new get request (retrieves whatever information is stored on specified url).]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createGetRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode(); // httpCode 200 is ok"
 var content = response.getResponseBody();]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1189,11 +1331,13 @@ var content = response.getResponseBody();]]></sample>
             <return type="com.servoy.extensions.plugins.http.HeadRequest" typecode="com.servoy.extensions.plugins.http.HeadRequest"/>
             <description><![CDATA[Creates a new head request (similar to get request, must not contain body content).]]></description>
             <summary><![CDATA[Creates a new head request (similar to get request, must not contain body content).]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createHeadRequest('http://www.servoy.com');
 var response = request.executeRequest();
 var httpCode = response.getStatusCode(); // httpCode 200 is ok
 var header = response.getResponseHeaders('last-modified');]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1205,9 +1349,11 @@ var header = response.getResponseHeaders('last-modified');]]></sample>
             <return type="com.servoy.extensions.plugins.http.OptionsRequest" typecode="com.servoy.extensions.plugins.http.OptionsRequest"/>
             <description><![CDATA[Creates a new options request (a request for information about communication options).]]></description>
             <summary><![CDATA[Creates a new options request (a request for information about communication options).]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createOptionsRequest('http://www.servoy.com');
 var methods = request.getAllowedMethods(request.executeRequest());]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1224,12 +1370,14 @@ Then for a smart client a dialog will be given, to give the user the ability to 
 For a Web or Headless client the system administrator does have to add that certificate (chain) to the java install on the server.
 See http://wiki.servoy.com/display/tutorials/Import+a+%28Root%29+certificate+in+the+java+cacerts+file]]></description>
             <summary><![CDATA[Create a new post request ( Origin server should accept/process the submitted data.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
 poster.addParameter('status',globals.textToPost);
 poster.addParameter('source','Test Source');
 poster.setCharset('UTF-8');
 var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPassword).getStatusCode(); // httpCode 200 is ok]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1241,10 +1389,12 @@ var httpCode = poster.executeRequest(globals.twitterUserName, globals.twitterPas
             <return type="com.servoy.extensions.plugins.http.PutRequest" typecode="com.servoy.extensions.plugins.http.PutRequest"/>
             <description><![CDATA[Creates a new put request (similar to post request, contains information to be submitted).]]></description>
             <summary><![CDATA[Creates a new put request (similar to post request, contains information to be submitted).]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var request = client.createPutRequest('http://jakarta.apache.org');
 request.setFile('UploadMe.gif');
 var httpCode = putRequest.executeRequest().getStatusCode() // httpCode 200 is ok]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1256,10 +1406,12 @@ var httpCode = putRequest.executeRequest().getStatusCode() // httpCode 200 is ok
             <return type="com.servoy.extensions.plugins.http.TraceRequest" typecode="com.servoy.extensions.plugins.http.TraceRequest"/>
             <description><![CDATA[Creates a new trace request (debug request, server will just echo back).]]></description>
             <summary><![CDATA[Creates a new trace request (debug request, server will just echo back).]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var response = request.executeRequest();
 var httpCode = response.getStatusCode(); // httpCode 200 is ok"
 var content = response.getResponseBody();]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1271,13 +1423,15 @@ var content = response.getResponseBody();]]></sample>
             <return type="com.servoy.extensions.plugins.http.Cookie" typecode="com.servoy.extensions.plugins.http.Cookie"/>
             <description><![CDATA[Get a cookie by name.]]></description>
             <summary><![CDATA[Get a cookie by name.]]></summary>
-            <sample><![CDATA[var cookie = client.getCookie('JSESSIONID');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('JSESSIONID');
 if (cookie != null)
 {
 	// do something
 }
 else
 	client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)]]></sample>
+            </samples>
             <parameters>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1287,7 +1441,9 @@ else
             <return type="com.servoy.extensions.plugins.http.Cookie[]" typecode="[Lcom.servoy.extensions.plugins.http.Cookie;"/>
             <description><![CDATA[Get all cookies from this client.]]></description>
             <summary><![CDATA[Get all cookies from this client.]]></summary>
-            <sample><![CDATA[var cookies = client.getHttpClientCookies()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookies = client.getHttpClientCookies()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="setClientProxyCredentials">
             <argumentsTypes>
@@ -1297,7 +1453,9 @@ else
             <return type="void" typecode="void"/>
             <description><![CDATA[Set proxy credentials.]]></description>
             <summary><![CDATA[Set proxy credentials.]]></summary>
-            <sample><![CDATA[client.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[client.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1311,11 +1469,13 @@ else
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add cookie to the this client.]]></description>
             <summary><![CDATA[Add cookie to the this client.]]></summary>
-            <sample><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
 if (cookieSet)
 {
 	//do something
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the cookie]]></description>
@@ -1334,11 +1494,13 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add cookie to the this client.]]></description>
             <summary><![CDATA[Add cookie to the this client.]]></summary>
-            <sample><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
 if (cookieSet)
 {
 	//do something
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the cookie]]></description>
@@ -1361,11 +1523,13 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add cookie to the this client.]]></description>
             <summary><![CDATA[Add cookie to the this client.]]></summary>
-            <sample><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
 if (cookieSet)
 {
 	//do something
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the cookie]]></description>
@@ -1392,11 +1556,13 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add cookie to the this client.]]></description>
             <summary><![CDATA[Add cookie to the this client.]]></summary>
-            <sample><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
 if (cookieSet)
 {
 	//do something
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the cookie]]></description>
@@ -1427,11 +1593,13 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add cookie to the this client.]]></description>
             <summary><![CDATA[Add cookie to the this client.]]></summary>
-            <sample><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookieSet = client.setCookie('JSESSIONID', 'abc', 'localhost', '/', -1, false)
 if (cookieSet)
 {
 	//do something
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the cookie]]></description>
@@ -1460,7 +1628,9 @@ if (cookieSet)
             <return type="void" typecode="void"/>
             <description><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></description>
             <summary><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></summary>
-            <sample><![CDATA[client.setTimeout(1000)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[client.setTimeout(1000)]]></sample>
+            </samples>
             <parameters>
               <parameter name="msTimeout"/>
             </parameters>
@@ -1477,7 +1647,9 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1493,7 +1665,9 @@ if (cookieSet)
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1517,7 +1691,9 @@ if (cookieSet)
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1532,7 +1708,9 @@ if (cookieSet)
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -1542,7 +1720,9 @@ if (cookieSet)
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1559,8 +1739,10 @@ if (cookieSet)
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             <description><![CDATA[Returns the supported HTTP Request operations as a String Array]]></description>
             <summary><![CDATA[Returns the supported HTTP Request operations as a String Array]]></summary>
-            <sample><![CDATA[var supportedOperations = request.getAllowedMethods()
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var supportedOperations = request.getAllowedMethods()
 application.output(supportedOperations.join(','));]]></sample>
+            </samples>
           </function>
         </functions>
       </object>
@@ -1574,7 +1756,8 @@ application.output(supportedOperations.join(','));]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a file to the post.]]></description>
             <summary><![CDATA[Add a file to the post.]]></summary>
-            <sample><![CDATA[poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
 
 var f = plugins.file.convertToJSFile('./somefile02.txt')
@@ -1582,6 +1765,7 @@ if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
 
 f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
 if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
+            </samples>
             <parameters>
               <parameter name="parameterName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="jsFile" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
@@ -1596,7 +1780,8 @@ if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a file to the post.]]></description>
             <summary><![CDATA[Add a file to the post.]]></summary>
-            <sample><![CDATA[poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
 
 var f = plugins.file.convertToJSFile('./somefile02.txt')
@@ -1604,6 +1789,7 @@ if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
 
 f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
 if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
+            </samples>
             <parameters>
               <parameter name="parameterName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1619,7 +1805,8 @@ if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a file to the post.]]></description>
             <summary><![CDATA[Add a file to the post.]]></summary>
-            <sample><![CDATA[poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
 
 var f = plugins.file.convertToJSFile('./somefile02.txt')
@@ -1627,6 +1814,7 @@ if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
 
 f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
 if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
+            </samples>
             <parameters>
               <parameter name="parameterName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1641,7 +1829,9 @@ if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1655,8 +1845,10 @@ if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a parameter to the post.]]></description>
             <summary><![CDATA[Add a parameter to the post.]]></summary>
-            <sample><![CDATA[poster.addParameter('name','value')
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[poster.addParameter('name','value')
 poster.addParameter(null,'value') //sets the content to post]]></sample>
+            </samples>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1669,8 +1861,10 @@ poster.addParameter(null,'value') //sets the content to post]]></sample>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description/>
             <deprecated><![CDATA[Replaced by #executeRequest(String,String)]]></deprecated>
-            <sample><![CDATA[//null
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[//null
 var httpCode = poster.doPost()]]></sample>
+            </samples>
             <parameters>
               <parameter name="username" optional="true"/>
               <parameter name="password" optional="true"/>
@@ -1686,7 +1880,9 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1710,7 +1906,9 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1725,7 +1923,9 @@ var httpCode = poster.doPost()]]></sample>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -1735,7 +1935,9 @@ var httpCode = poster.doPost()]]></sample>
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1751,7 +1953,9 @@ var httpCode = poster.doPost()]]></sample>
             <description><![CDATA[Get the result page data after a post.]]></description>
             <summary><![CDATA[Get the result page data after a post.]]></summary>
             <deprecated><![CDATA[Replaced by #executeRequest(String,String)]]></deprecated>
-            <sample><![CDATA[var pageData = poster.getPageData()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var pageData = poster.getPageData()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="setBodyContent">
             <argumentsTypes>
@@ -1760,7 +1964,9 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the body of the request.]]></description>
             <summary><![CDATA[Set the body of the request.]]></summary>
-            <sample><![CDATA[method.setBodyContent(content)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
+            </samples>
             <parameters>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1772,12 +1978,14 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).]]></description>
             <summary><![CDATA[Set the charset used when posting.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
 poster.addParameter('status',scopes.globals.textToPost);
 poster.addParameter('source','Test Source');
 poster.setCharset('UTF-8');
 var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.globals.twitterPassword).getStatusCode() // httpCode 200 is ok]]></sample>
+            </samples>
             <parameters>
               <parameter name="charset"/>
             </parameters>
@@ -1789,7 +1997,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description/>
             <deprecated><![CDATA[Replaced by #setCharset(String)]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
         </functions>
       </object>
@@ -1803,7 +2011,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -1819,7 +2029,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1843,7 +2055,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1858,7 +2072,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -1868,7 +2084,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -1885,7 +2103,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the body of the request.]]></description>
             <summary><![CDATA[Set the body of the request.]]></summary>
-            <sample><![CDATA[method.setBodyContent(content)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
+            </samples>
             <parameters>
               <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1897,12 +2117,14 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).]]></description>
             <summary><![CDATA[Set the charset used when posting.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
 poster.addParameter('status',scopes.globals.textToPost);
 poster.addParameter('source','Test Source');
 poster.setCharset('UTF-8');
 var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.globals.twitterPassword).getStatusCode() // httpCode 200 is ok]]></sample>
+            </samples>
             <parameters>
               <parameter name="charset"/>
             </parameters>
@@ -1914,7 +2136,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Set a file to put.]]></description>
             <summary><![CDATA[Set a file to put.]]></summary>
-            <sample><![CDATA[putRequest.setFile('c:/temp/manual_01a.doc')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[putRequest.setFile('c:/temp/manual_01a.doc')]]></sample>
+            </samples>
             <parameters>
               <parameter name="filePath" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1928,31 +2152,39 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get the charset of the response body.]]></description>
             <summary><![CDATA[Get the charset of the response body.]]></summary>
-            <sample><![CDATA[var charset = response.getCharset();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var charset = response.getCharset();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getMediaData">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
             <description><![CDATA[Get the content of response as binary data. It also supports gzip-ed content.]]></description>
             <summary><![CDATA[Get the content of response as binary data.]]></summary>
-            <sample><![CDATA[var mediaData = response.getMediaData();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var mediaData = response.getMediaData();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getResponseBody">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get the content of the response as String.]]></description>
             <summary><![CDATA[Get the content of the response as String.]]></summary>
-            <sample><![CDATA[var pageData = response.getResponseBody();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var pageData = response.getResponseBody();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getResponseHeaders">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="com.servoy.j2db.scripting.JSMap"/>
             <description><![CDATA[Gets the headers of the response as name/value arrays.]]></description>
             <summary><![CDATA[Gets the headers of the response as name/value arrays.]]></summary>
-            <sample><![CDATA[var allHeaders = response.getResponseHeaders();
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var allHeaders = response.getResponseHeaders();
 var header;
 
 for (header in allHeaders) application.output(header + ': ' + allHeaders[header]);]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getResponseHeaders">
             <argumentsTypes>
@@ -1961,7 +2193,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="com.servoy.j2db.scripting.JSMap"/>
             <description><![CDATA[Gets the headers of the response as name/value arrays.]]></description>
             <summary><![CDATA[Gets the headers of the response as name/value arrays.]]></summary>
-            <sample><![CDATA[var contentLength = response.getResponseHeaders("Content-Length");]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var contentLength = response.getResponseHeaders("Content-Length");]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -1971,7 +2205,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description><![CDATA[Gets the status code of the response, the list of the possible values is in HTTP_STATUS constants.]]></description>
             <summary><![CDATA[Gets the status code of the response, the list of the possible values is in HTTP_STATUS constants.]]></summary>
-            <sample><![CDATA[var status = response.getStatusCode();// compare with HTTP_STATUS constants]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var status = response.getStatusCode();// compare with HTTP_STATUS constants]]></sample>
+            </samples>
           </function>
         </functions>
       </object>
@@ -1985,7 +2221,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[Add a header to the request.]]></description>
             <summary><![CDATA[Add a header to the request.]]></summary>
-            <sample><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.addHeader('Content-type','text/xml; charset=ISO-8859-1')]]></sample>
+            </samples>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2001,7 +2239,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -2025,7 +2265,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -2040,7 +2282,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="executeRequest">
             <argumentsTypes>
@@ -2050,7 +2294,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
             <description><![CDATA[Execute the request method.]]></description>
             <summary><![CDATA[Execute the request method.]]></summary>
-            <sample><![CDATA[var response = method.executeRequest()]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()]]></sample>
+            </samples>
             <parameters>
               <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the user name]]></description>
@@ -2072,7 +2318,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <description><![CDATA[Get or create an http client.]]></description>
             <summary><![CDATA[Get or create an http client.]]></summary>
             <deprecated><![CDATA[Replaced by #createNewHttpClient().]]></deprecated>
-            <sample><![CDATA[var client = plugins.http.createHttpClient();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createHttpClient();]]></sample>
+            </samples>
             <parameters>
               <parameter name="name" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -2082,7 +2330,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="com.servoy.extensions.plugins.http.HttpClient" typecode="com.servoy.extensions.plugins.http.HttpClient"/>
             <description><![CDATA[Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session.]]></description>
             <summary><![CDATA[Create an http client (like a web browser with session binding) usable todo multiple request/posts in same server session.]]></summary>
-            <sample><![CDATA[var client = plugins.http.createNewHttpClient();]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="deleteHttpClient">
             <argumentsTypes>
@@ -2092,7 +2342,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <description><![CDATA[Delete a named http client.]]></description>
             <summary><![CDATA[Delete a named http client.]]></summary>
             <deprecated><![CDATA[Obsolete method, HttpClient mechanism has changed.]]></deprecated>
-            <sample><![CDATA[plugins.http.deleteHttpClient('mybrowser');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.http.deleteHttpClient('mybrowser');]]></sample>
+            </samples>
             <parameters>
               <parameter name="http_clientname"/>
             </parameters>
@@ -2106,13 +2358,15 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <description><![CDATA[Get cookie object from the specified client.]]></description>
             <summary><![CDATA[Get cookie object from the specified client.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
-            <sample><![CDATA[var cookie = plugins.http.getHttpClientCookie('clientName', 'JSESSIONID');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookie = plugins.http.getHttpClientCookie('clientName', 'JSESSIONID');
 if (cookie != null)
 {
 	// do something
 }
 else
 	plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="cookieName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2126,7 +2380,9 @@ else
             <description><![CDATA[Returns a Cookie array with all the cookies set on the specified client.]]></description>
             <summary><![CDATA[Returns a Cookie array with all the cookies set on the specified client.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
-            <sample><![CDATA[var cookies = plugins.http.getHttpClientCookies('clientName')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookies = plugins.http.getHttpClientCookies('clientName')]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientName"/>
             </parameters>
@@ -2137,17 +2393,19 @@ else
             <description><![CDATA[Get the charset of the last page received with getPageData(...)]]></description>
             <summary><![CDATA[Get the charset of the last page received with getPageData(.]]></summary>
             <deprecated><![CDATA[Obsolete method.]]></deprecated>
-            <sample><![CDATA[var a = plugins.http.getPageData('http://www.google.com.hk');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var a = plugins.http.getPageData('http://www.google.com.hk');
 var charset = plugins.http.getLastPageCharset();
 var success = plugins.file.writeTXTFile('someFilePath', a, charset);
 if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file', 'OK');]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="getLastPageEncoding">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description/>
             <deprecated><![CDATA[Obsolete method.]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="getMediaData">
             <argumentsTypes>
@@ -2159,7 +2417,9 @@ If this url is an https url that uses certificates unknown to Java
 then you have to use the HttpClient so that smart client users will get the unknown certificate dialog that they then can accept
 or you must make sure that those server certificates are stored in the cacerts of the java vm that is used (this is required for a web or headless client)]]></description>
             <summary><![CDATA[Get media (binary data) such as images in a variable.]]></summary>
-            <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -2176,7 +2436,9 @@ then you have to use the HttpClient so that smart client users will get the unkn
 or you must make sure that those server certificates are stored in the cacerts of the java vm that is used (this is required for a web or headless client)]]></description>
             <summary><![CDATA[Get media (binary data) such as images in a variable.]]></summary>
             <deprecated><![CDATA[Obsolete method.]]></deprecated>
-            <sample><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var image_byte_array = plugins.http.getMediaData('http://www.cnn.com/cnn.gif');]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2193,8 +2455,10 @@ or you must make sure that those server certificates are stored in the cacerts o
             <summary><![CDATA[Get all page html in a variable, if this url is an https url that uses certificates unknown to Java
 then you have to use the HttpClient so that smart client users will get the unknown certificate dialog that they then can accept
 or you must make sure that those server certificates are stored in the cacerts of the java vm that is used (this is required for a web or headless client)]]></summary>
-            <sample><![CDATA[// get data using a default connection
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// get data using a default connection
 var pageData = plugins.http.getPageData('http://www.cnn.com');]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -2208,8 +2472,10 @@ var pageData = plugins.http.getPageData('http://www.cnn.com');]]></sample>
             <description><![CDATA[Get all page html in a variable (authentication only works with http client usage). A http client will be created/used.]]></description>
             <summary><![CDATA[Get all page html in a variable (authentication only works with http client usage).]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient.createGetRequest(String)]]></deprecated>
-            <sample><![CDATA[// create an http client and use it to get the data
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// create an http client and use it to get the data
 var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="httpClientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2226,8 +2492,10 @@ var pageData = plugins.http.getPageData('http://www.cnn.com','myclient');]]></sa
             <description><![CDATA[Get all page html in a variable (authentication only works with http client usage). If name is provided a http client will be created/used.]]></description>
             <summary><![CDATA[Get all page html in a variable (authentication only works with http client usage).]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient.createGetRequest(String)]]></deprecated>
-            <sample><![CDATA[// create an http client and use it to get the data
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// create an http client and use it to get the data
 var pageData = plugins.http.getPageData('http://www.admin.com','myclient','myuser','secret');]]></sample>
+            </samples>
             <parameters>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="httpClientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2243,12 +2511,14 @@ var pageData = plugins.http.getPageData('http://www.admin.com','myclient','myuse
             <description><![CDATA[Get poster object to do http (file) posts. If posting files, it will post multipart!]]></description>
             <summary><![CDATA[Get poster object to do http (file) posts.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient#createPostRequest(String).]]></deprecated>
-            <sample><![CDATA[var poster = plugins.http.getPoster('http://www.abc.com/apply_form.jsp');
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var poster = plugins.http.getPoster('http://www.abc.com/apply_form.jsp');
 var didAddParam = poster.addParameter('myParamName','myValue');
 var didAddFile = poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc');
 var httpCode = poster.doPost('username','mypassword'); //httpCode 200 is ok
 //var httpCode = poster.doPost('username','mypassword'); //use if authentication is needed
 var pageData = poster.getPageData()]]></sample>
+            </samples>
             <parameters>
               <parameter name="url"/>
               <parameter name="http_clientname" optional="true"/>
@@ -2265,7 +2535,9 @@ var pageData = poster.getPageData()]]></sample>
             <description><![CDATA[Put a file at the specified URL.]]></description>
             <summary><![CDATA[Put a file at the specified URL.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient.createPutRequest(String)]]></deprecated>
-            <sample><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc')]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2286,7 +2558,9 @@ var pageData = poster.getPageData()]]></sample>
             <description><![CDATA[Put a file at the specified URL, using authentication.]]></description>
             <summary><![CDATA[Put a file at the specified URL, using authentication.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient.createPutRequest(String)]]></deprecated>
-            <sample><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var fileAdded = plugins.http.put('clientName', 'http://www.abc.com/put_stuff.jsp', 'manual.doc', 'c:/temp/manual_01a.doc', 'user', 'password')]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="url" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2305,7 +2579,9 @@ var pageData = poster.getPageData()]]></sample>
             <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
             <summary><![CDATA[Set the proxy username and password.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient.setClientProxyCredentials(String,String)]]></deprecated>
-            <sample><![CDATA[plugins.http.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.http.setClientProxyCredentials('my_proxy_username','my_proxy_password');]]></sample>
+            </samples>
             <parameters>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2320,7 +2596,9 @@ var pageData = poster.getPageData()]]></sample>
             <description><![CDATA[Set the proxy username and password. Used for named http clients (else use implicit java data).]]></description>
             <summary><![CDATA[Set the proxy username and password.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient.setClientProxyCredentials(String,String)]]></deprecated>
-            <sample><![CDATA[plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.http.setClientProxyUserNamePassword('my_proxy_username','my_proxy_password');]]></sample>
+            </samples>
             <parameters>
               <parameter name="username"/>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -2334,11 +2612,13 @@ var pageData = poster.getPageData()]]></sample>
             <description><![CDATA[Add cookie to the specified client.]]></description>
             <summary><![CDATA[Add cookie to the specified client.]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient#setCookie(String,String).]]></deprecated>
-            <sample><![CDATA[var cookieSet = plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var cookieSet = plugins.http.setHttpClientCookie('clientName', 'JSESSIONID', 'abc', 'localhost', '/', -1, false)
 if (cookieSet)
 {
 	//do something
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientName"/>
               <parameter name="cookieName"/>
@@ -2357,7 +2637,9 @@ if (cookieSet)
             <description><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></description>
             <summary><![CDATA[Sets a timeout in milliseconds for retrieving of data (when 0 there is no timeout).]]></summary>
             <deprecated><![CDATA[Replaced by HttpClient#setTimeout(Object[]).]]></deprecated>
-            <sample><![CDATA[plugins.http.setTimeout(1000,'client_name')]]></sample>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[plugins.http.setTimeout(1000,'client_name')]]></sample>
+            </samples>
             <parameters>
               <parameter name="msTimeout"/>
               <parameter name="http_clientname" optional="true"/>

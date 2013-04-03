@@ -8,7 +8,8 @@
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
             <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -18,19 +19,21 @@
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*/
+	}*&#47;
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
           </constant>
           <constant clientSupport="wc,sc" name="CALLBACK_EXCEPTION_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></description>
             <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -40,13 +43,14 @@
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*/
+	}*&#47;
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
           </constant>
         </constants>
         <functions>
@@ -58,13 +62,15 @@
 This client id can be used to find the client from the headless client plugin.
 Note that this client id is not the same id as the id displayed on the Aplicationb Server admin page.]]></description>
             <summary><![CDATA[Gets the id of the client.]]></summary>
-            <sample><![CDATA[var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 var clientID = headlessClient.getClientID()
 ....
 headlessClient = plugins.headlessclient.getClient(clientID);
 if (headlessClient != null && headlessClient.isValid()) {
 	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
 }]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="getDataProviderValue">
             <argumentsTypes>
@@ -74,7 +80,8 @@ if (headlessClient != null && headlessClient.isValid()) {
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value for the data-provider.]]></return>
             <description><![CDATA[Get a data-provider value.]]></description>
             <summary><![CDATA[Get a data-provider value.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -90,6 +97,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 		application.output("value get from scopes.globals.number :: " + null);
 	}
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
@@ -108,7 +116,8 @@ if (headlessClient != null && headlessClient.isValid()) {
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value of the data-provider.]]></return>
             <description><![CDATA[Get a data-provider value.]]></description>
             <summary><![CDATA[Get a data-provider value.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -124,6 +133,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 		application.output("value get from scopes.globals.number :: " + null);
 	}
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The context of the given method; null if it is global method or a form name for a form method.]]></description>
@@ -141,7 +151,8 @@ if (headlessClient != null && headlessClient.isValid()) {
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <description><![CDATA[returns true if this client is still valid/usable.]]></description>
             <summary><![CDATA[returns true if this client is still valid/usable.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -151,13 +162,14 @@ if (headlessClient != null && headlessClient.isValid()) {
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*/
+	}*&#47;
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="queueMethod">
             <argumentsTypes>
@@ -173,7 +185,8 @@ If an exception is thrown somewhere then the callback method will be called with
 the exception as the JSEvent data object with the JSEvent.getType() value of JSClient.CALLBACK_EXCEPTION_EVENT
 The second argument that is give back is the JSClient instance that did the call.]]></description>
             <summary><![CDATA[Queues a method call on the remote server.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -183,13 +196,14 @@ The second argument that is give back is the JSClient instance that did the call
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*/
+	}*&#47;
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method.]]></description>
@@ -214,7 +228,8 @@ The second argument that is give back is the JSClient instance that did the call
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change.]]></return>
             <description><![CDATA[Set a data-provider value.]]></description>
             <summary><![CDATA[Set a data-provider value.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -230,6 +245,7 @@ The second argument that is give back is the JSClient instance that did the call
 		application.output("value get from scopes.globals.number :: " + null);
 	}
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method.]]></description>
@@ -252,7 +268,8 @@ The second argument that is give back is the JSClient instance that did the call
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change]]></return>
             <description><![CDATA[Set a data-provider value.]]></description>
             <summary><![CDATA[Set a data-provider value.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -268,6 +285,7 @@ The second argument that is give back is the JSClient instance that did the call
 		application.output("value get from scopes.globals.number :: " + null);
 	}
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="contextName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The context of the given method, null if it is global method or a form name for a form method]]></description>
@@ -290,14 +308,15 @@ The second argument that is give back is the JSClient instance that did the call
             <return type="void" typecode="void"/>
             <description/>
             <deprecated><![CDATA[Replaced by #shutdown(boolean)]]></deprecated>
-            <sample/>
+            <samples/>
           </function>
           <function clientSupport="wc,sc" name="shutdown">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <description><![CDATA[closes the client.]]></description>
             <summary><![CDATA[closes the client.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -307,13 +326,14 @@ The second argument that is give back is the JSClient instance that did the call
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*/
+	}*&#47;
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
           </function>
           <function clientSupport="wc,sc" name="shutdown">
             <argumentsTypes>
@@ -322,7 +342,8 @@ The second argument that is give back is the JSClient instance that did the call
             <return type="void" typecode="void"/>
             <description><![CDATA[closes the client.]]></description>
             <summary><![CDATA[closes the client.]]></summary>
-            <sample><![CDATA[if (jsclient && jsclient.isValid())
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -332,13 +353,14 @@ The second argument that is give back is the JSClient instance that did the call
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*/
+	}*&#47;
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
 	// this calls a 'remoteMethod' on the server as a global method, because the context (first argument is set to null), you can use a formname to call a form method
 	jsclient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="force" type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             </parameters>
@@ -363,7 +385,8 @@ NOTE: in the developer this will only load the solution in debug mode when it is
 you can load any solution from the workspace when you pass "nodebug" as last argument in the arguments list (it should still use the same resources project).
 But then you won't be able to debug it, breakpoints won't hit.]]></description>
             <summary><![CDATA[Creates a headless client on the server that will open the given solution.]]></summary>
-            <sample><![CDATA[// Creates a headless client that will open the given solution.
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
 var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 if (headlessClient != null && headlessClient.isValid()) { 
 	var x = new Object();
@@ -371,6 +394,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 	x.number = 10;
 	headlessClient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="solutionName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="username" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -385,11 +409,13 @@ if (headlessClient != null && headlessClient.isValid()) {
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
             <description><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
             <summary><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
-            <sample><![CDATA[// Gets an existing headless client for the given client uuid.
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// Gets an existing headless client for the given client uuid.
 var headlessClient = plugins.headlessclient.getClient("clientID");
 if (headlessClient != null && headlessClient.isValid()) {
 	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -413,7 +439,8 @@ you can load any solution from the workspace when you pass "nodebug" as last arg
 But then you won't be able to debug it, breakpoints won't hit.]]></description>
             <summary><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
 it will create a headless client on the server that will open the given solution if it didn't exists yet.]]></summary>
-            <sample><![CDATA[// Creates a headless client that will open the given solution.
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
 var storedSolutionSpecificID = "aaaabbbbccccc1111";
 var headlessClient = plugins.headlessclient.getOrCreateClient(storedSolutionSpecificID, "someSolution", "user", "pass", null);
 if (headlessClient != null && headlessClient.isValid()) { 
@@ -422,6 +449,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 	x.number = 10;
 	headlessClient.queueMethod(null, "remoteMethod", [x], callback);
 }]]></sample>
+            </samples>
             <parameters>
               <parameter name="clientId" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The id of the client if it already exists, or it will be the id of the client if it will be created.]]></description>
