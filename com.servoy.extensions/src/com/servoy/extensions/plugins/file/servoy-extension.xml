@@ -456,8 +456,6 @@ else {
           <function clientSupport="wc,sc" deprecated="true" name="js_delete">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #deleteFile().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="lastModified">
@@ -1062,8 +1060,6 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <descriptions/>
-            <summaries/>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
@@ -1661,8 +1657,6 @@ for (var i=0; i<files.length; i++)
           <function clientSupport="wc,sc" deprecated="true" name="getHomeDirectory">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #getHomeFolder().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="getHomeFolder">
@@ -3765,8 +3759,6 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <descriptions/>
-            <summaries/>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
 var bytes = new Array();

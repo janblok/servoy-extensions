@@ -29,8 +29,6 @@
           <function clientSupport="wc,sc" name="execute">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
 authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);

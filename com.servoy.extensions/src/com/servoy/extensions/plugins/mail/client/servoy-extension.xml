@@ -779,8 +779,6 @@ if (!success)
           <function clientSupport="wc,sc" deprecated="true" name="getLastSendMailException">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #getLastSendMailExceptionMsg()]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="getLastSendMailExceptionMsg">
@@ -1097,8 +1095,6 @@ if (msgs != null) //if is null error occurred!
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.mail.client.MailMessage[]" typecode="[Lcom.servoy.extensions.plugins.mail.client.MailMessage;"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #receiveMail(String,String,Boolean,Number,Date,String[])]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="senBulkdMail">

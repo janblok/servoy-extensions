@@ -1223,8 +1223,6 @@ plugins.dialogs.showInfoDialog(
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
-            <descriptions/>
-            <summaries/>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//Helper method to get the next date when a period is given;
 //valid periods are:

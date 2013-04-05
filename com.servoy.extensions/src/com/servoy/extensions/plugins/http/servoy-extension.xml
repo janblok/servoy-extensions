@@ -2243,8 +2243,6 @@ poster.addParameter(null,'value') //sets the content to post]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #executeRequest(String,String)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//null
@@ -2408,8 +2406,6 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setCharset(String)]]></deprecated>
           </function>
         </functions>
@@ -2916,8 +2912,6 @@ if (!success) plugins.dialogs.showWarningDialog('Warning', 'Could not write file
           <function clientSupport="wc,sc" deprecated="true" name="getLastPageEncoding">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Obsolete method.]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="getMediaData">

@@ -10,8 +10,6 @@
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
             <parameters>
               <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -29,8 +27,6 @@
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
             <parameters>
               <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">

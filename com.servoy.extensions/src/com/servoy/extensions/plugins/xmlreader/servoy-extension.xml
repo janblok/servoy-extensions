@@ -152,8 +152,6 @@ application.output(subChilds[0].getType())]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #readXmlDocumentFromString(String) and #readXmlDocumentFromFile(Object)]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="readXmlDocumentFromFile">

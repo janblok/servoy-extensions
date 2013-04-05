@@ -546,8 +546,6 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
@@ -1259,8 +1257,6 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">

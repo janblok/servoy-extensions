@@ -484,8 +484,6 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
           <function clientSupport="wc,sc" deprecated="true" name="getRecievedPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #getReceivedPacket().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="sendPacket">

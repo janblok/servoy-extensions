@@ -9,8 +9,6 @@
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by application#getUUID(String)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
@@ -33,8 +31,6 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by application#getUUID(byte[])]]></deprecated>
             <parameters>
               <parameter name="data" type="byte[]" typecode="[B"/>
@@ -282,8 +278,6 @@ else
           <function clientSupport="wc,sc" deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #getException().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="notifyDataChange">

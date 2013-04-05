@@ -349,8 +349,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function) and #setSelected(boolean).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="set">
@@ -360,8 +358,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -383,8 +379,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -410,8 +404,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -441,8 +433,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -476,8 +466,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String), #setMnemonic(Function)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -515,8 +503,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String), #setMnemonic(Function), #setEnabled(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -558,8 +544,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setSelected(boolean), #setIcon(Object), #setAccelerator(String), #setMnemonic(Function), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -598,8 +582,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -621,8 +603,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -648,8 +628,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -679,8 +657,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -714,8 +690,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -753,8 +727,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -857,8 +829,6 @@ entry.setAlign(true);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
@@ -1580,8 +1550,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1599,8 +1567,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1622,8 +1588,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1649,8 +1613,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1680,8 +1642,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1715,8 +1675,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1754,8 +1712,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -1827,8 +1783,6 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
@@ -2597,8 +2551,6 @@ chk.setMethod(feedback_checkbox);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addMenuItem(String,Function,Object,String,Boolean,Integer).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="addMenu">
@@ -3768,8 +3720,6 @@ menu.addSeparator(1);]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addMenu(String).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
@@ -3777,8 +3727,6 @@ menu.addSeparator(1);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addMenu(Number).]]></deprecated>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
@@ -4170,8 +4118,6 @@ else {
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #getMenu().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="putClientProperty">
@@ -4303,8 +4249,6 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setEnabled(boolean) and #setMnemonic(String).]]></deprecated>
             <parameters>
               <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
@@ -4318,8 +4262,6 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setEnabled(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -4336,8 +4278,6 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String) and #setMnemonic(String).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -4355,8 +4295,6 @@ menu.addMenuItem("new item", feedback_item);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setEnabled(boolean) and #setMnemonic(String).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -4705,8 +4643,6 @@ menubar.setVisible(false);]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="validate">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Obsolete method, no longer needed.]]></deprecated>
           </function>
         </functions>
@@ -5132,8 +5068,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5151,8 +5085,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5174,8 +5106,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5201,8 +5131,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5232,8 +5160,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5267,8 +5193,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5306,8 +5230,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -5379,8 +5301,6 @@ entry.setIcon("media:///yourimage.gif");]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
@@ -6125,8 +6045,6 @@ chk.setMethod(feedback_checkbox);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addMenuItem(String,Function,Object,String,Boolean,Integer).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="addMenu">
@@ -7296,8 +7214,6 @@ menu.addSeparator(1);]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addMenu(String).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="addSubMenu">
@@ -7305,8 +7221,6 @@ menu.addSeparator(1);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addMenu(Number).]]></deprecated>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
@@ -7681,8 +7595,6 @@ else {
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #getMenu().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="putClientProperty">
@@ -8307,8 +8219,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (text,function,selected...).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="set">
@@ -8318,8 +8228,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8341,8 +8249,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8368,8 +8274,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8399,8 +8303,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8434,8 +8336,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8473,8 +8373,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8516,8 +8414,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by individual sets for each property (setText(String),setFunction(Function),setSelected(boolean)...).]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8556,8 +8452,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8579,8 +8473,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8606,8 +8498,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8637,8 +8527,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8672,8 +8560,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8711,8 +8597,6 @@ entry.putClientProperty("ToolTipText", "changed tooltip");
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setText(String), #setMethod(Function), #setMethod(Function,Object[]), #setMethodArguments(Object[]), #setIcon(Object), #setAccelerator(String), #setMnemonic(String), #setEnabled(boolean), #setVisible(boolean)]]></deprecated>
             <parameters>
               <parameter name="text" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
@@ -8815,8 +8699,6 @@ entry.setAlign(true);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setMethodArguments(Object[])]]></deprecated>
             <parameters>
               <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
@@ -10081,8 +9963,6 @@ toolbar.visibleItem(1, false);]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="addMenu">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#addMenu().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="addMenu">
@@ -10090,8 +9970,6 @@ toolbar.visibleItem(1, false);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#addMenu().]]></deprecated>
             <parameters>
               <parameter name="index" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
@@ -10105,8 +9983,6 @@ toolbar.visibleItem(1, false);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="javax.swing.JToolBar" typecode="javax.swing.JToolBar"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #addToolBar(String).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="addToolBar">
@@ -10515,8 +10391,6 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.CheckBox" typecode="com.servoy.extensions.plugins.window.menu.CheckBox"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="createMenuItem">
@@ -10524,8 +10398,6 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.MenuItem" typecode="com.servoy.extensions.plugins.window.menu.MenuItem"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="createPopupMenu">
@@ -10558,8 +10430,6 @@ if (event.getSource()) {
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.RadioButton" typecode="com.servoy.extensions.plugins.window.menu.RadioButton"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by Menu class functionality.]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="createShortcut">
@@ -11007,8 +10877,6 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#getMenu(int).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="getMenuBar">
@@ -11077,8 +10945,6 @@ menuMain.addMenuItem("another entry", feedback);]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="getMenuCount">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#getMenuCount().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="getMenuIndexByText">
@@ -11086,8 +10952,6 @@ menuMain.addMenuItem("another entry", feedback);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#getMenuIndexByText(String).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="getToolBar">
@@ -11268,15 +11132,11 @@ plugins.window.maximize("windowName");]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Obsolete method.]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="removeAllMenus">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Menu" typecode="com.servoy.extensions.plugins.window.menu.Menu"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#removeAllMenus().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="removeMenu">
@@ -11284,8 +11144,6 @@ plugins.window.maximize("windowName");]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#removeMenu(int).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="removeServoyToolBar">
@@ -11294,8 +11152,6 @@ plugins.window.maximize("windowName");]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #removeToolBar(String).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="removeShortcut">
@@ -11466,8 +11322,6 @@ plugins.window.removeToolBar("toolbar_0");]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="resetMenuBar">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#reset().]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="setFullScreen">
@@ -11494,8 +11348,6 @@ plugins.window.setFullScreen(true);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by Menu#setVisible(boolean).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setMouseOverPopup">
@@ -11503,15 +11355,11 @@ plugins.window.setFullScreen(true);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setPopup">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setPopup">
@@ -11519,8 +11367,6 @@ plugins.window.setFullScreen(true);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.window.menu.Popup" typecode="com.servoy.extensions.plugins.window.menu.Popup"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
             <parameters>
               <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;">
@@ -11571,8 +11417,6 @@ plugins.window.setToolBarAreaVisible(false);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #setToolBarAreaVisible(boolean).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="showFormPopup">
@@ -11656,15 +11500,11 @@ plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord()
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by #createPopupMenu(Object[]).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="validateMenuBar">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <descriptions/>
-            <summaries/>
             <deprecated><![CDATA[Replaced by MenuBar#validate().]]></deprecated>
           </function>
         </functions>
