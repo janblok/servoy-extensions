@@ -6,8 +6,12 @@
         <properties>
           <property clientSupport="wc,sc" name="exportEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Enable the export feature of this plugin.]]></description>
-            <summary><![CDATA[Enable the export feature of this plugin.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Enable the export feature of this plugin.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Enable the export feature of this plugin.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.excelxport.exportEnabled = true;
 var isEnabled = plugins.excelxport.exportEnabled;]]></sample>
@@ -15,8 +19,12 @@ var isEnabled = plugins.excelxport.exportEnabled;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="importEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Enable the import feature of this plugin.]]></description>
-            <summary><![CDATA[Enable the import feature of this plugin.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Enable the import feature of this plugin.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Enable the import feature of this plugin.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.excelxport.importEnabled = true;
 var isEnabled = plugins.excelxport.importEnabled;]]></sample>
@@ -30,8 +38,12 @@ var isEnabled = plugins.excelxport.importEnabled;]]></sample>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Export to Excel data]]></description>
-            <summary><![CDATA[Export to Excel data]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
@@ -58,8 +70,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Export to Excel data]]></description>
-            <summary><![CDATA[Export to Excel data]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
@@ -90,8 +106,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Export to Excel data]]></description>
-            <summary><![CDATA[Export to Excel data]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
@@ -126,8 +146,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Export to Excel data]]></description>
-            <summary><![CDATA[Export to Excel data]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
@@ -166,8 +190,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Export to Excel data]]></description>
-            <summary><![CDATA[Export to Excel data]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);

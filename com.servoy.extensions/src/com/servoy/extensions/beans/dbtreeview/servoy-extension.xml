@@ -10,8 +10,12 @@
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set callback method for node selection and double click]]></description>
-            <summary><![CDATA[Set callback method for node selection and double click]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set callback method for node selection and double click]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set callback method for node selection and double click]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setCallBackInfo(globals.node_selected, 'node_id');]]></sample>
@@ -26,8 +30,12 @@ binding.setCallBackInfo(globals.node_selected, 'node_id');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set checkbox value dataprovider. Dataprovider returns INTEGER (0 or 1) or STRING (false or true)]]></description>
-            <summary><![CDATA[Set checkbox value dataprovider.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set checkbox value dataprovider. Dataprovider returns INTEGER (0 or 1) or STRING (false or true)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set checkbox value dataprovider.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setCheckBoxValueDataprovider('comment_text');]]></sample>
@@ -41,8 +49,12 @@ binding.setCheckBoxValueDataprovider('comment_text');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the dataprovider name to retrieve column name and sort order for the child nodes.\nThe provided data must be a string of form : column_name_used_for_sort sort_order(asc or desc)]]></description>
-            <summary><![CDATA[Set the dataprovider name to retrieve column name and sort order for the child nodes.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve column name and sort order for the child nodes.\nThe provided data must be a string of form : column_name_used_for_sort sort_order(asc or desc)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve column name and sort order for the child nodes.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
 binding.setChildSortDataprovider('company_sort');]]></sample>
@@ -56,8 +68,12 @@ binding.setChildSortDataprovider('company_sort');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set configuration dataprovider. Dataprovider must be MEDIA type and returns a configuration object]]></description>
-            <summary><![CDATA[Set configuration dataprovider.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set configuration dataprovider. Dataprovider must be MEDIA type and returns a configuration object]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set configuration dataprovider.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var config = new Object();
 config.text = 'my_text';
@@ -78,8 +94,12 @@ config.checkBoxValue = 'true';]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the dataprovider name to retrieve the node font from]]></description>
-            <summary><![CDATA[Set the dataprovider name to retrieve the node font from]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node font from]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node font from]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setFontTypeDataprovider('bean_font');]]></sample>
@@ -93,8 +113,12 @@ binding.setFontTypeDataprovider('bean_font');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set has checkbox flag dataprovider. Dataprovider returns INTEGER (0 / 1 / 2) or STRING (false / true / disabled) for (does not have / have / have but disabled)]]></description>
-            <summary><![CDATA[Set has checkbox flag dataprovider.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set has checkbox flag dataprovider. Dataprovider returns INTEGER (0 / 1 / 2) or STRING (false / true / disabled) for (does not have / have / have but disabled)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set has checkbox flag dataprovider.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setHasCheckBoxDataprovider('hasCheckBox');]]></sample>
@@ -108,8 +132,12 @@ binding.setHasCheckBoxDataprovider('hasCheckBox');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the dataprovider name to retrieve the node image from (blob column)]]></description>
-            <summary><![CDATA[Set the dataprovider name to retrieve the node image from (blob column)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node image from (blob column)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node image from (blob column)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
 binding.setImageMediaDataprovider('company_icon');]]></sample>
@@ -123,8 +151,12 @@ binding.setImageMediaDataprovider('company_icon');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the dataprovider name to retrieve the node image from (via url)]]></description>
-            <summary><![CDATA[Set the dataprovider name to retrieve the node image from (via url)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node image from (via url)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node image from (via url)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setImageURLDataprovider('order_icon');]]></sample>
@@ -138,8 +170,12 @@ binding.setImageURLDataprovider('order_icon');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set m-relation dataprovider. Dataprovider returns the name of the m-relation]]></description>
-            <summary><![CDATA[Set m-relation dataprovider.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set m-relation dataprovider. Dataprovider returns the name of the m-relation]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set m-relation dataprovider.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setMRelationDataprovider('m_relation');]]></sample>
@@ -153,8 +189,12 @@ binding.setMRelationDataprovider('m_relation');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set m-relation name]]></description>
-            <summary><![CDATA[Set m-relation name]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set m-relation name]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set m-relation name]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setMRelationName('m_relation_name');]]></sample>
@@ -169,8 +209,12 @@ binding.setMRelationName('m_relation_name');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to call on check box status change]]></description>
-            <summary><![CDATA[Set method to call on check box status change]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to call on check box status change]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to call on check box status change]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnCheckBoxChange(onCheckBoxChangeMethod,'orderdate');]]></sample>
@@ -186,8 +230,12 @@ binding.setMethodToCallOnCheckBoxChange(onCheckBoxChangeMethod,'orderdate');]]><
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
-            <summary><![CDATA[Set method to call on click.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to call on click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to call on click.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnClick(onClickMethod,'orderid');]]></sample>
@@ -203,8 +251,12 @@ binding.setMethodToCallOnClick(onClickMethod,'orderid');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
-            <summary><![CDATA[Set method to call on double click.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to call on double click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to call on double click.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnDoubleClick(doubleClickMethod,'orderid');]]></sample>
@@ -220,8 +272,12 @@ binding.setMethodToCallOnDoubleClick(doubleClickMethod,'orderid');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
-            <summary><![CDATA[Set method to call on right click.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to call on right click.\nThe callback will be called with the following arguments : returnDataprovider, tableName, mouseX, mouseY]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to call on right click.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setMethodToCallOnRightClick(rightClickMethod,'orderid');]]></sample>
@@ -236,8 +292,12 @@ binding.setMethodToCallOnRightClick(rightClickMethod,'orderid');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set n-relation dataprovider. Dataprovider returns the name of the n-relation]]></description>
-            <summary><![CDATA[Set n-relation dataprovider.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set n-relation dataprovider. Dataprovider returns the name of the n-relation]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set n-relation dataprovider.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setNRelationDataprovider('n_relation');]]></sample>
@@ -251,8 +311,12 @@ binding.setNRelationDataprovider('n_relation');]]></sample>
               <argumentType typecode="[Lcom.servoy.extensions.beans.dbtreeview.RelationInfo;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.createRelationInfo() for having multiple child relations for one node)]]></description>
-            <summary><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.createRelationInfo() for having multiple child relations for one node)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set n-relation infos (array of RelationInfo objects created using tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var company_relations = new Array();
 company_relations[0] = tree.createRelationInfo();
@@ -272,8 +336,12 @@ binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set n-relation name]]></description>
-            <summary><![CDATA[Set n-relation name]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set n-relation name]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set n-relation name]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), controller.getTableName());
 binding.setNRelationName('n_relation_name');]]></sample>
@@ -287,8 +355,12 @@ binding.setNRelationName('n_relation_name');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set text dataprovider]]></description>
-            <summary><![CDATA[Set text dataprovider]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set text dataprovider]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set text dataprovider]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'orders');
 binding.setTextDataprovider('orderid');]]></sample>
@@ -302,8 +374,12 @@ binding.setTextDataprovider('orderid');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the dataprovider name to retrieve the node tooltiptext from]]></description>
-            <summary><![CDATA[Set the dataprovider name to retrieve the node tooltiptext from]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node tooltiptext from]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the dataprovider name to retrieve the node tooltiptext from]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var binding = elements.dbtreeview.createBinding(controller.getServerName(), 'customers');
 binding.setToolTipTextDataprovider('companyname');]]></sample>
@@ -321,8 +397,12 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set column dataprovider]]></description>
-            <summary><![CDATA[Set column dataprovider]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set column dataprovider]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set column dataprovider]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[column.setDataprovider('fieldName');]]></sample>
             </samples>
@@ -335,8 +415,12 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set column header text]]></description>
-            <summary><![CDATA[Set column header text]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set column header text]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set column header text]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[column.setHeader('header text');]]></sample>
             </samples>
@@ -350,8 +434,12 @@ binding.setToolTipTextDataprovider('companyname');]]></sample>
         <properties>
           <property clientSupport="wc,sc" name="bgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the background color]]></return>
-            <description><![CDATA[Property for getting/setting the background color of the bean.]]></description>
-            <summary><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the background color of the bean.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
 var x = %%elementName%%.bgcolor;]]></sample>
@@ -359,8 +447,12 @@ var x = %%elementName%%.bgcolor;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the enabled state of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
-            <summary><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var b = %%elementName%%.enabled;
 if (b) %%elementName%%.enabled = false;]]></sample>
@@ -368,8 +460,12 @@ if (b) %%elementName%%.enabled = false;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="fgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
-            <summary><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.fgcolor = "#000000";
 var y = %%elementName%%.fgcolor;]]></sample>
@@ -377,8 +473,12 @@ var y = %%elementName%%.fgcolor;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="selectionPath">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            <description><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
-            <summary><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
 var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
@@ -386,16 +486,24 @@ var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="toolTipText">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the tooltip text of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
-            <summary><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
             </samples>
           </property>
           <property clientSupport="wc,sc" name="transparent">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the transparent state of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
-            <summary><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var t = %%elementName%%.transparent;
 if (!t) %%elementName%%.transparent = true;]]></sample>
@@ -403,8 +511,12 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="visible">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the visibility of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
-            <summary><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var v = %%elementName%%.visible;]]></sample>
             </samples>
@@ -416,8 +528,12 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The number of added root nodes]]></return>
-            <description><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.]]></description>
-            <summary><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var addedRootNodes = %%elementName%%.addRoots(foundset);]]></sample>
             </samples>
@@ -430,57 +546,73 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageMediaDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageURLDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setImageURLDataprovider(imageURLDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeTooltipTextDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="createBinding" varargs="true">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
-            <description><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></description>
-            <summary><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var companies_binding = %%elementName%%.createBinding('example_data', 'companies');
 companies_binding.setTextDataprovider('company_name');
@@ -499,8 +631,12 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
-            <description><![CDATA[Create and add new column to the tree table]]></description>
-            <summary><![CDATA[Create and add new column to the tree table]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
             </samples>
@@ -518,8 +654,12 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
-            <description><![CDATA[Create and add new column to the tree table]]></description>
-            <summary><![CDATA[Create and add new column to the tree table]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('db:/serverName/tableName', 'header text', 'tablefieldname', 150);]]></sample>
             </samples>
@@ -538,8 +678,12 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
-            <description><![CDATA[Create and add new column to the tree table]]></description>
-            <summary><![CDATA[Create and add new column to the tree table]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
             </samples>
@@ -559,8 +703,12 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.table.Column" typecode="com.servoy.extensions.beans.dbtreeview.table.Column"><![CDATA[Column object]]></return>
-            <description><![CDATA[Create and add new column to the tree table]]></description>
-            <summary><![CDATA[Create and add new column to the tree table]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
             </samples>
@@ -575,8 +723,12 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
           <function clientSupport="wc,sc" name="createRelationInfo">
             <argumentsTypes/>
             <return type="com.servoy.extensions.beans.dbtreeview.RelationInfo" typecode="com.servoy.extensions.beans.dbtreeview.RelationInfo"><![CDATA[RelationInfo object]]></return>
-            <description><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
-            <summary><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var company_relations = new Array();
 company_relations[0] = %%elementName%%.createRelationInfo();
@@ -591,8 +743,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The height]]></return>
-            <description><![CDATA[Returns the height of the tree.]]></description>
-            <summary><![CDATA[Returns the height of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the height of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the height of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getHeight();]]></sample>
             </samples>
@@ -600,8 +756,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getLocationX">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The x coordinate]]></return>
-            <description><![CDATA[Get the x coordinate of the location of the tree.]]></description>
-            <summary><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get the x coordinate of the location of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationX();]]></sample>
             </samples>
@@ -609,8 +769,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getLocationY">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The y coordinate]]></return>
-            <description><![CDATA[Get the y coordinate of the location of the tree.]]></description>
-            <summary><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get the y coordinate of the location of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationY();]]></sample>
             </samples>
@@ -618,8 +782,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the name of the tree.]]></description>
-            <summary><![CDATA[Returns the name of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the name of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the name of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getName();]]></sample>
             </samples>
@@ -627,8 +795,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The width]]></return>
-            <description><![CDATA[Returns the width of the tree.]]></description>
-            <summary><![CDATA[Returns the width of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the width of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the width of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getWidth();]]></sample>
             </samples>
@@ -638,8 +810,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[True if the node is expanded, False otherwise]]></return>
-            <description><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></description>
-            <summary><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.isNodeExpanded(pathArray);]]></sample>
@@ -651,8 +827,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="refresh">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Refresh the tree display]]></description>
-            <summary><![CDATA[Refresh the tree display]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Refresh the tree display]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Refresh the tree display]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.refresh();]]></sample>
             </samples>
@@ -660,8 +840,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="removeAllColumns">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Remove all columns but the tree column from the tree table]]></description>
-            <summary><![CDATA[Remove all columns but the tree column from the tree table]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Remove all columns but the tree column from the tree table]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Remove all columns but the tree column from the tree table]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.removeAllColumns();]]></sample>
             </samples>
@@ -669,8 +853,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="removeAllRoots">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Remove all root foundsets]]></description>
-            <summary><![CDATA[Remove all root foundsets]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Remove all root foundsets]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Remove all root foundsets]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
             </samples>
@@ -681,10 +869,13 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setCallBackInfo(f,returnDataprovider)]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setExpandNode">
             <argumentsTypes>
@@ -692,8 +883,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></description>
-            <summary><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.setExpandNode(pathArray, true);]]></sample>
@@ -708,8 +903,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the specified font as the font of the tree.]]></description>
-            <summary><![CDATA[Sets the specified font as the font of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the specified font as the font of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the specified font as the font of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setFont('Times New Roman, 1, 22');]]></sample>
             </samples>
@@ -723,8 +922,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the location of the tree.]]></description>
-            <summary><![CDATA[Sets the location of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the location of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the location of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setLocation(120,80);]]></sample>
             </samples>
@@ -738,20 +941,26 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setMRelationName(name) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setNRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setNRelationName(name) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setNodeLevelVisible">
             <argumentsTypes>
@@ -759,8 +968,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
-            <summary><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
             </samples>
@@ -774,8 +987,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called when a drag is started on the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called when a drag is started on the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrag(onDrag);]]></sample>
             </samples>
@@ -788,8 +1005,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called when a drag of on the tree is ended.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called when a drag of on the tree is ended.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragEnd(onDragEnd);]]></sample>
             </samples>
@@ -802,8 +1023,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called during a drag over the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called during a drag over the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragOver(onDragOver);]]></sample>
             </samples>
@@ -816,8 +1041,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called on a drop on the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called on a drop on the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrop(onDrop);]]></sample>
             </samples>
@@ -830,18 +1059,25 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></description>
-            <summary><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></summary>
+            </summaries>
             <deprecated><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setRowHeight">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set row height]]></description>
-            <summary><![CDATA[Set row height]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set row height]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set row height]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setRowHeight(40);]]></sample>
             </samples>
@@ -855,8 +1091,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the size of the tree.]]></description>
-            <summary><![CDATA[Sets the size of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the size of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the size of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setSize(400,300);]]></sample>
             </samples>
@@ -870,8 +1110,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the header text for the tree column]]></description>
-            <summary><![CDATA[Set the header text for the tree column]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the header text for the tree column]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the header text for the tree column]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setTreeColumnHeader('Tree Column Header');]]></sample>
             </samples>
@@ -884,8 +1128,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the preferred width in pixels for the tree column]]></description>
-            <summary><![CDATA[Set the preferred width in pixels for the tree column]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the preferred width in pixels for the tree column]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the preferred width in pixels for the tree column]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setTreeColumnPreferredWidth(200);]]></sample>
             </samples>
@@ -899,8 +1147,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
         <properties>
           <property clientSupport="wc,sc" name="bgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the background color]]></return>
-            <description><![CDATA[Property for getting/setting the background color of the bean.]]></description>
-            <summary><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the background color of the bean.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the background color of the bean.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.bgcolor = "#FFFFFF";
 var x = %%elementName%%.bgcolor;]]></sample>
@@ -908,8 +1160,12 @@ var x = %%elementName%%.bgcolor;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="enabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the enabled state of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
-            <summary><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the enabled state of the bean]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the enabled state of the bean]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var b = %%elementName%%.enabled;
 if (b) %%elementName%%.enabled = false;]]></sample>
@@ -917,8 +1173,12 @@ if (b) %%elementName%%.enabled = false;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="fgcolor">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
-            <summary><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the foreground color of the bean.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the foreground color of the bean.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.fgcolor = "#000000";
 var y = %%elementName%%.fgcolor;]]></sample>
@@ -926,8 +1186,12 @@ var y = %%elementName%%.fgcolor;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="selectionPath">
             <return type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
-            <description><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
-            <summary><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get/Set the selection (path), array with pk records values (only single pk key supported)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.selectionPath = new Array(14,24,45,67);
 var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
@@ -935,16 +1199,24 @@ var currentSelectionArray = %%elementName%%.selectionPath;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="toolTipText">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the tooltip text of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
-            <summary><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the text of the bean's tooltip]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the text of the bean's tooltip]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.toolTipText = 'Hello world!';]]></sample>
             </samples>
           </property>
           <property clientSupport="wc,sc" name="transparent">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the transparent state of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
-            <summary><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the transparent or opaque state of the bean]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var t = %%elementName%%.transparent;
 if (!t) %%elementName%%.transparent = true;]]></sample>
@@ -952,8 +1224,12 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="visible">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[the visibility of the bean]]></return>
-            <description><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
-            <summary><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Property for getting/setting the visibility of the bean.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Property for getting/setting the visibility of the bean.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var v = %%elementName%%.visible;]]></sample>
             </samples>
@@ -965,8 +1241,12 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The number of added root nodes]]></return>
-            <description><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.]]></description>
-            <summary><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.\nNote: the bean will use a clone of the foundset, so any changes on the foundset parameter will be ignored in the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add foundset to the list of foundsets used to create the tree's root nodes.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var addedRootNodes = %%elementName%%.addRoots(foundset);]]></sample>
             </samples>
@@ -979,57 +1259,73 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[use Binding.setChildSortDataprovider(childSortDataprovider)]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeFontTypeDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setFontTypeDataprovider(fontTypeDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageMediaDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setImageMediaDataprovider(imageMediaDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeImageURLDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setImageURLDataprovider(imageURLDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="bindNodeTooltipTextDataProvider">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="createBinding" varargs="true">
             <argumentsTypes>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
-            <description><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></description>
-            <summary><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create and add binding object for a database table used to set data bindings for nodes.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var companies_binding = %%elementName%%.createBinding('example_data', 'companies');
 companies_binding.setTextDataprovider('company_name');
@@ -1044,8 +1340,12 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
           <function clientSupport="wc,sc" name="createRelationInfo">
             <argumentsTypes/>
             <return type="com.servoy.extensions.beans.dbtreeview.RelationInfo" typecode="com.servoy.extensions.beans.dbtreeview.RelationInfo"><![CDATA[RelationInfo object]]></return>
-            <description><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
-            <summary><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Create relation info object used to set multiple child relations for a tree node]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var company_relations = new Array();
 company_relations[0] = %%elementName%%.createRelationInfo();
@@ -1060,8 +1360,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The height]]></return>
-            <description><![CDATA[Returns the height of the tree.]]></description>
-            <summary><![CDATA[Returns the height of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the height of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the height of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getHeight();]]></sample>
             </samples>
@@ -1069,8 +1373,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getLocationX">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The x coordinate]]></return>
-            <description><![CDATA[Get the x coordinate of the location of the tree.]]></description>
-            <summary><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get the x coordinate of the location of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get the x coordinate of the location of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationX();]]></sample>
             </samples>
@@ -1078,8 +1386,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getLocationY">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The y coordinate]]></return>
-            <description><![CDATA[Get the y coordinate of the location of the tree.]]></description>
-            <summary><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get the y coordinate of the location of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get the y coordinate of the location of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getLocationY();]]></sample>
             </samples>
@@ -1087,8 +1399,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the name of the tree.]]></description>
-            <summary><![CDATA[Returns the name of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the name of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the name of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getName();]]></sample>
             </samples>
@@ -1096,8 +1412,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"><![CDATA[The width]]></return>
-            <description><![CDATA[Returns the width of the tree.]]></description>
-            <summary><![CDATA[Returns the width of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the width of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the width of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.getWidth();]]></sample>
             </samples>
@@ -1107,8 +1427,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[True if the node is expanded, False otherwise]]></return>
-            <description><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></description>
-            <summary><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Check the path (array with pk records values (only single pk key supported)) expanded status]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.isNodeExpanded(pathArray);]]></sample>
@@ -1120,8 +1444,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="refresh">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Refresh the tree display]]></description>
-            <summary><![CDATA[Refresh the tree display]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Refresh the tree display]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Refresh the tree display]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.refresh();]]></sample>
             </samples>
@@ -1129,8 +1457,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
           <function clientSupport="wc,sc" name="removeAllRoots">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Remove all root foundsets]]></description>
-            <summary><![CDATA[Remove all root foundsets]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Remove all root foundsets]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Remove all root foundsets]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.removeAllRoots();]]></sample>
             </samples>
@@ -1141,10 +1473,13 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setCallBackInfo(f,returnDataprovider)]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setExpandNode">
             <argumentsTypes>
@@ -1152,8 +1487,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></description>
-            <summary><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Expand/collapse the path, array with pk records values (only single pk key supported)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var pathArray = new Array(14,24,45,67);
 %%elementName%%.setExpandNode(pathArray, true);]]></sample>
@@ -1168,8 +1507,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the specified font as the font of the tree.]]></description>
-            <summary><![CDATA[Sets the specified font as the font of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the specified font as the font of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the specified font as the font of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setFont('Times New Roman, 1, 22');]]></sample>
             </samples>
@@ -1183,8 +1526,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the location of the tree.]]></description>
-            <summary><![CDATA[Sets the location of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the location of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the location of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setLocation(120,80);]]></sample>
             </samples>
@@ -1198,20 +1545,26 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setMRelationName(name) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" deprecated="true" name="setNRelationName">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
-            <summary><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, store this in a compatibility Binding instance]]></summary>
+            </summaries>
             <deprecated><![CDATA[use Binding.setNRelationName(name) instead]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setNodeLevelVisible">
             <argumentsTypes>
@@ -1219,8 +1572,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
-            <summary><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the level of visible nodes (expand or collapse to certain level)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setNodeLevelVisible(scopes.globals.g_treeview_level, (scopes.globals.g_treeview_expand == 1 ? true : false));]]></sample>
             </samples>
@@ -1234,8 +1591,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called when a drag is started on the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called when a drag is started on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called when a drag is started on the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrag(onDrag);]]></sample>
             </samples>
@@ -1248,8 +1609,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called when a drag of on the tree is ended.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called when a drag of on the tree is ended. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called when a drag of on the tree is ended.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragEnd(onDragEnd);]]></sample>
             </samples>
@@ -1262,8 +1627,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called during a drag over the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called during a drag over the tree. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called during a drag over the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDragOver(onDragOver);]]></sample>
             </samples>
@@ -1276,8 +1645,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
-            <summary><![CDATA[Set method to be called on a drop on the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set method to be called on a drop on the tree. For more details about the method arguments and return value check the same property of a form]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set method to be called on a drop on the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setOnDrop(onDrop);]]></sample>
             </samples>
@@ -1290,18 +1663,25 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></description>
-            <summary><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></summary>
+            </summaries>
             <deprecated><![CDATA[for compatibility, just call addRoots,createBinding (store in compatibility Bindings instance) with passed info]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="setRowHeight">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Set row height]]></description>
-            <summary><![CDATA[Set row height]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set row height]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set row height]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setRowHeight(40);]]></sample>
             </samples>
@@ -1315,8 +1695,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the size of the tree.]]></description>
-            <summary><![CDATA[Sets the size of the tree.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the size of the tree.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the size of the tree.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.setSize(400,300);]]></sample>
             </samples>
@@ -1334,8 +1718,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the label of a relation info object used to set multiple child relations for a tree node.]]></description>
-            <summary><![CDATA[Sets the label of a relation info object used to set multiple child relations for a tree node.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the label of a relation info object used to set multiple child relations for a tree node.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the label of a relation info object used to set multiple child relations for a tree node.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
 var company_relations = new Array();
@@ -1353,8 +1741,12 @@ companies_binding.setNRelationInfos(company_relations);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the name of a relation info object used to set multiple child relations for a tree node.]]></description>
-            <summary><![CDATA[Sets the name of a relation info object used to set multiple child relations for a tree node.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the name of a relation info object used to set multiple child relations for a tree node.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the name of a relation info object used to set multiple child relations for a tree node.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var companies_binding = elements.myDbTreeView.createBinding('example_data', 'companies');
 var company_relations = new Array();

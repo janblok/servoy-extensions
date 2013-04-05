@@ -10,8 +10,12 @@
               <argumentType typecode="org.mozilla.javascript.Scriptable"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with metaData added]]></return>
-            <description><![CDATA[Add metadata to the PDF, like Author]]></description>
-            <summary><![CDATA[Add metadata to the PDF, like Author]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add metadata to the PDF, like Author]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add metadata to the PDF, like Author]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add metadata to the PDF, like Author
 var pdf = plugins.file.showFileOpenDialog();
@@ -35,8 +39,12 @@ if (pdf) {
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Combine multiple PDF docs into one.]]></description>
-            <summary><![CDATA[Combine multiple PDF docs into one.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Combine multiple PDF docs into one.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Combine multiple PDF docs into one.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[pdf_blob_column = combinePDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3));]]></sample>
             </samples>
@@ -52,8 +60,12 @@ if (pdf) {
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Combine multiple protected PDF docs into one.]]></description>
-            <summary><![CDATA[Combine multiple protected PDF docs into one.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Combine multiple protected PDF docs into one.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Combine multiple protected PDF docs into one.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[pdf_blob_column = combineProtectedPDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3), new Array(pdf_blob1_pass,pdf_blob2_pass,pdf_blob3_pass));]]></sample>
             </samples>
@@ -72,8 +84,12 @@ if (pdf) {
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Convert a PDF form to a PDF document.]]></description>
-            <summary><![CDATA[Convert a PDF form to a PDF document.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Convert a PDF form to a PDF document.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Convert a PDF form to a PDF document.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var pdfform = plugins.file.readFile('c:/temp/1040a-form.pdf');
 //var field_values = plugins.file.readFile('c:/temp/1040a-data.fdf');//read adobe fdf values or
@@ -102,8 +118,12 @@ if (result_pdf_doc != null)
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Convert a protected PDF form to a PDF document.]]></description>
-            <summary><![CDATA[Convert a protected PDF form to a PDF document.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Convert a protected PDF form to a PDF document.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Convert a protected PDF form to a PDF document.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var pdfform = plugins.file.readFile('c:/temp/1040a-form.pdf');
 //var field_values = plugins.file.readFile('c:/temp/1040a-data.fdf');//read adobe fdf values or
@@ -134,8 +154,12 @@ if (result_pdf_doc != null)
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-            <description><![CDATA[Add password protection and security options to the PDF]]></description>
-            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
@@ -161,8 +185,12 @@ if (unEncryptedFile) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-            <description><![CDATA[Add password protection and security options to the PDF]]></description>
-            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
@@ -199,8 +227,12 @@ if (unEncryptedFile) {
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-            <description><![CDATA[Add password protection and security options to the PDF]]></description>
-            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
@@ -262,8 +294,12 @@ if (unEncryptedFile) {
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-            <description><![CDATA[Add password protection and security options to the PDF]]></description>
-            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
@@ -329,8 +365,12 @@ if (unEncryptedFile) {
               <argumentType typecode="org.mozilla.javascript.Scriptable"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the encrypted PDF]]></return>
-            <description><![CDATA[Add password protection and security options to the PDF]]></description>
-            <summary><![CDATA[Add password protection and security options to the PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add password protection and security options to the PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
 // NOTE: Passwords are case sensitive 
@@ -385,8 +425,12 @@ if (unEncryptedFile) {
           <function clientSupport="wc,sc" name="endMetaPrintJob">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Ends a previously started meta print job. For meta print jobs that were stored in memory, not in a file on disk, also returns the content of the generated PDF document.]]></description>
-            <summary><![CDATA[Ends a previously started meta print job.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Ends a previously started meta print job. For meta print jobs that were stored in memory, not in a file on disk, also returns the content of the generated PDF document.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Ends a previously started meta print job.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
@@ -416,8 +460,12 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           <function clientSupport="wc,sc" name="getPDFPrinter">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.PrinterJob" typecode="java.awt.print.PrinterJob"/>
-            <description><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
-            <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a PDF printer that can be used in print calls. Returns the last started meta print job.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print current record without printdialog to pdf file in temp dir.
 controller.print(true,false,plugins.pdf_output.getPDFPrinter());]]></sample>
@@ -428,8 +476,12 @@ controller.print(true,false,plugins.pdf_output.getPDFPrinter());]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.PrinterJob" typecode="java.awt.print.PrinterJob"/>
-            <description><![CDATA[Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.]]></description>
-            <summary><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a PDF printer that can be used in print calls.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print current record without printdialog to pdf file in temp dir.
 controller.print(true,false,plugins.pdf_output.getPDFPrinter('c:/temp/out.pdf'));]]></sample>
@@ -443,8 +495,12 @@ controller.print(true,false,plugins.pdf_output.getPDFPrinter('c:/temp/out.pdf'))
           <function clientSupport="wc,sc" name="getPagesPrinted">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></description>
-            <summary><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the number of pages printed by the last print call done in the context of a meta print job.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
@@ -474,8 +530,12 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
           <function clientSupport="wc,sc" name="getTotalPagesPrinted">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the total number of pages printed in the context of a meta print job. Call this method before ending the meta print job.]]></description>
-            <summary><![CDATA[Returns the total number of pages printed in the context of a meta print job.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the total number of pages printed in the context of a meta print job. Call this method before ending the meta print job.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the total number of pages printed in the context of a meta print job.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
@@ -507,8 +567,12 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Add a directory that should be searched for fonts. Call this only in the context of an active meta print job.]]></description>
-            <summary><![CDATA[Add a directory that should be searched for fonts.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add a directory that should be searched for fonts. Call this only in the context of an active meta print job.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add a directory that should be searched for fonts.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//Insert font directories for font embedding.
 //You must create an MetaPrintJob before using it.
@@ -527,8 +591,12 @@ plugins.pdf_output.insertFontDirectory('/Library/Fonts');]]></sample>
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with numbered pages]]></return>
-            <description><![CDATA[Add pages numbers to a PDF]]></description>
-            <summary><![CDATA[Add pages numbers to a PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add pages numbers to a PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add pages numbers to a PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add pages numbers to a PDF
 var unNumberedFile = plugins.file.showFileOpenDialog();
@@ -553,8 +621,12 @@ if (unNumberedFile) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with numbered pages]]></return>
-            <description><![CDATA[Add pages numbers to a PDF]]></description>
-            <summary><![CDATA[Add pages numbers to a PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add pages numbers to a PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add pages numbers to a PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add pages numbers to a PDF
 var unNumberedFile = plugins.file.showFileOpenDialog();
@@ -590,8 +662,12 @@ if (unNumberedFile) {
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-            <description><![CDATA[Add some PDF based content over a PDF]]></description>
-            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
@@ -627,8 +703,12 @@ if (input1) {
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-            <description><![CDATA[Add some PDF based content over a PDF]]></description>
-            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
@@ -668,8 +748,12 @@ if (input1) {
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-            <description><![CDATA[Add some PDF based content over a PDF]]></description>
-            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
@@ -711,8 +795,12 @@ if (input1) {
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-            <description><![CDATA[Add some PDF based content over a PDF]]></description>
-            <summary><![CDATA[Add some PDF based content over a PDF]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add some PDF based content over a PDF]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add some PDF based content over a PDF
 var pages = new Array();
@@ -750,8 +838,12 @@ if (input1) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-            <description><![CDATA[Add text over every page at a 45 degree angle]]></description>
-            <summary><![CDATA[Add text over every page at a 45 degree angle]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add text over every page at a 45 degree angle]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add text over every page at a 45 degree angle]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add text over every page at a 45 degree angle\m
 var pdf = plugins.file.showFileOpenDialog();
@@ -781,8 +873,12 @@ if (pdf) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added overlay]]></return>
-            <description><![CDATA[Add text over every page at a 45 degree angle]]></description>
-            <summary><![CDATA[Add text over every page at a 45 degree angle]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add text over every page at a 45 degree angle]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add text over every page at a 45 degree angle]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add text over every page at a 45 degree angle\m
 var pdf = plugins.file.showFileOpenDialog();
@@ -821,8 +917,12 @@ if (pdf) {
           <function clientSupport="wc,sc" name="startMetaPrintJob">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.]]></description>
-            <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
@@ -854,8 +954,12 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.]]></description>
-            <summary><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Used for printing multiple things into the same PDF document.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//to print multiple forms to one pdf document (on file system).
 var success = plugins.pdf_output.startMetaPrintJob('c:/temp/out.pdf')
@@ -893,8 +997,12 @@ mediaDataProvider = plugins.pdf_output.endMetaPrintJob()]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
-            <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
-            <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
 var pdf = plugins.file.showFileOpenDialog();
@@ -922,8 +1030,12 @@ if (pdf) {
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
-            <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
-            <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
 var pdf = plugins.file.showFileOpenDialog();
@@ -961,8 +1073,12 @@ if (pdf) {
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"><![CDATA[the PDF with added watermak]]></return>
-            <description><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
-            <summary><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Add an image as a watermark on every page, or the pages specified as a parameter]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add an image as a watermark on every page, or the pages specified as a parameter.
 var pdf = plugins.file.showFileOpenDialog();

@@ -9,8 +9,12 @@
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Flips the image verticaly (type param=0) or horizontaly (type param=1). A new JSImage is returned.]]></description>
-            <summary><![CDATA[Flips the image verticaly (type param=0) or horizontaly (type param=1).]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Flips the image verticaly (type param=0) or horizontaly (type param=1). A new JSImage is returned.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Flips the image verticaly (type param=0) or horizontaly (type param=1).]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 image = image.flip(0);//flip vertically
@@ -24,8 +28,12 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
           <function clientSupport="wc,sc" name="getContentType">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Gets the contenttype (image/jpeg) of this image.]]></description>
-            <summary><![CDATA[Gets the contenttype (image/jpeg) of this image.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the contenttype (image/jpeg) of this image.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the contenttype (image/jpeg) of this image.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file);
 var width = image.getWidth();
@@ -36,8 +44,12 @@ var contentType = image.getContentType();]]></sample>
           <function clientSupport="wc,sc" name="getData">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Gets the bytes of this image, so that they can be saved to disk or stored the database.]]></description>
-            <summary><![CDATA[Gets the bytes of this image, so that they can be saved to disk or stored the database.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the bytes of this image, so that they can be saved to disk or stored the database.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the bytes of this image, so that they can be saved to disk or stored the database.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 image = image.resize(200,200);//resizes it to 200,200
@@ -48,8 +60,12 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
           <function clientSupport="wc,sc" name="getHeight">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Gets the height of this image.]]></description>
-            <summary><![CDATA[Gets the height of this image.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the height of this image.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the height of this image.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file);
 var width = image.getWidth();
@@ -62,8 +78,12 @@ var contentType = image.getContentType();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Gets the description of a metadata property from the image. Currently only jpg is supported.]]></description>
-            <summary><![CDATA[Gets the description of a metadata property from the image.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the description of a metadata property from the image. Currently only jpg is supported.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the description of a metadata property from the image.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 // get the available metadata properties from the image, currently only jpg is supported
@@ -87,8 +107,12 @@ thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail 
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Gets the real object of a metadata property from the image. Currently only jpg is supported.]]></description>
-            <summary><![CDATA[Gets the real object of a metadata property from the image.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the real object of a metadata property from the image. Currently only jpg is supported.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the real object of a metadata property from the image.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 // get the available metadata properties from the image, currently only jpg is supported
@@ -110,8 +134,12 @@ thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail 
           <function clientSupport="wc,sc" name="getMetaDataProperties">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-            <description><![CDATA[Gets the available metadata properties from the image. Currently only jpg is supported.]]></description>
-            <summary><![CDATA[Gets the available metadata properties from the image.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the available metadata properties from the image. Currently only jpg is supported.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the available metadata properties from the image.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 // get the available metadata properties from the image, currently only jpg is supported
@@ -130,8 +158,12 @@ thumbnail = image.getMetaDataObject("Exif - Thumbnail Data"); // gets thumbnail 
           <function clientSupport="wc,sc" name="getWidth">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Gets the width of this image.]]></description>
-            <summary><![CDATA[Gets the width of this image.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the width of this image.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the width of this image.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file);
 var width = image.getWidth();
@@ -145,8 +177,12 @@ var contentType = image.getContentType();]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Resizes the image to the width/height given, keeping aspect ratio. A new JSImage is returned.]]></description>
-            <summary><![CDATA[Resizes the image to the width/height given, keeping aspect ratio.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Resizes the image to the width/height given, keeping aspect ratio. A new JSImage is returned.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Resizes the image to the width/height given, keeping aspect ratio.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 image = image.resize(200,200);//resizes it to 200,200
@@ -163,8 +199,12 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <argumentType typecode="double"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Rotates the image the number of degrees that is given. A new JSImage is returned.]]></description>
-            <summary><![CDATA[Rotates the image the number of degrees that is given.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Rotates the image the number of degrees that is given. A new JSImage is returned.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Rotates the image the number of degrees that is given.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray_or_file_or_filename);//loads the image
 image = image.rotate(90);//rotate the image 90 degrees
@@ -184,10 +224,13 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
-            <summary><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #getImage(Object)]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="obj" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[bean/imageObj/element]]></description>
@@ -201,10 +244,13 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
-            <summary><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a javascript image from the given bean/applet/form_element.]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #getImage(Object)]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="object" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[bean/imageObj/element]]></description>
@@ -218,8 +264,12 @@ plugins.file.writeFile('filename',bytes);//saves the image bytes]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.images.JSImage" typecode="com.servoy.extensions.plugins.images.JSImage"/>
-            <description><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></description>
-            <summary><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get a javascript image/resource object for the given file/bytearray/bean/applet/form_element.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var image = plugins.images.getImage(byteArray);
 var height = image.getHeight();

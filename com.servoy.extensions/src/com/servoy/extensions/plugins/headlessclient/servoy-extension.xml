@@ -6,8 +6,12 @@
         <constants>
           <constant clientSupport="wc,sc" name="CALLBACK_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
-            <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -30,8 +34,12 @@
           </constant>
           <constant clientSupport="wc,sc" name="CALLBACK_EXCEPTION_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></description>
-            <summary><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -57,11 +65,15 @@
           <function clientSupport="wc,sc" name="getClientID">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Gets the id of the client.
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the id of the client.
 
 This client id can be used to find the client from the headless client plugin.
 Note that this client id is not the same id as the id displayed on the Aplicationb Server admin page.]]></description>
-            <summary><![CDATA[Gets the id of the client.]]></summary>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the id of the client.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 var clientID = headlessClient.getClientID()
@@ -78,8 +90,12 @@ if (headlessClient != null && headlessClient.isValid()) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value for the data-provider.]]></return>
-            <description><![CDATA[Get a data-provider value.]]></description>
-            <summary><![CDATA[Get a data-provider value.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -114,8 +130,12 @@ if (headlessClient != null && headlessClient.isValid()) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value of the data-provider.]]></return>
-            <description><![CDATA[Get a data-provider value.]]></description>
-            <summary><![CDATA[Get a data-provider value.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -149,8 +169,12 @@ if (headlessClient != null && headlessClient.isValid()) {
           <function clientSupport="wc,sc" name="isValid">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[returns true if this client is still valid/usable.]]></description>
-            <summary><![CDATA[returns true if this client is still valid/usable.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[returns true if this client is still valid/usable.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[returns true if this client is still valid/usable.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -179,12 +203,16 @@ if (headlessClient != null && headlessClient.isValid()) {
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Queues a method call on the remote server. The callback method will be called when the method is executed on the server
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Queues a method call on the remote server. The callback method will be called when the method is executed on the server
 and the return value is given as the JSEvent.data object with the JSEvent.getType() value of JSClient.CALLBACK_EVENT. 
 If an exception is thrown somewhere then the callback method will be called with
 the exception as the JSEvent data object with the JSEvent.getType() value of JSClient.CALLBACK_EXCEPTION_EVENT
 The second argument that is give back is the JSClient instance that did the call.]]></description>
-            <summary><![CDATA[Queues a method call on the remote server.]]></summary>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Queues a method call on the remote server.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -226,8 +254,12 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change.]]></return>
-            <description><![CDATA[Set a data-provider value.]]></description>
-            <summary><![CDATA[Set a data-provider value.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -266,8 +298,12 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change]]></return>
-            <description><![CDATA[Set a data-provider value.]]></description>
-            <summary><![CDATA[Set a data-provider value.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -306,15 +342,19 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #shutdown(boolean)]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="shutdown">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[closes the client.]]></description>
-            <summary><![CDATA[closes the client.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[closes the client.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[closes the client.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -340,8 +380,12 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[closes the client.]]></description>
-            <summary><![CDATA[closes the client.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[closes the client.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[closes the client.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
@@ -377,14 +421,18 @@ The second argument that is give back is the JSClient instance that did the call
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
-            <description><![CDATA[Creates a headless client on the server that will open the given solution.
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a headless client on the server that will open the given solution.
 The clientId of this client can be stored in the database to be shared between clients so that that specific client can be used 
 over multiply clients later on or picked up later on by this client. (Even after restart of this client) 
 
 NOTE: in the developer this will only load the solution in debug mode when it is the current active solution or a module of the active solution;
 you can load any solution from the workspace when you pass "nodebug" as last argument in the arguments list (it should still use the same resources project).
 But then you won't be able to debug it, breakpoints won't hit.]]></description>
-            <summary><![CDATA[Creates a headless client on the server that will open the given solution.]]></summary>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a headless client on the server that will open the given solution.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
 var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
@@ -407,8 +455,12 @@ if (headlessClient != null && headlessClient.isValid()) {
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
-            <description><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
-            <summary><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Gets an existing headless client for the given client uuid.
 var headlessClient = plugins.headlessclient.getClient("clientID");
@@ -429,7 +481,8 @@ if (headlessClient != null && headlessClient.isValid()) {
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"><![CDATA[An existing JSClient or the JSClient that is created.]]></return>
-            <description><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
 it will create a headless client on the server that will open the given solution if it didn't exists yet.
 
 If the client does exist but it is not loaded with that solution an exception will be thrown.
@@ -437,8 +490,11 @@ If the client does exist but it is not loaded with that solution an exception wi
 NOTE: in the developer this will only load the solution in debug mode when it is the current active solution or a module of the active solution;
 you can load any solution from the workspace when you pass "nodebug" as last argument in the arguments list (it should still use the same resources project).
 But then you won't be able to debug it, breakpoints won't hit.]]></description>
-            <summary><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
 it will create a headless client on the server that will open the given solution if it didn't exists yet.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
 var storedSolutionSpecificID = "aaaabbbbccccc1111";

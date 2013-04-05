@@ -7,8 +7,12 @@
           <function clientSupport="wc,sc" name="getAttributeNames">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-            <description><![CDATA[Return all the attribute names of the current node.]]></description>
-            <summary><![CDATA[Return all the attribute names of the current node.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Return all the attribute names of the current node.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Return all the attribute names of the current node.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[nodes = plugins.XmlReader.readXmlDocumentFromString("<root attr1='value1' attr2='value2'/>")
 rootNode = nodes[0];
@@ -24,8 +28,12 @@ application.output(val1)]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Return the value of the named attribute.]]></description>
-            <summary><![CDATA[Return the value of the named attribute.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Return the value of the named attribute.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Return the value of the named attribute.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[nodes = plugins.XmlReader.readXmlDocumentFromString("<root attr1='value1' attr2='value2'/>")
 rootNode = nodes[0];
@@ -42,8 +50,12 @@ application.output(val1)]]></sample>
           <function clientSupport="wc,sc" name="getChildNodes">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
-            <description><![CDATA[Return the child nodes of the current node.]]></description>
-            <summary><![CDATA[Return the child nodes of the current node.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Return the child nodes of the current node.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Return the child nodes of the current node.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[nodes = plugins.XmlReader.readXmlDocumentFromString('<father><child1>John</child1><child2>Mary</child2></father>');
 application.output(nodes[0].getName())
@@ -62,8 +74,12 @@ application.output(subChilds[0].getType())]]></sample>
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Return the name of the XML node element.]]></description>
-            <summary><![CDATA[Return the name of the XML node element.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Return the name of the XML node element.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Return the name of the XML node element.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[nodes = plugins.XmlReader.readXmlDocumentFromString('<father><child1>John</child1><child2>Mary</child2></father>');
 application.output(nodes[0].getName())
@@ -82,8 +98,12 @@ application.output(subChilds[0].getType())]]></sample>
           <function clientSupport="wc,sc" name="getTextValue">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Return the text-value of the XML node element.]]></description>
-            <summary><![CDATA[Return the text-value of the XML node element.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Return the text-value of the XML node element.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Return the text-value of the XML node element.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[nodes = plugins.XmlReader.readXmlDocumentFromString('<father><child1>John</child1><child2>Mary</child2></father>');
 application.output(nodes[0].getName())
@@ -102,8 +122,12 @@ application.output(subChilds[0].getType())]]></sample>
           <function clientSupport="wc,sc" name="getType">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Return the type of the XML node element.]]></description>
-            <summary><![CDATA[Return the type of the XML node element.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Return the type of the XML node element.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Return the type of the XML node element.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[nodes = plugins.XmlReader.readXmlDocumentFromString('<father><child1>John</child1><child2>Mary</child2></father>');
 application.output(nodes[0].getName())
@@ -128,17 +152,21 @@ application.output(subChilds[0].getType())]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #readXmlDocumentFromString(String) and #readXmlDocumentFromFile(Object)]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="readXmlDocumentFromFile">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
-            <description><![CDATA[Reads an XML document from a file.]]></description>
-            <summary><![CDATA[Reads an XML document from a file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads an XML document from a file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads an XML document from a file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// specifies a reference to a file containing valid XML
 var xmlNodes = plugins.XmlReader.readXmlDocumentFromFile('c:/test.xml');
@@ -157,8 +185,12 @@ var childNodes = xmlNodes[0].getChildNodes();]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.xmlreader.XmlNode[]" typecode="[Lcom.servoy.extensions.plugins.xmlreader.XmlNode;"/>
-            <description><![CDATA[Reads an XML document from a string.]]></description>
-            <summary><![CDATA[Reads an XML document from a string.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads an XML document from a string.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads an XML document from a string.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var xmlString = '<books><book price="44.95">' +
 '<title>Core Java 1.5</title>' +

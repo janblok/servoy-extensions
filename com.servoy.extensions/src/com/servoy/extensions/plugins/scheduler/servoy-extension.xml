@@ -11,8 +11,12 @@
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
-            <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -41,8 +45,12 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
-            <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -68,8 +76,12 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
-            <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -97,8 +109,12 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
-            <summary><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler. A cron job must have at least one minute between each execution (otherwise it won't execute).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a cron job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// see: http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html for more info
 // add a job that runs every 20 minutes after the hour (0,20,40)
@@ -124,8 +140,12 @@ plugins.scheduler.addCronJob('23:30','0 30 23 ? * *',method,dateNow,date5Days)]]
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a job to the scheduler.]]></description>
-            <summary><![CDATA[Adds a job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
@@ -148,8 +168,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a job to the scheduler.]]></description>
-            <summary><![CDATA[Adds a job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
@@ -176,8 +200,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a job to the scheduler.]]></description>
-            <summary><![CDATA[Adds a job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
@@ -206,8 +234,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a job to the scheduler.]]></description>
-            <summary><![CDATA[Adds a job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
@@ -238,8 +270,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a job to the scheduler.]]></description>
-            <summary><![CDATA[Adds a job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
@@ -268,8 +304,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Adds a job to the scheduler.]]></description>
-            <summary><![CDATA[Adds a job to the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Adds a job to the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// add a job that runs at the given date (20 seconds in the future)
 // and repeats that every 20 seconds for 40 times or the enddate is reached (0 for no repeats = just one call)
@@ -288,8 +328,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
           <function clientSupport="wc,sc" name="getCurrentJobNames">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-            <description><![CDATA[Returns an array with the current jobs.]]></description>
-            <summary><![CDATA[Returns an array with the current jobs.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array with the current jobs.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array with the current jobs.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.scheduler.getCurrentJobNames()]]></sample>
             </samples>
@@ -297,8 +341,12 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
           <function clientSupport="wc,sc" name="getLastRunJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the last job run from the scheduler.]]></description>
-            <summary><![CDATA[Returns the last job run from the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the last job run from the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the last job run from the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.scheduler.getLastRunJobName();]]></sample>
             </samples>
@@ -306,17 +354,21 @@ plugins.scheduler.addJob('in20seconds',startDate,method,20000,40,endDate)]]></sa
           <function clientSupport="wc,sc" deprecated="true" name="getLastRunnedJobName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #getLastRunJobName().]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="removeJob">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Removes a job from the scheduler.]]></description>
-            <summary><![CDATA[Removes a job from the scheduler.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Removes a job from the scheduler.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Removes a job from the scheduler.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// removes a job 'myjob' from the scheduler
 plugins.scheduler.removeJob('myjob');]]></sample>

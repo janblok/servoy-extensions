@@ -10,9 +10,9 @@
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Dialog title.]]></description>
@@ -29,9 +29,9 @@
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #showWarningDialog(String,String,String[]).]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="dialogTitle" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[Dialog title.]]></description>
@@ -51,8 +51,12 @@
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allowed','OK');]]></sample>
@@ -76,8 +80,12 @@ var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allow
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');]]></sample>
@@ -97,8 +105,12 @@ var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowe
           <function clientSupport="wc,sc" name="showInputDialog">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
-            <summary><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
@@ -109,8 +121,12 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
-            <summary><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
@@ -125,8 +141,12 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
-            <summary><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
@@ -143,8 +163,12 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
-            <summary><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
@@ -161,8 +185,12 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            <descriptions>
+              <description clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="mc,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');]]></sample>
@@ -183,8 +211,12 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');]]></sample>
@@ -208,8 +240,12 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
-            <summary><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show select,returns nothing when canceled 
 var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
@@ -229,8 +265,12 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
-            <summary><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show select,returns nothing when canceled 
 var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
@@ -249,8 +289,12 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            <descriptions>
+              <description clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="mc,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed');]]></sample>
@@ -271,8 +315,12 @@ var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not all
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
-            <summary><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');]]></sample>

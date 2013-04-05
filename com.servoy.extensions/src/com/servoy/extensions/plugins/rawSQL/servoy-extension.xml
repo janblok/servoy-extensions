@@ -9,7 +9,8 @@
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by application#getUUID(String)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
@@ -32,9 +33,9 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by application#getUUID(byte[])]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="data" type="byte[]" typecode="[B"/>
             </parameters>
@@ -46,8 +47,12 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Execute any SQL, returns true if successful.]]></description>
-            <summary><![CDATA[Execute any SQL, returns true if successful.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
@@ -96,8 +101,12 @@ else
               <argumentType typecode="[Ljava.lang.Object;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Execute any SQL, returns true if successful.]]></description>
-            <summary><![CDATA[Execute any SQL, returns true if successful.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
@@ -150,8 +159,12 @@ else
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
-            <description><![CDATA[Execute a stored procedure.]]></description>
-            <summary><![CDATA[Execute a stored procedure.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Execute a stored procedure.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Execute a stored procedure.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
@@ -189,8 +202,12 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Flush cached database data. Use with extreme care, its affecting the performance of clients!]]></description>
-            <summary><![CDATA[Flush cached database data.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Flush cached database data. Use with extreme care, its affecting the performance of clients!]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Flush cached database data.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
@@ -227,8 +244,12 @@ else
           <function clientSupport="wc,sc" name="getException">
             <argumentsTypes/>
             <return type="com.servoy.j2db.util.ServoyException" typecode="java.lang.Exception"/>
-            <description><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
-            <summary><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
@@ -261,9 +282,9 @@ else
           <function clientSupport="wc,sc" deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #getException().]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="notifyDataChange">
             <argumentsTypes>
@@ -273,8 +294,12 @@ else
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!]]></description>
-            <summary><![CDATA[Notify clients about changes in records, based on pk(s).]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s).]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!

@@ -6,8 +6,12 @@
         <properties>
           <property clientSupport="wc,sc" name="x">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Gets or sets the x position of the agent.]]></description>
-            <summary><![CDATA[Gets or sets the x position of the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets or sets the x position of the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets or sets the x position of the agent.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//move the agent diagonaly
 plugins.agent.x = plugins.agent.x-10;
@@ -16,8 +20,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
           </property>
           <property clientSupport="wc,sc" name="y">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Gets or sets the y position of the agent.]]></description>
-            <summary><![CDATA[Gets or sets the y position of the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets or sets the y position of the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets or sets the y position of the agent.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[//move the agent diagonaly
 plugins.agent.x = plugins.agent.x-10;
@@ -29,8 +37,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="hide">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Hides the agent.]]></description>
-            <summary><![CDATA[Hides the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Hides the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Hides the agent.]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #setVisible(boolean)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.hide();]]></sample>
@@ -42,8 +54,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the size of the balloon.]]></description>
-            <summary><![CDATA[Sets the size of the balloon.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the size of the balloon.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the size of the balloon.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setBalloonSize(width,height)]]></sample>
             </samples>
@@ -57,8 +73,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets a new image for the agent.]]></description>
-            <summary><![CDATA[Sets a new image for the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets a new image for the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets a new image for the agent.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setImageURL("url")]]></sample>
             </samples>
@@ -72,8 +92,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Sets the location of the agent.]]></description>
-            <summary><![CDATA[Sets the location of the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the location of the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the location of the agent.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setLocation(100,100);]]></sample>
             </samples>
@@ -87,8 +111,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Show/hides the agent.]]></description>
-            <summary><![CDATA[Show/hides the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Show/hides the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Show/hides the agent.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.setVisible(true);]]></sample>
             </samples>
@@ -99,8 +127,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
           <function clientSupport="wc,sc" deprecated="true" name="show">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Shows the agent.]]></description>
-            <summary><![CDATA[Shows the agent.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows the agent.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows the agent.]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #setVisible(boolean)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.show();]]></sample>
@@ -111,8 +143,12 @@ plugins.agent.y = plugins.agent.y-10;]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Makes the agent speak.]]></description>
-            <summary><![CDATA[Makes the agent speak.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Makes the agent speak.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Makes the agent speak.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.agent.speak('hello nerd');]]></sample>
             </samples>

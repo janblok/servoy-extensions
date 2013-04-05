@@ -6,40 +6,60 @@
         <constants>
           <constant clientSupport="wc,sc" name="DUTCH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant for specifying the Dutch language.]]></description>
-            <summary><![CDATA[Constant for specifying the Dutch language.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant for specifying the Dutch language.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant for specifying the Dutch language.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.spellcheck.checkTextComponent('textInDutch', plugins.spellcheck.LANGUAGES.DUTCH);]]></sample>
             </samples>
           </constant>
           <constant clientSupport="wc,sc" name="ENGLISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant for specifying the English language.]]></description>
-            <summary><![CDATA[Constant for specifying the English language.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant for specifying the English language.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant for specifying the English language.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.spellcheck.checkTextComponent('textInEnglish', plugins.spellcheck.LANGUAGES.ENGLISH);]]></sample>
             </samples>
           </constant>
           <constant clientSupport="wc,sc" name="GERMAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant for specifying the German language.]]></description>
-            <summary><![CDATA[Constant for specifying the German language.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant for specifying the German language.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant for specifying the German language.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.spellcheck.checkTextComponent('textInGerman', plugins.spellcheck.LANGUAGES.GERMAN);]]></sample>
             </samples>
           </constant>
           <constant clientSupport="wc,sc" name="ITALIAN">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant for specifying the Italian language.]]></description>
-            <summary><![CDATA[Constant for specifying the Italian language.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant for specifying the Italian language.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant for specifying the Italian language.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.spellcheck.checkTextComponent('textInItalian', plugins.spellcheck.LANGUAGES.ITALIAN);]]></sample>
             </samples>
           </constant>
           <constant clientSupport="wc,sc" name="SPANISH">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Constant for specifying the Spanish language.]]></description>
-            <summary><![CDATA[Constant for specifying the Spanish language.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Constant for specifying the Spanish language.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Constant for specifying the Spanish language.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[plugins.spellcheck.checkTextComponent('textInSpanish', plugins.spellcheck.LANGUAGES.SPANISH);]]></sample>
             </samples>
@@ -53,8 +73,12 @@
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Spellcheck the form element/component.]]></description>
-            <summary><![CDATA[Spellcheck the form element/component.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
 // Spellchecking currently works in SmartClient only.
@@ -74,8 +98,12 @@ plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
-            <description><![CDATA[Spellcheck the form element/component.]]></description>
-            <summary><![CDATA[Spellcheck the form element/component.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
 // Spellchecking currently works in SmartClient only.

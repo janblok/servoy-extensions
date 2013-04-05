@@ -7,8 +7,12 @@
           <function clientSupport="wc,sc" name="canRead">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the file exists and is readable (has access to it) - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -35,8 +39,12 @@ else {
           <function clientSupport="wc,sc" name="canWrite">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the file exists and can be modified - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -63,8 +71,12 @@ else {
           <function clientSupport="wc,sc" name="createNewFile">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates the file on disk if needed. Returns true if the file (name) did not already exists and had to be created - for remote, use the streamFilesToServer to stream a file.]]></description>
-            <summary><![CDATA[Creates the file on disk if needed.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates the file on disk if needed. Returns true if the file (name) did not already exists and had to be created - for remote, use the streamFilesToServer to stream a file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates the file on disk if needed.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 if (!f.exists())
@@ -74,8 +86,12 @@ if (!f.exists())
           <function clientSupport="wc,sc" name="deleteFile">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Deletes the file from the disk if possible. Returns true if the file could be deleted. If the file is a directory, then it must be empty in order to be deleted - works on remote files too.]]></description>
-            <summary><![CDATA[Deletes the file from the disk if possible.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Deletes the file from the disk if possible. Returns true if the file could be deleted. If the file is a directory, then it must be empty in order to be deleted - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Deletes the file from the disk if possible.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 // or for a remote file:
@@ -87,8 +103,12 @@ if (f && f.exists())
           <function clientSupport="wc,sc" name="exists">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the file/directory exists on the filesystem - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -115,8 +135,12 @@ else {
           <function clientSupport="wc,sc" name="getAbsoluteFile">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a JSFile instance that corresponds to the absolute form of this pathname - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 // or for a remote file:
@@ -128,8 +152,12 @@ application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().li
           <function clientSupport="wc,sc" name="getAbsolutePath">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a String representation of the absolute form of this pathname - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -156,8 +184,12 @@ else {
           <function clientSupport="wc,sc" name="getBytes">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Gets the contents (bytes) for the file data.]]></description>
-            <summary><![CDATA[Gets the contents (bytes) for the file data.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Gets the contents (bytes) for the file data.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Gets the contents (bytes) for the file data.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var theFile = plugins.file.showFileOpenDialog();
 application.output('The file size in bytes: ' + theFile.getBytes());]]></sample>
@@ -166,8 +198,12 @@ application.output('The file size in bytes: ' + theFile.getBytes());]]></sample>
           <function clientSupport="wc,sc" name="getContentType">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the contenttype of this file, like for example 'application/pdf' - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -194,8 +230,12 @@ else {
           <function clientSupport="wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the name of the file. The name consists in the last part of the file path - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the name of the file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the name of the file. The name consists in the last part of the file path - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the name of the file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -222,8 +262,12 @@ else {
           <function clientSupport="wc,sc" name="getParent">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the String representation of the path of the parent of this file - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 // or for a remote file:
@@ -235,8 +279,12 @@ application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().li
           <function clientSupport="wc,sc" name="getParentFile">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a JSFile instance that corresponds to the parent of this file - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 // or for a remote file:
@@ -248,8 +296,12 @@ application.output('parent folder has ' + f.getAbsoluteFile().getParentFile().li
           <function clientSupport="wc,sc" name="getPath">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a String holding the path to the file - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -276,8 +328,12 @@ else {
           <function clientSupport="wc,sc" name="isAbsolute">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the path is absolute. The path is absolute if it starts with '/' on Unix/Linux/MacOS or has a driver letter on Windows - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the path is absolute.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the path is absolute. The path is absolute if it starts with '/' on Unix/Linux/MacOS or has a driver letter on Windows - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the path is absolute.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -304,8 +360,12 @@ else {
           <function clientSupport="wc,sc" name="isDirectory">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file is a directory - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file is a directory - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the file is a directory - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the file is a directory - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -332,8 +392,12 @@ else {
           <function clientSupport="wc,sc" name="isFile">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the file is a file and not a regular file - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -360,8 +424,12 @@ else {
           <function clientSupport="wc,sc" name="isHidden">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></description>
-            <summary><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the file is hidden (a file system attribute) - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -388,15 +456,19 @@ else {
           <function clientSupport="wc,sc" deprecated="true" name="js_delete">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #deleteFile().]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="lastModified">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
-            <description><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the time/date of the last modification on the file - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -423,8 +495,12 @@ else {
           <function clientSupport="wc,sc" name="list">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
-            <description><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
-            <summary><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of strings naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var d = plugins.file.convertToJSFile('plugins');
 // or for a remote file:
@@ -442,8 +518,12 @@ for (var i=0; i<files.length; i++)
           <function clientSupport="wc,sc" name="listFiles">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
-            <summary><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFiles naming the files and directories located inside the file, if the file is a directory - works on remote files too.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var d = plugins.file.convertToJSFile('plugins');
 // or for a remote file:
@@ -461,8 +541,12 @@ for (var i=0; i<files.length; i++)
           <function clientSupport="wc,sc" name="mkdir">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates a directory on disk if possible. Returns true if a new directory was created - for remote, use the streamFilesToServer to create the directory instead.]]></description>
-            <summary><![CDATA[Creates a directory on disk if possible.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a directory on disk if possible. Returns true if a new directory was created - for remote, use the streamFilesToServer to create the directory instead.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a directory on disk if possible.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('one/two/three/four');
 f.mkdirs(); // Create all four levels of folders in one step.
@@ -473,8 +557,12 @@ g.mkdir(); // This will work because all parent folders are already created.]]><
           <function clientSupport="wc,sc" name="mkdirs">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates a directory on disk, together with all its parent directories, if possible. Returns true if the hierarchy of directories is created - for remote, use the streamFilesToServer to create the directories instead.]]></description>
-            <summary><![CDATA[Creates a directory on disk, together with all its parent directories, if possible.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a directory on disk, together with all its parent directories, if possible. Returns true if the hierarchy of directories is created - for remote, use the streamFilesToServer to create the directories instead.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a directory on disk, together with all its parent directories, if possible.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('one/two/three/four');
 f.mkdirs(); // Create all four levels of folders in one step.
@@ -487,8 +575,12 @@ g.mkdir(); // This will work because all parent folders are already created.]]><
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Renames the file to a different name. Returns true if the file could be renamed - works on remote files too.]]></description>
-            <summary><![CDATA[Renames the file to a different name.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Renames the file to a different name. Returns true if the file could be renamed - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Renames the file to a different name.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 f.renameTo('otherstory.txt');
@@ -505,10 +597,14 @@ f.renameTo('otherstory.txt');
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
-            <description><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
 Will not create a new file if one doesn't exist]]></description>
-            <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the content of the file (local or remote) to the bytes provided<br/>
 Will not create a new file if one doesn't exist]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.convertToJSFile('/pathTo/file.jpg');
 // or for a remote file:
@@ -527,8 +623,12 @@ var success = file.setBytes(blobDataProvider, true);]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the operation worked]]></return>
-            <description><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></description>
-            <summary><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the content of the file (local or remote) to the bytes provided]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.convertToJSFile('/pathTo/file.jpg');
 // or for a remote file:
@@ -549,8 +649,12 @@ var success = file.setBytes(blobDataProvider, true);]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Sets the date/time of the last modification on the file.]]></description>
-            <summary><![CDATA[Sets the date/time of the last modification on the file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the date/time of the last modification on the file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the date/time of the last modification on the file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 f.createNewFile();
@@ -564,8 +668,12 @@ f.setLastModified(new Date(1999, 5, 21));]]></sample>
           <function clientSupport="wc,sc" name="setReadOnly">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Sets the readonly attribute of the file/directory. Returns true on success.]]></description>
-            <summary><![CDATA[Sets the readonly attribute of the file/directory.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets the readonly attribute of the file/directory. Returns true on success.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets the readonly attribute of the file/directory.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('invoice.txt');
 plugins.file.writeTXTFile(f, 'important data that should not be changed');
@@ -575,8 +683,12 @@ f.setReadOnly();]]></sample>
           <function clientSupport="wc,sc" name="size">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the size in bytes of the file. Returns 0 if the file does not exist on disk - works on remote files too.]]></description>
-            <summary><![CDATA[Returns the size in bytes of the file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the size in bytes of the file. Returns 0 if the file does not exist on disk - works on remote files too.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the size in bytes of the file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('./big.jpg');
 // or for a remote file:
@@ -607,8 +719,12 @@ else {
           <function clientSupport="wc,sc" name="cancel">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Cancels the transfer process.]]></description>
-            <summary><![CDATA[Cancels the transfer process.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Cancels the transfer process.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Cancels the transfer process.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[monitor.cancel();]]></sample>
             </samples>
@@ -616,8 +732,12 @@ else {
           <function clientSupport="wc,sc" name="getCurrentBytesToTransfer">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the number of bytes to transfer for the current file.]]></description>
-            <summary><![CDATA[Returns the number of bytes to transfer for the current file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the number of bytes to transfer for the current file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the number of bytes to transfer for the current file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -633,8 +753,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="getCurrentFileIndex">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the index of the current file being transferred.]]></description>
-            <summary><![CDATA[Returns the index of the current file being transferred.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the index of the current file being transferred.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the index of the current file being transferred.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -650,8 +774,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="getCurrentTransferredBytes">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the number of bytes already transferred for the current file.]]></description>
-            <summary><![CDATA[Returns the number of bytes already transferred for the current file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the number of bytes already transferred for the current file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the number of bytes already transferred for the current file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -667,8 +795,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="getCurrentTransferredFileName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Returns the name of the current file being transferred.]]></description>
-            <summary><![CDATA[Returns the name of the current file being transferred.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the name of the current file being transferred.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the name of the current file being transferred.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -684,8 +816,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="getTotalBytesToTransfer">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></description>
-            <summary><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the total bytes to transfer to or from the server (sum of all the files size)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -701,8 +837,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="getTotalFilesToTransfer">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
-            <description><![CDATA[Returns the total number of files to transfer.]]></description>
-            <summary><![CDATA[Returns the total number of files to transfer.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the total number of files to transfer.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the total number of files to transfer.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -718,8 +858,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="getTotalTransferredBytes">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the total bytes already transferred (for all files)]]></description>
-            <summary><![CDATA[Returns the total bytes already transferred (for all files)]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the total bytes already transferred (for all files)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the total bytes already transferred (for all files)]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -735,8 +879,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="isCanceled">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the process was canceled.]]></description>
-            <summary><![CDATA[Returns true if the process was canceled.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the process was canceled.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the process was canceled.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -752,8 +900,12 @@ if (monitor.isFinished()) {
           <function clientSupport="wc,sc" name="isFinished">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Returns true if the process is finished.]]></description>
-            <summary><![CDATA[Returns true if the process is finished.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns true if the process is finished.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns true if the process is finished.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[application.output('total transferred: ' + monitor.getTotalTransferredBytes() + ' / ' + monitor.getTotalBytesToTransfer());
 application.output('current file: ' + monitor.getCurrentTransferredFileName() + ' ( ' + monitor.getCurrentFileIndex() + ' / ' + monitor.getTotalFilesToTransfer() + ' )');
@@ -772,8 +924,12 @@ if (monitor.isFinished()) {
               <argumentType typecode="float"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[this for chaining]]></return>
-            <description><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
-            <summary><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
 monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
@@ -794,8 +950,12 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[this for chaining]]></return>
-            <description><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
-            <summary><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values. Can use an optional delay (for testing purpose in developer).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Sets a method to be called repeatedly at the given interval (in seconds), the method will receive an instance of this JSProgressMonitor updated with the latest values.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// call the progressCallbackFuntion every 2 and a half seconds (with a delay of 200ms in developer):
 monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeveloper() ? 200 : 0));]]></sample>
@@ -822,8 +982,12 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
-            <description><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
-            <summary><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
@@ -844,8 +1008,12 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
-            <description><![CDATA[Appends a string given in parameter to a file, using the specified encoding.]]></description>
-            <summary><![CDATA[Appends a string given in parameter to a file, using the specified encoding.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using the specified encoding.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using the specified encoding.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
@@ -868,8 +1036,12 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if appending worked]]></return>
-            <description><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
-            <summary><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using default platform encoding.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
@@ -890,7 +1062,8 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
@@ -912,10 +1085,13 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[returns a JSFile for the given string]]></description>
-            <summary><![CDATA[returns a JSFile for the given string]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[returns a JSFile for the given string]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[returns a JSFile for the given string]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #convertToJSFile(Object).]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
@@ -925,8 +1101,12 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"><![CDATA[JSFile]]></return>
-            <description><![CDATA[Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).]]></description>
-            <summary><![CDATA[Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a JSFile instance corresponding to an alternative representation of a file (for example a string).]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile("story.txt");
 if (f.canRead())
@@ -941,8 +1121,12 @@ if (f.canRead())
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"><![CDATA[the JSFile]]></return>
-            <description><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></description>
-            <summary><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Convenience return to get a JSFile representation of a server file based on its path.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToRemoteJSFile('/story.txt');
 if (f && f.canRead())
@@ -960,8 +1144,12 @@ if (f && f.canRead())
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Copies the source file to the destination file. Returns true if the copy succeeds, false if any error occurs.]]></description>
-            <summary><![CDATA[Copies the source file to the destination file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Copies the source file to the destination file. Returns true if the copy succeeds, false if any error occurs.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Copies the source file to the destination file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Copy based on file names.
 if (!plugins.file.copyFile("story.txt", "story.txt.copy"))
@@ -983,8 +1171,12 @@ if (!plugins.file.copyFile(f, fcopy))
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[success boolean]]></return>
-            <description><![CDATA[Copies the sourcefolder to the destination folder, recursively. Returns true if the copy succeeds, false if any error occurs.]]></description>
-            <summary><![CDATA[Copies the sourcefolder to the destination folder, recursively.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Copies the sourcefolder to the destination folder, recursively. Returns true if the copy succeeds, false if any error occurs.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Copies the sourcefolder to the destination folder, recursively.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Copy folder based on names.
 if (!plugins.file.copyFolder("stories", "stories_copy"))
@@ -1005,8 +1197,12 @@ if (!plugins.file.copyFolder(d, dcopy))
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Creates a JSFile instance. Does not create the file on disk.]]></description>
-            <summary><![CDATA[Creates a JSFile instance.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a JSFile instance. Does not create the file on disk.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a JSFile instance.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Create the JSFile instance based on the file name.
 var f = plugins.file.createFile("newfile.txt");
@@ -1023,8 +1219,12 @@ if (!f.createNewFile())
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Creates a folder on disk. Returns true if the folder is successfully created, false if any error occurs.]]></description>
-            <summary><![CDATA[Creates a folder on disk.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a folder on disk. Returns true if the folder is successfully created, false if any error occurs.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a folder on disk.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var d = plugins.file.convertToJSFile("newfolder");
 if (!plugins.file.createFolder(d))
@@ -1040,8 +1240,12 @@ if (!plugins.file.createFolder(d))
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Creates a temporary file on disk. A prefix and an extension are specified and they will be part of the file name.]]></description>
-            <summary><![CDATA[Creates a temporary file on disk.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Creates a temporary file on disk. A prefix and an extension are specified and they will be part of the file name.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Creates a temporary file on disk.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var tempFile = plugins.file.createTempFile('myfile','.txt');
 application.output('Temporary file created as: ' + tempFile.getAbsolutePath());
@@ -1057,8 +1261,12 @@ plugins.file.writeTXTFile(tempFile, 'abcdefg');]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Removes a file from disk. Returns true on success, false otherwise.]]></description>
-            <summary><![CDATA[Removes a file from disk.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Removes a file from disk. Returns true on success, false otherwise.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Removes a file from disk.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (plugins.file.deleteFile('story.txt'))
 	application.output('File deleted.');]]></sample>
@@ -1073,8 +1281,12 @@ plugins.file.writeTXTFile(tempFile, 'abcdefg');]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Deletes a folder from disk recursively. Returns true on success, false otherwise. If the second parameter is set to true, then a warning will be issued to the user before actually removing the folder.]]></description>
-            <summary><![CDATA[Deletes a folder from disk recursively.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Deletes a folder from disk recursively. Returns true on success, false otherwise. If the second parameter is set to true, then a warning will be issued to the user before actually removing the folder.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Deletes a folder from disk recursively.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[if (plugins.file.deleteFolder('stories', true))
 	application.output('Folder deleted.');]]></sample>
@@ -1087,8 +1299,12 @@ plugins.file.writeTXTFile(tempFile, 'abcdefg');]]></sample>
           <function clientSupport="wc,sc" name="getDefaultUploadLocation">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the location as canonical path]]></return>
-            <description><![CDATA[Returns the default upload location path of the server.]]></description>
-            <summary><![CDATA[Returns the default upload location path of the server.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the default upload location path of the server.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the default upload location path of the server.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// get the (server-side) default upload location path:
 var serverPath = plugins.file.getDefaultUploadLocation();]]></sample>
@@ -1097,8 +1313,12 @@ var serverPath = plugins.file.getDefaultUploadLocation();]]></sample>
           <function clientSupport="wc,sc" name="getDesktopFolder">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.]]></description>
-            <summary><![CDATA[Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var d = plugins.file.getDesktopFolder();
 application.output('desktop folder is: ' + d.getAbsolutePath());]]></sample>
@@ -1107,8 +1327,12 @@ application.output('desktop folder is: ' + d.getAbsolutePath());]]></sample>
           <function clientSupport="wc,sc" name="getDiskList">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an Array of JSFile instances correponding to the file system root folders.]]></description>
-            <summary><![CDATA[Returns an Array of JSFile instances correponding to the file system root folders.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an Array of JSFile instances correponding to the file system root folders.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an Array of JSFile instances correponding to the file system root folders.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var roots = plugins.file.getDiskList();
 for (var i = 0; i < roots.length; i++)
@@ -1120,8 +1344,12 @@ for (var i = 0; i < roots.length; i++)
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="long"/>
-            <description><![CDATA[Returns the size of the specified file.]]></description>
-            <summary><![CDATA[Returns the size of the specified file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the size of the specified file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the size of the specified file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
@@ -1135,8 +1363,12 @@ application.output('file size: ' + plugins.file.getFileSize(f));]]></sample>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1154,8 +1386,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1177,8 +1413,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1204,8 +1444,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1235,8 +1479,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1265,8 +1513,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1284,8 +1536,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1307,8 +1563,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1334,8 +1594,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1365,8 +1629,12 @@ for (var i=0; i<files.length; i++)
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"/>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var files = plugins.file.getFolderContents('stories', '.txt');
 for (var i=0; i<files.length; i++)
@@ -1393,15 +1661,19 @@ for (var i=0; i<files.length; i++)
           <function clientSupport="wc,sc" deprecated="true" name="getHomeDirectory">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <deprecated><![CDATA[Replaced by #getHomeFolder().]]></deprecated>
-            <samples/>
           </function>
           <function clientSupport="wc,sc" name="getHomeFolder">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></description>
-            <summary><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns a JSFile instance corresponding to the home folder of the logged in used.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var d = plugins.file.getHomeFolder();
 application.output('home folder: ' + d.getAbsolutePath());]]></sample>
@@ -1412,8 +1684,12 @@ application.output('home folder: ' + d.getAbsolutePath());]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
-            <description><![CDATA[Returns the modification date of a file.]]></description>
-            <summary><![CDATA[Returns the modification date of a file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns the modification date of a file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns the modification date of a file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var f = plugins.file.convertToJSFile('story.txt');
 application.output('last changed: ' + plugins.file.getModificationDate(f));]]></sample>
@@ -1427,8 +1703,12 @@ application.output('last changed: ' + plugins.file.getModificationDate(f));]]></
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1443,8 +1723,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1465,8 +1749,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1491,8 +1779,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1521,8 +1813,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1550,8 +1846,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1568,8 +1868,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1590,8 +1894,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1616,8 +1924,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1646,8 +1958,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
-            <summary><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side. The content can be filtered by optional name filter(s), by type, by visibility and by lock status.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Returns an array of JSFile instances corresponding to content of the specified folder on the server side.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// retrieves an array of files located on the server side inside the default upload folder:
 var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
@@ -1675,10 +1991,13 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Retrieves an array of files/folders from the server]]></description>
-            <summary><![CDATA[Retrieves an array of files/folders from the server]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Retrieves an array of files/folders from the server]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Retrieves an array of files/folders from the server]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #getRemoteFolderContents(Object,Object,Number,Number,Number).]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="serverPath" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[the path of a remote directory (relative to the defaultFolder)]]></description>
@@ -1691,10 +2010,13 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile[]" typecode="[Lcom.servoy.extensions.plugins.file.JSFile;"><![CDATA[the array of file names]]></return>
-            <description><![CDATA[Retrieves an array of files/folders from the server]]></description>
-            <summary><![CDATA[Retrieves an array of files/folders from the server]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Retrieves an array of files/folders from the server]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Retrieves an array of files/folders from the server]]></summary>
+            </summaries>
             <deprecated><![CDATA[Replaced by #getRemoteFolderContents(Object,Object,Number,Number,Number).]]></deprecated>
-            <samples/>
             <parameters>
               <parameter name="serverPath" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object">
                 <description><![CDATA[a JSFile or String with the path of a remote directory (relative to the defaultFolder)]]></description>
@@ -1710,8 +2032,12 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Moves the file from the source to the destination place. Returns true on success, false otherwise.]]></description>
-            <summary><![CDATA[Moves the file from the source to the destination place.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Moves the file from the source to the destination place. Returns true on success, false otherwise.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Moves the file from the source to the destination place.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Move file based on names.
 if (!plugins.file.moveFile('story.txt','story.txt.new'))
@@ -1730,8 +2056,12 @@ if (!plugins.file.moveFile(f, fmoved))
           <function clientSupport="wc,sc" name="readFile">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read all content from the file.
 var bytes = plugins.file.readFile('big.jpg');
@@ -1749,8 +2079,12 @@ application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read all content from the file.
 var bytes = plugins.file.readFile('big.jpg');
@@ -1774,8 +2108,12 @@ application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
               <argumentType typecode="long"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read all content from the file.
 var bytes = plugins.file.readFile('big.jpg');
@@ -1801,8 +2139,12 @@ application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read all content from the file.
 var bytes = plugins.file.readFile('big.jpg');
@@ -1826,8 +2168,12 @@ application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
               <argumentType typecode="long"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
-            <description><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file. If a file name is not specified, then a file selection dialog pops up for selecting a file. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Reads all or part of the content from a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read all content from the file.
 var bytes = plugins.file.readFile('big.jpg');
@@ -1851,8 +2197,12 @@ application.output('unknown file size: ' + bytesUnknownFile.length);]]></sample>
           <function clientSupport="wc,sc" name="readTXTFile">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Read all content from a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read content from a known text file.
 var txt = plugins.file.readTXTFile('story.txt');
@@ -1867,8 +2217,12 @@ application.output(txtUnknown);]]></sample>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Read all content from a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read content from a known text file.
 var txt = plugins.file.readTXTFile('story.txt');
@@ -1889,8 +2243,12 @@ application.output(txtUnknown);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Read all content from a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read content from a known text file.
 var txt = plugins.file.readTXTFile('story.txt');
@@ -1913,8 +2271,12 @@ application.output(txtUnknown);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Read all content from a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read content from a known text file.
 var txt = plugins.file.readTXTFile('story.txt');
@@ -1935,8 +2297,12 @@ application.output(txtUnknown);]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
-            <description><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
-            <summary><![CDATA[Read all content from a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Read all content from a text file. If a file name is not specified, then a file selection dialog pops up for selecting a file. The encoding can be also specified. (Web Enabled only for a JSFile argument)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Read all content from a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Read content from a known text file.
 var txt = plugins.file.readTXTFile('story.txt');
@@ -1957,8 +2323,12 @@ application.output(txtUnknown);]]></sample>
           <function clientSupport="wc,sc" name="showDirectorySelectDialog">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a directory selector dialog.]]></description>
-            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
@@ -1969,8 +2339,12 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a directory selector dialog.]]></description>
-            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
@@ -1987,8 +2361,12 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a directory selector dialog.]]></description>
-            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
@@ -2007,8 +2385,12 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a directory selector dialog.]]></description>
-            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
@@ -2025,8 +2407,12 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a directory selector dialog.]]></description>
-            <summary><![CDATA[Shows a directory selector dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a directory selector dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var dir = plugins.file.showDirectorySelectDialog();
 application.output("you've selected folder: " + dir.getAbsolutePath());]]></sample>
@@ -2043,8 +2429,12 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
           <function clientSupport="wc,sc" name="showFileOpenDialog">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2075,8 +2465,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.Number"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2113,8 +2507,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2155,8 +2553,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.Boolean"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2201,8 +2603,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2251,8 +2657,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2305,8 +2715,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2360,8 +2774,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2408,8 +2826,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2452,8 +2874,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2494,8 +2920,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.Boolean"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2540,8 +2970,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2590,8 +3024,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2644,8 +3082,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2699,8 +3141,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2747,8 +3193,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2791,8 +3241,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2831,8 +3285,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
-            <description><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
-            <summary><![CDATA[Shows a file open dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file open dialog. Filters can be applied on what type of files can be selected. (Web Enabled, you must set the callback method for this to work)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file open dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
@@ -2866,8 +3324,12 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
           <function clientSupport="wc,sc" name="showFileSaveDialog">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a file save dialog.]]></description>
-            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
@@ -2878,8 +3340,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a file save dialog.]]></description>
-            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
@@ -2896,8 +3362,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a file save dialog.]]></description>
-            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
@@ -2916,8 +3386,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a file save dialog.]]></description>
-            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
@@ -2934,8 +3408,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
-            <description><![CDATA[Shows a file save dialog.]]></description>
-            <summary><![CDATA[Shows a file save dialog.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
@@ -2955,8 +3433,12 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Stream 1 or more files from the server to the client.]]></description>
-            <summary><![CDATA[Stream 1 or more files from the server to the client.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Stream 1 or more files from the server to the client.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Stream 1 or more files from the server to the client.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// transfer all the files of a chosen server folder to a directory on the client
 var dir = plugins.file.showDirectorySelectDialog();
@@ -2995,10 +3477,14 @@ var monitor = plugins.file.streamFilesFromServer(files, serverFiles, callbackFun
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
 the filename that was transfered. An extra second exception parameter can be given if an exception did occur.]]></description>
-            <summary><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Stream 1 or more files from the server to the client, the callback method is invoked after every file, with as argument
 the filename that was transfered.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// transfer all the files of a chosen server folder to a directory on the client
 var dir = plugins.file.showDirectorySelectDialog();
@@ -3038,8 +3524,12 @@ var monitor = plugins.file.streamFilesFromServer(files, serverFiles, callbackFun
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Overloaded method, only defines file(s) to be streamed]]></description>
-            <summary><![CDATA[Overloaded method, only defines file(s) to be streamed]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Overloaded method, only defines file(s) to be streamed]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Overloaded method, only defines file(s) to be streamed]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// send one file:
 var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
@@ -3073,8 +3563,12 @@ if (folder) {
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
-            <summary><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// send one file:
 var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
@@ -3112,8 +3606,12 @@ if (folder) {
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></description>
-            <summary><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Overloaded method, defines file(s) to be streamed, a callback function and file name(s) to use on the server]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// send one file:
 var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
@@ -3153,8 +3651,12 @@ if (folder) {
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSProgressMonitor" typecode="com.servoy.extensions.plugins.file.JSProgressMonitor"><![CDATA[a JSProgressMonitor object to allow client to subscribe to progress notifications]]></return>
-            <description><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
-            <summary><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Overloaded method, defines file(s) to be streamed and a callback function]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// send one file:
 var file = plugins.file.showFileOpenDialog( 1, null, false, null, null, 'Choose a file to transfer' );
@@ -3191,8 +3693,12 @@ if (folder) {
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
 var bytes = new Array();
@@ -3222,8 +3728,12 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
 var bytes = new Array();
@@ -3255,7 +3765,8 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description/>
+            <descriptions/>
+            <summaries/>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
 var bytes = new Array();
@@ -3285,8 +3796,12 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a binary file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
 var bytes = new Array();
@@ -3318,8 +3833,12 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
-            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
 var textData = 'load of data...'
@@ -3344,8 +3863,12 @@ if (!success) application.output('Could not write file.');
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
-            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
 var textData = 'load of data...'
@@ -3374,8 +3897,12 @@ if (!success) application.output('Could not write file.');
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[Success boolean.]]></return>
-            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
 var textData = 'load of data...'
@@ -3405,8 +3932,12 @@ if (!success) application.output('Could not write file.');
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
 var textData = 'load of data...'
@@ -3431,8 +3962,12 @@ if (!success) application.output('Could not write file.');
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
 var textData = 'load of data...'
@@ -3461,8 +3996,12 @@ if (!success) application.output('Could not write file.');
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into a text file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into a text file. (Web Enabled: file parameter can be a string 'mytextfile.txt' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into a text file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileNameSuggestion = 'myspecialexport.tab'
 var textData = 'load of data...'
@@ -3492,8 +4031,12 @@ if (!success) application.output('Could not write file.');
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into an XML file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileName = 'form.xml'
 var xml = controller.printXML()
@@ -3516,8 +4059,12 @@ if (!success) application.output('Could not write file.');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into an XML file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileName = 'form.xml'
 var xml = controller.printXML()
@@ -3542,8 +4089,12 @@ if (!success) application.output('Could not write file.');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into an XML file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileName = 'form.xml'
 var xml = controller.printXML()
@@ -3566,8 +4117,12 @@ if (!success) application.output('Could not write file.');]]></sample>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
-            <description><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
-            <summary><![CDATA[Writes data into an XML file.]]></summary>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes data into an XML file. The file is saved with the encoding specified by the XML itself. (Web Enabled: file parameter can be a string 'myxmlfile.xml' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes data into an XML file.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var fileName = 'form.xml'
 var xml = controller.printXML()
