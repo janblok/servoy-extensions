@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.servoy.extensions.plugins.pdf_forms.servlets.PDFServlet;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
@@ -29,6 +30,7 @@ import com.servoy.j2db.preference.PreferencePanel;
 /**
  * @author jblok
  */
+@ServoyDocumented
 public class PDFFormsPlugin implements IServerPlugin
 {
 	public void initialize(IServerAccess app) throws PluginException

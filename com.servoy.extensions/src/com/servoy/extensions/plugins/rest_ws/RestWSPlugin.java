@@ -30,6 +30,7 @@ import org.apache.commons.pool.KeyedObjectPool;
 import org.apache.commons.pool.impl.GenericKeyedObjectPool;
 
 import com.servoy.extensions.plugins.rest_ws.servlets.RestWSServlet;
+import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
@@ -53,6 +54,7 @@ import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
  * 
  */
 @SuppressWarnings("nls")
+@ServoyDocumented
 public class RestWSPlugin implements IServerPlugin
 {
 	private static final String CLIENT_POOL_SIZE_PROPERTY = "rest_ws_plugin_client_pool_size";
