@@ -173,7 +173,9 @@ public class RestWSServlet extends HttpServlet
 		}
 		else if (e instanceof NoClientsException)
 		{
-			plugin.log.error(request.getRequestURI(), e);
+			plugin.log.error(
+				"Client could not be found. Possible reasons: 1.Client could not be created due to maximum number of licenses reached. 2.Client could not be created due to property mustAuthenticate=true in ws solution. 3.The client pool reached maximum number of clients. 4.An internal error occured. " +
+					request.getRequestURI(), e);
 			errorCode = HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 		}
 		else if (e instanceof IllegalArgumentException)
