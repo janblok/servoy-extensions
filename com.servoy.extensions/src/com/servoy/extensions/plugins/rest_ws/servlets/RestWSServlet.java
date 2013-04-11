@@ -503,7 +503,8 @@ public class RestWSServlet extends HttpServlet
 			{
 				String authorization = authorizationHeader.substring(6);
 				// TODO: which encoding to use? see http://tools.ietf.org/id/draft-reschke-basicauth-enc-05.xml
-				authorization = new String(Utils.decodeBASE64(authorization));
+				// we assume now we get UTF-8 , we need to define a standard due to mobile client usage
+				authorization = new String(Utils.decodeBASE64(authorization), "UTF-8");
 				int index = authorization.indexOf(':');
 				if (index > 0)
 				{
