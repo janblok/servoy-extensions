@@ -39,12 +39,6 @@ public class RadioButton extends AbstractMenuItem
 		super(pluginAccess, menuHandler, menuItem);
 	}
 
-	@Override
-	public String js_getText()
-	{
-		return menuItem.getName();
-	}
-
 	/**
 	 * @deprecated Replaced by individual sets for each property (text,function,selected...).
 	 */
