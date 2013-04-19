@@ -523,11 +523,14 @@ public class FoundSetTreeModel extends DefaultTreeModel
 
 		public void loadChildren()
 		{
-			if (!didInit)
+			synchronized (FoundSetTreeModel.this)
 			{
-				boolean isLeaf = !hasChild(this);
-				if (isLeaf) setAllowsChildren(false);
-				else lazyLoadChilderenIfNeeded(this);
+				if (!didInit)
+				{
+					boolean isLeaf = !hasChild(this);
+					if (isLeaf) setAllowsChildren(false);
+					else lazyLoadChilderenIfNeeded(this);
+				}
 			}
 		}
 

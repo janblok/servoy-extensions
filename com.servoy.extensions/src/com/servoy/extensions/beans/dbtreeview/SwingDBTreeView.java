@@ -488,13 +488,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			if (tp.getPathCount() - 1 <= level && visible)
 			{
 				Object node = tp.getLastPathComponent();
-				if (node instanceof UserNode)
-				{
-					synchronized ((FoundSetTreeModel)tree.getModel())
-					{
-						((UserNode)node).loadChildren();
-					}
-				}
+				if (node instanceof UserNode) ((UserNode)node).loadChildren();
 				if (((FoundSetTreeModel)tree.getModel()).hasChild(node) && tree.isCollapsed(row))
 				{
 					tree.expandRow(row);
