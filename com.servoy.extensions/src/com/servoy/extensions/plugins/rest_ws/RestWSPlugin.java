@@ -37,6 +37,7 @@ import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
 
 /**
@@ -214,9 +215,25 @@ public class RestWSPlugin implements IServerPlugin
 		}
 	}
 
-	public void releaseClient(String solutionName, IHeadlessClient client) throws Exception
+	public void releaseClient(final String solutionName, final IHeadlessClient client)
 	{
-		getClientPool().returnObject(solutionName, client);
+		application.getExecutor().execute(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				try
+				{
+					client.closeSolution();
+					client.loadSolution(solutionName);
+					getClientPool().returnObject(solutionName, client);
+				}
+				catch (Exception ex)
+				{
+					Debug.error(ex);
+				}
+			}
+		});
 	}
 
 	public static class NoClientsException extends Exception

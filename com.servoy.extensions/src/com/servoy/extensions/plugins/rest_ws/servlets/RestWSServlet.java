@@ -48,7 +48,6 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
-import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
 import com.servoy.j2db.util.Utils;
 
@@ -333,14 +332,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				try
-				{
-					plugin.releaseClient(wsRequest.solutionName, client);
-				}
-				catch (Exception e)
-				{
-					Debug.error(e);
-				}
+				plugin.releaseClient(wsRequest.solutionName, client);
 			}
 		}
 	}
@@ -470,14 +462,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				try
-				{
-					plugin.releaseClient(wsRequest.solutionName, client);
-				}
-				catch (Exception e)
-				{
-					Debug.error(e);
-				}
+				plugin.releaseClient(wsRequest.solutionName, client);
 			}
 		}
 	}
