@@ -221,11 +221,23 @@ public class RestWSPlugin implements IServerPlugin
 			@Override
 			public void run()
 			{
+				boolean solutionReopened = false;
 				try
 				{
-					client.closeSolution();
+					client.closeSolution(true);
 					client.loadSolution(solutionName);
-					getClientPool().returnObject(solutionName, client);
+					solutionReopened = true;
+				}
+				catch (Exception ex)
+				{
+					Debug.error("cannot reopen solution " + solutionName, ex);
+					client.shutDown(true);
+				}
+
+				try
+				{
+					if (solutionReopened) getClientPool().returnObject(solutionName, client);
+					else getClientPool().invalidateObject(solutionName, client);
 				}
 				catch (Exception ex)
 				{
