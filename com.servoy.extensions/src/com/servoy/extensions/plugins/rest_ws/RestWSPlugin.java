@@ -38,6 +38,7 @@ import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
+import com.servoy.j2db.util.Utils;
 import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
 
 /**
@@ -184,7 +185,14 @@ public class RestWSPlugin implements IServerPlugin
 				public Object makeObject(Object key) throws Exception
 				{
 					log.debug("creating new session client for solution '" + key + '\'');
-					return HeadlessClientFactory.createHeadlessClient((String)key, SOLUTION_OPEN_METHOD_ARGS);
+					String solutionName = (String)key;
+					String[] arr = ((String)key).split(":");
+					if (arr.length == 2)
+					{
+						String[] solOpenArgs = Utils.arrayJoin(SOLUTION_OPEN_METHOD_ARGS.clone(), new String[] { "nodebug" });
+						return HeadlessClientFactory.createHeadlessClient(arr[0], solOpenArgs);
+					}
+					return HeadlessClientFactory.createHeadlessClient(solutionName, SOLUTION_OPEN_METHOD_ARGS);
 				}
 
 				@Override

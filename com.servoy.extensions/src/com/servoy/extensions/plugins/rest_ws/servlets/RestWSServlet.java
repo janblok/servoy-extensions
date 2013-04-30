@@ -89,6 +89,7 @@ public class RestWSServlet extends HttpServlet
 	private static final String WS_READ = "ws_read";
 	private static final String WS_AUTHENTICATE = "ws_authenticate";
 	private static final String WS_RESPONSE_HEADERS = "ws_response_headers";
+	private static final String WS_NODEBUG_HEADER = "servoy.nodebug";
 
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
@@ -125,10 +126,14 @@ public class RestWSServlet extends HttpServlet
 			response.setHeader("Access-Control-Allow-Methods", "GET, DELETE, POST, PUT, OPTIONS");
 		}
 
+		if (getNodebugHeadderValue(request))
+		{
+			response.setHeader("Access-Control-Expose-Headers", WS_NODEBUG_HEADER);
+		}
 		value = request.getHeader("Access-Control-Request-Headers");
 		if (value != null)
 		{
-			response.setHeader("Access-Control-Allow-Headers", value);
+			response.setHeader("Access-Control-Allow-Headers", value);//value.substring(0, value.lastIndexOf(", authorization")) + ", origin");
 		}
 
 		super.service(request, response);
@@ -295,12 +300,13 @@ public class RestWSServlet extends HttpServlet
 	{
 		IHeadlessClient client = null;
 		WsRequest wsRequest = null;
+		boolean nodebug = getNodebugHeadderValue(request);
 		try
 		{
 			plugin.log.trace("OPTIONS");
 			wsRequest = parsePath(request);
 
-			client = plugin.getClient(wsRequest.solutionName);
+			client = plugin.getClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName);
 
 			String retval = "TRACE, OPTIONS";
 			if (new FunctionDefinition(wsRequest.formName, WS_READ).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
@@ -332,7 +338,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(wsRequest.solutionName, client);
+				plugin.releaseClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName, client);
 			}
 		}
 	}
@@ -370,10 +376,11 @@ public class RestWSServlet extends HttpServlet
 		plugin.log.debug("Request '" + path + '\'');
 
 		WsRequest wsRequest = parsePath(request);
+		boolean nodebug = getNodebugHeadderValue(request);
 		IHeadlessClient client = null;
 		try
 		{
-			client = plugin.getClient(wsRequest.solutionName);
+			client = plugin.getClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName);
 			Object ws_authenticate_result = checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
 
 			FunctionDefinition fd = new FunctionDefinition(wsRequest.formName, methodName);
@@ -462,7 +469,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(wsRequest.solutionName, client);
+				plugin.releaseClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName, client);
 			}
 		}
 	}
@@ -654,6 +661,24 @@ public class RestWSServlet extends HttpServlet
 
 		// should not happen, content type was checked before
 		throw new IllegalStateException();
+	}
+
+	private boolean getNodebugHeadderValue(HttpServletRequest request)
+	{
+		// when DOING cross to an url the browser first sends and extra options request with the request method  and 
+		//headers it will set ,before sending the actual request
+		//http://stackoverflow.com/questions/1256593/jquery-why-am-i-getting-an-options-request-insted-of-a-get-request
+		if (request.getMethod().equalsIgnoreCase("OPTIONS"))
+		{
+			String header = request.getHeader("Access-Control-Request-Headers");
+			if (header.contains(WS_NODEBUG_HEADER))
+			{
+				return true;
+			}
+			else return false;
+		}
+		String noDebugOption = request.getHeader(WS_NODEBUG_HEADER);
+		return noDebugOption != null ? noDebugOption.equalsIgnoreCase("true") : false;
 	}
 
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
