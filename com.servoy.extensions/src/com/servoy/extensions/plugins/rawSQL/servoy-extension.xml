@@ -20,7 +20,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var uuid = application.getNewUUID();
 plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);]]></sample>
@@ -59,7 +59,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -113,7 +113,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -171,7 +171,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var maxReturnedRows = 10; //useful to limit number of rows
 var procedure_declaration = '{?=calculate_interest_rate(?)}'
@@ -214,7 +214,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -256,7 +256,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var country = 'NL'
 var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
@@ -304,7 +304,7 @@ You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
 
 Note that when server names have been switched (databasemanager.switchServer),the 
 real server names must be used here, plugins.rawSQL is not transparent to switched servers.
-****************************************************************************&#47;
+****************************************************************************/
 
 var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
 //var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted

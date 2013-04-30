@@ -23,7 +23,7 @@
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*&#47;
+	}*/
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
@@ -51,7 +51,7 @@
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*&#47;
+	}*/
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
@@ -186,7 +186,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*&#47;
+	}*/
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
@@ -224,7 +224,7 @@ The second argument that is give back is the JSClient instance that did the call
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*&#47;
+	}*/
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
@@ -364,7 +364,7 @@ The second argument that is give back is the JSClient instance that did the call
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*&#47;
+	}*/
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;
@@ -395,7 +395,7 @@ The second argument that is give back is the JSClient instance that did the call
 	else if (event.getType() == JSClient.CALLBACK_EXCEPTION_EVENT)
 	{
 		application.output("exception callback, name: " + event.data);
-	}*&#47;
+	}*/
 	var x = new Object();
 	x.name = 'remote1';
 	x.number = 10;

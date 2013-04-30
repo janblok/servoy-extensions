@@ -10467,7 +10467,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10520,7 +10520,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10574,7 +10574,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10631,7 +10631,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10687,7 +10687,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10740,7 +10740,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10794,7 +10794,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -10851,7 +10851,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -11188,7 +11188,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'
@@ -11237,7 +11237,7 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 // * Handle keyboard shortcut.
 // * 
 // * @param {JSEvent} event the event that triggered the action
-// *&#47;
+// */
 //function handleShortcut(event)
 //{
 //  application.output(event.getType()) // returns 'menu 1'

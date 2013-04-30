@@ -2432,7 +2432,7 @@ application.output("you've selected folder: " + dir.getAbsolutePath());]]></samp
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2441,7 +2441,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2468,7 +2468,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2477,7 +2477,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2510,7 +2510,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2519,7 +2519,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2556,7 +2556,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2565,7 +2565,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2606,7 +2606,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2615,7 +2615,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2660,7 +2660,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2669,7 +2669,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2718,7 +2718,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2727,7 +2727,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2777,7 +2777,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2786,7 +2786,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2829,7 +2829,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2838,7 +2838,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2877,7 +2877,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2886,7 +2886,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2923,7 +2923,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2932,7 +2932,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -2973,7 +2973,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -2982,7 +2982,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3027,7 +3027,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -3036,7 +3036,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3085,7 +3085,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -3094,7 +3094,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3144,7 +3144,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -3153,7 +3153,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3196,7 +3196,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -3205,7 +3205,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3244,7 +3244,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -3253,7 +3253,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3288,7 +3288,7 @@ plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some 
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// This selects only files ('1'), previous dir must be used ('null'), no multiselect ('false') and
 // the filter "JPG and GIF" should be used: ('new Array("JPG and GIF","jpg","gif")').
-/** @type {JSFile} *&#47;
+/** @type {JSFile} */
 var f = plugins.file.showFileOpenDialog(1, null, false, new Array("JPG and GIF", "jpg", "gif"));
 application.output('File: ' + f.getName());
 application.output('is dir: ' + f.isDirectory());
@@ -3297,7 +3297,7 @@ application.output('path: ' + f.getAbsolutePath());
 
 // This allows mutliple selection of files, using previous dir and the same filter as above. This also casts the result to the JSFile type using JSDoc.
 // if filters are specified, "all file" filter will not show up unless "*" filter is present
-/** @type {JSFile[]} *&#47;
+/** @type {JSFile[]} */
 var files = plugins.file.showFileOpenDialog(1, null, true, new Array("JPG and GIF", "jpg", "gif", "*"));
 for (var i = 0; i < files.length; i++)
 {
@@ -3694,7 +3694,7 @@ if (folder) {
               <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
+              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
 var bytes = new Array();
 for (var i=0; i<1024; i++)
 	bytes[i] = i % 100;
@@ -3729,7 +3729,7 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
+              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
 var bytes = new Array();
 for (var i=0; i<1024; i++)
 	bytes[i] = i % 100;
@@ -3760,7 +3760,7 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
+              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
 var bytes = new Array();
 for (var i=0; i<1024; i++)
 	bytes[i] = i % 100;
@@ -3795,7 +3795,7 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*&#47;
+              <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
 var bytes = new Array();
 for (var i=0; i<1024; i++)
 	bytes[i] = i % 100;
