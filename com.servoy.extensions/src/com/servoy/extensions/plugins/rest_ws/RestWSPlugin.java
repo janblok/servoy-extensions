@@ -186,13 +186,15 @@ public class RestWSPlugin implements IServerPlugin
 				{
 					log.debug("creating new session client for solution '" + key + '\'');
 					String solutionName = (String)key;
-					String[] arr = ((String)key).split(":");
+					String[] solOpenArgs = SOLUTION_OPEN_METHOD_ARGS;
+
+					String[] arr = solutionName.split(":");
 					if (arr.length == 2)
 					{
-						String[] solOpenArgs = Utils.arrayJoin(SOLUTION_OPEN_METHOD_ARGS.clone(), new String[] { "nodebug" });
-						return HeadlessClientFactory.createHeadlessClient(arr[0], solOpenArgs);
+						solutionName = arr[0];
+						solOpenArgs = Utils.arrayJoin(SOLUTION_OPEN_METHOD_ARGS, new String[] { "nodebug" });
 					}
-					return HeadlessClientFactory.createHeadlessClient(solutionName, SOLUTION_OPEN_METHOD_ARGS);
+					return HeadlessClientFactory.createHeadlessClient(solutionName, solOpenArgs);
 				}
 
 				@Override

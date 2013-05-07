@@ -133,7 +133,7 @@ public class RestWSServlet extends HttpServlet
 		value = request.getHeader("Access-Control-Request-Headers");
 		if (value != null)
 		{
-			response.setHeader("Access-Control-Allow-Headers", value);//value.substring(0, value.lastIndexOf(", authorization")) + ", origin");
+			response.setHeader("Access-Control-Allow-Headers", value);
 		}
 
 		super.service(request, response);
@@ -677,8 +677,7 @@ public class RestWSServlet extends HttpServlet
 			}
 			else return false;
 		}
-		String noDebugOption = request.getHeader(WS_NODEBUG_HEADER);
-		return noDebugOption != null ? noDebugOption.equalsIgnoreCase("true") : false;
+		return request.getHeader(WS_NODEBUG_HEADER) != null ? true : false;
 	}
 
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
