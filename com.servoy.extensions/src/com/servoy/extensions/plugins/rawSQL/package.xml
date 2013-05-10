@@ -3,10 +3,10 @@
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.rawSQL</extension-id>
 	<extension-name>RawSQL Plugin</extension-name> 
-	<version>6.1.0</version>
+	<version>6.1.3 i2</version>
 	<dependencies>
 	    <servoy>
-	       <min-version>6.1.0 rc1</min-version>
+	       <min-version>6.1.3 i2</min-version>
 	    </servoy>
 	</dependencies>
 	<info>
