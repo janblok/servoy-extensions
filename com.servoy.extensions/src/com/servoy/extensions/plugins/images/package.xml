@@ -3,10 +3,10 @@
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.images</extension-id>
 	<extension-name>Images Plugin</extension-name> 
-	<version>6.1.0</version>
+	<version>7.1.0</version>
 	<dependencies>
 	    <servoy>
-	       <min-version>6.1.0 rc1</min-version>
+	       <min-version>7.1.0</min-version>
 	    </servoy>
 	    <lib>
         	<id>com.sun.media.imageio</id> <!-- MANIFEST.MF listed id ("Extension-Name" from MANIFEST.MF) -->
