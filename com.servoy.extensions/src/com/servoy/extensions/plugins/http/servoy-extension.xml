@@ -139,6 +139,32 @@ var value = cookie.getValue();]]></sample>
               </parameter>
             </parameters>
           </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+            </parameters>
+          </function>
         </functions>
       </object>
       <object publicName="GetRequest" qualifiedName="com.servoy.extensions.plugins.http.GetRequest">
@@ -223,6 +249,32 @@ var value = cookie.getValue();]]></sample>
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
               </parameter>
             </parameters>
           </function>
@@ -1141,6 +1193,32 @@ switch(httpCode) {
               </parameter>
             </parameters>
           </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+            </parameters>
+          </function>
         </functions>
       </object>
       <object publicName="HttpClient" qualifiedName="com.servoy.extensions.plugins.http.HttpClient">
@@ -1552,6 +1630,32 @@ if (cookieSet)
               </parameter>
             </parameters>
           </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function name="getAllowedMethods">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.http.Response"/>
@@ -1668,7 +1772,7 @@ poster.addParameter(null,'value') //sets the content to post]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <description/>
-            <deprecated><![CDATA[Replaced by #executeRequest(String,String)]]></deprecated>
+            <deprecated><![CDATA[Replaced by #executeRequest(String,String,String,String,boolean)]]></deprecated>
             <sample><![CDATA[//null
 var httpCode = poster.doPost()]]></sample>
             <parameters>
@@ -1745,12 +1849,38 @@ var httpCode = poster.doPost()]]></sample>
               </parameter>
             </parameters>
           </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function deprecated="true" name="getPageData">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <description><![CDATA[Get the result page data after a post.]]></description>
             <summary><![CDATA[Get the result page data after a post.]]></summary>
-            <deprecated><![CDATA[Replaced by #executeRequest(String,String)]]></deprecated>
+            <deprecated><![CDATA[Replaced by #executeRequest(String,String,String,String,boolean)]]></deprecated>
             <sample><![CDATA[var pageData = poster.getPageData()]]></sample>
           </function>
           <function name="setBodyContent">
@@ -1875,6 +2005,32 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
               </parameter>
             </parameters>
           </function>
@@ -2057,6 +2213,32 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
               </parameter>
               <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the password]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.plugins.http.Response" typecode="com.servoy.extensions.plugins.http.Response"/>
+            <description><![CDATA[Execute a request method using windows authentication.]]></description>
+            <summary><![CDATA[Execute a request method using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeRequest('username','password','mycomputername','domain');]]></sample>
+            <parameters>
+              <parameter name="userName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
               </parameter>
             </parameters>
           </function>
