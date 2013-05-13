@@ -24,11 +24,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.mozilla.javascript.Function;
 
@@ -126,7 +129,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	{
 		try
 		{
-			return executeRequest(userName, password);
+			return executeRequest(userName, password, null, null, false);
 		}
 		catch (Exception ex)
 		{
@@ -135,7 +138,31 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		}
 	}
 
-	private Response executeRequest(String userName, String password) throws ClientProtocolException, IOException
+	/**
+	 * Execute a request method using windows authentication.
+	 * @sample
+	 * var response = method.executeRequest('username','password','mycomputername','domain');
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 * @param workstation The workstation the authentication request is originating from.
+	 * @param domain The domain to authenticate within.
+	 */
+	public Response js_executeRequest(String userName, String password, String workstation, String domain)
+	{
+		try
+		{
+			return executeRequest(userName, password, workstation, domain, true);
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+			return null;
+		}
+	}
+
+	private Response executeRequest(String userName, String password, String workstation, String domain, boolean windowsAuthentication)
+		throws ClientProtocolException, IOException
 	{
 		Iterator<String> it = headers.keySet().iterator();
 		while (it.hasNext())
@@ -152,7 +179,20 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		{
 			BasicCredentialsProvider bcp = new BasicCredentialsProvider();
 			URL _url = new URL(url);
-			bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(userName, password));
+			Credentials cred = null;
+			if (windowsAuthentication)
+			{
+				if (context == null)
+				{
+					context = new BasicHttpContext();
+				}
+				cred = new NTCredentials(userName, password, workstation, domain);
+			}
+			else
+			{
+				cred = new UsernamePasswordCredentials(userName, password);
+			}
+			bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), cred);
 			client.setCredentialsProvider(bcp);
 		}
 
@@ -184,7 +224,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * @param errorCallbackMethod callbackMethod to be called if request errors out
 	 */
 
-	public void js_executeAsyncRequest(final String userName, final String password, Function successCallbackMethod, Function errorCallbackMethod)
+	public void js_executeAsyncRequest(final String username, final String password, Function successCallbackMethod, Function errorCallbackMethod)
 	{
 		final FunctionDefinition successFunctionDef = successCallbackMethod != null ? new FunctionDefinition(successCallbackMethod) : null;
 		final FunctionDefinition errorFunctionDef = errorCallbackMethod != null ? new FunctionDefinition(errorCallbackMethod) : null;
@@ -195,7 +235,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 			{
 				try
 				{
-					final Response response = executeRequest(userName, password);
+					final Response response = executeRequest(username, password, null, null, false);
 
 					if (successFunctionDef != null)
 					{
