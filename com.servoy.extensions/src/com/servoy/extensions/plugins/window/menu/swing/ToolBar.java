@@ -42,6 +42,7 @@ import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.toolbar.IToolbarPanel;
 import com.servoy.j2db.util.toolbar.Toolbar;
 import com.servoy.j2db.util.toolbar.ToolbarButton;
@@ -155,7 +156,7 @@ public class ToolBar implements IToolBar, IScriptable, IJavaScriptType
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
+				Debug.error(e);
 			}
 		}
 
