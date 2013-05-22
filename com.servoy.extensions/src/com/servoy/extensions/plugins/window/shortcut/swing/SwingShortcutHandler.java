@@ -18,12 +18,15 @@ package com.servoy.extensions.plugins.window.shortcut.swing;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -53,11 +56,49 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 	private final IClientPluginAccess access;
 	private final WindowProvider windowProvider;
+	private static boolean shortcutDispatcherAdded = false;
+
+	/**
+	 * Needed because if you have a Scrollpane and you press UP, DOWN, LEFT, RIGHT 
+	 * it doesn't get to fire the registered action because it is consumed by scroll pane to scroll around
+	 */
+	private class ShortcutDispatcher implements KeyEventDispatcher
+	{
+		@Override
+		public boolean dispatchKeyEvent(KeyEvent e)
+		{
+			if (e.getID() == KeyEvent.KEY_PRESSED)
+			{
+				int k = e.getKeyCode();
+				if (k == KeyEvent.VK_UP || k == KeyEvent.VK_DOWN || k == KeyEvent.VK_LEFT || k == KeyEvent.VK_RIGHT)
+				{
+					JRootPane rootPane = getRootPane().getRootPane();
+					if (rootPane != null)
+					{
+						InputMap im = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+						ActionMap am = rootPane.getActionMap();
+						String keyMap = (String)im.get(KeyStroke.getKeyStroke(k, 0));
+						Action action = keyMap != null ? am.get(keyMap) : null;
+						if (action != null) action.actionPerformed(null);
+					}
+				}
+			}
+			return false;
+		}
+	}
 
 	public SwingShortcutHandler(IClientPluginAccess access, WindowProvider windowProvider)
 	{
 		this.access = access;
 		this.windowProvider = windowProvider;
+
+		//SwingShortcutHandler is created every time you run the debug client from developer
+		if (!shortcutDispatcherAdded)
+		{
+			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+			manager.addKeyEventDispatcher(new ShortcutDispatcher());
+			shortcutDispatcherAdded = true;
+		}
 	}
 
 	public boolean addShortcut(final KeyStroke key)
