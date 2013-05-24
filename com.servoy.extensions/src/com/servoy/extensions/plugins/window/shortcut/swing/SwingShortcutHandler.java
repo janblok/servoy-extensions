@@ -39,6 +39,7 @@ import com.servoy.extensions.plugins.window.shortcut.IShortcutHandler;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
+import com.servoy.j2db.smart.dataui.DataComboBox;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.ui.IFormUI;
 import com.servoy.j2db.util.Debug;
@@ -56,7 +57,10 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 	private final IClientPluginAccess access;
 	private final WindowProvider windowProvider;
-	private static boolean shortcutDispatcherAdded = false;
+	private final ShortcutDispatcher shortcutDispatcher = new ShortcutDispatcher();
+
+	private final ActionMap specialKeysActionMap = new ActionMap();
+	private final InputMap specialKeysInputMap = new InputMap();
 
 	/**
 	 * Needed because if you have a Scrollpane and you press UP, DOWN, LEFT, RIGHT 
@@ -67,18 +71,17 @@ public class SwingShortcutHandler implements IShortcutHandler
 		@Override
 		public boolean dispatchKeyEvent(KeyEvent e)
 		{
-			if (e.getID() == KeyEvent.KEY_PRESSED)
+			Component comp = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+			if (e.getID() == KeyEvent.KEY_PRESSED && !(comp instanceof DataComboBox || comp.getParent() instanceof DataComboBox))
 			{
 				int k = e.getKeyCode();
-				if (k == KeyEvent.VK_UP || k == KeyEvent.VK_DOWN || k == KeyEvent.VK_LEFT || k == KeyEvent.VK_RIGHT)
+				if (isSpecialKey(k))
 				{
 					JRootPane rootPane = getRootPane().getRootPane();
 					if (rootPane != null)
 					{
-						InputMap im = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-						ActionMap am = rootPane.getActionMap();
-						String keyMap = (String)im.get(KeyStroke.getKeyStroke(k, 0));
-						Action action = keyMap != null ? am.get(keyMap) : null;
+						String keyMap = (String)specialKeysInputMap.get(KeyStroke.getKeyStroke(k, 0));
+						Action action = keyMap != null ? specialKeysActionMap.get(keyMap) : null;
 						if (action != null) action.actionPerformed(null);
 					}
 				}
@@ -91,14 +94,8 @@ public class SwingShortcutHandler implements IShortcutHandler
 	{
 		this.access = access;
 		this.windowProvider = windowProvider;
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(shortcutDispatcher);
 
-		//SwingShortcutHandler is created every time you run the debug client from developer
-		if (!shortcutDispatcherAdded)
-		{
-			KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-			manager.addKeyEventDispatcher(new ShortcutDispatcher());
-			shortcutDispatcherAdded = true;
-		}
 	}
 
 	public boolean addShortcut(final KeyStroke key)
@@ -113,10 +110,19 @@ public class SwingShortcutHandler implements IShortcutHandler
 		JRootPane rootPane = rootPaneContainer.getRootPane();
 		InputMap im = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		String mapKey = SHORTCUT_PREFIX + key;
+		int k = key.getKeyCode();
 
 		im.put(key, mapKey);
+		if (isSpecialKey(k))
+		{
+			specialKeysInputMap.put(key, mapKey);
+		}
+		else
+		{
+			im.put(key, mapKey);
+		}
 		ActionMap am = rootPane.getActionMap();
-		am.put(mapKey, new AbstractAction()
+		AbstractAction action = new AbstractAction()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -134,7 +140,16 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 				windowProvider.shortcutHit(key, (IComponent)component, formName);
 			}
-		});
+		};
+		if (isSpecialKey(k))
+		{
+			specialKeysActionMap.put(mapKey, action);
+		}
+		else
+		{
+			am.put(mapKey, action);
+		}
+
 		return true;
 	}
 
@@ -152,6 +167,15 @@ public class SwingShortcutHandler implements IShortcutHandler
 			w = w.getParent();
 		}
 		return null;
+	}
+
+	public static boolean isSpecialKey(int keyCode)
+	{
+		if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -215,5 +239,10 @@ public class SwingShortcutHandler implements IShortcutHandler
 		ActionMap am = rootPane.getActionMap();
 		am.remove(mapKey);
 		return true;
+	}
+
+	public void cleanup()
+	{
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(shortcutDispatcher);
 	}
 }

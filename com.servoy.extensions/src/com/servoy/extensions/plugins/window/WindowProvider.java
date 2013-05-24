@@ -154,6 +154,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			{
 				shortcutHandler.removeShortcut(key);
 			}
+			shortcutHandler.cleanup();
 			shortcuts.clear();
 			shortcutHandler = null;
 		}

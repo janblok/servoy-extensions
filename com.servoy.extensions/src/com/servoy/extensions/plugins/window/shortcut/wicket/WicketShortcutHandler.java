@@ -718,4 +718,10 @@ public class WicketShortcutHandler implements IShortcutHandler
 		String unknown = "Unknown";
 		return unknown + " keyCode: 0x" + Integer.toString(keyCode, 16);
 	}
+
+	@Override
+	public void cleanup()
+	{
+
+	}
 }
