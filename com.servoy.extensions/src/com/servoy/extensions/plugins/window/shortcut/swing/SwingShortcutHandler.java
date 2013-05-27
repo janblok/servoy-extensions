@@ -80,7 +80,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 					JRootPane rootPane = getRootPane().getRootPane();
 					if (rootPane != null)
 					{
-						String keyMap = (String)specialKeysInputMap.get(KeyStroke.getKeyStroke(k, 0));
+						String keyMap = (String)specialKeysInputMap.get(KeyStroke.getKeyStroke(k, e.getModifiers()));
 						Action action = keyMap != null ? specialKeysActionMap.get(keyMap) : null;
 						if (action != null) action.actionPerformed(null);
 					}
@@ -112,8 +112,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 		String mapKey = SHORTCUT_PREFIX + key;
 		int k = key.getKeyCode();
 
-		im.put(key, mapKey);
-		if (isSpecialKey(k))
+		if (isSpecialKey(k) && key.getModifiers() == 0)
 		{
 			specialKeysInputMap.put(key, mapKey);
 		}
@@ -141,7 +140,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 				windowProvider.shortcutHit(key, (IComponent)component, formName);
 			}
 		};
-		if (isSpecialKey(k))
+		if (isSpecialKey(k) && key.getModifiers() == 0)
 		{
 			specialKeysActionMap.put(mapKey, action);
 		}
