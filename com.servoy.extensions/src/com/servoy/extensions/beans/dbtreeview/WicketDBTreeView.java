@@ -490,6 +490,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		synchronized (wicketTree)
 		{
 			boolean isChanged = wicketTree.jsChangeRecorder.isChanged();
+			if (isChanged) target.addComponent(this);
 			wicketTree.jsChangeRecorder.setRendered();
 			if (application instanceof IWebClientPluginAccess) ((IWebClientPluginAccess)application).generateAjaxResponse(target);
 			if (isChanged) wicketTree.jsChangeRecorder.setChanged();

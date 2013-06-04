@@ -16,6 +16,9 @@
  */
 package com.servoy.extensions.beans.dbtreeview;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import javax.swing.Icon;
 import javax.swing.tree.TreeNode;
 
@@ -163,6 +166,8 @@ public abstract class WicketDBTreeViewNode extends LinkIconPanel implements Wick
 		return nodeLabel;
 	}
 
+	static ConcurrentMap<String, ResourceReference> mediaUrlToResource = new ConcurrentHashMap<String, ResourceReference>();
+
 	/**
 	 * Creates the icon component for the node
 	 * 
@@ -174,7 +179,7 @@ public abstract class WicketDBTreeViewNode extends LinkIconPanel implements Wick
 	@Override
 	protected Component newImageComponent(String componentId, final BaseTree tree, final IModel model)
 	{
-		Object treeNode = model.getObject();
+		final Object treeNode = model.getObject();
 		Component imgComp = null;
 
 		if (treeNode != null && treeNode instanceof FoundSetTreeModel.UserNode)
@@ -183,6 +188,7 @@ public abstract class WicketDBTreeViewNode extends LinkIconPanel implements Wick
 
 			if (nodeIcon != null)
 			{
+				final Object mediaUrl = ((FoundSetTreeModel.UserNode)treeNode).getUserObject();
 				final ResourceReference imageResource = WicketTreeNodeStyleAdapter.imageResource(nodeIcon);
 				if (imageResource != null)
 				{
@@ -193,10 +199,22 @@ public abstract class WicketDBTreeViewNode extends LinkIconPanel implements Wick
 						@Override
 						protected ResourceReference getImageResourceReference()
 						{
-							return imageResource;
+							String key = ((FoundSetTreeModel.UserNode)treeNode).getUserObject().toString();
+							if (mediaUrlToResource.containsKey(key))
+							{
+								return mediaUrlToResource.get(key);
+							}
+							else
+							{
+								ResourceReference resRefference = WicketTreeNodeStyleAdapter.imageResource(((FoundSetTreeModel.UserNode)treeNode).getIcon());
+								resRefference.bind(getApplication());
+								resRefference.getResource().setCacheable(true);
+								mediaUrlToResource.putIfAbsent(((FoundSetTreeModel.UserNode)treeNode).getUserObject().toString(), resRefference);
+
+								return resRefference;
+							}
 						}
 					};
-
 					imgComp.add(new SimpleAttributeModifier("width", "" + nodeIcon.getIconWidth()));
 					imgComp.add(new SimpleAttributeModifier("height", "" + nodeIcon.getIconHeight()));
 				}
