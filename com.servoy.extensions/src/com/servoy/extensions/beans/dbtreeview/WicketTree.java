@@ -117,6 +117,16 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 				hasChanged = false;
 				js_refresh();
 			}
+			else if (hasChanged)
+			{
+				hasChanged = false;
+				needRebuild = false;
+				/**
+				 * This can be further optimized by firing node changed on the model  of abstractTree when INSERT , DELETE, UPDATED foundset event comes,
+				 *  Firing maybe  javax.swing.tree.DefaultTreeModel.valueForPathChanged(TreePath, Object)
+				 */
+				abstractTree.invalidateAll();
+			}
 		}
 	}
 
@@ -262,12 +272,10 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 			expandedPath = (Object[])expandedNodes.get(i);
 			if (expandedPath != null && expandedPath.length > 0) setExpandNode(expandedPath, true);
 		}
-
 //		js_setSelectionPath(selectionPath);
 
 		updateTree();
 	}
-
 
 	public void js_setRowHeight(int rowHeight)
 	{
@@ -680,6 +688,17 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 		{
 			TreeNode lastNode = (TreeNode)path.get(path.size() - 1);
 
+			while (lastNode instanceof FoundSetTreeModel.UserNode && !((FoundSetTreeModel.UserNode)lastNode).isInitialized())
+			{
+				try
+				{
+					Thread.sleep(50);
+				}
+				catch (InterruptedException e)
+				{
+					Debug.error(e);
+				}
+			}
 			ITreeState treeState = abstractTree.getTreeState();
 			if (expand_collapse)
 			{
