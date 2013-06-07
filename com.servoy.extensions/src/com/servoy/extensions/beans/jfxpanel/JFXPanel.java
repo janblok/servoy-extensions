@@ -47,7 +47,7 @@ public class JFXPanel implements IServoyBeanFactory
 		}
 		else
 		{
-			if (Utils.isJavaFXAvaible(getClass().getClassLoader()))
+			if (Utils.isJavaFXAvailable(getClass().getClassLoader()))
 			{
 				try
 				{

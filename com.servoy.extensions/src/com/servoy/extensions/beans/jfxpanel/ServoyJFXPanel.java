@@ -55,8 +55,8 @@ public class ServoyJFXPanel extends JFXPanel implements IComponent//, IScriptabl
 		return null;
 	}
 
-	public boolean isJavaFXAvaible()
+	public boolean isJavaFXAvailable()
 	{
-		return Utils.isJavaFXAvaible(getClass().getClassLoader());
+		return Utils.isJavaFXAvailable(getClass().getClassLoader());
 	}
 }

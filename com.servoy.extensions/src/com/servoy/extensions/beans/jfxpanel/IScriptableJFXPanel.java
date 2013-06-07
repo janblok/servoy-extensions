@@ -31,9 +31,9 @@ public interface IScriptableJFXPanel extends IScriptable
 	 * Utility method to decide if Java FX is installed.
 	 * 
 	 * @sample
-	 * %%elementName%%.isJavaFXAvaible();
+	 * %%elementName%%.isJavaFXAvailable();
 	 * 
 	 * @return boolean indicating availability
 	 */
-	boolean js_isJavaFXAvaible();
+	boolean js_isJavaFXAvailable();
 }

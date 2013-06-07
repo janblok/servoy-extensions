@@ -34,7 +34,7 @@ public class EmptyJFXPanel extends JLabel implements IComponent, IScriptableJFXP
 	}
 
 	@Override
-	public boolean js_isJavaFXAvaible()
+	public boolean js_isJavaFXAvailable()
 	{
 		return false;
 	}
