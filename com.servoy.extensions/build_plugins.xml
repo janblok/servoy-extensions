@@ -118,6 +118,7 @@
 			depends="clean"
 			description="Delete all extensions' temporary and result files" unless="do_not_clean">
 		<delete file="${beans.dir}/dbtreeview.jar"/>
+		<delete file="${beans.dir}/jfxpanel.jar"/>
 		<delete dir="${server_lib.dir}/template-handler.jar"/>
 		<delete dir="${drivers.dir}/oraclelobfix.jar"/>
 	</target>
@@ -138,7 +139,7 @@
 	
 	<target	name="_all_common_plugins"
 			    depends="agent.jar,dialog.jar,http.jar,mail.jar,tabxport.jar,excelxport.jar,pdf_output.jar,file.jar,scheduler.jar,
-			 	   pdf_forms.jar,dbtreeview.jar,amortization.jar,spellcheck.jar,images.jar,window.jar,udp.jar,rawSQL.jar,openid.jar,
+			 	   pdf_forms.jar,dbtreeview.jar,jfxpanel.jar,amortization.jar,spellcheck.jar,images.jar,window.jar,udp.jar,rawSQL.jar,openid.jar,
 			 	   xmlreader.jar,serialize.jar,default_validators.jar,converters.jar,rest_ws.jar,headlessclient.jar"
 	>
 		<!--<ant target="clean"/>-->
@@ -146,7 +147,7 @@
 	
 	<target	name="all_extensions"
 				    depends="agent.exp,dialog.exp,http.exp,mail.exp,tabxport.exp,excelxport.exp,pdf_output.exp,file.exp,scheduler.exp,
-	 	   pdf_forms.exp,dbtreeview.exp,amortization.exp,spellcheck.exp,images.exp,window.exp,udp.exp,rawSQL.exp,openid.exp,
+	 	   pdf_forms.exp,dbtreeview.exp,jfxpanel.exp,amortization.exp,spellcheck.exp,images.exp,window.exp,udp.exp,rawSQL.exp,openid.exp,
 	 	   xmlreader.exp,serialize.exp,default_validators.exp,converters.exp,rest_ws.exp,headlessclient.exp"/>
 
 	<!--================================================
@@ -940,6 +941,54 @@
 			<fileset file="${src_beans.dir}/dbtreeview/res/icon/DBTreeView32.gif"/>
 		</copy>
 		<zip	destfile="${extensions.dir}/dbtreeview.exp"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	
+	<target name="jfxpanel.jar" depends="compile">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}/META-INF"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/META-INF">
+			<fileset file="resources/jfxpanel/MANIFEST.MF"/>
+		</copy>
+		<delete file="${beans.dir}/jfxpanel.jar" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/jfxpanel">
+			<fileset dir="${src_beans.dir}/jfxpanel">
+				<filename name="**/*.html"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/jfxpanel">
+			<fileset dir="${src_beans.dir}/jfxpanel">
+				<include name="**/servoy-*.xml"/>
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/beans/jfxpanel">
+			<fileset dir="${bin_beans.dir}/jfxpanel">
+				<filename name="**/*.class"/>
+			</fileset>
+		</copy>
+		<jar	destfile="${beans.dir}/jfxpanel.jar"
+		    	manifest="${tempForJar.dir}/META-INF/MANIFEST.MF"
+				basedir="${tempForJar.dir}"
+				duplicate="fail"
+		/>
+		<delete dir="${tempForJar.dir}"/>
+	</target>
+	
+	<target name="jfxpanel.exp" depends="jfxpanel.jar">
+		<delete dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}"/>
+		<delete file="${extensions.dir}/jfxpanel.exp" quiet="true"/>
+		<copy overwrite="true" todir="${tempForJar.dir}">
+			<fileset file="${src_beans.dir}/jfxpanel/package.xml"/>
+		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/application_server/beans">
+			<fileset file="${beans.dir}/jfxpanel.jar"/>
+		</copy>
+		<zip	destfile="${extensions.dir}/jfxpanel.exp"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
 		/>
