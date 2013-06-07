@@ -648,7 +648,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 								path.add(child);
 								lastNode = child;
 								found = true;
-								if (!lastNode.isLeaf())
+								if (treemodel.hasChild(lastNode))
 								{
 									treemodel.lazyLoadChilderenIfNeeded(lastNode);
 									if (expand && i < nodePath.length - 1) abstractTree.getTreeState().expandNode(lastNode);
@@ -665,7 +665,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 							path.add(child);
 							lastNode = child;
 							found = true;
-							if (!lastNode.isLeaf())
+							if (treemodel.hasChild(lastNode))
 							{
 								treemodel.lazyLoadChilderenIfNeeded(lastNode);
 								if (expand && i < nodePath.length - 1) abstractTree.getTreeState().expandNode(lastNode);
@@ -688,17 +688,6 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 		{
 			TreeNode lastNode = (TreeNode)path.get(path.size() - 1);
 
-			while (lastNode instanceof FoundSetTreeModel.UserNode && !((FoundSetTreeModel.UserNode)lastNode).isInitialized())
-			{
-				try
-				{
-					Thread.sleep(50);
-				}
-				catch (InterruptedException e)
-				{
-					Debug.error(e);
-				}
-			}
 			ITreeState treeState = abstractTree.getTreeState();
 			if (expand_collapse)
 			{
