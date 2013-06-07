@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="lib/openid4java.jar" sourcepath="libsrc/openid4java-src.zip"/>
 	<classpathentry kind="lib" path="/servoy_shared/lib/tim-api.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/servoy_base"/>
+	<classpathentry kind="lib" path="lib/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

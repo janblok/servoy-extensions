@@ -21,7 +21,6 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
 import com.servoy.j2db.ui.IComponent;
-import com.servoy.j2db.util.Utils;
 
 /**
  * @author lvostinar
@@ -57,6 +56,6 @@ public class ServoyJFXPanel extends JFXPanel implements IComponent//, IScriptabl
 
 	public boolean isJavaFXAvailable()
 	{
-		return Utils.isJavaFXAvailable(getClass().getClassLoader());
+		return true;
 	}
 }

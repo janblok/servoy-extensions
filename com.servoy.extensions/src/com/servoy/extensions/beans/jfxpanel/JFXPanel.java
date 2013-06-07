@@ -17,6 +17,8 @@
 
 package com.servoy.extensions.beans.jfxpanel;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.servoy.j2db.IServoyBeanFactory;
@@ -24,7 +26,6 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.ui.IComponent;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ExtendableURLClassLoader;
-import com.servoy.j2db.util.Utils;
 
 /**
  * @author lvostinar
@@ -47,7 +48,7 @@ public class JFXPanel implements IServoyBeanFactory
 		}
 		else
 		{
-			if (Utils.isJavaFXAvailable(getClass().getClassLoader()))
+			if (isJavaFXAvailable(getClass().getClassLoader()))
 			{
 				try
 				{
@@ -64,7 +65,7 @@ public class JFXPanel implements IServoyBeanFactory
 			}
 			else
 			{
-				URL fxUrl = Utils.getJavaFXURL();
+				URL fxUrl = getJavaFXURL();
 				if (fxUrl != null && getClass().getClassLoader() instanceof ExtendableURLClassLoader)
 				{
 					((ExtendableURLClassLoader)getClass().getClassLoader()).addURL(fxUrl);
@@ -85,5 +86,37 @@ public class JFXPanel implements IServoyBeanFactory
 			return new EmptyJFXPanel();
 		}
 
+	}
+
+	private static boolean isJavaFXAvailable(ClassLoader classLoader)
+	{
+		try
+		{
+			Class.forName("javafx.embed.swing.JFXPanel", false, classLoader); //$NON-NLS-1$
+			return true;
+		}
+		catch (Exception e)
+		{
+			// ignore
+		}
+		return false;
+	}
+
+	private static URL getJavaFXURL()
+	{
+		String jrePath = System.getProperty("java.home"); //$NON-NLS-1$
+		File javaFXJar = new File(jrePath, "lib/jfxrt.jar"); //$NON-NLS-1$
+		if (javaFXJar.exists())
+		{
+			try
+			{
+				return javaFXJar.toURI().toURL();
+			}
+			catch (MalformedURLException e)
+			{
+				Debug.error(e);
+			}
+		}
+		return null;
 	}
 }
