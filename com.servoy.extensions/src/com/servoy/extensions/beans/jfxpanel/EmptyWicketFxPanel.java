@@ -33,7 +33,7 @@ import com.servoy.j2db.ui.IComponent;
  * @author lvostinar
  *
  */
-public class EmptyWicketFxPanel extends Label implements IComponent, IScriptableJFXPanel
+public class EmptyWicketFxPanel extends Label implements IComponent, IJFXPanel
 {
 	private final String id;
 
@@ -44,7 +44,7 @@ public class EmptyWicketFxPanel extends Label implements IComponent, IScriptable
 	}
 
 	@Override
-	public boolean js_isJavaFXAvailable()
+	public boolean isJavaFXAvailable()
 	{
 		return false;
 	}

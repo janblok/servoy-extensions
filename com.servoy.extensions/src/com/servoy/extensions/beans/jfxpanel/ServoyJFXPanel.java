@@ -26,8 +26,7 @@ import com.servoy.j2db.ui.IComponent;
  * @author lvostinar
  *
  */
-// this class also implements methods from IScriptableJFXPanel, cannot do it directly because we need access to java methods also
-public class ServoyJFXPanel extends JFXPanel implements IComponent//, IScriptableJFXPanel
+public class ServoyJFXPanel extends JFXPanel implements IComponent, IJFXPanel
 {
 	public ServoyJFXPanel()
 	{
@@ -45,7 +44,6 @@ public class ServoyJFXPanel extends JFXPanel implements IComponent//, IScriptabl
 	public void setComponentVisible(boolean visible)
 	{
 		setVisible(visible);
-
 	}
 
 	@Override

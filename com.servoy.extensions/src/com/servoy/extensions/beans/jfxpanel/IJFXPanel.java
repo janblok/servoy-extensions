@@ -17,23 +17,15 @@
 
 package com.servoy.extensions.beans.jfxpanel;
 
-import com.servoy.j2db.documentation.ServoyDocumented;
-import com.servoy.j2db.scripting.IScriptable;
-
 /**
  * @author lvostinar
  *
  */
-@ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "JFXPanel")
-public interface IScriptableJFXPanel extends IScriptable
+public interface IJFXPanel 
 {
 	/**
 	 * Utility method to decide if Java FX is installed.
 	 * 
-	 * @sample
-	 * %%elementName%%.isJavaFXAvailable();
-	 * 
-	 * @return boolean indicating availability
 	 */
-	boolean js_isJavaFXAvailable();
+	boolean isJavaFXAvailable();
 }

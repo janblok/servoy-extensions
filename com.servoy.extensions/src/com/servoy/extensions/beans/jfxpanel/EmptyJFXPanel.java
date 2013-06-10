@@ -25,7 +25,7 @@ import com.servoy.j2db.ui.IComponent;
  * @author lvostinar
  *
  */
-public class EmptyJFXPanel extends JLabel implements IComponent, IScriptableJFXPanel
+public class EmptyJFXPanel extends JLabel implements IComponent, IJFXPanel
 {
 
 	public EmptyJFXPanel()
@@ -34,7 +34,7 @@ public class EmptyJFXPanel extends JLabel implements IComponent, IScriptableJFXP
 	}
 
 	@Override
-	public boolean js_isJavaFXAvailable()
+	public boolean isJavaFXAvailable()
 	{
 		return false;
 	}
