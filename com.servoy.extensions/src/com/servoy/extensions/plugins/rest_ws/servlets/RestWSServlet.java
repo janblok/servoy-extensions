@@ -329,6 +329,18 @@ public class RestWSServlet extends HttpServlet
 			}
 
 			response.setHeader("Allow", retval);
+
+			String value = request.getHeader("Access-Control-Request-Headers");
+			if (value == null)
+			{
+				value = "Allow";
+			}
+			else if (!value.contains("Allow"))
+			{
+				value += ", Allow";
+			}
+			response.setHeader("Access-Control-Allow-Headers", value);
+			response.setHeader("Access-Control-Expose-Headers", value + ", " + WS_NODEBUG_HEADER);
 		}
 		catch (Exception e)
 		{
@@ -683,11 +695,10 @@ public class RestWSServlet extends HttpServlet
 		if (request.getMethod().equalsIgnoreCase("OPTIONS"))
 		{
 			String header = request.getHeader("Access-Control-Request-Headers");
-			if (header.contains(WS_NODEBUG_HEADER))
+			if (header != null && header.contains(WS_NODEBUG_HEADER))
 			{
 				return true;
 			}
-			else return false;
 		}
 		return request.getHeader(WS_NODEBUG_HEADER) != null ? true : false;
 	}
