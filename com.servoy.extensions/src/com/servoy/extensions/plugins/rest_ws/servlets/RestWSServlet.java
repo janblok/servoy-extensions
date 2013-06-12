@@ -393,18 +393,6 @@ public class RestWSServlet extends HttpServlet
 		try
 		{
 			client = plugin.getClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName);
-			if (wsRequest.solutionName != null && !wsRequest.solutionName.equals(client.getPluginAccess().getSolutionName()))
-			{
-				try
-				{
-					client.closeSolution(true);
-					client.loadSolution(wsRequest.solutionName);
-				}
-				catch (Exception ex)
-				{
-					throw new WebServiceException("Cannot load solution in Rest client " + wsRequest.solutionName, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				}
-			}
 			Object ws_authenticate_result = checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
 
 			FunctionDefinition fd = new FunctionDefinition(wsRequest.formName, methodName);
