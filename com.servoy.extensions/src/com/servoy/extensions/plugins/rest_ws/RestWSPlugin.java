@@ -204,7 +204,7 @@ public class RestWSPlugin implements IServerPlugin
 					String solutionName = (String)key;
 					if (solutionName.contains(":")) solutionName = solutionName.split(":")[0];
 
-					if (!solutionName.equals(((IHeadlessClient)obj).getPluginAccess().getSolutionName()))
+					if (client.getPluginAccess().isInDeveloper() && !solutionName.equals(((IHeadlessClient)obj).getPluginAccess().getSolutionName()))
 					{
 						try
 						{
