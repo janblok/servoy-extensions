@@ -201,19 +201,22 @@ public class RestWSPlugin implements IServerPlugin
 				public boolean validateObject(Object key, Object obj)
 				{
 					IHeadlessClient client = ((IHeadlessClient)obj);
-					String solutionName = (String)key;
-					if (solutionName.contains(":")) solutionName = solutionName.split(":")[0];
-
-					if (client.getPluginAccess().isInDeveloper() && !solutionName.equals(((IHeadlessClient)obj).getPluginAccess().getSolutionName()))
+					if (client.getPluginAccess().isInDeveloper())
 					{
-						try
+						String solutionName = (String)key;
+						if (solutionName.contains(":")) solutionName = solutionName.split(":")[0];
+
+						if (!solutionName.equals(((IHeadlessClient)obj).getPluginAccess().getSolutionName()))
 						{
-							client.closeSolution(true);
-							client.loadSolution(solutionName);
-						}
-						catch (Exception ex)
-						{
-							return false;
+							try
+							{
+								client.closeSolution(true);
+								client.loadSolution(solutionName);
+							}
+							catch (Exception ex)
+							{
+								return false;
+							}
 						}
 					}
 					boolean valid = client.isValid();
