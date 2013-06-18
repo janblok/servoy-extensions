@@ -129,7 +129,7 @@ var value = cookie.getValue();]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -167,7 +167,7 @@ var value = cookie.getValue();]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -197,7 +197,7 @@ var value = cookie.getValue();]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
@@ -318,7 +318,7 @@ var value = cookie.getValue();]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -356,7 +356,7 @@ var value = cookie.getValue();]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -386,7 +386,7 @@ var value = cookie.getValue();]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
@@ -1623,7 +1623,7 @@ switch(httpCode) {
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -1661,7 +1661,7 @@ switch(httpCode) {
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -1691,7 +1691,7 @@ switch(httpCode) {
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
@@ -2232,7 +2232,7 @@ if (cookieSet)
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -2270,7 +2270,7 @@ if (cookieSet)
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -2300,7 +2300,7 @@ if (cookieSet)
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
@@ -2558,7 +2558,7 @@ var httpCode = poster.doPost()]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -2596,7 +2596,7 @@ var httpCode = poster.doPost()]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -2626,7 +2626,7 @@ var httpCode = poster.doPost()]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
@@ -2809,7 +2809,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -2847,7 +2847,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -2877,7 +2877,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
@@ -3147,7 +3147,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -3185,7 +3185,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="userName">
@@ -3215,7 +3215,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
               <summary clientSupport="wc,sc"><![CDATA[Execute the request method asynchronous.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+              <sample clientSupport="wc,sc"><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             </samples>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
