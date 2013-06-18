@@ -211,7 +211,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 */
 	public void js_executeAsyncRequest(Function successCallbackMethod, Function errorCallbackMethod)
 	{
-		js_executeAsyncRequest(null, null, successCallbackMethod, errorCallbackMethod);
+		executeAsyncRequest(null, null, null, null, successCallbackMethod, errorCallbackMethod, false);
 	}
 
 	/**
@@ -226,6 +226,31 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 
 	public void js_executeAsyncRequest(final String username, final String password, Function successCallbackMethod, Function errorCallbackMethod)
 	{
+		executeAsyncRequest(username, password, null, null, successCallbackMethod, errorCallbackMethod, false);
+	}
+
+	/**
+	 * Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.
+	 * 
+	 * @sampleas js_executeAsyncRequest(Function,Function)
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 * @param workstation The workstation the authentication request is originating from.
+	 * @param domain The domain to authenticate within.
+	 * @param successCallbackMethod callbackMethod to be called after response is received
+	 * @param errorCallbackMethod callbackMethod to be called if request errors out
+	 */
+
+	public void js_executeAsyncRequest(final String username, final String password, final String workstation, final String domain,
+		Function successCallbackMethod, Function errorCallbackMethod)
+	{
+		executeAsyncRequest(username, password, workstation, domain, successCallbackMethod, errorCallbackMethod, true);
+	}
+
+	private void executeAsyncRequest(final String username, final String password, final String workstation, final String domain,
+		Function successCallbackMethod, Function errorCallbackMethod, final boolean windowsAuthentication)
+	{
 		final FunctionDefinition successFunctionDef = successCallbackMethod != null ? new FunctionDefinition(successCallbackMethod) : null;
 		final FunctionDefinition errorFunctionDef = errorCallbackMethod != null ? new FunctionDefinition(errorCallbackMethod) : null;
 
@@ -235,7 +260,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 			{
 				try
 				{
-					final Response response = executeRequest(username, password, null, null, false);
+					final Response response = executeRequest(username, password, workstation, domain, windowsAuthentication);
 
 					if (successFunctionDef != null)
 					{

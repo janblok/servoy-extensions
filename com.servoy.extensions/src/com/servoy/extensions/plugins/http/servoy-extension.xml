@@ -74,6 +74,40 @@ var value = cookie.getValue();]]></sample>
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -181,6 +215,40 @@ var value = cookie.getValue();]]></sample>
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
@@ -1128,6 +1196,40 @@ switch(httpCode) {
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1565,6 +1667,40 @@ if (cookieSet)
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1784,6 +1920,40 @@ var httpCode = poster.doPost()]]></sample>
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
@@ -1937,6 +2107,40 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
@@ -2145,6 +2349,40 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <parameters>
               <parameter name="headerName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="value" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function name="executeAsyncRequest">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+              <argumentType typecode="org.mozilla.javascript.Function"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
+            <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
+            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <parameters>
+              <parameter name="userName">
+                <description><![CDATA[the user name]]></description>
+              </parameter>
+              <parameter name="password" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the password]]></description>
+              </parameter>
+              <parameter name="workstation" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The workstation the authentication request is originating from.]]></description>
+              </parameter>
+              <parameter name="domain" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[The domain to authenticate within.]]></description>
+              </parameter>
+              <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called after response is received]]></description>
+              </parameter>
+              <parameter name="errorCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
+                <description><![CDATA[callbackMethod to be called if request errors out]]></description>
+              </parameter>
             </parameters>
           </function>
           <function name="executeAsyncRequest">
