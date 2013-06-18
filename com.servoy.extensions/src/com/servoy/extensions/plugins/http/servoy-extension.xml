@@ -82,7 +82,7 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -114,7 +114,7 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -138,7 +138,7 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -229,7 +229,7 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -261,7 +261,7 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -285,7 +285,7 @@ var value = cookie.getValue();]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1204,7 +1204,7 @@ switch(httpCode) {
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1236,7 +1236,7 @@ switch(httpCode) {
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1260,7 +1260,7 @@ switch(httpCode) {
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1675,7 +1675,7 @@ if (cookieSet)
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1707,7 +1707,7 @@ if (cookieSet)
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1731,7 +1731,7 @@ if (cookieSet)
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -1928,7 +1928,7 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1960,7 +1960,7 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -1984,7 +1984,7 @@ var httpCode = poster.doPost()]]></sample>
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -2121,7 +2121,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -2153,7 +2153,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -2177,7 +2177,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>
@@ -2363,7 +2363,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous using windows authentication.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -2395,7 +2395,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="userName">
                 <description><![CDATA[the user name]]></description>
@@ -2419,7 +2419,7 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <return type="void" typecode="void"/>
             <description><![CDATA[Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.]]></description>
             <summary><![CDATA[Execute the request method asynchronous.]]></summary>
-            <sample><![CDATA[var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
+            <sample><![CDATA[method.executeAsyncRequest(globals.successCallback,globals.errorCallback)]]></sample>
             <parameters>
               <parameter name="successCallbackMethod" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[callbackMethod to be called after response is received]]></description>

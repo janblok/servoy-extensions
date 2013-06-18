@@ -203,7 +203,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * Execute the request method asynchronous. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.
 	 *
 	 * @sample
-	 * var response = method.executeAsyncRequest(globals.successCallback,globals.errorCallback)
+	 * method.executeAsyncRequest(globals.successCallback,globals.errorCallback)
 	 * 
 	 * @param successCallbackMethod callbackMethod to be called after response is received
 	 * @param errorCallbackMethod callbackMethod to be called if request errors out
@@ -232,7 +232,8 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	/**
 	 * Execute the request method asynchronous using windows authentication. Success callback method will be called when response is received. Response is sent as parameter in callback. If no response is received (request errors out), the errorCallbackMethod is called with exception message as parameter.
 	 * 
-	 * @sampleas js_executeAsyncRequest(Function,Function)
+	 * @sample
+	 * method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)
 	 *
 	 * @param userName the user name
 	 * @param password the password
