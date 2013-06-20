@@ -218,7 +218,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * @clonedesc js_executeAsyncRequest(Function,Function)
 	 * @sampleas js_executeAsyncRequest(Function,Function)
 	 *
-	 * @param userName the user name
+	 * @param username the user name
 	 * @param password the password
 	 * @param successCallbackMethod callbackMethod to be called after response is received
 	 * @param errorCallbackMethod callbackMethod to be called if request errors out
@@ -235,7 +235,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 * @sample
 	 * method.executeAsyncRequest('username','password','mycomputername','domain',globals.successCallback,globals.errorCallback)
 	 *
-	 * @param userName the user name
+	 * @param username the user name
 	 * @param password the password
 	 * @param workstation The workstation the authentication request is originating from.
 	 * @param domain The domain to authenticate within.

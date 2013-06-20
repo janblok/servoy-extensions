@@ -682,6 +682,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <summaries>
               <summary clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></summary>
             </summaries>
+            <deprecated><![CDATA[Replaced by createColumn(datasource, header, fieldname)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
             </samples>
@@ -707,6 +708,7 @@ companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             <summaries>
               <summary clientSupport="wc,sc"><![CDATA[Create and add new column to the tree table]]></summary>
             </summaries>
+            <deprecated><![CDATA[Replaced by createColumn(datasource, header, fieldname, preferredWidth)]]></deprecated>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[%%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);]]></sample>
             </samples>

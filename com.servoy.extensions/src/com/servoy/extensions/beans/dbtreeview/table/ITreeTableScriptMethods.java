@@ -48,7 +48,6 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	/**
 	 * @clonedesc js_createColumn(String, String, String, String, int)
 	 * @sampleas js_createColumn(String, String, String, String, int)
-	 * @deprecated
 	 * 
 	 * @param servername
 	 * @param tablename
@@ -56,6 +55,8 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 * @param fieldname
 	 *   
 	 * @return Column object
+	 * 
+	 * @deprecated Replaced by createColumn(datasource, header, fieldname)
 	 */
 	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname);
@@ -65,7 +66,6 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 * 
 	 * @sample
 	 * %%elementName%%.createColumn('servername', 'tablename', 'header text', 'tablefieldname', 150);
-	 * @deprecated
 	 * 
 	 * @param servername
 	 * @param tablename
@@ -74,6 +74,8 @@ public interface ITreeTableScriptMethods extends ITreeViewScriptMethods
 	 * @param preferredWidth
 	 *   
 	 * @return Column object
+	 * 
+	 * @deprecated Replaced by createColumn(datasource, header, fieldname, preferredWidth)
 	 */
 	@Deprecated
 	public Column js_createColumn(String servername, String tablename, String header, String fieldname, int preferredWidth);
