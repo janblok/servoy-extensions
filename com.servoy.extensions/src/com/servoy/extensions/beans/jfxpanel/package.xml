@@ -3,7 +3,12 @@
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.jfxpanel</extension-id>
 	<extension-name>JFXPanel Bean</extension-name> 
-	<version>7.1.1</version>
+	<version>7.2.0</version>
+	<dependencies>
+	    <servoy>
+	       <min-version>7.2.0</min-version>
+	    </servoy>
+	</dependencies>
 	<info>
     	 <description>Wrapper around JFXPanel from Java FX.</description>
     </info>
