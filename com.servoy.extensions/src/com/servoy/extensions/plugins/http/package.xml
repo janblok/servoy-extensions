@@ -3,10 +3,10 @@
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.http</extension-id>
 	<extension-name>Http Plugin</extension-name> 
-	<version>6.1.6</version>
+	<version>6.1.6 rc0</version>
 	<dependencies>
 	    <servoy>
-	       <min-version>6.1.6</min-version>
+	       <min-version>6.1.6 rc0</min-version>
 	    </servoy>
 	</dependencies>
 	<info>
