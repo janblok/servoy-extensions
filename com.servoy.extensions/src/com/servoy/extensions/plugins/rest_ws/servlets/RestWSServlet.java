@@ -695,13 +695,21 @@ public class RestWSServlet extends HttpServlet
 	{
 		int contentType = getContentType(request, "Accept", null, defaultContentType);
 
-		String resultContentType;
-		byte[] bytes;
+		String resultContentType = null;
+		byte[] bytes = null;
 
-		if ((contentType == CONTENT_BINARY) && (result instanceof byte[]))
+		if (contentType == CONTENT_BINARY)
 		{
-			resultContentType = "application/binary";
-			bytes = (byte[])result;
+			if (result instanceof byte[])
+			{
+				resultContentType = "application/binary";
+				bytes = (byte[])result;
+			}
+			else
+			{
+				sendError(response, HttpServletResponse.SC_NOT_FOUND);
+				return;
+			}
 		}
 		else
 		{
