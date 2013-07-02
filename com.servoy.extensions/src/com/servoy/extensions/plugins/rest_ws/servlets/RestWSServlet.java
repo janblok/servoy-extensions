@@ -695,8 +695,8 @@ public class RestWSServlet extends HttpServlet
 	{
 		int contentType = getContentType(request, "Accept", null, defaultContentType);
 
-		String resultContentType = null;
-		byte[] bytes = null;
+		String resultContentType;
+		byte[] bytes;
 
 		if (contentType == CONTENT_BINARY)
 		{
@@ -707,7 +707,8 @@ public class RestWSServlet extends HttpServlet
 			}
 			else
 			{
-				sendError(response, HttpServletResponse.SC_NOT_FOUND);
+				plugin.log.error("Request for binary data was made, but the return data is not a byte array; return data is " + result);
+				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
 		}
