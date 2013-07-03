@@ -698,10 +698,19 @@ public class RestWSServlet extends HttpServlet
 		String resultContentType;
 		byte[] bytes;
 
-		if ((contentType == CONTENT_BINARY) && (result instanceof byte[]))
+		if (contentType == CONTENT_BINARY)
 		{
-			resultContentType = "application/binary";
-			bytes = (byte[])result;
+			if (result instanceof byte[])
+			{
+				resultContentType = "application/binary";
+				bytes = (byte[])result;
+			}
+			else
+			{
+				plugin.log.error("Request for binary data was made, but the return data is not a byte array; return data is " + result);
+				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+				return;
+			}
 		}
 		else
 		{
