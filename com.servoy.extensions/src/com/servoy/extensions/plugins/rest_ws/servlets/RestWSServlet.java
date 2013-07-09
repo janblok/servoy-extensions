@@ -49,6 +49,7 @@ import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.HTTPUtils;
+import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -142,13 +143,12 @@ public class RestWSServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		IHeadlessClient client = null;
-		StringBuffer solName = new StringBuffer();
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			plugin.log.trace("GET");
-			client = getClient(request, solName);
-			Object result = wsService(WS_READ, null, request, response, client);
+			client = getClient(request);
+			Object result = wsService(WS_READ, null, request, response, client.getLeft());
 			if (result == null)
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
@@ -165,18 +165,24 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(solName.toString(), client);
+				plugin.releaseClient(client.getRight(), client.getLeft());
 			}
 		}
 	}
 
-	private IHeadlessClient getClient(HttpServletRequest request, /* OUT param */StringBuffer solutionName) throws Exception
+	/**
+	 * 
+	 * @param request HttpServletRequest
+	 * @return  a pair of IHeadlessClient object and the keyname from the objectpool ( the keyname depends if it nodebug mode is enabled)
+	 * @throws Exception
+	 */
+	private Pair<IHeadlessClient, String> getClient(HttpServletRequest request) throws Exception
 	{
 		WsRequest wsRequest = parsePath(request);
 		boolean nodebug = getNodebugHeadderValue(request);
-		solutionName.append(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName);
+		String solutionName = nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName;
 		IHeadlessClient client = plugin.getClient(solutionName.toString());
-		return client;
+		return new Pair<IHeadlessClient, String>(client, solutionName);
 	}
 
 	private void handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -240,13 +246,13 @@ public class RestWSServlet extends HttpServlet
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		IHeadlessClient client = null;
-		StringBuffer solName = new StringBuffer();
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			plugin.log.trace("DELETE");
-			client = getClient(request, solName);
-			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response, client)))
+
+			client = getClient(request);
+			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response, client.getLeft())))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -260,7 +266,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(solName.toString(), client);
+				plugin.releaseClient(client.getRight(), client.getLeft());
 			}
 		}
 	}
@@ -268,8 +274,7 @@ public class RestWSServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		IHeadlessClient client = null;
-		StringBuffer solName = new StringBuffer();
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			byte[] contents = getBody(request);
@@ -284,8 +289,8 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			client = getClient(request, solName);
-			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client);
+			client = getClient(request);
+			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client.getLeft());
 			HTTPUtils.setNoCacheHeaders(response);
 			if (result != null)
 			{
@@ -300,7 +305,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(solName.toString(), client);
+				plugin.releaseClient(client.getRight(), client.getLeft());
 			}
 		}
 	}
@@ -308,8 +313,7 @@ public class RestWSServlet extends HttpServlet
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		IHeadlessClient client = null;
-		StringBuffer solName = new StringBuffer();
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			byte[] contents = getBody(request);
@@ -324,8 +328,8 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			client = getClient(request, solName);
-			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client)))
+			client = getClient(request);
+			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client.getLeft())))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -339,7 +343,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(solName.toString(), client);
+				plugin.releaseClient(client.getRight(), client.getLeft());
 			}
 		}
 	}
