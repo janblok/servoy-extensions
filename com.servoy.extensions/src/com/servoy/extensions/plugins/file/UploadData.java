@@ -68,7 +68,7 @@ public class UploadData extends AbstractFile
 	@Override
 	public long lastModified()
 	{
-		return System.currentTimeMillis();
+		return upload.lastModified();
 	}
 
 	@Override

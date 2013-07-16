@@ -95,11 +95,6 @@ public interface IAbstractFile extends IUploadData
 	boolean isHidden();
 
 	/**
-	 * @return the last modified date/time as a long
-	 */
-	long lastModified();
-
-	/**
 	 * @return the size of the file
 	 */
 	long size();
