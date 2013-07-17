@@ -28,9 +28,9 @@ import com.servoy.j2db.ui.IComponent;
 public class EmptyJFXPanel extends JLabel implements IComponent, IJFXPanel
 {
 
-	public EmptyJFXPanel()
+	public EmptyJFXPanel(String reason)
 	{
-		super("Cannot initialize bean because Java FX install was not found.");
+		super(reason);
 	}
 
 	@Override

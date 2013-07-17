@@ -36,7 +36,7 @@ public class JFXPanel implements IServoyBeanFactory
 	@Override
 	public String getName()
 	{
-		return "JFXPanel";
+		return "JFXPanel"; //$NON-NLS-1$
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class JFXPanel implements IServoyBeanFactory
 		{
 			return new EmptyWicketFxPanel((String)cargs[0]);
 		}
-		else
+		else if (!"true".equalsIgnoreCase(System.getProperty("java.awt.headless", "false"))) //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		{
 			if (isJavaFXAvailable(getClass().getClassLoader()))
 			{
@@ -83,9 +83,13 @@ public class JFXPanel implements IServoyBeanFactory
 					}
 				}
 			}
-			return new EmptyJFXPanel();
+			return new EmptyJFXPanel("Cannot initialize bean because Java FX install was not found."); //$NON-NLS-1$
 		}
-
+		else
+		{
+			// java.awt.headless is set to true; this will cause a warning on Mac if we begin loafing JavaFX, so don't load it to avoid the warning
+			return new EmptyJFXPanel("Will not initialize Java FX bean because -Djava.awt.headless was used."); //$NON-NLS-1$
+		}
 	}
 
 	private static boolean isJavaFXAvailable(ClassLoader classLoader)
