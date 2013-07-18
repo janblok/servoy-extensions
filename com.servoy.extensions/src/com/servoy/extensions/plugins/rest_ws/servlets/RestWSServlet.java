@@ -16,15 +16,19 @@
  */
 package com.servoy.extensions.plugins.rest_ws.servlets;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import javax.mail.BodyPart;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -96,6 +100,7 @@ public class RestWSServlet extends HttpServlet
 	private static final int CONTENT_JSON = 1;
 	private static final int CONTENT_XML = 2;
 	private static final int CONTENT_BINARY = 3;
+	private static final int CONTENT_MULTIPART = 4;
 
 	private static final int CONTENT_DEFAULT = CONTENT_JSON;
 	private static final String CHARSET_DEFAULT = "UTF-8";
@@ -661,6 +666,10 @@ public class RestWSServlet extends HttpServlet
 		{
 			return CONTENT_BINARY;
 		}
+		if (contentType != null && contentType.toLowerCase().indexOf("multipart") >= 0)
+		{
+			return CONTENT_MULTIPART;
+		}
 
 		if (contents != null)
 		{
@@ -710,6 +719,65 @@ public class RestWSServlet extends HttpServlet
 
 			case CONTENT_XML :
 				return plugin.getJSONSerializer().fromJSON(XML.toJSONObject(new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT))));
+
+			case CONTENT_MULTIPART :
+				javax.mail.internet.MimeMultipart m = new MimeMultipart(new ServletMultipartDataSource(new ByteArrayInputStream(contents),
+					request.getContentType()));
+				Object[] partArray = new Object[m.getCount()];
+				for (int i = 0; i < m.getCount(); i++)
+				{
+					BodyPart bodyPart = m.getBodyPart(i);
+					JSMap<String, Object> partObj = new JSMap<String, Object>();
+					partObj.put("filename", bodyPart.getFileName() != null ? bodyPart.getFileName() : "");
+					String partContentType = "";
+					if (bodyPart.getContentType() != null) partContentType = bodyPart.getContentType();
+					//GetCharset
+					String charset = CHARSET_DEFAULT;
+					String parsedCharset = partContentType.replaceAll(".*?charset=(\\w+?)", "$1");
+					partContentType = partContentType.replaceAll("(.*?);\\s*charset=.*", "$1");
+					charset = parsedCharset.length() > 0 && parsedCharset.length() < partContentType.length() ? parsedCharset : charset;
+					partObj.put("contentType", partContentType);
+					partObj.put("charset", charset);
+					InputStream contentStream = bodyPart.getInputStream();
+					//Get content value
+					if (partContentType.toLowerCase().contains("json"))
+					{
+						String jsonString = Utils.getTXTFileContent(contentStream, Charset.forName(charset), true);
+						Object jsonObj = plugin.getJSONSerializer().fromJSON(jsonString);
+						partObj.put("value", jsonObj);
+					}
+					else if (partContentType.contains("text"))
+					{
+						// Text content
+						partObj.put("value", new String(Utils.getBytesFromInputStream(contentStream)));
+					}
+					else if (partContentType.contains("xml"))
+					{
+						Object xmlObj = plugin.getJSONSerializer().fromJSON(
+							XML.toJSONObject(new String(Utils.getBytesFromInputStream(contentStream), getCharset(request, "Content-Type", CHARSET_DEFAULT))));
+						partObj.put("value", xmlObj);
+					}
+					else
+					{ // binary content
+						partObj.put("value", Utils.getBytesFromInputStream(contentStream));
+					}
+
+					// Get name header
+					String nameHeader = "";
+					String[] nameHeaders = bodyPart.getHeader("Content-Disposition");
+					if (nameHeaders != null)
+					{
+						for (String bodyName : nameHeaders)
+						{
+							String name = bodyName.replaceAll(".*?\\sname=\"(.+?)\".*", "$1");
+							if (name.length() > 0 && bodyName.length() > name.length()) nameHeader = name;
+							break;
+						}
+					}
+					partObj.put("name", nameHeader);
+					partArray[i] = partObj;
+				}
+				return partArray;
 
 			case CONTENT_BINARY :
 				return contents;
@@ -795,7 +863,9 @@ public class RestWSServlet extends HttpServlet
 				case CONTENT_XML :
 					content = "<?xml version=\"1.0\" encoding=\"" + charset + "\"?>\n" + ((isXML) ? result.toString() : XML.toString(json, null));
 					break;
-
+				case CONTENT_MULTIPART :
+					content = "";
+					break;
 				default :
 					// how can this happen...
 					throw new IllegalStateException();
@@ -809,6 +879,10 @@ public class RestWSServlet extends HttpServlet
 
 				case CONTENT_XML :
 					resultContentType = "application/xml";
+					break;
+				case CONTENT_MULTIPART :
+					resultContentType = "";
+					response.setStatus(HttpServletResponse.SC_FOUND);
 					break;
 
 				default :
