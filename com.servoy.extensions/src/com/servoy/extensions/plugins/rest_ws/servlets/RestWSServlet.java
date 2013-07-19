@@ -711,16 +711,16 @@ public class RestWSServlet extends HttpServlet
 	 * <br/>
 	 * calling getHeaderKey(header,"name","--") will return <b>myFile<b/>
 	 */
-	protected String getHeaderKey(String header, String subHeaderName, String defaultValue)
+	protected String getHeaderKey(String header, String key, String defaultValue)
 	{
 		if (header != null)
 		{
 			String[] split = header.split("; *");
 			for (String element : split)
 			{
-				if (element.toLowerCase().startsWith(subHeaderName + "="))
+				if (element.toLowerCase().startsWith(key + "="))
 				{
-					String charset = element.substring((subHeaderName + "=").length());
+					String charset = element.substring(key.length() + 1);
 					if (charset.length() > 1 && charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"')
 					{
 						charset = charset.substring(1, charset.length() - 1);
@@ -755,22 +755,27 @@ public class RestWSServlet extends HttpServlet
 					//charset
 					if (bodyPart.getContentType() != null) partContentType = bodyPart.getContentType();
 
-					String _charset = getHeaderKey(partContentType, "charset", CHARSET_DEFAULT);
+					String _charset = getHeaderKey(partContentType, "charset", "");
 					partContentType = partContentType.replaceAll("(.*?);\\s*\\w+=.*", "$1");
 					//contentType
 					if (partContentType.length() > 0) partObj.put("contentType", partContentType);
 					if (_charset.length() > 0) partObj.put("charset", _charset);
 					InputStream contentStream = bodyPart.getInputStream();
-					if (contentStream.available() > 0)
+					try
 					{
-						//Get content value
-						Object decodedBodyPart = decodeContent(partContentType, getContentType(partContentType), Utils.getBytesFromInputStream(contentStream),
-							_charset);
-						contentStream.close();
-						partObj.put("value", decodedBodyPart);
+						if (contentStream.available() > 0)
+						{
+							//Get content value
+							Object decodedBodyPart = decodeContent(partContentType, getContentType(partContentType),
+								Utils.getBytesFromInputStream(contentStream), _charset);
+							contentStream.close();
+							partObj.put("value", decodedBodyPart);
+						}
 					}
-					contentStream.close();
-
+					finally
+					{
+						contentStream.close();
+					}
 
 					// Get name header
 					String nameHeader = "";
