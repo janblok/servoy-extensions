@@ -3,10 +3,10 @@
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.dbtreeview</extension-id>
 	<extension-name>Tree Viewer Bean</extension-name> 
-	<version>7.2.0 rc0</version>
+	<version>7.2.0</version>
 	<dependencies>
 	    <servoy>
-	       <min-version>7.2.0 rc0</min-version>
+	       <min-version>7.2.0</min-version>
 	    </servoy>
 	    <lib>
         	<id>com.inmethod.grid</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
