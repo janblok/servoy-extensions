@@ -17,25 +17,22 @@
 
 package com.servoy.extensions.plugins.http;
 
-import java.io.UnsupportedEncodingException;
-
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 
 import com.servoy.j2db.plugins.IClientPluginAccess;
-import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
 /**
  * @author pbakker
- *
  */
 public class BaseEntityEnclosingRequest extends BaseRequest
 {
-	protected String content;
+	private String content;
+	private String mimeType;
 	protected String charset = HTTP.UTF_8;
 
 	public BaseEntityEnclosingRequest()
@@ -53,12 +50,28 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 	 * @sample
 	 * method.setBodyContent(content)
 	 *
-	 * @param s 
+	 * @param content 
 	 */
-	public void js_setBodyContent(String s)
+	public void js_setBodyContent(String content)
 	{
-		this.content = s;
+		this.content = content;
 	}
+
+	/**
+	 * Set the body of the request and content mime type.
+	 *
+	 * @sample
+	 * method.setBodyContent(content, 'text/xml')
+	 *
+	 * @param content
+	 * @param mimeType 
+	 */
+	public void js_setBodyContent(String content, String mimeType)
+	{
+		this.content = content;
+		this.mimeType = mimeType;
+	}
+
 
 	/**
 	 * Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).
@@ -79,20 +92,14 @@ public class BaseEntityEnclosingRequest extends BaseRequest
 	}
 
 	@Override
-	public Response js_executeRequest(String userName, String password)
+	protected HttpEntity buildEntity() throws Exception
 	{
-		try
+		if (!Utils.stringIsEmpty(content))
 		{
-			if (!Utils.stringIsEmpty(content))
-			{
-				((HttpEntityEnclosingRequestBase)method).setEntity(new StringEntity(content, charset));
-			}
+			StringEntity se = new StringEntity(content, mimeType, charset);
+			content = null;
+			return se;
 		}
-		catch (UnsupportedEncodingException e)
-		{
-			Debug.error(e);
-		}
-		return super.js_executeRequest(userName, password);
+		return null;
 	}
-
 }

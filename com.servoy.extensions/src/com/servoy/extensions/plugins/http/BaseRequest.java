@@ -17,17 +17,17 @@
 
 package com.servoy.extensions.plugins.http;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -161,9 +161,16 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		}
 	}
 
-	private Response executeRequest(String userName, String password, String workstation, String domain, boolean windowsAuthentication)
-		throws ClientProtocolException, IOException
+	protected HttpEntity buildEntity() throws Exception
 	{
+		return null;
+	}
+
+	private Response executeRequest(String userName, String password, String workstation, String domain, boolean windowsAuthentication) throws Exception
+	{
+		HttpEntity entity = buildEntity();
+		if (entity != null) ((HttpEntityEnclosingRequestBase)method).setEntity(entity);
+
 		Iterator<String> it = headers.keySet().iterator();
 		while (it.hasNext())
 		{
