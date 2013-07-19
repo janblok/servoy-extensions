@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -101,6 +100,7 @@ public class RestWSServlet extends HttpServlet
 	private static final int CONTENT_XML = 2;
 	private static final int CONTENT_BINARY = 3;
 	private static final int CONTENT_MULTIPART = 4;
+	private static final int CONTENT_TEXT = 5;
 
 	private static final int CONTENT_DEFAULT = CONTENT_JSON;
 	private static final String CHARSET_DEFAULT = "UTF-8";
@@ -288,14 +288,16 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_NO_CONTENT);
 				return;
 			}
-			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER);
+			int contentType = getRequestContentType(request, "Content-Type", contents, CONTENT_OTHER);
 			if (contentType == CONTENT_OTHER)
 			{
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
 			client = getClient(request);
-			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client.getLeft());
+			String charset = getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT);
+			Object result = wsService(WS_CREATE, new Object[] { decodeContent(request.getContentType(), contentType, contents, charset) }, request, response,
+				client.getLeft());
 			HTTPUtils.setNoCacheHeaders(response);
 			if (result != null)
 			{
@@ -327,14 +329,16 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_NO_CONTENT);
 				return;
 			}
-			int contentType = getContentType(request, "Content-Type", contents, CONTENT_OTHER);
+			int contentType = getRequestContentType(request, "Content-Type", contents, CONTENT_OTHER);
 			if (contentType == CONTENT_OTHER)
 			{
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
 			client = getClient(request);
-			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client.getLeft())))
+			String charset = getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT);
+			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeContent(request.getContentType(), contentType, contents, charset) }, request,
+				response, client.getLeft())))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -651,29 +655,42 @@ public class RestWSServlet extends HttpServlet
 		}
 	}
 
-	private int getContentType(HttpServletRequest request, String header, byte[] contents, int defaultContentType) throws UnsupportedEncodingException
+	private int getContentType(String headerValue)
 	{
-		String contentType = request.getHeader(header);
-		if (contentType != null && contentType.toLowerCase().indexOf("json") >= 0)
+
+		if (headerValue != null && headerValue.toLowerCase().indexOf("json") >= 0)
 		{
 			return CONTENT_JSON;
 		}
-		if (contentType != null && contentType.toLowerCase().indexOf("xml") >= 0)
+		if (headerValue != null && headerValue.toLowerCase().indexOf("xml") >= 0)
 		{
 			return CONTENT_XML;
 		}
-		if (contentType != null && contentType.toLowerCase().indexOf("binary") >= 0)
+		if (headerValue != null && headerValue.toLowerCase().indexOf("binary") >= 0)
 		{
 			return CONTENT_BINARY;
 		}
-		if (contentType != null && contentType.toLowerCase().indexOf("multipart") >= 0)
+		if (headerValue != null && headerValue.toLowerCase().indexOf("multipart") >= 0)
 		{
 			return CONTENT_MULTIPART;
 		}
+		if (headerValue != null && headerValue.toLowerCase().indexOf("text") >= 0)
+		{
+			return CONTENT_TEXT;
+		}
+
+		return CONTENT_OTHER;
+	}
+
+	private int getRequestContentType(HttpServletRequest request, String header, byte[] contents, int defaultContentType) throws UnsupportedEncodingException
+	{
+		String contentTypeHeaderValue = request.getHeader(header);
+		int contentType = getContentType(contentTypeHeaderValue);
+		if (contentType != CONTENT_OTHER) return contentType;
 
 		if (contents != null)
 		{
-			String stringContent = new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT));
+			String stringContent = new String(contents, getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT));
 			// start guessing....
 			if (stringContent.length() > 0 && stringContent.charAt(0) == '<')
 			{
@@ -684,21 +701,26 @@ public class RestWSServlet extends HttpServlet
 				return CONTENT_JSON;
 			}
 		}
-
 		return defaultContentType;
 	}
 
-	protected String getCharset(HttpServletRequest request, String header, String defaultCharset)
+	/**
+	 * 
+	 * Gets the key from a headder . For example, the folowing header :<br/>
+	 * <b>Content-Disposition: form-data; name="myFile"; filename="SomeRandomFile.txt"</b>
+	 * <br/>
+	 * calling getHeaderKey(header,"name","--") will return <b>myFile<b/>
+	 */
+	protected String getHeaderKey(String header, String subHeaderName, String defaultValue)
 	{
-		String contentType = request.getHeader(header);
-		if (contentType != null)
+		if (header != null)
 		{
-			String[] split = contentType.split("; *");
+			String[] split = header.split("; *");
 			for (String element : split)
 			{
-				if (element.toLowerCase().startsWith("charset="))
+				if (element.toLowerCase().startsWith(subHeaderName + "="))
 				{
-					String charset = element.substring("charset=".length());
+					String charset = element.substring((subHeaderName + "=").length());
 					if (charset.length() > 1 && charset.charAt(0) == '"' && charset.charAt(charset.length() - 1) == '"')
 					{
 						charset = charset.substring(1, charset.length() - 1);
@@ -707,60 +729,48 @@ public class RestWSServlet extends HttpServlet
 				}
 			}
 		}
-		return defaultCharset;
+		return defaultValue;
 	}
 
-	private Object decodeRequest(HttpServletRequest request, int contentType, byte[] contents) throws Exception
+	private Object decodeContent(String contentTypeStr, int contentType, byte[] contents, String charset) throws Exception
 	{
 		switch (contentType)
 		{
 			case CONTENT_JSON :
-				return plugin.getJSONSerializer().fromJSON(new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT)));
+				return plugin.getJSONSerializer().fromJSON(new String(contents, charset));
 
 			case CONTENT_XML :
-				return plugin.getJSONSerializer().fromJSON(XML.toJSONObject(new String(contents, getCharset(request, "Content-Type", CHARSET_DEFAULT))));
+				return plugin.getJSONSerializer().fromJSON(XML.toJSONObject(new String(contents, charset)));
 
 			case CONTENT_MULTIPART :
-				javax.mail.internet.MimeMultipart m = new MimeMultipart(new ServletMultipartDataSource(new ByteArrayInputStream(contents),
-					request.getContentType()));
+				javax.mail.internet.MimeMultipart m = new MimeMultipart(new ServletMultipartDataSource(new ByteArrayInputStream(contents), contentTypeStr));
 				Object[] partArray = new Object[m.getCount()];
 				for (int i = 0; i < m.getCount(); i++)
 				{
 					BodyPart bodyPart = m.getBodyPart(i);
 					JSMap<String, Object> partObj = new JSMap<String, Object>();
-					partObj.put("filename", bodyPart.getFileName() != null ? bodyPart.getFileName() : "");
+					//filename
+					if (bodyPart.getFileName() != null) partObj.put("fileName", bodyPart.getFileName());
 					String partContentType = "";
+					//charset
 					if (bodyPart.getContentType() != null) partContentType = bodyPart.getContentType();
-					//GetCharset
-					String charset = CHARSET_DEFAULT;
-					String parsedCharset = partContentType.replaceAll(".*?charset=(\\w+?)", "$1");
-					partContentType = partContentType.replaceAll("(.*?);\\s*charset=.*", "$1");
-					charset = parsedCharset.length() > 0 && parsedCharset.length() < partContentType.length() ? parsedCharset : charset;
-					partObj.put("contentType", partContentType);
-					partObj.put("charset", charset);
+
+					String _charset = getHeaderKey(partContentType, "charset", CHARSET_DEFAULT);
+					partContentType = partContentType.replaceAll("(.*?);\\s*\\w+=.*", "$1");
+					//contentType
+					if (partContentType.length() > 0) partObj.put("contentType", partContentType);
+					if (_charset.length() > 0) partObj.put("charset", _charset);
 					InputStream contentStream = bodyPart.getInputStream();
-					//Get content value
-					if (partContentType.toLowerCase().contains("json"))
+					if (contentStream.available() > 0)
 					{
-						String jsonString = Utils.getTXTFileContent(contentStream, Charset.forName(charset), true);
-						Object jsonObj = plugin.getJSONSerializer().fromJSON(jsonString);
-						partObj.put("value", jsonObj);
+						//Get content value
+						Object decodedBodyPart = decodeContent(partContentType, getContentType(partContentType), Utils.getBytesFromInputStream(contentStream),
+							_charset);
+						contentStream.close();
+						partObj.put("value", decodedBodyPart);
 					}
-					else if (partContentType.contains("text"))
-					{
-						// Text content
-						partObj.put("value", new String(Utils.getBytesFromInputStream(contentStream)));
-					}
-					else if (partContentType.contains("xml"))
-					{
-						Object xmlObj = plugin.getJSONSerializer().fromJSON(
-							XML.toJSONObject(new String(Utils.getBytesFromInputStream(contentStream), getCharset(request, "Content-Type", CHARSET_DEFAULT))));
-						partObj.put("value", xmlObj);
-					}
-					else
-					{ // binary content
-						partObj.put("value", Utils.getBytesFromInputStream(contentStream));
-					}
+					contentStream.close();
+
 
 					// Get name header
 					String nameHeader = "";
@@ -769,17 +779,21 @@ public class RestWSServlet extends HttpServlet
 					{
 						for (String bodyName : nameHeaders)
 						{
-							String name = bodyName.replaceAll(".*?\\sname=\"(.+?)\".*", "$1");
-							if (name.length() > 0 && bodyName.length() > name.length()) nameHeader = name;
+							String name = getHeaderKey(bodyName, "name", "");
+							if (name.length() > 0) nameHeader = name;
 							break;
 						}
 					}
-					partObj.put("name", nameHeader);
+					if (nameHeader.length() > 0) partObj.put("name", nameHeader);
 					partArray[i] = partObj;
 				}
 				return partArray;
 
 			case CONTENT_BINARY :
+				return contents;
+			case CONTENT_TEXT :
+				return new String(contents, charset);
+			case CONTENT_OTHER :
 				return contents;
 		}
 
@@ -805,7 +819,7 @@ public class RestWSServlet extends HttpServlet
 
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
 	{
-		int contentType = getContentType(request, "Accept", null, defaultContentType);
+		int contentType = getRequestContentType(request, "Accept", null, defaultContentType);
 
 		String resultContentType;
 		byte[] bytes;
@@ -845,7 +859,8 @@ public class RestWSServlet extends HttpServlet
 
 
 			String content;
-			String charset = getCharset(request, "Accept", getCharset(request, "Content-Type", CHARSET_DEFAULT));
+			String contentTypeCharset = getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT);
+			String charset = getHeaderKey(request.getHeader("Accept"), "charset", contentTypeCharset);
 			switch (contentType)
 			{
 				case CONTENT_JSON :
