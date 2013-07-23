@@ -37,6 +37,7 @@ import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
+import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
@@ -92,11 +93,11 @@ public class RestWSPlugin implements IServerPlugin
 	{
 		Map<String, String> req = new HashMap<String, String>();
 		req.put(CLIENT_POOL_SIZE_PROPERTY, "Max number of clients used (this defines the number of concurrent requests and licences used), default = " +
-			CLIENT_POOL_SIZE_DEFAULT);
+			CLIENT_POOL_SIZE_DEFAULT + ", when running in developer this setting is ignored, pool size will always be 1");
 		req.put(CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY, "The following values are supported for this property:\n" +
 			//
 			ACTION_BLOCK +
-			" (default): requests will wait untill a client becomes available\n" +
+			" (default): requests will wait untill a client becomes available, when running in developer this value will be used\n" +
 			//
 			ACTION_FAIL + ": the request will fail. The API will generate a SERVICE_UNAVAILABLE response (HTTP " + HttpServletResponse.SC_SERVICE_UNAVAILABLE +
 			")\n" +
@@ -151,32 +152,41 @@ public class RestWSPlugin implements IServerPlugin
 	{
 		if (clientPool == null)
 		{
-			int poolSize;
-			try
-			{
-				poolSize = Integer.parseInt(application.getSettings().getProperty(CLIENT_POOL_SIZE_PROPERTY));
-			}
-			catch (NumberFormatException nfe)
-			{
-				poolSize = CLIENT_POOL_SIZE_DEFAULT;
-			}
-			String exchaustedActionCode = application.getSettings().getProperty(CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY);
-			if (exchaustedActionCode != null) exchaustedActionCode = exchaustedActionCode.trim();
 			byte exchaustedAction;
-			if (ACTION_FAIL.equalsIgnoreCase(exchaustedActionCode))
+			int poolSize;
+			if (ApplicationServerSingleton.get().isDeveloperStartup())
 			{
-				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_FAIL;
-				log.debug("Client pool, exchaustedAction=" + ACTION_FAIL);
-			}
-			else if (ACTION_GROW.equalsIgnoreCase(exchaustedActionCode))
-			{
-				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
-				log.debug("Client pool, exchaustedAction=" + ACTION_GROW);
+				// in developer multiple clients do not work well with debugger
+				poolSize = 1;
+				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_BLOCK;
 			}
 			else
 			{
-				exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_BLOCK;
-				log.debug("Client pool, exchaustedAction=" + ACTION_BLOCK);
+				try
+				{
+					poolSize = Integer.parseInt(application.getSettings().getProperty(CLIENT_POOL_SIZE_PROPERTY));
+				}
+				catch (NumberFormatException nfe)
+				{
+					poolSize = CLIENT_POOL_SIZE_DEFAULT;
+				}
+				String exchaustedActionCode = application.getSettings().getProperty(CLIENT_POOL_EXCHAUSTED_ACTION_PROPERTY);
+				if (exchaustedActionCode != null) exchaustedActionCode = exchaustedActionCode.trim();
+				if (ACTION_FAIL.equalsIgnoreCase(exchaustedActionCode))
+				{
+					exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_FAIL;
+					log.debug("Client pool, exchaustedAction=" + ACTION_FAIL);
+				}
+				else if (ACTION_GROW.equalsIgnoreCase(exchaustedActionCode))
+				{
+					exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
+					log.debug("Client pool, exchaustedAction=" + ACTION_GROW);
+				}
+				else
+				{
+					exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_BLOCK;
+					log.debug("Client pool, exchaustedAction=" + ACTION_BLOCK);
+				}
 			}
 			log.debug("Creating client pool, maxSize=" + poolSize);
 			clientPool = new GenericKeyedObjectPool(new BaseKeyedPoolableObjectFactory()
