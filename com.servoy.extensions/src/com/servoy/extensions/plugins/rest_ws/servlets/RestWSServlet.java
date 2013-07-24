@@ -893,16 +893,14 @@ public class RestWSServlet extends HttpServlet
 
 			switch (contentType)
 			{
+			//multipart requests cannot respond multipart responses so treat response as json
+				case CONTENT_MULTIPART :
 				case CONTENT_JSON :
 					resultContentType = "application/json";
 					break;
 
 				case CONTENT_XML :
 					resultContentType = "application/xml";
-					break;
-				case CONTENT_MULTIPART :
-					resultContentType = "";
-					response.setStatus(HttpServletResponse.SC_FOUND);
 					break;
 
 				default :
