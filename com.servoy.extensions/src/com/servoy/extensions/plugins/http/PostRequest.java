@@ -29,10 +29,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.FileEntity;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
@@ -192,7 +190,8 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		}
 		else if (value != null)
 		{
-			content = value;
+			js_setBodyContent(value);
+			return true;
 		}
 		return false;
 	}
@@ -231,58 +230,48 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	}
 
 	@Override
-	public Response js_executeRequest(String userName, String password)
+	protected HttpEntity buildEntity() throws Exception
 	{
-		try
+		HttpEntity entity;
+		if (files.size() == 0)
 		{
-			HttpEntity entity;
-			if (files.size() == 0)
+			if (params != null)
 			{
-				if (params != null)
-				{
-					entity = new UrlEncodedFormEntity(params, charset);
-				}
-				else
-				{
-					entity = new StringEntity(content != null ? content : "", charset);
-				}
-				content = null;
-			}
-			else if (files.size() == 1 && (params == null || params.size() == 0))
-			{
-				File f = files.values().iterator().next();
-				entity = new FileEntity(f, "binary/octet-stream"); //$NON-NLS-1$
+				entity = new UrlEncodedFormEntity(params, charset);
 			}
 			else
 			{
-				entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+				entity = super.buildEntity();
+			}
+		}
+		else if (files.size() == 1 && (params == null || params.size() == 0))
+		{
+			File f = files.values().iterator().next();
+			entity = new FileEntity(f, "binary/octet-stream"); //$NON-NLS-1$
+		}
+		else
+		{
+			entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-				// For File parameters
-				for (Entry<Pair<String, String>, File> e : files.entrySet())
-				{
-					((MultipartEntity)entity).addPart(e.getKey().getLeft(), new FileBody(e.getValue()));
-				}
+			// For File parameters
+			for (Entry<Pair<String, String>, File> e : files.entrySet())
+			{
+				((MultipartEntity)entity).addPart(e.getKey().getLeft(), new FileBody(e.getValue()));
+			}
 
-				// add the parameters
-				if (params != null)
+			// add the parameters
+			if (params != null)
+			{
+				Iterator<NameValuePair> it = params.iterator();
+				while (it.hasNext())
 				{
-					Iterator<NameValuePair> it = params.iterator();
-					while (it.hasNext())
-					{
-						NameValuePair nvp = it.next();
-						// For usual String parameters
-						((MultipartEntity)entity).addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
-					}
+					NameValuePair nvp = it.next();
+					// For usual String parameters
+					((MultipartEntity)entity).addPart(nvp.getName(), new StringBody(nvp.getValue(), "text/plain", Charset.forName(charset)));
 				}
 			}
-			((HttpEntityEnclosingRequestBase)method).setEntity(entity);
-			return super.js_executeRequest(userName, password);
 		}
-		catch (Exception ex)
-		{
-			Debug.error(ex);
-			return null;
-		}
+		return entity;
 	}
 
 	/**

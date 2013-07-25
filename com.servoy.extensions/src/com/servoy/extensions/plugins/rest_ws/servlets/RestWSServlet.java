@@ -49,6 +49,7 @@ import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
 import com.servoy.j2db.util.HTTPUtils;
+import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -142,10 +143,12 @@ public class RestWSServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			plugin.log.trace("GET");
-			Object result = wsService(WS_READ, null, request, response);
+			client = getClient(request);
+			Object result = wsService(WS_READ, null, request, response, client.getLeft());
 			if (result == null)
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
@@ -158,6 +161,28 @@ public class RestWSServlet extends HttpServlet
 		{
 			handleException(e, request, response);
 		}
+		finally
+		{
+			if (client != null)
+			{
+				plugin.releaseClient(client.getRight(), client.getLeft());
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param request HttpServletRequest
+	 * @return  a pair of IHeadlessClient object and the keyname from the objectpool ( the keyname depends if it nodebug mode is enabled)
+	 * @throws Exception
+	 */
+	private Pair<IHeadlessClient, String> getClient(HttpServletRequest request) throws Exception
+	{
+		WsRequest wsRequest = parsePath(request);
+		boolean nodebug = getNodebugHeadderValue(request);
+		String solutionName = nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName;
+		IHeadlessClient client = plugin.getClient(solutionName.toString());
+		return new Pair<IHeadlessClient, String>(client, solutionName);
 	}
 
 	private void handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -221,10 +246,13 @@ public class RestWSServlet extends HttpServlet
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			plugin.log.trace("DELETE");
-			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response)))
+
+			client = getClient(request);
+			if (Boolean.FALSE.equals(wsService(WS_DELETE, null, request, response, client.getLeft())))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -234,11 +262,19 @@ public class RestWSServlet extends HttpServlet
 		{
 			handleException(e, request, response);
 		}
+		finally
+		{
+			if (client != null)
+			{
+				plugin.releaseClient(client.getRight(), client.getLeft());
+			}
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			byte[] contents = getBody(request);
@@ -253,7 +289,8 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response);
+			client = getClient(request);
+			Object result = wsService(WS_CREATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client.getLeft());
 			HTTPUtils.setNoCacheHeaders(response);
 			if (result != null)
 			{
@@ -264,11 +301,19 @@ public class RestWSServlet extends HttpServlet
 		{
 			handleException(e, request, response);
 		}
+		finally
+		{
+			if (client != null)
+			{
+				plugin.releaseClient(client.getRight(), client.getLeft());
+			}
+		}
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		Pair<IHeadlessClient, String> client = null;
 		try
 		{
 			byte[] contents = getBody(request);
@@ -283,7 +328,8 @@ public class RestWSServlet extends HttpServlet
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response)))
+			client = getClient(request);
+			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeRequest(request, contentType, contents) }, request, response, client.getLeft())))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -292,6 +338,13 @@ public class RestWSServlet extends HttpServlet
 		catch (Exception e)
 		{
 			handleException(e, request, response);
+		}
+		finally
+		{
+			if (client != null)
+			{
+				plugin.releaseClient(client.getRight(), client.getLeft());
+			}
 		}
 	}
 
@@ -381,109 +434,100 @@ public class RestWSServlet extends HttpServlet
 	 * @return
 	 * @throws Exception
 	 */
-	protected Object wsService(String methodName, Object[] fixedArgs, HttpServletRequest request, HttpServletResponse response) throws Exception
+	protected Object wsService(String methodName, Object[] fixedArgs, HttpServletRequest request, HttpServletResponse response, IHeadlessClient client)
+		throws Exception
 	{
 		String path = request.getPathInfo(); //without servlet name
 
 		plugin.log.debug("Request '" + path + '\'');
 
 		WsRequest wsRequest = parsePath(request);
-		boolean nodebug = getNodebugHeadderValue(request);
-		IHeadlessClient client = null;
-		try
+
+		Object ws_authenticate_result = checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
+
+		FunctionDefinition fd = new FunctionDefinition(wsRequest.formName, methodName);
+		Exist functionExists = fd.exists(client.getPluginAccess());
+		if (functionExists == FunctionDefinition.Exist.NO_SOLUTION)
 		{
-			client = plugin.getClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName);
-			Object ws_authenticate_result = checkAuthorization(request, client.getPluginAccess(), wsRequest.solutionName, wsRequest.formName);
+			throw new WebServiceException("Solution " + wsRequest.solutionName + " not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+		}
+		if (functionExists == FunctionDefinition.Exist.FORM_NOT_FOUND)
+		{
+			throw new WebServiceException("Form " + wsRequest.formName + " not found", HttpServletResponse.SC_NOT_FOUND);
+		}
+		if (functionExists != FunctionDefinition.Exist.METHOD_FOUND)
+		{
+			throw new WebServiceException("Method " + methodName + " not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""),
+				HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+		}
 
-			FunctionDefinition fd = new FunctionDefinition(wsRequest.formName, methodName);
-			Exist functionExists = fd.exists(client.getPluginAccess());
-			if (functionExists == FunctionDefinition.Exist.NO_SOLUTION)
+		FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, WS_RESPONSE_HEADERS);
+		if (fd_headers.exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
+		{
+			Object result = fd_headers.executeSync(client.getPluginAccess(), null);
+			if (result instanceof String)
 			{
-				throw new WebServiceException("Solution " + wsRequest.solutionName + " not loaded", HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+				String[] l_r = String.valueOf(result).split("=");
+				if (l_r.length == 2) response.addHeader(l_r[0], l_r[1]);
 			}
-			if (functionExists == FunctionDefinition.Exist.FORM_NOT_FOUND)
+			else if (result instanceof Object[])
 			{
-				throw new WebServiceException("Form " + wsRequest.formName + " not found", HttpServletResponse.SC_NOT_FOUND);
-			}
-			if (functionExists != FunctionDefinition.Exist.METHOD_FOUND)
-			{
-				throw new WebServiceException("Method " + methodName + " not found" + (wsRequest.formName != null ? " on form " + wsRequest.formName : ""),
-					HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-			}
-
-			FunctionDefinition fd_headers = new FunctionDefinition(wsRequest.formName, WS_RESPONSE_HEADERS);
-			if (fd_headers.exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
-			{
-				Object result = fd_headers.executeSync(client.getPluginAccess(), null);
-				if (result instanceof String)
+				Object[] resultArray = (Object[])result;
+				for (Object element : resultArray)
 				{
-					String[] l_r = String.valueOf(result).split("=");
+					String[] l_r = String.valueOf(element).split("=");
 					if (l_r.length == 2) response.addHeader(l_r[0], l_r[1]);
 				}
-				else if (result instanceof Object[])
-				{
-					Object[] resultArray = (Object[])result;
-					for (Object element : resultArray)
-					{
-						String[] l_r = String.valueOf(element).split("=");
-						if (l_r.length == 2) response.addHeader(l_r[0], l_r[1]);
-					}
-				}
 			}
-
-			Object[] args = null;
-			if (fixedArgs != null || wsRequest.args.length > 0 || request.getParameterMap().size() > 0)
-			{
-				args = new Object[((fixedArgs == null) ? 0 : fixedArgs.length) + wsRequest.args.length +
-					((request.getParameterMap().size() > 0 || ws_authenticate_result != null) ? 1 : 0)];
-				int idx = 0;
-				if (fixedArgs != null)
-				{
-					System.arraycopy(fixedArgs, 0, args, 0, fixedArgs.length);
-					idx += fixedArgs.length;
-				}
-				if (wsRequest.args.length > 0)
-				{
-					System.arraycopy(wsRequest.args, 0, args, idx, wsRequest.args.length);
-					idx += wsRequest.args.length;
-				}
-				if (request.getParameterMap().size() > 0 || ws_authenticate_result != null)
-				{
-					JSMap<String, Object> jsMap = new JSMap<String, Object>();
-					Iterator<Entry<String, Object>> parameters = request.getParameterMap().entrySet().iterator();
-					while (parameters.hasNext())
-					{
-						Entry<String, Object> entry = parameters.next();
-						if (entry.getValue() instanceof String)
-						{
-							jsMap.put(entry.getKey(), new String[] { (String)entry.getValue() });
-						}
-						else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
-						{
-							jsMap.put(entry.getKey(), entry.getValue());
-						}
-					}
-					if (ws_authenticate_result != null)
-					{
-						jsMap.put(WS_AUTHENTICATE, new Object[] { ws_authenticate_result });
-					}
-					args[idx++] = jsMap;
-				}
-			}
-
-			plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)");
-			//DO NOT USE FunctionDefinition here! we want to be able to catch possible exceptions! 
-			Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
-			plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
-			return result;
 		}
-		finally
+
+		Object[] args = null;
+		if (fixedArgs != null || wsRequest.args.length > 0 || request.getParameterMap().size() > 0)
 		{
-			if (client != null)
+			args = new Object[((fixedArgs == null) ? 0 : fixedArgs.length) + wsRequest.args.length +
+				((request.getParameterMap().size() > 0 || ws_authenticate_result != null) ? 1 : 0)];
+			int idx = 0;
+			if (fixedArgs != null)
 			{
-				plugin.releaseClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName, client);
+				System.arraycopy(fixedArgs, 0, args, 0, fixedArgs.length);
+				idx += fixedArgs.length;
+			}
+			if (wsRequest.args.length > 0)
+			{
+				System.arraycopy(wsRequest.args, 0, args, idx, wsRequest.args.length);
+				idx += wsRequest.args.length;
+			}
+			if (request.getParameterMap().size() > 0 || ws_authenticate_result != null)
+			{
+				JSMap<String, Object> jsMap = new JSMap<String, Object>();
+				Iterator<Entry<String, Object>> parameters = request.getParameterMap().entrySet().iterator();
+				while (parameters.hasNext())
+				{
+					Entry<String, Object> entry = parameters.next();
+					if (entry.getValue() instanceof String)
+					{
+						jsMap.put(entry.getKey(), new String[] { (String)entry.getValue() });
+					}
+					else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
+					{
+						jsMap.put(entry.getKey(), entry.getValue());
+					}
+				}
+				if (ws_authenticate_result != null)
+				{
+					jsMap.put(WS_AUTHENTICATE, new Object[] { ws_authenticate_result });
+				}
+				args[idx++] = jsMap;
 			}
 		}
+
+		plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)");
+		//DO NOT USE FunctionDefinition here! we want to be able to catch possible exceptions! 
+		Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
+		plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
+		return result;
+
+
 	}
 
 	private Object checkAuthorization(HttpServletRequest request, IClientPluginAccess client, String solutionName, String formName) throws Exception
