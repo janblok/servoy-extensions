@@ -760,6 +760,7 @@ public class RestWSServlet extends HttpServlet
 					//contentType
 					if (partContentType.length() > 0) partObj.put("contentType", partContentType);
 					if (_charset.length() > 0) partObj.put("charset", _charset);
+					else _charset = "UTF-8"; // still use a valid default encoding in case it's not specified for reading it - it is ok that it will not be reported to JS I guess (this happens almost all the time)
 					InputStream contentStream = bodyPart.getInputStream();
 					try
 					{
