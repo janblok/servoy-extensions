@@ -30,6 +30,7 @@ import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
  */
 public class BrowserDialog
 {
+	@SuppressWarnings("nls")
 	public static void alert(IClientPluginAccess clientPluginAccess, String msg)
 	{
 		if (clientPluginAccess instanceof IWebClientPluginAccess)
@@ -37,7 +38,8 @@ public class BrowserDialog
 			IRequestTarget target = RequestCycle.get().getRequestTarget();
 			if (target instanceof AjaxRequestTarget)
 			{
-				((AjaxRequestTarget)target).appendJavascript("alert('" + msg + "')");
+				String escapedMsg = msg.replace("\\", "\\\\").replace("\n", "\\n").replace("\t", "\\t").replace("\'", "\\'");
+				((AjaxRequestTarget)target).appendJavascript("alert('" + escapedMsg + "')");
 				((IWebClientPluginAccess)clientPluginAccess).generateAjaxResponse((AjaxRequestTarget)target);
 			}
 		}
