@@ -479,6 +479,22 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			{
 				return wicketTree.bindingInfo.getMethodToCallOnRightClick(userNode);
 			}
+
+			@SuppressWarnings("nls")
+			@Override
+			public AjaxPostprocessingCallDecorator getPostprocessingCallDecorator()
+			{
+				return new AjaxPostprocessingCallDecorator(null)
+				{
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public CharSequence postDecorateScript(CharSequence script)
+					{
+						return MouseEventBehavior.MOUSE_POSITION_SCRIPT + script + "return !" + IAjaxCallDecorator.WICKET_CALL_RESULT_VAR + ";";
+					}
+				};
+			}
 		}));
 
 		return nodeComp;
