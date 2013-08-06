@@ -254,7 +254,7 @@ public class RestWSPlugin implements IServerPlugin
 		}
 	}
 
-	public void releaseClient(final String solutionName, final IHeadlessClient client)
+	public void releaseClient(final String poolKey, final IHeadlessClient client)
 	{
 		application.getExecutor().execute(new Runnable()
 		{
@@ -265,19 +265,20 @@ public class RestWSPlugin implements IServerPlugin
 				try
 				{
 					client.closeSolution(true);
-					client.loadSolution(solutionName);
+					String[] arr = poolKey.split(":");
+					client.loadSolution(arr.length == 2 ? arr[0] : poolKey); // avoid the ":nodebug" part from the pool key...
 					solutionReopened = true;
 				}
 				catch (Exception ex)
 				{
-					Debug.error("cannot reopen solution " + solutionName, ex);
+					Debug.error("cannot reopen solution " + poolKey, ex);
 					client.shutDown(true);
 				}
 
 				try
 				{
-					if (solutionReopened) getClientPool().returnObject(solutionName, client);
-					else getClientPool().invalidateObject(solutionName, client);
+					if (solutionReopened) getClientPool().returnObject(poolKey, client);
+					else getClientPool().invalidateObject(poolKey, client);
 				}
 				catch (Exception ex)
 				{
