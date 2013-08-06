@@ -846,6 +846,12 @@ public class RestWSServlet extends HttpServlet
 		}
 		else
 		{
+			if (result instanceof byte[])
+			{
+				plugin.log.error("Request for non-binary data was made, but the return data is a byte array.");
+				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+				return;
+			}
 			boolean isXML = (result instanceof XMLObject);
 			boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
 
