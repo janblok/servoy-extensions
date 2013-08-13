@@ -79,7 +79,6 @@ public class JSTask
 		try 
 		{
 			Map<String,Object> variables = MapSerializer.convertToMap(jsVariablesObject);
-			VariablesTypeHelper.convertToJBPMTypes(variables);
 			workflowService.save(td,variables);
 		} 
 		catch (Exception e) 

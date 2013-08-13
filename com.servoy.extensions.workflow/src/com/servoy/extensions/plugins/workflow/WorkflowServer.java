@@ -438,8 +438,7 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 			}
 			if (variables != null) 
 			{
-	//			Map<String, Object> vars = taskService.getVariables(tid, null);
-	//			vars.putAll(variables);
+				VariablesTypeHelper.convertToJBPMTypes(variables);
 				taskService.setVariables(td.taskId, variables);
 			}
 		} 

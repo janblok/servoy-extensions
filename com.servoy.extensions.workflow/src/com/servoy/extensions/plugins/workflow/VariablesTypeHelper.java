@@ -10,7 +10,7 @@ public class VariablesTypeHelper
 	 * Converts String variables which are longer than 255 characters to char[].
 	 * @param vars process variables
 	 */
-	public static void convertToJBPMTypes(Map<String,Object> vars)
+	static void convertToJBPMTypes(Map<String,Object> vars)
 	{
 		for (String key : vars.keySet())
 		{
