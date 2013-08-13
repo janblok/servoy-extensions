@@ -16,6 +16,7 @@
  */
 package com.servoy.extensions.plugins.file;
 
+import java.awt.Desktop;
 import java.awt.Window;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -1525,6 +1526,31 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		catch (Exception e)
 		{
 			Debug.error(e);
+			return false;
+		}
+	}
+
+	/**
+	 * Launches the associated application to open the file.
+	 * 
+	 * @param file
+	 * @return success status of the open operation
+	 * 
+	 * @sample
+	 * 	var myPDF = plugins.file.createFile('my.pdf');
+	 *  myPDF.setBytes(data, true)
+	 *	plugins.file.openFile(myPDF);
+	 */
+	public boolean js_openFile(JSFile file)
+	{
+		try
+		{
+			Desktop.getDesktop().open(file.getFile());
+			return true;
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
 			return false;
 		}
 	}

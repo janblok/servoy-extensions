@@ -86,6 +86,17 @@ public class WebFileProvider extends FileProvider
 	}
 
 	@Override
+	public boolean js_openFile(JSFile file)
+	{
+		IClientPluginAccess access = plugin.getClientPluginAccess();
+		String fileName = file.js_getName();
+		byte[] data = file.jsFunction_getBytes();
+		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, ImageLoader.getContentType(data, fileName), "inline"); //$NON-NLS-1$
+		((IWebClientPluginAccess)access).showURL(url, "_blank", null, 0, false); //$NON-NLS-1$
+		return true;
+	}
+
+	@Override
 	public String js_readTXTFile(JSFile file, String charsetname)
 	{
 		return readTXTFile(file, charsetname);
