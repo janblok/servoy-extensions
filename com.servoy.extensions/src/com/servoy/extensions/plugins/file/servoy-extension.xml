@@ -2047,6 +2047,26 @@ if (!plugins.file.moveFile(f, fmoved))
               <parameter name="destination" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
+          <function clientSupport="wc,sc" name="openFile">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[success status of the open operation]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Launches the associated application to open the file.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Launches the associated application to open the file.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var myPDF = plugins.file.createFile('my.pdf');
+ myPDF.setBytes(data, true)
+	plugins.file.openFile(myPDF);]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            </parameters>
+          </function>
           <function clientSupport="wc,sc" name="readFile">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>

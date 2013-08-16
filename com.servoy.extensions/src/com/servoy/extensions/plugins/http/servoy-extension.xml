@@ -2735,7 +2735,27 @@ var httpCode = poster.doPost()]]></sample>
               <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
             </samples>
             <parameters>
-              <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="setBodyContent">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content, 'text/xml')]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function clientSupport="wc,sc" name="setCharset">
@@ -2972,7 +2992,27 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
             </samples>
             <parameters>
-              <parameter name="s" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="setBodyContent">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content, 'text/xml')]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function clientSupport="wc,sc" name="setCharset">
