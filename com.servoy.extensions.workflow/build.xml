@@ -16,10 +16,13 @@
 	<property name="servoy_shared.lib.dir" value="../servoy_shared/lib"/>
 	<property name="javacVerbose" value="false"/>
 	<property name="javacDebugInfo" value="true"/>
-	<property name="bundleJavacSource" value="1.5"/>
-	<property name="bundleJavacTarget" value="1.5"/>
+	<property name="bundleJavacSource" value="1.6"/>
+	<property name="bundleJavacTarget" value="1.6"/>
 
-		
+	<property file="personal_settings.properties"/>
+	
+	<property name="jdk1.6_home" value="${JAVA_HOME}"/>
+	<property name="javac_1.6" value="${jdk1.6_home}/bin/javac"/>		
 		
 	<property name="bin_plugins.dir" value="${bin.dir}/com/servoy/extensions/plugins"/>
 
@@ -58,6 +61,7 @@
 			deprecation="off"
 			classpathref="classpath"
 			fork="yes"
+			executable="${javac_1.6}"
 		/>
 	</target>
 	
