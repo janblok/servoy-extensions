@@ -164,7 +164,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (Exception e)
 		{
-			handleException(e, request, response);
+			handleException(e, request, response, client != null ? client.getLeft() : null);
 		}
 		finally
 		{
@@ -190,7 +190,7 @@ public class RestWSServlet extends HttpServlet
 		return new Pair<IHeadlessClient, String>(client, solutionName);
 	}
 
-	private void handleException(Exception e, HttpServletRequest request, HttpServletResponse response) throws IOException
+	private void handleException(Exception e, HttpServletRequest request, HttpServletResponse response, IHeadlessClient headlessClient) throws IOException
 	{
 		final int errorCode;
 		String errorResponse = null;
@@ -237,12 +237,14 @@ public class RestWSServlet extends HttpServlet
 			}
 			else
 			{
+				if (headlessClient != null) headlessClient.getPluginAccess().reportError("Error executing rest call", e);
 				errorCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 			}
 		}
 		else
 		{
 			plugin.log.error(request.getRequestURI(), e);
+			if (headlessClient != null) headlessClient.getPluginAccess().reportError("Error executing rest call", e);
 			errorCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 		}
 		sendError(response, errorCode, errorResponse);
@@ -265,7 +267,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (Exception e)
 		{
-			handleException(e, request, response);
+			handleException(e, request, response, client != null ? client.getLeft() : null);
 		}
 		finally
 		{
@@ -306,7 +308,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (Exception e)
 		{
-			handleException(e, request, response);
+			handleException(e, request, response, client != null ? client.getLeft() : null);
 		}
 		finally
 		{
@@ -346,7 +348,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (Exception e)
 		{
-			handleException(e, request, response);
+			handleException(e, request, response, client != null ? client.getLeft() : null);
 		}
 		finally
 		{
@@ -406,7 +408,7 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (Exception e)
 		{
-			handleException(e, request, response);
+			handleException(e, request, response, client);
 		}
 		finally
 		{
