@@ -23,13 +23,16 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -371,7 +374,7 @@ public class RestWSServlet extends HttpServlet
 			wsRequest = parsePath(request);
 
 			client = plugin.getClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName);
-
+			setApplicationUserProperties(request, client.getPluginAccess());
 			String retval = "TRACE, OPTIONS";
 			if (new FunctionDefinition(wsRequest.formName, WS_READ).exists(client.getPluginAccess()) == FunctionDefinition.Exist.METHOD_FOUND)
 			{
@@ -405,6 +408,7 @@ public class RestWSServlet extends HttpServlet
 			}
 			response.setHeader("Access-Control-Allow-Headers", value);
 			response.setHeader("Access-Control-Expose-Headers", value + ", " + WS_NODEBUG_HEADER);
+			setResponseUserProperties(response, client.getPluginAccess());
 		}
 		catch (Exception e)
 		{
@@ -448,6 +452,8 @@ public class RestWSServlet extends HttpServlet
 	protected Object wsService(String methodName, Object[] fixedArgs, HttpServletRequest request, HttpServletResponse response, IHeadlessClient client)
 		throws Exception
 	{
+		//update cookies in the application from request
+		setApplicationUserProperties(request, client.getPluginAccess());
 		String path = request.getPathInfo(); //without servlet name
 
 		plugin.log.debug("Request '" + path + '\'');
@@ -536,6 +542,8 @@ public class RestWSServlet extends HttpServlet
 		//DO NOT USE FunctionDefinition here! we want to be able to catch possible exceptions! 
 		Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
 		plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
+		//flush updated cookies from the application
+		setResponseUserProperties(response, client.getPluginAccess());
 		return result;
 
 
@@ -732,6 +740,40 @@ public class RestWSServlet extends HttpServlet
 			}
 		}
 		return defaultValue;
+	}
+
+	/**
+	 *  happens at the beginning  of each request (before application is invoked)
+	 */
+	void setApplicationUserProperties(HttpServletRequest request, IClientPluginAccess client)
+	{
+		Cookie[] cookies = request.getCookies();
+		Map<String, String> map = new HashMap<String, String>();
+		if (cookies != null)
+		{
+			for (Cookie cookie : cookies)
+			{
+				String name = cookie.getName();
+				String value = cookie.getValue();
+				map.put(name, value);
+			}
+			client.setUserProperties(map);
+		}
+	}
+
+	/**
+	 * Sets the cookies for the response  from the user properties.
+	 * Happens at the end of every request
+	 */
+	void setResponseUserProperties(HttpServletResponse response, IClientPluginAccess client)
+	{
+		Map<String, String> map = client.getUserProperties();
+		for (String propName : map.keySet())
+		{
+			Cookie cookie = new Cookie(propName, map.get(propName));
+			cookie.setMaxAge(900000000);// 28.5 years
+			response.addCookie(cookie);
+		}
 	}
 
 	private Object decodeContent(String contentTypeStr, int contentType, byte[] contents, String charset) throws Exception
