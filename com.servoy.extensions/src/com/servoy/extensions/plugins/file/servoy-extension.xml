@@ -2471,7 +2471,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
           </function>
           <function clientSupport="wc,sc" name="showFileOpenDialog">
@@ -2507,7 +2507,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2549,7 +2549,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2595,7 +2595,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2645,7 +2645,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2699,7 +2699,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2757,7 +2757,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2816,7 +2816,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2868,7 +2868,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2916,7 +2916,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -2962,7 +2962,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3012,7 +3012,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3066,7 +3066,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3124,7 +3124,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3183,7 +3183,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3235,7 +3235,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3283,7 +3283,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="selectionMode" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
@@ -3327,7 +3327,7 @@ for (var i = 0; i < files.length; i++)
 	 application.output('size: ' + files[i].size());
 }
 //for the web you have to give a callback function that has a JSFile array as its first argument (also works in smart), only multi select and the title are used in the webclient, others are ignored
-plugins.file.showFileOpenDialog(null,null,false,mycallbackfunction,'Select some nice files')]]></sample>
+plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')]]></sample>
             </samples>
             <parameters>
               <parameter name="callbackfunction" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
