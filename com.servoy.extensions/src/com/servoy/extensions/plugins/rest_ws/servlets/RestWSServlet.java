@@ -697,10 +697,18 @@ public class RestWSServlet extends HttpServlet
 		String contentTypeHeaderValue = request.getHeader(header);
 		int contentType = getContentType(contentTypeHeaderValue);
 		if (contentType != CONTENT_OTHER) return contentType;
-
 		if (contents != null)
 		{
 			String stringContent = new String(contents, getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT));
+			return guessContentType(stringContent, defaultContentType);
+		}
+		return defaultContentType;
+	}
+
+	private int guessContentType(String stringContent, int defaultContentType)
+	{
+		if (stringContent != null)
+		{
 			// start guessing....
 			if (stringContent.length() > 0 && stringContent.charAt(0) == '<')
 			{
@@ -1009,6 +1017,20 @@ public class RestWSServlet extends HttpServlet
 		}
 		else
 		{
+			int contentType = guessContentType(errorResponse, CONTENT_TEXT);
+			switch (contentType)
+			{
+				case CONTENT_JSON :
+					response.setContentType("application/json");
+					break;
+
+				case CONTENT_XML :
+					response.setContentType("application/xml");
+					break;
+
+				default :
+			}
+
 			Writer w = response.getWriter();
 			w.write(errorResponse);
 			w.close();
