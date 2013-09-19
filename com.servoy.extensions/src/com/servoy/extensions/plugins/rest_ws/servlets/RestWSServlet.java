@@ -32,12 +32,12 @@ import javax.mail.BodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.mozilla.javascript.JavaScriptException;
@@ -54,6 +54,7 @@ import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.FunctionDefinition.Exist;
 import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.headlessclient.IHeadlessClient;
+import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
 import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.Utils;
@@ -97,6 +98,7 @@ public class RestWSServlet extends HttpServlet
 	private static final String WS_AUTHENTICATE = "ws_authenticate";
 	private static final String WS_RESPONSE_HEADERS = "ws_response_headers";
 	private static final String WS_NODEBUG_HEADER = "servoy.nodebug";
+	private static final String WS_USER_PROPERTIES_HEADER = "servoy.userproperties";
 
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
@@ -137,7 +139,11 @@ public class RestWSServlet extends HttpServlet
 
 		if (getNodebugHeadderValue(request))
 		{
-			response.setHeader("Access-Control-Expose-Headers", WS_NODEBUG_HEADER);
+			response.setHeader("Access-Control-Expose-Headers", WS_NODEBUG_HEADER + ", " + WS_USER_PROPERTIES_HEADER);
+		}
+		else
+		{
+			response.setHeader("Access-Control-Expose-Headers", WS_USER_PROPERTIES_HEADER);
 		}
 		value = request.getHeader("Access-Control-Request-Headers");
 		if (value != null)
@@ -407,7 +413,7 @@ public class RestWSServlet extends HttpServlet
 				value += ", Allow";
 			}
 			response.setHeader("Access-Control-Allow-Headers", value);
-			response.setHeader("Access-Control-Expose-Headers", value + ", " + WS_NODEBUG_HEADER);
+			response.setHeader("Access-Control-Expose-Headers", value + ", " + WS_NODEBUG_HEADER + ", " + WS_USER_PROPERTIES_HEADER);
 			setResponseUserProperties(response, client.getPluginAccess());
 		}
 		catch (Exception e)
@@ -751,36 +757,60 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	/**
+	 *  Gets the custom header's : servoy.userproperties  value and sets the user properties with its value.
+	 *  This custom header simulates a session cookie.
 	 *  happens at the beginning  of each request (before application is invoked)
 	 */
 	void setApplicationUserProperties(HttpServletRequest request, IClientPluginAccess client)
 	{
-		Cookie[] cookies = request.getCookies();
-		Map<String, String> map = new HashMap<String, String>();
-		if (cookies != null)
+		String headerValue = request.getHeader(WS_USER_PROPERTIES_HEADER);
+		if (headerValue != null)
 		{
-			for (Cookie cookie : cookies)
+			Map<String, String> map = new HashMap<String, String>();
+			org.json.JSONObject object;
+			try
 			{
-				String name = cookie.getName();
-				String value = cookie.getValue();
-				map.put(name, value);
+				object = new org.json.JSONObject(headerValue);
+				for (Object key : Utils.iterate(object.keys()))
+				{
+					String value = object.getString((String)key);
+					map.put((String)key, value);
+				}
+				client.setUserProperties(map);
 			}
-			client.setUserProperties(map);
+			catch (JSONException e)
+			{
+				Debug.error("cannot get json object from " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
+			}
 		}
+
+
 	}
 
 	/**
-	 * Sets the cookies for the response  from the user properties.
-	 * Happens at the end of every request
+	 * Serializes user properties as a json string headder   ("servoy.userproperties" header)  
+	 * 
 	 */
 	void setResponseUserProperties(HttpServletResponse response, IClientPluginAccess client)
 	{
 		Map<String, String> map = client.getUserProperties();
-		for (String propName : map.keySet())
+		if (map.keySet().size() > 0)
 		{
-			Cookie cookie = new Cookie(propName, map.get(propName));
-			cookie.setMaxAge(900000000);// 28.5 years
-			response.addCookie(cookie);
+			try
+			{
+				org.json.JSONStringer stringer = new org.json.JSONStringer();
+				org.json.JSONWriter writer = stringer.object();
+				for (String propName : map.keySet())
+				{
+					writer = writer.key(propName).value(map.get(propName));
+				}
+				writer.endObject();
+				response.setHeader(WS_USER_PROPERTIES_HEADER, writer.toString());
+			}
+			catch (JSONException e)
+			{
+				Debug.error("cannot serialize json object to " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
+			}
 		}
 	}
 
