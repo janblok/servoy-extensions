@@ -18,6 +18,8 @@
 package com.servoy.extensions.plugins.http;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -26,6 +28,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLSocket;
 
 import org.apache.http.client.params.AuthPolicy;
 import org.apache.http.client.params.ClientPNames;
@@ -74,6 +77,29 @@ public class HttpClient implements IScriptable, IJavaScriptType
 				public Socket connectSocket(Socket socket, InetSocketAddress remoteAddress, InetSocketAddress localAddress, HttpParams params)
 					throws IOException, UnknownHostException, ConnectTimeoutException
 				{
+					if (socket instanceof SSLSocket)
+					{
+						try
+						{
+							Method s = socket.getClass().getMethod("setHost", String.class);
+							s.invoke(socket, remoteAddress.getHostName());
+						}
+						catch (NoSuchMethodException ex)
+						{
+						}
+						catch (IllegalAccessException ex)
+						{
+						}
+						catch (InvocationTargetException ex)
+						{
+						}
+						catch (IllegalArgumentException ex)
+						{
+						}
+						catch (SecurityException ex)
+						{
+						}
+					}
 					try
 					{
 						return super.connectSocket(socket, remoteAddress, localAddress, params);
