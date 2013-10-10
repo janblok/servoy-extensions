@@ -32,6 +32,7 @@ import javax.mail.BodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,6 +100,7 @@ public class RestWSServlet extends HttpServlet
 	private static final String WS_RESPONSE_HEADERS = "ws_response_headers";
 	private static final String WS_NODEBUG_HEADER = "servoy.nodebug";
 	private static final String WS_USER_PROPERTIES_HEADER = "servoy.userproperties";
+	private static final String WS_USER_PROPERTIES_COOKIE_PREFIX = "servoy.userprop_cookie";
 
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
@@ -414,7 +416,7 @@ public class RestWSServlet extends HttpServlet
 			}
 			response.setHeader("Access-Control-Allow-Headers", value);
 			response.setHeader("Access-Control-Expose-Headers", value + ", " + WS_NODEBUG_HEADER + ", " + WS_USER_PROPERTIES_HEADER);
-			setResponseUserProperties(response, client.getPluginAccess());
+			setResponseUserProperties(request, response, client.getPluginAccess());
 		}
 		catch (Exception e)
 		{
@@ -549,7 +551,7 @@ public class RestWSServlet extends HttpServlet
 		Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
 		plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
 		//flush updated cookies from the application
-		setResponseUserProperties(response, client.getPluginAccess());
+		setResponseUserProperties(request, response, client.getPluginAccess());
 		return result;
 
 
@@ -783,33 +785,62 @@ public class RestWSServlet extends HttpServlet
 				Debug.error("cannot get json object from " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
 			}
 		}
-
+		else
+		{
+			Cookie[] cookies = request.getCookies();
+			Map<String, String> map = new HashMap<String, String>();
+			if (cookies != null)
+			{
+				for (Cookie cookie : cookies)
+				{
+					String name = cookie.getName();
+					if (name.startsWith(WS_USER_PROPERTIES_COOKIE_PREFIX))
+					{
+						String value = cookie.getValue();
+						map.put(name.substring(WS_USER_PROPERTIES_COOKIE_PREFIX.length()), value);
+					}
+				}
+				client.setUserProperties(map);
+			}
+		}
 
 	}
 
 	/**
 	 * Serializes user properties as a json string headder   ("servoy.userproperties" header)  
+	 * @param request TODO
 	 * 
 	 */
-	void setResponseUserProperties(HttpServletResponse response, IClientPluginAccess client)
+	void setResponseUserProperties(HttpServletRequest request, HttpServletResponse response, IClientPluginAccess client)
 	{
 		Map<String, String> map = client.getUserProperties();
 		if (map.keySet().size() > 0)
 		{
-			try
+			if (request.getHeader(WS_USER_PROPERTIES_HEADER) != null)
 			{
-				org.json.JSONStringer stringer = new org.json.JSONStringer();
-				org.json.JSONWriter writer = stringer.object();
+				try
+				{
+					org.json.JSONStringer stringer = new org.json.JSONStringer();
+					org.json.JSONWriter writer = stringer.object();
+					for (String propName : map.keySet())
+					{
+						writer = writer.key(propName).value(map.get(propName));
+					}
+					writer.endObject();
+					response.setHeader(WS_USER_PROPERTIES_HEADER, writer.toString());
+				}
+				catch (JSONException e)
+				{
+					Debug.error("cannot serialize json object to " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
+				}
+			}
+			else
+			{
 				for (String propName : map.keySet())
 				{
-					writer = writer.key(propName).value(map.get(propName));
+					Cookie cookie = new Cookie(WS_USER_PROPERTIES_COOKIE_PREFIX + propName, map.get(propName));
+					response.addCookie(cookie);
 				}
-				writer.endObject();
-				response.setHeader(WS_USER_PROPERTIES_HEADER, writer.toString());
-			}
-			catch (JSONException e)
-			{
-				Debug.error("cannot serialize json object to " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
 			}
 		}
 	}
