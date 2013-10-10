@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.rawSQL;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
+import com.servoy.j2db.plugins.ClientPluginAccessProvider;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.DataSourceUtils;
 import com.servoy.j2db.util.Debug;
@@ -196,7 +197,7 @@ public class RawSQLProvider implements IScriptable
 			String cid = plugin.getClientPluginAccess().getClientID();
 			// TODO HOW TO HANDLE ARGS WITH NULL?? sHOULD BE CONVERTED TO NullValue?????
 			IDataSet set = getSQLService().executeStoredProcedure(cid, serverName, tid, procedureDeclaration, args, inOutType, 0, maxNumberOfRowsToRetrieve);
-			return new JSDataSet(set);
+			return new JSDataSet(((ClientPluginAccessProvider)plugin.getClientPluginAccess()).getApplication(), set);
 		}
 		catch (ServoyException ex)
 		{

@@ -23,9 +23,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.mozilla.javascript.annotations.JSFunction;
+
 import com.servoy.j2db.dataprocessing.BufferedDataSet;
 import com.servoy.j2db.dataprocessing.IDataSet;
-import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IConstantsObject;
 import com.servoy.j2db.scripting.IScriptable;
@@ -209,9 +210,9 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	public AmortizationCalculation()
 	{
 		events = new BufferedDataSet(new String[] { "event", "amount", "start_date", "end_date", "period", "number", "start_day" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-			new SafeArrayList());
+			new SafeArrayList<Object[]>());
 		schedule = new BufferedDataSet(new String[] { "event", "date", "payment", "interest", "principal", "balance" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-			new SafeArrayList());
+			new SafeArrayList<Object[]>());
 	}
 
 	/**
@@ -378,9 +379,10 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	 * @sample
 	 * plugins.amortization.getAmortizationSchedule();
 	 */
-	public JSDataSet js_getAmortizationSchedule()
+	@JSFunction
+	public IDataSet getAmortizationSchedule()
 	{
-		return getAmortizationSchedule();
+		return schedule;
 	}
 
 	/**
@@ -417,9 +419,10 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	 * @sample
 	 * plugins.amortization.getEvents();
 	 */
-	public JSDataSet js_getEvents()
+	@JSFunction
+	public IDataSet getEvents()
 	{
-		return getEvents();
+		return events;
 	}
 
 	/**
@@ -551,12 +554,6 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	{
 		events.sort(EI_START, true);
 	}
-
-	public JSDataSet getEvents()
-	{
-		return new JSDataSet(events);
-	}
-
 
 	public boolean solveForUnknown()
 	{
@@ -767,11 +764,6 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 		interestPolynomial.addPolynomial(deltaInterest);
 	}
 
-	public JSDataSet getAmortizationSchedule()
-	{
-		return new JSDataSet(schedule);
-	}
-
 	public double getRestBalance()
 	{
 		return roundMoney(bni[0] + bni[1]);
@@ -938,7 +930,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	private void expandEventList()
 	{
 		// Expand the events to a list.
-		ArrayList expandedList = new ArrayList();
+		ArrayList<CalendarEvent> expandedList = new ArrayList<CalendarEvent>();
 		for (int i = 0; i < events.getRowCount(); i++)
 		{
 			// Get the next event.

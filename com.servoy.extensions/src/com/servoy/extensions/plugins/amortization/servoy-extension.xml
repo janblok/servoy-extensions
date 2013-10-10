@@ -580,7 +580,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
           </function>
           <function clientSupport="wc,sc" name="getAmortizationSchedule">
             <argumentsTypes/>
-            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
+            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.IDataSet"/>
             <descriptions>
               <description clientSupport="wc,sc"><![CDATA[Gets the amortization schedule as a JSDataSet.]]></description>
             </descriptions>
@@ -623,7 +623,7 @@ var e = c.getError();]]></sample>
           </function>
           <function clientSupport="wc,sc" name="getEvents">
             <argumentsTypes/>
-            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
+            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.IDataSet"/>
             <descriptions>
               <description clientSupport="wc,sc"><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></description>
             </descriptions>
