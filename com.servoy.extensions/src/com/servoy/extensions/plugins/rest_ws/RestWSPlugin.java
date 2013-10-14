@@ -68,7 +68,7 @@ public class RestWSPlugin implements IServerPlugin
 	private static final String ACTION_GROW = "grow";
 	private static final String AUTHORIZED_GROUPS_PROPERTY = "rest_ws_plugin_authorized_groups";
 
-	private static final String WEBSERVICE_NAME = "rest_ws";
+	public static final String WEBSERVICE_NAME = "rest_ws";
 	private static final String[] SOLUTION_OPEN_METHOD_ARGS = new String[] { "rest_ws_server" };
 
 	public final Log log = LogFactory.getLog(RestWSPlugin.class);
