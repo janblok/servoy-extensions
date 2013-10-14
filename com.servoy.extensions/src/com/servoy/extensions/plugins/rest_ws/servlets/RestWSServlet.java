@@ -100,7 +100,7 @@ public class RestWSServlet extends HttpServlet
 	private static final String WS_RESPONSE_HEADERS = "ws_response_headers";
 	private static final String WS_NODEBUG_HEADER = "servoy.nodebug";
 	private static final String WS_USER_PROPERTIES_HEADER = "servoy.userproperties";
-	private static final String WS_USER_PROPERTIES_COOKIE_PREFIX = "servoy.userprop_cookie";
+	private static final String WS_USER_PROPERTIES_COOKIE_PREFIX = "servoy.userprop_cookie.";
 
 	private static final int CONTENT_OTHER = 0;
 	private static final int CONTENT_JSON = 1;
@@ -807,7 +807,8 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	/**
-	 * Serializes user properties as a json string headder   ("servoy.userproperties" header)  
+	 * Serializes user properties as a json string header   ("servoy.userproperties" header)  
+	 * AND besides the custom header they are also serialized cookies for non mobile clients
 	 * @param request TODO
 	 * 
 	 */
@@ -816,31 +817,39 @@ public class RestWSServlet extends HttpServlet
 		Map<String, String> map = client.getUserProperties();
 		if (map.keySet().size() > 0)
 		{
-			if (request.getHeader(WS_USER_PROPERTIES_HEADER) != null)
+			// set custom header
+			try
 			{
-				try
-				{
-					org.json.JSONStringer stringer = new org.json.JSONStringer();
-					org.json.JSONWriter writer = stringer.object();
-					for (String propName : map.keySet())
-					{
-						writer = writer.key(propName).value(map.get(propName));
-					}
-					writer.endObject();
-					response.setHeader(WS_USER_PROPERTIES_HEADER, writer.toString());
-				}
-				catch (JSONException e)
-				{
-					Debug.error("cannot serialize json object to " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
-				}
-			}
-			else
-			{
+				org.json.JSONStringer stringer = new org.json.JSONStringer();
+				org.json.JSONWriter writer = stringer.object();
 				for (String propName : map.keySet())
 				{
-					Cookie cookie = new Cookie(WS_USER_PROPERTIES_COOKIE_PREFIX + propName, map.get(propName));
-					response.addCookie(cookie);
+					writer = writer.key(propName).value(map.get(propName));
 				}
+				writer.endObject();
+				response.setHeader(WS_USER_PROPERTIES_HEADER, writer.toString());
+			}
+			catch (JSONException e)
+			{
+				Debug.error("cannot serialize json object to " + WS_USER_PROPERTIES_HEADER + " headder: ", e);
+			}
+			//set cookie
+			for (String propName : map.keySet())
+			{
+				Cookie cookie = new Cookie(WS_USER_PROPERTIES_COOKIE_PREFIX + propName, map.get(propName));
+				String ctxPath = request.getContextPath();
+				if (ctxPath == null || ctxPath.length() < 1)
+				{
+					ctxPath = "/";
+				}
+				else
+				{ // the solution is deployed as a WAR
+					ctxPath = "/" + client.getSolutionName();
+				}
+				cookie.setPath(ctxPath + "/servoy-service/rest_ws/" + client.getSolutionName());
+				cookie.setSecure(true);
+				cookie.setDomain("/");
+				response.addCookie(cookie);
 			}
 		}
 	}
