@@ -233,13 +233,14 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				SwingDBTreeTableView.this.mouseClicked(e);
+				if (e.getClickCount() == 2) SwingDBTreeTableView.this.mouseClicked(e);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e)
 			{
 				if (e.isPopupTrigger()) SwingDBTreeTableView.this.mouseRightClick(e);
+				else SwingDBTreeTableView.this.mouseClicked(e);
 			}
 
 			@Override

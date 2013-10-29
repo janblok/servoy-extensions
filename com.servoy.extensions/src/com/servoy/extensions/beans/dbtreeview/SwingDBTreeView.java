@@ -129,13 +129,14 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				SwingDBTreeView.this.mouseClicked(e);
+				if (e.getClickCount() == 2) SwingDBTreeView.this.mouseClicked(e);
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e)
 			{
 				if (e.isPopupTrigger()) SwingDBTreeView.this.mouseRightClick(e);
+				else SwingDBTreeView.this.mouseClicked(e);
 			}
 
 			@Override
