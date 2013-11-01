@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -436,53 +434,14 @@ public class RestWSServlet extends HttpServlet
 	public WsRequest parsePath(HttpServletRequest request)
 	{
 		String path = request.getPathInfo(); //without servlet name
-		String requestURI = request.getRequestURI();
 
-		String[] segments = null;
-		try
+		plugin.log.debug("Request '" + path + '\'');
+
+		// parse the path: /webServiceName/mysolution/myform/arg1/arg2/...
+		String[] segments = path == null ? null : path.split("/");
+		if (segments == null || segments.length < 4 || !webServiceName.equals(segments[1]))
 		{
-			boolean hasEncodedChars = false;
-			// parse the path: /webServiceName/mysolution/myform/arg1/arg2/... 
-			// If the uri contains encoded slashes, we have to deal with them and handle path correctly 
-			if (requestURI.contains(URLEncoder.encode("/", "UTF-8")))
-			{
-				hasEncodedChars = true;
-				path = requestURI;
-
-				plugin.log.debug("Request '" + path + '\'');
-
-				String[] segmentsFromURI = requestURI == null ? null : requestURI.split("/");
-				//first segment in uri is servoy-service, so skip it
-				segments = Arrays.copyOfRange(segmentsFromURI, 1, segmentsFromURI.length);
-			}
-			else
-			{
-				plugin.log.debug("Request '" + path + '\'');
-				segments = path == null ? null : path.split("/");
-			}
-
-			if (segments == null || segments.length < 4 ||
-				(!webServiceName.equals(segments[1]) && !webServiceName.endsWith(URLDecoder.decode(segments[1], "UTF-8"))))
-			{
-				throw new IllegalArgumentException(path);
-			}
-
-			if (hasEncodedChars)
-			{
-				for (int i = 0; i < segments.length; i++)
-				{
-					segments[i] = URLDecoder.decode(segments[i], "UTF-8");
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			String message = requestURI; // exception form encoding/decoding uri
-			if (e instanceof IllegalArgumentException)
-			{
-				message = e.getMessage();
-			}
-			throw new IllegalArgumentException(message);
+			throw new IllegalArgumentException(path);
 		}
 
 		return new WsRequest(segments[2], segments[3], Utils.arraySub(segments, 4, segments.length));
