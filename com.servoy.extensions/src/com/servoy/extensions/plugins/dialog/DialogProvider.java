@@ -18,9 +18,12 @@ package com.servoy.extensions.plugins.dialog;
 
 import java.awt.Dialog;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Method;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -34,6 +37,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.scripting.IScriptable;
+import com.servoy.j2db.util.gui.KeyReleaseActionJButton;
 
 /**
  * Scriptable object for dialog plugin
@@ -234,13 +238,37 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 				}
 			}
 		}
-		String[] options = new String[buttons.size()];
+		Object[] options = new Object[buttons.size()];
 		buttons.copyInto(options);
 		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
-		JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
+
+		for (int i = 0; i < options.length; i++)
+		{
+			KeyReleaseActionJButton b = new KeyReleaseActionJButton();
+			b.setText((String)options[i]);
+			options[i] = b;
+		}
+
+		final JOptionPane pane = new JOptionPane(msg, type, JOptionPane.DEFAULT_OPTION, null, options, options[0]);
 		pane.setInitialValue(options[0]);
+
+		ActionListener selectButtonActionListener = new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				pane.setValue(e.getSource());
+			}
+		};
+		for (Object option : options)
+		{
+			((JButton)option).addActionListener(selectButtonActionListener);
+		}
 		createAndShowDialog(title, pane);
 		Object retValue = pane.getValue();
+		if (retValue instanceof JButton)
+		{
+			retValue = ((JButton)retValue).getText();
+		}
 		if (retValue != null) return retValue.toString();
 		return null;
 	}
