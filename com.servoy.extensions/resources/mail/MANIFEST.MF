@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+
+Name: com/servoy/extensions/plugins/mail/MailServer.class
+Servoy-Plugin: True
+
+Name: com/servoy/extensions/plugins/mail/client/MailPlugin.class
+Servoy-Plugin: True
+

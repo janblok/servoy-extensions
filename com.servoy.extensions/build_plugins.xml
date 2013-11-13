@@ -509,6 +509,10 @@
 	<target name="mail.jar" depends="compile">
 		<delete dir="${tempForJar.dir}"/>
 		<mkdir dir="${tempForJar.dir}"/>
+		<mkdir dir="${tempForJar.dir}/META-INF"/>
+		<copy overwrite="true" todir="${tempForJar.dir}/META-INF">
+			<fileset file="resources/mail/MANIFEST.MF"/>
+		</copy>
 		<delete file="${plugins.dir}/mail.jar" quiet="true"/>
 		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/mail">
 			<fileset dir="${src_plugins.dir}/mail">
@@ -523,6 +527,7 @@
 		</copy>
 		<jar	destfile="${plugins.dir}/mail.jar"
 				basedir="${tempForJar.dir}"
+				manifest="${tempForJar.dir}/META-INF/MANIFEST.MF"
 				duplicate="fail"
 		/>
 		<delete dir="${tempForJar.dir}"/>
