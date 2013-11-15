@@ -39,6 +39,13 @@ public class MailPlugin implements IClientPlugin
 	private IClientPluginAccess access;
 	private MailProvider impl;
 
+	/**
+	 * Dummy constructor.
+	 */
+	public MailPlugin()
+	{
+	}
+
 	public void initialize(IClientPluginAccess app) throws PluginException
 	{
 		access = app;
