@@ -167,6 +167,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 		}
 	}
 
+	@Override
 	public IDataSet executeStoredProcedure(String clientId, String serverName, String transaction_id, String procedureDeclaration, Object[] questiondata,
 		int[] inOutType, int startRow, int rowsToRetrieve) throws RepositoryException, RemoteException
 	{
@@ -176,6 +177,22 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 		{
 			return application.executeStoredProcedure(clientId, serverName, transaction_id, procedureDeclaration, questiondata, inOutType, startRow,
 				rowsToRetrieve);
+		}
+		catch (ServoyException e)
+		{
+			throw new RepositoryException(e);
+		}
+	}
+
+	@Override
+	public IDataSet[] executeStoredProcedure(String clientId, String serverName, String transaction_id, String procedureDeclaration, Object[] questiondata,
+		int startRow, int rowsToRetrieve) throws RepositoryException, RemoteException
+	{
+		if (!checkAccess(clientId)) return null;
+
+		try
+		{
+			return application.executeStoredProcedure(clientId, serverName, transaction_id, procedureDeclaration, questiondata, startRow, rowsToRetrieve);
 		}
 		catch (ServoyException e)
 		{

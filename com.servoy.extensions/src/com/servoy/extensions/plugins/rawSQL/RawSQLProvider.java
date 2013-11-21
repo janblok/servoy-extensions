@@ -48,7 +48,7 @@ public class RawSQLProvider implements IScriptable
 		exception = null;
 		if (sqlService == null)
 		{
-			sqlService = (ISQLService)plugin.getClientPluginAccess().getServerService("servoy.ISQLService"); //$NON-NLS-1$
+			sqlService = (ISQLService)plugin.getClientPluginAccess().getRemoteService("servoy.ISQLService"); //$NON-NLS-1$
 		}
 		return sqlService;
 	}
@@ -169,25 +169,15 @@ public class RawSQLProvider implements IScriptable
 	 * @param arguments 
 	 * @param inOutDirectionality 
 	 * @param maxNumberOfRowsToRetrieve 
+	 * 
+	 * @return a dataset with output (in case of output data) or the last result set executed by the procedure.
 	 */
 	public JSDataSet js_executeStoredProcedure(String serverName, String procedureDeclaration, Object[] arguments, int[] inOutDirectionality,
 		int maxNumberOfRowsToRetrieve)
 	{
-		Object[] args;
-		int[] inOutType;
-		if (arguments == null || inOutDirectionality == null)
-		{
-			args = new Object[0];
-			inOutType = new int[0];
-		}
-		else if (arguments.length != inOutDirectionality.length)
+		if (arguments != null && inOutDirectionality != null && arguments.length != inOutDirectionality.length)
 		{
 			throw new RuntimeException("In/Out Arguments should be same size as directionality array"); //$NON-NLS-1$
-		}
-		else
-		{
-			args = arguments;
-			inOutType = inOutDirectionality;
 		}
 
 		try
@@ -196,7 +186,8 @@ public class RawSQLProvider implements IScriptable
 				plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName));
 			String cid = plugin.getClientPluginAccess().getClientID();
 			// TODO HOW TO HANDLE ARGS WITH NULL?? sHOULD BE CONVERTED TO NullValue?????
-			IDataSet set = getSQLService().executeStoredProcedure(cid, serverName, tid, procedureDeclaration, args, inOutType, 0, maxNumberOfRowsToRetrieve);
+			IDataSet set = getSQLService().executeStoredProcedure(cid, serverName, tid, procedureDeclaration, arguments, inOutDirectionality, 0,
+				maxNumberOfRowsToRetrieve);
 			return new JSDataSet(((ClientPluginAccessProvider)plugin.getClientPluginAccess()).getApplication(), set);
 		}
 		catch (ServoyException ex)
@@ -211,6 +202,47 @@ public class RawSQLProvider implements IScriptable
 			Debug.error(e);
 			return null;
 		}
+	}
+
+	/**
+	 * Execute a stored procedure, return all created result sets.
+	 *
+	 * @sample
+	 * /**************************************************************************** 
+	 * WARNING! You can cause data loss or serious data integrity compromises!
+	 * You should have a THOROUGH understanding of both SQL and your backend
+	 * database (and other interfaces that may use that backend) BEFORE YOU USE
+	 * ANY OF THESE COMMANDS.
+	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+	 * 
+	 * Note that when server names have been switched (databasemanager.switchServer),the 
+	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+	 * ****************************************************************************&#47;
+	 * 
+	 * var maxReturnedRows = 10; //useful to limit number of rows
+	 * var procedure_declaration = '{ get_unpaid_orders_and_their_customers(?) }'
+	 * var args = [42]
+	 * var datasets = plugins.rawSQL.executeStoredProcedure(databaseManager.getDataSourceServerName(controller.getDataSource()), procedure_declaration, args, maxReturnedRows);
+	 * for (var i = 0; i < datasets.length; i++) {
+	 * 	var ds = datasets[i]
+	 * 	// process dataset
+	 * }
+	 * 
+	 * @param serverName 
+	 * @param procedureDeclaration 
+	 * @param arguments 
+	 * @param maxNumberOfRowsToRetrieve 
+	 * 
+	 * @return the result sets created by the procedure.
+	 */
+	public IDataSet[] js_executeStoredProcedure(String serverName, String procedureDeclaration, Object[] arguments, int maxNumberOfRowsToRetrieve)
+		throws Exception
+	{
+		String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(
+			plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName));
+		// TODO HOW TO HANDLE ARGS WITH NULL?? sHOULD BE CONVERTED TO NullValue?????
+		return getSQLService().executeStoredProcedure(plugin.getClientPluginAccess().getClientID(), serverName, tid, procedureDeclaration, arguments, 0,
+			maxNumberOfRowsToRetrieve);
 	}
 
 	/**

@@ -29,6 +29,9 @@ public interface ISQLService extends Remote
 	public IDataSet executeStoredProcedure(String clientId, String serverName, String transaction_id, String procedureDeclaration, Object[] args,
 		int[] inOutType, int startRow, int maxNumberOfRowsToRetrieve) throws RepositoryException, RemoteException;
 
+	public IDataSet[] executeStoredProcedure(String clientId, String serverName, String transaction_id, String procedureDeclaration, Object[] args,
+		int startRow, int maxNumberOfRowsToRetrieve) throws RepositoryException, RemoteException;
+
 	public boolean flushAllClientsCache(String client_id, boolean notifySelf, String server_name, String table, String transaction_id) throws RemoteException;
 
 	public boolean notifyDataChange(String client_id, boolean notifySelf, String server_name, String tableName, IDataSet pks, int action, String transaction_id)
