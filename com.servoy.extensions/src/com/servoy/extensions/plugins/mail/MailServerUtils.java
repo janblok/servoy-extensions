@@ -55,7 +55,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -63,7 +63,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -71,7 +71,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -79,7 +79,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -87,7 +87,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -95,7 +95,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -103,7 +103,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 			try
 			{
@@ -111,7 +111,7 @@ public class MailServerUtils
 			}
 			catch (Exception e)
 			{
-				Debug.error(e);
+				Debug.warn(e);
 			}
 
 			if (receiveMode != IMailService.HEADERS_ONLY)
@@ -122,7 +122,7 @@ public class MailServerUtils
 				}
 				catch (Exception e)
 				{
-					Debug.error(e);
+					Debug.warn(e);
 				}
 			}
 		}
