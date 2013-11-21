@@ -274,15 +274,17 @@ public class RestWSPlugin implements IServerPlugin
 					Debug.error("cannot reopen solution " + poolKey, ex);
 					client.shutDown(true);
 				}
-
-				try
+				finally
 				{
-					if (solutionReopened) getClientPool().returnObject(poolKey, client);
-					else getClientPool().invalidateObject(poolKey, client);
-				}
-				catch (Exception ex)
-				{
-					Debug.error(ex);
+					try
+					{
+						if (solutionReopened) getClientPool().returnObject(poolKey, client);
+						else getClientPool().invalidateObject(poolKey, client);
+					}
+					catch (Exception ex)
+					{
+						Debug.error(ex);
+					}
 				}
 			}
 		});
