@@ -151,10 +151,52 @@ else
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="[Ljava.lang.Object;"/>
+              <argumentType typecode="int"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.dataprocessing.JSDataSet[]" typecode="[Lcom.servoy.j2db.dataprocessing.IDataSet;"><![CDATA[the result sets created by the procedure.]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+WARNING! You can cause data loss or serious data integrity compromises!
+You should have a THOROUGH understanding of both SQL and your backend
+database (and other interfaces that may use that backend) BEFORE YOU USE
+ANY OF THESE COMMANDS.
+You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
+
+Note that when server names have been switched (databasemanager.switchServer),the 
+real server names must be used here, plugins.rawSQL is not transparent to switched servers.
+****************************************************************************/
+
+var maxReturnedRows = 10; //useful to limit number of rows
+var procedure_declaration = '{ get_unpaid_orders_and_their_customers(?) }'
+var args = [42]
+var datasets = plugins.rawSQL.executeStoredProcedure(databaseManager.getDataSourceServerName(controller.getDataSource()), procedure_declaration, args, maxReturnedRows);
+for (var i = 0; i < datasets.length; i++) {
+	var ds = datasets[i]
+	// process dataset
+}]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="procedureDeclaration" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="arguments" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
+              <parameter name="maxNumberOfRowsToRetrieve" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="executeStoredProcedure">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.Object;"/>
               <argumentType typecode="[I"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
-            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"/>
+            <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"><![CDATA[a dataset with output (in case of output data) or the last result set executed by the procedure.]]></return>
             <descriptions>
               <description clientSupport="wc,sc"><![CDATA[Execute a stored procedure.]]></description>
             </descriptions>
