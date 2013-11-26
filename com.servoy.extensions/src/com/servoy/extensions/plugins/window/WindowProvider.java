@@ -192,13 +192,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		return KeyStroke.getKeyStroke(keyStrokeString);
 	}
 
-	public void shortcutHit(KeyStroke key, IComponent component, String formName)
+	public boolean shortcutHit(KeyStroke key, IComponent component, String formName)
 	{
 		Map<String, ShortcutCallData> shortcutMap = shortcuts.get(key);
 		if (shortcutMap == null)
 		{
 			// unknown shortcut
-			return;
+			return false;
 		}
 
 		ShortcutCallData globalHandler = shortcutMap.get(null);
@@ -246,6 +246,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 				}
 			}
 		}
+		return formHandler != null || globalHandler != null;
 	}
 
 	/**

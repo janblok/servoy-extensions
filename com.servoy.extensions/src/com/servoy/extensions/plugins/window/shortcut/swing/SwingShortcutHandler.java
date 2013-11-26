@@ -126,7 +126,6 @@ public class SwingShortcutHandler implements IShortcutHandler
 			public void actionPerformed(ActionEvent e)
 			{
 				Component component = findIComponent(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner());
-
 				String formName = null;
 				for (Component c = component; c != null; c = c.getParent())
 				{
@@ -137,7 +136,21 @@ public class SwingShortcutHandler implements IShortcutHandler
 					}
 				}
 
-				windowProvider.shortcutHit(key, (IComponent)component, formName);
+				if (!windowProvider.shortcutHit(key, (IComponent)component, formName))
+				{
+					// if the action didn't result in a real hit, try to find a default mapping that we did override.
+					InputMap inputMap = getRootPane().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+					if (inputMap.getParent() != null)
+					{
+						// if the input map has a parent look if that one has a action mapping for the keystroke
+						Object actionMapping = inputMap.getParent().get(key);
+						if (actionMapping != null)
+						{
+							Action act = getRootPane().getRootPane().getActionMap().get(actionMapping);
+							if (act != null) act.actionPerformed(e);
+						}
+					}
+				}
 			}
 		};
 		if (isSpecialKey(k) && key.getModifiers() == 0)
