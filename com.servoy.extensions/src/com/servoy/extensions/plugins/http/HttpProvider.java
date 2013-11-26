@@ -188,7 +188,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 			lastPageEncoding = data.getRight();
 			return data.getLeft();
 		}
-		catch (MalformedURLException e)
+		catch (Exception e)
 		{
 			Debug.error(e);
 			return "";
@@ -241,7 +241,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		{
 			return getPageDataOldImpl(new URL(input), timeout);
 		}
-		catch (MalformedURLException e)
+		catch (Exception e)
 		{
 			Debug.error(e);
 			return new Pair<String, String>("", null);
