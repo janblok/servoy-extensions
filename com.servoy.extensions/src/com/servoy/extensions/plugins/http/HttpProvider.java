@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
@@ -155,7 +156,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 			BasicCredentialsProvider bcp = new BasicCredentialsProvider();
 			if (username != null)
 			{
-				URL _url = new URL(url);
+				URL _url = createURLFromString(url);
 				bcp.setCredentials(new AuthScope(_url.getHost(), _url.getPort()), new UsernamePasswordCredentials(username, password));
 				client.setCredentialsProvider(bcp);
 			}
@@ -169,20 +170,37 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		}
 	}
 
-	private String getPageDataOldImplementation(String input)
+	protected URL createURLFromString(String url) throws MalformedURLException
 	{
-		Pair<String, String> data = getPageDataOldImpl(input, timeout);
-		lastPageEncoding = data.getRight();
-		return data.getLeft();
+		return createURLFromString(url, access);
 	}
 
-	public static Pair<String, String> getPageDataOldImpl(String input, int timeout)
+	public static URL createURLFromString(String url, IClientPluginAccess access) throws MalformedURLException
+	{
+		return url.startsWith(MediaURLStreamHandler.MEDIA_URL_DEF) ? new URL(null, url, access.getMediaURLStreamHandler()) : new URL(url);
+	}
+
+	private String getPageDataOldImplementation(String input)
+	{
+		try
+		{
+			Pair<String, String> data = getPageDataOldImpl(createURLFromString(input), timeout);
+			lastPageEncoding = data.getRight();
+			return data.getLeft();
+		}
+		catch (MalformedURLException e)
+		{
+			Debug.error(e);
+			return "";
+		}
+	}
+
+	public static Pair<String, String> getPageDataOldImpl(URL url, int timeout)
 	{
 		StringBuffer sb = new StringBuffer();
 		String charset = null;
 		try
 		{
-			URL url = new URL(input);
 			URLConnection connection = url.openConnection();
 			if (timeout >= 0) connection.setConnectTimeout(timeout);
 			InputStream is = connection.getInputStream();
@@ -214,7 +232,20 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		{
 			Debug.error(e);
 		}
-		return new Pair(sb.toString(), charset);
+		return new Pair<String, String>(sb.toString(), charset);
+	}
+
+	public static Pair<String, String> getPageDataOldImpl(String input, int timeout)
+	{
+		try
+		{
+			return getPageDataOldImpl(new URL(input), timeout);
+		}
+		catch (MalformedURLException e)
+		{
+			Debug.error(e);
+			return new Pair<String, String>("", null);
+		}
 	}
 
 	private DefaultHttpClient getOrCreateHTTPclient(String name, String url)
@@ -368,15 +399,8 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		ByteArrayOutputStream sb = new ByteArrayOutputStream();
 		try
 		{
-			URLConnection connection;
-			if (url.startsWith(MediaURLStreamHandler.MEDIA_URL_DEF))
-			{
-				connection = new URL(null, url, access.getMediaURLStreamHandler()).openConnection();
-			}
-			else
-			{
-				connection = new URL(url).openConnection();
-			}
+			URLConnection connection = createURLFromString(url).openConnection();
+
 			if (timeout >= 0) connection.setConnectTimeout(timeout);
 			InputStream is = connection.getInputStream();
 			BufferedInputStream bis = new BufferedInputStream(is);
@@ -505,7 +529,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		int status = 0;
 		try
 		{
-			URL _url = new URL(url);
+			URL _url = createURLFromString(url);
 			HttpPut method = new HttpPut(url + "/" + fileName);
 			DefaultHttpClient client = getOrCreateHTTPclient(clientName, url);
 			File file = new File(filePath);
@@ -902,7 +926,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 						}
 						System.out.println("write file " + file.getAbsolutePath()); //$NON-NLS-1$
 
-//						URL iurl = new URL(surl.toString());
+//						URL iurl = createURLFromString(surl.toString());
 						HttpGet get = new HttpGet(surl.toString());
 
 						HttpResponse response = client.execute(get);

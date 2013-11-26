@@ -240,7 +240,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		}
 		Object[] options = new Object[buttons.size()];
 		buttons.copyInto(options);
-		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
+		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 
 		for (int i = 0; i < options.length; i++)
 		{
@@ -368,7 +368,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		if (dialog_title != null) title = Messages.getStringIfPrefix(dialog_title);
 		String message = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
 		if (msg != null) message = Messages.getStringIfPrefix(msg);
-		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
+		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 		JOptionPane pane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
 		pane.setWantsInput(true);
 		pane.setSelectionValues(options);
@@ -402,7 +402,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix((String)element)); //$NON-NLS-1$
 			}
 		}
-		Object[] options = new String[buttons.size()];
+		Object[] options = new Object[buttons.size()];
 		buttons.copyInto(options);
 		return showSelectDialogEx(dialog_title, msg, options);
 	}

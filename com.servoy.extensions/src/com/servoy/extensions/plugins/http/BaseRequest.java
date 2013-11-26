@@ -53,14 +53,14 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	protected String url;
 	protected HttpContext context;
 	protected Map<String, String[]> headers;
-	private IClientPluginAccess plugin;
+	private IClientPluginAccess access;
 
 	public BaseRequest()
 	{
 		method = null;
 	}//only used by script engine
 
-	public BaseRequest(String url, DefaultHttpClient hc, HttpRequestBase method, IClientPluginAccess plugin)
+	public BaseRequest(String url, DefaultHttpClient hc, HttpRequestBase method, IClientPluginAccess access)
 	{
 		this.url = url;
 		if (hc == null)
@@ -73,7 +73,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		}
 		headers = new HashMap<String, String[]>();
 		this.method = method;
-		this.plugin = plugin;
+		this.access = access;
 	}
 
 	/**
@@ -185,7 +185,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 		if (!Utils.stringIsEmpty(userName))
 		{
 			BasicCredentialsProvider bcp = new BasicCredentialsProvider();
-			URL _url = new URL(url);
+			URL _url = HttpProvider.createURLFromString(url, access);
 			Credentials cred = null;
 			if (windowsAuthentication)
 			{
@@ -272,7 +272,7 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 
 					if (successFunctionDef != null)
 					{
-						successFunctionDef.executeAsync(plugin, new Object[] { response });
+						successFunctionDef.executeAsync(access, new Object[] { response });
 					}
 				}
 				catch (final Exception ex)
@@ -280,11 +280,11 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 					Debug.error(ex);
 					if (errorFunctionDef != null)
 					{
-						errorFunctionDef.executeAsync(plugin, new Object[] { ex.getMessage() });
+						errorFunctionDef.executeAsync(access, new Object[] { ex.getMessage() });
 					}
 				}
 			}
 		};
-		plugin.getExecutor().execute(runnable);
+		access.getExecutor().execute(runnable);
 	}
 }
