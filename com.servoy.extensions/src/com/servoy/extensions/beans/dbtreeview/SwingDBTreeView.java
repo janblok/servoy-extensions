@@ -657,7 +657,27 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	{
 		private static final long serialVersionUID = 1L;
 
-		private final UserNodeTreeCellRenderer theEditor = new UserNodeTreeCellRenderer();
+		// custom node panel used for the renderer when using it for the editor
+		private final JPanel nodePanel = new JPanel()
+		{
+			@Override
+			public void setBounds(int x, int y, int width, int height)
+			{
+				super.setBounds(x, y, width, height);
+				// make sure all components are in-place, because if it is used as editor
+				// the click on it may miss the right child component
+				doLayout();
+			}
+		};
+
+		private final UserNodeTreeCellRenderer theEditor = new UserNodeTreeCellRenderer()
+		{
+			@Override
+			protected JPanel getNodePanel()
+			{
+				return nodePanel;
+			}
+		};
 		private int editingRow;
 
 		public UserNodeTreeCellEditor()
@@ -729,7 +749,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	{
 		private static final long serialVersionUID = 1L;
 
-		private final JPanel nodePanel = new JPanel();
+		private final JPanel cellNodePanel = new JPanel();
 		private final JCheckBox cb = new JCheckBox();
 		private final JLabel img = new JLabel();
 
@@ -738,6 +758,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 
 		public UserNodeTreeCellRenderer()
 		{
+			JPanel nodePanel = getNodePanel();
 			nodePanel.setOpaque(false);
 			nodePanel.setLayout(new BoxLayout(nodePanel, BoxLayout.X_AXIS));
 
@@ -747,6 +768,11 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 			Color clr = new Color(0, 0, 0, 0);
 //			setBackground(clr);
 			setBackgroundNonSelectionColor(clr);
+		}
+
+		protected JPanel getNodePanel()
+		{
+			return cellNodePanel;
 		}
 
 		public JCheckBox getCheckBox()
@@ -771,6 +797,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 		public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus)
 		{
 			isRendering = true;
+			JPanel nodePanel = getNodePanel();
 			nodePanel.removeAll();
 
 			JComponent comp = (JComponent)super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, (rowFocus == row) ? true : hasFocus);
