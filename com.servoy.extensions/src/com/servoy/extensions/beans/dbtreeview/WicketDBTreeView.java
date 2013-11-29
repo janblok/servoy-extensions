@@ -936,21 +936,20 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		return wicketTree.jsChangeRecorder;
 	}
 
-	public Binding js_createBinding(String... args)
+	public Binding js_createBinding(String datasource)
 	{
 		Binding binding = new Binding();
-		if (args.length == 2)
-		{
-			binding.setServerName(args[0]);
-			binding.setTableName(args[1]);
-		}
-		else
-		{
-			binding.setDataSource(args[0]);
-		}
-
+		binding.setDataSource(datasource);
 		bindingInfo.addBinding(binding);
+		return binding;
+	}
 
+	public Binding js_createBinding(String serverName, String tableName)
+	{
+		Binding binding = new Binding();
+		binding.setServerName(serverName);
+		binding.setTableName(tableName);
+		bindingInfo.addBinding(binding);
 		return binding;
 	}
 

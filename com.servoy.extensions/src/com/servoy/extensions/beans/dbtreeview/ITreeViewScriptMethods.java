@@ -294,10 +294,27 @@ public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScripta
 	 * companies_binding.setImageURLDataprovider('type_icon');
 	 * companies_binding.setChildSortDataprovider('company_sort');
 	 * 
-	 * @param args
+	 * @param datasource
 	 * @return Binding object for a database table
 	 */
-	public Binding js_createBinding(String... args);
+	public Binding js_createBinding(String datasource);
+
+	/**
+	 * @clodenesc {@link #js_createBinding(String)}
+	 * @sample
+	 * /** @type {JSFoundSet<db:/udm/companies>} *&#47;
+	 * var fs = databaseManager.getFoundSet("db:/udm/companies");
+	 * var companies_binding = %%elementName%%.createBinding(fs.getDataSource());
+	 * companies_binding.setTextDataprovider('company_name');
+	 * companies_binding.setNRelationName('companies_to_companies');
+	 * companies_binding.setImageURLDataprovider('type_icon');
+	 * companies_binding.setChildSortDataprovider('company_sort');
+	 * 
+	 * @param serverName
+	 * @param tableName
+	 * @return Binding object for a database table
+	 */
+	public Binding js_createBinding(String serverName, String tableName);
 
 	/**
 	 * Create relation info object used to set multiple child relations for a tree node
