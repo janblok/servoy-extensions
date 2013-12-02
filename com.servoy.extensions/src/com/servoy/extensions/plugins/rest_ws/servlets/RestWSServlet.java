@@ -975,6 +975,9 @@ public class RestWSServlet extends HttpServlet
 				case CONTENT_MULTIPART :
 					content = "";
 					break;
+				case CONTENT_TEXT :
+					content = result != null ? result.toString() : "";
+					break;
 				default :
 					// how can this happen...
 					throw new IllegalStateException();
@@ -990,6 +993,9 @@ public class RestWSServlet extends HttpServlet
 
 				case CONTENT_XML :
 					resultContentType = "application/xml";
+					break;
+				case CONTENT_TEXT :
+					resultContentType = "text/plain";
 					break;
 
 				default :
