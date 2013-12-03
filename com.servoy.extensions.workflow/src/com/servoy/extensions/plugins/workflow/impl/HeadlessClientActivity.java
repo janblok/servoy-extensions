@@ -24,7 +24,7 @@ import org.jbpm.api.activity.ActivityExecution;
 
 import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
-import com.servoy.j2db.server.headlessclient.IHeadlessClient;
+import com.servoy.j2db.server.shared.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.serialize.MapSerializer;
 

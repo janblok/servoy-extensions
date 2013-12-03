@@ -39,7 +39,7 @@ import com.servoy.j2db.server.annotations.TerracottaAutolockWrite;
 import com.servoy.j2db.server.annotations.TerracottaInstrumentedClass;
 import com.servoy.j2db.server.annotations.TerracottaRoot;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
-import com.servoy.j2db.server.headlessclient.IHeadlessClient;
+import com.servoy.j2db.server.shared.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.UUID;
