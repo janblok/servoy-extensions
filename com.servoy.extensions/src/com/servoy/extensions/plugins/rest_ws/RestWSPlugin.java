@@ -23,11 +23,11 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.BaseKeyedPoolableObjectFactory;
 import org.apache.commons.pool.KeyedObjectPool;
 import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.servoy.extensions.plugins.rest_ws.servlets.RestWSServlet;
 import com.servoy.j2db.documentation.ServoyDocumented;
@@ -52,9 +52,7 @@ import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
  * </ul>
  * 
  * @see RestWSServlet
- * 
  * @author rgansevles
- * 
  */
 @SuppressWarnings("nls")
 @ServoyDocumented
@@ -71,7 +69,7 @@ public class RestWSPlugin implements IServerPlugin
 	public static final String WEBSERVICE_NAME = "rest_ws";
 	private static final String[] SOLUTION_OPEN_METHOD_ARGS = new String[] { "rest_ws_server" };
 
-	public final Log log = LogFactory.getLog(RestWSPlugin.class);
+	public final Logger log = LoggerFactory.getLogger(RestWSPlugin.class);
 
 	private JSONSerializerWrapper serializerWrapper;
 	private GenericKeyedObjectPool clientPool = null;
