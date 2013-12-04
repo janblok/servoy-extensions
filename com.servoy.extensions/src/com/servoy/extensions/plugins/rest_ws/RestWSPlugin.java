@@ -233,6 +233,21 @@ public class RestWSPlugin implements IServerPlugin
 					log.debug("Validated session client for solution '" + key + "', valid = " + valid);
 					return valid;
 				}
+
+				@Override
+				public void destroyObject(Object key, Object obj) throws Exception
+				{
+					log.debug("Destroying session client for solution '" + key + "'");
+					IHeadlessClient client = ((IHeadlessClient)obj);
+					try
+					{
+						client.shutDown(true);
+					}
+					catch (Exception e)
+					{
+						Debug.error(e);
+					}
+				}
 			}, poolSize);
 			clientPool.setTestOnBorrow(true);
 			clientPool.setWhenExhaustedAction(exchaustedAction);
