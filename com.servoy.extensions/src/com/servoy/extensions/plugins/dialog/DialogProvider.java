@@ -240,7 +240,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		}
 		Object[] options = new Object[buttons.size()];
 		buttons.copyInto(options);
-		if (options.length == 0) options = new String[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
+		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 
 		for (int i = 0; i < options.length; i++)
 		{
