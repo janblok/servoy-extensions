@@ -1561,7 +1561,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @clonedesc {@link #js_openFile(JSFile)}
 	 * 
 	 * @param file the local file to open. The file should exist and be accessible.
-	 * @param webClientTarget Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for wnother browser window. By default "_blank" is used.
+	 * @param webClientTarget Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for another browser window. By default "_blank" is used.
 	 * @param webClientTargetOptions window options used when a new browser window is to be shown; see browser JS 'window.open(...)' documentation.
 	 * @return success status of the open operation
 	 *
@@ -1627,7 +1627,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
 	 * http://www.iana.org/assignments/media-types/media-types.xhtml
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7
-	 * @param webClientTarget Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for wnother browser window. By default "_blank" is used.
+	 * @param webClientTarget Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for another browser window. By default "_blank" is used.
 	 * @param webClientTargetOptions window options used when a new browser window is to be shown; see browser JS 'window.open(...)' documentation.
 	 * 
 	 * @return success status of the open operation
