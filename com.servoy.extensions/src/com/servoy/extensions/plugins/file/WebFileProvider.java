@@ -86,13 +86,25 @@ public class WebFileProvider extends FileProvider
 	}
 
 	@Override
-	public boolean js_openFile(JSFile file)
+	public boolean js_openFile(JSFile file, String webClientTarget, String webClientTargetOptions)
 	{
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		String fileName = file.js_getName();
 		byte[] data = file.jsFunction_getBytes();
 		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, ImageLoader.getContentType(data, fileName), "inline"); //$NON-NLS-1$
-		((IWebClientPluginAccess)access).showURL(url, "_blank", null, 0, false); //$NON-NLS-1$
+		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
+		return true;
+	}
+
+	@Override
+	public boolean js_openFile(String fileName, byte[] data, String mimeType, String webClientTarget, String webClientTargetOptions)
+	{
+		String name = (fileName == null ? "file.bin" : fileName); //$NON-NLS-1$
+
+		IClientPluginAccess access = plugin.getClientPluginAccess();
+		String type = (mimeType == null) ? ImageLoader.getContentType(data, name) : mimeType.trim();
+		String url = ((IWebClientPluginAccess)access).serveResource(name, data, type, "inline"); //$NON-NLS-1$
+		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;
 	}
 
