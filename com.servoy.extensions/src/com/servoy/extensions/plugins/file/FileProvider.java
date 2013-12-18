@@ -1550,7 +1550,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 *  myPDF.setBytes(data, true)
 	 *	plugins.file.openFile(myPDF);
 	 *
-	 * @since 7.3.1
+	 * @since 7.3
 	 */
 	public boolean js_openFile(JSFile file)
 	{
