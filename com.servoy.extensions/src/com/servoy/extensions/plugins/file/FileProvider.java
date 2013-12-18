@@ -1436,7 +1436,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)
+	 * Writes the given file to disk.
+	 * 
+	 * If "file" is a JSFile or you are running in Smart Client, it writes data into a (local) binary file.
+	 * 
+	 * If you are running in Web Client and "file" is a String (like 'mypdffile.pdf' to hint the browser what it is) the user will get
+	 * prompted by the browser to save the file (sent using "Content-disposition: attachment" HTTP header). If it is a JSFile instance
+	 * in this case it will be saved as a file on the server.
 	 *
 	 * @sample
 	 * /**@type {Array<byte>}*&#47;
@@ -1446,7 +1452,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var f = plugins.file.convertToJSFile('bin.dat');
 	 * if (!plugins.file.writeFile(f, bytes))
 	 * 	application.output('Failed to write the file.');
-	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+	 * // mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
 	 * var mimeType = 'application/vnd.ms-excel'
 	 * if (!plugins.file.writeFile(f, bytes, mimeType))
 	 * 	application.output('Failed to write the file.');
@@ -1477,7 +1483,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param file a local JSFile
 	 * @param data the data to be written
-	 * @param mimeType the mime type
+	 * @param mimeType the mime type (used in Web-Client)
 	 */
 	public boolean js_writeFile(JSFile file, byte[] data, String mimeType)
 	{
@@ -1490,7 +1496,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param file the file path as a String
 	 * @param data the data to be written
-	 * @param mimeType the mime type
+	 * @param mimeType the mime type (used in Web-Client)
 	 */
 	public boolean js_writeFile(String file, byte[] data, String mimeType)
 	{
@@ -1531,20 +1537,140 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Launches the associated application to open the file.
+	 * Opens the given local file.
 	 * 
-	 * @param file
+	 * Smart Client: launches the default OS associated application to open an existing local file.
+	 * Web Client: the (server local) file will open inside the browser - if supported (sent using "Content-disposition: inline" HTTP header).
+	 * 
+	 * @param file the local file to open. The file should exist and be accessible.
 	 * @return success status of the open operation
 	 * 
 	 * @sample
 	 * 	var myPDF = plugins.file.createFile('my.pdf');
 	 *  myPDF.setBytes(data, true)
 	 *	plugins.file.openFile(myPDF);
+	 *
+	 * @since 7.3
 	 */
 	public boolean js_openFile(JSFile file)
 	{
+		return js_openFile(file, null, null);
+	}
+
+	/**
+	 * @clonedesc {@link #js_openFile(JSFile)}
+	 * 
+	 * @param file the local file to open. The file should exist and be accessible.
+	 * @param webClientTarget Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for another browser window. By default "_blank" is used.
+	 * @param webClientTargetOptions window options used when a new browser window is to be shown; see browser JS 'window.open(...)' documentation.
+	 * @return success status of the open operation
+	 *
+	 * @sample
+	 * 	var myPDF = plugins.file.createFile('my.pdf');
+	 *  myPDF.setBytes(data, true)
+	 *	plugins.file.openFile(myPDF, "_self", null); // show in the same browser window
+	 *
+	 * @since 7.3.1
+	 */
+	public boolean js_openFile(JSFile file, String webClientTarget, String webClientTargetOptions)
+	{
 		try
 		{
+			Desktop.getDesktop().open(file.getFile());
+			return true;
+		}
+		catch (Exception ex)
+		{
+			Debug.error(ex);
+			return false;
+		}
+	}
+
+	/**
+	 * Opens the given data as a file.
+	 * 
+	 * Smart Client: writes the data to a temporary file, then launches the default OS associated application to open it.
+	 * Web Client: the data will open as a file inside the browser - if supported (sent using "Content-disposition: inline" HTTP header).
+	 * 
+	 * @param fileName the name of the file that should open with the given data. Can be null (but in Smart Client null - so no extension - will probably make open fail).
+	 * @param data the file's binary content.
+	 * @param mimeType can be left null, and is used for webclient only. Specify one of any valid mime types:
+	 * https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
+	 * http://www.iana.org/assignments/media-types/media-types.xhtml
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7
+	 * 
+	 * @return success status of the open operation
+	 * 
+	 * @sample
+	 * // read or generate pdf file bytes
+	 * var bytes = plugins.file.readFile("c:/ExportedPdfs/13542.pdf");
+	 * 
+	 * // mimeType variable can be left null
+	 * var mimeType = 'application/pdf'
+	 * 
+	 * if (!plugins.file.openFile("MonthlyStatistics.pdf", bytes, mimeType))
+	 * 	application.output('Failed to open the file.');
+	 *
+	 * @since 7.3.1
+	 */
+	public boolean js_openFile(String fileName, byte[] data, String mimeType)
+	{
+		return js_openFile(fileName, data, mimeType, null, null);
+	}
+
+	/**
+	 * @clonedesc {@link #js_openFile(String, byte[], String)}
+	 * 
+	 * @param fileName the name of the file that should open with the given data. Can be null (but in Smart Client null - so no extension - will probably make open fail).
+	 * @param data the file's binary content.
+	 * @param mimeType can be left null, and is used for webclient only. Specify one of any valid mime types:
+	 * https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
+	 * http://www.iana.org/assignments/media-types/media-types.xhtml
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7
+	 * @param webClientTarget Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for another browser window. By default "_blank" is used.
+	 * @param webClientTargetOptions window options used when a new browser window is to be shown; see browser JS 'window.open(...)' documentation.
+	 * 
+	 * @return success status of the open operation
+	 * 
+	 * @sample
+	 * // read or generate pdf file bytes
+	 * var bytes = plugins.file.readFile("c:/ExportedPdfs/13542.pdf");
+	 * 
+	 * // mimeType variable can be left null
+	 * var mimeType = 'application/pdf'
+	 * 
+	 * if (!plugins.file.openFile("MonthlyStatistics.pdf", bytes, mimeType, "_self", null))
+	 * 	application.output('Failed to open the file.');
+	 *
+	 * @since 7.3.1
+	 */
+	public boolean js_openFile(String fileName, byte[] data, String mimeType, String webClientTarget, String webClientTargetOptions)
+	{
+		try
+		{
+			String suffix, prefix;
+			if (fileName != null)
+			{
+				int idx = fileName.lastIndexOf(".");
+				if (idx >= 0)
+				{
+					suffix = fileName.substring(idx);
+					prefix = fileName.substring(0, idx);
+				}
+				else
+				{
+					suffix = null;
+					prefix = fileName;
+				}
+			}
+			else
+			{
+				suffix = "bin";
+				prefix = "file";
+			}
+			JSFile file = js_createTempFile(prefix, suffix);
+			js_writeFile(file, data);
+
 			Desktop.getDesktop().open(file.getFile());
 			return true;
 		}
