@@ -1466,7 +1466,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clondesc js_writeFile(JSFile,byte[])
+	 * @clonedesc js_writeFile(JSFile,byte[])
 	 * @sampleas js_writeFile(JSFile,byte[])
 	 * 
 	 * @param file the file path as a String
@@ -2136,7 +2136,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clondesc js_appendToTXTFile(JSFile,String,String)
+	 * @clonedesc js_appendToTXTFile(JSFile,String,String)
 	 * @sampleas js_appendToTXTFile(JSFile,String,String)
 	 * 
 	 * @param file the file path as a String
