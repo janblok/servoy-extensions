@@ -735,7 +735,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public void js_closeFormPopup(Object retval)
 	{
-		popupShower.close(retval);
+		if (popupShower != null) popupShower.close(retval);
 	}
 
 	/**
@@ -744,7 +744,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public void js_cancelFormPopup()
 	{
-		popupShower.cancel();
+		if (popupShower != null) popupShower.cancel();
 	}
 
 
