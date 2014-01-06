@@ -1060,6 +1060,12 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using the specified encoding.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Appends a string given in parameter to a file, using the specified encoding.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// append some text to a text file:
 	var ok = plugins.file.appendToTXTFile('myTextFile.txt', '\nMy fantastic new line of text\n');]]></sample>
@@ -2047,16 +2053,19 @@ if (!plugins.file.moveFile(f, fmoved))
               <parameter name="destination" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="openFile">
+          <function clientSupport="wc,sc" name="openFile" since="7.3">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[success status of the open operation]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Launches the associated application to open the file.]]></description>
+              <description clientSupport="wc,sc"><![CDATA[Opens the given local file.
+
+Smart Client: launches the default OS associated application to open an existing local file.
+Web Client: the (server local) file will open inside the browser - if supported (sent using "Content-disposition: inline" HTTP header).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Launches the associated application to open the file.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[Opens the given local file.]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var myPDF = plugins.file.createFile('my.pdf');
@@ -2064,7 +2073,132 @@ if (!plugins.file.moveFile(f, fmoved))
 	plugins.file.openFile(myPDF);]]></sample>
             </samples>
             <parameters>
-              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[the local file to open. The file should exist and be accessible.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="openFile" since="7.3.1">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[success status of the open operation]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Opens the given local file.
+
+Smart Client: launches the default OS associated application to open an existing local file.
+Web Client: the (server local) file will open inside the browser - if supported (sent using "Content-disposition: inline" HTTP header).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Opens the given local file.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[var myPDF = plugins.file.createFile('my.pdf');
+ myPDF.setBytes(data, true)
+	plugins.file.openFile(myPDF, "_self", null); // show in the same browser window]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[the local file to open. The file should exist and be accessible.]]></description>
+              </parameter>
+              <parameter name="webClientTarget" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for another browser window. By default "_blank" is used.]]></description>
+              </parameter>
+              <parameter name="webClientTargetOptions" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[window options used when a new browser window is to be shown; see browser JS 'window.open(...)' documentation.]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="openFile" since="7.3.1">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[success status of the open operation]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Opens the given data as a file.
+
+Smart Client: writes the data to a temporary file, then launches the default OS associated application to open it.
+Web Client: the data will open as a file inside the browser - if supported (sent using "Content-disposition: inline" HTTP header).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Opens the given data as a file.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// read or generate pdf file bytes
+var bytes = plugins.file.readFile("c:/ExportedPdfs/13542.pdf");
+
+// mimeType variable can be left null
+var mimeType = 'application/pdf'
+
+if (!plugins.file.openFile("MonthlyStatistics.pdf", bytes, mimeType))
+	application.output('Failed to open the file.');]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the file that should open with the given data. Can be null (but in Smart Client null - so no extension - will probably make open fail).]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the file's binary content.]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[can be left null, and is used for webclient only. Specify one of any valid mime types:
+https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
+http://www.iana.org/assignments/media-types/media-types.xhtml
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="openFile" since="7.3.1">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[success status of the open operation]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Opens the given data as a file.
+
+Smart Client: writes the data to a temporary file, then launches the default OS associated application to open it.
+Web Client: the data will open as a file inside the browser - if supported (sent using "Content-disposition: inline" HTTP header).]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Opens the given data as a file.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// read or generate pdf file bytes
+var bytes = plugins.file.readFile("c:/ExportedPdfs/13542.pdf");
+
+// mimeType variable can be left null
+var mimeType = 'application/pdf'
+
+if (!plugins.file.openFile("MonthlyStatistics.pdf", bytes, mimeType, "_self", null))
+	application.output('Failed to open the file.');]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="fileName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the file that should open with the given data. Can be null (but in Smart Client null - so no extension - will probably make open fail).]]></description>
+              </parameter>
+              <parameter name="data" type="byte[]" typecode="[B">
+                <description><![CDATA[the file's binary content.]]></description>
+              </parameter>
+              <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[can be left null, and is used for webclient only. Specify one of any valid mime types:
+https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
+http://www.iana.org/assignments/media-types/media-types.xhtml
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7]]></description>
+              </parameter>
+              <parameter name="webClientTarget" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[Target frame or named dialog/window. For example "_self" to open in the same browser window, "_blank" for another browser window. By default "_blank" is used.]]></description>
+              </parameter>
+              <parameter name="webClientTargetOptions" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[window options used when a new browser window is to be shown; see browser JS 'window.open(...)' documentation.]]></description>
+              </parameter>
             </parameters>
           </function>
           <function clientSupport="wc,sc" name="readFile">
@@ -3708,10 +3842,16 @@ if (folder) {
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+              <description clientSupport="wc,sc"><![CDATA[Writes the given file to disk.
+
+If "file" is a JSFile or you are running in Smart Client, it writes data into a (local) binary file.
+
+If you are running in Web Client and "file" is a String (like 'mypdffile.pdf' to hint the browser what it is) the user will get
+prompted by the browser to save the file (sent using "Content-disposition: attachment" HTTP header). If it is a JSFile instance
+in this case it will be saved as a file on the server.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[Writes the given file to disk.]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
@@ -3721,7 +3861,7 @@ for (var i=0; i<1024; i++)
 var f = plugins.file.convertToJSFile('bin.dat');
 if (!plugins.file.writeFile(f, bytes))
 	application.output('Failed to write the file.');
-// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
 var mimeType = 'application/vnd.ms-excel'
 if (!plugins.file.writeFile(f, bytes, mimeType))
 	application.output('Failed to write the file.');]]></sample>
@@ -3743,10 +3883,16 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+              <description clientSupport="wc,sc"><![CDATA[Writes the given file to disk.
+
+If "file" is a JSFile or you are running in Smart Client, it writes data into a (local) binary file.
+
+If you are running in Web Client and "file" is a String (like 'mypdffile.pdf' to hint the browser what it is) the user will get
+prompted by the browser to save the file (sent using "Content-disposition: attachment" HTTP header). If it is a JSFile instance
+in this case it will be saved as a file on the server.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[Writes the given file to disk.]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
@@ -3756,7 +3902,7 @@ for (var i=0; i<1024; i++)
 var f = plugins.file.convertToJSFile('bin.dat');
 if (!plugins.file.writeFile(f, bytes))
 	application.output('Failed to write the file.');
-// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
 var mimeType = 'application/vnd.ms-excel'
 if (!plugins.file.writeFile(f, bytes, mimeType))
 	application.output('Failed to write the file.');]]></sample>
@@ -3769,7 +3915,7 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
                 <description><![CDATA[the data to be written]]></description>
               </parameter>
               <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the mime type]]></description>
+                <description><![CDATA[the mime type (used in Web-Client)]]></description>
               </parameter>
             </parameters>
           </function>
@@ -3779,6 +3925,18 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Writes the given file to disk.
+
+If "file" is a JSFile or you are running in Smart Client, it writes data into a (local) binary file.
+
+If you are running in Web Client and "file" is a String (like 'mypdffile.pdf' to hint the browser what it is) the user will get
+prompted by the browser to save the file (sent using "Content-disposition: attachment" HTTP header). If it is a JSFile instance
+in this case it will be saved as a file on the server.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Writes the given file to disk.]]></summary>
+            </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
 var bytes = new Array();
@@ -3787,7 +3945,7 @@ for (var i=0; i<1024; i++)
 var f = plugins.file.convertToJSFile('bin.dat');
 if (!plugins.file.writeFile(f, bytes))
 	application.output('Failed to write the file.');
-// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
 var mimeType = 'application/vnd.ms-excel'
 if (!plugins.file.writeFile(f, bytes, mimeType))
 	application.output('Failed to write the file.');]]></sample>
@@ -3809,10 +3967,16 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes data into a binary file. (Web Enabled: file parameter can be a string 'mypdffile.pdf' to hint the browser what it is, if it is a JSFile instance it will be saved on the server)]]></description>
+              <description clientSupport="wc,sc"><![CDATA[Writes the given file to disk.
+
+If "file" is a JSFile or you are running in Smart Client, it writes data into a (local) binary file.
+
+If you are running in Web Client and "file" is a String (like 'mypdffile.pdf' to hint the browser what it is) the user will get
+prompted by the browser to save the file (sent using "Content-disposition: attachment" HTTP header). If it is a JSFile instance
+in this case it will be saved as a file on the server.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes data into a binary file.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[Writes the given file to disk.]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[/**@type {Array<byte>}*/
@@ -3822,7 +3986,7 @@ for (var i=0; i<1024; i++)
 var f = plugins.file.convertToJSFile('bin.dat');
 if (!plugins.file.writeFile(f, bytes))
 	application.output('Failed to write the file.');
-// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: http://www.w3schools.com/media/media_mimeref.asp'
+// mimeType variable can be left null, and is used for webclient only. Specify one of any valid mime types as referenced here: https://developer.mozilla.org/en-US/docs/Properly_Configuring_Server_MIME_Types
 var mimeType = 'application/vnd.ms-excel'
 if (!plugins.file.writeFile(f, bytes, mimeType))
 	application.output('Failed to write the file.');]]></sample>
@@ -3835,7 +3999,7 @@ if (!plugins.file.writeFile(f, bytes, mimeType))
                 <description><![CDATA[the data to be written]]></description>
               </parameter>
               <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[the mime type]]></description>
+                <description><![CDATA[the mime type (used in Web-Client)]]></description>
               </parameter>
             </parameters>
           </function>
