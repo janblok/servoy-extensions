@@ -24,7 +24,9 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeMultipart;
@@ -523,7 +525,19 @@ public class RestWSServlet extends HttpServlet
 			if (request.getParameterMap().size() > 0 || ws_authenticate_result != null)
 			{
 				JSMap<String, Object> jsMap = new JSMap<String, Object>();
-				jsMap.putAll(request.getParameterMap());
+				Iterator<Entry<String, Object>> parameters = request.getParameterMap().entrySet().iterator();
+				while (parameters.hasNext())
+				{
+					Entry<String, Object> entry = parameters.next();
+					if (entry.getValue() instanceof String)
+					{
+						jsMap.put(entry.getKey(), new String[] { (String)entry.getValue() });
+					}
+					else if (entry.getValue() instanceof String[] && ((String[])entry.getValue()).length > 0)
+					{
+						jsMap.put(entry.getKey(), entry.getValue());
+					}
+				}
 				if (ws_authenticate_result != null)
 				{
 					jsMap.put(WS_AUTHENTICATE, new Object[] { ws_authenticate_result });
