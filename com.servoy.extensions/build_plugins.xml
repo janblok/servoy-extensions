@@ -529,6 +529,12 @@
 				basedir="${tempForJar.dir}"
 				duplicate="fail"
 		/>
+		<copy overwrite="true" todir="${plugins.dir}/mail">
+			<fileset file="lib/mail*.jar"/>
+		</copy>
+		<copy overwrite="true" todir="${plugins.dir}">
+			<fileset file="resources/mail/mail.jar.jnlp"/>
+		</copy>
 		<delete dir="${tempForJar.dir}"/>
 	</target>
 

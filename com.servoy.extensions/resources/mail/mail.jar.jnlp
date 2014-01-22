@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/mail.jar.jnlp">
+   <information> 
+      <title>Servoy Client Plugins</title> 
+      <vendor>Servoy and Others</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/mail.jar" download="eager" part="mail" version="%%version%%"/>
+      <package name="javax.mail.*" part="mail" recursive="true"/>      
+   </resources>
+   <component-desc/>
+	<security>
+		<all-permissions/>
+	</security>
+</jnlp>
