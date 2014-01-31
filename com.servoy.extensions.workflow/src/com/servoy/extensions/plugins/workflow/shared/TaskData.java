@@ -27,6 +27,8 @@ import java.util.Date;
  */
 public class TaskData implements Serializable
 {
+	private static final long serialVersionUID = 5728633064312936077L;
+
 	public String taskId;
 	public String executionId;
 	public String activityName;

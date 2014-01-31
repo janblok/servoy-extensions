@@ -1,2 +1,0 @@
-# make a copy of this file and remove the ".template" if you need to customise the ant build (such as using a specific compiler instead of the one from JAVA_HOME)
-jdk1.6_home = [my_jdk1.6_home_path]

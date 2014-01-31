@@ -20,8 +20,8 @@ package com.servoy.extensions.plugins.workflow.client;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
+import com.servoy.extensions.workflow.api.IWorkflowPluginService;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;

@@ -46,18 +46,32 @@ public class IdentitySessionImpl implements IdentitySession
 	private String domain;
 	private String clientId;
 	
-    public IdentitySessionImpl() 
+    private void init() 
     {
-    	
-    	IApplicationServerSingleton as = ApplicationServerSingleton.get();
-    	clientId = as.getClientId();
-    	userManager = as.getUserManager();
-    	Object servoy_user_domain = Settings.getInstance().get(SERVOY_USERS_MAIL_DOMAIN);
-    	if (servoy_user_domain != null) domain = servoy_user_domain.toString();
+    	if (clientId == null)
+    	{
+	    	IApplicationServerSingleton as = ApplicationServerSingleton.get();
+	    	if (as != null)
+	    	{
+		    	clientId = as.getClientId();
+		    	userManager = as.getUserManager();
+		    	Object servoy_user_domain = as.getService(Settings.class).getProperty(SERVOY_USERS_MAIL_DOMAIN);
+		    	if (servoy_user_domain != null) 
+		    	{
+		    		domain = servoy_user_domain.toString();
+		    	}
+		    	else
+		    	{
+		    		Debug.log("Property "+SERVOY_USERS_MAIL_DOMAIN+" not found, consider configuring this to enable emails");
+		    	}
+	    	}
+    	}
     }
 
     public Group findGroupById(String groupname) 
     {
+    	init();
+    	
     	GroupImpl lGroup = null;
     	try 
     	{
@@ -85,6 +99,8 @@ public class IdentitySessionImpl implements IdentitySession
     
     public List<Group> findGroupsByUser(String username) 
     {
+    	init();
+    	
     	List<Group> lGroups = new ArrayList<Group>();
     	try 
     	{
@@ -113,11 +129,15 @@ public class IdentitySessionImpl implements IdentitySession
 
     public List<Group> findGroupsByUserAndGroupType(String username, String iGroupType) 
     {
+    	init();
+    	
     	return findGroupsByUser(username);
     }
 
     public User findUserById(String username) 
     {
+    	init();
+    	
         UserImpl lUser = null;
     	try 
     	{
@@ -139,6 +159,8 @@ public class IdentitySessionImpl implements IdentitySession
 
     public List<User> findUsersByGroup(String groupname) 
     {
+    	init();
+    	
         List<User> lUsers = new ArrayList<User>();
     	try 
     	{
@@ -167,6 +189,8 @@ public class IdentitySessionImpl implements IdentitySession
 
     public List<User> findUsersById(String... usernames) 
     {
+    	init();
+    	
 		List<User> lUsers = new ArrayList<User>(usernames.length);
 		for (String lUserId : usernames) 
 		{
@@ -177,6 +201,8 @@ public class IdentitySessionImpl implements IdentitySession
 
     public List<User> findUsers() 
     {
+    	init();
+    	
     	return findUsersByGroup(null);
     }
     

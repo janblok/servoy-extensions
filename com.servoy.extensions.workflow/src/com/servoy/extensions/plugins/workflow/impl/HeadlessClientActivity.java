@@ -22,7 +22,7 @@ import java.util.Map;
 import org.jbpm.api.activity.ActivityBehaviour;
 import org.jbpm.api.activity.ActivityExecution;
 
-import com.servoy.extensions.plugins.workflow.IWorkflowPluginService;
+import com.servoy.extensions.workflow.api.IWorkflowPluginService;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
 import com.servoy.j2db.server.shared.IHeadlessClient;
 import com.servoy.j2db.util.Debug;

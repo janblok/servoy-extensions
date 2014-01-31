@@ -25,6 +25,8 @@ import java.io.Serializable;
  */
 public class Deployment implements Serializable
 {
+	private static final long serialVersionUID = -4008347272918863939L;
+
 	public String id;
 	public String name;
 	public String state;

@@ -19,23 +19,17 @@ package com.servoy.extensions.plugins.workflow;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Environment;
 import org.jbpm.api.Configuration;
 import org.jbpm.api.DeploymentQuery;
 import org.jbpm.api.Execution;
@@ -51,12 +45,9 @@ import org.jbpm.pvm.internal.email.impl.MailTemplateRegistry;
 
 import com.servoy.extensions.plugins.workflow.shared.Deployment;
 import com.servoy.extensions.plugins.workflow.shared.TaskData;
+import com.servoy.extensions.workflow.api.IWorkflowPluginService;
 import com.servoy.j2db.dataprocessing.IDataSet;
-import com.servoy.j2db.persistence.IServer;
 import com.servoy.j2db.persistence.IServerInternal;
-import com.servoy.j2db.plugins.IServerAccess;
-import com.servoy.j2db.plugins.IServerPlugin;
-import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.server.shared.ApplicationServerSingleton;
 import com.servoy.j2db.server.shared.IApplicationServerSingleton;
 import com.servoy.j2db.server.shared.IUserManager;
@@ -68,113 +59,72 @@ import com.servoy.j2db.util.Pair;
  *
  * @author jblok
  */
-public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
+public class WorkflowServer implements IWorkflowPluginService
 {
-	private static final String JBPM_SERVERNAME_PROPERTY = "jbpm_servername";
-	private String jbpmServerName = "jbpm";
-	private IServerInternal jbpm_server;
+	public static final String JBPM_SERVERNAME_PROPERTY = "jbpm_servername";
 
-	private IServerAccess app;
-
-	public void initialize(IServerAccess app) throws PluginException
+	private String jndi_jbpm_server;
+	private String jndi_datasource;
+	
+	public void init(String jndi_jbpm_server,String jndi_datasource) throws Exception
 	{
-		this.app = app;
-
-		String jbpmServerPropertyValue = app.getSettings().getProperty(JBPM_SERVERNAME_PROPERTY, jbpmServerName);  
-		if (jbpmServerPropertyValue != null && jbpmServerPropertyValue.length() != 0) jbpmServerName = jbpmServerPropertyValue;
-
-		IServer js = app.getDBServer(jbpmServerName, true, true);
-		if (js == null) 
-		{
-			throw new PluginException("jbpm database server not found, config the server plugin properties and restart");
-		}
-		jbpm_server = (IServerInternal)js;
-
-		try
-		{
-			createProcessEngine();
-		}
-		catch (Throwable e)
-		{
-			Debug.error(e);
-			throw new PluginException(e.getMessage());
-		}
+		this.jndi_jbpm_server = jndi_jbpm_server;
+		this.jndi_datasource = jndi_datasource;
 		
-		try
-		{
-			app.registerRMIService(IWorkflowPluginService.SERVICE_NAME, this);
-		}
-		catch (Exception e)
-		{
-			Debug.error(e);
-			throw new PluginException(e);
-		}
+		createProcessEngine();
 	}
 
 	private void checkAndCreateGroupsIfNeeded(String xml) throws Exception 
 	{
-    	IApplicationServerSingleton as = ApplicationServerSingleton.get();
-		IUserManager userManager = as.getUserManager();;
-		Set<String> servoyGroupNames = new HashSet<String>();
-		String clientId = as.getClientId();
-		IDataSet groups_ds = userManager.getGroups(clientId);
-		if (groups_ds != null)
+		IApplicationServerSingleton as = ApplicationServerSingleton.get(); 
+		if (as != null)
 		{
-			for (int i = 0; i < groups_ds.getRowCount(); i++) 
+			IUserManager userManager = as.getService(IUserManager.class);
+			Set<String> servoyGroupNames = new HashSet<String>();
+			String clientId = as.getClientId();
+			IDataSet groups_ds = userManager.getGroups(clientId);
+			if (groups_ds != null)
 			{
-				Object[] group_row = groups_ds.getRow(i);
-				servoyGroupNames.add(String.valueOf(group_row[1]));
-			}
-		}
-
-		String scontent = xml.toLowerCase().replace('\'', '"');
-		
-		int idx1 = 0;
-		while ((idx1 = scontent.indexOf("candidate-groups",idx1)) != -1)
-		{
-			int idx2 = scontent.indexOf('"',idx1);
-			int idx3 = scontent.indexOf('"',idx2+1);
-			idx1++; //to pass into next iteration
-
-			String groups = xml.substring(idx2+1,idx3).trim();
-			String[] grps = groups.split(",");
-			for (int i = 0; i < grps.length; i++) 
-			{
-				String group = grps[i].trim();
-				if (!servoyGroupNames.contains(group))
+				for (int i = 0; i < groups_ds.getRowCount(); i++) 
 				{
-					userManager.createGroup(clientId, group);
-					servoyGroupNames.add(group);
+					Object[] group_row = groups_ds.getRow(i);
+					servoyGroupNames.add(String.valueOf(group_row[1]));
+				}
+			}
+	
+			String scontent = xml.toLowerCase().replace('\'', '"');
+			
+			int idx1 = 0;
+			while ((idx1 = scontent.indexOf("candidate-groups",idx1)) != -1)
+			{
+				int idx2 = scontent.indexOf('"',idx1);
+				int idx3 = scontent.indexOf('"',idx2+1);
+				idx1++; //to pass into next iteration
+	
+				String groups = xml.substring(idx2+1,idx3).trim();
+				String[] grps = groups.split(",");
+				for (int i = 0; i < grps.length; i++) 
+				{
+					String group = grps[i].trim();
+					if (!servoyGroupNames.contains(group))
+					{
+						userManager.createGroup(clientId, group);
+						servoyGroupNames.add(group);
+					}
 				}
 			}
 		}
+		else
+		{
+			Debug.error("Could not checkAndCreateGroupsIfNeeded");
+		}
 	}
 
-	public Map<String,String> getRequiredPropertyNames()
-	{
-		Map<String,String> req = new HashMap<String,String>();
-		req.put(JBPM_SERVERNAME_PROPERTY, "The name of the server to locate the required jbpm SQL tabels (default:jbpm)");
-		req.put(IdentitySessionImpl.SERVOY_USERS_MAIL_DOMAIN, "The mail domain for all servoy server users as seen on admin page.");
-//		req.put("jbpm_IdentitySessionImpl", "The name of the class to use for identity management (default:package.IdentitySessionImpl)");
-		return req;
-	}
-
-	public void load() throws PluginException
-	{
-	}
-
-	public void unload() throws PluginException
+	public void close() throws Exception
 	{
 		if (processEngine != null) processEngine.close();
 	}
 
-	public Properties getProperties()
-	{
-		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Workflow Plugin"); 
-		return props;
-	}
-	
 	public String addProcessDefinition(String content)
 	{
 		return addProcessDefinition(content, 0);
@@ -475,65 +425,37 @@ public class WorkflowServer implements IServerPlugin, IWorkflowPluginService
 		}
 	}
 	
-	/**
-	 * JNDI tree structure get (or create if not existent yet)
-	 * @param ctx parent
-	 * @param subcontext context to get (or create if not existent)
-	 * @return the required context
-	 */
-	private Context getOrCreateSubContext(Context ctx,String subcontext) throws NamingException
-	{
-	    NamingEnumeration<NameClassPair> list = ctx.list("");
-	    while (list.hasMore()) 
-	    {
-	    	NameClassPair nc = list.next();
-	    	if (nc.getName().equals(subcontext))
-	    	{
-	    		return (Context)ctx.lookup(subcontext);
-	    	}
-	    }
-	    return ctx.createSubcontext(subcontext);
-    }
 	private volatile ProcessEngine processEngine;
 	private synchronized ProcessEngine createProcessEngine() throws Exception
 	{
 		if (processEngine == null)
 		{
-			System.setProperty("hibernate.dialect", jbpm_server.getDialectClassName()); //not really nice, but hibernate does not seem to support more than one anyway
-			System.setProperty("hibernate.connection.datasource","comp/env/jdbc/servoy_"+jbpm_server.getName()); //strange why does java: not work here any more? (while it does in main method below)
-			System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "tyrex.naming.MemoryContextFactory");//Using a kind of hack here with in-mem shared JNDI datasource to have hibernate use the servoy database definition
-
-            Context ctx = new InitialContext();
-			ctx = getOrCreateSubContext(ctx, "comp" );
-			ctx = getOrCreateSubContext(ctx, "env" );
-			ctx = getOrCreateSubContext(ctx, "jdbc" );
-			ctx.bind( "servoy_"+jbpm_server.getName(), jbpm_server.getDataSource() );
+			Context ctx = new InitialContext();
+			IServerInternal jbpm_server = (IServerInternal) ctx.lookup(jndi_jbpm_server);
+			if (jbpm_server == null) 
+			{
+				throw new IllegalStateException("jbpm database server not found, config the server plugin properties and restart");
+			}
 			
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			try
 			{
 				Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
-				final Properties properties = app.getSettings();
 				
-				//next line is similar to servoy mail plugin
-				Session session = Session.getInstance(properties, new Authenticator() 
-				{
-					@Override
-					public PasswordAuthentication getPasswordAuthentication()
-					{
-						String username = properties.getProperty("mail.smtp.username"); 
-						String password = properties.getProperty("mail.smtp.password"); 
-						return new PasswordAuthentication(username, password);
-					}
-				});
-				ctx = new InitialContext();
-				ctx = getOrCreateSubContext(ctx, "comp" );
-				ctx = getOrCreateSubContext(ctx, "env" );
-				ctx = getOrCreateSubContext(ctx, "mail" );
-				ctx.bind( "smtp", session );
-
+				SessionFactory sessionFactory = new org.hibernate.cfg.Configuration()
+				.setProperty(Environment.DATASOURCE,jndi_datasource)
+				.setProperty(Environment.DIALECT, jbpm_server.getDialectClassName())
+                .addResource("jbpm.execution.hbm.xml",Configuration.class.getClassLoader())
+                .addResource("jbpm.history.hbm.xml",Configuration.class.getClassLoader())
+                .addResource("jbpm.identity.hbm.xml",Configuration.class.getClassLoader())
+                .addResource("jbpm.repository.hbm.xml",Configuration.class.getClassLoader())
+                .addResource("jbpm.task.hbm.xml",Configuration.class.getClassLoader())
+                .configure(getClass().getResource("/jbpm.hibernate.cfg.xml"))
+                .buildSessionFactory();
+				
 			    Configuration conf = new Configuration();
-				conf.setResource("jbpm.cfg.xml");
+			    conf.setHibernateSessionFactory(sessionFactory);
+				conf.setUrl(this.getClass().getResource("/jbpm.cfg.xml"));
 				processEngine = conf.buildProcessEngine();
 				
 				//Workarround classload problem to make sure all services are pre loaded (still needed?)
