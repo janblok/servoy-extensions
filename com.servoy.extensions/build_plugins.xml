@@ -1062,6 +1062,11 @@
 				<filename name="**/*.class"/>
 			</fileset>
 		</copy>
+		<copy overwrite="true" todir="${tempForJar.dir}/com/servoy/extensions/plugins/spellcheck/res">
+			<fileset dir="${bin_plugins.dir}/spellcheck/res">
+				<include name="**/*.properties"/>
+			</fileset>
+		</copy>
 		<jar	destfile="${plugins.dir}/spellcheck.jar"
 				basedir="${tempForJar.dir}"
 				duplicate="fail"

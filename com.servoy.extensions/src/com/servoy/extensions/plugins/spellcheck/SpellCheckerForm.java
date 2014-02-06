@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -60,9 +61,11 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 
 	protected SpellCheckEvent spellEvent;
 	protected List<SpellCheckEvent> spellEvents = new ArrayList<SpellCheckEvent>();
+	private final ResourceBundle messages;
 
-	public SpellCheckerForm()
+	public SpellCheckerForm(ResourceBundle messages)
 	{
+		this.messages = messages;
 		initializeGUI();
 	}
 
@@ -87,7 +90,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		jPanel1.add(Box.createHorizontalGlue());
 		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JButton ignoreBtn = createButton(SpellCheckerUtils.IGNORE_CMD, SpellCheckerUtils.IGNORE_BUTTON, this);
+		JButton ignoreBtn = createButton(SpellCheckerUtils.IGNORE_CMD, messages.getString(SpellCheckerUtils.SKIP), this);
 		ignoreBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
 		jPanel1.add(Box.createHorizontalGlue());
 		jPanel1.add(ignoreBtn);
@@ -99,19 +102,19 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 //		jPanel1.add(Box.createHorizontalGlue());
 //		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JButton changeBtn = createButton(SpellCheckerUtils.REPLACE_CMD, SpellCheckerUtils.REPLACE_BUTTON, this);
+		JButton changeBtn = createButton(SpellCheckerUtils.REPLACE_CMD, messages.getString(SpellCheckerUtils.REPLACE), this);
 		changeBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
 		jPanel1.add(changeBtn);
 		jPanel1.add(Box.createHorizontalGlue());
 		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JButton changeAllBtn = createButton(SpellCheckerUtils.REPLACEALL_CMD, SpellCheckerUtils.REPLACE_ALL_BUTTON, this);
+		JButton changeAllBtn = createButton(SpellCheckerUtils.REPLACEALL_CMD, messages.getString(SpellCheckerUtils.REPLACE_ALL), this);
 		changeAllBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
 		jPanel1.add(changeAllBtn);
 		jPanel1.add(Box.createHorizontalGlue());
 		jPanel1.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JButton cancelBtn = createButton(SpellCheckerUtils.CANCEL_CMD, SpellCheckerUtils.CANCEL_BUTTON, this);
+		JButton cancelBtn = createButton(SpellCheckerUtils.CANCEL_CMD, messages.getString(SpellCheckerUtils.CANCEL), this);
 		cancelBtn.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
 		jPanel1.add(cancelBtn);
 		jPanel1.add(Box.createHorizontalGlue());
@@ -127,7 +130,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		jPanel2.add(Box.createHorizontalGlue());
 		jPanel2.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JLabel lbl1 = new JLabel(SpellCheckerUtils.NOT_IN_DICTIONARY_LABEL);
+		JLabel lbl1 = new JLabel(messages.getString(SpellCheckerUtils.NOT_IN_DICTIONARY));
 		lbl1.setHorizontalTextPosition(SwingConstants.LEFT);
 		jPanel2.add(lbl1);
 		jPanel2.add(Box.createHorizontalGlue());
@@ -144,7 +147,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		jPanel2.add(Box.createHorizontalGlue());
 		jPanel2.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		JLabel lbl2 = new JLabel(SpellCheckerUtils.SUGGESTIONS_LABEL);
+		JLabel lbl2 = new JLabel(messages.getString(SpellCheckerUtils.SUGGESTIONS));
 		jPanel2.add(lbl2);
 		jPanel2.add(Box.createHorizontalGlue());
 		jPanel2.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
