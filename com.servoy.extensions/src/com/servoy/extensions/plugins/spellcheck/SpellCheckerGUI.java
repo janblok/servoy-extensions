@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -31,28 +32,33 @@ import com.servoy.j2db.util.gui.JEscapeDialog;
 public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, WindowListener
 {
 	private final SpellCheckClientPlugin plugin;
-	private final SpellCheckerForm spellCheckerForm = new SpellCheckerForm();
+	private final SpellCheckerForm spellCheckerForm;
 
 	private SpellCheckEvent spellEvent;
+	private final ResourceBundle messages;
 
-	public SpellCheckerGUI(SpellCheckClientPlugin plugin, JDialog w, boolean modal)
+	public SpellCheckerGUI(SpellCheckClientPlugin plugin, JDialog w, ResourceBundle messages, boolean modal)
 	{
 		super(w, modal);
 		this.plugin = plugin;
+		this.spellCheckerForm = new SpellCheckerForm(messages);
+		this.messages = messages;
 		init();
 	}
 
-	public SpellCheckerGUI(SpellCheckClientPlugin plugin, JFrame w, boolean modal)
+	public SpellCheckerGUI(SpellCheckClientPlugin plugin, JFrame w, ResourceBundle messages, boolean modal)
 	{
 		super(w, modal);
 		this.plugin = plugin;
+		this.spellCheckerForm = new SpellCheckerForm(messages);
+		this.messages = messages;
 		init();
 	}
 
 
 	private void init()
 	{
-		this.setTitle("Spelling"); //$NON-NLS-1$
+		this.setTitle(messages.getString(SpellCheckerUtils.SPELLING));
 		this.getContentPane().add(spellCheckerForm);
 		spellCheckerForm.addActionListener(this);
 		this.addWindowListener(this);
@@ -113,7 +119,8 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 		{
 			//nothing to spell check - the text is correct.
 			this.setVisible(false);
-			JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling", JOptionPane.INFORMATION_MESSAGE);//$NON-NLS-1$//$NON-NLS-2$
+			JOptionPane.showMessageDialog(this, messages.getString(SpellCheckerUtils.SPELLING_CHECK_COMPLETE), messages.getString(SpellCheckerUtils.SPELLING),
+				JOptionPane.INFORMATION_MESSAGE);
 			plugin.unsetTheEditFormatter();
 		}
 	}
@@ -180,8 +187,8 @@ public class SpellCheckerGUI extends JEscapeDialog implements ActionListener, Wi
 			//no more spell events, therefore the spell check is complete
 			this.setVisible(false);
 			//we do not want the message to show up if we clicked "Cancel"
-			if (spellEvent.getAction() != SpellCheckEvent.CANCEL) JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling", //$NON-NLS-1$//$NON-NLS-2$
-				JOptionPane.INFORMATION_MESSAGE);
+			if (spellEvent.getAction() != SpellCheckEvent.CANCEL) JOptionPane.showMessageDialog(this,
+				messages.getString(SpellCheckerUtils.SPELLING_CHECK_COMPLETE), messages.getString(SpellCheckerUtils.SPELLING), JOptionPane.INFORMATION_MESSAGE);
 			plugin.unsetTheEditFormatter();
 			unhighlight();
 		}

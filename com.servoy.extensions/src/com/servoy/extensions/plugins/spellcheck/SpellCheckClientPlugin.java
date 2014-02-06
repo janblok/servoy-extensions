@@ -28,7 +28,9 @@ import java.beans.PropertyChangeEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -62,6 +64,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	private JButton check;
 	private SpellCheckerGUI gui = null;
 	private Window lastWindow = null;
+	private String lastUsedLanguage = null;
 	private SpellCheckClientProvider spellCheckProvider;
 	private SpellResult spellResponse = null;
 	private JTextComponent checkedComponent = null;
@@ -142,17 +145,19 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 			if (currentWindow != null)
 			{
-				if (gui == null || currentWindow != lastWindow)
+				if (gui == null || currentWindow != lastWindow || language != lastUsedLanguage)
 				{
 					lastWindow = currentWindow;
+					ResourceBundle messages = getMessages(language);
+					lastUsedLanguage = language;
 					if (gui != null) gui.dispose();
 					if (currentWindow instanceof JDialog)
 					{
-						gui = new SpellCheckerGUI(this, (JDialog)currentWindow, true);
+						gui = new SpellCheckerGUI(this, (JDialog)currentWindow, messages, true);
 					}
 					else if (currentWindow instanceof JFrame)
 					{
-						gui = new SpellCheckerGUI(this, (JFrame)currentWindow, true);
+						gui = new SpellCheckerGUI(this, (JFrame)currentWindow, messages, true);
 					}
 					else
 					{
@@ -188,6 +193,37 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 				}
 			}
 		}
+	}
+
+	private ResourceBundle getMessages(String language)
+	{
+		ResourceBundle messages;
+		if (language != null)
+		{
+			Locale locale = Locale.ENGLISH;
+			if (language.equals(LANGUAGES.DUTCH))
+			{
+				locale = new Locale("nl"); //$NON-NLS-1$
+			}
+			else if (language.equals(LANGUAGES.GERMAN))
+			{
+				locale = Locale.GERMAN;
+			}
+			else if (language.equals(LANGUAGES.ITALIAN))
+			{
+				locale = Locale.ITALIAN;
+			}
+			else if (language.equalsIgnoreCase(LANGUAGES.SPANISH))
+			{
+				locale = new Locale("es"); //$NON-NLS-1$
+			}
+			messages = ResourceBundle.getBundle(SpellCheckerUtils.MESSAGES, locale);
+		}
+		else
+		{
+			messages = ResourceBundle.getBundle(SpellCheckerUtils.MESSAGES);
+		}
+		return messages;
 	}
 
 	public void check(JTextComponent c, String optLang)
@@ -370,7 +406,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			DataField df = (DataField)checkedComponent;
 			initialFormatter = df.getFormatter();
 			DefaultFormatterFactory dff = (DefaultFormatterFactory)df.getFormatterFactory();
-			if (!(initialFormatter.equals(dff.getEditFormatter())))
+			if (dff != null && (initialFormatter == null || !initialFormatter.equals(dff.getEditFormatter())))
 			{
 				df.setFormatter(dff.getEditFormatter());
 			}
