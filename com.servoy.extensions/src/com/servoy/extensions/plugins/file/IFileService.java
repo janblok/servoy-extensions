@@ -32,11 +32,8 @@ import java.util.UUID;
 @SuppressWarnings("nls")
 public interface IFileService extends Remote
 {
-
-	/**
-	 * Used to register/retrieve the service
-	 */
-	public static final String SERVICE_NAME = "servoy.FileServerService";
+	@Deprecated
+	public static final String SERVICE_NAME = IFileService.class.getName();
 
 	/**
 	 * The default folder server property key

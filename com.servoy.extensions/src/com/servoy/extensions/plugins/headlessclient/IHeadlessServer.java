@@ -21,7 +21,8 @@ import java.rmi.RemoteException;
 
 public interface IHeadlessServer extends Remote
 {
-	public static final String SERVICE_NAME = "servoy.IHeadlessServer"; //$NON-NLS-1$
+	@Deprecated
+	public static final String SERVICE_NAME = IHeadlessServer.class.getName();
 
 
 	public String getOrCreateClient(String clientKey, String solutionname, String username, String password, Object[] solutionOpenMethodArgs,

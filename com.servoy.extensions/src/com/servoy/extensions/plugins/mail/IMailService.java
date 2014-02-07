@@ -29,7 +29,8 @@ import com.servoy.extensions.plugins.mail.client.MailMessage;
  */
 public interface IMailService extends Remote
 {
-	public static final String SERVICE_NAME = "servoy.IMailService"; //$NON-NLS-1$
+	@Deprecated
+	public static final String SERVICE_NAME = IMailService.class.getName();
 
 	public static final int FULL = 0;//recieveMode
 	public static final int HEADERS_ONLY = 1;//recieveMode

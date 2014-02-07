@@ -89,7 +89,7 @@ public class MailServer implements IMailService, IServerPlugin
 
 		try
 		{
-			app.registerRMIService(IMailService.SERVICE_NAME, this);
+			app.registerRemoteService(IMailService.class.getName(), this);
 		}
 		catch (Exception e)
 		{

@@ -75,7 +75,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		setDefaultFolder(app.getSettings().getProperty(IFileService.DEFAULT_FOLDER_PROPERTY));
 		try
 		{
-			app.registerRMIService(IFileService.SERVICE_NAME, this);
+			app.registerRemoteService(IFileService.class.getName(), this);
 		}
 		catch (RemoteException ex)
 		{

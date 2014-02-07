@@ -87,7 +87,7 @@ public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 		this.application = app;
 		try
 		{
-			app.registerRemoteService(IHeadlessServer.SERVICE_NAME, this);
+			app.registerRemoteService(IHeadlessServer.class.getName(), this);
 		}
 		catch (Exception e)
 		{

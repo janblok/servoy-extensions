@@ -354,7 +354,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			try
 			{
 				IClientPluginAccess access = plugin.getClientPluginAccess();
-				mailService = (IMailService)access.getServerService(IMailService.SERVICE_NAME);
+				mailService = (IMailService)access.getRemoteService(IMailService.class.getName());
 			}
 			catch (Exception ex)
 			{

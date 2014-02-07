@@ -2741,7 +2741,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	protected IFileService getFileService() throws Exception
 	{
-		return (IFileService)plugin.getClientPluginAccess().getServerService(IFileService.SERVICE_NAME);
+		return (IFileService)plugin.getClientPluginAccess().getRemoteService(IFileService.class.getName());
 	}
 
 	/**

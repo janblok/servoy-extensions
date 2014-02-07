@@ -40,7 +40,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 			try
 			{
 				IClientPluginAccess access = plugin.getPluginAccess();
-				headlessServer = (IHeadlessServer)access.getRemoteService(IHeadlessServer.SERVICE_NAME);
+				headlessServer = (IHeadlessServer)access.getRemoteService(IHeadlessServer.class.getName());
 			}
 			catch (Exception ex)
 			{
