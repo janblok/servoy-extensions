@@ -11,15 +11,13 @@ import javax.sql.DataSource;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceEvent;
-import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.servoy.extensions.plugins.workflow.client.WorkflowPlugin;
 import com.servoy.extensions.workflow.api.IWorkflowPluginService;
 import com.servoy.j2db.persistence.IServerInternal;
-import com.servoy.j2db.plugins.IClientPlugin;
 import com.servoy.j2db.plugins.IPluginManager;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.server.starter.IServerStarter;
@@ -33,6 +31,7 @@ public class Activator implements BundleActivator
 	private WorkflowServer server = new WorkflowServer();
 
 	private  ServiceTracker<IPluginManager,ServiceReference<IPluginManager>> serviceTracker;
+	private ServiceRegistration<IWorkflowPluginService> workflowPluginServiceRegistration;
 
 	@Override
 	public void start(BundleContext context) throws Exception 
@@ -75,7 +74,7 @@ public class Activator implements BundleActivator
 		server.init(jndi_server, jndi_datasource);
 		
 		//expose the server side service interface
-		context.registerService(IWorkflowPluginService.class, server, null);
+		workflowPluginServiceRegistration = context.registerService(IWorkflowPluginService.class, server, null);
 		
 		ServiceReference<IPluginManager> reference = context.getServiceReference(IPluginManager.class);
 		if (reference != null)
@@ -120,6 +119,8 @@ public class Activator implements BundleActivator
 	@Override
 	public void stop(BundleContext context) throws Exception 
 	{
+		workflowPluginServiceRegistration.unregister();
 		server.close();
+		serviceTracker.close();
 	}
 }

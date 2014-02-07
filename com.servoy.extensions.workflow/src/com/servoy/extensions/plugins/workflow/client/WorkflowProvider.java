@@ -53,7 +53,7 @@ public class WorkflowProvider implements IScriptable, IReturnedTypesProvider
 			try
 			{
 				IClientPluginAccess access = plugin.getClientPluginAccess();
-				_workflowService = (IWorkflowPluginService)access.getServerService(IWorkflowPluginService.SERVICE_NAME); //$NON-NLS-1$
+				_workflowService = (IWorkflowPluginService)access.getRemoteService(IWorkflowPluginService.class.getName()); //$NON-NLS-1$
 			}
 			catch (Exception ex)
 			{

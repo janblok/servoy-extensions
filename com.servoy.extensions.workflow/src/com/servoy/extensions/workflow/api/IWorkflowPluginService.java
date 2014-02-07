@@ -33,7 +33,6 @@ import com.servoy.j2db.util.Pair;
  */
 public interface IWorkflowPluginService extends Remote 
 {
-	public static final String SERVICE_NAME = "servoy.IWorkflowPluginService";
 	public static final String SOLUTION_PROPERTY_NAME = "servoySolutionName";
 
 	public List<Deployment> getDeploymentList() throws RemoteException;
