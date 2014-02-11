@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.server.shared.ApplicationServerSingleton;
+import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -112,7 +112,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 				// try to find the Tomcat ROOT context
 
 				File parent = null;
-				if (ApplicationServerSingleton.get() != null) parent = new File(ApplicationServerSingleton.get().getServoyApplicationServerDirectory(),
+				if (ApplicationServerRegistry.get() != null) parent = new File(ApplicationServerRegistry.get().getServoyApplicationServerDirectory(),
 					"server/webapps/ROOT");
 				if (parent == null || !parent.exists() || !parent.isDirectory())
 				{

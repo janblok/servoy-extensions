@@ -27,7 +27,7 @@ import org.jbpm.pvm.internal.identity.impl.UserImpl;
 import org.jbpm.pvm.internal.identity.spi.IdentitySession;
 
 import com.servoy.j2db.dataprocessing.IDataSet;
-import com.servoy.j2db.server.shared.ApplicationServerSingleton;
+import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.server.shared.IApplicationServerSingleton;
 import com.servoy.j2db.server.shared.IUserManager;
 import com.servoy.j2db.util.Debug;
@@ -50,7 +50,7 @@ public class IdentitySessionImpl implements IdentitySession
     {
     	if (clientId == null)
     	{
-	    	IApplicationServerSingleton as = ApplicationServerSingleton.get();
+	    	IApplicationServerSingleton as = ApplicationServerRegistry.get();
 	    	if (as != null)
 	    	{
 		    	clientId = as.getClientId();

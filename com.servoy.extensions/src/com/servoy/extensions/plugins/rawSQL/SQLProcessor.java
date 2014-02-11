@@ -32,7 +32,7 @@ import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
-import com.servoy.j2db.server.shared.ApplicationServerSingleton;
+import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.ServoyException;
 import com.servoy.j2db.util.Utils;
@@ -216,7 +216,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 
 		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true"))) //$NON-NLS-1$ //$NON-NLS-2$
 		{
-			return ApplicationServerSingleton.get().getDataServer().notifyDataChange(notifySelf ? null : client_id, server_name, tableName, pks, action,
+			return ApplicationServerRegistry.get().getDataServer().notifyDataChange(notifySelf ? null : client_id, server_name, tableName, pks, action,
 				transaction_id);
 		}
 		return false;

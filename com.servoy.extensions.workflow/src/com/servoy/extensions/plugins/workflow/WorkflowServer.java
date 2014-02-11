@@ -48,7 +48,7 @@ import com.servoy.extensions.plugins.workflow.shared.TaskData;
 import com.servoy.extensions.workflow.api.IWorkflowPluginService;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.persistence.IServerInternal;
-import com.servoy.j2db.server.shared.ApplicationServerSingleton;
+import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.server.shared.IApplicationServerSingleton;
 import com.servoy.j2db.server.shared.IUserManager;
 import com.servoy.j2db.util.Debug;
@@ -76,7 +76,7 @@ public class WorkflowServer implements IWorkflowPluginService
 
 	private void checkAndCreateGroupsIfNeeded(String xml) throws Exception 
 	{
-		IApplicationServerSingleton as = ApplicationServerSingleton.get(); 
+		IApplicationServerSingleton as = ApplicationServerRegistry.get(); 
 		if (as != null)
 		{
 			IUserManager userManager = as.getService(IUserManager.class);

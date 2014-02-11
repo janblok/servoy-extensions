@@ -56,7 +56,7 @@ import com.servoy.j2db.persistence.IServer;
 import com.servoy.j2db.persistence.ITable;
 import com.servoy.j2db.persistence.RepositoryException;
 import com.servoy.j2db.plugins.IServerAccess;
-import com.servoy.j2db.server.shared.ApplicationServerSingleton;
+import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
@@ -436,9 +436,9 @@ public class PDFServlet extends HttpServlet
 				{
 					String redirect_url = null;
 
-					IDataServer ds = ApplicationServerSingleton.get().getDataServer();
+					IDataServer ds = ApplicationServerRegistry.get().getDataServer();
 					String sql = "select form_id,template_id,closed,redirect_url from pdf_actions where action_id = ?";
-					IDataSet rs = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER, "pdf_actions", null, sql,
+					IDataSet rs = ds.performQuery(ApplicationServerRegistry.get().getClientId(), PDF_SERVER, "pdf_actions", null, sql,
 						new Object[] { new Integer(action_id) }, 0, -1);
 					for (int r = 0; r < rs.getRowCount(); r++)//normally just one (or zero)
 					{
@@ -449,7 +449,7 @@ public class PDFServlet extends HttpServlet
 						redirect_url = (String)row[3];
 						if (redirect_url == null || redirect_url.trim().length() == 0)
 						{
-							IDataSet valContainer = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER, "pdf_templates", null,
+							IDataSet valContainer = ds.performQuery(ApplicationServerRegistry.get().getClientId(), PDF_SERVER, "pdf_templates", null,
 								"select redirect_url from pdf_templates where template_id = ?", new Object[] { new Integer(template_id) }, 0, -1);
 							if (valContainer.getRowCount() > 0 && valContainer.getColumnCount() > 0)
 							{
@@ -461,7 +461,7 @@ public class PDFServlet extends HttpServlet
 						{
 							Map currentValues = new HashMap();
 							String sql1 = "select value_name,fval_id from pdf_form_values where form_id = ?";
-							IDataSet rs1 = ds.performQuery(ApplicationServerSingleton.get().getClientId(), PDF_SERVER, "pdf_form_values", null, sql1,
+							IDataSet rs1 = ds.performQuery(ApplicationServerRegistry.get().getClientId(), PDF_SERVER, "pdf_form_values", null, sql1,
 								new Object[] { new Integer(form_id) }, 0, -1);
 							for (int i = 0; i < rs1.getRowCount(); i++)
 							{
@@ -551,7 +551,7 @@ public class PDFServlet extends HttpServlet
 
 									currentValues.remove(name);
 								}
-								ds.performUpdates(ApplicationServerSingleton.get().getClientId(), new ISQLStatement[] { ps });
+								ds.performUpdates(ApplicationServerRegistry.get().getClientId(), new ISQLStatement[] { ps });
 							}
 
 							//delete the leftovers (it seems empty fields are not always submitted)
@@ -566,13 +566,13 @@ public class PDFServlet extends HttpServlet
 									"delete from pdf_form_values where fval_id = ?", questionData);
 								delList.add(ps);
 							}
-							ds.performUpdates(ApplicationServerSingleton.get().getClientId(),
+							ds.performUpdates(ApplicationServerRegistry.get().getClientId(),
 								(ISQLStatement[])delList.toArray(new ISQLStatement[delList.size()]));
 
 							Object[] pkData = new Object[] { new Integer(action_id) };
 							Object[] questionData = new Object[] { new Integer(action_id) };
 							String sql5 = "update pdf_actions set closed = 1 where action_id = ?";
-							ds.performUpdates(ApplicationServerSingleton.get().getClientId(), new ISQLStatement[] { ds.createSQLStatement(
+							ds.performUpdates(ApplicationServerRegistry.get().getClientId(), new ISQLStatement[] { ds.createSQLStatement(
 								ISQLActionTypes.UPDATE_ACTION, PDF_SERVER, "pdf_actions", pkData, null, sql5, questionData) });
 						}
 						else

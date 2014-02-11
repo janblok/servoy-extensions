@@ -36,7 +36,7 @@ import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
 import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.server.headlessclient.HeadlessClientFactory;
-import com.servoy.j2db.server.shared.ApplicationServerSingleton;
+import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.server.shared.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
@@ -152,7 +152,7 @@ public class RestWSPlugin implements IServerPlugin
 		{
 			byte exchaustedAction;
 			int poolSize;
-			if (ApplicationServerSingleton.get().isDeveloperStartup())
+			if (ApplicationServerRegistry.get().isDeveloperStartup())
 			{
 				// in developer multiple clients do not work well with debugger
 				poolSize = 1;
