@@ -62,7 +62,6 @@ public class PopupPanel extends Panel
 		add(formUI);
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
-		boolean isTransparent = ((FormController)form).getForm().getTransparent();
 
 		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:999;"); //$NON-NLS-1$
 		int popupHeight;
@@ -90,7 +89,11 @@ public class PopupPanel extends Panel
 		}
 		style.append("width:").append(width > -1 ? width : size.width).append("px;height:").append(popupHeight).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		if (!isTransparent) style.append(";background-color:white;"); //$NON-NLS-1$
+		// the following two lines are not needed when working with Servoy >= 7.4 rc2 (when WebForm already does this for popup form as well), but
+		// if we want transparency to work with older versions, they are needed (cause now PopupPanel has class="webform" which by default has a white background)
+		boolean isTransparent = ((FormController)form).getForm().getTransparent();
+		if (isTransparent) style.append(";background:transparent;"); //$NON-NLS-1$
+
 		add(new SimpleAttributeModifier("style", style.toString())); //$NON-NLS-1$
 
 		final StringBuilder formStyle = new StringBuilder();
@@ -189,4 +192,5 @@ public class PopupPanel extends Panel
 			enclosingFormComponent = null;
 		}
 	}
+
 }
