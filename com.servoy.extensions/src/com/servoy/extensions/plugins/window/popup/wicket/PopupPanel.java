@@ -62,7 +62,6 @@ public class PopupPanel extends Panel
 		add(formUI);
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
-		boolean isTransparent = ((FormController)form).getForm().getTransparent();
 
 		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:999;"); //$NON-NLS-1$
 		int popupHeight;
@@ -90,7 +89,6 @@ public class PopupPanel extends Panel
 		}
 		style.append("width:").append(width > -1 ? width : size.width).append("px;height:").append(popupHeight).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		if (!isTransparent) style.append(";background-color:white;"); //$NON-NLS-1$
 		add(new SimpleAttributeModifier("style", style.toString())); //$NON-NLS-1$
 
 		final StringBuilder formStyle = new StringBuilder();
@@ -189,4 +187,5 @@ public class PopupPanel extends Panel
 			enclosingFormComponent = null;
 		}
 	}
+
 }
