@@ -600,9 +600,9 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             </summaries>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
           </function>
-          <function clientSupport="wc,sc" name="createBinding" varargs="true">
+          <function clientSupport="wc,sc" name="createBinding">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
             <descriptions>
@@ -619,7 +619,27 @@ companies_binding.setImageURLDataprovider('type_icon');
 companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             </samples>
             <parameters>
-              <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+              <parameter name="datasource" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="createBinding">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/** @type {JSFoundSet<db:/udm/companies>} */
+var fs = databaseManager.getFoundSet("db:/udm/companies");
+var companies_binding = %%elementName%%.createBinding(fs.getDataSource());
+companies_binding.setTextDataprovider('company_name');
+companies_binding.setNRelationName('companies_to_companies');
+companies_binding.setImageURLDataprovider('type_icon');
+companies_binding.setChildSortDataprovider('company_sort');]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function clientSupport="wc,sc" name="createColumn">
@@ -1313,9 +1333,9 @@ if (!t) %%elementName%%.transparent = true;]]></sample>
             </summaries>
             <deprecated><![CDATA[use Binding.setToolTipTextDataprovider(toolTipTextDataprovider) instead]]></deprecated>
           </function>
-          <function clientSupport="wc,sc" name="createBinding" varargs="true">
+          <function clientSupport="wc,sc" name="createBinding">
             <argumentsTypes>
-              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
             <descriptions>
@@ -1332,7 +1352,27 @@ companies_binding.setImageURLDataprovider('type_icon');
 companies_binding.setChildSortDataprovider('company_sort');]]></sample>
             </samples>
             <parameters>
-              <parameter name="args" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
+              <parameter name="datasource" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="createBinding">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.extensions.beans.dbtreeview.Binding" typecode="com.servoy.extensions.beans.dbtreeview.Binding"><![CDATA[Binding object for a database table]]></return>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[/** @type {JSFoundSet<db:/udm/companies>} */
+var fs = databaseManager.getFoundSet("db:/udm/companies");
+var companies_binding = %%elementName%%.createBinding(fs.getDataSource());
+companies_binding.setTextDataprovider('company_name');
+companies_binding.setNRelationName('companies_to_companies');
+companies_binding.setImageURLDataprovider('type_icon');
+companies_binding.setChildSortDataprovider('company_sort');]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="serverName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
+              <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
           <function clientSupport="wc,sc" name="createRelationInfo">
