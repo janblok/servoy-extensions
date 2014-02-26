@@ -121,13 +121,19 @@ function zIndex(el) {
 }
 
 function removePopupPanel(e) {
+	doPopupPanelRemove((e && e.target) ? $(e.target) : null);
+};
+
+function doPopupPanelRemove(element) {
 	if($('#' + ServoyPopup.id).length > 0) {
 		// if target element is at a higher z-index then the panel, then do not remove it
-		if(e && e.target && (zIndex($(e.target)) > zIndex($('#' + ServoyPopup.id)))) return;
+		if(element && (zIndex(element) > zIndex($('#' + ServoyPopup.id)))) return;
 		wicketAjaxGet(ServoyPopup.callback);
 	}
-};
+}
+
 $(document).click(removePopupPanel);
+$('iframe').each(function() { var parentDiv=$(this).closest("div"); if(parentDiv.length < 1) { parentDiv = null; } $(this).contents().bind('click', function(event) { doPopupPanelRemove(parentDiv); });});
 $(window).resize(removePopupPanel);
 /*-->]]>*/
 </script>
