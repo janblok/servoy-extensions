@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Webdav template servlet
+Bundle-SymbolicName: com.servoy.extensions.template;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.servoy.extensions.template.startup.Activator
+Bundle-Vendor: Servoy
+Require-Bundle: org.eclipse.core.runtime,
+ org.apache.tomcat;bundle-version="7.0.52",
+ javax.servlet;bundle-version="3.0.0",
+ servoy_shared;bundle-version="8.0.0",
+ servoy_headless_client;bundle-version="8.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
