@@ -70,7 +70,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 	 * 	headlessClient.queueMethod(null, "remoteMethod", [x], callback);
 	 * }
 	 * 
-	 * @param clientId The id of the client if it already exists, or it will be the id of the client if it will be created.
+	 * @param clientId The client to lookup by id, if not found a new headless client is created with this id.  
 	 * @param solutionname The solution to load
 	 * @param username The user name that is used to login to the solution
 	 * @param password The password for the user
