@@ -53,6 +53,11 @@ public class ImageProvider implements IScriptable, IReturnedTypesProvider
 		}
 	}
 
+	public ImageProvider()
+	{
+		this.plugin = null;
+	}
+
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { JSImage.class };

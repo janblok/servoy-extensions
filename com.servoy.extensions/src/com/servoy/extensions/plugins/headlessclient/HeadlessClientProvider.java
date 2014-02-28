@@ -33,6 +33,12 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 		this.plugin = plugin;
 	}
 
+	// default constructor
+	public HeadlessClientProvider()
+	{
+		this.plugin = null;
+	}
+
 	private void createService()
 	{
 		if (headlessServer == null)

@@ -85,6 +85,12 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		this.access = access;
 	}
 
+	// default constructor
+	public HttpProvider()
+	{
+		this.access = null;
+	}
+
 	/**
 	 * Get all page html in a variable, if this url is an https url that uses certificates unknown to Java
 	 * then you have to use the HttpClient so that smart client users will get the unknown certificate dialog that they then can accept

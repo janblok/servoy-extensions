@@ -48,6 +48,11 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 		this.plugin = plugin;
 	}
 
+	public UDPProvider()
+	{
+		this.plugin = null;
+	}
+
 	/**
 	 * Start a UDP socket for a port.
 	 *

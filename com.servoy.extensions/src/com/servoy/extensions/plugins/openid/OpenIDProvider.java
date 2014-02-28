@@ -122,9 +122,9 @@ public class OpenIDProvider implements IScriptable, IReturnedTypesProvider
 
 	}
 
-	OpenIDProvider()
-	{
-	}
+//	OpenIDProvider()
+//	{
+//	}
 
 	/**
 	 * Redirect to openID provider to login, callback method will receive answer.
