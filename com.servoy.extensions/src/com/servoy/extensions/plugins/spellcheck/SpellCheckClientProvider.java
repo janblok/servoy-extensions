@@ -35,6 +35,11 @@ public class SpellCheckClientProvider implements IScriptable, IReturnedTypesProv
 		plugin = app;
 	}
 
+	public SpellCheckClientProvider()
+	{
+		this.plugin = null;
+	}
+
 	/**
 	 * Spellcheck the form element/component.
 	 *

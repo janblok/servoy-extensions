@@ -44,6 +44,12 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 		this.plugin = plugin;
 	}
 
+	// default constructor needed for documentation
+	public MailProvider()
+	{
+		this.plugin = null;
+	}
+
 	/**
 	 * @deprecated Replaced by {@link #receiveMail(Object[])}
 	 */

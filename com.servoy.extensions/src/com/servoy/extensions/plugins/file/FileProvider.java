@@ -93,6 +93,12 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		this.plugin = plugin;
 	}
 
+	// default constructor
+	public FileProvider()
+	{
+		this.plugin = null;
+	}
+
 	/**
 	 * Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.
 	 *

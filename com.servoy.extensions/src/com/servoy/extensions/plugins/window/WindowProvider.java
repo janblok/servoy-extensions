@@ -107,6 +107,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		this.plugin = plugin;
 	}
 
+	public WindowProvider()
+	{
+		this.plugin = null;
+	}
+
 	public final IClientPluginAccess getClientPluginAccess()
 	{
 		return plugin.getClientPluginAccess();
@@ -798,6 +803,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * @deprecated Replaced by {@link #addToolBar(String)}.
+	 * @return JToolBar
 	 */
 	@Deprecated
 	public JToolBar js_addServoyToolBar(JComponent pane, String name) throws Exception
