@@ -32,7 +32,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.servoy.j2db.plugins.IServerAccess;
 import com.servoy.j2db.plugins.IServerPlugin;
 import com.servoy.j2db.plugins.PluginException;
-import com.servoy.j2db.server.shared.ApplicationServerRegistry;
 import com.servoy.j2db.util.Debug;
 
 /**
@@ -60,9 +59,8 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		final Map<String, String> req = new HashMap<String, String>();
-		req.put(
-			IFileService.DEFAULT_FOLDER_PROPERTY,
-			"Set the default folder path (absolute path on the server) to save files sent by clients (will default to $ServoyInstallationDirectory$/server/webapps/ROOT/uploads/)");
+		req.put(IFileService.DEFAULT_FOLDER_PROPERTY,
+			"Set the default folder path (absolute path on the server) to save files sent by clients (will default to user.home/.servoy/uploads/UUID/)");
 		return req;
 	}
 
@@ -81,6 +79,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 		{
 			throw new PluginException(ex);
 		}
+		app.registerWebService("file", new FileServlet(this, app));
 	}
 
 	/**
@@ -109,29 +108,19 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 			}
 			else
 			{
-				// try to find the Tomcat ROOT context
-
-				File parent = null;
-				if (ApplicationServerRegistry.get() != null) parent = new File(ApplicationServerRegistry.get().getServoyApplicationServerDirectory(),
-					"server/webapps/ROOT");
-				if (parent == null || !parent.exists() || !parent.isDirectory())
+				defaultFolder = new File(System.getProperty("user.home") + File.separator + ".servoy" + File.separator + "uploads" + File.separator +
+					UUID.randomUUID());
+				if (!defaultFolder.exists())
 				{
-					Debug.log("Servoy root webapps directory '" + parent + "' not found -- falling back to home directory");
-					// fall back to home directory
-					parent = new File(System.getProperty("user.home"));
-				}
-				// then tries to locate (or create) an 'uploads" folder.
-				if (parent != null && parent.exists() && parent.isDirectory())
-				{
-					defaultFolder = new File(parent.getAbsolutePath() + File.separator + "uploads");
-					if (!defaultFolder.exists())
+					if (!defaultFolder.mkdirs())
 					{
-						if (!defaultFolder.mkdirs())
-						{
-							throw new RuntimeException("Cant set the default folder for the File plugin to '" + folder + "' can't create the directory");
-						}
+						throw new RuntimeException("Cant set the default folder for the File plugin to '" + defaultFolder.getCanonicalPath() +
+							"' can't create the directory");
 					}
 				}
+
+				application.getSettings().setProperty(IFileService.DEFAULT_FOLDER_PROPERTY, defaultFolder.getCanonicalPath());
+				// TODO this should really be saved once.
 			}
 			// if we made it so far and still haven't found a default folder, then we have a problem!
 			if (defaultFolder == null)
