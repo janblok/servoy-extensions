@@ -8,12 +8,14 @@ if (typeof(ServoyPopup) == "undefined")
 	{
 		id: null,
 		callback: null,
+		iframeClickCallback: new Array(),
 		
 		setup: function(id, callback)
 		{
 			ServoyPopup.id = id;
 			ServoyPopup.callback = callback;
-			$('#' + ServoyPopup.id).click(function(event) { event.stopPropagation();});
+			$('#' + ServoyPopup.id).click(function(event) { event.stopPropagation();}); 
+			$('iframe').each(function() { var parentDiv=$(this).closest("div"); if(parentDiv.length < 1) { parentDiv = null; }; var iframeClickFn = function(event) { doPopupPanelRemove(parentDiv)}; ServoyPopup.iframeClickCallback[$(this).attr('id')] = iframeClickFn; $(this).contents().bind('click', iframeClickFn);});
 		},
 		
 		center: function(popupId)
@@ -127,13 +129,16 @@ function removePopupPanel(e) {
 function doPopupPanelRemove(element) {
 	if($('#' + ServoyPopup.id).length > 0) {
 		// if target element is at a higher z-index then the panel, then do not remove it
-		if(element && (zIndex(element) > zIndex($('#' + ServoyPopup.id)))) return;
+		if(element && (zIndex(element) > zIndex($('#' + ServoyPopup.id)))) return;		
 		wicketAjaxGet(ServoyPopup.callback);
+		for(var iframeid in ServoyPopup.iframeClickCallback) {
+			$('#' + iframeid).contents().unbind('click', ServoyPopup.iframeClickCallback[iframeid]);
+		}
+		ServoyPopup.iframeClickCallback.length = 0;
 	}
 }
 
 $(document).click(removePopupPanel);
-$('iframe').each(function() { var parentDiv=$(this).closest("div"); if(parentDiv.length < 1) { parentDiv = null; } $(this).contents().bind('click', function(event) { doPopupPanelRemove(parentDiv); });});
 $(window).resize(removePopupPanel);
 /*-->]]>*/
 </script>
