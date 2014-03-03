@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.rmi.RemoteException;
@@ -75,6 +76,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	private final Map<String, File> tempFiles = new HashMap<String, File>(); //check this map when saving (txt/binary) files
 	private static final JSFile[] EMPTY = new JSFile[0];
 	private final Timer timer = new Timer();
+	private final List<JSFile> trackedFiles = new ArrayList<JSFile>();
 
 	/**
 	 * Line Separator constant, used to append to Text file
@@ -2828,6 +2830,63 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		}
 		return null;
 	}
+
+	/**
+	 * Get an url from a remote file that can be used to download the file in a browser.
+	 * This is a complete url with the server url that is get from application.getServerURL()
+	 * 
+	 * @param file the remote file where the url should be generated from. Must be a remote file
+	 * @return the url as a string
+	 */
+	public String js_getUrlForRemoteFile(JSFile file) throws Exception
+	{
+		if (file.getAbstractFile() instanceof RemoteFile)
+		{
+			if (!file.js_exists()) throw new RuntimeException("File " + file.js_getName() + " does not exist on the server");
+			URL serverURL = plugin.getClientPluginAccess().getServerURL();
+			return new URL(serverURL.toURI().toString() + "/servoy-service/file" + file.js_getAbsolutePath()).toURI().toString();
+		}
+		throw new RuntimeException("File " + file.js_getName() + " is not a remote file");
+	}
+
+	/**
+	 * Get an url from a remote file that can be used to download the file in a browser.
+	 * This is a complete url with the server url that is get from application.getServerURL()
+	 * 
+	 * @param file the remote file where the url should be generated from. Must be a remote file and start with a "/"
+	 * @return the url as a string
+	 */
+	public String js_getUrlForRemoteFile(String file) throws Exception
+	{
+		return js_getUrlForRemoteFile(js_convertToRemoteJSFile(file));
+	}
+
+	/**
+	 * If the client's solution is closed, the file given to this method wil be deleted.
+	 * This can be a remote or local file.
+	 * 
+	 * This can be used to have temp files within a client that will be cleaned up when the solution is closed.
+	 * So they live as long as the client has its solution open.  
+	 * 
+	 * @param file the file to track
+	 */
+	public void js_trackFileForDeletion(JSFile file)
+	{
+		trackedFiles.add(file);
+	}
+
+	void deleteTrackedFiles()
+	{
+		for (JSFile file : trackedFiles)
+		{
+			if (!file.js_deleteFile())
+			{
+				Debug.log("File: " + file.js_getName() + " that was tracked for deletion didn't delete");
+			}
+		}
+		trackedFiles.clear();
+	}
+
 
 	public void unload()
 	{

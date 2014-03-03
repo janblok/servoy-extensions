@@ -67,6 +67,14 @@ public class RemoteFileData implements Serializable
 		this.exists = file.exists();
 	}
 
+	/**
+	 * @return the fileObj
+	 */
+	File getFile()
+	{
+		return fileObj;
+	}
+
 
 	/**
 	 * Overloaded Constructor, with no name provided (deduced from the file provided)

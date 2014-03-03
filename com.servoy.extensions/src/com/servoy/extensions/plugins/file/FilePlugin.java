@@ -114,5 +114,9 @@ public class FilePlugin implements IClientPlugin
 
 	public void propertyChange(PropertyChangeEvent evt)
 	{
+		if (fileProvider != null && "solution".equals(evt.getPropertyName()) && evt.getNewValue() == null) //$NON-NLS-1$
+		{
+			fileProvider.deleteTrackedFiles();
+		}
 	}
 }

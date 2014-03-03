@@ -2026,6 +2026,42 @@ var files = plugins.file.getRemoteFolderContents('/', '.txt');]]></sample>
               </parameter>
             </parameters>
           </function>
+          <function clientSupport="wc,sc" name="getUrlForRemoteFile">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the url as a string]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get an url from a remote file that can be used to download the file in a browser.
+This is a complete url with the server url that is get from application.getServerURL()]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get an url from a remote file that can be used to download the file in a browser.]]></summary>
+            </summaries>
+            <parameters>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[the remote file where the url should be generated from. Must be a remote file]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="getUrlForRemoteFile">
+            <argumentsTypes>
+              <argumentType typecode="java.lang.String"/>
+            </argumentsTypes>
+            <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"><![CDATA[the url as a string]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Get an url from a remote file that can be used to download the file in a browser.
+This is a complete url with the server url that is get from application.getServerURL()]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Get an url from a remote file that can be used to download the file in a browser.]]></summary>
+            </summaries>
+            <parameters>
+              <parameter name="file" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the remote file where the url should be generated from. Must be a remote file and start with a "/"]]></description>
+              </parameter>
+            </parameters>
+          </function>
           <function clientSupport="wc,sc" name="moveFile">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
@@ -3832,6 +3868,27 @@ if (folder) {
               </parameter>
               <parameter name="callback" type="com.servoy.j2db.documentation.scripting.docs.Function" typecode="org.mozilla.javascript.Function">
                 <description><![CDATA[the Function to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="trackFileForDeletion">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[If the client's solution is closed, the file given to this method wil be deleted.
+This can be a remote or local file.
+
+This can be used to have temp files within a client that will be cleaned up when the solution is closed.
+So they live as long as the client has its solution open.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[If the client's solution is closed, the file given to this method wil be deleted.]]></summary>
+            </summaries>
+            <parameters>
+              <parameter name="file" type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile">
+                <description><![CDATA[the file to track]]></description>
               </parameter>
             </parameters>
           </function>
