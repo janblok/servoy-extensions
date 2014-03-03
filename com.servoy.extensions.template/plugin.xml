@@ -4,7 +4,7 @@
    <extension
          point="org.apache.tomcat.serviceprovider">
       <serviceprovider
-            class="com.servoy.extensions.template.startup.ServiceProvider"
+            class="com.servoy.extensions.template.startup.ServicesProvider"
             id="com.servoy.extensions.template.serviceprovider">
       </serviceprovider>
    </extension>
