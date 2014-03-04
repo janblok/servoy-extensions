@@ -506,7 +506,7 @@ if (headlessClient != null && headlessClient.isValid()) {
             </samples>
             <parameters>
               <parameter name="clientId" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
-                <description><![CDATA[The id of the client if it already exists, or it will be the id of the client if it will be created.]]></description>
+                <description><![CDATA[The client to lookup by id, if not found a new headless client is created with this id.]]></description>
               </parameter>
               <parameter name="solutionname" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[The solution to load]]></description>

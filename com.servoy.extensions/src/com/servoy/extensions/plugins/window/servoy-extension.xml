@@ -9982,7 +9982,7 @@ toolbar.visibleItem(1, false);]]></sample>
               <argumentType typecode="javax.swing.JComponent"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
-            <return type="javax.swing.JToolBar" typecode="javax.swing.JToolBar"/>
+            <return type="javax.swing.JToolBar" typecode="javax.swing.JToolBar"><![CDATA[JToolBar]]></return>
             <deprecated><![CDATA[Replaced by #addToolBar(String).]]></deprecated>
           </function>
           <function clientSupport="wc,sc" name="addToolBar">
