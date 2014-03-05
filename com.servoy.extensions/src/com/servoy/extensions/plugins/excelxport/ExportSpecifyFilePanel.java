@@ -172,7 +172,7 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 						dataProviders[i] = ((DataProviderWithLabel)dlm.get(i)).dataProvider.getDataProviderID();
 					}
 					IFoundSet data = (IFoundSet)state.getProperty("foundset"); //$NON-NLS-1$
-					wb = populateWb(data, dataProviders, null, null, 0, 0);
+					wb = populateWb(data, dataProviders, null, null, null, 0, 0);
 					rows = data.getSize();
 				}
 				catch (Exception ex)
@@ -188,8 +188,8 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		};
 	}
 
-	public static HSSFWorkbook populateWb(IFoundSet foundSet, String[] dataProviders, byte[] templateXLS, String sheetName, int startRow, int startColumn)
-		throws IOException
+	public static HSSFWorkbook populateWb(IFoundSet foundSet, String[] dataProviders, byte[] templateXLS, String[] outputColumnNames, String sheetName,
+		int startRow, int startColumn) throws IOException
 	{
 		HSSFWorkbook hwb;
 		if (templateXLS == null)
@@ -206,11 +206,16 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		if (sheet == null) sheet = hwb.createSheet(sheetName);
 		sheet.setActive(true);
 
+		if (outputColumnNames != null && outputColumnNames.length != dataProviders.length)
+		{
+			throw new RuntimeException("The arrays 'output column names' and 'data provider ids' must have the same length."); //$NON-NLS-1$
+		}
+		String[] columnNames = outputColumnNames != null ? outputColumnNames : dataProviders;
 		HSSFRow header = sheet.createRow((short)0 + startRow);
-		for (int k = 0; k < dataProviders.length; k++)
+		for (int k = 0; k < columnNames.length; k++)
 		{
 			HSSFCell cell = header.createCell((short)(k + startColumn));
-			cell.setCellValue(dataProviders[k]);
+			cell.setCellValue(columnNames[k]);
 		}
 
 		for (int i = 0; i < foundSet.getSize(); i++)
