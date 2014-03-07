@@ -43,6 +43,8 @@ import com.servoy.j2db.util.ServoyException;
  */
 public class PopupPanel extends Panel
 {
+	public static final int ZINDEX = 999;
+
 	private final Component elementToShowRelatedTo;
 	private final String formName;
 	private final IClientPluginAccess clientPluginAccess;
@@ -63,7 +65,7 @@ public class PopupPanel extends Panel
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
 
-		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:999;"); //$NON-NLS-1$
+		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:").append(ZINDEX).append(";"); //$NON-NLS-1$ //$NON-NLS-2$
 		int popupHeight;
 		if (height > -1) popupHeight = height;
 		else
