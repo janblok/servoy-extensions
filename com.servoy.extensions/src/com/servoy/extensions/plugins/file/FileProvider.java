@@ -2855,8 +2855,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc getUrlForRemoteFile(JSFile)
-	 * @sampleas getUrlForRemoteFile(JSFile)
+	 * @clonedesc js_getUrlForRemoteFile(JSFile)
+	 * @sampleas js_getUrlForRemoteFile(JSFile)
 	 * 
 	 * @param file the remote file where the url should be generated from. Must be a remote file
 	 * @return the url as a string
