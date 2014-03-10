@@ -2832,7 +2832,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Get an url from a remote file that can be used to download the file in a browser.
+	 * Get a url from a remote file that can be used to download the file in a browser.
 	 * This is a complete url with the server url that is get from application.getServerURL()
 	 * 
 	 * @sample
