@@ -2832,8 +2832,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Get an url from a remote file that can be used to download the file in a browser.
+	 * Get a url from a remote file that can be used to download the file in a browser.
 	 * This is a complete url with the server url that is get from application.getServerURL()
+	 * 
+	 * @sample
+	 * var file = plugins.file.convertToRemoteJSFile("aremotefile.pdf");
+	 * var url = plugins.file.getUrlForRemoteFile(file);
+	 * application.showURL(url);
 	 * 
 	 * @param file the remote file where the url should be generated from. Must be a remote file
 	 * @return the url as a string
@@ -2850,10 +2855,10 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Get an url from a remote file that can be used to download the file in a browser.
-	 * This is a complete url with the server url that is get from application.getServerURL()
+	 * @clonedesc js_getUrlForRemoteFile(JSFile)
+	 * @sampleas js_getUrlForRemoteFile(JSFile)
 	 * 
-	 * @param file the remote file where the url should be generated from. Must be a remote file and start with a "/"
+	 * @param file the remote file where the url should be generated from. Must be a remote file
 	 * @return the url as a string
 	 */
 	public String js_getUrlForRemoteFile(String file) throws Exception
@@ -2867,6 +2872,11 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * This can be used to have temp files within a client that will be cleaned up when the solution is closed.
 	 * So they live as long as the client has its solution open.  
+	 * 
+	 * @sample
+	 * var file = plugins.file.createFile("newfile.txt");
+	 * plugins.file.writeTXTFile(file, "some data");
+	 * plugins.file.trackFileForDeletionfile(file);
 	 * 
 	 * @param file the file to track
 	 */
