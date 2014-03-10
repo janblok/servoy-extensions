@@ -183,7 +183,8 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 	public static boolean isSpecialKey(int keyCode)
 	{
-		if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT)
+		if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT ||
+			keyCode == KeyEvent.VK_ENTER)
 		{
 			return true;
 		}
