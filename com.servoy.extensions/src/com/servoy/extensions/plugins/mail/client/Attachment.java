@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
-import com.servoy.j2db.util.ImageLoader;
+import com.servoy.j2db.util.MimeTypes;
 
 /**
  * @author jblok
@@ -63,7 +63,7 @@ public class Attachment implements Serializable, IJavaScriptType
 
 		if (mimeType == null && data != null && data.length != 0)
 		{
-			this.mimeType = ImageLoader.getContentType(data, name);
+			this.mimeType = MimeTypes.getContentType(data, name);
 		}
 	}
 

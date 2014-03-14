@@ -41,6 +41,7 @@ import com.drew.metadata.jpeg.JpegComponent;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.ImageLoader;
+import com.servoy.j2db.util.MimeTypes;
 import com.servoy.j2db.util.Utils;
 
 /**
@@ -280,14 +281,14 @@ public class JSImage implements IScriptable, Wrapper
 	{
 		if (imageData != null)
 		{
-			return ImageLoader.getContentType(imageData, file != null ? file.getName() : null);
+			return MimeTypes.getContentType(imageData, file != null ? file.getName() : null);
 		}
 		else if (file != null)
 		{
 			byte[] bytes = Utils.readFile(file, 32);
 			if (bytes != null)
 			{
-				return ImageLoader.getContentType(bytes, file.getName());
+				return MimeTypes.getContentType(bytes, file.getName());
 			}
 		}
 		return null;

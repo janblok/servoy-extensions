@@ -32,7 +32,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.util.Debug;
-import com.servoy.j2db.util.ImageLoader;
+import com.servoy.j2db.util.MimeTypes;
 
 /**
  * Web plugin provider implementation
@@ -74,7 +74,7 @@ public class WebFileProvider extends FileProvider
 			if (f instanceof JSFile) name = ((JSFile)f).js_getName();
 			else if (f != null) name = f.toString();
 			IClientPluginAccess access = plugin.getClientPluginAccess();
-			String type = (mimeType == null) ? ImageLoader.getContentType(data, name) : mimeType.trim();
+			String type = (mimeType == null) ? MimeTypes.getContentType(data, name) : mimeType.trim();
 			String url = ((IWebClientPluginAccess)access).serveResource(name, data, type);
 			((IWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
 			return true;
@@ -91,7 +91,7 @@ public class WebFileProvider extends FileProvider
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		String fileName = file.js_getName();
 		byte[] data = file.jsFunction_getBytes();
-		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, ImageLoader.getContentType(data, fileName), "inline"); //$NON-NLS-1$
+		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, MimeTypes.getContentType(data, fileName), "inline"); //$NON-NLS-1$
 		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;
 	}
@@ -102,7 +102,7 @@ public class WebFileProvider extends FileProvider
 		String name = (fileName == null ? "file.bin" : fileName); //$NON-NLS-1$
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
-		String type = (mimeType == null) ? ImageLoader.getContentType(data, name) : mimeType.trim();
+		String type = (mimeType == null) ? MimeTypes.getContentType(data, name) : mimeType.trim();
 		String url = ((IWebClientPluginAccess)access).serveResource(name, data, type, "inline"); //$NON-NLS-1$
 		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;

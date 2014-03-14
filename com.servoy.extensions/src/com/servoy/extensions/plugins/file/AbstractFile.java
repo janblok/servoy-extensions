@@ -23,7 +23,7 @@ import java.io.InputStream;
 
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.FileChooserUtils;
-import com.servoy.j2db.util.ImageLoader;
+import com.servoy.j2db.util.MimeTypes;
 
 /**
  * Defines the basic implementation of the {@link IAbstractFile} interface
@@ -185,7 +185,7 @@ public abstract class AbstractFile implements IAbstractFile
 		{
 			try
 			{
-				return ImageLoader.getContentType(FileChooserUtils.readFile(file, 32), file.getName());
+				return MimeTypes.getContentType(FileChooserUtils.readFile(file, 32), file.getName());
 			}
 			catch (Exception e)
 			{
