@@ -51,8 +51,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
-var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
             </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
@@ -83,8 +87,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
-var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
             </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
@@ -119,8 +127,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
-var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
             </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
@@ -159,8 +171,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
-var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
             </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
@@ -174,6 +190,9 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               </parameter>
               <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the worksheet]]></description>
+              </parameter>
+              <parameter name="outputColumnNames">
+                <description><![CDATA[is used to set the column headers independently from the dataprovider names]]></description>
               </parameter>
               <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
                 <description><![CDATA[row in the foundset at which to start the export]]></description>
@@ -203,8 +222,12 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
 var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
 //export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
-var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);]]></sample>
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
             </samples>
             <parameters>
               <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
@@ -218,6 +241,156 @@ var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],t
               </parameter>
               <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
                 <description><![CDATA[the name of the worksheet]]></description>
+              </parameter>
+              <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
+                <description><![CDATA[row in the foundset at which to start the export]]></description>
+              </parameter>
+              <parameter name="startColumn" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
+                <description><![CDATA[column in the foundset at which to start the export]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="excelExport">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
+//export by adding to templateXLS in default (new) 'Servoy Data' worksheet
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
+//export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
+//export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+                <description><![CDATA[the foundset on which to export]]></description>
+              </parameter>
+              <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[the ids of the dataproviders]]></description>
+              </parameter>
+              <parameter name="templateXLS" type="byte[]" typecode="[B">
+                <description><![CDATA[the xls template to export in]]></description>
+              </parameter>
+              <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the worksheet]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="excelExport">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="java.lang.Number"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
+//export by adding to templateXLS in default (new) 'Servoy Data' worksheet
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
+//export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
+//export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+                <description><![CDATA[the foundset on which to export]]></description>
+              </parameter>
+              <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[the ids of the dataproviders]]></description>
+              </parameter>
+              <parameter name="templateXLS" type="byte[]" typecode="[B">
+                <description><![CDATA[the xls template to export in]]></description>
+              </parameter>
+              <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the worksheet]]></description>
+              </parameter>
+              <parameter name="outputColumnNames" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[is used to set the column headers independently from the dataprovider names]]></description>
+              </parameter>
+              <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
+                <description><![CDATA[row in the foundset at which to start the export]]></description>
+              </parameter>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="excelExport">
+            <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="[B"/>
+              <argumentType typecode="java.lang.String"/>
+              <argumentType typecode="[Ljava.lang.String;"/>
+              <argumentType typecode="java.lang.Number"/>
+              <argumentType typecode="java.lang.Number"/>
+            </argumentsTypes>
+            <return type="byte[]" typecode="[B"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Export to Excel data]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Export to Excel data]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[//export in new byte array
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name']);
+//export by adding to templateXLS in default (new) 'Servoy Data' worksheet
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS);
+//export by adding to templateXLS, in 'mySheet' worksheet, starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet');
+//export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name' starting at default(1/1) row/column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name']);
+//export by adding to templateXLS, in 'mySheet' worksheet, starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet',3,5);
+* //export by adding to templateXLS, in 'mySheet' worksheet, with column names 'ID' and 'Name', starting at 3rd row and 5th column
+var bytes = plugins.excelxport.excelExport(forms.form1.foundset, ['id','name'],templateXLS, 'mySheet', ['ID', 'Name'], 3, 5);]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="foundSet" type="com.servoy.j2db.dataprocessing.FoundSet" typecode="com.servoy.j2db.dataprocessing.IFoundSet">
+                <description><![CDATA[the foundset on which to export]]></description>
+              </parameter>
+              <parameter name="dataProviderIds" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[the ids of the dataproviders]]></description>
+              </parameter>
+              <parameter name="templateXLS" type="byte[]" typecode="[B">
+                <description><![CDATA[the xls template to export in]]></description>
+              </parameter>
+              <parameter name="sheetName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String">
+                <description><![CDATA[the name of the worksheet]]></description>
+              </parameter>
+              <parameter name="outputColumnNames" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;">
+                <description><![CDATA[is used to set the column headers independently from the dataprovider names]]></description>
               </parameter>
               <parameter name="startRow" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="java.lang.Number">
                 <description><![CDATA[row in the foundset at which to start the export]]></description>
