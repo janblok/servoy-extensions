@@ -106,6 +106,7 @@ public class JFXPanel implements IServoyBeanFactory
 	{
 		String jrePath = System.getProperty("java.home"); //$NON-NLS-1$
 		File javaFXJar = new File(jrePath, "lib/jfxrt.jar"); //$NON-NLS-1$
+		if (!javaFXJar.exists()) javaFXJar = new File(jrePath, "lib/ext/jfxrt.jar"); //$NON-NLS-1$
 		if (javaFXJar.exists())
 		{
 			try
