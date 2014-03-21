@@ -14,8 +14,25 @@ if (typeof(ServoyPopup) == "undefined")
 		{
 			ServoyPopup.id = id;
 			ServoyPopup.callback = callback;
-			$('#' + ServoyPopup.id).click(function(event) { event.stopPropagation();}); 
-			$('iframe').each(function() { var parentDiv=$(this).closest("div"); if(parentDiv.length < 1) { parentDiv = null; }; var iframeClickFn = function(event) { doPopupPanelRemove(parentDiv)}; ServoyPopup.iframeClickCallback[$(this).attr('id')] = iframeClickFn; $(this).contents().bind('click', iframeClickFn);});
+			var hitEvent = 'ontouchstart' in document? 'touchstart': 'click';
+			$('iframe').each(function() { 
+				try {
+					var parentDiv=$(this).closest("div"); 
+					if(parentDiv.length < 1) { 
+						parentDiv = null; 
+					}; 
+					var iframeClickFn = function(event) { 
+						doPopupPanelRemove(parentDiv)
+					}; 
+					$(this).contents().bind(hitEvent, iframeClickFn);
+					ServoyPopup.iframeClickCallback[$(this).attr('id')] = iframeClickFn;
+				} catch(e) {
+					if (window.console) console.log("can't bind " +hitEvent+ " to iframe, "  + e);
+				}
+			});
+			$('#' + ServoyPopup.id).bind(hitEvent,function(event) { event.stopPropagation();}); 
+			$(document).bind(hitEvent, removePopupPanel);
+			$(window).bind("resize",removePopupPanel);
 		},
 		
 		center: function(popupId)
@@ -129,17 +146,18 @@ function removePopupPanel(e) {
 function doPopupPanelRemove(element) {
 	if($('#' + ServoyPopup.id).length > 0) {
 		// if target element is at a higher z-index then the panel, then do not remove it
+		var hitEvent = 'ontouchstart' in document? 'touchstart': 'click';
 		if(element && (zIndex(element) > zIndex($('#' + ServoyPopup.id)))) return;		
 		wicketAjaxGet(ServoyPopup.callback);
 		for(var iframeid in ServoyPopup.iframeClickCallback) {
-			$('#' + iframeid).contents().unbind('click', ServoyPopup.iframeClickCallback[iframeid]);
+			$('#' + iframeid).contents().unbind(hitEvent, ServoyPopup.iframeClickCallback[iframeid]);
 		}
 		ServoyPopup.iframeClickCallback.length = 0;
+		
+		$(document).unbind(hitEvent, removePopupPanel);
+		$(window).unbind("resize",removePopupPanel);
 	}
 }
-
-$(document).click(removePopupPanel);
-$(window).resize(removePopupPanel);
 /*-->]]>*/
 </script>
 </wicket:head>
