@@ -57,6 +57,7 @@ import com.servoy.j2db.scripting.JSMap;
 import com.servoy.j2db.server.shared.IHeadlessClient;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.HTTPUtils;
+import com.servoy.j2db.util.MimeTypes;
 import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.Utils;
 
@@ -675,26 +676,29 @@ public class RestWSServlet extends HttpServlet
 
 	private int getContentType(String headerValue)
 	{
-
-		if (headerValue != null && headerValue.toLowerCase().indexOf("json") >= 0)
+		if (headerValue != null)
 		{
-			return CONTENT_JSON;
-		}
-		if (headerValue != null && headerValue.toLowerCase().indexOf("xml") >= 0)
-		{
-			return CONTENT_XML;
-		}
-		if (headerValue != null && headerValue.toLowerCase().indexOf("binary") >= 0)
-		{
-			return CONTENT_BINARY;
-		}
-		if (headerValue != null && headerValue.toLowerCase().indexOf("multipart") >= 0)
-		{
-			return CONTENT_MULTIPART;
-		}
-		if (headerValue != null && headerValue.toLowerCase().indexOf("text") >= 0)
-		{
-			return CONTENT_TEXT;
+			String header = headerValue.toLowerCase();
+			if (header.indexOf("json") >= 0)
+			{
+				return CONTENT_JSON;
+			}
+			if (header.indexOf("xml") >= 0)
+			{
+				return CONTENT_XML;
+			}
+			if (header.indexOf("octet-stream") >= 0)
+			{
+				return CONTENT_BINARY;
+			}
+			if (header.indexOf("multipart") >= 0)
+			{
+				return CONTENT_MULTIPART;
+			}
+			if (header.indexOf("text") >= 0)
+			{
+				return CONTENT_TEXT;
+			}
 		}
 
 		return CONTENT_OTHER;
@@ -939,33 +943,30 @@ public class RestWSServlet extends HttpServlet
 
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
 	{
-		int contentType = getRequestContentType(request, "Accept", null, defaultContentType);
+		int contentType = getRequestContentType(request, "Accept", null, (result instanceof byte[]) ? CONTENT_BINARY : defaultContentType);
 
 		String resultContentType;
 		byte[] bytes;
 
-		if (contentType == CONTENT_BINARY)
+		if (result instanceof byte[])
 		{
-			if (result instanceof byte[])
+			if (contentType == CONTENT_BINARY)
 			{
-				resultContentType = "application/binary";
 				bytes = (byte[])result;
+				//get content type from accept header, if not set guess from response content
+				resultContentType = request.getHeader("Accept") != null ? request.getHeader("Accept") : MimeTypes.getContentType(bytes);
+				if (resultContentType == null) resultContentType = "application/octet-stream";//if still null, then set to standard
 			}
 			else
 			{
-				plugin.log.error("Request for binary data was made, but the return data is not a byte array; return data is " + result);
+				//requested type is json or xml
+				plugin.log.error("Request for non-binary data was made, but the return data is a byte array.");
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
 		}
 		else
 		{
-			if (result instanceof byte[])
-			{
-				plugin.log.error("Request for non-binary data was made, but the return data is a byte array.");
-				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
-				return;
-			}
 			boolean isXML = (result instanceof XMLObject);
 			boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
 
