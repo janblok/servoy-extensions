@@ -51,6 +51,7 @@ import javax.swing.filechooser.FileSystemView;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeArray;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -1826,13 +1827,13 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * Shows a file save dialog.
+	 * Shows a file save dialog. File save is only supported in the SmartClient.
 	 *
 	 * @sample
 	 * var file = plugins.file.showFileSaveDialog();
 	 * application.output("you've selected file: " + file.getAbsolutePath());
 	 */
-
+	@ServoyClientSupport(mc = false, wc = false, sc = true)
 	public JSFile js_showFileSaveDialog()
 	{
 		return js_showFileSaveDialog((String)null, null);
@@ -1844,6 +1845,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param fileNameDir JSFile to save.
 	 */
+	@ServoyClientSupport(mc = false, wc = false, sc = true)
 	public JSFile js_showFileSaveDialog(JSFile fileNameDir)
 	{
 		return js_showFileSaveDialog(fileNameDir, null);
@@ -1855,6 +1857,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param fileNameDir File (give as file path) to save.
 	 */
+	@ServoyClientSupport(mc = false, wc = false, sc = true)
 	public JSFile js_showFileSaveDialog(String fileNameDir)
 	{
 		return js_showFileSaveDialog(fileNameDir, null);
@@ -1866,6 +1869,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileNameDir JSFile to save
 	 * @param title Dialog title.
 	 */
+	@ServoyClientSupport(mc = false, wc = false, sc = true)
 	public JSFile js_showFileSaveDialog(JSFile fileNameDir, String title)
 	{
 		return showFileSaveDialog(fileNameDir, title);
@@ -1877,6 +1881,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileNameDir File to save (specified as file path)
 	 * @param title Dialog title.
 	 */
+	@ServoyClientSupport(mc = false, wc = false, sc = true)
 	public JSFile js_showFileSaveDialog(String fileNameDir, String title)
 	{
 		return showFileSaveDialog(fileNameDir, title);
@@ -1891,6 +1896,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		}
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
+		if (access.getApplicationType() != IClientPluginAccess.CLIENT && access.getApplicationType() != IClientPluginAccess.RUNTIME) throw new UnsupportedMethodException(
+			"File save is only supported in the SmartClient (not in web or headless client)"); //$NON-NLS-1$
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
