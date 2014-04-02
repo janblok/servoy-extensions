@@ -972,7 +972,7 @@ monitor.setProgressCallBack(progressCallbackFunction, 2.5, (application.isInDeve
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="file" qualifiedName="com.servoy.extensions.plugins.file.FileProvider" scriptingName="plugins.file">
+      <object clientSupport="sc" publicName="file" qualifiedName="com.servoy.extensions.plugins.file.FileProvider" scriptingName="plugins.file">
         <functions>
           <function clientSupport="wc,sc" name="appendToTXTFile" since="Servoy 5.2">
             <argumentsTypes>
@@ -3515,33 +3515,33 @@ plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", 
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showFileSaveDialog">
+          <function clientSupport="sc" name="showFileSaveDialog">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+              <description clientSupport="sc"><![CDATA[Shows a file save dialog. File save is only supported in the SmartClient.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Shows a file save dialog.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
+              <sample clientSupport="sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="showFileSaveDialog">
+          <function clientSupport="sc" name="showFileSaveDialog">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+              <description clientSupport="sc"><![CDATA[Shows a file save dialog. File save is only supported in the SmartClient.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Shows a file save dialog.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
+              <sample clientSupport="sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             </samples>
             <parameters>
@@ -3550,20 +3550,20 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showFileSaveDialog">
+          <function clientSupport="sc" name="showFileSaveDialog">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.file.JSFile"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+              <description clientSupport="sc"><![CDATA[Shows a file save dialog. File save is only supported in the SmartClient.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Shows a file save dialog.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
+              <sample clientSupport="sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             </samples>
             <parameters>
@@ -3575,19 +3575,19 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showFileSaveDialog">
+          <function clientSupport="sc" name="showFileSaveDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+              <description clientSupport="sc"><![CDATA[Shows a file save dialog. File save is only supported in the SmartClient.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Shows a file save dialog.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
+              <sample clientSupport="sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             </samples>
             <parameters>
@@ -3596,20 +3596,20 @@ application.output("you've selected file: " + file.getAbsolutePath());]]></sampl
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showFileSaveDialog">
+          <function clientSupport="sc" name="showFileSaveDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.file.JSFile" typecode="com.servoy.extensions.plugins.file.JSFile"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></description>
+              <description clientSupport="sc"><![CDATA[Shows a file save dialog. File save is only supported in the SmartClient.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a file save dialog.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Shows a file save dialog.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
+              <sample clientSupport="sc"><![CDATA[var file = plugins.file.showFileSaveDialog();
 application.output("you've selected file: " + file.getAbsolutePath());]]></sample>
             </samples>
             <parameters>
