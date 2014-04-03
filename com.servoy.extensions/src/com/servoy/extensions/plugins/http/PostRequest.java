@@ -30,10 +30,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -52,7 +55,7 @@ import com.servoy.j2db.util.Pair;
 @ServoyDocumented
 public class PostRequest extends BaseEntityEnclosingRequest
 {
-	private Map<Pair<String, String>, File> files;
+	private Map<Pair<String, String>, Object> files;
 	private List<NameValuePair> params;
 
 	public PostRequest()
@@ -63,7 +66,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	public PostRequest(String url, DefaultHttpClient hc, IClientPluginAccess plugin)
 	{
 		super(url, hc, new HttpPost(url), plugin);
-		files = new HashMap<Pair<String, String>, File>();
+		files = new HashMap<Pair<String, String>, Object>();
 	}
 
 	/**
@@ -124,14 +127,10 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	 */
 	public boolean js_addFile(String parameterName, Object jsFile)
 	{
-		if (jsFile instanceof JSFile)
+		if (jsFile instanceof JSFile && ((JSFile)jsFile).js_exists())
 		{
-			File f = ((JSFile)jsFile).getFile();
-			if (f.exists())
-			{
-				files.put(new Pair<String, String>(parameterName, f.getName()), f);
-				return true;
-			}
+			files.put(new Pair<String, String>(parameterName, ((JSFile)jsFile).js_getName()), jsFile);
+			return true;
 		}
 		return false;
 	}
@@ -155,14 +154,10 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	 */
 	public boolean js_addFile(String parameterName, String fileName, Object jsFile)
 	{
-		if (jsFile instanceof JSFile)
+		if (jsFile instanceof JSFile && ((JSFile)jsFile).js_exists())
 		{
-			File f = ((JSFile)jsFile).getFile();
-			if (f.exists())
-			{
-				files.put(new Pair<String, String>(parameterName, fileName), f);
-				return true;
-			}
+			files.put(new Pair<String, String>(parameterName, fileName), jsFile);
+			return true;
 		}
 		return false;
 	}
@@ -232,7 +227,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	@Override
 	protected HttpEntity buildEntity() throws Exception
 	{
-		HttpEntity entity;
+		HttpEntity entity = null;
 		if (files.size() == 0)
 		{
 			if (params != null)
@@ -246,17 +241,41 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		}
 		else if (files.size() == 1 && (params == null || params.size() == 0))
 		{
-			File f = files.values().iterator().next();
-			entity = new FileEntity(f, "binary/octet-stream"); //$NON-NLS-1$
+			Object f = files.values().iterator().next();
+			if (f instanceof File)
+			{
+				entity = new FileEntity((File)f, ContentType.create("binary/octet-stream")); //$NON-NLS-1$
+			}
+			else if (f instanceof JSFile)
+			{
+				entity = new InputStreamEntity(((JSFile)f).getAbstractFile().getInputStream(), ((JSFile)f).js_size(), ContentType.create("binary/octet-stream")); //$NON-NLS-1$
+			}
+			else
+			{
+				Debug.error("could not add file to post request unknown type: " + f);
+			}
 		}
 		else
 		{
 			entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
 			// For File parameters
-			for (Entry<Pair<String, String>, File> e : files.entrySet())
+			for (Entry<Pair<String, String>, Object> e : files.entrySet())
 			{
-				((MultipartEntity)entity).addPart(e.getKey().getLeft(), new FileBody(e.getValue()));
+				Object file = e.getValue();
+				if (file instanceof File)
+				{
+					((MultipartEntity)entity).addPart(e.getKey().getLeft(), new FileBody((File)file));
+				}
+				else if (file instanceof JSFile)
+				{
+					((MultipartEntity)entity).addPart(e.getKey().getLeft(), new InputStreamBody(((JSFile)file).getAbstractFile().getInputStream(),
+						"binary/octet-stream", ((JSFile)file).js_getName()));
+				}
+				else
+				{
+					Debug.error("could not add file to post request unknown type: " + file);
+				}
 			}
 
 			// add the parameters
