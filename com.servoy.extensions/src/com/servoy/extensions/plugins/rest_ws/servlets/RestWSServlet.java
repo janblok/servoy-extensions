@@ -939,8 +939,8 @@ public class RestWSServlet extends HttpServlet
 			if (contentType == CONTENT_BINARY)
 			{
 				bytes = (byte[])result;
-				//get content type from accept header, if not set guess from response content
-				resultContentType = request.getHeader("Accept") != null ? request.getHeader("Accept") : MimeTypes.getContentType(bytes);
+				//get content type from accept header (if multiple types specified in accept header, take the first), if not guess from response content
+				resultContentType = request.getHeader("Accept") != null ? request.getHeader("Accept").split(";")[0] : MimeTypes.getContentType(bytes);
 				if (resultContentType == null) resultContentType = "application/octet-stream";//if still null, then set to standard
 			}
 			else
@@ -953,6 +953,12 @@ public class RestWSServlet extends HttpServlet
 		}
 		else
 		{
+			if (contentType == CONTENT_BINARY)
+			{
+				plugin.log.error("Request for binary data was made, but the return data is not a byte array; return data is " + result);
+				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+				return;
+			}
 			boolean isXML = (result instanceof XMLObject);
 			boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
 
