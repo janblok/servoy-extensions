@@ -28,7 +28,9 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
 import com.servoy.j2db.plugins.PluginException;
+import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.ui.IComponent;
+import com.servoy.j2db.ui.scripting.AbstractRuntimeBaseComponent;
 
 /**
  * Popup menu scriptable.
@@ -143,5 +145,37 @@ public class Popup extends AbstractMenu
 			loc = getMenuHandler().makeLocationWindowRelative(comp, loc);
 		}
 		getMenu().showPopup(comp, loc.x, loc.y);
+	}
+
+	/**
+	 * Show the popup based on JSEvent information. This can be used to show popup in tableview header that is styled with labelfor label.
+	 *
+	 * @sampleas js_show(IComponent)
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void js_show(JSEvent jsEvent) throws PluginException
+	{
+		if (jsEvent != null)
+		{
+			IComponent component = null;
+			if (jsEvent.getSource() instanceof AbstractRuntimeBaseComponent)
+			{
+				component = ((AbstractRuntimeBaseComponent)jsEvent.getSource()).getComponent();
+			}
+			else if (jsEvent.getSource() instanceof IComponent)
+			{
+				component = (IComponent)jsEvent.getSource();
+			}
+			if (component != null)
+			{
+				js_show(component);
+			}
+			else if (jsEvent.getAbsoluteLocation() != null)
+			{
+				js_show(jsEvent.getAbsoluteLocation().x, jsEvent.getAbsoluteLocation().y);
+			}
+		}
 	}
 }
