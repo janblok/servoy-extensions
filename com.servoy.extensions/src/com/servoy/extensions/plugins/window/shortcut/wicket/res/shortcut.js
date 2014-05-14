@@ -25,7 +25,6 @@ shortcut = {
 		var ele = opt.target;
 		if(typeof opt.target == 'string') ele = document.getElementById(opt.target);
 		var ths = this;
-		shortcut_combination = shortcut_combination.toLowerCase();
 
 		//The function to be called at keypress
 		var func = function(e) {
@@ -47,7 +46,6 @@ shortcut = {
 			
 			if(code == 188) character=","; //If the user presses , when the type is onkeydown
 			else if(code == 190) character="."; //If the user presses , when the type is onkeydown
-			else if (character) character = character.toLowerCase();
 
 			var keys = shortcut_combination.split("+");
 			//Key Pressed - counts the number of valid keypresses - if it is same as the number of keys, the shortcut function is invoked
@@ -161,22 +159,22 @@ shortcut = {
                         
 			for(var i=0; k=keys[i],i<keys.length; i++) {
 				//Modifiers
-				if(k == 'ctrl' || k == 'control') {
+				if(k == 'CTRL' || k == 'CONTROL') {
 					kp++;
 					modifiers.ctrl.wanted = true;
 
-				} else if(k == 'shift') {
+				} else if(k == 'SHIFT') {
 					kp++;
 					modifiers.shift.wanted = true;
 
-				} else if(k == 'alt') {
+				} else if(k == 'ALT') {
 					kp++;
 					modifiers.alt.wanted = true;
-				} else if(k == 'meta') {
+				} else if(k == 'META') {
 					kp++;
 					modifiers.meta.wanted = true;
 				} else if(k.length > 1) { //If it is a special key
-					if(special_keys[k] == code) kp++;
+					if(special_keys[k.toLowerCase()] == code) kp++;
 					
 				} else if(opt['keycode']) {
 					if(opt['keycode'] == code) kp++;
@@ -185,7 +183,7 @@ shortcut = {
 					if(character == k) kp++;
 					else {
 						if(shift_nums[character] && e.shiftKey) { //Stupid Shift key bug created by using lowercase
-							character = shift_nums[character]; 
+							character = shift_nums[character];
 							if(character == k) kp++;
 						}
 					}
@@ -226,7 +224,6 @@ shortcut = {
 
 	//Remove the shortcut - just specify the shortcut and I will remove the binding
 	'remove':function(shortcut_combination) {
-		shortcut_combination = shortcut_combination.toLowerCase();
 		var binding = this.all_shortcuts[shortcut_combination];
 		delete(this.all_shortcuts[shortcut_combination])
 		if(!binding) return;
