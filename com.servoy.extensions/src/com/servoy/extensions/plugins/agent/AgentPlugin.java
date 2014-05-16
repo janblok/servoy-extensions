@@ -42,7 +42,7 @@ import com.servoy.j2db.util.Utils;
  */
 public class AgentPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "agent";
+	public static final String PLUGIN_NAME = "agent"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private IJSAgent impl;
@@ -85,7 +85,7 @@ public class AgentPlugin implements IClientPlugin
 					showingIn.addComponentListener((ComponentListener)impl);
 				}
 
-				if (Utils.getAsBoolean(app.getSettings().getProperty("plugin.agent.showAgentOnStart", "false")))
+				if (Utils.getAsBoolean(app.getSettings().getProperty("plugin.agent.showAgentOnStart", "false"))) //$NON-NLS-1$ //$NON-NLS-2$
 				{
 					SwingUtilities.invokeLater(new Runnable()
 					{
@@ -108,7 +108,7 @@ public class AgentPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.agent.displayname"));
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.agent.displayname")); //$NON-NLS-1$
 		return props;
 	}
 
@@ -142,7 +142,7 @@ public class AgentPlugin implements IClientPlugin
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/agent.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/agent.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

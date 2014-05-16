@@ -66,7 +66,7 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 	{
 		this.parent = parent;
 		this.state = state;
-		setName("SpecifyFilePanel");
+		setName("SpecifyFilePanel"); //$NON-NLS-1$
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout(10, 10));
 
@@ -76,13 +76,13 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 //		fieldPanel.setSize(new Dimension(500,20));
 		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
 		fieldPanel.add(Box.createHorizontalGlue());
-		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.exportImport.specifyFileTitle")));
+		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.exportImport.specifyFileTitle"))); //$NON-NLS-1$
 
-		browse = new JButton(Messages.getString("servoy.button.browse"));
-		browse.setActionCommand("browse");
+		browse = new JButton(Messages.getString("servoy.button.browse")); //$NON-NLS-1$
+		browse.setActionCommand("browse"); //$NON-NLS-1$
 		browse.addActionListener(this);
 
-		JLabel label = new JLabel(Messages.getString("servoy.plugin.exportImport.specifyFileLabel"), SwingConstants.LEFT);
+		JLabel label = new JLabel(Messages.getString("servoy.plugin.exportImport.specifyFileLabel"), SwingConstants.LEFT); //$NON-NLS-1$
 
 		fieldPanel.add(label);
 		fieldPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -92,8 +92,8 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		add(fieldPanel, BorderLayout.CENTER);
 
 		JPanel titlePanel = new JPanel();
-		header = new JCheckBox(Messages.getString("servoy.plugin.export.exportHeader"));
-		JLabel encodingLabel = new JLabel(Messages.getString("servoy.plugin.export.exportEncoding"));
+		header = new JCheckBox(Messages.getString("servoy.plugin.export.exportHeader")); //$NON-NLS-1$
+		JLabel encodingLabel = new JLabel(Messages.getString("servoy.plugin.export.exportEncoding")); //$NON-NLS-1$
 
 		Charset sys_file_cs = Charset.forName(System.getProperty("file.encoding"));
 		int selectionIndex = 0;
@@ -114,7 +114,7 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		titlePanel.add(encodingLabel);
 		titlePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		titlePanel.add(encodingCombo);
-		titlePanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.export.fileOptions.title")));
+		titlePanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.export.fileOptions.title"))); //$NON-NLS-1$
 		add(titlePanel, BorderLayout.NORTH);
 
 		setPreferredSize(new Dimension(550, 400));
@@ -123,17 +123,17 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if (command.equals("browse")) browse();
+		if (command.equals("browse")) browse(); //$NON-NLS-1$
 	}
 
 	private void browse()
 	{
 		try
 		{
-			String sep = (String)state.getProperty("separator");
+			String sep = (String)state.getProperty("separator"); //$NON-NLS-1$
 			if (header.isSelected())
 			{
-				DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs");
+				DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs"); //$NON-NLS-1$
 				String[] dataProviders = new String[dlm.getSize()];
 				for (int i = 0; i < dlm.getSize(); i++)
 				{
@@ -144,14 +144,14 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 
 			boolean suc6 = false;
 			FileNameSuggestionFileChooser fc = new FileNameSuggestionFileChooser();
-			String fName = "export.csv";
-			if (sep.equals(","))
+			String fName = "export.csv"; //$NON-NLS-1$
+			if (sep.equals(",")) //$NON-NLS-1$
 			{
-				fName = "export.csv";
+				fName = "export.csv"; //$NON-NLS-1$
 			}
-			else if (sep.equals("\t"))
+			else if (sep.equals("\t")) //$NON-NLS-1$
 			{
-				fName = "export.tab";
+				fName = "export.tab"; //$NON-NLS-1$
 			}
 			fc.suggestFileName(fName);
 			int returnVal = fc.showSaveDialog(parent.getMainApplicationWindow());
@@ -165,13 +165,13 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 				suc6 = true;
 
 				fileData = null;
-				if (suc6) JOptionPane.showMessageDialog(this, Messages.getString("servoy.plugin.export.success", new Object[] { new Integer(rows) }));
+				if (suc6) JOptionPane.showMessageDialog(this, Messages.getString("servoy.plugin.export.success", new Object[] { new Integer(rows) })); //$NON-NLS-1$
 				browse.setEnabled(false);
 			}
 		}
 		catch (Exception ex)
 		{
-			parent.reportError(Messages.getString("servoy.plugin.exportImport.fileSelect.exception"), ex);
+			parent.reportError(Messages.getString("servoy.plugin.exportImport.fileSelect.exception"), ex); //$NON-NLS-1$
 		}
 	}
 
@@ -180,12 +180,12 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 		StringBuffer headerBuffer = new StringBuffer();
 		for (int k = 0; k < dataProviders.length; k++)
 		{
-			headerBuffer.append("\"");
+			headerBuffer.append("\""); //$NON-NLS-1$
 			headerBuffer.append(dataProviders[k]);
-			headerBuffer.append("\"");
+			headerBuffer.append("\""); //$NON-NLS-1$
 			if (k < dataProviders.length - 1) headerBuffer.append(sep);
 		}
-		headerBuffer.append("\n");
+		headerBuffer.append("\n"); //$NON-NLS-1$
 		return headerBuffer;
 	}
 
@@ -210,24 +210,24 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 			public void run()
 			{
 				rows = 0;
-				parent.blockGUI(Messages.getString("servoy.plugin.export.status.loadingData"));
+				parent.blockGUI(Messages.getString("servoy.plugin.export.status.loadingData")); //$NON-NLS-1$
 				try
 				{
-					String sep = (String)state.getProperty("separator");
-					DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs");
+					String sep = (String)state.getProperty("separator"); //$NON-NLS-1$
+					DefaultListModel dlm = (DefaultListModel)state.getProperty("dataProviderIDs"); //$NON-NLS-1$
 					String[] dataProviders = new String[dlm.getSize()];
 					for (int i = 0; i < dlm.getSize(); i++)
 					{
 						dataProviders[i] = ((DataProviderWithLabel)dlm.get(i)).dataProvider.getDataProviderID();
 					}
-					IFoundSet data = (IFoundSet)state.getProperty("foundset");
+					IFoundSet data = (IFoundSet)state.getProperty("foundset"); //$NON-NLS-1$
 					fileData = populateFileData(data, dataProviders, sep);
 					rows = data.getSize();
 				}
 				catch (Exception ex)
 				{
 					rows = 0;
-					parent.reportError(Messages.getString("servoy.plugin.export.exception"), ex);
+					parent.reportError(Messages.getString("servoy.plugin.export.exception"), ex); //$NON-NLS-1$
 				}
 				finally
 				{
@@ -248,25 +248,25 @@ public class ExportSpecifyFilePanel extends JPanel implements ActionListener, IW
 				Object obj = s.getValue(dataProviders[k]);
 				if (obj instanceof String && ((String)obj).length() != 0)
 				{
-					fData.append("\"");
-					obj = Utils.stringReplace((String)obj, "\"", "\"\"");
+					fData.append("\""); //$NON-NLS-1$
+					obj = Utils.stringReplace((String)obj, "\"", "\"\""); //$NON-NLS-1$
 				}
 				if (obj instanceof Date)
 				{
-					fData.append("\"");
+					fData.append("\""); //$NON-NLS-1$
 				}
 				if (obj != null) fData.append(obj);
 				if (obj instanceof String && ((String)obj).length() != 0)
 				{
-					fData.append("\"");
+					fData.append("\""); //$NON-NLS-1$
 				}
 				if (obj instanceof Date)
 				{
-					fData.append("\"");
+					fData.append("\""); //$NON-NLS-1$
 				}
 				if (k < dataProviders.length - 1) fData.append(sep);
 			}
-			fData.append("\n");
+			fData.append("\n"); //$NON-NLS-1$
 		}
 		return fData;
 	}

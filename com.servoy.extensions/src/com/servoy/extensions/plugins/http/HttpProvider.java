@@ -172,7 +172,7 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 		catch (Exception e)
 		{
 			Debug.error(e);
-			return "";
+			return "";//$NON-NLS-1$
 		}
 	}
 
@@ -808,9 +808,9 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 	{
 		if (args.length != 3)
 		{
-			System.out.println("Use: ContentFetcher mainurl contenturl destdir");
-			System.out.println("Example: ContentFetcher http://site.com http://site.com/dir[0-2]/image_A[001-040].jpg c:/temp");
-			System.out.println("Result: accessing http://site.com for cookie, reading http://site.com/dir1/image_A004.jpg writing c:/temp/dir_1_image_A004.jpg");
+			System.out.println("Use: ContentFetcher mainurl contenturl destdir"); //$NON-NLS-1$
+			System.out.println("Example: ContentFetcher http://site.com http://site.com/dir[0-2]/image_A[001-040].jpg c:/temp"); //$NON-NLS-1$
+			System.out.println("Result: accessing http://site.com for cookie, reading http://site.com/dir1/image_A004.jpg writing c:/temp/dir_1_image_A004.jpg"); //$NON-NLS-1$
 		}
 		else
 		{
@@ -825,20 +825,20 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 			int to = 0;
 			int fill = 0;
 
-			StringTokenizer tk = new StringTokenizer(url, "[]", true);
+			StringTokenizer tk = new StringTokenizer(url, "[]", true); //$NON-NLS-1$
 			boolean hasDir = (tk.countTokens() > 5);
 			boolean inDir = hasDir;
-			System.out.println("hasDir " + hasDir);
+			System.out.println("hasDir " + hasDir); //$NON-NLS-1$
 			boolean inTag = false;
 			while (tk.hasMoreTokens())
 			{
 				String token = tk.nextToken();
-				if (token.equals("["))
+				if (token.equals("[")) //$NON-NLS-1$
 				{
 					inTag = true;
 					continue;
 				}
-				if (token.equals("]"))
+				if (token.equals("]")) //$NON-NLS-1$
 				{
 					inTag = false;
 					if (inDir) inDir = false;
@@ -878,30 +878,30 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 			int main_rs = res.getStatusLine().getStatusCode();
 			if (main_rs != 200)
 			{
-				System.out.println("main page retrieval failed " + main_rs);
+				System.out.println("main page retrieval failed " + main_rs); //$NON-NLS-1$
 				return;
 			}
 
 			for (int d = dir_from; d <= dir_to; d++)
 			{
-				String dir_number = "" + d;
+				String dir_number = "" + d; //$NON-NLS-1$
 				if (dir_fill > 1)
 				{
-					dir_number = "000000" + d;
+					dir_number = "000000" + d; //$NON-NLS-1$
 					int dir_digits = (int)(Math.log(fill) / Math.log(10));
-					System.out.println("dir_digits " + dir_digits);
+					System.out.println("dir_digits " + dir_digits); //$NON-NLS-1$
 					dir_number = dir_number.substring(dir_number.length() - (dir_fill - dir_digits), dir_number.length());
 				}
 				for (int i = from; i <= to; i++)
 				{
 					try
 					{
-						String number = "" + i;
+						String number = "" + i; //$NON-NLS-1$
 						if (fill > 1)
 						{
-							number = "000000" + i;
+							number = "000000" + i; //$NON-NLS-1$
 							int digits = (int)(Math.log(fill) / Math.log(10));
-							System.out.println("digits " + digits);
+							System.out.println("digits " + digits); //$NON-NLS-1$
 							number = number.substring(number.length() - (fill - digits), number.length());
 						}
 						int part = 0;
@@ -913,16 +913,16 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 						}
 						surl.append(number);
 						surl.append(parts.get(part++));
-						System.out.println("reading url " + surl);
+						System.out.println("reading url " + surl); //$NON-NLS-1$
 
 						int indx = surl.toString().lastIndexOf('/');
 						StringBuffer sfile = new StringBuffer(destdir);
-						sfile.append("\\");
+						sfile.append("\\"); //$NON-NLS-1$
 						if (hasDir)
 						{
-							sfile.append("dir_");
+							sfile.append("dir_"); //$NON-NLS-1$
 							sfile.append(dir_number);
-							sfile.append("_");
+							sfile.append("_"); //$NON-NLS-1$
 						}
 						sfile.append(surl.toString().substring(indx + 1));
 						File file = new File(sfile.toString());
@@ -930,14 +930,14 @@ public class HttpProvider implements IReturnedTypesProvider, IScriptable
 						{
 							file = new File("" + System.currentTimeMillis() + sfile.toString());
 						}
-						System.out.println("write file " + file.getAbsolutePath());
+						System.out.println("write file " + file.getAbsolutePath()); //$NON-NLS-1$
 
 //						URL iurl = createURLFromString(surl.toString());
 						HttpGet get = new HttpGet(surl.toString());
 
 						HttpResponse response = client.execute(get);
 						int result = response.getStatusLine().getStatusCode();
-						System.out.println("page http result " + result);
+						System.out.println("page http result " + result); //$NON-NLS-1$
 						if (result == 200)
 						{
 							InputStream is = response.getEntity().getContent();

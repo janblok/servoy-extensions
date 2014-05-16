@@ -39,6 +39,7 @@ import com.servoy.j2db.util.IStyleSheet;
  * 
  * @author jblok
  */
+@SuppressWarnings("nls")
 public class DBTreeView implements IServoyBeanFactory, Serializable, ITreeView
 {
 	private static final long serialVersionUID = 1L;

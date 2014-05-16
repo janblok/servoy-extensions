@@ -141,12 +141,12 @@ public class HttpClient implements IScriptable, IJavaScriptType
 
 				}
 			};
-			Scheme https = new Scheme("https", 443, sf);
+			Scheme https = new Scheme("https", 443, sf); //$NON-NLS-1$
 			client.getConnectionManager().getSchemeRegistry().register(https);
 		}
 		catch (Exception e)
 		{
-			Debug.error("Can't register a https scheme", e);
+			Debug.error("Can't register a https scheme", e); //$NON-NLS-1$
 		}
 	}
 
@@ -180,7 +180,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	 */
 	public boolean js_setCookie(String cookieName, String cookieValue)
 	{
-		return js_setCookie(cookieName, cookieValue, "");
+		return js_setCookie(cookieName, cookieValue, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class HttpClient implements IScriptable, IJavaScriptType
 	 */
 	public boolean js_setCookie(String cookieName, String cookieValue, String domain)
 	{
-		return js_setCookie(cookieName, cookieValue, domain, "");
+		return js_setCookie(cookieName, cookieValue, domain, ""); //$NON-NLS-1$
 	}
 
 	/**

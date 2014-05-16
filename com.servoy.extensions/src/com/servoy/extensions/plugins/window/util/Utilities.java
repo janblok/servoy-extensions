@@ -42,7 +42,7 @@ public class Utilities
 	 */
 	public static ImageIcon getImageIcon(Object imageName)
 	{
-		if (imageName == null || "".equals(imageName) || " ".equals(imageName))
+		if (imageName == null || "".equals(imageName) || " ".equals(imageName)) //$NON-NLS-1$ //$NON-NLS-2$
 		{
 			return new ImageIcon();
 		}
@@ -72,13 +72,13 @@ public class Utilities
 		URL imageURL = null;
 		ImageIcon image = new ImageIcon();
 
-		if (imageName == null || imageName.trim().equals(""))
+		if (imageName == null || imageName.trim().equals("")) //$NON-NLS-1$
 		{
 			return new ImageIcon();
 		}
 		else
 		{
-			if (imageName.startsWith("media:///"))
+			if (imageName.startsWith("media:///")) //$NON-NLS-1$
 			{
 				try
 				{

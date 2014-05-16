@@ -64,7 +64,7 @@ public class PutRequest extends BaseEntityEnclosingRequest
 			File file = new File(filePath);
 			if (file.exists())
 			{
-				((HttpPut)method).setEntity(new FileEntity(file, ContentType.create("binary/octet-stream")));
+				((HttpPut)method).setEntity(new FileEntity(file, ContentType.create("binary/octet-stream"))); //$NON-NLS-1$
 				return true;
 			}
 		}
@@ -86,7 +86,7 @@ public class PutRequest extends BaseEntityEnclosingRequest
 			try
 			{
 				((HttpPut)method).setEntity(new InputStreamEntity(file.getAbstractFile().getInputStream(), file.js_size(),
-					ContentType.create("binary/octet-stream")));
+					ContentType.create("binary/octet-stream"))); //$NON-NLS-1$
 				return true;
 			}
 			catch (IOException e)

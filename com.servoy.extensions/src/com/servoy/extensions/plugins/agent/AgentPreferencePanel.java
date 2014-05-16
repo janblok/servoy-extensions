@@ -42,9 +42,9 @@ public class AgentPreferencePanel extends PreferencePanel implements ActionListe
 	{
 		super();
 		application = app;
-		boolean showAgent = new Boolean(app.getSettings().getProperty("plugin.agent.showAgentOnStart", "false")).booleanValue();
+		boolean showAgent = new Boolean(app.getSettings().getProperty("plugin.agent.showAgentOnStart", "false")).booleanValue(); //$NON-NLS-1$ //$NON-NLS-2$
 
-		JCheckBox check = new JCheckBox(Messages.getString("servoy.plugin.agent.preference.showOnStartup"), showAgent);
+		JCheckBox check = new JCheckBox(Messages.getString("servoy.plugin.agent.preference.showOnStartup"), showAgent); //$NON-NLS-1$
 		check.addActionListener(this);
 		this.setLayout(new BorderLayout());
 		this.add(check, BorderLayout.NORTH);
@@ -102,7 +102,7 @@ public class AgentPreferencePanel extends PreferencePanel implements ActionListe
 	@Override
 	public String getTabName()
 	{
-		return Messages.getString("servoy.plugin.agent.preference.tabname");
+		return Messages.getString("servoy.plugin.agent.preference.tabname"); //$NON-NLS-1$
 	}
 
 	/**
@@ -113,11 +113,11 @@ public class AgentPreferencePanel extends PreferencePanel implements ActionListe
 		fireChangeEvent();
 		if (((JCheckBox)e.getSource()).isSelected())
 		{
-			application.getSettings().setProperty("plugin.agent.showAgentOnStart", "true");
+			application.getSettings().setProperty("plugin.agent.showAgentOnStart", "true"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		else
 		{
-			application.getSettings().setProperty("plugin.agent.showAgentOnStart", "false");
+			application.getSettings().setProperty("plugin.agent.showAgentOnStart", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 }

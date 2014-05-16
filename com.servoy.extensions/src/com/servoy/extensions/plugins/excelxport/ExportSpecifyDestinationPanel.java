@@ -63,7 +63,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		application = app;
 		this.parent = parent;
 		this.state = state;
-		setName("start");
+		setName("start"); //$NON-NLS-1$
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 
@@ -71,11 +71,11 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		movePane.setLayout(new BoxLayout(movePane, BoxLayout.Y_AXIS));
 		movePane.setMaximumSize(new Dimension(100, 200));
 
-		JButton downButton = new JButton(Messages.getString("servoy.button.moveDown"));
+		JButton downButton = new JButton(Messages.getString("servoy.button.moveDown")); //$NON-NLS-1$
 		Dimension minimumSize = downButton.getPreferredSize();//new Dimension(100,20);
-		final JButton rightButton = new JButton(" >> ");
+		final JButton rightButton = new JButton(" >> "); //$NON-NLS-1$
 		rightButton.addActionListener(this);
-		rightButton.setActionCommand("right");
+		rightButton.setActionCommand("right"); //$NON-NLS-1$
 		rightButton.setPreferredSize(minimumSize);
 		rightButton.setMinimumSize(minimumSize);
 		rightButton.setMaximumSize(minimumSize);
@@ -85,9 +85,9 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 		movePane.add(Box.createRigidArea(new Dimension(0, 5)));
 
-		final JButton leftButton = new JButton(" << ");
+		final JButton leftButton = new JButton(" << "); //$NON-NLS-1$
 		leftButton.addActionListener(this);
-		leftButton.setActionCommand("left");
+		leftButton.setActionCommand("left"); //$NON-NLS-1$
 		leftButton.setPreferredSize(minimumSize);
 		leftButton.setMinimumSize(minimumSize);
 		leftButton.setMaximumSize(minimumSize);
@@ -97,9 +97,9 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 		movePane.add(Box.createRigidArea(new Dimension(0, 5)));
 
-		JButton upButton = new JButton(Messages.getString("servoy.button.moveUp"));
+		JButton upButton = new JButton(Messages.getString("servoy.button.moveUp")); //$NON-NLS-1$
 		upButton.addActionListener(this);
-		upButton.setActionCommand("up");
+		upButton.setActionCommand("up"); //$NON-NLS-1$
 		upButton.setPreferredSize(minimumSize);
 		upButton.setMinimumSize(minimumSize);
 		upButton.setMaximumSize(minimumSize);
@@ -111,7 +111,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 //        JButton downButton = new JButton("move down");
 		downButton.addActionListener(this);
-		downButton.setActionCommand("down");
+		downButton.setActionCommand("down"); //$NON-NLS-1$
 		downButton.setPreferredSize(minimumSize);
 		downButton.setMinimumSize(minimumSize);
 		downButton.setMaximumSize(minimumSize);
@@ -150,7 +150,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(tableScroll, BorderLayout.CENTER);
-		rightPanel.add(new JLabel(Messages.getString("servoy.plugin.export.toFile")), BorderLayout.NORTH);
+		rightPanel.add(new JLabel(Messages.getString("servoy.plugin.export.toFile")), BorderLayout.NORTH); //$NON-NLS-1$
 
 		JPanel toppanel = new JPanel();
 //		toppanel.setLayout(new BorderLayout());
@@ -171,10 +171,10 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if (command.equals("left")) left();
-		else if (command.equals("right")) right();
-		else if (command.equals("up")) up();
-		else if (command.equals("down")) down();
+		if (command.equals("left")) left(); //$NON-NLS-1$
+		else if (command.equals("right")) right(); //$NON-NLS-1$
+		else if (command.equals("up")) up(); //$NON-NLS-1$
+		else if (command.equals("down")) down(); //$NON-NLS-1$
 	}
 
 	private void up()
@@ -268,7 +268,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 	public String getNextPanelName()
 	{
-		return "SpecifyFilePanel";
+		return "SpecifyFilePanel"; //$NON-NLS-1$
 	}
 
 	public boolean isDone()
@@ -280,7 +280,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		}
 		else
 		{
-			state.setProperty("dataProviderIDs", dlm);
+			state.setProperty("dataProviderIDs", dlm); //$NON-NLS-1$
 			return true;
 		}
 	}
@@ -293,8 +293,8 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 			{
 				try
 				{
-					parent.blockGUI(Messages.getString("servoy.plugin.export.status.buildingUI"));
-					IFoundSetInternal data = (IFoundSetInternal)state.getProperty("foundset");
+					parent.blockGUI(Messages.getString("servoy.plugin.export.status.buildingUI")); //$NON-NLS-1$
+					IFoundSetInternal data = (IFoundSetInternal)state.getProperty("foundset"); //$NON-NLS-1$
 					if (data != null && data.getTable() != null)
 					{
 						dpe.setDefinedTable(data.getTable());

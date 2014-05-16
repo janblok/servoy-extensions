@@ -33,7 +33,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class SchedulerPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "scheduler";
+	public static final String PLUGIN_NAME = "scheduler"; //$NON-NLS-1$
 
 	private SchedulerProvider schedulerProvider;
 	private IClientPluginAccess access;
@@ -43,6 +43,7 @@ public class SchedulerPlugin implements IClientPlugin
 	 * 
 	 * @see com.servoy.j2db.plugins.IClientPlugin#initialize(com.servoy.j2db.plugins.IClientPluginAccess)
 	 */
+	@SuppressWarnings("nls")
 	public void initialize(IClientPluginAccess acc) throws PluginException
 	{
 		this.access = acc;
@@ -76,7 +77,7 @@ public class SchedulerPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/timer.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/timer.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -146,7 +147,7 @@ public class SchedulerPlugin implements IClientPlugin
 	 */
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		if (schedulerProvider != null && "solution".equals(evt.getPropertyName()) && evt.getNewValue() == null)
+		if (schedulerProvider != null && "solution".equals(evt.getPropertyName()) && evt.getNewValue() == null) //$NON-NLS-1$
 		{
 			schedulerProvider.stopScheduler();
 			schedulerProvider = null;

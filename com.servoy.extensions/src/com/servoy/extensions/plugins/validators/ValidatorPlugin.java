@@ -47,7 +47,7 @@ public class ValidatorPlugin implements IClientPlugin, IColumnValidatorProvider
 
 	public Icon getImage()
 	{
-		URL iconUrl = this.getClass().getResource("images/validators.gif");
+		URL iconUrl = this.getClass().getResource("images/validators.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

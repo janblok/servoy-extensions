@@ -34,7 +34,7 @@ import com.servoy.j2db.util.Utils;
 
 public class GlobalMethodValidator implements IColumnValidator, IPropertyDescriptorProvider, IMethodTemplatesProvider
 {
-	public static final String GLOBAL_METHOD_NAME_PROPERTY = "globalMethodName";
+	public static final String GLOBAL_METHOD_NAME_PROPERTY = "globalMethodName"; //$NON-NLS-1$
 
 	private IClientPluginAccess clientPluginAccess;
 
@@ -46,13 +46,13 @@ public class GlobalMethodValidator implements IColumnValidator, IPropertyDescrip
 	public Map<String, String> getDefaultProperties()
 	{
 		Map<String, String> props = new HashMap<String, String>();
-		props.put(GLOBAL_METHOD_NAME_PROPERTY, "");
+		props.put(GLOBAL_METHOD_NAME_PROPERTY, ""); //$NON-NLS-1$
 		return props;
 	}
 
 	public String getName()
 	{
-		return "servoy.GlobalMethodValidator";
+		return "servoy.GlobalMethodValidator"; //$NON-NLS-1$
 	}
 
 	public int[] getSupportedColumnTypes()
@@ -96,7 +96,7 @@ public class GlobalMethodValidator implements IColumnValidator, IPropertyDescrip
 	{
 		if (GLOBAL_METHOD_NAME_PROPERTY.equals(property))
 		{
-			return new PropertyDescriptor("Global method to use as a validator, signature: (object)", IPropertyDescriptor.GLOBAL_METHOD);
+			return new PropertyDescriptor("Global method to use as a validator, signature: (object)", IPropertyDescriptor.GLOBAL_METHOD); //$NON-NLS-1$
 		}
 		return null;
 	}

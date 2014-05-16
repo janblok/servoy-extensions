@@ -220,19 +220,19 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		{
 			throw new RuntimeException("Can't use the dialog plugin in a none Swing thread/environment");
 		}
-		String title = Messages.getString("servoy.general.warning");
+		String title = Messages.getString("servoy.general.warning"); //$NON-NLS-1$
 		if (dialogTitle != null)
 		{
 			title = Messages.getStringIfPrefix(dialogTitle);
 		}
-		String msg = Messages.getString("servoy.general.clickOk");
+		String msg = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
 		if (dialogMessage != null) msg = Messages.getStringIfPrefix(dialogMessage);
 		Vector<String> buttons = new Vector<String>();
 		if (buttonsText != null)
 		{
 			for (String text : getButtonTexts(buttonsText))
 			{
-				if (text != null && !("".equals(text)))
+				if (text != null && !("".equals(text))) //$NON-NLS-1$
 				{
 					buttons.addElement(Messages.getStringIfPrefix(text));
 				}
@@ -240,7 +240,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		}
 		Object[] options = new Object[buttons.size()];
 		buttons.copyInto(options);
-		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") };
+		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 
 		for (int i = 0; i < options.length; i++)
 		{
@@ -301,9 +301,9 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		Object modalityDocumentModalValue = null;
 		try
 		{
-			Class< ? > clz = Class.forName("java.awt.Dialog$ModalityType");
-			modalityDocumentModalValue = clz.getField("DOCUMENT_MODAL").get(clz);
-			setModalityTypeMethod = Dialog.class.getMethod("setModalityType", clz);
+			Class< ? > clz = Class.forName("java.awt.Dialog$ModalityType"); //$NON-NLS-1$
+			modalityDocumentModalValue = clz.getField("DOCUMENT_MODAL").get(clz); //$NON-NLS-1$
+			setModalityTypeMethod = Dialog.class.getMethod("setModalityType", clz); //$NON-NLS-1$
 		}
 		catch (Exception e)
 		{
@@ -344,7 +344,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		{
 			for (String element : options)
 			{
-				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix(element));
+				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix(element)); //$NON-NLS-1$
 			}
 		}
 		Object[] optionsCopy = new String[buttons.size()];
@@ -364,11 +364,11 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		{
 			throw new RuntimeException("Can't use the dialog plugin in a none Swing thread/environment");
 		}
-		String title = Messages.getString("servoy.general.warning");
+		String title = Messages.getString("servoy.general.warning"); //$NON-NLS-1$
 		if (dialog_title != null) title = Messages.getStringIfPrefix(dialog_title);
-		String message = Messages.getString("servoy.general.clickOk");
+		String message = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
 		if (msg != null) message = Messages.getStringIfPrefix(msg);
-		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") };
+		if (options.length == 0) options = new Object[] { Messages.getString("servoy.button.ok") }; //$NON-NLS-1$
 		JOptionPane pane = new JOptionPane(message, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, null, options[0]);
 		pane.setWantsInput(true);
 		pane.setSelectionValues(options);
@@ -399,7 +399,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		{
 			for (Object element : optionArray)
 			{
-				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix((String)element));
+				buttons.addElement(element == null ? "" : Messages.getStringIfPrefix((String)element)); //$NON-NLS-1$
 			}
 		}
 		Object[] options = new Object[buttons.size()];
@@ -457,9 +457,9 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 		{
 			throw new RuntimeException("Can't use the dialog plugin in a none Swing thread/environment");
 		}
-		String title = Messages.getString("servoy.general.warning");
+		String title = Messages.getString("servoy.general.warning"); //$NON-NLS-1$
 		if (dialog_title != null) title = Messages.getStringIfPrefix(dialog_title);
-		String message = Messages.getString("servoy.general.clickOk");
+		String message = Messages.getString("servoy.general.clickOk"); //$NON-NLS-1$
 		if (msg != null) message = Messages.getStringIfPrefix(msg);
 		String val = null;
 		if (initialValue != null) val = initialValue;

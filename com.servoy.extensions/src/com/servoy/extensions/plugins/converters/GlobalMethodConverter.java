@@ -40,9 +40,9 @@ import com.servoy.j2db.plugins.IMethodTemplatesProvider;
 
 public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverter, IPropertyDescriptorProvider, IMethodTemplatesProvider
 {
-	private final String TO_OBJECT_NAME_PROPERTY = "toObjectMethodName";
-	private final String FROM_OBJECT_NAME_PROPERTY = "fromObjectMethodName";
-	private final String TYPE_NAME_PROPERTY = "type";
+	private final String TO_OBJECT_NAME_PROPERTY = "toObjectMethodName"; //$NON-NLS-1$
+	private final String FROM_OBJECT_NAME_PROPERTY = "fromObjectMethodName"; //$NON-NLS-1$
+	private final String TYPE_NAME_PROPERTY = "type"; //$NON-NLS-1$
 
 	private final ConverterPlugin plugin;
 
@@ -82,9 +82,9 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverte
 	public Map<String, String> getDefaultProperties()
 	{
 		Map<String, String> props = new HashMap<String, String>();
-		props.put(FROM_OBJECT_NAME_PROPERTY, "");
-		props.put(TO_OBJECT_NAME_PROPERTY, "");
-		props.put(TYPE_NAME_PROPERTY, "");
+		props.put(FROM_OBJECT_NAME_PROPERTY, ""); //$NON-NLS-1$
+		props.put(TO_OBJECT_NAME_PROPERTY, ""); //$NON-NLS-1$
+		props.put(TYPE_NAME_PROPERTY, ""); //$NON-NLS-1$
 		return props;
 	}
 
@@ -103,11 +103,11 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverte
 			Object value = props.get(TYPE_NAME_PROPERTY);
 			if (value != null)
 			{
-				if (value.equals("TEXT")) return IColumnTypes.TEXT;
-				if (value.equals("INTEGER")) return IColumnTypes.INTEGER;
-				if (value.equals("NUMBER")) return IColumnTypes.NUMBER;
-				if (value.equals("DATETIME")) return IColumnTypes.DATETIME;
-				if (value.equals("MEDIA")) return IColumnTypes.MEDIA;
+				if (value.equals("TEXT")) return IColumnTypes.TEXT; //$NON-NLS-1$
+				if (value.equals("INTEGER")) return IColumnTypes.INTEGER; //$NON-NLS-1$
+				if (value.equals("NUMBER")) return IColumnTypes.NUMBER; //$NON-NLS-1$
+				if (value.equals("DATETIME")) return IColumnTypes.DATETIME; //$NON-NLS-1$
+				if (value.equals("MEDIA")) return IColumnTypes.MEDIA; //$NON-NLS-1$
 			}
 		}
 		return Integer.MAX_VALUE;
@@ -130,23 +130,23 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverte
 	{
 		if (TO_OBJECT_NAME_PROPERTY.equals(property))
 		{
-			return new PropertyDescriptor("Global method to convert DBValue to Object, signature: (dbvalue,columntype)", IPropertyDescriptor.GLOBAL_METHOD);
+			return new PropertyDescriptor("Global method to convert DBValue to Object, signature: (dbvalue,columntype)", IPropertyDescriptor.GLOBAL_METHOD); //$NON-NLS-1$
 		}
 		if (FROM_OBJECT_NAME_PROPERTY.equals(property))
 		{
-			return new PropertyDescriptor("Global method to convert Object to DBValue, signature: (object,columntype)", IPropertyDescriptor.GLOBAL_METHOD);
+			return new PropertyDescriptor("Global method to convert Object to DBValue, signature: (object,columntype)", IPropertyDescriptor.GLOBAL_METHOD); //$NON-NLS-1$
 		}
 		if (TYPE_NAME_PROPERTY.equals(property))
 		{
 			String[] choices = new String[] {//
-			"<as is>",
-			"TEXT",
-			"INTEGER",
-			"NUMBER",
-			"DATETIME",
-			"MEDIA"
+			"<as is>", //$NON-NLS-1$
+			"TEXT", //$NON-NLS-1$
+			"INTEGER", //$NON-NLS-1$
+			"NUMBER", //$NON-NLS-1$
+			"DATETIME", //$NON-NLS-1$
+			"MEDIA" //$NON-NLS-1$
 			};
-			return new PropertyDescriptor("The converted object type", IPropertyDescriptor.NUMBER, choices);
+			return new PropertyDescriptor("The converted object type", IPropertyDescriptor.NUMBER, choices); //$NON-NLS-1$
 		}
 		return null;
 	}

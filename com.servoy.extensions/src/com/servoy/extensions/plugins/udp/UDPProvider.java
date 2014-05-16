@@ -75,7 +75,7 @@ public class UDPProvider implements IScriptable, IReturnedTypesProvider
 		{
 			try
 			{
-				if (!(method_to_call_when_packet_received_and_buffer_is_empty instanceof Function)) throw new IllegalArgumentException("method invalid");
+				if (!(method_to_call_when_packet_received_and_buffer_is_empty instanceof Function)) throw new IllegalArgumentException("method invalid"); //$NON-NLS-1$
 
 				DatagramSocket socket = new DatagramSocket(port_number);
 				listner = new DatagramHandler(this, socket);

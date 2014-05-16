@@ -87,6 +87,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  * 
  */
+@SuppressWarnings("nls")
 public class RestWSServlet extends HttpServlet
 {
 	// solution method names

@@ -44,8 +44,8 @@ import com.servoy.j2db.util.Debug;
  */
 public class PDFPrintService implements PrintService
 {
-	private static final String OUTPUT_FILE_NAME = "out";
-	private static final String OUTPUT_FILE_EXTENSION = ".pdf";
+	private static final String OUTPUT_FILE_NAME = "out"; //$NON-NLS-1$
+	private static final String OUTPUT_FILE_EXTENSION = ".pdf"; //$NON-NLS-1$
 
 	private final IClientPluginAccess access;
 	private JFileChooser outputFolderChooser;
@@ -80,7 +80,7 @@ public class PDFPrintService implements PrintService
 				@Override
 				public boolean accept(File f)
 				{
-					return f.getName().toLowerCase().endsWith("pdf");
+					return f.getName().toLowerCase().endsWith("pdf"); //$NON-NLS-1$
 				}
 
 				@Override
@@ -95,7 +95,7 @@ public class PDFPrintService implements PrintService
 		StringBuffer outputFileName = new StringBuffer(OUTPUT_FILE_NAME);
 		if (outputFileNameCounter > 0) outputFileName.append(outputFileNameCounter);
 		outputFileName.append(OUTPUT_FILE_EXTENSION);
-		outputFolderChooser.setSelectedFile(new File(System.getProperty("user.home"), outputFileName.toString()));
+		outputFolderChooser.setSelectedFile(new File(System.getProperty("user.home"), outputFileName.toString())); //$NON-NLS-1$
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();

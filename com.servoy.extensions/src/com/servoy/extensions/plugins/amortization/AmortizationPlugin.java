@@ -55,7 +55,7 @@ public class AmortizationPlugin implements IClientPlugin
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/calculator.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/calculator.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -84,7 +84,7 @@ public class AmortizationPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "");
+		props.put(DISPLAY_NAME, ""); //$NON-NLS-1$
 		return props;
 	}
 

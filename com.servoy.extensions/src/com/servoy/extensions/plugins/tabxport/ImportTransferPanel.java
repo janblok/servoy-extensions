@@ -73,13 +73,13 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 		this.state = state;
 		this.application = app;
 
-		setName("TransferPanel");
+		setName("TransferPanel"); //$NON-NLS-1$
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		setLayout(new BorderLayout());
 
 		Dimension d = new Dimension(350, 20);
-		doneLabel = new JLabel(Messages.getString("servoy.plugin.import.importing.label"));
+		doneLabel = new JLabel(Messages.getString("servoy.plugin.import.importing.label")); //$NON-NLS-1$
 		cancelButton = new JButton(Messages.getString("servoy.general.cancel.title"));
 
 		doneLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -92,7 +92,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 		fieldPanel.setSize(new Dimension(500, 20));
 		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
 		fieldPanel.add(Box.createHorizontalGlue());
-		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseFile")));
+		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseFile"))); //$NON-NLS-1$
 
 		fieldPanel.add(doneLabel);
 		fieldPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -181,19 +181,19 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 
 		public void run()
 		{
-			parent.semiBlockGUI(Messages.getString("servoy.plugin.import.status.loadingData"));
+			parent.semiBlockGUI(Messages.getString("servoy.plugin.import.status.loadingData")); //$NON-NLS-1$
 			IFoundSetManagerInternal fsm = application.getFoundSetManager();
 			boolean start = !fsm.hasTransaction();
 			try
 			{
-				SeparatedASCIIImportTableModel data = (SeparatedASCIIImportTableModel)state.getProperty("data");
-				AbstractTableModel columns = (AbstractTableModel)state.getProperty("columns");
-				BufferedReader br = (BufferedReader)state.getProperty("reader");
-				Table table = (Table)state.getProperty("table");
-				String dateformat = (String)state.getProperty("dateFormat");
+				SeparatedASCIIImportTableModel data = (SeparatedASCIIImportTableModel)state.getProperty("data"); //$NON-NLS-1$
+				AbstractTableModel columns = (AbstractTableModel)state.getProperty("columns"); //$NON-NLS-1$
+				BufferedReader br = (BufferedReader)state.getProperty("reader"); //$NON-NLS-1$
+				Table table = (Table)state.getProperty("table"); //$NON-NLS-1$
+				String dateformat = (String)state.getProperty("dateFormat"); //$NON-NLS-1$
 				if (dateformat == null || dateformat.trim().length() == 0)
 				{
-					dateformat = "yyyy-MM-dd HH:mm:ss.S";
+					dateformat = "yyyy-MM-dd HH:mm:ss.S"; //$NON-NLS-1$
 				}
 
 				String prevLastLine = data.parseLines();
@@ -203,7 +203,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 
 				while (br != null && semaphore.get())
 				{
-					parent.semiBlockGUI(Messages.getString("servoy.plugin.import.status.rowsImported", new Object[] { new Integer(totalSize) }));
+					parent.semiBlockGUI(Messages.getString("servoy.plugin.import.status.rowsImported", new Object[] { new Integer(totalSize) })); //$NON-NLS-1$
 					Vector lines = new Vector();
 					if (prevLastLine != null) lines.add(prevLastLine);
 					String line;
@@ -229,14 +229,14 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 					createRecords(data, columns, dateformat, fs, start);
 
 				}
-				doneLabel.setText(Messages.getString("servoy.plugin.import.status.doneImporting", new Object[] { new Integer(totalSize) }));
+				doneLabel.setText(Messages.getString("servoy.plugin.import.status.doneImporting", new Object[] { new Integer(totalSize) })); //$NON-NLS-1$
 
 				IForm dm = application.getFormManager().getCurrentForm();
 				if (dm != null) dm.loadAllRecords();//refresh screen in background
 			}
 			catch (Exception ex)
 			{
-				parent.reportError(Messages.getString("servoy.plugin.import.exception"), ex);
+				parent.reportError(Messages.getString("servoy.plugin.import.exception"), ex); //$NON-NLS-1$
 			}
 			finally
 			{

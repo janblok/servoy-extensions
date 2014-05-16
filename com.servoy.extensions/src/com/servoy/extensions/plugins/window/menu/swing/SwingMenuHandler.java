@@ -401,7 +401,7 @@ public class SwingMenuHandler implements IMenuHandler
 		{
 			if (index >= jMenuBar.getMenuCount())
 			{
-				throw new PluginException("A _menu with index " + index + " doesn't exist.");
+				throw new PluginException("A _menu with index " + index + " doesn't exist."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			jMenuBar.remove(index);
 		}

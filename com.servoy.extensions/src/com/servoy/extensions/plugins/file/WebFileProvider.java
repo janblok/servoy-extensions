@@ -63,6 +63,7 @@ public class WebFileProvider extends FileProvider
 	}
 
 	@Override
+	@SuppressWarnings("nls")
 	protected boolean writeFile(Object f, byte[] data, String mimeType)
 	{
 		if (data == null) return false;
@@ -90,20 +91,20 @@ public class WebFileProvider extends FileProvider
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		String fileName = file.js_getName();
 		byte[] data = file.jsFunction_getBytes();
-		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, MimeTypes.getContentType(data, fileName), "inline");
-		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true);
+		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, MimeTypes.getContentType(data, fileName), "inline"); //$NON-NLS-1$
+		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;
 	}
 
 	@Override
 	public boolean js_openFile(String fileName, byte[] data, String mimeType, String webClientTarget, String webClientTargetOptions)
 	{
-		String name = (fileName == null ? "file.bin" : fileName);
+		String name = (fileName == null ? "file.bin" : fileName); //$NON-NLS-1$
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		String type = (mimeType == null) ? MimeTypes.getContentType(data, name) : mimeType.trim();
-		String url = ((IWebClientPluginAccess)access).serveResource(name, data, type, "inline");
-		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true);
+		String url = ((IWebClientPluginAccess)access).serveResource(name, data, type, "inline"); //$NON-NLS-1$
+		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;
 	}
 
@@ -119,6 +120,7 @@ public class WebFileProvider extends FileProvider
 		return readTXTFile(file, charsetname);
 	}
 
+	@SuppressWarnings("nls")
 	private String readTXTFile(Object file, String charsetname)
 	{
 		if (file instanceof JSFile)
@@ -170,6 +172,7 @@ public class WebFileProvider extends FileProvider
 	 * @throws FileNotFoundException 
 	 * @see com.servoy.extensions.plugins.file.FileProvider#writeTXT(java.lang.Object, java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@SuppressWarnings("nls")
 	@Override
 	protected boolean writeTXT(Object f, String data, String encoding, String contentType)
 	{
@@ -202,6 +205,7 @@ public class WebFileProvider extends FileProvider
 		return super.writeTXT(f, data, encoding, contentType);
 	}
 
+	@SuppressWarnings("nls")
 	@Override
 	public JSProgressMonitor js_streamFilesToServer(final Object f, final Object s, final Function callback)
 	{
@@ -360,7 +364,7 @@ public class WebFileProvider extends FileProvider
 			{
 				out = out.replace('\\', '/');
 			}
-			String[] tokens = out.split("/");
+			String[] tokens = out.split("/"); //$NON-NLS-1$
 			out = tokens[tokens.length - 1];
 		}
 		return out;

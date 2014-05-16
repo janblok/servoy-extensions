@@ -31,7 +31,7 @@ import com.servoy.j2db.scripting.IScriptable;
 
 public class UDPPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "udp";
+	public static final String PLUGIN_NAME = "udp"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private UDPProvider impl;
@@ -64,7 +64,7 @@ public class UDPPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "UDP packets plugin");
+		props.put(DISPLAY_NAME, "UDP packets plugin"); //$NON-NLS-1$
 		return props;
 	}
 
@@ -105,7 +105,7 @@ public class UDPPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		iconUrl = this.getClass().getResource("images/udp.gif");
+		iconUrl = this.getClass().getResource("images/udp.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

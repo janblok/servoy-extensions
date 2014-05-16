@@ -32,11 +32,12 @@ import com.servoy.j2db.util.Debug;
  */
 public class ExecuteScriptMethodJob implements StatefulJob
 {
+	@SuppressWarnings("nls")
 	public void execute(JobExecutionContext jobContext) throws JobExecutionException
 	{
 		final String name = jobContext.getJobDetail().getName();
 		JobDataMap jdm = jobContext.getJobDetail().getJobDataMap();
-		Object o = jdm.get("methodcontext");
+		Object o = jdm.get("methodcontext"); //$NON-NLS-1$
 		final String methodcontext;
 		if (o instanceof String)
 		{

@@ -133,7 +133,7 @@ public class ScriptableWicketMenuItem implements IMenuItem
 
 	public void setText(String t)
 	{
-		if (t != null && t.length() < 1) text = "&nbsp";
+		if (t != null && t.length() < 1) text = "&nbsp"; //$NON-NLS-1$
 		else text = t;
 	}
 

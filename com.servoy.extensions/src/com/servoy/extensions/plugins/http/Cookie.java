@@ -55,7 +55,7 @@ public class Cookie implements IScriptable
 	 */
 	public String js_getName()
 	{
-		if (cookie == null) return "";
+		if (cookie == null) return ""; //$NON-NLS-1$
 		return cookie.getName();
 	}
 
@@ -70,7 +70,7 @@ public class Cookie implements IScriptable
 	 */
 	public String js_getValue()
 	{
-		if (cookie == null) return "";
+		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getValue();
 	}
 
@@ -85,7 +85,7 @@ public class Cookie implements IScriptable
 	 */
 	public String js_getDomain()
 	{
-		if (cookie == null) return "";
+		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getDomain();
 	}
 
@@ -100,7 +100,7 @@ public class Cookie implements IScriptable
 	 */
 	public String js_getPath()
 	{
-		if (cookie == null) return "";
+		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getPath();
 	}
 
@@ -130,7 +130,7 @@ public class Cookie implements IScriptable
 	 */
 	public String js_getComment()
 	{
-		if (cookie == null) return "";
+		if (cookie == null) return "";//$NON-NLS-1$
 		return cookie.getComment();
 	}
 

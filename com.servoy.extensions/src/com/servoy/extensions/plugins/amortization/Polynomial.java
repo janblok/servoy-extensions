@@ -452,12 +452,12 @@ public class Polynomial implements IScriptable
 			StringBuffer buffer = new StringBuffer();
 			while (iterator.hasNext())
 			{
-				if (buffer.length() > 0) buffer.append(" + ");
+				if (buffer.length() > 0) buffer.append(" + "); //$NON-NLS-1$
 				buffer.append(iterator.next());
 			}
 			return buffer.toString();
 		}
-		return "0";
+		return "0"; //$NON-NLS-1$
 	}
 
 	/**
@@ -558,7 +558,7 @@ public class Polynomial implements IScriptable
 			buffer.append(coefficient);
 			if (exponent != 0)
 			{
-				buffer.append("*x^");
+				buffer.append("*x^"); //$NON-NLS-1$
 				buffer.append(exponent);
 			}
 			return buffer.toString();

@@ -38,7 +38,7 @@ import com.servoy.j2db.scripting.IScriptable;
 */
 public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements both to indicate is webclient/serverclient only
 {
-	public static final String PLUGIN_NAME = "openid";
+	public static final String PLUGIN_NAME = "openid"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private OpenIDProvider impl;
@@ -75,14 +75,14 @@ public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements b
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		Map<String, String> req = new LinkedHashMap<String, String>();
-//		req.put("openid.redirectServletName", "Redirect servlet name, defaults to 'servoy-webclient'");
+//		req.put("openid.redirectServletName", "Redirect servlet name, defaults to 'servoy-webclient'"); //$NON-NLS-1$ //$NON-NLS-2$
 		return req;
 	}
 
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Open ID Plugin");
+		props.put(DISPLAY_NAME, "Open ID Plugin"); //$NON-NLS-1$
 		return props;
 	}
 
@@ -123,7 +123,7 @@ public class OpenIDPlugin implements IClientPlugin, IServerPlugin //implements b
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/openid.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/openid.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

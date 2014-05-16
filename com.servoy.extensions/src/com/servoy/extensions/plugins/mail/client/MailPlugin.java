@@ -34,7 +34,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class MailPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "mail";
+	public static final String PLUGIN_NAME = "mail"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private MailProvider impl;
@@ -63,7 +63,7 @@ public class MailPlugin implements IClientPlugin
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/mail.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/mail.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -101,7 +101,7 @@ public class MailPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.mail.displayname"));
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.mail.displayname")); //$NON-NLS-1$
 		return props;
 	}
 

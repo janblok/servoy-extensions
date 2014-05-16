@@ -154,18 +154,19 @@ public class Attachment implements Serializable, IJavaScriptType
 	}
 
 	@Override
+	@SuppressWarnings("nls")
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("name: ");
+		sb.append("name: "); //$NON-NLS-1$
 		sb.append(getName());
-		sb.append("\n");
-		sb.append("mime type: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("mime type: "); //$NON-NLS-1$
 		sb.append(getMimeType());
-		sb.append("\n");
-		sb.append("datalength: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("datalength: "); //$NON-NLS-1$
 		sb.append((getData() != null ? getData().length : 0));
-		sb.append("\n");
+		sb.append("\n"); //$NON-NLS-1$
 		sb.append("embedded: ");
 		sb.append(embedded);
 		sb.append("\n");

@@ -90,7 +90,7 @@ public class FilePluginUtils
 	{
 		if (filePath.charAt(0) != '/')
 		{
-			throw new IllegalArgumentException("Remote path should start with '/'");
+			throw new IllegalArgumentException("Remote path should start with '/'"); //$NON-NLS-1$
 		}
 	}
 

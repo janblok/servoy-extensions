@@ -35,7 +35,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class RawSQLPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "rawSQL";
+	public static final String PLUGIN_NAME = "rawSQL"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private RawSQLProvider impl;
@@ -67,7 +67,7 @@ public class RawSQLPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "RawSQL plugin");
+		props.put(DISPLAY_NAME, "RawSQL plugin"); //$NON-NLS-1$
 		return props;
 	}
 
@@ -103,7 +103,7 @@ public class RawSQLPlugin implements IClientPlugin
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/sql.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/sql.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

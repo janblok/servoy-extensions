@@ -79,7 +79,8 @@ public class SwingPopupShower implements IPopupShower
 	 * @param form
 	 * @param record
 	 * @param dataprovider
-	 */
+	 */
+	@SuppressWarnings("nls")
 	public SwingPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider,
 		int width, int height)
 	{
@@ -143,7 +144,7 @@ public class SwingPopupShower implements IPopupShower
 			this.window.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 			if (Utils.isAppleMacOS())
 			{
-				this.window.getRootPane().putClientProperty("Window.shadow", Boolean.FALSE);
+				this.window.getRootPane().putClientProperty("Window.shadow", Boolean.FALSE); //$NON-NLS-1$
 				this.window.getRootPane().putClientProperty("apple.awt.draggableWindowBackground", Boolean.FALSE);
 			}
 
@@ -244,7 +245,8 @@ public class SwingPopupShower implements IPopupShower
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.window.popup.IPopupShower#close(java.lang.Object)
-	 */
+	 */
+	@SuppressWarnings("nls")
 	public void close(Object retval)
 	{
 		scope.put(dataprovider, scope, retval);

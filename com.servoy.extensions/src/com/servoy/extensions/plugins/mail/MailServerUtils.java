@@ -145,7 +145,7 @@ public class MailServerUtils
 		}
 		else
 		{
-			Debug.trace("?");
+			Debug.trace("?"); //$NON-NLS-1$
 		}
 	}
 
@@ -154,7 +154,7 @@ public class MailServerUtils
 		// -- Get the content type --
 		String contentType = messagePart.getContentType();
 		String charset = getCharsetFromContentType(contentType);
-		if (contentType.startsWith("text/plain"))
+		if (contentType.startsWith("text/plain")) //$NON-NLS-1$
 		{
 			if (messagePart.getFileName() == null)
 			{
@@ -162,7 +162,7 @@ public class MailServerUtils
 				return;
 			}
 		}
-		else if (contentType.startsWith("text/html"))
+		else if (contentType.startsWith("text/html")) //$NON-NLS-1$
 		{
 			if (messagePart.getFileName() == null)
 			{
@@ -170,7 +170,7 @@ public class MailServerUtils
 				return;
 			}
 		}
-		else if (contentType.startsWith("multipart"))
+		else if (contentType.startsWith("multipart")) //$NON-NLS-1$
 		{
 			handleContent(mm, messagePart.getContent(), receiveMode);
 			return;
@@ -230,7 +230,7 @@ public class MailServerUtils
 		while (headers.hasMoreElements())
 		{
 			Header header = (Header)headers.nextElement();
-			if (header.getName().startsWith("Content-ID")) return true;
+			if (header.getName().startsWith("Content-ID")) return true; //$NON-NLS-1$
 		}
 		return false;
 	}
@@ -258,7 +258,7 @@ public class MailServerUtils
 				retval.append(addresses[i].toString());
 				if (i < addresses.length - 1)
 				{
-					retval.append(";");
+					retval.append(";"); //$NON-NLS-1$
 				}
 			}
 		}
@@ -272,11 +272,11 @@ public class MailServerUtils
 		{
 			Header header = (Header)headers.nextElement();
 			retval.append(header.getName());
-			retval.append("=");
+			retval.append("="); //$NON-NLS-1$
 			retval.append(header.getValue());
 			if (headers.hasMoreElements())
 			{
-				retval.append("\n");
+				retval.append("\n"); //$NON-NLS-1$
 			}
 		}
 		return retval.toString();

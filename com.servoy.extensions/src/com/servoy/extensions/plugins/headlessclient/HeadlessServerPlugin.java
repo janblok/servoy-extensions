@@ -45,6 +45,7 @@ import com.servoy.j2db.util.Pair;
 import com.servoy.j2db.util.UUID;
 import com.servoy.j2db.util.serialize.JSONConverter;
 
+@SuppressWarnings("nls")
 @TerracottaInstrumentedClass
 public class HeadlessServerPlugin implements IHeadlessServer, IServerPlugin
 {

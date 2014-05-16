@@ -107,7 +107,7 @@ public class BindingInfo
 			}
 			return null;
 		}
-		return "<unknown>";		
+		return "<unknown>"; //$NON-NLS-1$		
 	}
 
 	public String getText(FoundSetTreeModel.UserNode tn, String textDataprovider, String datasource)

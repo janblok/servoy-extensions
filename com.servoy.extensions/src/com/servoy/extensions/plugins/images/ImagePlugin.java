@@ -33,7 +33,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class ImagePlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "images";
+	public static final String PLUGIN_NAME = "images"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private ImageProvider impl;
@@ -72,7 +72,7 @@ public class ImagePlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("icon.gif");
+		java.net.URL iconUrl = this.getClass().getResource("icon.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

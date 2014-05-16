@@ -123,7 +123,7 @@ public class SpellCheckerPreferencePanel extends PreferencePanel implements Acti
 	@Override
 	public String getTabName()
 	{
-		return "SpellCheck";
+		return "SpellCheck"; //$NON-NLS-1$
 	}
 
 	/**
@@ -138,11 +138,11 @@ public class SpellCheckerPreferencePanel extends PreferencePanel implements Acti
 		setDesiredLanguage(SpellCheckerUtils.DEFAULT);
 		if (serviceProvider.equals(SpellCheckerUtils.GOOGLE_SPELL))
 		{
-			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "true");
+			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "true"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		else
 		{
-			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "false");
+			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		}
 	}

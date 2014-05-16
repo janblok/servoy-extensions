@@ -75,13 +75,13 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 		this.state = state;
 		this.application = app;
 
-		setName("TransferPanel");
+		setName("TransferPanel"); //$NON-NLS-1$
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		setLayout(new BorderLayout());
 
-		doneLabel = new JLabel(Messages.getString("servoy.plugin.import.importing.label"));
-		cancelButton = new JButton(Messages.getString("servoy.general.cancel.title"));
+		doneLabel = new JLabel(Messages.getString("servoy.plugin.import.importing.label")); //$NON-NLS-1$
+		cancelButton = new JButton(Messages.getString("servoy.general.cancel.title")); //$NON-NLS-1$
 
 		doneLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -94,7 +94,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 		fieldPanel.setSize(new Dimension(500, 20));
 		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
 		fieldPanel.add(Box.createHorizontalGlue());
-		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseFile")));
+		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseFile"))); //$NON-NLS-1$
 
 		fieldPanel.add(doneLabel);
 		fieldPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -182,18 +182,18 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 
 		public void run()
 		{
-			parent.semiBlockGUI(Messages.getString("servoy.plugin.import.status.loadingData"));
+			parent.semiBlockGUI(Messages.getString("servoy.plugin.import.status.loadingData")); //$NON-NLS-1$
 			try
 			{
 				final IFoundSetManagerInternal fsm = application.getFoundSetManager();
 
-				AbstractTableModel data = (AbstractTableModel)state.getProperty("data");
-				AbstractTableModel columns = (AbstractTableModel)state.getProperty("columns");
-				Table table = (Table)state.getProperty("table");
-				String dateformat = (String)state.getProperty("dateFormat");
+				AbstractTableModel data = (AbstractTableModel)state.getProperty("data"); //$NON-NLS-1$
+				AbstractTableModel columns = (AbstractTableModel)state.getProperty("columns"); //$NON-NLS-1$
+				Table table = (Table)state.getProperty("table"); //$NON-NLS-1$
+				String dateformat = (String)state.getProperty("dateFormat"); //$NON-NLS-1$
 				if (dateformat == null || dateformat.trim().length() == 0)
 				{
-					dateformat = "yyyy-MM-dd HH:mm:ss.S";
+					dateformat = "yyyy-MM-dd HH:mm:ss.S"; //$NON-NLS-1$
 				}
 
 				//new: final
@@ -223,7 +223,7 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 						{
 
 							Object fixval = columns.getValueAt(k, 0);
-							if (fixval != null && fixval.toString().startsWith("fixed:"))
+							if (fixval != null && fixval.toString().startsWith("fixed:")) //$NON-NLS-1$
 							{
 								fixval = fixval.toString().substring(6);
 							}
@@ -312,13 +312,13 @@ public class ImportTransferPanel extends JPanel implements IWizardPanel
 				});
 
 				if (possibleException[0] != null) throw possibleException[0];
-				doneLabel.setText(Messages.getString("servoy.plugin.import.importingDone.label"));
+				doneLabel.setText(Messages.getString("servoy.plugin.import.importingDone.label")); //$NON-NLS-1$
 				IForm dm = application.getFormManager().getCurrentForm();
 				if (dm != null) dm.loadAllRecords();//refresh screen in background
 			}
 			catch (Exception ex)
 			{
-				parent.reportError(Messages.getString("servoy.plugin.import.exception"), ex);
+				parent.reportError(Messages.getString("servoy.plugin.import.exception"), ex); //$NON-NLS-1$
 			}
 			finally
 			{

@@ -59,46 +59,46 @@ import com.servoy.j2db.util.TreeBidiMap;
  */
 public class WicketShortcutHandler implements IShortcutHandler
 {
-	private static final ResourceReference shortcut_js = new JavascriptResourceReference(WicketShortcutHandler.class, "res/shortcut.js");
-	public static final String BEHAVIOUR = "ShortcutBehaviour";
+	private static final ResourceReference shortcut_js = new JavascriptResourceReference(WicketShortcutHandler.class, "res/shortcut.js"); //$NON-NLS-1$
+	public static final String BEHAVIOUR = "ShortcutBehaviour"; //$NON-NLS-1$
 
 	private static final Map<Integer, String> specialKeys = new HashMap<Integer, String>();
 	static
 	{
-		specialKeys.put(new Integer(KeyEvent.VK_BACK_QUOTE), "`");
-		specialKeys.put(new Integer(KeyEvent.VK_MINUS), "-");
-		specialKeys.put(new Integer(KeyEvent.VK_EQUALS), "=");
-		specialKeys.put(new Integer(KeyEvent.VK_SEMICOLON), ";");
-		specialKeys.put(new Integer(KeyEvent.VK_QUOTE), "'");
-		specialKeys.put(new Integer(KeyEvent.VK_COMMA), ",");
-		specialKeys.put(new Integer(KeyEvent.VK_PERIOD), ".");
-		specialKeys.put(new Integer(KeyEvent.VK_SLASH), "/");
-		specialKeys.put(new Integer(KeyEvent.VK_BACK_SLASH), "\\");
+		specialKeys.put(new Integer(KeyEvent.VK_BACK_QUOTE), "`"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_MINUS), "-"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_EQUALS), "="); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_SEMICOLON), ";"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_QUOTE), "'"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_COMMA), ","); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_PERIOD), "."); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_SLASH), "/"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_BACK_SLASH), "\\"); //$NON-NLS-1$
 
-		specialKeys.put(new Integer(KeyEvent.VK_OPEN_BRACKET), "[");
-		specialKeys.put(new Integer(KeyEvent.VK_CLOSE_BRACKET), "]");
-		specialKeys.put(new Integer(KeyEvent.VK_AMPERSAND), "&");
-		specialKeys.put(new Integer(KeyEvent.VK_ASTERISK), "*");
-		specialKeys.put(new Integer(KeyEvent.VK_QUOTEDBL), "\"");
-		specialKeys.put(new Integer(KeyEvent.VK_LESS), "<");
-		specialKeys.put(new Integer(KeyEvent.VK_GREATER), ">");
-		specialKeys.put(new Integer(KeyEvent.VK_BRACELEFT), "{");
-		specialKeys.put(new Integer(KeyEvent.VK_BRACERIGHT), "}");
-		specialKeys.put(new Integer(KeyEvent.VK_AT), "@");
-		specialKeys.put(new Integer(KeyEvent.VK_COLON), "@");
-		specialKeys.put(new Integer(KeyEvent.VK_CIRCUMFLEX), "^");
-		specialKeys.put(new Integer(KeyEvent.VK_DOLLAR), "$");
-		specialKeys.put(new Integer(KeyEvent.VK_EXCLAMATION_MARK), "!");
-		specialKeys.put(new Integer(KeyEvent.VK_LEFT_PARENTHESIS), "(");
-		specialKeys.put(new Integer(KeyEvent.VK_RIGHT_PARENTHESIS), ")");
-		specialKeys.put(new Integer(KeyEvent.VK_NUMBER_SIGN), "#");
-		specialKeys.put(new Integer(KeyEvent.VK_PLUS), "+");
-		specialKeys.put(new Integer(KeyEvent.VK_UNDERSCORE), "_");
-		specialKeys.put(new Integer(KeyEvent.VK_ADD), "add");
-		specialKeys.put(new Integer(KeyEvent.VK_MULTIPLY), "multiply");
-		specialKeys.put(new Integer(KeyEvent.VK_DIVIDE), "divide");
-		specialKeys.put(new Integer(KeyEvent.VK_SUBTRACT), "subtract");
-		specialKeys.put(new Integer(KeyEvent.VK_DECIMAL), "decimal");
+		specialKeys.put(new Integer(KeyEvent.VK_OPEN_BRACKET), "["); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_CLOSE_BRACKET), "]"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_AMPERSAND), "&"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_ASTERISK), "*"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_QUOTEDBL), "\""); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_LESS), "<"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_GREATER), ">"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_BRACELEFT), "{"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_BRACERIGHT), "}"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_AT), "@"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_COLON), "@"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_CIRCUMFLEX), "^"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_DOLLAR), "$"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_EXCLAMATION_MARK), "!"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_LEFT_PARENTHESIS), "("); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_RIGHT_PARENTHESIS), ")"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_NUMBER_SIGN), "#"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_PLUS), "+"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_UNDERSCORE), "_"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_ADD), "add"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_MULTIPLY), "multiply"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_DIVIDE), "divide"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_SUBTRACT), "subtract"); //$NON-NLS-1$
+		specialKeys.put(new Integer(KeyEvent.VK_DECIMAL), "decimal"); //$NON-NLS-1$
 	}
 
 	private final TreeBidiMap<ComparableKeyStroke, String> shortcuts = new TreeBidiMap<ComparableKeyStroke, String>();
@@ -136,15 +136,15 @@ public class WicketShortcutHandler implements IShortcutHandler
 	{
 		StringBuilder sb = new StringBuilder();
 		int modifiers = key.getModifiers();
-		if ((modifiers & InputEvent.SHIFT_DOWN_MASK) != 0) sb.append("SHIFT+");
-		if ((modifiers & InputEvent.CTRL_DOWN_MASK) != 0) sb.append("CTRL+");
-		if ((modifiers & InputEvent.META_DOWN_MASK) != 0) sb.append("META+");
-		if ((modifiers & InputEvent.ALT_DOWN_MASK) != 0) sb.append("ALT+");
+		if ((modifiers & InputEvent.SHIFT_DOWN_MASK) != 0) sb.append("SHIFT+"); //$NON-NLS-1$
+		if ((modifiers & InputEvent.CTRL_DOWN_MASK) != 0) sb.append("CTRL+"); //$NON-NLS-1$
+		if ((modifiers & InputEvent.META_DOWN_MASK) != 0) sb.append("META+"); //$NON-NLS-1$
+		if ((modifiers & InputEvent.ALT_DOWN_MASK) != 0) sb.append("ALT+"); //$NON-NLS-1$
 
 		int supportedModifiers = InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK | InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK;
 		if ((modifiers | supportedModifiers) != supportedModifiers)
 		{
-			Debug.log("WindowPlugin: shortcut contains unsopported modifiers");
+			Debug.log("WindowPlugin: shortcut contains unsopported modifiers"); //$NON-NLS-1$
 		}
 
 		String specialKey = specialKeys.get(Integer.valueOf(key.getKeyCode()));
@@ -194,19 +194,19 @@ public class WicketShortcutHandler implements IShortcutHandler
 			super.renderHead(response);
 
 			boolean isAjax = ((WebRequest)RequestCycle.get().getRequest()).isAjax();
-			Debug.trace("WicketShortcutHandler: renderHead headRendered=" + headRendered + " isAjax=" + isAjax);
+			Debug.trace("WicketShortcutHandler: renderHead headRendered=" + headRendered + " isAjax=" + isAjax); //$NON-NLS-1$ //$NON-NLS-2$
 			if (!headRendered || !isAjax)
 			{
 				response.renderJavascriptReference(shortcut_js);
 				response.renderJavascript(new StringBuilder().append(//
-					"function registerShortcut(sc){").append(
-					"shortcut.add(sc,function(e){").append(
-					"var element;").append(
-					"if(e.target) element=e.target;").append(
-					"else if(e.srcElement) element=e.srcElement;").append(
-					"if(element.nodeType==3) element=element.parentNode;").append(// defeat Safari bug
+					"function registerShortcut(sc){").append( //$NON-NLS-1$
+					"shortcut.add(sc,function(e){").append( //$NON-NLS-1$
+					"var element;").append( //$NON-NLS-1$
+					"if(e.target) element=e.target;").append( //$NON-NLS-1$
+					"else if(e.srcElement) element=e.srcElement;").append( //$NON-NLS-1$
+					"if(element.nodeType==3) element=element.parentNode;").append(// defeat Safari bug //$NON-NLS-1$
 					getCallbackScript()).append(//
-					"},{'propagate':true,'disable_in_input':false})}"), "registerShortcut");
+					"},{'propagate':true,'disable_in_input':false})}"), "registerShortcut"); //$NON-NLS-1$ //$NON-NLS-2$
 
 				if (headRendered && !isAjax)
 				{
@@ -253,8 +253,8 @@ public class WicketShortcutHandler implements IShortcutHandler
 		protected CharSequence getCallbackScript(boolean onlyTargetActivePage)
 		{
 			// post, serialize the component so that modified data is pushed in the FormComponent.
-			return generateCallbackScript(new AppendingStringBuffer("wicketAjaxPost('").append(getCallbackUrl(onlyTargetActivePage)).append(
-				"'+'&shortcut='+encodeURIComponent(sc)+'&elementId='+element.id, wicketSerialize(Wicket.$(element.id))"));
+			return generateCallbackScript(new AppendingStringBuffer("wicketAjaxPost('").append(getCallbackUrl(onlyTargetActivePage)).append( //$NON-NLS-1$
+				"'+'&shortcut='+encodeURIComponent(sc)+'&elementId='+element.id, wicketSerialize(Wicket.$(element.id))")); //$NON-NLS-1$
 		}
 
 		List<CharSequence> newShortCuts = new ArrayList<CharSequence>();
@@ -268,7 +268,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 		{
 			if (renderedShortcuts.add(sc))
 			{
-				StringBuilder newShortcutJS = new StringBuilder().append("registerShortcut('").append(sc).append("');");
+				StringBuilder newShortcutJS = new StringBuilder().append("registerShortcut('").append(sc).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
 				if (fillNewShortCutsMap) newShortCuts.add(newShortcutJS);
 				return newShortcutJS;
 			}
@@ -279,7 +279,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 		{
 			if (renderedShortcuts.remove(sc))
 			{
-				return new StringBuilder().append("shortcut.remove('").append(sc).append("');");
+				return new StringBuilder().append("shortcut.remove('").append(sc).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			return null;
 		}
@@ -289,16 +289,16 @@ public class WicketShortcutHandler implements IShortcutHandler
 		{
 			if (Debug.tracing())
 			{
-				Debug.trace("WicketShortcutHandler: respond to URL " + RequestCycle.get().getRequest().getURL());
+				Debug.trace("WicketShortcutHandler: respond to URL " + RequestCycle.get().getRequest().getURL()); //$NON-NLS-1$
 			}
 			// can be null or empty string if the shortcut target has no id
-			final String markupId = RequestCycle.get().getRequest().getParameter("elementId");
+			final String markupId = RequestCycle.get().getRequest().getParameter("elementId"); //$NON-NLS-1$
 
-			String sc = RequestCycle.get().getRequest().getParameter("shortcut");
+			String sc = RequestCycle.get().getRequest().getParameter("shortcut"); //$NON-NLS-1$
 			ComparableKeyStroke cks = sc == null ? null : shortcuts.getKey(sc);
 			if (cks == null)
 			{
-				Debug.trace("WicketShortcutHandler: called for unknown or removed shortcut");
+				Debug.trace("WicketShortcutHandler: called for unknown or removed shortcut"); //$NON-NLS-1$
 				return;
 			}
 
@@ -400,6 +400,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 		}
 	}
 
+	@SuppressWarnings("nls")
 	private static String getKeyText(int keyCode)
 	{
 		if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9 || keyCode >= KeyEvent.VK_A && keyCode <= KeyEvent.VK_Z)

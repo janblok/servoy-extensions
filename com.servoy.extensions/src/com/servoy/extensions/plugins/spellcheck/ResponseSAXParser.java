@@ -51,7 +51,7 @@ public class ResponseSAXParser
 
 			SAXHandler handler = new SAXHandler();
 
-			InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes("UTF-8"));
+			InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes("UTF-8")); //$NON-NLS-1$
 
 			parser.parse(inputStream, handler);
 
@@ -94,27 +94,27 @@ public class ResponseSAXParser
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attrs) throws SAXException
 		{
-			tempVal = "";
+			tempVal = ""; //$NON-NLS-1$
 			tempCorrection = new SpellCorrection();
-			if (qName.equals("spellresult"))
+			if (qName.equals("spellresult")) //$NON-NLS-1$
 			{
 				// create a new instance of employee
 				spellResponse = new SpellResult();
-				spellResponse.setErrorNumber(Integer.parseInt(attrs.getValue("error")));
-				spellResponse.setClippedNumber(Integer.parseInt(attrs.getValue("clipped")));
-				spellResponse.setCharsCheckednumber(Integer.parseInt(attrs.getValue("charschecked")));
+				spellResponse.setErrorNumber(Integer.parseInt(attrs.getValue("error"))); //$NON-NLS-1$
+				spellResponse.setClippedNumber(Integer.parseInt(attrs.getValue("clipped"))); //$NON-NLS-1$
+				spellResponse.setCharsCheckednumber(Integer.parseInt(attrs.getValue("charschecked"))); //$NON-NLS-1$
 			}
-			else if (qName.equals("c"))
+			else if (qName.equals("c")) //$NON-NLS-1$
 			{
-				tempCorrection.setOffset(Integer.parseInt(attrs.getValue("o")));
-				tempCorrection.setLength(Integer.parseInt(attrs.getValue("l")));
-				tempCorrection.setConfidence(Integer.parseInt(attrs.getValue("s")));
+				tempCorrection.setOffset(Integer.parseInt(attrs.getValue("o"))); //$NON-NLS-1$
+				tempCorrection.setLength(Integer.parseInt(attrs.getValue("l"))); //$NON-NLS-1$
+				tempCorrection.setConfidence(Integer.parseInt(attrs.getValue("s"))); //$NON-NLS-1$
 				tempCorrection.setTextCorrection(tempVal);
 				spellResponse.addCorrection(tempCorrection);
 			}
 			else
 			{
-				throw new IllegalArgumentException("Element '" + qName + "' is not allowed here");
+				throw new IllegalArgumentException("Element '" + qName + "' is not allowed here"); //$NON-NLS-1$//$NON-NLS-2$
 			}
 		}
 
@@ -127,7 +127,7 @@ public class ResponseSAXParser
 		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException
 		{
-			if (qName.equalsIgnoreCase("c"))
+			if (qName.equalsIgnoreCase("c")) //$NON-NLS-1$
 			{
 				tempCorrection.setTextCorrection(tempVal);
 			}

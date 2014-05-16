@@ -31,7 +31,7 @@ import com.servoy.j2db.util.serialize.JSONConverter;
 
 public class HeadlessClientPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "headlessclient";
+	public static final String PLUGIN_NAME = "headlessclient"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private HeadlessClientProvider impl;
@@ -49,7 +49,7 @@ public class HeadlessClientPlugin implements IClientPlugin
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/console.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/console.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

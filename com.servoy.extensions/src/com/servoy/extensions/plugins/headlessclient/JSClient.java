@@ -43,14 +43,14 @@ public class JSClient implements IScriptable, IConstantsObject
 	 * 
 	 * @sampleas js_shutdown()
 	 */
-	public static final String CALLBACK_EVENT = "headlessCallback";
+	public static final String CALLBACK_EVENT = "headlessCallback"; //$NON-NLS-1$
 
 	/**
 	 * Constant that is returned as a JSEvent type when in the callback method when an exception occurred.
 	 * 
 	 * @sampleas js_shutdown()
 	 */
-	public static final String CALLBACK_EXCEPTION_EVENT = "headlessExceptionCallback";
+	public static final String CALLBACK_EXCEPTION_EVENT = "headlessExceptionCallback"; //$NON-NLS-1$
 
 	// for doc
 	public JSClient()
@@ -135,7 +135,7 @@ public class JSClient implements IScriptable, IConstantsObject
 					}
 					catch (ExceptionWrapper ex)
 					{
-						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex);
+						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						JSEvent event = new JSEvent();
 						event.setType(CALLBACK_EXCEPTION_EVENT);
 						Object data = ex.getMessage();
@@ -153,7 +153,7 @@ public class JSClient implements IScriptable, IConstantsObject
 					}
 					catch (Exception ex)
 					{
-						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex);
+						Debug.log("Error calling method " + methodName + ", context: " + contextName + " on client " + clientID, ex); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						JSEvent event = new JSEvent();
 						event.setType(CALLBACK_EXCEPTION_EVENT);
 						Object data = ex.getMessage();
@@ -386,6 +386,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	/**
 	 * @see java.lang.Object#toString()
 	 */
+	@SuppressWarnings("nls")
 	@Override
 	public String toString()
 	{

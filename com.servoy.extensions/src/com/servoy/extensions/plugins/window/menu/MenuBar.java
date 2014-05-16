@@ -34,6 +34,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
+@SuppressWarnings("nls")
 @ServoyDocumented
 public class MenuBar implements IScriptable, IJavaScriptType
 {

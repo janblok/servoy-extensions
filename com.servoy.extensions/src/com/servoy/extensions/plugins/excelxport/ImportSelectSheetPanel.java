@@ -53,7 +53,7 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 
 	protected JComboBox sheetSelect = new JComboBox();
 
-	protected JCheckBox headerRows = new JCheckBox(Messages.getString("servoy.plugin.import.rowContainsFieldnames"));
+	protected JCheckBox headerRows = new JCheckBox(Messages.getString("servoy.plugin.import.rowContainsFieldnames")); //$NON-NLS-1$
 //	protected JComboBox textQualifierCombo = new JComboBox();
 
 	protected boolean canceled = true;
@@ -67,7 +67,7 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 	{
 		this.parent = parent;
 		this.state = state;
-		setName("SelectSheetPanel");
+		setName("SelectSheetPanel"); //$NON-NLS-1$
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 
@@ -81,11 +81,11 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 		// Lay out topmost Part pane
 		JPanel formatPanel = new JPanel();
 		formatPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseSheet")));
+		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseSheet"))); //$NON-NLS-1$
 		formatPanel.add(sheetSelect);
 		sheetSelect.addActionListener(this);
 		formatPanel.add(headerRows);
-		headerRows.setActionCommand("UseHeaderRows");
+		headerRows.setActionCommand("UseHeaderRows"); //$NON-NLS-1$
 		headerRows.addActionListener(this);
 
 		//Lay out the master content pane.
@@ -96,7 +96,7 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if (command.equals("UseHeaderRows"))
+		if (command.equals("UseHeaderRows")) //$NON-NLS-1$
 		{
 			if (tableModel != null) tableModel.setUseHeaderRow(headerRows.isSelected());
 		}
@@ -104,7 +104,7 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 		{
 			if (sheetSelect.getSelectedItem() != null)
 			{
-				HSSFWorkbook wb = (HSSFWorkbook)state.getProperty("workbook");
+				HSSFWorkbook wb = (HSSFWorkbook)state.getProperty("workbook"); //$NON-NLS-1$
 				HSSFSheet sheet = wb.getSheetAt(wb.getSheetIndex(sheetSelect.getSelectedItem().toString()));
 				tableModel = new SheetTableModel(sheet);
 				tableModel.setUseHeaderRow(headerRows.isSelected());
@@ -123,13 +123,13 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 
 	public String getNextPanelName()
 	{
-		return "SpecifyDestinationPanel";
+		return "SpecifyDestinationPanel"; //$NON-NLS-1$
 	}
 
 	public boolean isDone()
 	{
 		if (tableModel.getRowCount() == 0) return false;
-		state.setProperty("data", tableModel);
+		state.setProperty("data", tableModel); //$NON-NLS-1$
 		return true;
 	}
 
@@ -141,10 +141,10 @@ public class ImportSelectSheetPanel extends JPanel implements ActionListener, IW
 			{
 				try
 				{
-					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData"));
+					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData")); //$NON-NLS-1$
 					if (forward)
 					{
-						HSSFWorkbook wb = (HSSFWorkbook)state.getProperty("workbook");
+						HSSFWorkbook wb = (HSSFWorkbook)state.getProperty("workbook"); //$NON-NLS-1$
 						SortedComboModel dcm = new SortedComboModel(StringComparator.INSTANCE);
 						for (int i = 0; i < wb.getNumberOfSheets(); i++)
 						{
@@ -229,7 +229,7 @@ class SheetTableModel extends AbstractTableModel
 		{
 			if (column < getColumnCount())
 			{
-				return "" + column;
+				return "" + column; //$NON-NLS-1$
 			}
 			else
 			{

@@ -103,7 +103,7 @@ public class RemoteFileData implements Serializable
 	 */
 	public String getName()
 	{
-		return (name == null) ? "/" : name;
+		return (name == null) ? "/" : name; //$NON-NLS-1$
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class RemoteFileData implements Serializable
 		else
 		{
 			final String parentPath = parent.getAbsolutePath();
-			if (parentPath.endsWith("/"))
+			if (parentPath.endsWith("/")) //$NON-NLS-1$
 			{
 				return parentPath + getName();
 			}

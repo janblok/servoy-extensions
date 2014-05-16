@@ -105,10 +105,10 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 				String iconURL = ((ScriptableWicketMenuItem)elem).getIconURL();
 				if (iconURL != null)
 				{
-					if (iconURL.startsWith("media:///"))
+					if (iconURL.startsWith("media:///")) //$NON-NLS-1$ 
 					{
-						String mediaUrl = RequestCycle.get().urlFor(new ResourceReference("media")).toString();
-						imageIcon = mediaUrl + "?s=" + app.getSolutionName() + "&id=" + iconURL.substring(9);
+						String mediaUrl = RequestCycle.get().urlFor(new ResourceReference("media")).toString(); //$NON-NLS-1$ 
+						imageIcon = mediaUrl + "?s=" + app.getSolutionName() + "&id=" + iconURL.substring(9); //$NON-NLS-1$ //$NON-NLS-2$ 
 					}
 					else imageIcon = iconURL;
 				}
@@ -122,35 +122,35 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 			{
 				menuSequence++;
 				int currentMenuNr = menuSequence;
-				js.append("var menu" + currentMenuNr + " = new YAHOO.widget.Menu('menu" + currentMenuNr + "');");
-				js.append(((ScriptableWicketMenu)elem).generateMenuJS(popupMenu, "menu" + currentMenuNr));
+				js.append("var menu" + currentMenuNr + " = new YAHOO.widget.Menu('menu" + currentMenuNr + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				js.append(((ScriptableWicketMenu)elem).generateMenuJS(popupMenu, "menu" + currentMenuNr)); //$NON-NLS-1$ 
 
 				String text = elem.getText();
 				if (imageIcon != null)
 				{
-					StringBuilder labelText = new StringBuilder("<html><table><tr>");
-					if (imageIcon != null) labelText.append("<td><img src=\"" + imageIcon + "\" style=\"border:none\"/></td>");
-					labelText.append("<td>" + text + "</td>");
-					labelText.append("</tr></table></html>");
+					StringBuilder labelText = new StringBuilder("<html><table><tr>"); //$NON-NLS-1$ 
+					if (imageIcon != null) labelText.append("<td><img src=\"" + imageIcon + "\" style=\"border:none\"/></td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					labelText.append("<td>" + text + "</td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					labelText.append("</tr></table></html>"); //$NON-NLS-1$ 
 					text = labelText.toString();
 				}
-				js.append("var m" + currentMenuNr + " = new YAHOO.widget.MenuItem('" + text + "');");
+				js.append("var m" + currentMenuNr + " = new YAHOO.widget.MenuItem('" + text + "');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if (((ScriptableWicketMenu)elem).getBackgroundColor() != null)
 				{
-					js.append("YAHOO.util.Dom.setStyle(m").append(currentMenuNr).append(".element, 'background-color', '").append(((ScriptableWicketMenu)elem).getBackgroundColor()).append("');");
+					js.append("YAHOO.util.Dom.setStyle(m").append(currentMenuNr).append(".element, 'background-color', '").append(((ScriptableWicketMenu)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				if (((ScriptableWicketMenu)elem).getForegroundColor() != null)
 				{
-					js.append("menuLabel = YAHOO.util.Dom.getElementsByClassName('yuimenuitemlabel', 'a', m").append(currentMenuNr).append(".element);");
-					js.append("if(menuLabel) { YAHOO.util.Dom.setStyle(menuLabel, 'color', '").append(((ScriptableWicketMenu)elem).getForegroundColor()).append("') };");
+					js.append("menuLabel = YAHOO.util.Dom.getElementsByClassName('yuimenuitemlabel', 'a', m").append(currentMenuNr).append(".element);"); //$NON-NLS-1$ //$NON-NLS-2$  
+					js.append("if(menuLabel) { YAHOO.util.Dom.setStyle(menuLabel, 'color', '").append(((ScriptableWicketMenu)elem).getForegroundColor()).append("') };"); //$NON-NLS-1$ //$NON-NLS-2$ 
 				}
 
-				js.append("m" + currentMenuNr + ".cfg.setProperty('submenu',menu" + currentMenuNr + ");");
+				js.append("m" + currentMenuNr + ".cfg.setProperty('submenu',menu" + currentMenuNr + ");"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if (!elem.isEnabled())
 				{
-					js.append("m" + currentMenuNr + ".cfg.setProperty('disabled', true);");
+					js.append("m" + currentMenuNr + ".cfg.setProperty('disabled', true);"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				js.append(menuName + ".addItem(m" + currentMenuNr + "," + groupCount + ");");
+				js.append(menuName + ".addItem(m" + currentMenuNr + "," + groupCount + ");"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			else
 			{
@@ -158,11 +158,11 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 
 				if (elem instanceof ScriptableWicketCheckBoxMenuItem && ((ScriptableWicketCheckBoxMenuItem)elem).isSelected())
 				{
-					controlClass = "img_checkbox";
+					controlClass = "img_checkbox"; //$NON-NLS-1$ 
 				}
 				else if (elem instanceof ScriptableWicketRadioButtonMenuItem)
 				{
-					controlClass = ((ScriptableWicketRadioButtonMenuItem)elem).isSelected() ? "img_radio_on" : "img_radio_off";
+					controlClass = ((ScriptableWicketRadioButtonMenuItem)elem).isSelected() ? "img_radio_on" : "img_radio_off"; //$NON-NLS-1$ //$NON-NLS-2$ 
 				}
 
 				String text = elem.getText();
@@ -180,35 +180,35 @@ public class ScriptableWicketMenu extends ScriptableWicketMenuItem implements IM
 
 				if (controlClass != null || imageIcon != null)
 				{
-					StringBuilder labelText = new StringBuilder("<html><table><tr>");
-					if (controlClass != null) labelText.append("<td class=\"" + controlClass + "\">&nbsp;&nbsp;&nbsp;&nbsp;</td>");
-					if (imageIcon != null) labelText.append("<td><img src=\"" + imageIcon + "\" style=\"border:none\"/></td>");
-					labelText.append("<td>" + text + "</td>");
-					labelText.append("</tr></table></html>");
+					StringBuilder labelText = new StringBuilder("<html><table><tr>"); //$NON-NLS-1$ 
+					if (controlClass != null) labelText.append("<td class=\"" + controlClass + "\">&nbsp;&nbsp;&nbsp;&nbsp;</td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					if (imageIcon != null) labelText.append("<td><img src=\"" + imageIcon + "\" style=\"border:none\"/></td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					labelText.append("<td>" + text + "</td>"); //$NON-NLS-1$ //$NON-NLS-2$ 
+					labelText.append("</tr></table></html>"); //$NON-NLS-1$ 
 					text = labelText.toString();
 				}
-				js.append("mi = new YAHOO.widget.MenuItem('" + text + "');");
+				js.append("mi = new YAHOO.widget.MenuItem('" + text + "');"); //$NON-NLS-1$ //$NON-NLS-2$ 
 				if (elem instanceof ScriptableWicketMenuItem)
 				{
 					if (((ScriptableWicketMenuItem)elem).getBackgroundColor() != null)
 					{
-						js.append("YAHOO.util.Dom.setStyle(mi.element, 'background-color', '").append(((ScriptableWicketMenuItem)elem).getBackgroundColor()).append("');");
+						js.append("YAHOO.util.Dom.setStyle(mi.element, 'background-color', '").append(((ScriptableWicketMenuItem)elem).getBackgroundColor()).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 
 					if (((ScriptableWicketMenuItem)elem).getForegroundColor() != null)
 					{
-						js.append("menuLabel = YAHOO.util.Dom.getElementsByClassName('yuimenuitemlabel', 'a', mi.element);");
-						js.append("if(menuLabel) { YAHOO.util.Dom.setStyle(menuLabel, 'color', '").append(((ScriptableWicketMenuItem)elem).getForegroundColor()).append("') };");
+						js.append("menuLabel = YAHOO.util.Dom.getElementsByClassName('yuimenuitemlabel', 'a', mi.element);"); //$NON-NLS-1$ 
+						js.append("if(menuLabel) { YAHOO.util.Dom.setStyle(menuLabel, 'color', '").append(((ScriptableWicketMenuItem)elem).getForegroundColor()).append("') };"); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
-				js.append("mi.cfg.setProperty('onclick', {fn:svy_popmenu_click,obj:\"" + popupMenu.getCallBackUrl(elem) + "\"});");
+				js.append("mi.cfg.setProperty('onclick', {fn:svy_popmenu_click,obj:\"" + popupMenu.getCallBackUrl(elem) + "\"});"); //$NON-NLS-1$ //$NON-NLS-2$ 
 
 				if (!elem.isEnabled())
 				{
-					js.append("mi.cfg.setProperty('disabled', true);");
+					js.append("mi.cfg.setProperty('disabled', true);"); //$NON-NLS-1$
 				}
 
-				js.append(menuName + ".addItem(mi," + groupCount + ");");
+				js.append(menuName + ".addItem(mi," + groupCount + ");"); //$NON-NLS-1$ //$NON-NLS-2$ 
 			}
 		}
 		return js.toString();

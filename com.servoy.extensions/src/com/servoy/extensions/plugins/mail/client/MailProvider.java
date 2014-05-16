@@ -81,7 +81,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 			}
 			else if (args[5] instanceof String)
 			{
-				overrideProperties = new String[] { "mail.pop3.host=" + args[5] };
+				overrideProperties = new String[] { "mail.pop3.host=" + args[5] }; //$NON-NLS-1$
 			}
 		}
 		return receiveMail(userName, password, Boolean.valueOf(leaveMsgsOnServer), Integer.valueOf(receiveMode), onlyreceiveMsgWithSentDate, overrideProperties);
@@ -239,7 +239,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 		String[] overrideProperties = null;
 		if (pop3Host != null)
 		{
-			overrideProperties = new String[] { "mail.pop3.host=" + pop3Host };
+			overrideProperties = new String[] { "mail.pop3.host=" + pop3Host }; //$NON-NLS-1$
 		}
 		return receiveMail(username, password, leaveMsgsOnServer, receiveMode, onlyReceiveMsgWithSentDate, overrideProperties);
 	}
@@ -330,7 +330,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 		if (addresses == null) return new String[0];
 
 		List<String> retval = new ArrayList<String>();
-		StringTokenizer tk = new StringTokenizer(addresses.toLowerCase(), " ;,<>[]()'\":\n\t\r");
+		StringTokenizer tk = new StringTokenizer(addresses.toLowerCase(), " ;,<>[]()'\":\n\t\r"); //$NON-NLS-1$
 		while (tk.hasMoreTokens())
 		{
 			String token = tk.nextToken();
@@ -1025,7 +1025,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 		String[] overrideProperties = null;
 		if (smtpHost != null)
 		{
-			overrideProperties = new String[] { "mail.smtp.host=" + smtpHost };
+			overrideProperties = new String[] { "mail.smtp.host=" + smtpHost }; //$NON-NLS-1$
 		}
 		return overrideProperties;
 	}
@@ -1070,7 +1070,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 				if (mex.getCause() != null)
 				{
 					String nested = mex.getCause().getMessage();
-					if (!("".equals(nested))) sendMailException = sendMailException + "; " + nested;
+					if (!("".equals(nested))) sendMailException = sendMailException + "; " + nested; //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				return false;
 			}
@@ -1107,7 +1107,7 @@ public class MailProvider implements IReturnedTypesProvider, IScriptable
 				if (mex.getCause() != null)
 				{
 					String nested = mex.getCause().getMessage();
-					if (!("".equals(nested))) sendMailException = sendMailException + "; " + nested;
+					if (!("".equals(nested))) sendMailException = sendMailException + "; " + nested; //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				return false;
 			}

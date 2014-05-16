@@ -145,7 +145,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 		}
 		catch (Exception e)
 		{
-			throw new PluginException("You tried to click a non clickable item!");
+			throw new PluginException("You tried to click a non clickable item!"); //$NON-NLS-1$
 		}
 	}
 
@@ -168,7 +168,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	@Deprecated
 	public void js_set(String text, Function method)
 	{
-		set(text, method, null, null, "", "", true, true);
+		set(text, method, null, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -181,7 +181,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments)
 	{
-		set(text, method, arguments, null, "", "", true, true);
+		set(text, method, arguments, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -195,7 +195,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon)
 	{
-		set(text, method, arguments, icon, "", "", true, true);
+		set(text, method, arguments, icon, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -210,7 +210,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	@Deprecated
 	public void js_set(String text, Function method, Object[] arguments, Object icon, String accelerator)
 	{
-		set(text, method, arguments, icon, accelerator, "", true, true);
+		set(text, method, arguments, icon, accelerator, "", true, true); //$NON-NLS-1$ 
 	}
 
 	/**
@@ -396,7 +396,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	 */
 	public AbstractMenuItem js_setIcon(Object icon)
 	{
-		if (" ".equals(icon) || (align && ((icon == null) || "".equals(icon))))
+		if (" ".equals(icon) || (align && ((icon == null) || "".equals(icon)))) //$NON-NLS-1$ //$NON-NLS-2$
 		{
 			menuItem.setIcon(null);
 		}
@@ -419,7 +419,7 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	 */
 	public AbstractMenuItem js_setMnemonic(String mnemonic)
 	{
-		if ((mnemonic == null) || mnemonic.equals(""))
+		if ((mnemonic == null) || mnemonic.equals("")) //$NON-NLS-1$ 
 		{
 			menuItem.setMnemonic((char)KeyEvent.VK_CLEAR);
 		}
@@ -433,9 +433,9 @@ public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 	public void js_setText(String text)
 	{
 		String message = text;
-		if (message.startsWith("i18n:"))
+		if (message.startsWith("i18n:")) //$NON-NLS-1$ 
 		{
-			message = Messages.getString(message.replaceFirst("i18n:", ""));
+			message = Messages.getString(message.replaceFirst("i18n:", "")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		menuItem.setText(message);

@@ -24,10 +24,10 @@ package com.servoy.extensions.plugins.spellcheck;
  */
 public class RapidSpellUtils extends SpellCheckerUtils
 {
-	public static final String DutchDictionary = "nl-dutch-v2.dict";
-	public static final String GermanDictionary = "de-German-v2.dict";
-	public static final String ItalianDictionary = "DICT-IT-IT-Italian.dict";
-	public static final String SpanishDictionary = "es-Spanish-v2.dict";
+	public static final String DutchDictionary = "nl-dutch-v2.dict"; //$NON-NLS-1$
+	public static final String GermanDictionary = "de-German-v2.dict"; //$NON-NLS-1$
+	public static final String ItalianDictionary = "DICT-IT-IT-Italian.dict"; //$NON-NLS-1$
+	public static final String SpanishDictionary = "es-Spanish-v2.dict"; //$NON-NLS-1$
 
 	public static String getDictionaryForLanguage(String lang)
 	{

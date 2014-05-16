@@ -51,14 +51,14 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 	protected SeparatedASCIIImportTableModel tableModel;
 
 	protected ButtonGroup delimButtonGroup = new ButtonGroup();
-	protected JRadioButton tabRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.tab"));
-	protected JRadioButton semicolonRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.semicolon"));
-	protected JRadioButton commaRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.comma"));
-	protected JRadioButton spaceRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.space"));
-	protected JRadioButton otherRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.other"));
+	protected JRadioButton tabRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.tab")); //$NON-NLS-1$
+	protected JRadioButton semicolonRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.semicolon")); //$NON-NLS-1$
+	protected JRadioButton commaRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.comma")); //$NON-NLS-1$
+	protected JRadioButton spaceRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.space")); //$NON-NLS-1$
+	protected JRadioButton otherRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.other")); //$NON-NLS-1$
 	protected JTextField otherSeparator = new JTextField(2);
 
-	protected JCheckBox headerRows = new JCheckBox(Messages.getString("servoy.plugin.import.rowContainsFieldnames"));
+	protected JCheckBox headerRows = new JCheckBox(Messages.getString("servoy.plugin.import.rowContainsFieldnames")); //$NON-NLS-1$
 	protected JComboBox textQualifierCombo = new JComboBox();
 
 	protected boolean canceled = true;
@@ -72,7 +72,7 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 	{
 		this.parent = parent;
 		this.state = state;
-		setName("SeparatorTypePanel");
+		setName("SeparatorTypePanel"); //$NON-NLS-1$
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 
@@ -86,21 +86,21 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 		// Lay out topmost Part pane
 		JPanel formatPanel = new JPanel();
 		formatPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.tabxport.choose.separator")));
+		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.tabxport.choose.separator"))); //$NON-NLS-1$
 		formatPanel.add(tabRadio);
-		tabRadio.setActionCommand("separatorIsTab");
+		tabRadio.setActionCommand("separatorIsTab"); //$NON-NLS-1$
 		tabRadio.addActionListener(this);
 		formatPanel.add(commaRadio);
-		commaRadio.setActionCommand("separatorIsComma");
+		commaRadio.setActionCommand("separatorIsComma"); //$NON-NLS-1$
 		commaRadio.addActionListener(this);
 		formatPanel.add(semicolonRadio);
-		semicolonRadio.setActionCommand("separatorIsSemicolon");
+		semicolonRadio.setActionCommand("separatorIsSemicolon"); //$NON-NLS-1$
 		semicolonRadio.addActionListener(this);
 		formatPanel.add(spaceRadio);
-		spaceRadio.setActionCommand("separatorIsSpace");
+		spaceRadio.setActionCommand("separatorIsSpace"); //$NON-NLS-1$
 		spaceRadio.addActionListener(this);
 		formatPanel.add(otherRadio);
-		otherRadio.setActionCommand("separatorIsOther");
+		otherRadio.setActionCommand("separatorIsOther"); //$NON-NLS-1$
 		otherRadio.addActionListener(this);
 		formatPanel.add(otherSeparator);
 		delimButtonGroup.add(tabRadio);
@@ -112,17 +112,17 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 		JPanel extraPane = new JPanel();
 		extraPane.setLayout(new BorderLayout(5, 5));
 		JPanel textQualifierPane = new JPanel();
-		textQualifierPane.add(new JLabel(Messages.getString("servoy.plugin.tabxport.textQualifier")));
+		textQualifierPane.add(new JLabel(Messages.getString("servoy.plugin.tabxport.textQualifier"))); //$NON-NLS-1$
 		textQualifierCombo.addItem(SeparatedASCIIImportTableModel.DUBBLE_QUOTE_QUALIFIER);
 		textQualifierCombo.addItem(SeparatedASCIIImportTableModel.SINGLE_QUOTE_QUALIFIER);
 		textQualifierCombo.addItem(SeparatedASCIIImportTableModel.NONE_QUALIFIER);
 		textQualifierPane.add(textQualifierCombo);
-		textQualifierCombo.setActionCommand("TextQualifier");
+		textQualifierCombo.setActionCommand("TextQualifier"); //$NON-NLS-1$
 		textQualifierCombo.addActionListener(this);
 		extraPane.add(formatPanel, BorderLayout.NORTH);
 		extraPane.add(textQualifierPane, BorderLayout.EAST);
 		extraPane.add(headerRows, BorderLayout.WEST);
-		headerRows.setActionCommand("UseHeaderRows");
+		headerRows.setActionCommand("UseHeaderRows"); //$NON-NLS-1$
 		headerRows.addActionListener(this);
 
 		//Lay out the master content pane.
@@ -133,36 +133,36 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if (command.equals("UseHeaderRows"))
+		if (command.equals("UseHeaderRows")) //$NON-NLS-1$
 		{
 			if (tableModel != null) tableModel.setUseHeaderRow(headerRows.isSelected());
 		}
-		else if (command.equals("TextQualifier"))
+		else if (command.equals("TextQualifier")) //$NON-NLS-1$
 		{
 			if (tableModel != null) tableModel.setTextQualifier((String)textQualifierCombo.getSelectedItem());
 		}
 		else
 		{
-			String sep = "\t";
+			String sep = "\t"; //$NON-NLS-1$
 			if (otherRadio.isSelected())
 			{
 				sep = otherSeparator.getText();
 			}
 			else if (tabRadio.isSelected())
 			{
-				sep = "\t";
+				sep = "\t"; //$NON-NLS-1$
 			}
 			else if (semicolonRadio.isSelected())
 			{
-				sep = ";";
+				sep = ";"; //$NON-NLS-1$
 			}
 			else if (commaRadio.isSelected())
 			{
-				sep = ",";
+				sep = ","; //$NON-NLS-1$
 			}
 			else if (spaceRadio.isSelected())
 			{
-				sep = " ";
+				sep = " "; //$NON-NLS-1$
 			}
 			if (tableModel != null) tableModel.setSeparator(sep);
 		}
@@ -178,12 +178,12 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 
 	public String getNextPanelName()
 	{
-		return "SpecifyDestinationPanel";
+		return "SpecifyDestinationPanel"; //$NON-NLS-1$
 	}
 
 	public boolean isDone()
 	{
-		state.setProperty("data", tableModel);
+		state.setProperty("data", tableModel); //$NON-NLS-1$
 		return true;
 	}
 
@@ -195,10 +195,10 @@ public class ImportSeparatorTypePanel extends JPanel implements ActionListener, 
 			{
 				try
 				{
-					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData"));
+					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData")); //$NON-NLS-1$
 					if (forward)
 					{
-						Vector items = (Vector)state.getProperty("lines");
+						Vector items = (Vector)state.getProperty("lines"); //$NON-NLS-1$
 						tableModel = new SeparatedASCIIImportTableModel(items);
 						tableModel.setTextQualifier(SeparatedASCIIImportTableModel.DUBBLE_QUOTE_QUALIFIER);
 						table.setModel(tableModel);

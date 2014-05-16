@@ -118,7 +118,7 @@ public class Enabler implements IScriptable
 	 */
 	public String js_textExport(IFoundSet foundSet, String[] dataProviderIds)
 	{
-		return js_textExport(foundSet, dataProviderIds, "\t", false);
+		return js_textExport(foundSet, dataProviderIds, "\t", false); //$NON-NLS-1$
 	}
 
 

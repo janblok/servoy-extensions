@@ -23,45 +23,45 @@ import java.util.List;
 public class SpellCheckerUtils
 {
 	// Buttons and labels names - in properties files
-	public static final String SPELLING = "SPELLING";
-	public static String SKIP = "SKIP";
-	public static String IGNORE_ALL = "IGNORE_ALL";
-	public static String REPLACE = "REPLACE";
-	public static String REPLACE_ALL = "REPLACE_ALL";
-	public static String ADD = "ADD_TO_DICTIONARY";
-	public static String CANCEL = "CANCEL";
-	public static String NOT_IN_DICTIONARY = "NOT_IN_DICTIONARY";
-	public static String SUGGESTIONS = "SUGGESTIONS";
-	public static String FIND_SUGGESTIONS = "FIND_SUGGESTIONS";
-	public static String SPELLING_CHECK_COMPLETE = "SPELLING_CHECK_COMPLETE";
+	public static final String SPELLING = "SPELLING";//$NON-NLS-1$
+	public static String SKIP = "SKIP"; //$NON-NLS-1$
+	public static String IGNORE_ALL = "IGNORE_ALL"; //$NON-NLS-1$
+	public static String REPLACE = "REPLACE"; //$NON-NLS-1$
+	public static String REPLACE_ALL = "REPLACE_ALL"; //$NON-NLS-1$
+	public static String ADD = "ADD_TO_DICTIONARY"; //$NON-NLS-1$
+	public static String CANCEL = "CANCEL"; //$NON-NLS-1$
+	public static String NOT_IN_DICTIONARY = "NOT_IN_DICTIONARY"; //$NON-NLS-1$
+	public static String SUGGESTIONS = "SUGGESTIONS"; //$NON-NLS-1$
+	public static String FIND_SUGGESTIONS = "FIND_SUGGESTIONS"; //$NON-NLS-1$
+	public static String SPELLING_CHECK_COMPLETE = "SPELLING_CHECK_COMPLETE"; //$NON-NLS-1$
 
-	public static final String GOOGLE_SPELL = "GOOGLE SPELL";
-	public static final String RAPID_SPELL = "RAPID SPELL";
+	public static final String GOOGLE_SPELL = "GOOGLE SPELL"; //$NON-NLS-1$
+	public static final String RAPID_SPELL = "RAPID SPELL"; //$NON-NLS-1$
 
 	/** The Ignore button click action command */
-	public static final String IGNORE_CMD = "IGNORE";
+	public static final String IGNORE_CMD = "IGNORE"; //$NON-NLS-1$
 	/** The Ignore All button click action command */
-	public static final String IGNOREALL_CMD = "IGNOREALL";
+	public static final String IGNOREALL_CMD = "IGNOREALL"; //$NON-NLS-1$
 	/** The Add button click action command */
-	public static final String ADD_CMD = "ADD";
+	public static final String ADD_CMD = "ADD"; //$NON-NLS-1$
 	/** The Replace button click action command */
-	public static final String REPLACE_CMD = "REPLACE";
+	public static final String REPLACE_CMD = "REPLACE"; //$NON-NLS-1$
 	/** The Replace All button click action command */
-	public static final String REPLACEALL_CMD = "REPLACEALL";
+	public static final String REPLACEALL_CMD = "REPLACEALL"; //$NON-NLS-1$
 	/** The Cancel button click action command */
-	public static final String CANCEL_CMD = "CANCEL";
+	public static final String CANCEL_CMD = "CANCEL"; //$NON-NLS-1$
 
 	/** 
 	 * Language Strings
 	 */
-	public static final String ENGLISH = "English";
-	public static final String DUTCH = "Dutch";
-	public static final String GERMAN = "German";
-	public static final String ITALIAN = "Italian";
-	public static final String SPANISH = "Spanish";
+	public static final String ENGLISH = "English"; //$NON-NLS-1$ 
+	public static final String DUTCH = "Dutch"; //$NON-NLS-1$
+	public static final String GERMAN = "German"; //$NON-NLS-1$
+	public static final String ITALIAN = "Italian"; //$NON-NLS-1$
+	public static final String SPANISH = "Spanish"; //$NON-NLS-1$
 	public static final String DEFAULT = ENGLISH;
 
-	public static final String MESSAGES = "com.servoy.extensions.plugins.spellcheck.res.SpellcheckMessages";
+	public static final String MESSAGES = "com.servoy.extensions.plugins.spellcheck.res.SpellcheckMessages";//$NON-NLS-1$
 
 	/**
 	 * Get available languages/dictionaries as a list.

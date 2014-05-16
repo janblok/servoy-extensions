@@ -84,7 +84,7 @@ public class Menu extends AbstractMenu
 		}
 		else
 		{
-			throw new PluginException("Unexpected parameter type: " + obj.getClass());
+			throw new PluginException("Unexpected parameter type: " + obj.getClass()); //$NON-NLS-1$
 		}
 	}
 
@@ -159,7 +159,7 @@ public class Menu extends AbstractMenu
 	 */
 	public void js_setIcon(Object icon)
 	{
-		if (" ".equals(icon)/* || (_align && ((icon == null) || "".equals(icon))) */)
+		if (" ".equals(icon)/* || (_align && ((icon == null) || "".equals(icon))) */) //$NON-NLS-1$
 		{
 			getMenu().setIcon(null);
 		}
@@ -180,15 +180,15 @@ public class Menu extends AbstractMenu
 	 */
 	public void js_setMnemonic(String mnemonic)
 	{
-		if ((mnemonic == null) || mnemonic.equals(""))
+		if ((mnemonic == null) || mnemonic.equals("")) //$NON-NLS-1$
 		{
 			getMenu().setMnemonic((char)KeyEvent.VK_CLEAR);
 		}
 		else
 		{
-			if (mnemonic.startsWith("i18n:"))
+			if (mnemonic.startsWith("i18n:")) //$NON-NLS-1$
 			{
-				mnemonic = Messages.getString(mnemonic.replaceFirst("i18n:", ""));
+				mnemonic = Messages.getString(mnemonic.replaceFirst("i18n:", "")); //$NON-NLS-1$ //$NON-NLS-2$ 
 			}
 			getMenu().setMnemonic(mnemonic.charAt(0));
 		}
@@ -196,14 +196,14 @@ public class Menu extends AbstractMenu
 
 	public void js_setText(String text) throws PluginException
 	{
-		if ((text == null) || (text == ""))
+		if ((text == null) || (text == "")) //$NON-NLS-1$
 		{
-			throw new PluginException("A new _menu text can not be empty!");
+			throw new PluginException("A new _menu text can not be empty!"); //$NON-NLS-1$
 		}
 
-		if (text.startsWith("i18n:"))
+		if (text.startsWith("i18n:")) //$NON-NLS-1$
 		{
-			text = Messages.getString(text.replaceFirst("i18n:", ""));
+			text = Messages.getString(text.replaceFirst("i18n:", "")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		getMenu().setText(text);

@@ -25,6 +25,6 @@ public class HTTP_STATUS implements ServoyHttpStatus, IPrefixedConstantsObject
 {
 	public String getPrefix()
 	{
-		return "HTTP_STATUS";
+		return "HTTP_STATUS"; //$NON-NLS-1$
 	}
 }

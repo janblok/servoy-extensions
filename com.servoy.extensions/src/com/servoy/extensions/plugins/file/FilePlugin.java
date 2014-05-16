@@ -36,7 +36,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class FilePlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "file";
+	public static final String PLUGIN_NAME = "file"; //$NON-NLS-1$
 
 	private IClientPluginAccess access;
 	private FileProvider fileProvider;
@@ -58,7 +58,7 @@ public class FilePlugin implements IClientPlugin
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/file.gif");
+		java.net.URL iconUrl = this.getClass().getResource("images/file.gif"); //$NON-NLS-1$
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -108,13 +108,13 @@ public class FilePlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.file.displayname"));
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.file.displayname")); //$NON-NLS-1$
 		return props;
 	}
 
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		if (fileProvider != null && "solution".equals(evt.getPropertyName()) && evt.getNewValue() == null)
+		if (fileProvider != null && "solution".equals(evt.getPropertyName()) && evt.getNewValue() == null) //$NON-NLS-1$
 		{
 			fileProvider.deleteTrackedFiles();
 		}

@@ -54,6 +54,7 @@ import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
  * @see RestWSServlet
  * @author rgansevles
  */
+@SuppressWarnings("nls")
 @ServoyDocumented
 public class RestWSPlugin implements IServerPlugin
 {

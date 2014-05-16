@@ -67,7 +67,7 @@ class AllowedCertTrustStrategy implements TrustStrategy
 	{
 		if (holder == null)
 		{
-			File file = new File(System.getProperty("user.home"), J2DBGlobals.CLIENT_LOCAL_DIR + "servoy.ks");
+			File file = new File(System.getProperty("user.home"), J2DBGlobals.CLIENT_LOCAL_DIR + "servoy.ks"); //$NON-NLS-1$//$NON-NLS-2$
 			if (file.exists())
 			{
 				ObjectInputStream ois = null;
@@ -100,7 +100,7 @@ class AllowedCertTrustStrategy implements TrustStrategy
 	{
 		getCertificatesHolder();
 		holder.add(certificates);
-		File file = new File(System.getProperty("user.home"), J2DBGlobals.CLIENT_LOCAL_DIR + "servoy.ks");
+		File file = new File(System.getProperty("user.home"), J2DBGlobals.CLIENT_LOCAL_DIR + "servoy.ks"); //$NON-NLS-1$//$NON-NLS-2$
 		if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
 		ObjectOutputStream oos = null;
 		try

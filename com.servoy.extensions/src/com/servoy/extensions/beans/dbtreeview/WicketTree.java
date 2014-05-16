@@ -811,7 +811,7 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 	{
 		if (!Utils.stringIsEmpty(tip))
 		{
-			if (!Utils.stringContainsIgnoreCase(tip, "<html"))
+			if (!Utils.stringContainsIgnoreCase(tip, "<html")) //$NON-NLS-1$
 			{
 				tooltip = tip;
 			}

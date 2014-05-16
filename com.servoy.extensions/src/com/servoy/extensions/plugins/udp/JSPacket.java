@@ -442,24 +442,24 @@ public class JSPacket implements IScriptable
 						case 13 :
 							/* 110x xxxx 10xx xxxx */
 							count += 2;
-							if (count - index > utflen) throw new UTFDataFormatException("malformed input: partial character at end");
+							if (count - index > utflen) throw new UTFDataFormatException("malformed input: partial character at end"); //$NON-NLS-1$
 							char2 = bytearr[count - 1];
-							if ((char2 & 0xC0) != 0x80) throw new UTFDataFormatException("malformed input around byte " + count);
+							if ((char2 & 0xC0) != 0x80) throw new UTFDataFormatException("malformed input around byte " + count); //$NON-NLS-1$
 							chararr[chararr_count++] = (char)(((c & 0x1F) << 6) | (char2 & 0x3F));
 							break;
 						case 14 :
 							/* 1110 xxxx 10xx xxxx 10xx xxxx */
 							count += 3;
-							if (count > utflen) throw new UTFDataFormatException("malformed input: partial character at end");
+							if (count > utflen) throw new UTFDataFormatException("malformed input: partial character at end"); //$NON-NLS-1$
 							char2 = bytearr[count - 2];
 							char3 = bytearr[count - 1];
 							if (((char2 & 0xC0) != 0x80) || ((char3 & 0xC0) != 0x80)) throw new UTFDataFormatException(
-								"malformed input around byte " + (count - 1));
+								"malformed input around byte " + (count - 1)); //$NON-NLS-1$
 							chararr[chararr_count++] = (char)(((c & 0x0F) << 12) | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));
 							break;
 						default :
 							/* 10xx xxxx, 1111 xxxx */
-							throw new UTFDataFormatException("malformed input around byte " + count);
+							throw new UTFDataFormatException("malformed input around byte " + count); //$NON-NLS-1$
 					}
 				}
 				index += utflen;

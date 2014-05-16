@@ -32,7 +32,7 @@ import com.servoy.extensions.plugins.spellcheck.SpellCheckServerPlugin;
 public class SpellCheckXMLServlet extends HttpServlet
 {
 	private final SpellCheckServerPlugin spellCheckServerPlugin;
-	private final String CHARSET_DEFAULT = "UTF-8";
+	private final String CHARSET_DEFAULT = "UTF-8"; //$NON-NLS-1$
 
 	public SpellCheckXMLServlet(String webServiceName, SpellCheckServerPlugin spellCheckServer)
 	{
@@ -49,11 +49,11 @@ public class SpellCheckXMLServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		response.setContentType("text/xml");
+		response.setContentType("text/xml"); //$NON-NLS-1$
 
 		String content = spellCheckServerPlugin.check(getBody(request));
 
-		response.setHeader("Content-Type", "text/xml" + ";charset=" + CHARSET_DEFAULT);
+		response.setHeader("Content-Type", "text/xml" + ";charset=" + CHARSET_DEFAULT); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 
 		byte[] bytes = content.getBytes(CHARSET_DEFAULT);

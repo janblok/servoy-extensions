@@ -256,26 +256,26 @@ public class MailMessage implements Serializable, IJavaScriptType
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("from: ");
+		sb.append("from: "); //$NON-NLS-1$
 		sb.append(getFromAddresses());
-		sb.append("\n");
-		sb.append("to: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("to: "); //$NON-NLS-1$
 		sb.append(getRecipientAddresses());
-		sb.append("\n");
-		sb.append("cc: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("cc: "); //$NON-NLS-1$
 		sb.append(getCCAddresses());
-		sb.append("\n");
-		sb.append("sentdate: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("sentdate: "); //$NON-NLS-1$
 		sb.append(getSentDate());
-		sb.append("\n");
-		sb.append("subject: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("subject: "); //$NON-NLS-1$
 		sb.append(getSubject());
-		sb.append("plain msg: ");
+		sb.append("plain msg: "); //$NON-NLS-1$
 		sb.append(getPlainMsg());
-		sb.append("\n");
-		sb.append("html msg: ");
+		sb.append("\n"); //$NON-NLS-1$
+		sb.append("html msg: "); //$NON-NLS-1$
 		sb.append(getHtmlMsg());
-		sb.append("\n");
+		sb.append("\n"); //$NON-NLS-1$
 		return sb.toString();
 	}
 

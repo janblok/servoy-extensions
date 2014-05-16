@@ -65,7 +65,7 @@ public class PopupPanel extends Panel
 		setOutputMarkupId(true);
 		Dimension size = ((FormController)form).getForm().getSize();
 
-		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:").append(ZINDEX).append(";");
+		StringBuilder style = new StringBuilder("display:none;position:absolute;z-index:").append(ZINDEX).append(";"); //$NON-NLS-1$ //$NON-NLS-2$
 		int popupHeight;
 		if (height > -1) popupHeight = height;
 		else
@@ -89,18 +89,18 @@ public class PopupPanel extends Panel
 				}
 			}
 		}
-		style.append("width:").append(width > -1 ? width : size.width).append("px;height:").append(popupHeight).append("px");
+		style.append("width:").append(width > -1 ? width : size.width).append("px;height:").append(popupHeight).append("px"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		// the following two lines are not needed when working with Servoy >= 7.4 rc2 (when WebForm already does this for popup form as well), but
 		// if we want transparency to work with older versions, they are needed (cause now PopupPanel has class="webform" which by default has a white background)
 		boolean isTransparent = ((FormController)form).getForm().getTransparent();
-		if (isTransparent) style.append(";background:transparent;");
+		if (isTransparent) style.append(";background:transparent;"); //$NON-NLS-1$
 
-		add(new SimpleAttributeModifier("style", style.toString()));
+		add(new SimpleAttributeModifier("style", style.toString())); //$NON-NLS-1$
 
 		final StringBuilder formStyle = new StringBuilder();
-		if (width < size.width) formStyle.append("min-width:").append(width).append("px;");
-		if (height < size.height) formStyle.append("min-height:").append(height).append("px;");
+		if (width < size.width) formStyle.append("min-width:").append(width).append("px;"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (height < size.height) formStyle.append("min-height:").append(height).append("px;"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		enclosingFormSizeBehavior = null;
 		enclosingFormComponent = null;
@@ -111,7 +111,7 @@ public class PopupPanel extends Panel
 				@Override
 				public Object component(Component component)
 				{
-					if ("servoywebform".equals(component.getId()))
+					if ("servoywebform".equals(component.getId())) //$NON-NLS-1$
 					{
 						enclosingFormComponent = component;
 						enclosingFormComponent.add(enclosingFormSizeBehavior = new StyleAppendingModifier(new Model<String>()

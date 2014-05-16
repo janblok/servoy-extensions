@@ -48,7 +48,7 @@ public class ExcelExport extends WizardWindow
 
 		createState();
 		IWizardState state = getState();
-		state.setProperty("application", application);
+		state.setProperty("application", application); //$NON-NLS-1$
 	}
 
 
@@ -56,8 +56,8 @@ public class ExcelExport extends WizardWindow
 	protected void createPanels() throws Exception
 	{
 		IWizardState state = getState();
-		state.setProperty("foundset", dataset);
-		state.setProperty("application", application);
+		state.setProperty("foundset", dataset); //$NON-NLS-1$
+		state.setProperty("application", application); //$NON-NLS-1$
 
 		addPanel(new ExportSpecifyDestinationPanel(this, getState(), application));
 		addPanel(new ExportSpecifyFilePanel(this, getState(), application));
@@ -73,7 +73,7 @@ public class ExcelExport extends WizardWindow
 	// Shows the frame
 	public void showFrame() throws Exception
 	{
-		super.showDialog(Messages.getString("servoy.plugin.export.title"), ((ISmartClientApplication)application).getMainApplicationFrame());
+		super.showDialog(Messages.getString("servoy.plugin.export.title"), ((ISmartClientApplication)application).getMainApplicationFrame()); //$NON-NLS-1$
 	}
 
 	@Override
@@ -84,8 +84,8 @@ public class ExcelExport extends WizardWindow
 	@Override
 	protected int showCancelDialog()
 	{
-		int res = JOptionPane.showConfirmDialog(window, Messages.getString("servoy.plugin.export.cancelExport"),
-			Messages.getString("servoy.button.cancel"),
+		int res = JOptionPane.showConfirmDialog(window, Messages.getString("servoy.plugin.export.cancelExport"), //$NON-NLS-1$
+			Messages.getString("servoy.button.cancel"), //$NON-NLS-1$
 			JOptionPane.YES_NO_OPTION);
 		return res;
 	}

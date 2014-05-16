@@ -100,7 +100,7 @@ public class RemoteFile extends AbstractFile
 	public boolean createNewFile() throws IOException
 	{
 		throw new UnsupportedMethodException(
-			"Creating a new remote file is not allowed, you can only upload to a specific location using the plugins.file.streamToServer() method");
+			"Creating a new remote file is not allowed, you can only upload to a specific location using the plugins.file.streamToServer() method"); //$NON-NLS-1$
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class RemoteFile extends AbstractFile
 	public boolean mkdir()
 	{
 		throw new UnsupportedMethodException(
-			"Create a remote folder is not allowed, but you can upload a file to a specific location including new folder path using the plugins.file.streamToServer() method");
+			"Create a remote folder is not allowed, but you can upload a file to a specific location including new folder path using the plugins.file.streamToServer() method"); //$NON-NLS-1$
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class RemoteFile extends AbstractFile
 	public boolean mkdirs()
 	{
 		throw new UnsupportedMethodException(
-			"Create remote folders is not allowed, but you can upload a file to a specific location including new folders path using the plugins.file.streamToServer() method");
+			"Create remote folders is not allowed, but you can upload a file to a specific location including new folders path using the plugins.file.streamToServer() method"); //$NON-NLS-1$
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class RemoteFile extends AbstractFile
 	@Override
 	public boolean setLastModified(long time)
 	{
-		throw new UnsupportedMethodException("Setting the lastModified time on a remote file is not allowed");
+		throw new UnsupportedMethodException("Setting the lastModified time on a remote file is not allowed"); //$NON-NLS-1$
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class RemoteFile extends AbstractFile
 	@Override
 	public boolean setReadOnly()
 	{
-		throw new UnsupportedMethodException("Setting the readOnly flag on a remote file is not allowed");
+		throw new UnsupportedMethodException("Setting the readOnly flag on a remote file is not allowed"); //$NON-NLS-1$
 	}
 
 	@Override
@@ -153,7 +153,8 @@ public class RemoteFile extends AbstractFile
 			return false;
 		}
 	}
-
+
+	@SuppressWarnings("nls")
 	public boolean renameTo(String upload)
 	{
 		if (upload == null || !upload.startsWith("/"))
@@ -183,7 +184,7 @@ public class RemoteFile extends AbstractFile
 		{
 			return renameTo(upload.getAbsolutePath());
 		}
-		throw new UnsupportedMethodException("You can only rename to a remote file or a remote String path");	
+		throw new UnsupportedMethodException("You can only rename to a remote file or a remote String path"); //$NON-NLS-1$	
 	}
 
 	@Override
@@ -223,7 +224,8 @@ public class RemoteFile extends AbstractFile
 	{
 		return this;
 	}
-
+
+	@SuppressWarnings("nls")
 	public byte[] getBytes()
 	{
 		UUID uuid = null;
@@ -252,7 +254,8 @@ public class RemoteFile extends AbstractFile
 		}
 	}
 
-	@Override
+	@Override
+	@SuppressWarnings("nls")
 	public String getContentType()
 	{
 		if (contentType == null)
@@ -268,7 +271,8 @@ public class RemoteFile extends AbstractFile
 		}
 		return contentType;
 	}
-
+
+	@SuppressWarnings("nls")
 	@Override
 	public IAbstractFile[] listFiles()
 	{
@@ -292,7 +296,8 @@ public class RemoteFile extends AbstractFile
 		}
 		return null;
 	}
-
+
+	@SuppressWarnings("nls")
 	@Override
 	public String[] list()
 	{
@@ -365,7 +370,7 @@ public class RemoteFile extends AbstractFile
 			}
 			catch (Exception ex)
 			{
-				Debug.error("Error transferring data using setBytes on remote JSFile " + getAbsolutePath(), ex);
+				Debug.error("Error transferring data using setBytes on remote JSFile " + getAbsolutePath(), ex); //$NON-NLS-1$
 			}
 			finally
 			{

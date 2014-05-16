@@ -241,8 +241,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	private MenuItemArgs getMenuItemArgs(String name, Object feedback_item, Object icon, String mnemonic, Boolean enabled_state, Number alignment)
 	{
 		String text = name;
-		if (name == null) text = "noname";
-		else if (name.startsWith("i18n:")) text = pluginAccess.getI18NMessage(name, null);
+		if (name == null) text = "noname"; //$NON-NLS-1$
+		else if (name.startsWith("i18n:")) text = pluginAccess.getI18NMessage(name, null); //$NON-NLS-1$
 
 		MenuItemArgs menuItemArgs = null;
 
@@ -734,8 +734,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 */
 	public Menu js_addMenu(String name) throws PluginException
 	{
-		String text = (name == null ? "noname" : name);
-		if (text.startsWith("i18n:")) text = pluginAccess.getI18NMessage(text, null);
+		String text = (name == null ? "noname" : name); //$NON-NLS-1$
+		if (text.startsWith("i18n:")) text = pluginAccess.getI18NMessage(text, null); //$NON-NLS-1$
 		MenuItemArgs menuItemArgs = new MenuItemArgs(text, null, null, null, null, (char)0, -1, true);
 		IMenu subMenu = menuHandler.createMenu(menu);
 		menu.addMenuItem(subMenu, -1);
@@ -928,9 +928,9 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 	 */
 	public int js_getItemIndexByText(String text)
 	{
-		if (text == null || "".equals(text))
+		if (text == null || "".equals(text)) //$NON-NLS-1$
 		{
-			Debug.error("You can not search for a text with a null or empty value.");
+			Debug.error("You can not search for a text with a null or empty value."); //$NON-NLS-1$
 			return -1;
 		}
 
@@ -1033,7 +1033,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 			if (idx < 0 || idx >= menu.getMenuItemCount())
 			{
-				throw new PluginException("The item with index " + idx + " doesn't exist.");
+				throw new PluginException("The item with index " + idx + " doesn't exist."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 			menu.removeMenuItem(idx);
@@ -1099,8 +1099,8 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 		{
 			name = args[0].toString();
 		}
-		if (name == null) name = "noname";
-		if (name.startsWith("i18n:")) name = pluginAccess.getI18NMessage(name, null);
+		if (name == null) name = "noname"; //$NON-NLS-1$
+		if (name.startsWith("i18n:")) name = pluginAccess.getI18NMessage(name, null); //$NON-NLS-1$
 
 		Object[] submenu = null;
 		Function method = null;
@@ -1118,7 +1118,7 @@ public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 
 		String imageURL = null;
 		byte[] imageBytes = null;
-		if (args.length >= 3 && args[2] != null && !"".equals(args[2]))
+		if (args.length >= 3 && args[2] != null && !"".equals(args[2])) //$NON-NLS-1$
 		{
 			if (args[2] instanceof String && ((String)args[2]).length() > 0)
 			{
