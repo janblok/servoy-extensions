@@ -363,6 +363,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 	 * // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 	 * plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+	 * // Num Lock and Substract shortcuts 
+	 * plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+	 * plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 	 * // remove global shortcut and form-level shortcut
 	 * plugins.window.removeShortcut('menu 1');
 	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -378,8 +381,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * //  application.output(event.getFormName()) // returns 'frm_contacts'
 	 * //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 	 * //}
-	 * // NOTE: shortcuts will not override existing operating system or browser shortcuts,
-	 * // choose your shortcuts careful to make sure they work in all clients.
+	 * // NOTES: 
+	 * // 1) shortcuts will not override existing operating system or browser shortcuts,
+	 * // choose your shortcuts carefully to make sure they work in all clients.
+	 * // 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.
 	 *
 	 * @param shortcut 
 	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute

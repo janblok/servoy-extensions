@@ -7755,6 +7755,44 @@ if (event.getSource())
           </function>
           <function clientSupport="wc,sc" name="show">
             <argumentsTypes>
+              <argumentType typecode="com.servoy.j2db.scripting.JSEvent"/>
+            </argumentsTypes>
+            <return type="void" typecode="void"/>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Show the popup based on JSEvent information. This can be used to show popup in tableview header that is styled with labelfor label.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Show the popup based on JSEvent information.]]></summary>
+            </summaries>
+            <samples>
+              <sample clientSupport="wc,sc"><![CDATA[// NOTE: usually this code is placed in a handler of an event (e.g. right click on some component)
+// create a popup menu
+var menu = plugins.window.createPopupMenu();
+// add a menu item
+menu.addMenuItem("item", feedback_item);
+// add another menu item
+menu.addMenuItem("item 2", feedback_item);
+
+if (event.getSource())
+{
+	// display the popup over the component which is the source of the event
+	menu.show(event.getSource());
+	// display the popup over the components, at specified coordinates relative to the component
+	//menu.show(event.getSource(), 10, 10);
+	// display the popup at specified coordinates relative to the main window
+	//menu.show(100, 100);
+}
+
+// in Smart client, you can also use show with no parameters, it will show at the mouse coordinates:
+//menu.show();]]></sample>
+            </samples>
+            <parameters>
+              <parameter name="x"/>
+              <parameter name="y"/>
+            </parameters>
+          </function>
+          <function clientSupport="wc,sc" name="show">
+            <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.ui.IComponent"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
@@ -10459,6 +10497,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10474,8 +10515,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10512,6 +10555,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10527,8 +10573,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10566,6 +10614,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10581,8 +10632,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10623,6 +10676,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10638,8 +10694,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10679,6 +10737,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10694,8 +10755,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10732,6 +10795,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10747,8 +10813,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10786,6 +10854,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10801,8 +10872,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -10843,6 +10916,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -10858,8 +10934,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -11180,6 +11258,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -11195,8 +11276,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
@@ -11229,6 +11312,9 @@ plugins.window.createShortcut('control RIGHT', forms.frm_contacts.handleMyShortc
 //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
+// Num Lock and Substract shortcuts 
+plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
+plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 // remove global shortcut and form-level shortcut
 plugins.window.removeShortcut('menu 1');
 plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
@@ -11244,8 +11330,10 @@ plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
 //  application.output(event.getFormName()) // returns 'frm_contacts'
 //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 //}
-// NOTE: shortcuts will not override existing operating system or browser shortcuts,
-// choose your shortcuts careful to make sure they work in all clients.]]></sample>
+// NOTES: 
+// 1) shortcuts will not override existing operating system or browser shortcuts,
+// choose your shortcuts carefully to make sure they work in all clients.
+// 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.]]></sample>
             </samples>
             <parameters>
               <parameter name="shortcut" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
