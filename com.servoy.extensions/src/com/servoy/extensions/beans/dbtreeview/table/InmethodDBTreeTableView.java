@@ -122,10 +122,10 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 
 		add(StyleAttributeModifierModel.INSTANCE);
 
-		WebMarkupContainer bodyContainer = (WebMarkupContainer)get("form:bodyContainer"); //$NON-NLS-1$
+		WebMarkupContainer bodyContainer = (WebMarkupContainer)get("form:bodyContainer");
 		if (bodyContainer != null)
 		{
-			bodyContainer.add(new StyleAppendingModifier(new Model<String>("height: 100%;"))); //$NON-NLS-1$
+			bodyContainer.add(new StyleAppendingModifier(new Model<String>("height: 100%;")));
 		}
 	}
 
@@ -728,7 +728,7 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 		wicketTree.js_setRowHeight(height);
 	}
 
-	private static final CompressedResourceReference CSS = new CompressedResourceReference(InmethodDBTreeTableView.class, "res/style.css"); //$NON-NLS-1$
+	private static final CompressedResourceReference CSS = new CompressedResourceReference(InmethodDBTreeTableView.class, "res/style.css");
 
 	@Override
 	public void renderHead(IHeaderResponse response)
@@ -1072,7 +1072,6 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 				{
 					private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings("nls")
 					@Override
 					public CharSequence postDecorateScript(CharSequence script)
 					{
@@ -1122,7 +1121,6 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 				{
 					private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings("nls")
 					@Override
 					public CharSequence postDecorateScript(CharSequence script)
 					{
@@ -1165,7 +1163,6 @@ public class InmethodDBTreeTableView extends TreeGrid implements IWicketTree, IT
 				return wicketTree.bindingInfo.getMethodToCallOnRightClick(userNode);
 			}
 
-			@SuppressWarnings("nls")
 			@Override
 			public AjaxPostprocessingCallDecorator getPostprocessingCallDecorator()
 			{

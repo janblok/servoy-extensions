@@ -53,7 +53,7 @@ import com.servoy.j2db.util.Debug;
  */
 public class SwingShortcutHandler implements IShortcutHandler
 {
-	static final String SHORTCUT_PREFIX = "_plugin_window_shortcut."; //$NON-NLS-1$
+	static final String SHORTCUT_PREFIX = "_plugin_window_shortcut.";
 
 	private final IClientPluginAccess access;
 	private final WindowProvider windowProvider;
@@ -103,7 +103,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 		RootPaneContainer rootPaneContainer = getRootPane();
 		if (rootPaneContainer == null)
 		{
-			Debug.error("SwingShortcutHandler: Could not find root pane for installing shortcuts"); //$NON-NLS-1$
+			Debug.error("SwingShortcutHandler: Could not find root pane for installing shortcuts");
 			return false;
 		}
 
@@ -240,7 +240,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 		RootPaneContainer rootPaneContainer = getRootPane();
 		if (rootPaneContainer == null)
 		{
-			Debug.error("SwingShortcutHandler: Could not find root pane for removing shortcuts"); //$NON-NLS-1$
+			Debug.error("SwingShortcutHandler: Could not find root pane for removing shortcuts");
 			return false;
 		}
 

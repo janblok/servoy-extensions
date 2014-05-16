@@ -77,7 +77,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 	private final WicketTree wicketTree;
 	private final BindingInfo bindingInfo;
 
-	private static final ResourceReference IMAGES = new ResourceReference(WicketDBTreeView.class, "res/base-tree-images.png"); //$NON-NLS-1$
+	private static final ResourceReference IMAGES = new ResourceReference(WicketDBTreeView.class, "res/base-tree-images.png");
 
 	private final IClientPluginAccess application;
 
@@ -387,7 +387,6 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 				{
 					private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings("nls")
 					@Override
 					public CharSequence postDecorateScript(CharSequence script)
 					{
@@ -437,7 +436,6 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 				{
 					private static final long serialVersionUID = 1L;
 
-					@SuppressWarnings("nls")
 					@Override
 					public CharSequence postDecorateScript(CharSequence script)
 					{
@@ -480,7 +478,6 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 				return wicketTree.bindingInfo.getMethodToCallOnRightClick(userNode);
 			}
 
-			@SuppressWarnings("nls")
 			@Override
 			public AjaxPostprocessingCallDecorator getPostprocessingCallDecorator()
 			{

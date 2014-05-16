@@ -60,11 +60,11 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 	private final JList rlist;
 
 	protected ButtonGroup delimButtonGroup = new ButtonGroup();
-	protected JRadioButton tabRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.tab")); //$NON-NLS-1$
-	protected JRadioButton semicolonRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.semicolon")); //$NON-NLS-1$
-	protected JRadioButton commaRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.comma")); //$NON-NLS-1$
-	protected JRadioButton spaceRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.space")); //$NON-NLS-1$
-	protected JRadioButton otherRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.other")); //$NON-NLS-1$
+	protected JRadioButton tabRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.tab"));
+	protected JRadioButton semicolonRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.semicolon"));
+	protected JRadioButton commaRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.comma"));
+	protected JRadioButton spaceRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.space"));
+	protected JRadioButton otherRadio = new JRadioButton(Messages.getString("servoy.plugin.tabxport.separator.other"));
 	protected JTextField otherSeparator = new JTextField(2);
 
 	private final IWizard parent;
@@ -76,28 +76,28 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		application = app;
 		this.parent = parent;
 		this.state = state;
-		setName("start"); //$NON-NLS-1$
+		setName("start");
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 
 		// Lay out topmost Part pane
 		JPanel formatPanel = new JPanel();
 		formatPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.tabxport.choose.separator"))); //$NON-NLS-1$
+		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.tabxport.choose.separator")));
 		formatPanel.add(tabRadio);
-		tabRadio.setActionCommand("separatorIsTab"); //$NON-NLS-1$
+		tabRadio.setActionCommand("separatorIsTab");
 		tabRadio.addActionListener(this);
 		formatPanel.add(commaRadio);
-		commaRadio.setActionCommand("separatorIsComma"); //$NON-NLS-1$
+		commaRadio.setActionCommand("separatorIsComma");
 		commaRadio.addActionListener(this);
 		formatPanel.add(semicolonRadio);
-		semicolonRadio.setActionCommand("separatorIsSemicolon"); //$NON-NLS-1$
+		semicolonRadio.setActionCommand("separatorIsSemicolon");
 		semicolonRadio.addActionListener(this);
 		formatPanel.add(spaceRadio);
-		spaceRadio.setActionCommand("separatorIsSpace"); //$NON-NLS-1$
+		spaceRadio.setActionCommand("separatorIsSpace");
 		spaceRadio.addActionListener(this);
 		formatPanel.add(otherRadio);
-		otherRadio.setActionCommand("separatorIsOther"); //$NON-NLS-1$
+		otherRadio.setActionCommand("separatorIsOther");
 		otherRadio.addActionListener(this);
 		formatPanel.add(otherSeparator);
 		otherSeparator.setEditable(false);
@@ -112,11 +112,11 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		movePane.setLayout(new BoxLayout(movePane, BoxLayout.Y_AXIS));
 		movePane.setMaximumSize(new Dimension(100, 200));
 
-		JButton downButton = new JButton(Messages.getString("servoy.button.moveDown")); //$NON-NLS-1$
+		JButton downButton = new JButton(Messages.getString("servoy.button.moveDown"));
 		Dimension minimumSize = downButton.getPreferredSize();//new Dimension(100,20);
-		final JButton rightButton = new JButton(" >> "); //$NON-NLS-1$
+		final JButton rightButton = new JButton(" >> ");
 		rightButton.addActionListener(this);
-		rightButton.setActionCommand("right"); //$NON-NLS-1$
+		rightButton.setActionCommand("right");
 		rightButton.setPreferredSize(minimumSize);
 		rightButton.setMinimumSize(minimumSize);
 		rightButton.setMaximumSize(minimumSize);
@@ -126,9 +126,9 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 		movePane.add(Box.createRigidArea(new Dimension(0, 5)));
 
-		final JButton leftButton = new JButton(" << "); //$NON-NLS-1$
+		final JButton leftButton = new JButton(" << ");
 		leftButton.addActionListener(this);
-		leftButton.setActionCommand("left"); //$NON-NLS-1$
+		leftButton.setActionCommand("left");
 		leftButton.setPreferredSize(minimumSize);
 		leftButton.setMinimumSize(minimumSize);
 		leftButton.setMaximumSize(minimumSize);
@@ -138,9 +138,9 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 		movePane.add(Box.createRigidArea(new Dimension(0, 5)));
 
-		JButton upButton = new JButton(Messages.getString("servoy.button.moveUp")); //$NON-NLS-1$
+		JButton upButton = new JButton(Messages.getString("servoy.button.moveUp"));
 		upButton.addActionListener(this);
-		upButton.setActionCommand("up"); //$NON-NLS-1$
+		upButton.setActionCommand("up");
 		upButton.setPreferredSize(minimumSize);
 		upButton.setMinimumSize(minimumSize);
 		upButton.setMaximumSize(minimumSize);
@@ -152,7 +152,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 
 //        JButton downButton = new JButton("move down");
 		downButton.addActionListener(this);
-		downButton.setActionCommand("down"); //$NON-NLS-1$
+		downButton.setActionCommand("down");
 		downButton.setPreferredSize(minimumSize);
 		downButton.setMinimumSize(minimumSize);
 		downButton.setMaximumSize(minimumSize);
@@ -191,7 +191,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(tableScroll, BorderLayout.CENTER);
-		rightPanel.add(new JLabel(Messages.getString("servoy.plugin.export.toFile")), BorderLayout.NORTH); //$NON-NLS-1$
+		rightPanel.add(new JLabel(Messages.getString("servoy.plugin.export.toFile")), BorderLayout.NORTH);
 
 		JPanel toppanel = new JPanel();
 //		toppanel.setLayout(new BorderLayout());
@@ -209,42 +209,42 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		add(toppanel, BorderLayout.CENTER);
 
 		//adddefault
-		String sep = "\t"; //$NON-NLS-1$
-		state.setProperty("separator", sep); //$NON-NLS-1$
+		String sep = "\t";
+		state.setProperty("separator", sep);
 	}
 
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if (command.equals("left")) left(); //$NON-NLS-1$
-		else if (command.equals("right")) right(); //$NON-NLS-1$
-		else if (command.equals("up")) up(); //$NON-NLS-1$
-		else if (command.equals("down")) down(); //$NON-NLS-1$
+		if (command.equals("left")) left();
+		else if (command.equals("right")) right();
+		else if (command.equals("up")) up();
+		else if (command.equals("down")) down();
 		else
 		{
 			otherSeparator.setEditable(false);
-			String sep = "\t"; //$NON-NLS-1$
+			String sep = "\t";
 			if (otherRadio.isSelected())
 			{
 				otherSeparator.setEditable(true);
 			}
 			else if (tabRadio.isSelected())
 			{
-				sep = "\t"; //$NON-NLS-1$
+				sep = "\t";
 			}
 			else if (semicolonRadio.isSelected())
 			{
-				sep = ";"; //$NON-NLS-1$
+				sep = ";";
 			}
 			else if (commaRadio.isSelected())
 			{
-				sep = ","; //$NON-NLS-1$
+				sep = ",";
 			}
 			else if (spaceRadio.isSelected())
 			{
-				sep = " "; //$NON-NLS-1$
+				sep = " ";
 			}
-			state.setProperty("separator", sep); //$NON-NLS-1$
+			state.setProperty("separator", sep);
 		}
 	}
 
@@ -340,7 +340,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 	public String getNextPanelName()
 	{
 		if (otherRadio.isSelected()) state.setProperty("separator", otherSeparator.getText());
-		return "SpecifyFilePanel"; //$NON-NLS-1$
+		return "SpecifyFilePanel";
 	}
 
 	public boolean isDone()
@@ -352,7 +352,7 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 		}
 		else
 		{
-			state.setProperty("dataProviderIDs", dlm); //$NON-NLS-1$
+			state.setProperty("dataProviderIDs", dlm);
 			return true;
 		}
 	}
@@ -365,8 +365,8 @@ public class ExportSpecifyDestinationPanel extends JPanel implements ActionListe
 			{
 				try
 				{
-					parent.blockGUI(Messages.getString("servoy.plugin.export.status.buildingUI")); //$NON-NLS-1$
-					IFoundSetInternal data = (IFoundSetInternal)state.getProperty("foundset"); //$NON-NLS-1$
+					parent.blockGUI(Messages.getString("servoy.plugin.export.status.buildingUI"));
+					IFoundSetInternal data = (IFoundSetInternal)state.getProperty("foundset");
 					if (data != null && data.getTable() != null)
 					{
 						dpe.setDefinedTable(data.getTable());

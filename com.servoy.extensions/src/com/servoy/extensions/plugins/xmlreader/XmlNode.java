@@ -29,7 +29,6 @@ import com.servoy.j2db.scripting.IScriptable;
 /**
  * @author jcompagner
  */
-@SuppressWarnings("nls")
 @ServoyDocumented
 public class XmlNode implements IScriptable
 {

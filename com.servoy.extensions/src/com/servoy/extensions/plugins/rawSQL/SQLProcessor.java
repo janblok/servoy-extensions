@@ -54,7 +54,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Raw SQL Plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "Raw SQL Plugin");
 		return props;
 	}
 
@@ -67,7 +67,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 		application = app;
 		try
 		{
-			app.registerRMIService("servoy.ISQLService", this); //$NON-NLS-1$
+			app.registerRMIService("servoy.ISQLService", this);
 		}
 		catch (Exception e)
 		{
@@ -90,7 +90,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		Map<String, String> req = new HashMap<String, String>();
-		req.put("servoy.rawSQL.allowClientCacheFlushes", "In case of performance problem you might want to disable this (true/false)"); //$NON-NLS-1$ //$NON-NLS-2$
+		req.put("servoy.rawSQL.allowClientCacheFlushes", "In case of performance problem you might want to disable this (true/false)");
 		return req;
 	}
 
@@ -202,7 +202,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 
 	public boolean flushAllClientsCache(String client_id, boolean notifySelf, String server_name, String table, String tid) throws RemoteException
 	{
-		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true"))) //$NON-NLS-1$ //$NON-NLS-2$
+		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true")))
 		{
 			return notifyDataChange(client_id, notifySelf, server_name, table, null, 0, tid);
 		}
@@ -214,7 +214,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 	{
 		if (!checkAccess(client_id)) return false;
 
-		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true"))) //$NON-NLS-1$ //$NON-NLS-2$
+		if (Utils.getAsBoolean(application.getSettings().getProperty("servoy.rawSQL.allowClientCacheFlushes", "true")))
 		{
 			return ApplicationServerRegistry.get().getDataServer().notifyDataChange(notifySelf ? null : client_id, server_name, tableName, pks, action,
 				transaction_id);
@@ -228,7 +228,7 @@ public class SQLProcessor implements ISQLService, IServerPlugin
 		boolean access = application.isServerProcess(clientId) || application.isAuthenticated(clientId);
 		if (!access)
 		{
-			Debug.warn("Rejected unauthenticated access"); //$NON-NLS-1$
+			Debug.warn("Rejected unauthenticated access");
 		}
 		return access;
 	}

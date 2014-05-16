@@ -39,7 +39,7 @@ import com.servoy.j2db.util.Utils;
  */
 public class PDFPrinterJob extends PrinterJob
 {
-	private String jobName = "pdfJob"; //$NON-NLS-1$
+	private String jobName = "pdfJob";
 	private Pageable printableDocument;
 	private final boolean isMetaPrintJob;
 	private Document document;
@@ -131,22 +131,22 @@ public class PDFPrinterJob extends PrinterJob
 	private float pageMargin(String side, PageFormat pf)
 	{
 		float margin = 0.0f;
-		if (side.equals("L")) //$NON-NLS-1$
+		if (side.equals("L"))
 		{
 			margin = d2f(pf.getImageableX());
 			return margin;
 		}
-		if (side.equals("T")) //$NON-NLS-1$
+		if (side.equals("T"))
 		{
 			margin = d2f(pf.getImageableY());
 			return margin;
 		}
-		if (side.equals("R")) //$NON-NLS-1$
+		if (side.equals("R"))
 		{
 			margin = d2f(pf.getWidth() - pf.getImageableX() - pf.getImageableWidth());
 			return margin;
 		}
-		if (side.equals("B")) //$NON-NLS-1$
+		if (side.equals("B"))
 		margin = d2f(pf.getHeight() - pf.getImageableY() - pf.getImageableHeight());
 		return margin;
 	}
@@ -163,9 +163,9 @@ public class PDFPrinterJob extends PrinterJob
 				{
 					Printable printable = printableDocument.getPrintable(0);
 					PageFormat pf = printableDocument.getPageFormat(0);
-					document = new Document(pageSize(pf), pageMargin("L", pf), //$NON-NLS-1$
-						pageMargin("R", pf), pageMargin("T", pf), //$NON-NLS-1$//$NON-NLS-2$
-						pageMargin("B", pf)); //$NON-NLS-1$
+					document = new Document(pageSize(pf), pageMargin("L", pf),
+						pageMargin("R", pf), pageMargin("T", pf),
+						pageMargin("B", pf));
 					// we create a writer that listens to the document and
 					// directs a PDF-stream to a file
 					writer = PdfWriter.getInstance(document, os);
@@ -183,9 +183,9 @@ public class PDFPrinterJob extends PrinterJob
 					Printable printable = printableDocument.getPrintable(i);
 					PageFormat pf = printableDocument.getPageFormat(i);
 					document.setPageSize(pageSize(pf));
-					document.setMargins(pageMargin("L", pf), //$NON-NLS-1$
-						pageMargin("R", pf), pageMargin("T", pf), //$NON-NLS-1$//$NON-NLS-2$
-						pageMargin("B", pf)); //$NON-NLS-1$
+					document.setMargins(pageMargin("L", pf),
+						pageMargin("R", pf), pageMargin("T", pf),
+						pageMargin("B", pf));
 					cb.saveState();
 					Graphics2D g2d = cb.createGraphics((int)pf.getWidth(), (int)pf.getHeight(), mapper);
 					printable.print(g2d, pf, i);

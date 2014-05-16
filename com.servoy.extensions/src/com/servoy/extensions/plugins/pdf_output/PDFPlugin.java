@@ -35,7 +35,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class PDFPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "pdf_output"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "pdf_output";
 
 	private IClientPluginAccess access;
 	private PDFProvider impl;
@@ -71,7 +71,7 @@ public class PDFPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.pdfoutput.displayname")); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.pdfoutput.displayname"));
 		return props;
 	}
 
@@ -112,7 +112,7 @@ public class PDFPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/pdf.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/pdf.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

@@ -51,7 +51,7 @@ public class ConverterPlugin implements IClientPlugin, IColumnConverterProvider,
 
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/converter.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/converter.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

@@ -136,7 +136,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		jPanel2.add(Box.createHorizontalGlue());
 		jPanel2.add(Box.createRigidArea(new Dimension(J2DBClient.BUTTON_SPACING, 3)));
 
-		wrongWordLabel = new JLabel(""); //$NON-NLS-1$
+		wrongWordLabel = new JLabel("");
 		wrongWordLabel.setForeground(Color.red);
 		jPanel2.add(wrongWordLabel);
 		jPanel2.add(Box.createHorizontalGlue());
@@ -276,7 +276,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 		if (event.getSuggestions().size() > 0)
 		{
 			SpellCorrection s = event.getSuggestions().get(0);
-			words = s.toString().split("\\s+"); //$NON-NLS-1$
+			words = s.toString().split("\\s+");
 
 			for (String w : words)
 			{
@@ -294,7 +294,7 @@ public class SpellCheckerForm extends JPanel implements ActionListener, ListSele
 //		else
 //		{
 //			this.setVisible(false);
-//			JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling", JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$//$NON-NLS-2$
+//			JOptionPane.showMessageDialog(this, "The spelling check is complete.", "Spelling", JOptionPane.INFORMATION_MESSAGE);
 //		}
 		spellEvent.setReplaceWord(checkText.getText());
 	}

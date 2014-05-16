@@ -43,8 +43,8 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 	private Map<Integer, IMenuItem> callableMenuItems;
 	private final IWebClientPluginAccess access;
 
-	private static final ResourceReference servoy_menu_css = new CompressedResourceReference(MenuExecutorBehavior.class, "res/servoy-menu.css"); //$NON-NLS-1$
-	private static final ResourceReference map_gif = new ResourceReference(MenuExecutorBehavior.class, "res/map.gif"); //$NON-NLS-1$
+	private static final ResourceReference servoy_menu_css = new CompressedResourceReference(MenuExecutorBehavior.class, "res/servoy-menu.css");
+	private static final ResourceReference map_gif = new ResourceReference(MenuExecutorBehavior.class, "res/map.gif");
 
 	/**
 	 * @param webDataHtmlView
@@ -65,14 +65,14 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 
 		if (((WebRequest)RequestCycle.get().getRequest()).isAjax())
 		{
-			response.renderJavascript("if (typeof(YAHOO_config) == \"undefined\") {YAHOO_config = {};}YAHOO_config.injecting = true;", "yahoo_config"); //$NON-NLS-1$ //$NON-NLS-2$
+			response.renderJavascript("if (typeof(YAHOO_config) == \"undefined\") {YAHOO_config = {};}YAHOO_config.injecting = true;", "yahoo_config");
 		}
 
 		response.renderJavascriptReference(YUILoader.JS_YAHOO_DOM_EVENT);
 		response.renderJavascriptReference(YUILoader.JS_CONTAINER_CORE);
 		response.renderJavascriptReference(YUILoader.JS_MENU);
 		response.renderJavascript(
-			"function svy_popmenu_click(psType,psArgs,psValue){wicketAjaxGet(psValue)};var oMenu = new YAHOO.widget.Menu('basicmenu',{zIndex : " + (PopupPanel.ZINDEX + 1) + "});", "yahoomenu"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			"function svy_popmenu_click(psType,psArgs,psValue){wicketAjaxGet(psValue)};var oMenu = new YAHOO.widget.Menu('basicmenu',{zIndex : " + (PopupPanel.ZINDEX + 1) + "});", "yahoomenu");
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 	{
 		if (callableMenuItems != null)
 		{
-			int mhash = Utils.getAsInteger(RequestCycle.get().getRequest().getParameter("m")); //$NON-NLS-1$
+			int mhash = Utils.getAsInteger(RequestCycle.get().getRequest().getParameter("m"));
 			IMenuItem mi = callableMenuItems.get(new Integer(mhash));
 			// free callableMenuItems memory, are to be used only in 1 respond.
 			callableMenuItems = null;
@@ -105,7 +105,7 @@ public final class MenuExecutorBehavior extends AbstractServoyDefaultAjaxBehavio
 		StringBuilder asb = new StringBuilder(url.length() + 30);
 //		asb.append("wicketAjaxGet(\"");
 		asb.append(url);
-		asb.append("&m="); //$NON-NLS-1$
+		asb.append("&m=");
 		asb.append(hashcode);
 //		asb.append("\")");
 		return asb;

@@ -54,7 +54,7 @@ public class RequestSAXParser
 
 			SAXHandler handler = new SAXHandler();
 
-			InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes("UTF-8")); //$NON-NLS-1$
+			InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes("UTF-8"));
 
 			parser.parse(inputStream, handler);
 
@@ -86,22 +86,22 @@ public class RequestSAXParser
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attrs) throws SAXException
 		{
-			tempVal = ""; //$NON-NLS-1$
-			if (qName.equals("spellrequest")) //$NON-NLS-1$
+			tempVal = "";
+			if (qName.equals("spellrequest"))
 			{
 				spellRequest = new SpellRequest();
-				spellRequest.setIgnoreallcaps(Integer.parseInt(attrs.getValue("ignoreallcaps"))); //$NON-NLS-1$
-				spellRequest.setIgnoredigits(Integer.parseInt(attrs.getValue("ignoredigits"))); //$NON-NLS-1$
-				spellRequest.setIgnoredups(Integer.parseInt(attrs.getValue("ignoredups"))); //$NON-NLS-1$
-				spellRequest.setTextalreadyclipped(Integer.parseInt(attrs.getValue("textalreadyclipped"))); //$NON-NLS-1$
+				spellRequest.setIgnoreallcaps(Integer.parseInt(attrs.getValue("ignoreallcaps")));
+				spellRequest.setIgnoredigits(Integer.parseInt(attrs.getValue("ignoredigits")));
+				spellRequest.setIgnoredups(Integer.parseInt(attrs.getValue("ignoredups")));
+				spellRequest.setTextalreadyclipped(Integer.parseInt(attrs.getValue("textalreadyclipped")));
 			}
-			else if (qName.equals("text")) //$NON-NLS-1$
+			else if (qName.equals("text"))
 			{
-				spellRequest.setText(attrs.getValue("text")); //$NON-NLS-1$
+				spellRequest.setText(attrs.getValue("text"));
 			}
 			else
 			{
-				throw new IllegalArgumentException("Element '" + qName + "' is not allowed here"); //$NON-NLS-1$//$NON-NLS-2$
+				throw new IllegalArgumentException("Element '" + qName + "' is not allowed here");
 			}
 		}
 
@@ -114,7 +114,7 @@ public class RequestSAXParser
 		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException
 		{
-			if (qName.equalsIgnoreCase("text")) //$NON-NLS-1$
+			if (qName.equalsIgnoreCase("text"))
 			{
 				spellRequest.setText(tempVal);
 			}

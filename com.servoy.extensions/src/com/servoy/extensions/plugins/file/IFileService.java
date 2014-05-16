@@ -28,8 +28,7 @@ import java.util.UUID;
  * 
  * @author Servoy Stuff
  * @since Servoy 5.2
- */
-@SuppressWarnings("nls")
+ */
 public interface IFileService extends Remote
 {
 	@Deprecated

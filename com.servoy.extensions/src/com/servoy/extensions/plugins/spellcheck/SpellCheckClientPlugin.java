@@ -58,7 +58,7 @@ import com.servoy.j2db.util.toolbar.ToolbarButton;
 
 public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 {
-	public static final String PLUGIN_NAME = "spellcheck"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "spellcheck";
 
 	private IClientPluginAccess application;
 	private JButton check;
@@ -88,10 +88,10 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		if (tbp != null)
 		{
 			Toolbar toolBar = null;
-			Toolbar textToolBar = tbp.getToolBar("text"); //$NON-NLS-1$
+			Toolbar textToolBar = tbp.getToolBar("text");
 			if (textToolBar == null)
 			{
-				toolBar = tbp.createToolbar("spellcheck", "spellcheck"); //$NON-NLS-1$ //$NON-NLS-2$
+				toolBar = tbp.createToolbar("spellcheck", "spellcheck");
 			}
 			else
 			//else add to text toolbar if possible
@@ -108,7 +108,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 				toolBar.add(check);
 				check.setEnabled(false);
 			}
-			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "false"); //$NON-NLS-1$//$NON-NLS-2$
+			application.getSettings().setProperty("plugin.spellcheck.googleServiceProvider", "false");
 			SpellCheckerPreferencePanel.setDesiredLanguage(SpellCheckerUtils.DEFAULT);
 		}
 	}
@@ -163,7 +163,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 					{
 						return;//no valid window parent
 					}
-					gui.setName("SpellingCheckDialog"); //$NON-NLS-1$
+					gui.setName("SpellingCheckDialog");
 					if (!Settings.getInstance().loadBounds(gui))
 					{
 						gui.setLocationRelativeTo(currentWindow);
@@ -203,7 +203,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			Locale locale = Locale.ENGLISH;
 			if (language.equals(LANGUAGES.DUTCH))
 			{
-				locale = new Locale("nl"); //$NON-NLS-1$
+				locale = new Locale("nl");
 			}
 			else if (language.equals(LANGUAGES.GERMAN))
 			{
@@ -215,7 +215,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			}
 			else if (language.equalsIgnoreCase(LANGUAGES.SPANISH))
 			{
-				locale = new Locale("es"); //$NON-NLS-1$
+				locale = new Locale("es");
 			}
 			messages = ResourceBundle.getBundle(SpellCheckerUtils.MESSAGES, locale);
 		}
@@ -240,21 +240,21 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 		try
 		{
 			String selectedLang = (optLang != null) ? optLang : SpellCheckerPreferencePanel.getDesiredLanguage();
-			if (Utils.getAsBoolean(application.getSettings().getProperty("plugin.spellcheck.googleServiceProvider"))) //$NON-NLS-1$ 
+			if (Utils.getAsBoolean(application.getSettings().getProperty("plugin.spellcheck.googleServiceProvider")))
 			{
 				String language = GoogleSpellUtils.getBasicLanguageName(selectedLang);
-				strUrl = "https://www.google.com/tbproxy/spell?lang=" + language + "&hl=" + language; //$NON-NLS-1$ //$NON-NLS-2$
+				strUrl = "https://www.google.com/tbproxy/spell?lang=" + language + "&hl=" + language;
 			}
 			else
 			{
 				URL url = getPluginAccess().getServerURL();
-				URL serviceURL = new URL(url, "servoy-service/" + SpellCheckServerPlugin.WEBSERVICE_NAME); //$NON-NLS-1$
+				URL serviceURL = new URL(url, "servoy-service/" + SpellCheckServerPlugin.WEBSERVICE_NAME);
 				strUrl = serviceURL.toString();
 			}
 
 			ServiceHandler serviceHandler = new ServiceHandler(strUrl);
 
-			String[] words = text.split("[\\p{Space}\\p{Punct}]+"); //$NON-NLS-1$
+			String[] words = text.split("[\\p{Space}\\p{Punct}]+");
 			for (String eachWord : words)
 			{
 				String xmlString = serviceHandler.handleTextSpellChecking(eachWord, selectedLang);
@@ -317,7 +317,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 			case SpellCheckEvent.CANCEL :
 				break;
 			default :
-				throw new IllegalArgumentException("Unhandled case."); //$NON-NLS-1$
+				throw new IllegalArgumentException("Unhandled case.");
 		}
 
 		if (df != null) try
@@ -341,7 +341,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Spellcheck"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "Spellcheck");
 		return props;
 	}
 
@@ -368,7 +368,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 
 	public Icon getImage()
 	{
-		URL iconUrl = this.getClass().getResource("images/spell.gif"); //$NON-NLS-1$
+		URL iconUrl = this.getClass().getResource("images/spell.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -381,7 +381,7 @@ public class SpellCheckClientPlugin implements IClientPlugin, ActionListener
 
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		if (evt.getPropertyName().equals("solution") && check != null) //$NON-NLS-1$
+		if (evt.getPropertyName().equals("solution") && check != null)
 		{
 			check.setEnabled(evt.getNewValue() != null);
 		}

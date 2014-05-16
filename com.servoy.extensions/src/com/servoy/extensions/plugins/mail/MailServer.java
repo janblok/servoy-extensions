@@ -61,7 +61,6 @@ import com.servoy.j2db.util.UUID;
  * 
  * @author jblok
  */
-@SuppressWarnings("nls")
 public class MailServer implements IMailService, IServerPlugin
 {
 	private Properties settings;

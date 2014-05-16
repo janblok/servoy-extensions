@@ -35,7 +35,7 @@ public class PDFFormsPlugin implements IServerPlugin
 {
 	public void initialize(IServerAccess app) throws PluginException
 	{
-		app.registerWebService("pdf_forms", new PDFServlet(app)); //$NON-NLS-1$
+		app.registerWebService("pdf_forms", new PDFServlet(app));
 	}
 
 	public PreferencePanel[] getPreferencePanels()
@@ -46,8 +46,8 @@ public class PDFFormsPlugin implements IServerPlugin
 	public Map getRequiredPropertyNames()
 	{
 		HashMap req = new HashMap();
-		req.put(PDFServlet.SERVER_NAME_PROPERTY, "The name of the server to locate the required pdf_form_values,pdf_templates,pdf_actions SQL tabels"); //$NON-NLS-1$ 
-		req.put(PDFServlet.TEMPLATE_LOCATION_PROPERTY, "The url to retrieve the pdf templates(using file name from database)"); //$NON-NLS-1$ 
+		req.put(PDFServlet.SERVER_NAME_PROPERTY, "The name of the server to locate the required pdf_form_values,pdf_templates,pdf_actions SQL tabels");
+		req.put(PDFServlet.TEMPLATE_LOCATION_PROPERTY, "The url to retrieve the pdf templates(using file name from database)");
 		return req;
 	}
 
@@ -62,7 +62,7 @@ public class PDFFormsPlugin implements IServerPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "PDF Forms Plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "PDF Forms Plugin");
 		return props;
 	}
 }

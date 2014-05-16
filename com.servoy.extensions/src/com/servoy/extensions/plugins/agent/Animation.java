@@ -40,7 +40,7 @@ public class Animation
 	void loadAnimationMedia(String file, String namedSoundFile)
 	{
 		//		frame.setSoundLocation(owner.getResource(Agent.soundsDir+"/"+file+i+".au"));
-		image = owner.getImage(AgentImpl.imagesDir + "/" + file + ".gif"); //$NON-NLS-1$ //$NON-NLS-2$
+		image = owner.getImage(AgentImpl.imagesDir + "/" + file + ".gif");
 		try
 		{
 			tracker.addImage(image, 0);

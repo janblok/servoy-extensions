@@ -35,7 +35,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class DialogPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "dialogs"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "dialogs";
 
 	private IClientPluginAccess access;
 	private DialogProvider impl;
@@ -67,7 +67,7 @@ public class DialogPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.dialog.displayname")); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.dialog.displayname"));
 		return props;
 	}
 
@@ -108,7 +108,7 @@ public class DialogPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/dialogs.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/dialogs.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

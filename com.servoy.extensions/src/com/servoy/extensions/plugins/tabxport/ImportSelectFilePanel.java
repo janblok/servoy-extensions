@@ -56,7 +56,7 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 	{
 		this.parent = parent;
 		this.state = state;
-		setName("start"); //$NON-NLS-1$
+		setName("start");
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 
@@ -66,13 +66,13 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 //		fieldPanel.setSize(new Dimension(500,20));
 		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
 		fieldPanel.add(Box.createHorizontalGlue());
-		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseFile"))); //$NON-NLS-1$
+		fieldPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.chooseFile")));
 
-		JButton browse = new JButton(Messages.getString("servoy.button.browse")); //$NON-NLS-1$
-		browse.setActionCommand("browse"); //$NON-NLS-1$
+		JButton browse = new JButton(Messages.getString("servoy.button.browse"));
+		browse.setActionCommand("browse");
 		browse.addActionListener(this);
 
-		JLabel label = new JLabel(Messages.getString("servoy.plugin.import.selectFile"), SwingConstants.LEFT); //$NON-NLS-1$
+		JLabel label = new JLabel(Messages.getString("servoy.plugin.import.selectFile"), SwingConstants.LEFT);
 
 		fieldPanel.add(label);
 		fieldPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -92,7 +92,7 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 		// Get the "action command" of the event, and dispatch based on that.
 		// This method calls a lot of the interesting methods in this class.
 		String command = event.getActionCommand();
-		if (command.equals("browse")) browse(); //$NON-NLS-1$
+		if (command.equals("browse")) browse();
 	}
 
 	private void browse()
@@ -106,9 +106,9 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 //			else
 //			{
 			JFileChooser fc = new JFileChooser();
-			FileNameFilter csv = new FileNameFilter("csv"); //$NON-NLS-1$
+			FileNameFilter csv = new FileNameFilter("csv");
 			fc.addChoosableFileFilter(csv);
-			fc.addChoosableFileFilter(new FileNameFilter("tab")); //$NON-NLS-1$
+			fc.addChoosableFileFilter(new FileNameFilter("tab"));
 			fc.setFileFilter(csv);
 			IApplication application = null;
 			String initialPath = null;
@@ -153,7 +153,7 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 
 	public String getNextPanelName()
 	{
-		return "SeparatorPanel"; //$NON-NLS-1$
+		return "SeparatorPanel";
 	}
 
 	public boolean isDone()
@@ -163,7 +163,7 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 		{
 			FileInputStream is = new FileInputStream(selectedFile);
 			Vector lines = new Vector();
-			state.setProperty("lines", lines); //$NON-NLS-1$
+			state.setProperty("lines", lines);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String line;
 			// only read first 200 lines..
@@ -175,7 +175,7 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 			if (line != null)
 			{
 				lines.addElement(line);
-				state.setProperty("reader", br); //$NON-NLS-1$
+				state.setProperty("reader", br);
 			}
 			else
 			{
@@ -186,7 +186,7 @@ public class ImportSelectFilePanel extends JPanel implements ActionListener, IWi
 		}
 		catch (Exception ex)
 		{
-			parent.reportError(Messages.getString("servoy.plugin.import.fileLoad.exception"), ex); //$NON-NLS-1$
+			parent.reportError(Messages.getString("servoy.plugin.import.fileLoad.exception"), ex);
 			return false;
 		}
 	}

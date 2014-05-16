@@ -189,7 +189,7 @@ public abstract class AbstractFile implements IAbstractFile
 			}
 			catch (Exception e)
 			{
-				Debug.error("Error reading the file " + file.getName() + "for getting the content type", e); //$NON-NLS-1$ //$NON-NLS-2$
+				Debug.error("Error reading the file " + file.getName() + "for getting the content type", e);
 			}
 		}
 		return null;

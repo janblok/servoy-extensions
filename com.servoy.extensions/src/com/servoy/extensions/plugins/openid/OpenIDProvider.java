@@ -49,8 +49,7 @@ import com.servoy.j2db.util.Debug;
 
 /**
  * @author jblok,jcompagner
- */
-@SuppressWarnings("nls")
+ */
 @ServoyDocumented(publicName = OpenIDPlugin.PLUGIN_NAME, scriptingName = "plugins." + OpenIDPlugin.PLUGIN_NAME)
 public class OpenIDProvider implements IScriptable, IReturnedTypesProvider
 {

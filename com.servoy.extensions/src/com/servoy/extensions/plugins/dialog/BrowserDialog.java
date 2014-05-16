@@ -29,8 +29,7 @@ import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
  * @author jblok
  */
 public class BrowserDialog
-{
-	@SuppressWarnings("nls")
+{
 	public static void alert(IClientPluginAccess clientPluginAccess, String msg)
 	{
 		if (clientPluginAccess instanceof IWebClientPluginAccess)

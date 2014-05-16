@@ -45,15 +45,15 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 	{
 		try
 		{
-			PropertyDescriptor name = new PropertyDescriptor("name", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor border = new PropertyDescriptor("borderType", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor foreground = new PropertyDescriptor("foreground", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor background = new PropertyDescriptor("background", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor transparent = new PropertyDescriptor("transparent", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor font = new PropertyDescriptor("font", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor loc = new PropertyDescriptor("location", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor size = new PropertyDescriptor("size", DBTreeView.class); //$NON-NLS-1$
-			PropertyDescriptor styleClass = new PropertyDescriptor("styleClass", DBTreeView.class); //$NON-NLS-1$
+			PropertyDescriptor name = new PropertyDescriptor("name", DBTreeView.class);
+			PropertyDescriptor border = new PropertyDescriptor("borderType", DBTreeView.class);
+			PropertyDescriptor foreground = new PropertyDescriptor("foreground", DBTreeView.class);
+			PropertyDescriptor background = new PropertyDescriptor("background", DBTreeView.class);
+			PropertyDescriptor transparent = new PropertyDescriptor("transparent", DBTreeView.class);
+			PropertyDescriptor font = new PropertyDescriptor("font", DBTreeView.class);
+			PropertyDescriptor loc = new PropertyDescriptor("location", DBTreeView.class);
+			PropertyDescriptor size = new PropertyDescriptor("size", DBTreeView.class);
+			PropertyDescriptor styleClass = new PropertyDescriptor("styleClass", DBTreeView.class);
 			PropertyEditorHint styleClassEditorHint = new PropertyEditorHint(PropertyEditorClass.styleclass);
 			styleClassEditorHint.setOption(PropertyEditorOption.styleLookupName, DBTreeView.ELEMENT_TYPE.toLowerCase());
 			styleClass.setValue(PropertyEditorHint.PROPERTY_EDITOR_HINT, styleClassEditorHint);
@@ -62,7 +62,7 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 		}
 		catch (Exception ex)
 		{
-			Debug.error("DBTreeViewBeanInfo: unexpected exeption: " + ex); //$NON-NLS-1$
+			Debug.error("DBTreeViewBeanInfo: unexpected exeption: " + ex);
 			return null;
 		}
 	}
@@ -84,7 +84,7 @@ public class DBTreeViewBeanInfo extends SimpleBeanInfo
 
 	protected void loadIcons()
 	{
-		icon16 = loadImage("res/icon/DBTreeView16.gif"); //$NON-NLS-1$
-		icon32 = loadImage("res/icon/DBTreeView32.gif"); //$NON-NLS-1$
+		icon16 = loadImage("res/icon/DBTreeView16.gif");
+		icon32 = loadImage("res/icon/DBTreeView32.gif");
 	}
 }

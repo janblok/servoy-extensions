@@ -48,7 +48,7 @@ import com.servoy.j2db.util.Debug;
 
 public class SpellCheckServerPlugin implements IServerPlugin
 {
-	public static final String WEBSERVICE_NAME = "spellchecker"; //$NON-NLS-1$
+	public static final String WEBSERVICE_NAME = "spellchecker";
 	private IServerAccess serverAccess;
 
 	public SpellCheckServerPlugin()
@@ -74,7 +74,7 @@ public class SpellCheckServerPlugin implements IServerPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Spellchecker Plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "Spellchecker Plugin");
 		return props;
 	}
 
@@ -103,9 +103,9 @@ public class SpellCheckServerPlugin implements IServerPlugin
 	 */
 	private String removeLanguageFromRequest(String text)
 	{
-		int startIndex = text.lastIndexOf("<rslang>"); //$NON-NLS-1$
-		int l = "</rslang>".length();//$NON-NLS-1$
-		int endIndex = text.indexOf("</rslang>"); //$NON-NLS-1$
+		int startIndex = text.lastIndexOf("<rslang>");
+		int l = "</rslang>".length();
+		int endIndex = text.indexOf("</rslang>");
 		return text.substring(0, startIndex) + text.substring(endIndex + l, text.length());
 	}
 
@@ -169,9 +169,9 @@ public class SpellCheckServerPlugin implements IServerPlugin
 
 	private String parseForLanguage(String xmlString)
 	{
-		int startIndex = xmlString.lastIndexOf("<rslang>"); //$NON-NLS-1$
-		int l = "<rslang>".length();//$NON-NLS-1$
-		int endIndex = xmlString.indexOf("</rslang>"); //$NON-NLS-1$
+		int startIndex = xmlString.lastIndexOf("<rslang>");
+		int l = "<rslang>".length();
+		int endIndex = xmlString.indexOf("</rslang>");
 		if (startIndex == -1 || endIndex == -1) return SpellCheckerUtils.DEFAULT;
 		else return xmlString.substring(startIndex + l, endIndex);
 	}

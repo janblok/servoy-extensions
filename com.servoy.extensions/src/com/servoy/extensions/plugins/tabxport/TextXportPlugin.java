@@ -41,7 +41,7 @@ import com.servoy.j2db.smart.ISmartClientPluginAccess;
  */
 public class TextXportPlugin implements IClientPlugin, ActionListener
 {
-	public static final String PLUGIN_NAME = "textxport"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "textxport";
 
 	private IApplication application;
 	private Enabler en;
@@ -66,9 +66,9 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 			JMenuItem exp = null;
 			if (export_Menu != null)
 			{
-				exp = new JMenuItem(Messages.getString("servoy.plugin.tabxport.menuitem.toTextFile")); //$NON-NLS-1$
+				exp = new JMenuItem(Messages.getString("servoy.plugin.tabxport.menuitem.toTextFile"));
 				exp.addActionListener(this);
-				exp.setActionCommand("export_tab_file"); //$NON-NLS-1$
+				exp.setActionCommand("export_tab_file");
 				export_Menu.add(exp);
 			}
 
@@ -76,8 +76,8 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 			JMenuItem imp = null;
 			if (import_Menu != null)
 			{
-				imp = new JMenuItem(Messages.getString("servoy.plugin.tabxport.menuitem.fromTextFile")); //$NON-NLS-1$
-				imp.setActionCommand("import_tab_file"); //$NON-NLS-1$
+				imp = new JMenuItem(Messages.getString("servoy.plugin.tabxport.menuitem.fromTextFile"));
+				imp.setActionCommand("import_tab_file");
 				imp.addActionListener(this);
 				import_Menu.add(imp);
 			}
@@ -88,14 +88,14 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.tabxport.displayname")); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, Messages.getString("servoy.plugin.tabxport.displayname"));
 		return props;
 	}
 
 	public void actionPerformed(ActionEvent e)
 	{
 		String cmd = e.getActionCommand();
-		if ("export_tab_file".equals(cmd)) //$NON-NLS-1$
+		if ("export_tab_file".equals(cmd))
 		{
 			try
 			{
@@ -104,10 +104,10 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 			}
 			catch (Exception ex)
 			{
-				application.reportError(Messages.getString("servoy.plugin.export.exception"), ex); //$NON-NLS-1$
+				application.reportError(Messages.getString("servoy.plugin.export.exception"), ex);
 			}
 		}
-		else if ("import_tab_file".equals(cmd)) //$NON-NLS-1$
+		else if ("import_tab_file".equals(cmd))
 		{
 			try
 			{
@@ -116,7 +116,7 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 			}
 			catch (Exception ex)
 			{
-				application.reportError(Messages.getString("servoy.plugin.import.exception"), ex); //$NON-NLS-1$
+				application.reportError(Messages.getString("servoy.plugin.import.exception"), ex);
 			}
 		}
 	}
@@ -162,7 +162,7 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/docexport.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/docexport.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -175,7 +175,7 @@ public class TextXportPlugin implements IClientPlugin, ActionListener
 
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		if (en != null && "solution".equals(evt.getPropertyName())) //$NON-NLS-1$
+		if (en != null && "solution".equals(evt.getPropertyName()))
 		{
 			en.setEnabled(true);//restore for new solution
 		}

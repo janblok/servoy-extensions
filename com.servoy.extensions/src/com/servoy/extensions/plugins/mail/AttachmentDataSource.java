@@ -62,6 +62,6 @@ class AttachmentDataSource implements DataSource
 
 	public OutputStream getOutputStream() throws IOException
 	{
-		throw new IOException("not supported to write"); //$NON-NLS-1$
+		throw new IOException("not supported to write");
 	}
 }

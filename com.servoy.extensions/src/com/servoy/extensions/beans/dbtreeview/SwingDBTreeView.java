@@ -191,7 +191,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 
 	public String getId()
 	{
-		return (String)getClientProperty("Id"); //$NON-NLS-1$
+		return (String)getClientProperty("Id");
 	}
 
 	/*
@@ -438,7 +438,7 @@ public class SwingDBTreeView extends EnableScrollPanel implements TreeSelectionL
 	 */
 	public void js_setToolTipText(String text)
 	{
-		if (text != null && text.startsWith("i18n:")) //$NON-NLS-1$
+		if (text != null && text.startsWith("i18n:"))
 		{
 			text = Messages.getString(text);
 		}

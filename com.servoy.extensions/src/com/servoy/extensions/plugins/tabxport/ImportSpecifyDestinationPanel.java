@@ -80,13 +80,13 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 		this.state = state;
 		this.application = app;
 
-		setName("SpecifyDestinationPanel"); //$NON-NLS-1$
+		setName("SpecifyDestinationPanel");
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 
 		jtable = new JTable();//columnsModel);
 		jtable.setPreferredScrollableViewportSize(new Dimension(500, 70));
-		jtable.setToolTipText(Messages.getString("servoy.plugin.import.columnTable.tooltip")); //$NON-NLS-1$
+		jtable.setToolTipText(Messages.getString("servoy.plugin.import.columnTable.tooltip"));
 
 		//Create the scroll pane and add the table to it.
 		JScrollPane scrollPane = new JScrollPane(jtable);
@@ -94,21 +94,21 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 		// Lay out topmost Part pane
 		JPanel formatPanel = new JPanel();
 		formatPanel.setLayout(new BorderLayout(5, 5));
-		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.specifyDateFormat.title"))); //$NON-NLS-1$
+		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.specifyDateFormat.title")));
 		JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		//        p1.setLayout (new FlowLayout (FlowLayout.LEFT, 0, 0));
-		dateFormat = new JComboBox(new Object[] { "dd-MM-yyyy", "dd/MM/yyyy", "MM-dd-yyyy", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"MM/dd/yyyy", "dd-MM-yyyy HH:mm:ss", "MM-dd-yyyy hh:mm:ss", "dd-MM-yyyy HH:mm", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		"MM-dd-yyyy hh:mm", "yyyy-MM-dd HH:mm:ss.S" }); //$NON-NLS-1$ //$NON-NLS-2$
-		dateFormat.setSelectedItem("yyyy-MM-dd HH:mm:ss.S"); //$NON-NLS-1$
+		dateFormat = new JComboBox(new Object[] { "dd-MM-yyyy", "dd/MM/yyyy", "MM-dd-yyyy",
+		"MM/dd/yyyy", "dd-MM-yyyy HH:mm:ss", "MM-dd-yyyy hh:mm:ss", "dd-MM-yyyy HH:mm",
+		"MM-dd-yyyy hh:mm", "yyyy-MM-dd HH:mm:ss.S" });
+		dateFormat.setSelectedItem("yyyy-MM-dd HH:mm:ss.S");
 
 		dateFormat.setEditable(true);
 		dateFormat.setPreferredSize(new Dimension(200, 24));
 		dateFormat.setSize(new Dimension(200, 24));
 		p1.add(dateFormat);
 
-		IApplication application = (IApplication)state.getProperty("application"); //$NON-NLS-1$
-		Table table = (Table)state.getProperty("table"); //$NON-NLS-1$
+		IApplication application = (IApplication)state.getProperty("application");
+		Table table = (Table)state.getProperty("table");
 		IServer server = table == null ? null : application.getSolution().getServer(table.getServerName());
 
 		Map<String, IServer> sp = application.getSolution().getServerProxies();
@@ -145,7 +145,7 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 
 		JPanel borderPanel = new JPanel();
 		borderPanel.setLayout(new BorderLayout());
-		borderPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.specifyMapping.title"))); //$NON-NLS-1$
+		borderPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.import.specifyMapping.title")));
 		borderPanel.add(scrollPane, BorderLayout.CENTER);
 		add(borderPanel, BorderLayout.CENTER);
 	}
@@ -169,8 +169,8 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 		@Override
 		public String getColumnName(int col)
 		{
-			if (col == 0) return Messages.getString("servoy.plugin.import.columnname.importField"); //$NON-NLS-1$
-			else return Messages.getString("servoy.plugin.import.columnname.databaseField"); //$NON-NLS-1$
+			if (col == 0) return Messages.getString("servoy.plugin.import.columnname.importField");
+			else return Messages.getString("servoy.plugin.import.columnname.databaseField");
 		}
 
 		public int getRowCount()
@@ -206,7 +206,7 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 
 	public String getNextPanelName()
 	{
-		return "TransferPanel"; //$NON-NLS-1$
+		return "TransferPanel";
 	}
 
 	public boolean isDone()
@@ -228,8 +228,8 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 		}
 		if (bcontinue)
 		{
-			state.setProperty("columns", columnsModel); //$NON-NLS-1$
-			state.setProperty("dateFormat", dateFormat.getSelectedItem()); //$NON-NLS-1$
+			state.setProperty("columns", columnsModel);
+			state.setProperty("dateFormat", dateFormat.getSelectedItem());
 		}
 
 		return bcontinue;
@@ -243,8 +243,8 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 			{
 				try
 				{
-					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData")); //$NON-NLS-1$
-					AbstractTableModel data = (AbstractTableModel)state.getProperty("data"); //$NON-NLS-1$
+					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData"));
+					AbstractTableModel data = (AbstractTableModel)state.getProperty("data");
 					columnsModel = new SpecialTableModel(data);
 
 					if (columnsModel.getRowCount() != columnsData.size())
@@ -261,10 +261,10 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 					columnColumn.setCellEditor(new DefaultCellEditor(columns));
 					if (columns.getItemCount() == 0)
 					{
-						columns.addItem("-none-"); //$NON-NLS-1$
+						columns.addItem("-none-");
 						try
 						{
-							Table possTable = (Table)state.getProperty("table"); //$NON-NLS-1$
+							Table possTable = (Table)state.getProperty("table");
 							if (possTable != null)
 							{
 								Iterator e1 = possTable.getColumnsSortedByName();
@@ -361,7 +361,7 @@ public class ImportSpecifyDestinationPanel extends JPanel implements IWizardPane
 					if (ce != null) ce.stopCellEditing();
 					columns.removeAllItems();
 					Table table = (Table)server.getTable((String)tableCombobox.getSelectedItem());
-					state.setProperty("table", table); //$NON-NLS-1$
+					state.setProperty("table", table);
 
 					SwingUtilities.invokeLater(needsToRunFirst(true));
 				}

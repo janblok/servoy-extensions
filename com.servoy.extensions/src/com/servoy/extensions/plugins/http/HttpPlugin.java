@@ -33,7 +33,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class HttpPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "http"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "http";
 
 	private IClientPluginAccess access;
 	private HttpProvider impl;
@@ -65,7 +65,7 @@ public class HttpPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "HTTP Plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "HTTP Plugin");
 		return props;
 	}
 
@@ -106,7 +106,7 @@ public class HttpPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/browse.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/browse.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

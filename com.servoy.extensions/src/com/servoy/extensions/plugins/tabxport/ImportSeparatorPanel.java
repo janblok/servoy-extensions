@@ -49,7 +49,7 @@ public class ImportSeparatorPanel extends JPanel implements IWizardPanel
 	{
 		this.parent = parent;
 		this.state = state;
-		setName("SeparatorPanel"); //$NON-NLS-1$
+		setName("SeparatorPanel");
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout());
 		// need to have a final local reference to the data vector in an enclosing block
@@ -59,14 +59,14 @@ public class ImportSeparatorPanel extends JPanel implements IWizardPanel
 		//Create the scroll pane and add the table to it. 
 		JScrollPane scrollPane = new JScrollPane(table_forPanel1);
 
-		JRadioButton useSeparator = new JRadioButton(Messages.getString("servoy.plugin.tabxport.useSeparator")); //$NON-NLS-1$
-		JRadioButton useFixedWidth = new JRadioButton(Messages.getString("servoy.plugin.tabxport.useFixedWidth")); //$NON-NLS-1$
+		JRadioButton useSeparator = new JRadioButton(Messages.getString("servoy.plugin.tabxport.useSeparator"));
+		JRadioButton useFixedWidth = new JRadioButton(Messages.getString("servoy.plugin.tabxport.useFixedWidth"));
 		ButtonGroup delimButtonGroup = new ButtonGroup();
 
 		// Lay out topmost Part pane
 		JPanel formatPanel = new JPanel();
 		formatPanel.setLayout(new BoxLayout(formatPanel, BoxLayout.Y_AXIS));
-		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.tabxport.format"))); //$NON-NLS-1$
+		formatPanel.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), Messages.getString("servoy.plugin.tabxport.format")));
 		formatPanel.add(useSeparator);
 		formatPanel.add(useFixedWidth);
 		useFixedWidth.setEnabled(false);
@@ -91,7 +91,7 @@ public class ImportSeparatorPanel extends JPanel implements IWizardPanel
 		@Override
 		public String getColumnName(int col)
 		{
-			return Messages.getString("servoy.plugin.tabxport.linesFromFile"); //$NON-NLS-1$
+			return Messages.getString("servoy.plugin.tabxport.linesFromFile");
 		}
 
 		public int getRowCount()
@@ -123,7 +123,7 @@ public class ImportSeparatorPanel extends JPanel implements IWizardPanel
 
 	public String getNextPanelName()
 	{
-		return "SeparatorTypePanel"; //$NON-NLS-1$
+		return "SeparatorTypePanel";
 	}
 
 	public boolean isDone()
@@ -139,8 +139,8 @@ public class ImportSeparatorPanel extends JPanel implements IWizardPanel
 			{
 				try
 				{
-					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData")); //$NON-NLS-1$
-					Vector vector = (Vector)state.getProperty("lines"); //$NON-NLS-1$
+					parent.blockGUI(Messages.getString("servoy.plugin.import.status.organizingData"));
+					Vector vector = (Vector)state.getProperty("lines");
 					table_forPanel1.setModel(new myTAbleModel(vector));
 				}
 				finally

@@ -76,8 +76,7 @@ public class UploadData extends AbstractFile
 	{
 		return getBytes().length;
 	}
-
-	@SuppressWarnings("nls")
+
 	@Override
 	public String toString()
 	{
@@ -102,7 +101,7 @@ public class UploadData extends AbstractFile
 	 */
 	public boolean setBytes(byte[] bytes, boolean createFile)
 	{
-		throw new UnsupportedMethodException("JSFile.setBytes() is not web compatible"); //$NON-NLS-1$
+		throw new UnsupportedMethodException("JSFile.setBytes() is not web compatible");
 	}
 
 

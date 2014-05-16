@@ -124,7 +124,7 @@ public class ToolBarButton
 		final IClientPluginAccess pluginAccess)
 	{
 		JComboBox box = new JComboBox(arguments);
-		box.setPrototypeDisplayValue("XXXXXXXX"); // Set a desired width //$NON-NLS-1$
+		box.setPrototypeDisplayValue("XXXXXXXX"); // Set a desired width
 		box.setMaximumSize(box.getMinimumSize());
 		box.setSelectedIndex(index);
 		box.setEnabled(enabled);

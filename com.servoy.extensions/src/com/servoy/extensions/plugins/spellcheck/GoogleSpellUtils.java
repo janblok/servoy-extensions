@@ -26,11 +26,11 @@ public class GoogleSpellUtils extends SpellCheckerUtils
 {
 	public static String getBasicLanguageName(String prettyName)
 	{
-		if (SpellCheckerUtils.DUTCH.equals(prettyName)) return "nl"; //$NON-NLS-1$
-		else if (SpellCheckerUtils.GERMAN.equals(prettyName)) return "de"; //$NON-NLS-1$
-		else if (SpellCheckerUtils.ITALIAN.equals(prettyName)) return "it"; //$NON-NLS-1$
-		else if (SpellCheckerUtils.SPANISH.equals(prettyName)) return "es"; //$NON-NLS-1$
-		else return "en"; //$NON-NLS-1$
+		if (SpellCheckerUtils.DUTCH.equals(prettyName)) return "nl";
+		else if (SpellCheckerUtils.GERMAN.equals(prettyName)) return "de";
+		else if (SpellCheckerUtils.ITALIAN.equals(prettyName)) return "it";
+		else if (SpellCheckerUtils.SPANISH.equals(prettyName)) return "es";
+		else return "en";
 	}
 
 }

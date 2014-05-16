@@ -78,7 +78,6 @@ public class JSImage implements IScriptable, Wrapper
 		file = null;
 	}
 
-	@SuppressWarnings("nls")
 	@Override
 	public String toString()
 	{

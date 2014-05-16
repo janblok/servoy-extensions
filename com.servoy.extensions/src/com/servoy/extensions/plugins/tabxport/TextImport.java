@@ -51,15 +51,15 @@ public class TextImport extends WizardWindow
 		table = application.getFormManager().getCurrentForm().getTable();
 		createState();
 		IWizardState state = getState();
-		state.setProperty("application", application); //$NON-NLS-1$
+		state.setProperty("application", application);
 	}
 
 	@Override
 	protected void createPanels() throws Exception
 	{
 		IWizardState state = getState();
-		state.setProperty("table", table); //$NON-NLS-1$
-		state.setProperty("application", application); //$NON-NLS-1$
+		state.setProperty("table", table);
+		state.setProperty("application", application);
 
 		addPanel(new ImportSelectFilePanel(this, getState()));
 		addPanel(new ImportSeparatorPanel(this, getState()));
@@ -78,14 +78,14 @@ public class TextImport extends WizardWindow
 	// Shows the frame
 	public void showFrame() throws Exception
 	{
-		super.showDialog(Messages.getString("servoy.plugin.import.title"), ((ISmartClientApplication)application).getMainApplicationFrame()); //$NON-NLS-1$
+		super.showDialog(Messages.getString("servoy.plugin.import.title"), ((ISmartClientApplication)application).getMainApplicationFrame());
 	}
 
 	@Override
 	protected int showCancelDialog()
 	{
-		int res = JOptionPane.showConfirmDialog(window, Messages.getString("servoy.plugin.import.cancelImport"), //$NON-NLS-1$
-			Messages.getString("servoy.general.cancel.title"), //$NON-NLS-1$
+		int res = JOptionPane.showConfirmDialog(window, Messages.getString("servoy.plugin.import.cancelImport"),
+			Messages.getString("servoy.general.cancel.title"),
 			JOptionPane.YES_NO_OPTION);
 		return res;
 	}

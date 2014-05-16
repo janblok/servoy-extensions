@@ -184,12 +184,12 @@ public class SchedulerProvider implements IScriptable
 		{
 			String id = plugin.getClientPluginAccess().getClientID();
 			JobDetail jobDetail = new JobDetail(jobname, id, ExecuteScriptMethodJob.class);
-			jobDetail.getJobDataMap().put("scheduler", this); //$NON-NLS-1$
+			jobDetail.getJobDataMap().put("scheduler", this);
 			FunctionDefinition functionDef = new FunctionDefinition(method);
-			jobDetail.getJobDataMap().put("methodname", functionDef.getMethodName()); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("methodcontext", functionDef.getContextName()); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("args", arguments); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("access", plugin.getClientPluginAccess()); //$NON-NLS-1$
+			jobDetail.getJobDataMap().put("methodname", functionDef.getMethodName());
+			jobDetail.getJobDataMap().put("methodcontext", functionDef.getContextName());
+			jobDetail.getJobDataMap().put("args", arguments);
+			jobDetail.getJobDataMap().put("access", plugin.getClientPluginAccess());
 
 			SimpleTrigger trigger = new SimpleTrigger(jobname, id, startDate, endDate, repeatCount == -1 ? SimpleTrigger.REPEAT_INDEFINITELY : repeatCount,
 				repeatInterval);
@@ -200,7 +200,7 @@ public class SchedulerProvider implements IScriptable
 			catch (SchedulerException e)
 			{
 				Debug.error(e);
-				throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.cannotStart") + e.getMessage()); //$NON-NLS-1$
+				throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.cannotStart") + e.getMessage());
 			}
 		}
 	}
@@ -322,12 +322,12 @@ public class SchedulerProvider implements IScriptable
 		{
 			String id = plugin.getClientPluginAccess().getClientID();
 			JobDetail jobDetail = new JobDetail(jobname, id, ExecuteScriptMethodJob.class);
-			jobDetail.getJobDataMap().put("scheduler", this); //$NON-NLS-1$
+			jobDetail.getJobDataMap().put("scheduler", this);
 			FunctionDefinition functionDef = new FunctionDefinition(method);
-			jobDetail.getJobDataMap().put("methodname", functionDef.getMethodName()); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("methodcontext", functionDef.getContextName()); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("args", arguments); //$NON-NLS-1$
-			jobDetail.getJobDataMap().put("access", plugin.getClientPluginAccess()); //$NON-NLS-1$
+			jobDetail.getJobDataMap().put("methodname", functionDef.getMethodName());
+			jobDetail.getJobDataMap().put("methodcontext", functionDef.getContextName());
+			jobDetail.getJobDataMap().put("args", arguments);
+			jobDetail.getJobDataMap().put("access", plugin.getClientPluginAccess());
 			try
 			{
 
@@ -337,12 +337,12 @@ public class SchedulerProvider implements IScriptable
 			catch (ParseException e)
 			{
 				Debug.error(e);
-				throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.invalidTimings", new Object[] { cronTimings, e.getMessage() })); //$NON-NLS-1$
+				throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.invalidTimings", new Object[] { cronTimings, e.getMessage() }));
 			}
 			catch (SchedulerException e)
 			{
 				Debug.error(e);
-				throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.cannotScheduleJob", new Object[] { jobname, e.getMessage() })); //$NON-NLS-1$
+				throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.cannotScheduleJob", new Object[] { jobname, e.getMessage() }));
 			}
 		}
 	}
@@ -364,7 +364,7 @@ public class SchedulerProvider implements IScriptable
 				catch (Exception e)
 				{
 					Debug.error(e);
-					throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.cannotStart") + e.getMessage()); //$NON-NLS-1$
+					throw new RuntimeException(Messages.getString("servoy.plugin.scheduler.cannotStart") + e.getMessage());
 				}
 			}
 		}
@@ -390,7 +390,7 @@ public class SchedulerProvider implements IScriptable
 			}
 			catch (SchedulerException e)
 			{
-				Debug.error("Error removing scheduler job: " + e.getMessage()); //$NON-NLS-1$
+				Debug.error("Error removing scheduler job: " + e.getMessage());
 			}
 		}
 		return false;

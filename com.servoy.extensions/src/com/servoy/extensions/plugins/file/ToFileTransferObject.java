@@ -53,8 +53,7 @@ public class ToFileTransferObject implements ITransferObject
 	 * 
 	 * @throws IOException if a {@link FileOutputStream} cannot be created from the {@link File} given
 	 * @throws IllegalArgumentException if the {@link File} given is null
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public ToFileTransferObject(final File file, RemoteFileData fileData) throws IOException
 	{
 		if (file == null)

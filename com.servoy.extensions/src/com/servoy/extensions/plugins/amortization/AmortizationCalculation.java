@@ -43,28 +43,28 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 	/**
 	 * The date format used for debug logging.
 	 */
-	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd"); //$NON-NLS-1$
+	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
 
 	/**
 	 * The string constant used to identify a loan event.
 	 */
-	private static final String EVENT_LOAN = "loan"; //$NON-NLS-1$
+	private static final String EVENT_LOAN = "loan";
 
 	/**
 	 * The string constant used to identify a payment event.
 	 */
-	private static final String EVENT_PAYMENT = "payment"; //$NON-NLS-1$
+	private static final String EVENT_PAYMENT = "payment";
 
 	/**
 	 * The string constant used to identify a rate change event.
 	 */
-	private static final String EVENT_RATE = "rate"; //$NON-NLS-1$
+	private static final String EVENT_RATE = "rate";
 
 	/**
 	 * The string constant used to identify a compounding period change event.
 	 */
-	private static final String EVENT_PERIOD = "period"; //$NON-NLS-1$
+	private static final String EVENT_PERIOD = "period";
 
 
 	/**
@@ -209,9 +209,9 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 
 	public AmortizationCalculation()
 	{
-		events = new BufferedDataSet(new String[] { "event", "amount", "start_date", "end_date", "period", "number", "start_day" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		events = new BufferedDataSet(new String[] { "event", "amount", "start_date", "end_date", "period", "number", "start_day" },
 			new SafeArrayList<Object[]>());
-		schedule = new BufferedDataSet(new String[] { "event", "date", "payment", "interest", "principal", "balance" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+		schedule = new BufferedDataSet(new String[] { "event", "date", "payment", "interest", "principal", "balance" },
 			new SafeArrayList<Object[]>());
 	}
 
@@ -581,7 +581,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 					if (unknownType != UNKNOWN_NONE && unknownType != UNKNOWN_RATE) return false;
 					unknownType = UNKNOWN_RATE;
 				}
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New rate: " + rate); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New rate: " + rate);
 			}
 			else if (event[EI_EVENT] == EVENT_PERIOD)
 			{
@@ -593,7 +593,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 				interestCalendar = (Calendar)calendar.clone();
 				compoundingStartDay = interestCalendar.get(Calendar.DAY_OF_MONTH);
 
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New compounding period: " + compoundingPeriod); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New compounding period: " + compoundingPeriod);
 			}
 			else if (event[EI_EVENT] == EVENT_LOAN)
 			{
@@ -601,7 +601,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 				updateInterest(balancePolynomial, interestPolynomial, compoundingStartDay, compoundingPeriod, rate, interestCalendar, calendar);
 				interestCalendar = (Calendar)calendar.clone();
 				balancePolynomial.addTerm(-((Double)event[EI_AMOUNT]).doubleValue(), 0);
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New loan: " + event[EI_AMOUNT]); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New loan: " + event[EI_AMOUNT]);
 			}
 			else if (event[EI_EVENT] == EVENT_PAYMENT)
 			{
@@ -618,7 +618,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 				{
 					balancePolynomial.addTerm(amount, 0);
 				}
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New payment: " + event[EI_AMOUNT]); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New payment: " + event[EI_AMOUNT]);
 			}
 		}
 
@@ -661,7 +661,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 			if (event[EI_EVENT] == EVENT_RATE)
 			{
 				rate = ((Double)event[EI_AMOUNT]).doubleValue();
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New rate: " + rate); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New rate: " + rate);
 			}
 			else if (event[EI_EVENT] == EVENT_PERIOD)
 			{
@@ -673,7 +673,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 				interestCalendar = (Calendar)calendar.clone();
 				compoundingStartDay = interestCalendar.get(Calendar.DAY_OF_MONTH);
 
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New compounding period: " + compoundingPeriod); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New compounding period: " + compoundingPeriod);
 			}
 			else if (event[EI_EVENT] == EVENT_LOAN)
 			{
@@ -687,7 +687,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 				principal = roundMoney(-amount - interest);
 				schedule.addRow(new Object[] { EVENT_LOAN, calendar.getTime(), new Double(-amount), new Double(interest), new Double(balance), new Double(
 					balance) }); // "event", "date", "payment", "interest", "principal", "balance"
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New loan: " + event[EI_AMOUNT]); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New loan: " + event[EI_AMOUNT]);
 				bni[2] = 0;
 			}
 			else if (event[EI_EVENT] == EVENT_PAYMENT)
@@ -702,7 +702,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 				principal = roundMoney(amount - interest);
 				schedule.addRow(new Object[] { EVENT_PAYMENT, calendar.getTime(), event[EI_AMOUNT], new Double(interest), new Double(principal), new Double(
 					balance) }); // "event", "date", "payment", "interest", "principal", "balance"
-				Debug.trace(dateFormat.format(calendar.getTime()) + ": New payment: " + event[EI_AMOUNT]); //$NON-NLS-1$
+				Debug.trace(dateFormat.format(calendar.getTime()) + ": New payment: " + event[EI_AMOUNT]);
 				bni[2] = 0;
 			}
 		}
@@ -917,7 +917,7 @@ public class AmortizationCalculation implements IScriptable, IConstantsObject
 			case PERIOD_NONE :
 				break;
 			default :
-				throw new IllegalArgumentException("unsupported period (" + period + ")"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("unsupported period (" + period + ")");
 		}
 
 		return next;

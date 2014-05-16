@@ -64,13 +64,12 @@ import com.servoy.j2db.util.Utils;
  * Main class to handle processing of PDF forms
  * @author JBlok
  */
-@SuppressWarnings("nls")
 public class PDFServlet extends HttpServlet
 {
 	private static final String ACTION_PROPERTY = "servoy_action_id";
 	private static final String URL_PROPERTY = "servoy_pdf_submit_url";
-	public static final String SERVER_NAME_PROPERTY = "pdf_forms_plugin_servername";//$NON-NLS-1$
-	public static final String TEMPLATE_LOCATION_PROPERTY = "pdf_forms_plugin_template_location";//$NON-NLS-1$
+	public static final String SERVER_NAME_PROPERTY = "pdf_forms_plugin_servername";
+	public static final String TEMPLATE_LOCATION_PROPERTY = "pdf_forms_plugin_template_location";
 //	private static final int VIEW = 0;
 	private static final int EDIT = 1;
 	private static Random rnd = new Random();
@@ -376,8 +375,8 @@ public class PDFServlet extends HttpServlet
 	private void addHeaders(HttpServletResponse response)
 	{
 		// this is for ie under https
-		response.setHeader("Cache-Control", "max-age=60, must-revalidate, proxy-revalidate"); //$NON-NLS-1$//$NON-NLS-2$
-		response.setHeader("Pragma", "public");//$NON-NLS-1$//$NON-NLS-2$
+		response.setHeader("Cache-Control", "max-age=60, must-revalidate, proxy-revalidate");
+		response.setHeader("Pragma", "public");
 	}
 
 	@Override

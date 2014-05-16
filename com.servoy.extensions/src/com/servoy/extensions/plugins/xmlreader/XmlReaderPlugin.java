@@ -33,7 +33,7 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 public class XmlReaderPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "XmlReader"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "XmlReader";
 
 	/**
 	 * @see com.servoy.j2db.plugins.IClientPlugin#initialize(com.servoy.j2db.plugins.IClientPluginAccess)
@@ -63,7 +63,7 @@ public class XmlReaderPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/xml.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/xml.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);

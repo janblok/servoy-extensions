@@ -83,7 +83,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * Line Separator constant, used to append to Text file
 	 * @since Servoy 5.2
 	 */
-	private static final String LF = System.getProperty("line.separator"); //$NON-NLS-1$
+	private static final String LF = System.getProperty("line.separator");
 
 	/**
 	 * Size of the buffer used to stream files to the server
@@ -115,7 +115,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		// in Unix-based systems, the root directory is "/", not ~<user>/Desktop => old implementation not correct
 		// in Windows the root directory is indeed the desktop directory, but it's also <user.home>\Desktop 
 		File homeDir = fsf.getHomeDirectory();
-		File desktopDir = new File(homeDir.getAbsolutePath() + File.separator + "Desktop"); //$NON-NLS-1$
+		File desktopDir = new File(homeDir.getAbsolutePath() + File.separator + "Desktop");
 		if (desktopDir != null && desktopDir.isDirectory())
 		{
 			return new JSFile(desktopDir);
@@ -144,7 +144,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public JSFile js_getHomeFolder()
 	{
-		return new JSFile(new File(System.getProperty("user.home"))); //$NON-NLS-1$
+		return new JSFile(new File(System.getProperty("user.home")));
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	@Deprecated
 	public JSFile js_getHomeDirectory()
 	{
-		return new JSFile(new File(System.getProperty("user.home"))); //$NON-NLS-1$
+		return new JSFile(new File(System.getProperty("user.home")));
 	}
 
 	protected File getFileFromArg(Object f, boolean createFileInstance)
@@ -507,7 +507,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		{
 			if (access.getApplicationType() == IClientPluginAccess.WEB_CLIENT)
 			{
-				throw new RuntimeException("Function callback not set for webclient"); //$NON-NLS-1$
+				throw new RuntimeException("Function callback not set for webclient");
 			}
 
 			IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
@@ -1074,7 +1074,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 				if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
 				int option = JOptionPane.showConfirmDialog(
 					currentWindow,
-					Messages.getString("servoy.plugin.file.folderDelete.warning") + destFile.getAbsolutePath(), Messages.getString("servoy.plugin.file.folderDelete.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+					Messages.getString("servoy.plugin.file.folderDelete.warning") + destFile.getAbsolutePath(), Messages.getString("servoy.plugin.file.folderDelete.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (option != JOptionPane.YES_OPTION) return false;
 			}
 			File[] files = destFile.listFiles();
@@ -1148,7 +1148,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param prefix 
 	 * @param suffix 
 	 */
-	@SuppressWarnings("nls")
 	public JSFile js_createTempFile(String prefix, String suffix)
 	{
 		try
@@ -1275,7 +1274,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		return writeTXTFile(file, text_data, charsetname, mimeType);
 	}
 
-	@SuppressWarnings("nls")
 	private boolean writeTXTFile(Object file, String text_data, String charsetname, String mimeType)
 	{
 		if (file == null) return false;
@@ -1388,7 +1386,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		return writeXMLFile(file, xml_data, encoding);
 	}
 
-	@SuppressWarnings("nls")
 	private boolean writeXMLFile(Object file, String xml_data, String encoding)
 	{
 		if (xml_data == null) return false;
@@ -1424,7 +1421,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		return writeXMLFile(file, xml_data);
 	}
 
-	@SuppressWarnings("nls")
 	private boolean writeXMLFile(Object file, String xml_data)
 	{
 		if (xml_data == null) return false;
@@ -1897,7 +1893,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		if (access.getApplicationType() != IClientPluginAccess.CLIENT && access.getApplicationType() != IClientPluginAccess.RUNTIME) throw new UnsupportedMethodException(
-			"File save is only supported in the SmartClient (not in web or headless client)"); //$NON-NLS-1$
+			"File save is only supported in the SmartClient (not in web or headless client)");
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
@@ -1978,7 +1974,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		if (access.getApplicationType() != IClientPluginAccess.CLIENT && access.getApplicationType() != IClientPluginAccess.RUNTIME) throw new UnsupportedMethodException(
-			"Directory selection is only supported in the SmartClient (not in web or headless client)"); //$NON-NLS-1$
+			"Directory selection is only supported in the SmartClient (not in web or headless client)");
 		IRuntimeWindow runtimeWindow = access.getCurrentRuntimeWindow();
 		Window currentWindow = null;
 		if (runtimeWindow instanceof ISmartRuntimeWindow) currentWindow = ((ISmartRuntimeWindow)runtimeWindow).getWindow();
@@ -2163,7 +2159,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		return appendToTXTFile(file, text, encoding);
 	}
 
-	@SuppressWarnings("nls")
 	private boolean appendToTXTFile(Object file, String text, String encoding)
 	{
 		if (text != null)
@@ -2210,7 +2205,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param path the path representing a file on the server (should start with "/")
 	 * @return the {@link JSFile}
 	 */
-	@SuppressWarnings("nls")
 	public JSFile js_convertToRemoteJSFile(final String path)
 	{
 		if (path == null)
@@ -2371,7 +2365,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		return getRemoteFolderContents(targetFolder, fileFilter, fileOption, visibleOption, lockedOption);
 	}
 
-	@SuppressWarnings("nls")
 	private JSFile[] getRemoteFolderContents(Object targetFolder, Object fileFilter, Number fileOption, Number visibleOption, Number lockedOption)
 	{
 		final int _fileOption = getNumberAsInt(fileOption, AbstractFile.ALL);
@@ -2583,7 +2576,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 						if (af instanceof UploadData)
 						{
 							throw new RuntimeException(
-								"Using streamFilesToServer with an uploadData in the web client makes no sense since the process is already on the server-side, consider using writeFile(), writeTXTFile() or writeXMLFile() instead!"); //$NON-NLS-1$
+								"Using streamFilesToServer with an uploadData in the web client makes no sense since the process is already on the server-side, consider using writeFile(), writeTXTFile() or writeXMLFile() instead!");
 						}
 						filesToBeStreamed[i] = null;
 					}
@@ -2656,7 +2649,6 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param callback the {@link Function} to be called back at the end of the process (for every file); the callback function is invoked with argument the filename that was transfered; an extra second exception parameter can be given if an exception occured
 	 * @return a {@link JSProgressMonitor} object to allow client to subscribe to progress notifications
 	 */
-	@SuppressWarnings("nls")
 	public JSProgressMonitor js_streamFilesFromServer(final Object files, final Object serverFiles, final Function callback)
 	{
 		if (files != null && serverFiles != null)
@@ -3095,7 +3087,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 						}
 						else
 						{
-							serverFileName = "/" + file.getName(); //$NON-NLS-1$
+							serverFileName = "/" + file.getName();
 						}
 
 						long currentTransferred = 0L;

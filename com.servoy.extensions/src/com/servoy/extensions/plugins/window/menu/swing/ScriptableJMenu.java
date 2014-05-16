@@ -237,7 +237,7 @@ public class ScriptableJMenu implements IMenu
 		{
 			return ((JPopupMenu)jmenu).getLabel();
 		}
-		return ""; //$NON-NLS-1$
+		return "";
 	}
 
 	public boolean isEnabled()

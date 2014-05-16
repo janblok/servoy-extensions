@@ -99,7 +99,7 @@ public class SpellCheckEvent
 	 */
 	public void replaceWord(String newWord, boolean replaceAll)
 	{
-		if (action != INITIAL) throw new IllegalStateException("The action can can only be set once"); //$NON-NLS-1$
+		if (action != INITIAL) throw new IllegalStateException("The action can can only be set once");
 		if (replaceAll) action = REPLACEALL;
 		else action = REPLACE;
 		replaceWord = newWord;
@@ -112,7 +112,7 @@ public class SpellCheckEvent
 	 */
 	public void ignoreWord(boolean ignoreAll)
 	{
-		if (action != INITIAL) throw new IllegalStateException("The action can can only be set once"); //$NON-NLS-1$
+		if (action != INITIAL) throw new IllegalStateException("The action can can only be set once");
 		if (ignoreAll) action = IGNOREALL;
 		else action = IGNORE;
 	}
@@ -123,7 +123,7 @@ public class SpellCheckEvent
 	 */
 	public void addToDictionary(String newWord)
 	{
-		if (action != INITIAL) throw new IllegalStateException("The action  can only be set once"); //$NON-NLS-1$
+		if (action != INITIAL) throw new IllegalStateException("The action  can only be set once");
 		action = ADDTODICT;
 		replaceWord = newWord;
 	}
@@ -132,7 +132,7 @@ public class SpellCheckEvent
 	 */
 	public void cancel()
 	{
-		if (action != INITIAL) throw new IllegalStateException("The action can can only be set once"); //$NON-NLS-1$
+		if (action != INITIAL) throw new IllegalStateException("The action can can only be set once");
 		action = CANCEL;
 	}
 

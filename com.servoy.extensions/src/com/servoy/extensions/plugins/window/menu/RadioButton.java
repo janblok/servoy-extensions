@@ -46,7 +46,7 @@ public class RadioButton extends AbstractMenuItem
 	@Deprecated
 	public void js_set(String text, Function method)
 	{
-		set(text, method, null, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
+		set(text, method, null, null, "", "", true, true);
 		js_setSelected(false);
 	}
 
@@ -60,7 +60,7 @@ public class RadioButton extends AbstractMenuItem
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected)
 	{
-		set(text, method, null, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
+		set(text, method, null, null, "", "", true, true);
 		js_setSelected(selected);
 	}
 
@@ -75,7 +75,7 @@ public class RadioButton extends AbstractMenuItem
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments)
 	{
-		set(text, method, arguments, null, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
+		set(text, method, arguments, null, "", "", true, true);
 		js_setSelected(selected);
 	}
 
@@ -91,7 +91,7 @@ public class RadioButton extends AbstractMenuItem
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon)
 	{
-		set(text, method, arguments, icon, "", "", true, true); //$NON-NLS-1$ //$NON-NLS-2$
+		set(text, method, arguments, icon, "", "", true, true);
 		js_setSelected(selected);
 	}
 
@@ -108,7 +108,7 @@ public class RadioButton extends AbstractMenuItem
 	@Deprecated
 	public void js_set(String text, Function method, boolean selected, Object[] arguments, Object icon, String accelerator)
 	{
-		set(text, method, arguments, icon, accelerator, "", true, true); //$NON-NLS-1$ 
+		set(text, method, arguments, icon, accelerator, "", true, true);
 		js_setSelected(selected);
 	}
 
@@ -185,9 +185,9 @@ public class RadioButton extends AbstractMenuItem
 	@Override
 	public RadioButton js_setIcon(Object icon)
 	{
-		if ((System.getProperty("mrj.version") == null) && (" ".equals(icon) || (align && ((icon == null) || "".equals(icon))))) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if ((System.getProperty("mrj.version") == null) && (" ".equals(icon) || (align && ((icon == null) || "".equals(icon)))))
 		{
-			menuItem.setIcon(Utilities.getImageIcon("images/empty.gif")); //$NON-NLS-1$ 
+			menuItem.setIcon(Utilities.getImageIcon("images/empty.gif"));
 		}
 		else if (icon instanceof String)
 		{

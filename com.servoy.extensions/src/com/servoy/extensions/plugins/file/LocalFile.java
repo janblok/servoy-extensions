@@ -58,7 +58,7 @@ public class LocalFile implements IAbstractFile
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException("Error getting the bytes of file " + file, e); //$NON-NLS-1$
+			throw new RuntimeException("Error getting the bytes of file " + file, e);
 		}
 		return null;
 	}
@@ -256,7 +256,7 @@ public class LocalFile implements IAbstractFile
 			}
 			catch (IOException ex)
 			{
-				Debug.error("Error transferring data using setBytes on local JSFile " + getAbsolutePath(), ex); //$NON-NLS-1$
+				Debug.error("Error transferring data using setBytes on local JSFile " + getAbsolutePath(), ex);
 			}
 			finally
 			{

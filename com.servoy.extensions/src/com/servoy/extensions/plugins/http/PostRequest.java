@@ -209,8 +209,8 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		String password = null;
 		if (args.length == 2)
 		{
-			username = "" + args[0]; //$NON-NLS-1$
-			password = "" + args[1]; //$NON-NLS-1$
+			username = "" + args[0];
+			password = "" + args[1];
 		}
 		try
 		{
@@ -244,11 +244,11 @@ public class PostRequest extends BaseEntityEnclosingRequest
 			Object f = files.values().iterator().next();
 			if (f instanceof File)
 			{
-				entity = new FileEntity((File)f, ContentType.create("binary/octet-stream")); //$NON-NLS-1$
+				entity = new FileEntity((File)f, ContentType.create("binary/octet-stream"));
 			}
 			else if (f instanceof JSFile)
 			{
-				entity = new InputStreamEntity(((JSFile)f).getAbstractFile().getInputStream(), ((JSFile)f).js_size(), ContentType.create("binary/octet-stream")); //$NON-NLS-1$
+				entity = new InputStreamEntity(((JSFile)f).getAbstractFile().getInputStream(), ((JSFile)f).js_size(), ContentType.create("binary/octet-stream"));
 			}
 			else
 			{
@@ -317,7 +317,7 @@ public class PostRequest extends BaseEntityEnclosingRequest
 		{
 			Debug.error(e);
 		}
-		return ""; //$NON-NLS-1$
+		return "";
 	}
 
 }

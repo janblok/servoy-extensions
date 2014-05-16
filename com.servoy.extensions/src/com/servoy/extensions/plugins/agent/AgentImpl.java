@@ -56,8 +56,8 @@ import com.servoy.j2db.util.Debug;
  */
 public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseMotionListener, ActionListener, ComponentListener
 {
-	public static final String imagesDir = "images"; //$NON-NLS-1$
-	public static final String soundsDir = "audio"; //$NON-NLS-1$
+	public static final String imagesDir = "images";
+	public static final String soundsDir = "audio";
 	public static final int STARTUP_ID = 0;
 	public static final int ANIMATION_ID = 1;
 
@@ -76,7 +76,7 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 		super();
 		setVisible(false);
 		loadAnimations();
-		currentAnimation = (Animation)animations.get("showing"); //$NON-NLS-1$
+		currentAnimation = (Animation)animations.get("showing");
 		Icon icon = new ImageIcon(currentAnimation.getImage());
 		setIcon(icon);
 
@@ -88,15 +88,15 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 		addMouseMotionListener(this);
 
 		agentContextMenu = new JPopupMenu();
-		JMenuItem mi = new JMenuItem(Messages.getString("servoy.plugin.agent.menu.hide")); //$NON-NLS-1$
+		JMenuItem mi = new JMenuItem(Messages.getString("servoy.plugin.agent.menu.hide"));
 		mi.addActionListener(this);
-		mi.setActionCommand("hide"); //$NON-NLS-1$
+		mi.setActionCommand("hide");
 		agentContextMenu.add(mi);
 		agentContextMenu.addSeparator();
-		mi = new JMenuItem(Messages.getString("servoy.plugin.agent.menu.animate")); //$NON-NLS-1$
+		mi = new JMenuItem(Messages.getString("servoy.plugin.agent.menu.animate"));
 		mi.addActionListener(this);
 		agentContextMenu.add(mi);
-		mi.setActionCommand("animate"); //$NON-NLS-1$
+		mi.setActionCommand("animate");
 
 		baloonHider = new javax.swing.Timer(3000, new ActionListener()
 		{
@@ -112,14 +112,14 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 	{
 		try
 		{
-			InputStream fis = this.getClass().getResourceAsStream("animation.data"); //$NON-NLS-1$
+			InputStream fis = this.getClass().getResourceAsStream("animation.data");
 			java.io.BufferedInputStream bis = new BufferedInputStream(fis);
 			animationData.load(bis);
 			{
-				String imageFileName = animationData.getProperty("showing.imageFileName"); //$NON-NLS-1$
-				String audioFileName = animationData.getProperty("showing.audioFileName"); //$NON-NLS-1$
+				String imageFileName = animationData.getProperty("showing.imageFileName");
+				String audioFileName = animationData.getProperty("showing.audioFileName");
 				Animation animation = new Animation(this, imageFileName, audioFileName);
-				animations.put("showing", animation); //$NON-NLS-1$
+				animations.put("showing", animation);
 			}
 			/*
 			 * { String imageFileName = properties.getProperty("showing.imageFileName"); String numberOfImages =
@@ -157,7 +157,7 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 		Container parent = getParent();
 		if (s == null || parent == null) return;
 
-		if (s.toLowerCase().trim().startsWith("<html>")) //$NON-NLS-1$
+		if (s.toLowerCase().trim().startsWith("<html>"))
 		{
 			if (balloon == null || balloon instanceof PlainTextBalloon)
 			{
@@ -219,7 +219,7 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 		{
 			super(new BorderLayout());
 			setOpaque(false);
-			ta = new JLabel("", SwingConstants.LEFT); //$NON-NLS-1$
+			ta = new JLabel("", SwingConstants.LEFT);
 			ta.setVerticalAlignment(SwingConstants.TOP);
 			ta.setBorder(null);
 			ta.setOpaque(false);
@@ -282,7 +282,7 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 	{
 		if (e.getClickCount() > 1)
 		{
-			speak(Messages.getString("servoy.plugin.agent.text.hello")); //$NON-NLS-1$
+			speak(Messages.getString("servoy.plugin.agent.text.hello"));
 		}
 	}
 
@@ -317,10 +317,10 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 	public void actionPerformed(ActionEvent event)
 	{
 		String command = event.getActionCommand();
-		if (command.equals("hide")) //$NON-NLS-1$
+		if (command.equals("hide"))
 		this.setVisible(false);
-		else if (command.equals("animate")) //$NON-NLS-1$
-		speak(Messages.getString("servoy.plugin.agent.text.animate")); //$NON-NLS-1$
+		else if (command.equals("animate"))
+		speak(Messages.getString("servoy.plugin.agent.text.animate"));
 	}
 
 	/*
@@ -387,9 +387,9 @@ public class AgentImpl extends JLabel implements IJSAgent, MouseListener, MouseM
 		try
 		{
 			Icon icon = null;
-			if (text_url == null || "".equals(text_url)) //$NON-NLS-1$
+			if (text_url == null || "".equals(text_url))
 			{
-				currentAnimation = (Animation)animations.get("showing"); //$NON-NLS-1$
+				currentAnimation = (Animation)animations.get("showing");
 				icon = new ImageIcon(currentAnimation.getImage());
 			}
 			else

@@ -38,7 +38,6 @@ import com.servoy.j2db.util.Debug;
 /**
  * @author jcompagner
  */
-@SuppressWarnings("nls")
 @ServoyDocumented(publicName = XmlReaderPlugin.PLUGIN_NAME, scriptingName = "plugins." + XmlReaderPlugin.PLUGIN_NAME)
 public class XmlReaderProvider implements IScriptable, IReturnedTypesProvider
 {

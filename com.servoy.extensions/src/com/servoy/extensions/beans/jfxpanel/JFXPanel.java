@@ -92,7 +92,7 @@ public class JFXPanel implements IServoyBeanFactory
 	{
 		try
 		{
-			Class.forName("javafx.embed.swing.JFXPanel", false, classLoader); //$NON-NLS-1$
+			Class.forName("javafx.embed.swing.JFXPanel", false, classLoader);
 			return true;
 		}
 		catch (Exception e)
@@ -104,9 +104,9 @@ public class JFXPanel implements IServoyBeanFactory
 
 	private static URL getJavaFXURL()
 	{
-		String jrePath = System.getProperty("java.home"); //$NON-NLS-1$
-		File javaFXJar = new File(jrePath, "lib/jfxrt.jar"); //$NON-NLS-1$
-		if (!javaFXJar.exists()) javaFXJar = new File(jrePath, "lib/ext/jfxrt.jar"); //$NON-NLS-1$
+		String jrePath = System.getProperty("java.home");
+		File javaFXJar = new File(jrePath, "lib/jfxrt.jar");
+		if (!javaFXJar.exists()) javaFXJar = new File(jrePath, "lib/ext/jfxrt.jar");
 		if (javaFXJar.exists())
 		{
 			try

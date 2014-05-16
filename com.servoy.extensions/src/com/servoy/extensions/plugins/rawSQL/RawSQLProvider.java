@@ -48,7 +48,7 @@ public class RawSQLProvider implements IScriptable
 		exception = null;
 		if (sqlService == null)
 		{
-			sqlService = (ISQLService)plugin.getClientPluginAccess().getRemoteService("servoy.ISQLService"); //$NON-NLS-1$
+			sqlService = (ISQLService)plugin.getClientPluginAccess().getRemoteService("servoy.ISQLService");
 		}
 		return sqlService;
 	}
@@ -177,7 +177,7 @@ public class RawSQLProvider implements IScriptable
 	{
 		if (arguments != null && inOutDirectionality != null && arguments.length != inOutDirectionality.length)
 		{
-			throw new RuntimeException("In/Out Arguments should be same size as directionality array"); //$NON-NLS-1$
+			throw new RuntimeException("In/Out Arguments should be same size as directionality array");
 		}
 
 		try

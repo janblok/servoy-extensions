@@ -54,8 +54,7 @@ public class WicketPopupShower implements IPopupShower
 	 * @param scope
 	 * @param dataprovider
 	 * @param clientPluginAccess 
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public WicketPopupShower(IClientPluginAccess clientPluginAccess, IComponent elementToShowRelatedTo, IForm form, Scriptable scope, String dataprovider,
 		int width, int height)
 	{
@@ -75,8 +74,7 @@ public class WicketPopupShower implements IPopupShower
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.window.popup.IPopupShower#show()
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public void show()
 	{
 		IPageContributor pageContributor = ((IWebClientPluginAccess)clientPluginAccess).getPageContributor();
@@ -111,8 +109,7 @@ public class WicketPopupShower implements IPopupShower
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.window.popup.IPopupShower#close(java.lang.Object)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public void close(Object retval)
 	{
 		scope.put(dataprovider, scope, retval);

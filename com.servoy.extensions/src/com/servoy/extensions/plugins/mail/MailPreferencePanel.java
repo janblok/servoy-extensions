@@ -63,7 +63,7 @@ class MailPreferencePanel extends PreferencePanel implements DocumentListener
 		JPanel fieldPanel = new JPanel(false);
 		fieldPanel.setLayout(new GridLayout(0, 1, 5, 5));
 
-		mailOutgoingHostNameLabel = new JLabel(Messages.getString("servoy.plugin.mail.outgoing.mailserver.label"), SwingConstants.RIGHT); //$NON-NLS-1$
+		mailOutgoingHostNameLabel = new JLabel(Messages.getString("servoy.plugin.mail.outgoing.mailserver.label"), SwingConstants.RIGHT);
 		namePanel.add(mailOutgoingHostNameLabel);
 
 		mailOutgoingHostNameField = new JTextField();
@@ -71,7 +71,7 @@ class MailPreferencePanel extends PreferencePanel implements DocumentListener
 		fieldPanel.add(mailOutgoingHostNameField);
 
 
-		mailIncomingHostNameLabel = new JLabel(Messages.getString("servoy.plugin.mail.incoming.mailserver.label"), SwingConstants.RIGHT); //$NON-NLS-1$
+		mailIncomingHostNameLabel = new JLabel(Messages.getString("servoy.plugin.mail.incoming.mailserver.label"), SwingConstants.RIGHT);
 		namePanel.add(mailIncomingHostNameLabel);
 
 		mailIncomingHostNameField = new JTextField();
@@ -92,8 +92,8 @@ class MailPreferencePanel extends PreferencePanel implements DocumentListener
 
 	private void fillFields()
 	{
-		mailOutgoingHostNameField.setText(properties.getProperty("mail.smtp.host")); //$NON-NLS-1$
-		mailIncomingHostNameField.setText(properties.getProperty("mail.pop3.host")); //$NON-NLS-1$
+		mailOutgoingHostNameField.setText(properties.getProperty("mail.smtp.host"));
+		mailIncomingHostNameField.setText(properties.getProperty("mail.pop3.host"));
 	}
 
 	/*
@@ -114,8 +114,8 @@ class MailPreferencePanel extends PreferencePanel implements DocumentListener
 	{
 		try
 		{
-			properties.put("mail.smtp.host", mailOutgoingHostNameField.getText()); //$NON-NLS-1$
-			properties.put("mail.pop3.host", mailIncomingHostNameField.getText()); //$NON-NLS-1$
+			properties.put("mail.smtp.host", mailOutgoingHostNameField.getText());
+			properties.put("mail.pop3.host", mailIncomingHostNameField.getText());
 		}
 		catch (Exception ex)
 		{
@@ -173,6 +173,6 @@ class MailPreferencePanel extends PreferencePanel implements DocumentListener
 	@Override
 	public String getTabName()
 	{
-		return Messages.getString("servoy.plugin.mail.tabname"); //$NON-NLS-1$
+		return Messages.getString("servoy.plugin.mail.tabname");
 	}
 }

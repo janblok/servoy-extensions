@@ -51,7 +51,6 @@ import com.servoy.j2db.util.toolbar.ToolbarToggleButton;
 /**
  * @author marceltrapman
  */
-@SuppressWarnings("nls")
 @ServoyDocumented
 public class ToolBar implements IToolBar, IScriptable, IJavaScriptType
 {

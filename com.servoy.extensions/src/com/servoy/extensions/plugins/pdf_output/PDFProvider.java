@@ -86,7 +86,6 @@ public class PDFProvider implements IScriptable
 	 *
 	 * @param filename the file name
 	 */
-	@SuppressWarnings("nls")
 	public PrinterJob js_getPDFPrinter(String filename)
 	{
 		try
@@ -131,7 +130,6 @@ public class PDFProvider implements IScriptable
 	 *
 	 * @param filename the file name
 	 */
-	@SuppressWarnings("nls")
 	public boolean js_startMetaPrintJob(String filename)
 	{
 		try
@@ -162,7 +160,7 @@ public class PDFProvider implements IScriptable
 			{
 				message += " for " + filename;
 			}
-			throw new RuntimeException(message, e); //$NON-NLS-1$
+			throw new RuntimeException(message, e);
 		}
 	}
 
@@ -308,7 +306,7 @@ public class PDFProvider implements IScriptable
 		catch (Exception e)
 		{
 			Debug.error(e);
-			throw new RuntimeException("Error combinding pdf documents", e); //$NON-NLS-1$
+			throw new RuntimeException("Error combinding pdf documents", e);
 
 		}
 		return baos.toByteArray();
@@ -404,7 +402,7 @@ public class PDFProvider implements IScriptable
 		catch (Exception e)
 		{
 			Debug.error(e);
-			throw new RuntimeException("Error converting pdf form to pdf document", e); //$NON-NLS-1$
+			throw new RuntimeException("Error converting pdf form to pdf document", e);
 		}
 	}
 
@@ -484,10 +482,10 @@ public class PDFProvider implements IScriptable
 	public byte[] js_addMetaData(byte[] data, Scriptable metaData) throws Exception
 	{
 
-		if (data == null || metaData == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		if (data == null || metaData == null) throw new IllegalArgumentException("Missing argument");
 
 		Map<String, Object> map = ITextTools.getMapFromScriptable(metaData);
-		if (ITextTools.isNullOrEmpty(map)) throw new IllegalArgumentException("No metadata to add"); //$NON-NLS-1$
+		if (ITextTools.isNullOrEmpty(map)) throw new IllegalArgumentException("No metadata to add");
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 		return ITextTools.addMetaData(bais, map);
@@ -637,7 +635,7 @@ public class PDFProvider implements IScriptable
 		boolean allowFillIn, boolean allowModifyAnnotations, boolean allowModifyContents, boolean allowPrinting, boolean allowScreenreaders, boolean is128bit,
 		Scriptable metaData) throws Exception
 	{
-		if (data == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		if (data == null) throw new IllegalArgumentException("Missing argument");
 		int sec = 0;
 		if (allowAssembly)
 		{
@@ -700,7 +698,7 @@ public class PDFProvider implements IScriptable
 	 */
 	public byte[] js_numberPages(byte[] data) throws Exception
 	{
-		return js_numberPages(data, 10, 520, 30, BaseFont.HELVETICA, "#000000"); //$NON-NLS-1$
+		return js_numberPages(data, 10, 520, 30, BaseFont.HELVETICA, "#000000");
 	}
 
 	/**
@@ -724,7 +722,7 @@ public class PDFProvider implements IScriptable
 	 */
 	public byte[] js_numberPages(byte[] data, int fontSize, int locationX, int locationY, String font, String hexColor) throws Exception
 	{
-		if (data == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		if (data == null) throw new IllegalArgumentException("Missing argument");
 
 		Color myColor = Color.decode(hexColor);
 
@@ -804,7 +802,7 @@ public class PDFProvider implements IScriptable
 	 */
 	public byte[] js_watermark(byte[] data, String image, int locationX, int locationY, boolean isOver, String[] pages) throws Exception
 	{
-		if (data == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		if (data == null) throw new IllegalArgumentException("Missing argument");
 
 		Image watermark = Image.getInstance(image);
 
@@ -912,7 +910,7 @@ public class PDFProvider implements IScriptable
 	 */
 	public byte[] js_overlay(byte[] data, byte[] forOverlay, boolean isOver, String[] pages) throws Exception
 	{
-		if (data == null || forOverlay == null) throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+		if (data == null || forOverlay == null) throw new IllegalArgumentException("Missing argument");
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 		ByteArrayInputStream foais = new ByteArrayInputStream(forOverlay);
@@ -943,7 +941,7 @@ public class PDFProvider implements IScriptable
 	 */
 	public byte[] js_overlayText(byte[] data, String text) throws Exception
 	{
-		return js_overlayText(data, text, 230, 430, true, 32, BaseFont.HELVETICA, "#000000"); //$NON-NLS-1$
+		return js_overlayText(data, text, 230, 430, true, 32, BaseFont.HELVETICA, "#000000");
 	}
 
 	/**
@@ -972,7 +970,7 @@ public class PDFProvider implements IScriptable
 	{
 		if (data == null || ITextTools.isNullOrEmpty(text) || ITextTools.isNullOrEmpty(font) || ITextTools.isNullOrEmpty(hexColor))
 		{
-			throw new IllegalArgumentException("Missing argument"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Missing argument");
 		}
 
 		Color myColor = Color.decode(hexColor);

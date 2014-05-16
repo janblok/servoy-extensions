@@ -48,8 +48,8 @@ public class ServiceHandler
 			URL url = new URL(strUrlServiceProvider);
 			URLConnection conn = url.openConnection();
 			conn.setDoOutput(true);
-			conn.addRequestProperty("Content-type", "text/xml; charset=UTF-8"); //$NON-NLS-1$ //$NON-NLS-2$
-			OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), Charset.forName("UTF-8")); //$NON-NLS-1$
+			conn.addRequestProperty("Content-type", "text/xml; charset=UTF-8");
+			OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(), Charset.forName("UTF-8"));
 			osw.write(xmlString);
 			osw.flush();
 
@@ -75,11 +75,11 @@ public class ServiceHandler
 	private String createXmlStringRequest(String text, String selectedLang)
 	{
 		StringBuffer requestXML = new StringBuffer();
-		requestXML.append("<spellrequest textalreadyclipped=\"0\"" + " ignoredups=\"1\"" + " ignoredigits=\"1\" ignoreallcaps=\"0\">");//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		requestXML.append("<rslang>" + selectedLang + "</rslang>"); //$NON-NLS-1$ //$NON-NLS-2$
-		requestXML.append("<text>"); //$NON-NLS-1$
+		requestXML.append("<spellrequest textalreadyclipped=\"0\"" + " ignoredups=\"1\"" + " ignoredigits=\"1\" ignoreallcaps=\"0\">");
+		requestXML.append("<rslang>" + selectedLang + "</rslang>");
+		requestXML.append("<text>");
 		requestXML.append(text);
-		requestXML.append("</text></spellrequest>"); //$NON-NLS-1$
+		requestXML.append("</text></spellrequest>");
 		return requestXML.toString();
 	}
 }

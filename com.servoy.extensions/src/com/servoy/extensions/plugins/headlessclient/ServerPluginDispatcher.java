@@ -95,7 +95,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 				{
 					// we can't be sure that this exception's class is instrumented and can be shared with terracotta DSO
 					Debug.warn(e);
-					exceptionMsg = e.getClass().getCanonicalName() + ": " + e.getMessage(); //$NON-NLS-1$
+					exceptionMsg = e.getClass().getCanonicalName() + ": " + e.getMessage();
 				}
 				finally
 				{
@@ -136,10 +136,10 @@ public class ServerPluginDispatcher<E> implements Runnable
 		try
 		{
 			// if this class can be found it means application server was started under Terracotta
-			Class.forName("com.tc.cluster.DsoClusterListener"); //$NON-NLS-1$
+			Class.forName("com.tc.cluster.DsoClusterListener");
 			runningInCluster = true;
 
-			Debug.trace("Starting cluster listener for server plugin."); //$NON-NLS-1$
+			Debug.trace("Starting cluster listener for server plugin.");
 			clusterListener = new ClusterListener();
 		}
 		catch (ClassNotFoundException e)
@@ -160,7 +160,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 		{
 			try
 			{
-				Thread callScheduler = new Thread(this, "Headless plugin Dispatcher"); //$NON-NLS-1$
+				Thread callScheduler = new Thread(this, "Headless plugin Dispatcher");
 				callScheduler.setDaemon(true);
 				callScheduler.start();
 			}
@@ -237,13 +237,13 @@ public class ServerPluginDispatcher<E> implements Runnable
 					}
 					catch (InterruptedException e)
 					{
-						throw new RuntimeException(e.getClass().getCanonicalName() + ": " + e.getMessage()); //$NON-NLS-1$
+						throw new RuntimeException(e.getClass().getCanonicalName() + ": " + e.getMessage());
 					}
 				}
 			}
 			else
 			{
-				throw new RuntimeException("The client's app. server is no longer running."); //$NON-NLS-1$
+				throw new RuntimeException("The client's app. server is no longer running.");
 			}
 		}
 		else
@@ -381,7 +381,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 					}
 					for (String x : disconnectedNodeIds)
 					{
-						Debug.trace("Cleaning up after another node in server plugin (at startup). Cleanup for node with Terracotta id:  " + x); //$NON-NLS-1$
+						Debug.trace("Cleaning up after another node in server plugin (at startup). Cleanup for node with Terracotta id:  " + x);
 						cleanupAfterOtherNode(x); // node is in nodeIdToServerPluginID but is no longer connected to the Terracotta cluster
 					}
 
@@ -402,7 +402,7 @@ public class ServerPluginDispatcher<E> implements Runnable
 			else
 			{
 				// another node left the cluster; current node is still connected
-				Debug.trace("Cleaning up after another in server plugin: " + event.getNode().getHostname() + " (" + event.getNode().getIp() + ")"); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+				Debug.trace("Cleaning up after another in server plugin: " + event.getNode().getHostname() + " (" + event.getNode().getIp() + ")");
 				// make sure we do the cleanup for this node just in case it left before it could cleanup itself
 				cleanupAfterOtherNode(event.getNode().getId());
 			}

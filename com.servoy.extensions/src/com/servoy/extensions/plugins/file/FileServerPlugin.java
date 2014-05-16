@@ -54,8 +54,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	private IServerAccess application;
 
-
-	@SuppressWarnings("nls")
+
 	public Map<String, String> getRequiredPropertyNames()
 	{
 		final Map<String, String> req = new HashMap<String, String>();
@@ -88,8 +87,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * Then tries to find the Tomcat ROOT context and an /uploads/ directory (create it if needed)<br/>
 	 * If all fails will use the home Directory<br/>
 	 * Finally, logs the default folder location
-	 */
-	@SuppressWarnings("nls")
+	 */
 	private void setDefaultFolder(final String folder)
 	{
 		try
@@ -139,8 +137,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 			Debug.error("File plugin error trying to setup the default upload folder", ex);
 		}
 	}
-
-	@SuppressWarnings("nls")
+
 	public Properties getProperties()
 	{
 		final Properties props = new Properties();
@@ -172,8 +169,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#openTransfer(String,String)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public UUID openTransfer(final String clientId, final String filePath) throws IOException, SecurityException
 	{
 		securityCheck(clientId, filePath);
@@ -194,8 +190,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFolderContent(String,String,String[],int,int,int)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public RemoteFileData[] getRemoteFolderContent(final String clientId, final String path, final String[] fileFilter, final int filesOption,
 		final int visibleOption, final int lockedOption) throws RemoteException, IOException, SecurityException
 	{
@@ -279,8 +274,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFileData(String,String)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public RemoteFileData getRemoteFileData(final String clientId, final String path) throws RemoteException, IOException, SecurityException
 	{
 		securityCheck(clientId, path);
@@ -327,8 +321,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * 
 	 * @throws IOException if the plugin is unloaded
 	 * @throws SecurityException if the client is not authenticated
-	 */
-	@SuppressWarnings("nls")
+	 */
 	private void securityCheck(final String clientId, final String filePath) throws IOException, SecurityException
 	{
 		if (defaultFolder == null)
@@ -346,8 +339,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#writeBytes(UUID,byte[],int,int)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public void writeBytes(final UUID uuid, final byte[] bytes, final long start, final long length) throws IOException
 	{
 		if (defaultFolder == null) throw new IOException("File Plugin is unloaded");
@@ -360,8 +352,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#readBytes(UUID,int)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public byte[] readBytes(final UUID uuid, final long length) throws RemoteException, IOException
 	{
 		if (defaultFolder == null) throw new IOException("File Plugin is unloaded");
@@ -385,8 +376,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#delete(String,String)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public boolean delete(final String clientId, final String filePath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, filePath);
@@ -402,8 +392,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#getContentType(String,String)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public String getContentType(final String clientId, final String filePath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, filePath);
@@ -419,8 +408,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 	 * (non-Javadoc)
 	 * 
 	 * @see com.servoy.extensions.plugins.file.IFileService#renameTo(String,String,String)
-	 */
-	@SuppressWarnings("nls")
+	 */
 	public RemoteFileData renameTo(final String clientId, final String srcPath, final String destPath) throws RemoteException, IOException
 	{
 		securityCheck(clientId, srcPath);

@@ -73,7 +73,7 @@ public class ITextTools
 				over.setColorFill(fontColor);
 				over.setFontAndSize(bf, fontSize);
 				over.setTextMatrix(locationX, locationY);// x, y
-				over.showText("Page " + i + " of " + totalPages); //$NON-NLS-1$//$NON-NLS-2$
+				over.showText("Page " + i + " of " + totalPages);
 				over.endText();
 			}
 

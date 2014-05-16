@@ -38,7 +38,7 @@ import com.servoy.j2db.util.Debug;
  */
 public class WindowPlugin implements IClientPlugin
 {
-	public static final String PLUGIN_NAME = "window"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "window";
 
 	private IClientPluginAccess access;
 	private WindowProvider impl;
@@ -74,7 +74,7 @@ public class WindowPlugin implements IClientPlugin
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Window plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "Window plugin");
 		return props;
 	}
 
@@ -112,7 +112,7 @@ public class WindowPlugin implements IClientPlugin
 	 */
 	public Icon getImage()
 	{
-		URL iconUrl = this.getClass().getResource("images/window.gif"); //$NON-NLS-1$
+		URL iconUrl = this.getClass().getResource("images/window.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
@@ -133,13 +133,13 @@ public class WindowPlugin implements IClientPlugin
 		if (impl == null) return;
 		if (IPlugin.PROPERTY_SOLUTION.equals(evt.getPropertyName()) && evt.getNewValue() == null)
 		{
-			Debug.trace("WindowPlugin: solution closed"); //$NON-NLS-1$
+			Debug.trace("WindowPlugin: solution closed");
 			impl.cleanup();
 			impl = null;
 		}
 		else if (IPlugin.PROPERTY_CURRENT_WINDOW.equals(evt.getPropertyName()))
 		{
-			Debug.trace("WindowPlugin: currentWindow changed to " + evt.getNewValue()); //$NON-NLS-1$
+			Debug.trace("WindowPlugin: currentWindow changed to " + evt.getNewValue());
 			impl.currentWindowChanged();
 		}
 	}

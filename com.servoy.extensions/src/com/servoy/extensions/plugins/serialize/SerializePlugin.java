@@ -33,7 +33,7 @@ import com.servoy.j2db.util.serialize.JSONSerializerWrapper;
 
 public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 {
-	public static final String PLUGIN_NAME = "serialize"; //$NON-NLS-1$
+	public static final String PLUGIN_NAME = "serialize";
 
 	private SerializeProvider impl;
 	private JSONSerializerWrapper serializerWrapper = null;
@@ -73,7 +73,7 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	public Properties getProperties()
 	{
 		Properties props = new Properties();
-		props.put(DISPLAY_NAME, "Serialize Plugin"); //$NON-NLS-1$
+		props.put(DISPLAY_NAME, "Serialize Plugin");
 		return props;
 	}
 
@@ -107,7 +107,7 @@ public class SerializePlugin implements IClientPlugin, IColumnConverterProvider
 	 */
 	public Icon getImage()
 	{
-		java.net.URL iconUrl = this.getClass().getResource("images/docsave.gif"); //$NON-NLS-1$
+		java.net.URL iconUrl = this.getClass().getResource("images/docsave.gif");
 		if (iconUrl != null)
 		{
 			return new ImageIcon(iconUrl);
