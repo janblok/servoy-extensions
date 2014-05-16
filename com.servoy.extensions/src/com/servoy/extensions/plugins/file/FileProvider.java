@@ -76,7 +76,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	protected final FilePlugin plugin;
 	private final Map<String, File> tempFiles = new HashMap<String, File>(); //check this map when saving (txt/binary) files
 	private static final JSFile[] EMPTY = new JSFile[0];
-	private final Timer timer = new Timer();
+	private final Timer timer;
 	private final List<JSFile> trackedFiles = new ArrayList<JSFile>();
 
 	/**
@@ -94,13 +94,16 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	public FileProvider(FilePlugin plugin)
 	{
 		this.plugin = plugin;
+		this.timer = new Timer();
 	}
 
-	// default constructor
+	// default constructor, used for documentation generation
 	public FileProvider()
 	{
 		this.plugin = null;
+		this.timer = null; // do not create a Timer here, it will not be cleaned up
 	}
+
 
 	/**
 	 * Returns a JSFile instance that corresponds to the Desktop folder of the currently logged in user.
@@ -1660,7 +1663,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			String suffix, prefix;
 			if (fileName != null)
 			{
-				int idx = fileName.lastIndexOf(".");
+				int idx = fileName.lastIndexOf('.');
 				if (idx >= 0)
 				{
 					suffix = fileName.substring(idx);
@@ -1674,8 +1677,8 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 			}
 			else
 			{
-				suffix = "bin";
-				prefix = "file";
+				suffix = "bin"; //$NON-NLS-1$
+				prefix = "file"; //$NON-NLS-1$
 			}
 			JSFile file = js_createTempFile(prefix, suffix);
 			js_writeFile(file, data);
@@ -2811,7 +2814,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	{
 		if (function != null)
 		{
-			function.execute(plugin.getClientPluginAccess(), new Object[] { monitor }, true);
+			function.executeAsync(plugin.getClientPluginAccess(), new Object[] { monitor });
 		}
 	}
 
@@ -2856,7 +2859,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 		{
 			if (!file.js_exists()) throw new RuntimeException("File " + file.js_getName() + " does not exist on the server");
 			URL serverURL = plugin.getClientPluginAccess().getServerURL();
-			return new URL(serverURL.toURI().toString() + "/servoy-service/file" + file.js_getAbsolutePath()).toURI().toString();
+			return new URL(serverURL.toURI().toString() + "/servoy-service/file" + file.js_getAbsolutePath()).toURI().toString(); //$NON-NLS-1$
 		}
 		throw new RuntimeException("File " + file.js_getName() + " is not a remote file");
 	}
@@ -2907,13 +2910,14 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 
 	public void unload()
 	{
-		timer.cancel();
+		if (timer != null)
+		{
+			timer.cancel();
+		}
 	}
-
 
 	private final class FromServerWorker implements Runnable
 	{
-
 		private final File[] files;
 		private final RemoteFile[] remoteFiles;
 		private final FunctionDefinition function;
@@ -3011,7 +3015,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 							}
 							if (function != null && !progressMonitor.js_isCanceled())
 							{
-								function.execute(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex }, true);
+								function.executeAsync(plugin.getClientPluginAccess(), new Object[] { new JSFile(file), ex });
 							}
 							if (progressMonitor.js_isCanceled())
 							{
@@ -3161,7 +3165,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 							if (function != null && !progressMonitor.js_isCanceled())
 							{
 								final JSFile returnedFile = (remoteFile == null) ? null : new JSFile(new RemoteFile(remoteFile, service, clientId));
-								function.execute(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex }, true);
+								function.executeAsync(plugin.getClientPluginAccess(), new Object[] { returnedFile, ex });
 							}
 							if (progressMonitor.js_isCanceled())
 							{
