@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="/servoy_shared/lib/tim-api.jar"/>
 	<classpathentry kind="lib" path="lib/jfxrt.jar"/>
 	<classpathentry kind="lib" path="/servoy_shared/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
