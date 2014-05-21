@@ -13,10 +13,11 @@
  You should have received a copy of the GNU Affero General Public License along
  with this program; if not, see http://www.gnu.org/licenses or write to the Free
  Software Foundation,Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
-*/
+ */
 package com.servoy.extensions.plugins.pdf_output;
 
 import java.io.OutputStream;
+
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
 import javax.print.ServiceUIFactory;
@@ -29,9 +30,9 @@ import javax.print.event.PrintServiceAttributeListener;
 
 /**
  * @author jblok
- * 
+ *
  * We have to do some work on this class to make it more compatible with a real StreamPrintService class.
- * @see sun.print.PSStreamPrintService
+ * @see StreamPrintService
  */
 public class PDFStreamPrintService extends StreamPrintService
 {
@@ -39,7 +40,8 @@ public class PDFStreamPrintService extends StreamPrintService
 	{
 		super(os);
 	}
-	
+
+	@Override
 	public String getOutputFormat()
 	{
 		return PDFStreamPrintServiceFactory.pdfMimeType;
@@ -48,7 +50,7 @@ public class PDFStreamPrintService extends StreamPrintService
 	public void addPrintServiceAttributeListener(PrintServiceAttributeListener listener)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public DocPrintJob createPrintJob()
@@ -120,22 +122,22 @@ public class PDFStreamPrintService extends StreamPrintService
 		return false;
 	}
 
-    public boolean isDocFlavorSupported(DocFlavor flavor) 
-    {
-    	DocFlavor [] flavors = getSupportedDocFlavors();
-    	for (int f=0; f<flavors.length; f++) 
-    	{
-    	    if (flavor.equals(flavors[f])) 
-    	    {
-    	    	return true;
-    	    }
-    	}
-    	return false;
-    }
-    
+	public boolean isDocFlavorSupported(DocFlavor flavor)
+	{
+		DocFlavor[] flavors = getSupportedDocFlavors();
+		for (DocFlavor flavor2 : flavors)
+		{
+			if (flavor.equals(flavor2))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void removePrintServiceAttributeListener(PrintServiceAttributeListener listener)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 }
