@@ -24,6 +24,7 @@ import java.util.concurrent.Executor;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Undefined;
 
+import com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider.ClientPool;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IConstantsObject;
@@ -37,6 +38,7 @@ public class JSClient implements IScriptable, IConstantsObject
 	private final IHeadlessServer headlessServer;
 	private final HeadlessClientPlugin plugin;
 	private final String clientID;
+	private final ClientPool clientPool;
 
 	/**
 	 * Constant that is returned as a JSEvent type when in the callback method when it executed normally.
@@ -55,14 +57,15 @@ public class JSClient implements IScriptable, IConstantsObject
 	// for doc
 	public JSClient()
 	{
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 
-	public JSClient(String clientID, IHeadlessServer server, HeadlessClientPlugin plugin)
+	public JSClient(String clientID, IHeadlessServer server, HeadlessClientPlugin plugin, ClientPool clientPool)
 	{
 		this.clientID = clientID;
 		this.headlessServer = server;
 		this.plugin = plugin;
+		this.clientPool = clientPool;
 	}
 
 	/**
@@ -86,6 +89,7 @@ public class JSClient implements IScriptable, IConstantsObject
 		return clientID;
 	}
 
+	// this JSClient instance should be reused in order for methodCalls to work as expected
 	private final List<Runnable> methodCalls = new ArrayList<Runnable>();
 
 	/**
@@ -166,10 +170,20 @@ public class JSClient implements IScriptable, IConstantsObject
 					synchronized (methodCalls)
 					{
 						methodCalls.remove(this);
-						if (methodCalls.size() > 0)
+						// check to see if the client exited after last method call
+						if (js_isValid()) // isValid will also remove it from the pool if invalid
 						{
-							Executor exe = plugin.getPluginAccess().getExecutor();
-							exe.execute(methodCalls.get(0));
+							if (methodCalls.size() > 0)
+							{
+								Executor exe = plugin.getPluginAccess().getExecutor();
+								exe.execute(methodCalls.get(0));
+							}
+						}
+						else if (methodCalls.size() > 0)
+						{
+							// TODO should we instead re-create the client and continue?
+							Debug.error("Dropped remaining queued headless client method calls - as the headless client is shut down: " + clientID);
+							methodCalls.clear();
 						}
 					}
 				}
@@ -195,7 +209,9 @@ public class JSClient implements IScriptable, IConstantsObject
 	{
 		try
 		{
-			return headlessServer.isValid(clientID);
+			boolean tmp = headlessServer.isValid(clientID);
+			if (!tmp) clientPool.remove(clientID);
+			return tmp;
 		}
 		catch (Exception ex)
 		{
@@ -255,6 +271,10 @@ public class JSClient implements IScriptable, IConstantsObject
 		catch (Exception ex)
 		{
 			Debug.error(ex);
+		}
+		finally
+		{
+			/* if (! */js_isValid()/* ) clientPool.remove(clientID) */; // js_isValid() already removes it from the pool if invalid
 		}
 	}
 

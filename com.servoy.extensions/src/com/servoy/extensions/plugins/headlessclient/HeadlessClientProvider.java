@@ -16,6 +16,9 @@
  */
 package com.servoy.extensions.plugins.headlessclient;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -27,6 +30,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 {
 	private final HeadlessClientPlugin plugin;
 	private IHeadlessServer headlessServer = null;
+	private ClientPool clientPool;
 
 	HeadlessClientProvider(HeadlessClientPlugin plugin)
 	{
@@ -95,7 +99,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 				plugin.getPluginAccess().getClientID());
 			if (clientID != null)
 			{
-				return new JSClient(clientID, headlessServer, plugin);
+				return getClientPool().getOrCreate(clientID);
 			}
 		}
 		catch (ClientNotFoundException ex)
@@ -143,7 +147,7 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 			String clientID = headlessServer.createClient(solutionName, username, password, solutionOpenMethodArgs, plugin.getPluginAccess().getClientID());
 			if (clientID != null)
 			{
-				return new JSClient(clientID, headlessServer, plugin);
+				return getClientPool().getOrCreate(clientID);
 			}
 		}
 		catch (Exception ex)
@@ -174,7 +178,11 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 		{
 			if (headlessServer.isValid(clientID))
 			{
-				return new JSClient(clientID, headlessServer, plugin);
+				return getClientPool().getOrCreate(clientID);
+			}
+			else
+			{
+				getClientPool().remove(clientID);
 			}
 		}
 		catch (Exception ex)
@@ -187,5 +195,52 @@ public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvid
 	public Class< ? >[] getAllReturnedTypes()
 	{
 		return new Class[] { JSClient.class };
+	}
+
+	private ClientPool getClientPool()
+	{
+		if (clientPool == null) clientPool = new ClientPool();
+		return clientPool;
+	}
+
+	class ClientPool
+	{
+		private Map<String, JSClient> clients = null;
+
+		private ClientPool()
+		{
+		}
+
+		private synchronized JSClient getOrCreate(String clientID)
+		{
+			JSClient tmp = get(clientID);
+			if (tmp == null)
+			{
+				tmp = new JSClient(clientID, headlessServer, plugin, this);
+				put(clientID, tmp);
+			}
+			return tmp;
+		}
+
+		private synchronized JSClient get(String clientID)
+		{
+			return clients == null ? null : clients.get(clientID);
+		}
+
+		public synchronized void put(String clientID, JSClient client)
+		{
+			if (clients == null) clients = new HashMap<String, JSClient>();
+			clients.put(clientID, client);
+		}
+
+		// currently this is called only if a get happens for an invalid headless client, a shutdown is called on that headless client
+		// or if it's invalid when it's "isValid" method gets called. If a headless client shuts down or becomes unavailable for unknown reasons
+		// (shut down from another client or in case of clustering the server holding that client gets disconnected) without being accessed again,
+		// it could remain behind until the current client is closed; if this is a problem in the future we will need to listen for client validity change
+		// to the server plugin
+		public synchronized void remove(String clientID)
+		{
+			if (clients != null) clients.remove(clientID);
+		}
 	}
 }
