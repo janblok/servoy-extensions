@@ -18,6 +18,7 @@
 	<property name="lib.dir" value="lib"/>
 	<property name="build_build.build.dir" value="build"/>
 	<property name="servoy_shared.lib.dir" value="../servoy_shared/lib"/>
+	<property name="eclipse_target.dir" value="../eclipse_target"/>
 	<property name="javacVerbose" value="false"/>
 	<property name="javacDebugInfo" value="true"/>
 	<property name="bundleJavacSource" value="1.6"/>
@@ -83,6 +84,13 @@
 		<fileset dir="${servoy_shared.lib.dir}">
 			<include name="*.jar" />
 			<include name="*.zip" />
+		</fileset>
+		<fileset dir="${eclipse_target.dir}/compile_target/install/plugins">
+			<include name="org.eclipse.osgi_*.jar" />
+			<include name="javax.*.jar" />
+		</fileset>
+		<fileset dir="${eclipse_target.dir}/ship_plugins/plugins">
+			<exclude name="org.eclipse*.jar" />
 		</fileset>
 	</path>
 

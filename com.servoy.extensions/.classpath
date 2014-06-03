@@ -15,11 +15,14 @@
 	<classpathentry exported="true" kind="lib" path="lib/quartz.jar" sourcepath="libsrc/quartz-1.8.4-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell_US_UK_Dict.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/RapidSpell.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/openid4java.jar" sourcepath="libsrc/openid4java-src.zip"/>
 	<classpathentry kind="lib" path="/servoy_shared/lib/tim-api.jar"/>
 	<classpathentry kind="lib" path="lib/jfxrt.jar"/>
-	<classpathentry kind="lib" path="/servoy_shared/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/mail.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/compile_target/install/plugins/javax.servlet_3.0.0.v201112011016.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/commons-pool.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/org.apache.httpcomponents.httpclient_4.2.5.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/org.apache.httpcomponents.httpcore_4.2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
