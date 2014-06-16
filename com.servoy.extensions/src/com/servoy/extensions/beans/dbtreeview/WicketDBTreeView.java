@@ -301,9 +301,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			@Override
 			protected void onNodeLinkClicked(Object node, BaseTree tree, AjaxRequestTarget target)
 			{
-				tree.getTreeState().selectNode(node, !tree.getTreeState().isNodeSelected(node));
-				generateAjaxResponse(target);
-				((WicketDBTreeView)tree).updateTree(target);
+				//ignore
 			}
 
 			@Override
@@ -396,7 +394,30 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 					}
 				};
 			}
-		}));
+
+			@Override
+			public void execute(AjaxRequestTarget target, int mx, int my)
+			{
+				WicketDBTreeView.this.getTreeState().selectNode(getModelObject(), !WicketDBTreeView.this.getTreeState().isNodeSelected(getModelObject()));
+				Object tn = getModelObject();
+				if (tn instanceof FoundSetTreeModel.UserNode && getMethodToCall((FoundSetTreeModel.UserNode)tn) != null)
+				{
+					super.execute(target, mx, my);
+				}
+				else
+				{
+					generateAjaxResponse(target);
+				}
+				WicketDBTreeView.this.updateTree(target);
+			}
+		})
+		{
+			@Override
+			public boolean isEnabled(Component component)
+			{
+				return true;
+			}
+		});
 
 		nodeComp.add(new MouseEventBehavior(new MouseAction(this)
 		{
@@ -446,7 +467,30 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 					}
 				};
 			}
-		}));
+
+			@Override
+			public void execute(AjaxRequestTarget target, int mx, int my)
+			{
+				WicketDBTreeView.this.getTreeState().selectNode(getModelObject(), !WicketDBTreeView.this.getTreeState().isNodeSelected(getModelObject()));
+				Object tn = getModelObject();
+				if (tn instanceof FoundSetTreeModel.UserNode && getMethodToCall((FoundSetTreeModel.UserNode)tn) != null)
+				{
+					super.execute(target, mx, my);
+				}
+				else
+				{
+					generateAjaxResponse(target);
+				}
+				WicketDBTreeView.this.updateTree(target);
+			}
+		})
+		{
+			@Override
+			public boolean isEnabled(Component component)
+			{
+				return true;
+			}
+		});
 
 		nodeComp.add(new MouseEventBehavior(new MouseAction(this)
 		{
