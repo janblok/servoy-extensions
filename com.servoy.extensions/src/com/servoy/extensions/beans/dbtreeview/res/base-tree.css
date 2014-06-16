@@ -131,6 +131,7 @@ table.icon-panel {
 table.icon-panel td.content {
 	width: 100%;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 table.icon-panel td.content a {
