@@ -40,6 +40,7 @@ import org.apache.wicket.markup.html.tree.ITreeState;
 import org.apache.wicket.model.Model;
 import org.mozilla.javascript.Function;
 
+import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel.UserNode;
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.dataprocessing.IFoundSetInternal;
 import com.servoy.j2db.dataprocessing.IRecord;
@@ -576,8 +577,16 @@ public class WicketTree implements IComponent, ITreeViewScriptMethods, TableMode
 						jsChangeRecorder.setChanged();
 						break;
 					case TableModelEvent.UPDATE :
-						hasChanged = true;
-						jsChangeRecorder.setChanged();
+						for (int rowId = e.getFirstRow(); rowId <= e.getLastRow(); rowId++)
+						{
+							UserNode nodeModel = treemodel.new UserNode((ISwingFoundSet)foundSet, rowId);
+							if (abstractTree.getNodeComponent(nodeModel) != null)
+							{
+								hasChanged = true;
+								jsChangeRecorder.setChanged();
+								break;
+							}
+						}
 						break;
 				}
 			}
