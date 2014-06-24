@@ -31,6 +31,7 @@ import org.apache.http.HeaderIterator;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
@@ -43,6 +44,7 @@ import com.servoy.j2db.util.Utils;
  *
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class Response implements IScriptable, IJavaScriptType
 {
 	private HttpResponse res;

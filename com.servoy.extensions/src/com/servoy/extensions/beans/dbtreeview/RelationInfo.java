@@ -16,6 +16,7 @@
  */
 package com.servoy.extensions.beans.dbtreeview;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -25,6 +26,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author gboros
  */
 @ServoyDocumented(category = ServoyDocumented.BEANS, scriptingName = "RelationInfo")
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class RelationInfo implements IScriptable
 {
 	private String label;

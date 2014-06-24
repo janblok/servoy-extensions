@@ -23,12 +23,14 @@ import org.openid4java.message.AuthRequest;
 import org.openid4java.message.MessageException;
 import org.openid4java.message.ax.FetchRequest;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSAuthenticateRequest implements IJavaScriptType, IScriptable
 {
 	private final AuthRequest authReq;

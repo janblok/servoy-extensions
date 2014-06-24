@@ -35,6 +35,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IJavaScriptType;
@@ -46,6 +47,7 @@ import com.servoy.j2db.util.Utils;
  * @author pbakker
  *
  */
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public abstract class BaseRequest implements IScriptable, IJavaScriptType
 {
 	protected DefaultHttpClient client;

@@ -20,6 +20,7 @@ package com.servoy.extensions.plugins.http;
 import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 
@@ -53,6 +54,7 @@ public class OptionsRequest extends BaseRequest
 	 * var supportedOperations = request.getAllowedMethods()
 	 * application.output(supportedOperations.join(','));
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public String[] js_getAllowedMethods(Response res)
 	{
 		return res.getAllowedMethods();

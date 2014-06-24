@@ -17,6 +17,7 @@
 
 package com.servoy.extensions.plugins.spellcheck;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IConstantsObject;
 
@@ -27,6 +28,7 @@ import com.servoy.j2db.scripting.IConstantsObject;
  *
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public abstract class LANGUAGES implements IConstantsObject
 {
 	/**

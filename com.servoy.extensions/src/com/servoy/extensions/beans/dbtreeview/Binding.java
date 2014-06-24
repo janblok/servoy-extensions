@@ -18,6 +18,7 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IScriptable;
@@ -30,6 +31,7 @@ import com.servoy.j2db.util.DataSourceUtils;
  * @author gboros
  */
 @ServoyDocumented(category = ServoyDocumented.BEANS)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class Binding implements IScriptable
 {
 	private String dataSource;

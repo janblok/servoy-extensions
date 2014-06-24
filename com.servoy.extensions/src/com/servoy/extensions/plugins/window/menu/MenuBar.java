@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.window.menu;
 
 import java.util.Arrays;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.documentation.ServoyDocumented;
@@ -36,6 +37,7 @@ import com.servoy.j2db.util.Utils;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class MenuBar implements IScriptable, IJavaScriptType
 {
 

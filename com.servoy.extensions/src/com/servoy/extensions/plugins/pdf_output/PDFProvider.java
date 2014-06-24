@@ -42,6 +42,7 @@ import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.SimpleBookmark;
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
@@ -54,6 +55,7 @@ import com.servoy.j2db.util.FileChooserUtils;
  * @author jblok
  */
 @ServoyDocumented(publicName = PDFPlugin.PLUGIN_NAME, scriptingName = "plugins." + PDFPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class PDFProvider implements IScriptable
 {
 	private final PDFPlugin plugin;

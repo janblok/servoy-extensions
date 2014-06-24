@@ -19,6 +19,7 @@ package com.servoy.extensions.plugins.spellcheck;
 
 import java.awt.Component;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
@@ -26,6 +27,7 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.IDelegate;
 
 @ServoyDocumented(publicName = SpellCheckClientPlugin.PLUGIN_NAME, scriptingName = "plugins." + SpellCheckClientPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class SpellCheckClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final SpellCheckClientPlugin plugin;

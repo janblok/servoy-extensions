@@ -18,6 +18,7 @@ package com.servoy.extensions.beans.dbtreeview;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -26,6 +27,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * 
  * @author jblok
  */
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public interface ITreeViewScriptMethods extends IReturnedTypesProvider, IScriptable, ITreeView
 {
 	/**

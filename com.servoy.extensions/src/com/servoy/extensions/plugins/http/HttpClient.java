@@ -42,6 +42,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.ISmartRuntimeWindow;
@@ -51,6 +52,7 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Utils;
 
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class HttpClient implements IScriptable, IJavaScriptType
 {
 	DefaultHttpClient client;

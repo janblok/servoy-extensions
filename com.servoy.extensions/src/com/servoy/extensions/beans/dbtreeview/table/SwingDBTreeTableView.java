@@ -46,6 +46,7 @@ import javax.swing.tree.TreePath;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.beans.dbtreeview.FoundSetTreeModel;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTree;
 import com.servoy.extensions.beans.dbtreeview.SwingDBTreeView;
@@ -62,6 +63,7 @@ import com.servoy.j2db.util.UIUtils;
  * @author gboros
  */
 @ServoyDocumented(category = ServoyDocumented.BEANS, publicName = "DB Tree Table View", extendsComponent = "DB Tree View")
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableScriptMethods
 {
 	private static final long serialVersionUID = 1L;

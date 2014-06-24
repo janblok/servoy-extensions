@@ -21,6 +21,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -34,6 +35,7 @@ import com.servoy.j2db.util.gui.SnapShot;
  * @author jcompagner
  */
 @ServoyDocumented(publicName = ImagePlugin.PLUGIN_NAME, scriptingName = "plugins." + ImagePlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class ImageProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final ImagePlugin plugin;

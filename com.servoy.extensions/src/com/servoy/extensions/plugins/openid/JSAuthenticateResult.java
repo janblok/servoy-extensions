@@ -19,11 +19,13 @@ package com.servoy.extensions.plugins.openid;
 
 import org.openid4java.message.ax.FetchResponse;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.scripting.IScriptable;
 
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSAuthenticateResult implements IJavaScriptType, IScriptable
 {
 	private final FetchResponse fetchResp;

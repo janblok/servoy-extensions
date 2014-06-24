@@ -43,6 +43,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.util.EntityUtils;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -53,6 +54,7 @@ import com.servoy.j2db.util.Pair;
  * @author jblok
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class PostRequest extends BaseEntityEnclosingRequest
 {
 	private Map<Pair<String, String>, Object> files;

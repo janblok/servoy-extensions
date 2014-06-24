@@ -39,6 +39,7 @@ import org.openid4java.message.ParameterList;
 import org.openid4java.message.ax.AxMessage;
 import org.openid4java.message.ax.FetchResponse;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -52,6 +53,7 @@ import com.servoy.j2db.util.Debug;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented(publicName = OpenIDPlugin.PLUGIN_NAME, scriptingName = "plugins." + OpenIDPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class OpenIDProvider implements IScriptable, IReturnedTypesProvider
 {
 	private static final class CallBackBehavior extends AbstractBehavior implements IBehaviorListener

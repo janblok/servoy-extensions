@@ -23,12 +23,14 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.util.Utils;
 
 /**
  * @author pbakker
  */
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class BaseEntityEnclosingRequest extends BaseRequest
 {
 	private String content;

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.IJavaScriptType;
@@ -33,6 +34,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author Servoy Stuff
  */
 @ServoyDocumented(scriptingName = "JSFile")
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSFile implements IScriptable, IJavaScriptType
 {
 	private final IAbstractFile file;

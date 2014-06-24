@@ -34,6 +34,7 @@ import javax.swing.KeyStroke;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.window.menu.AbstractMenu;
 import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.menu.AbstractMenuItem;
@@ -92,6 +93,7 @@ import com.servoy.j2db.util.toolbar.ToolbarPanel;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented(publicName = WindowPlugin.PLUGIN_NAME, scriptingName = "plugins." + WindowPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class WindowProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final WindowPlugin plugin;

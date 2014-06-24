@@ -32,6 +32,7 @@ import javax.swing.JToolBar.Separator;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.window.menu.IToolBar;
 import com.servoy.extensions.plugins.window.menu.ToolBarButton;
 import com.servoy.j2db.Messages;
@@ -53,6 +54,7 @@ import com.servoy.j2db.util.toolbar.ToolbarToggleButton;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class ToolBar implements IToolBar, IScriptable, IJavaScriptType
 {
 	public static JToolBar addServoyToolBar(IClientPluginAccess app, JComponent pane, String name)

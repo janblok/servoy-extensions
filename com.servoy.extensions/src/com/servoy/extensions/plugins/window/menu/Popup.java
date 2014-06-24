@@ -23,6 +23,7 @@ import java.awt.Window;
 
 import javax.swing.SwingUtilities;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.IRuntimeWindow;
@@ -37,6 +38,7 @@ import com.servoy.j2db.ui.scripting.AbstractRuntimeBaseComponent;
  * 
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class Popup extends AbstractMenu
 {
 	public Popup()

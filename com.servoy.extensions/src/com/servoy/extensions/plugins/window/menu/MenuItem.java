@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.window.menu;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IConstantsObject;
@@ -27,6 +28,7 @@ import com.servoy.j2db.scripting.IConstantsObject;
  * 
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class MenuItem extends AbstractMenuItem implements IConstantsObject
 {
 	/**

@@ -38,6 +38,7 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.Tag;
 import com.drew.metadata.jpeg.JpegComponent;
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.ImageLoader;
@@ -48,6 +49,7 @@ import com.servoy.j2db.util.Utils;
  * @author jcompagner
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSImage implements IScriptable, Wrapper
 {
 

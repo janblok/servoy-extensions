@@ -18,6 +18,7 @@ package com.servoy.extensions.plugins.tabxport;
 
 import javax.swing.JMenuItem;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
@@ -27,6 +28,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jblok
  */
 @ServoyDocumented(publicName = TextXportPlugin.PLUGIN_NAME, scriptingName = "plugins." + TextXportPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class Enabler implements IScriptable
 {
 	private JMenuItem imp;

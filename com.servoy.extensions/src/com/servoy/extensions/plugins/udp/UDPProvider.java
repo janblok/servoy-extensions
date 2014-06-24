@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -34,6 +35,7 @@ import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
 @ServoyDocumented(publicName = UDPPlugin.PLUGIN_NAME, scriptingName = "plugins." + UDPPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class UDPProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final UDPPlugin plugin;

@@ -16,8 +16,10 @@
  */
 package com.servoy.extensions.plugins.agent;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.scripting.IScriptable;
 
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public interface IJSAgent extends IScriptable
 {
 	/**

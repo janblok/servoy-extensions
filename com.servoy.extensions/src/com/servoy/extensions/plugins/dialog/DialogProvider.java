@@ -31,6 +31,7 @@ import javax.swing.SwingUtilities;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import com.servoy.base.plugins.IMobileDialogProvider;
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -62,6 +63,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public String js_showDialog(String dialogTitle, String dialogMessage, String... buttonsText)//old one
 	{
 		return showWarningDialog(dialogTitle, dialogMessage, buttonsText);
@@ -74,6 +76,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @deprecated Replaced by {@link #showWarningDialog(String,String,String[])}.
 	 */
 	@Deprecated
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public String js_showDialog(String dialogTitle, String dialogMessage)//old one
 	{
 		return showWarningDialog(dialogTitle, dialogMessage, (String[])null);
@@ -112,6 +115,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogMessage Dialog message.
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = true, wc = true, sc = true)
 	public String showWarningDialog(String dialogTitle, String dialogMessage)
 	{
 		return showWarningDialog(dialogTitle, dialogMessage, (String[])null);
@@ -129,6 +133,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param buttonsText Array of button texts.
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showWarningDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
@@ -151,6 +156,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param buttonsText Array of button texts.
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showInfoDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
@@ -173,6 +179,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param buttonsText Array of button texts.
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showErrorDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		if (plugin.getClientPluginAccess().getApplicationType() == IClientPluginAccess.WEB_CLIENT)
@@ -195,6 +202,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param buttonsText Array of button texts.
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showQuestionDialog(String dialogTitle, String dialogMessage, String... buttonsText)
 	{
 		return showDialogEx(dialogTitle, dialogMessage, buttonsText, JOptionPane.QUESTION_MESSAGE);
@@ -209,6 +217,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialogMessage Dialog message.
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = true, wc = true, sc = true)
 	public String showQuestionDialog(String dialogTitle, String dialogMessage)
 	{
 		return showQuestionDialog(dialogTitle, dialogMessage, (String[])null);
@@ -337,6 +346,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param options 
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showSelectDialog(String dialog_title, String msg, String... options)
 	{
 		Vector<String> buttons = new Vector<String>();
@@ -392,6 +402,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param optionArray 
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showSelectDialog(String dialog_title, String msg, Object[] optionArray)
 	{
 		Vector<String> buttons = new Vector<String>();
@@ -415,6 +426,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showInputDialog()
 	{
 		return showInputDialog(null, null, null);
@@ -426,6 +438,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param dialog_title
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showInputDialog(String dialog_title)
 	{
 		return showInputDialog(dialog_title, null, null);
@@ -438,6 +451,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param msg
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showInputDialog(String dialog_title, String msg)
 	{
 		return showInputDialog(dialog_title, msg, null);
@@ -451,6 +465,7 @@ public class DialogProvider implements IScriptable, IMobileDialogProvider
 	 * @param initialValue
 	 */
 	@JSFunction
+	@ServoyClientSupport(ng = false, mc = false, wc = true, sc = true)
 	public String showInputDialog(String dialog_title, String msg, String initialValue)
 	{
 		if (!SwingUtilities.isEventDispatchThread())

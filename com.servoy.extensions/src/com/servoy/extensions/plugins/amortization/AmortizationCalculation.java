@@ -25,6 +25,7 @@ import java.util.Date;
 
 import org.mozilla.javascript.annotations.JSFunction;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.dataprocessing.BufferedDataSet;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
@@ -37,6 +38,7 @@ import com.servoy.j2db.util.SafeArrayList;
  * @author sebster
  */
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class AmortizationCalculation implements IScriptable, IConstantsObject
 {
 

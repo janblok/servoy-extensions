@@ -16,6 +16,7 @@
  */
 package com.servoy.extensions.plugins.window.menu;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IDeprecated;
 
@@ -26,6 +27,7 @@ import com.servoy.j2db.scripting.IDeprecated;
  */
 @Deprecated
 @ServoyDocumented
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSMenuItem extends MenuItem implements IDeprecated
 {
 }

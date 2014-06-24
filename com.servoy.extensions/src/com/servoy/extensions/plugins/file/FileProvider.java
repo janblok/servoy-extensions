@@ -70,6 +70,7 @@ import com.servoy.j2db.util.FileChooserUtils;
  * @author Servoy Stuff
  */
 @ServoyDocumented(publicName = FilePlugin.PLUGIN_NAME, scriptingName = "plugins." + FilePlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = false, sc = true)
 public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
 
@@ -1836,7 +1837,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var file = plugins.file.showFileSaveDialog();
 	 * application.output("you've selected file: " + file.getAbsolutePath());
 	 */
-	@ServoyClientSupport(mc = false, wc = false, sc = true)
+	@ServoyClientSupport(mc = false, wc = false, sc = true, ng = false)
 	public JSFile js_showFileSaveDialog()
 	{
 		return js_showFileSaveDialog((String)null, null);
@@ -1848,7 +1849,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param fileNameDir JSFile to save.
 	 */
-	@ServoyClientSupport(mc = false, wc = false, sc = true)
+	@ServoyClientSupport(mc = false, wc = false, sc = true, ng = false)
 	public JSFile js_showFileSaveDialog(JSFile fileNameDir)
 	{
 		return js_showFileSaveDialog(fileNameDir, null);
@@ -1860,7 +1861,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param fileNameDir File (give as file path) to save.
 	 */
-	@ServoyClientSupport(mc = false, wc = false, sc = true)
+	@ServoyClientSupport(mc = false, wc = false, sc = true, ng = false)
 	public JSFile js_showFileSaveDialog(String fileNameDir)
 	{
 		return js_showFileSaveDialog(fileNameDir, null);
@@ -1872,7 +1873,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileNameDir JSFile to save
 	 * @param title Dialog title.
 	 */
-	@ServoyClientSupport(mc = false, wc = false, sc = true)
+	@ServoyClientSupport(mc = false, wc = false, sc = true, ng = false)
 	public JSFile js_showFileSaveDialog(JSFile fileNameDir, String title)
 	{
 		return showFileSaveDialog(fileNameDir, title);
@@ -1884,7 +1885,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param fileNameDir File to save (specified as file path)
 	 * @param title Dialog title.
 	 */
-	@ServoyClientSupport(mc = false, wc = false, sc = true)
+	@ServoyClientSupport(mc = false, wc = false, sc = true, ng = false)
 	public JSFile js_showFileSaveDialog(String fileNameDir, String title)
 	{
 		return showFileSaveDialog(fileNameDir, title);

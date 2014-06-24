@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.window.util.DescendingNumberComparator;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.plugins.PluginException;
@@ -34,6 +35,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 {
 	private final IClientPluginAccess pluginAccess;

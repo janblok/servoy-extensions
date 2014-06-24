@@ -16,6 +16,7 @@
  */
 package com.servoy.extensions.plugins.rawSQL;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
@@ -32,6 +33,7 @@ import com.servoy.j2db.util.UUID;
  * @author jblok
  */
 @ServoyDocumented(publicName = RawSQLPlugin.PLUGIN_NAME, scriptingName = "plugins." + RawSQLPlugin.PLUGIN_NAME)
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class RawSQLProvider implements IScriptable
 {
 	private final RawSQLPlugin plugin;

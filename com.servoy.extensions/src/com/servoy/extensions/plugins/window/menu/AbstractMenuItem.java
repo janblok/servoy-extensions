@@ -24,6 +24,7 @@ import javax.swing.KeyStroke;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.window.WindowProvider;
 import com.servoy.extensions.plugins.window.menu.AbstractMenu.MenuItemArgs;
 import com.servoy.extensions.plugins.window.util.Utilities;
@@ -41,6 +42,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
+@ServoyClientSupport(ng = false, wc = true, sc = true)
 public abstract class AbstractMenuItem implements IScriptable, IJavaScriptType
 {
 	protected IMenuItem menuItem;
