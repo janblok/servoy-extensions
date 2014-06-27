@@ -26,7 +26,6 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -37,7 +36,6 @@ import com.servoy.j2db.util.Debug;
  *
  */
 @ServoyDocumented
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class PutRequest extends BaseEntityEnclosingRequest
 {
 	//only used by script engine

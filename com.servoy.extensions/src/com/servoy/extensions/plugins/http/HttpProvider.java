@@ -57,7 +57,6 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.MediaURLStreamHandler;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -71,7 +70,6 @@ import com.servoy.j2db.util.Utils;
  * @author jblok
  */
 @ServoyDocumented(publicName = HttpPlugin.PLUGIN_NAME, scriptingName = "plugins." + HttpPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class HttpProvider implements IReturnedTypesProvider, IScriptable
 {
 	private String proxyUser = null;

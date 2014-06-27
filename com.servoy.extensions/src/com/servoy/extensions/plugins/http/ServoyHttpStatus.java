@@ -17,7 +17,6 @@
 
 package com.servoy.extensions.plugins.http;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 
 /**
  * Dummy class for listing http codes.
@@ -26,7 +25,6 @@ import com.servoy.base.scripting.annotations.ServoyClientSupport;
  * @author acostache
  *
  */
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public interface ServoyHttpStatus
 {
 	// --- 1xx Informational ---
