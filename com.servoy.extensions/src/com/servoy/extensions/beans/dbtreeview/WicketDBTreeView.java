@@ -398,7 +398,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			@Override
 			public void execute(AjaxRequestTarget target, int mx, int my)
 			{
-				WicketDBTreeView.this.getTreeState().selectNode(getModelObject(), !WicketDBTreeView.this.getTreeState().isNodeSelected(getModelObject()));
+				WicketDBTreeView.this.getTreeState().selectNode(getModelObject(), true);
 				Object tn = getModelObject();
 				if (tn instanceof FoundSetTreeModel.UserNode && getMethodToCall((FoundSetTreeModel.UserNode)tn) != null)
 				{
@@ -471,7 +471,7 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 			@Override
 			public void execute(AjaxRequestTarget target, int mx, int my)
 			{
-				WicketDBTreeView.this.getTreeState().selectNode(getModelObject(), !WicketDBTreeView.this.getTreeState().isNodeSelected(getModelObject()));
+				WicketDBTreeView.this.getTreeState().selectNode(getModelObject(), true);
 				Object tn = getModelObject();
 				if (tn instanceof FoundSetTreeModel.UserNode && getMethodToCall((FoundSetTreeModel.UserNode)tn) != null)
 				{
@@ -550,7 +550,6 @@ public class WicketDBTreeView extends BaseTree implements IWicketTree, IHeaderCo
 		synchronized (wicketTree)
 		{
 			boolean isChanged = wicketTree.jsChangeRecorder.isChanged();
-			if (isChanged) target.addComponent(this);
 			wicketTree.jsChangeRecorder.setRendered();
 			if (application instanceof IWebClientPluginAccess) ((IWebClientPluginAccess)application).generateAjaxResponse(target);
 			if (isChanged) wicketTree.jsChangeRecorder.setChanged();
