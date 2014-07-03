@@ -46,6 +46,7 @@ public class JFXPanel implements IServoyBeanFactory
 		{
 			return new EmptyWicketFxPanel((String)cargs[0]);
 		}
+		else if (access.isInDeveloper() && System.getProperty("os.name").contains("nux")) return new EmptyJFXPanel("");
 		else
 		{
 			if (isJavaFXAvailable(getClass().getClassLoader()))
