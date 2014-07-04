@@ -2,50 +2,50 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="textxport" qualifiedName="com.servoy.extensions.plugins.tabxport.Enabler" scriptingName="plugins.textxport">
+      <object clientSupport="sc" publicName="textxport" qualifiedName="com.servoy.extensions.plugins.tabxport.Enabler" scriptingName="plugins.textxport">
         <properties>
-          <property clientSupport="wc,sc" name="exportEnabled">
+          <property clientSupport="sc" name="exportEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Enable the export feature of this plugin.]]></description>
+              <description clientSupport="sc"><![CDATA[Enable the export feature of this plugin.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Enable the export feature of this plugin.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Enable the export feature of this plugin.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.textxport.exportEnabled = true;
+              <sample clientSupport="sc"><![CDATA[plugins.textxport.exportEnabled = true;
 var isEnabled = plugins.textxport.exportEnabled;]]></sample>
             </samples>
           </property>
-          <property clientSupport="wc,sc" name="importEnabled">
+          <property clientSupport="sc" name="importEnabled">
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Enable the import feature of this plugin.]]></description>
+              <description clientSupport="sc"><![CDATA[Enable the import feature of this plugin.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Enable the import feature of this plugin.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Enable the import feature of this plugin.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.textxport.importEnabled = true;
+              <sample clientSupport="sc"><![CDATA[plugins.textxport.importEnabled = true;
 var isEnabled = plugins.textxport.importEnabled;]]></sample>
             </samples>
           </property>
         </properties>
         <functions>
-          <function clientSupport="wc,sc" name="textExport">
+          <function clientSupport="sc" name="textExport">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
               <argumentType typecode="[Ljava.lang.String;"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
+              <description clientSupport="sc"><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Export to text 'separated value' data (*.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Export to text 'separated value' data (*.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//export with default separator(tab) and no header
+              <sample clientSupport="sc"><![CDATA[//export with default separator(tab) and no header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name']);]]></sample>
             </samples>
             <parameters>
@@ -57,7 +57,7 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="textExport">
+          <function clientSupport="sc" name="textExport">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
               <argumentType typecode="[Ljava.lang.String;"/>
@@ -65,13 +65,13 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
+              <description clientSupport="sc"><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Export to text 'separated value' data (*.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Export to text 'separated value' data (*.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//export with ';' separator and no header
+              <sample clientSupport="sc"><![CDATA[//export with ';' separator and no header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';');]]></sample>
             </samples>
             <parameters>
@@ -86,7 +86,7 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="textExport">
+          <function clientSupport="sc" name="textExport">
             <argumentsTypes>
               <argumentType typecode="com.servoy.j2db.dataprocessing.IFoundSet"/>
               <argumentType typecode="[Ljava.lang.String;"/>
@@ -95,13 +95,13 @@ var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','n
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
+              <description clientSupport="sc"><![CDATA[Export to text 'separated value' data (*.tab/*.csv)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Export to text 'separated value' data (*.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Export to text 'separated value' data (*.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//export with ';' separator and header
+              <sample clientSupport="sc"><![CDATA[//export with ';' separator and header
 var dataToBeWritten = plugins.textxport.textExport(forms.form1.foundset,['id','name'],';',true);]]></sample>
             </samples>
             <parameters>

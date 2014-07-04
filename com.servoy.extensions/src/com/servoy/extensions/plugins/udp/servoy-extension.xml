@@ -2,19 +2,19 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="JSPacket" qualifiedName="com.servoy.extensions.plugins.udp.JSPacket" scriptingName="JSPacket">
+      <object clientSupport="ng,wc,sc" publicName="JSPacket" qualifiedName="com.servoy.extensions.plugins.udp.JSPacket" scriptingName="JSPacket">
         <properties>
-          <property clientSupport="wc,sc" name="index">
+          <property clientSupport="ng,wc,sc" name="index">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the current position in the byte array of the packet. The next read/write operation will occur at this position.
 This is a 0 based index.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the current position in the byte array of the packet.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the current position in the byte array of the packet.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -36,17 +36,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
           </property>
         </properties>
         <functions>
-          <function clientSupport="wc,sc" name="getByteArray">
+          <function clientSupport="ng,wc,sc" name="getByteArray">
             <argumentsTypes/>
             <return type="byte[]" typecode="[B"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the content of the package into a byte array.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the content of the package into a byte array.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the content of the package into a byte array.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the content of the package into a byte array.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -62,17 +62,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getHost">
+          <function clientSupport="ng,wc,sc" name="getHost">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the name of the host that sent the packet.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the name of the host that sent the packet.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the name of the host that sent the packet.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the name of the host that sent the packet.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -85,17 +85,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getLength">
+          <function clientSupport="ng,wc,sc" name="getLength">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the length of the packet in bytes.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the length of the packet in bytes.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the length of the packet in bytes.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the length of the packet in bytes.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -108,17 +108,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getPort">
+          <function clientSupport="ng,wc,sc" name="getPort">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the port where the packet originated from.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the port where the packet originated from.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the port where the packet originated from.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the port where the packet originated from.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -131,17 +131,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="readByte">
+          <function clientSupport="ng,wc,sc" name="readByte">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Reads an 8 bits byte value from the packet, starting from the current index. Advances the index with one position.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Reads an 8 bits byte value from the packet, starting from the current index. Advances the index with one position.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Reads an 8 bits byte value from the packet, starting from the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Reads an 8 bits byte value from the packet, starting from the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -161,17 +161,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="readInt">
+          <function clientSupport="ng,wc,sc" name="readInt">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Reads a 32 bits int value from the packet, starting from the current index. Advances the index with 4 positions.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Reads a 32 bits int value from the packet, starting from the current index. Advances the index with 4 positions.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Reads a 32 bits int value from the packet, starting from the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Reads a 32 bits int value from the packet, starting from the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -191,17 +191,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="readShort">
+          <function clientSupport="ng,wc,sc" name="readShort">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Reads a 32 bits short value from the packet, starting from the current index. Advances the index with 2 positions.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Reads a 32 bits short value from the packet, starting from the current index. Advances the index with 2 positions.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Reads a 32 bits short value from the packet, starting from the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Reads a 32 bits short value from the packet, starting from the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -221,17 +221,17 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="readUTF">
+          <function clientSupport="ng,wc,sc" name="readUTF">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -244,19 +244,19 @@ while (packet = plugins.udp.getReceivedPacket()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="readUTF">
+          <function clientSupport="ng,wc,sc" name="readUTF">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index. If an argument is specified, then it represents the length (in UTF-8 encoded bytes, not characters) of the string to read. If no argument is specified, then first a 32 bits (4 byte) int is read from the packet and that will be the byte length of the string. Advances the index with a number of positions that depends on the length of the read string.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Reads a UTF-8 string from the packet, starting from the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet;
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet;
 while (packet = plugins.udp.getReceivedPacket()) {
 	application.output('packet received from ' + packet.getHost() + ':' + packet.getPort());
 	if (packet.getLength() > 0) {
@@ -272,19 +272,19 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="length" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="writeByte">
+          <function clientSupport="ng,wc,sc" name="writeByte">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes one byte into the packet, at the current index. The index is advanced with one position.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Writes one byte into the packet, at the current index. The index is advanced with one position.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes one byte into the packet, at the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Writes one byte into the packet, at the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
 	application.output('Failed to start socket.');
 } else {
 	var packet = plugins.udp.createNewPacket();
@@ -306,19 +306,19 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="writeBytes">
+          <function clientSupport="ng,wc,sc" name="writeBytes">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes an array of bytes into the packet, at the current index. The index is advanced with a number of positions equal to the length of the written array.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Writes an array of bytes into the packet, at the current index. The index is advanced with a number of positions equal to the length of the written array.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes an array of bytes into the packet, at the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Writes an array of bytes into the packet, at the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
 	application.output('Failed to start socket.');
 } else {
 	var packet = plugins.udp.createNewPacket();
@@ -340,19 +340,19 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="bytes" type="byte[]" typecode="[B"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="writeInt">
+          <function clientSupport="ng,wc,sc" name="writeInt">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes a 32 bits int into the packet, at the current index. The index is advances with 4 positions.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Writes a 32 bits int into the packet, at the current index. The index is advances with 4 positions.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes a 32 bits int into the packet, at the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Writes a 32 bits int into the packet, at the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
 	application.output('Failed to start socket.');
 } else {
 	var packet = plugins.udp.createNewPacket();
@@ -374,19 +374,19 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="writeShort">
+          <function clientSupport="ng,wc,sc" name="writeShort">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes a 16 bits short value into the packet, at the current index. The index is advances with 2 positions.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Writes a 16 bits short value into the packet, at the current index. The index is advances with 2 positions.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes a 16 bits short value into the packet, at the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Writes a 16 bits short value into the packet, at the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
 	application.output('Failed to start socket.');
 } else {
 	var packet = plugins.udp.createNewPacket();
@@ -408,19 +408,19 @@ while (packet = plugins.udp.getReceivedPacket()) {
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="writeUTF">
+          <function clientSupport="ng,wc,sc" name="writeUTF">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Writes an UTF-8 encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Writes an UTF-8 encoded string into the packet, at the current index. First the length of the string is written on 4 bytes, then the string is written. The index is advanced with a number of positions equal to the length of the string plus 4.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Writes an UTF-8 encoded string into the packet, at the current index.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Writes an UTF-8 encoded string into the packet, at the current index.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (!plugins.udp.startSocket('5555', packetReceived)) {
 	application.output('Failed to start socket.');
 } else {
 	var packet = plugins.udp.createNewPacket();
@@ -444,36 +444,36 @@ while (packet = plugins.udp.getReceivedPacket()) {
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="udp" qualifiedName="com.servoy.extensions.plugins.udp.UDPProvider" scriptingName="plugins.udp">
+      <object clientSupport="ng,wc,sc" publicName="udp" qualifiedName="com.servoy.extensions.plugins.udp.UDPProvider" scriptingName="plugins.udp">
         <functions>
-          <function clientSupport="wc,sc" name="createNewPacket">
+          <function clientSupport="ng,wc,sc" name="createNewPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Create a new empty packet.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Create a new empty packet.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Create a new empty packet.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Create a new empty packet.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
 packet.writeUTF('hello world!')//writes UTF
 packet.writeInt(12348293)//writes 4 bytes
 packet.writeShort(14823)//writes 2 bytes
 packet.writeByte(123)//writes 1 byte]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getReceivedPacket">
+          <function clientSupport="ng,wc,sc" name="getReceivedPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Get a packet from receive buffer, read buffer until empty (null is returned).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Get a packet from receive buffer, read buffer until empty (null is returned).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Get a packet from receive buffer, read buffer until empty (null is returned).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Get a packet from receive buffer, read buffer until empty (null is returned).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet = null
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet = null
 while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 {
 	var text = packet.readUTF()
@@ -481,25 +481,25 @@ while( ( packet = plugins.udp.getReceivedPacket() ) != null)
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" deprecated="true" name="getRecievedPacket">
+          <function clientSupport="ng,wc,sc" deprecated="true" name="getRecievedPacket">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.udp.JSPacket" typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             <deprecated><![CDATA[Replaced by #getReceivedPacket().]]></deprecated>
           </function>
-          <function clientSupport="wc,sc" name="sendPacket">
+          <function clientSupport="ng,wc,sc" name="sendPacket">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Send a packet.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Send a packet.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Send a packet.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Send a packet.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
             </samples>
@@ -512,7 +512,7 @@ plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="sendPacket">
+          <function clientSupport="ng,wc,sc" name="sendPacket">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
@@ -520,13 +520,13 @@ plugins.udp.sendPacket('10.0.0.1',packet)]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Send a packet on another port.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Send a packet on another port.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Send a packet on another port.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Send a packet on another port.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
 packet.writeUTF('hello world!')
 plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
             </samples>
@@ -542,20 +542,20 @@ plugins.udp.sendPacket('10.0.0.1',packet, 4321)]]></sample>
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="startSocket">
+          <function clientSupport="ng,wc,sc" name="startSocket">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Start a UDP socket for a port.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Start a UDP socket for a port.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Start a UDP socket for a port.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Start a UDP socket for a port.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.udp.startSocket(1234,my_packet_process_method)]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.udp.startSocket(1234,my_packet_process_method)]]></sample>
             </samples>
             <parameters>
               <parameter name="port_number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int">
@@ -568,32 +568,32 @@ consume all available packets before you expect this method to be called again.]
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="stopSocket">
+          <function clientSupport="ng,wc,sc" name="stopSocket">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Stop the UDP socket for a port.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Stop the UDP socket for a port.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Stop the UDP socket for a port.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Stop the UDP socket for a port.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.udp.stopSocket()]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.udp.stopSocket()]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="testPacket">
+          <function clientSupport="ng,wc,sc" name="testPacket">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.udp.JSPacket"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Put a test packet in the receive buffer to test your method call and getReceivedPacket.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Put a test packet in the receive buffer to test your method call and getReceivedPacket.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Put a test packet in the receive buffer to test your method call and getReceivedPacket.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Put a test packet in the receive buffer to test your method call and getReceivedPacket.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
+              <sample clientSupport="ng,wc,sc"><![CDATA[var packet = plugins.udp.createNewPacket()
 packet.writeUTF('hello world!')
 plugins.udp.testPacket(packet)]]></sample>
             </samples>

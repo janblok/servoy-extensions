@@ -29,7 +29,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -41,7 +40,6 @@ import com.servoy.j2db.util.Debug;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented(publicName = XmlReaderPlugin.PLUGIN_NAME, scriptingName = "plugins." + XmlReaderPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class XmlReaderProvider implements IScriptable, IReturnedTypesProvider
 {
 

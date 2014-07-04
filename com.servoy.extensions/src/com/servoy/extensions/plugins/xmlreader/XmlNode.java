@@ -23,7 +23,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 
@@ -32,7 +31,6 @@ import com.servoy.j2db.scripting.IScriptable;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class XmlNode implements IScriptable
 {
 	private final Node node;

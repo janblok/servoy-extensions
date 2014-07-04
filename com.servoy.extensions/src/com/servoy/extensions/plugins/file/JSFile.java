@@ -34,7 +34,6 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author Servoy Stuff
  */
 @ServoyDocumented(scriptingName = "JSFile")
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSFile implements IScriptable, IJavaScriptType
 {
 	private final IAbstractFile file;
@@ -215,6 +214,7 @@ public class JSFile implements IScriptable, IJavaScriptType
 	 * var theFile = plugins.file.showFileOpenDialog();
 	 * application.output('The file size in bytes: ' + theFile.getBytes());
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public byte[] jsFunction_getBytes()
 	{
 		return file.getBytes();

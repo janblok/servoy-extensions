@@ -2,18 +2,18 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="AmortizationCalculation" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationCalculation">
+      <object clientSupport="ng,wc,sc" publicName="AmortizationCalculation" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationCalculation">
         <constants>
-          <constant clientSupport="wc,sc" name="NUMBER_UNLIMITED">
+          <constant clientSupport="ng,wc,sc" name="NUMBER_UNLIMITED">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify an unlimited number of repeated events.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -24,16 +24,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_ANNUALY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_ANNUALY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify an annual period.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify an annual period.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify an annual period.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify an annual period.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -44,16 +44,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_BI_ANNUALLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_BI_ANNUALLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a bi-annual period (twice every year).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -64,17 +64,17 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_BI_MONTHLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_BI_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).
 TODO: this period is not supported yet.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a bi-monthly period (twice every month).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -85,16 +85,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_DAILY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_DAILY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a daily period.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a daily period.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a daily period.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a daily period.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -105,16 +105,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_FOUR_MONTHLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_FOUR_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a four-monthly period (once every four months).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -125,16 +125,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_FOUR_WEEKLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_FOUR_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a four-weekly period (once every four weeks).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -145,16 +145,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_MONTHLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a monthly period.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a monthly period.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a monthly period.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a monthly period.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -165,16 +165,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_NONE">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_NONE">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify that there is no period.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify that there is no period.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify that there is no period.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify that there is no period.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -185,16 +185,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_QUARTERLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_QUARTERLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a quarterly period (once every three months).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -205,16 +205,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_TWO_MONTHLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_TWO_MONTHLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a two-monthly period (once every two months).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -225,16 +225,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_TWO_WEEKLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_TWO_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a two-weekly period (once every two weeks).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -245,16 +245,16 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="PERIOD_WEEKLY">
+          <constant clientSupport="ng,wc,sc" name="PERIOD_WEEKLY">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a weekly period.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a weekly period.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify a weekly period.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify a weekly period.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -265,18 +265,18 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
 			plugins.amortization.AmortizationCalculation.NUMBER_UNLIMITED, 30);]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="STARTDAY_NORMAL">
+          <constant clientSupport="ng,wc,sc" name="STARTDAY_NORMAL">
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[The numeric constant used to identify that the same start day should be used as
+              <description clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify that the same start day should be used as
 the day of the month of the starting date of the event.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[The numeric constant used to identify that the same start day should be used as
+              <summary clientSupport="ng,wc,sc"><![CDATA[The numeric constant used to identify that the same start day should be used as
 the day of the month of the starting date of the event.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addPayment(500, new Date(2005, 1, 28), null, 
 			plugins.amortization.AmortizationCalculation.PERIOD_DAILY, 5, 
 			plugins.amortization.AmortizationCalculation.STARTDAY_NORMAL);
@@ -289,20 +289,20 @@ c2.addPayment(300, new Date(2006, 11, 24), new Date(2006, 12, 24),
           </constant>
         </constants>
         <functions>
-          <function clientSupport="wc,sc" name="addCompoundPeriodChange">
+          <function clientSupport="ng,wc,sc" name="addCompoundPeriodChange">
             <argumentsTypes>
               <argumentType typecode="int"/>
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a compound period change.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a compound period change.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a compound period change.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a compound period change.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -313,20 +313,20 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addLoan">
+          <function clientSupport="ng,wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a loan.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a loan.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -337,7 +337,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addLoan">
+          <function clientSupport="ng,wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -346,13 +346,13 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a loan.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a loan.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -365,7 +365,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="period" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addLoan">
+          <function clientSupport="ng,wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -375,13 +375,13 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a loan.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a loan.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -395,7 +395,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addLoan">
+          <function clientSupport="ng,wc,sc" name="addLoan">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -406,13 +406,13 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a loan.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a loan.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a loan.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -427,20 +427,20 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="startday" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addPayment">
+          <function clientSupport="ng,wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a payment.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a payment.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -451,7 +451,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addPayment">
+          <function clientSupport="ng,wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -460,13 +460,13 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a payment.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a payment.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -479,7 +479,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="period" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addPayment">
+          <function clientSupport="ng,wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -489,13 +489,13 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a payment.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a payment.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -509,7 +509,7 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="number" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addPayment">
+          <function clientSupport="ng,wc,sc" name="addPayment">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
@@ -520,13 +520,13 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a payment.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a payment.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a payment.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -541,20 +541,20 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="startday" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addRateChange">
+          <function clientSupport="ng,wc,sc" name="addRateChange">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="java.util.Date"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Sets a new interest rate.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Sets a new interest rate.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Sets a new interest rate.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Sets a new interest rate.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 c.addRateChange(r, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
 c.addLoan(2000, new Date(2005, 0, 1));
@@ -565,44 +565,44 @@ c.addPayment(500, new Date(2005, 1, 28), null, 12, 5, 31);]]></sample>
               <parameter name="date" type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="calculateAmortizationSchedule">
+          <function clientSupport="ng,wc,sc" name="calculateAmortizationSchedule">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Calculates the amortization schedule.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Calculates the amortization schedule.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Calculates the amortization schedule.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Calculates the amortization schedule.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.amortization.calculateAmortizationSchedule();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.amortization.calculateAmortizationSchedule();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getAmortizationSchedule">
+          <function clientSupport="ng,wc,sc" name="getAmortizationSchedule">
             <argumentsTypes/>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.IDataSet"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Gets the amortization schedule as a JSDataSet.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Gets the amortization schedule as a JSDataSet.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Gets the amortization schedule as a JSDataSet.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Gets the amortization schedule as a JSDataSet.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.amortization.getAmortizationSchedule();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.amortization.getAmortizationSchedule();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getError">
+          <function clientSupport="ng,wc,sc" name="getError">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the error that remains when solving for the unknown.
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the error that remains when solving for the unknown.
 Please note that the error should be less or equal to 1E-8 - otherwise, the solveForUnknown value is incorrect.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the error that remains when solving for the unknown.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the error that remains when solving for the unknown.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var c = plugins.amortization.newCalculation();
 // sets the rate to -1 for unknown.
 c.addRateChange(-1, new Date(2005, 0, 1));
 c.addCompoundPeriodChange(12, new Date(2005, 0, 1));
@@ -621,125 +621,125 @@ var r = c.getUnknown();
 var e = c.getError();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getEvents">
+          <function clientSupport="ng,wc,sc" name="getEvents">
             <argumentsTypes/>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.IDataSet"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns all the amortization events - such as rate changes, loan events, payment events, compounding period changes.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.amortization.getEvents();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.amortization.getEvents();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getRestBalance">
+          <function clientSupport="ng,wc,sc" name="getRestBalance">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Gets the rest balance after the amortization schedule.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Gets the rest balance after the amortization schedule.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Gets the rest balance after the amortization schedule.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Gets the rest balance after the amortization schedule.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var rb = plugins.amortization.getRestBalance();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[var rb = plugins.amortization.getRestBalance();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getUnknown">
+          <function clientSupport="ng,wc,sc" name="getUnknown">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the solveForUnknown value.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the solveForUnknown value.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the solveForUnknown value.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the solveForUnknown value.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.amortization.getUnknown();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.amortization.getUnknown();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="isValidPeriod">
+          <function clientSupport="ng,wc,sc" name="isValidPeriod">
             <argumentsTypes>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns true if the period is valid, or false if the period is not valid.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns true if the period is valid, or false if the period is not valid.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns true if the period is valid, or false if the period is not valid.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns true if the period is valid, or false if the period is not valid.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var v_period = plugins.amortization.isValidPeriod(12);]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[var v_period = plugins.amortization.isValidPeriod(12);]]></sample>
             </samples>
             <parameters>
               <parameter name="period" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="roundMoney">
+          <function clientSupport="ng,wc,sc" name="roundMoney">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Rounds a number up to the nearest cents.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Rounds a number up to the nearest cents.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Rounds a number up to the nearest cents.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Rounds a number up to the nearest cents.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//rounds the number up to 34.35
+              <sample clientSupport="ng,wc,sc"><![CDATA[//rounds the number up to 34.35
 var rm = plugins.amortization.roundMoney(34.349384);]]></sample>
             </samples>
             <parameters>
               <parameter name="amount" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="solveForUnknown">
+          <function clientSupport="ng,wc,sc" name="solveForUnknown">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns true if successful or false if the call failed.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns true if successful or false if the call failed.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns true if successful or false if the call failed.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns true if successful or false if the call failed.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.amortization.solveForUnknown();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.amortization.solveForUnknown();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="sortEvents">
+          <function clientSupport="ng,wc,sc" name="sortEvents">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Sorts the amortization events ascending by date.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Sorts the amortization events ascending by date.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Sorts the amortization events ascending by date.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Sorts the amortization events ascending by date.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[plugins.amortization.sortEvents();]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[plugins.amortization.sortEvents();]]></sample>
             </samples>
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="Polynomial" qualifiedName="com.servoy.extensions.plugins.amortization.Polynomial" scriptingName="Polynomial">
+      <object clientSupport="ng,wc,sc" publicName="Polynomial" qualifiedName="com.servoy.extensions.plugins.amortization.Polynomial" scriptingName="Polynomial">
         <functions>
-          <function clientSupport="wc,sc" name="addPolynomial">
+          <function clientSupport="ng,wc,sc" name="addPolynomial">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds another polynomial to this polynomial.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds another polynomial to this polynomial.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds another polynomial to this polynomial.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds another polynomial to this polynomial.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
+              <sample clientSupport="ng,wc,sc"><![CDATA[// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
 var eq = plugins.amortization.newPolynomial();
 for (var i = 0; i < 4; i++)
 {
@@ -756,20 +756,20 @@ application.output(eq.getValue(2));]]></sample>
               <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="addTerm">
+          <function clientSupport="ng,wc,sc" name="addTerm">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Adds a term to this polynomial.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Adds a term to this polynomial.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Adds a term to this polynomial.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Adds a term to this polynomial.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
+              <sample clientSupport="ng,wc,sc"><![CDATA[// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
 var eq = plugins.amortization.newPolynomial();
 for (var i = 0; i < 4; i++)
 {
@@ -787,7 +787,7 @@ application.output(eq.getValue(2));]]></sample>
               <parameter name="exponent" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="findRoot">
+          <function clientSupport="ng,wc,sc" name="findRoot">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="double"/>
@@ -795,13 +795,13 @@ application.output(eq.getValue(2));]]></sample>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Finds a root of this polynomial using Newton's method, starting from an initial search value, and with a given precision.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Finds a root of this polynomial using Newton's method, starting from an initial search value, and with a given precision.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Finds a root of this polynomial using Newton's method, starting from an initial search value, and with a given precision.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Finds a root of this polynomial using Newton's method, starting from an initial search value, and with a given precision.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
 var eq = plugins.amortization.newPolynomial();
 eq.addTerm(-1, 2);
 eq.addTerm(4, 1);
@@ -825,17 +825,17 @@ else application.output("Min point.");]]></sample>
               <parameter name="iterations" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="getDerivative">
+          <function clientSupport="ng,wc,sc" name="getDerivative">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns a polynomial that holds the derivative of this polynomial.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns a polynomial that holds the derivative of this polynomial.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns a polynomial that holds the derivative of this polynomial.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns a polynomial that holds the derivative of this polynomial.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
 var eq = plugins.amortization.newPolynomial();
 eq.addTerm(-1, 2);
 eq.addTerm(4, 1);
@@ -854,19 +854,19 @@ if (deriv.getDerivativeValue(rd) < 0) application.output("Max point.");
 else application.output("Min point.");]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getDerivativeValue">
+          <function clientSupport="ng,wc,sc" name="getDerivativeValue">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the value of the derivative of this polynomial in a certain point.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the value of the derivative of this polynomial in a certain point.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the value of the derivative of this polynomial in a certain point.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the value of the derivative of this polynomial in a certain point.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
 var eq = plugins.amortization.newPolynomial();
 eq.addTerm(-1, 2);
 eq.addTerm(4, 1);
@@ -888,19 +888,19 @@ else application.output("Min point.");]]></sample>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="getValue">
+          <function clientSupport="ng,wc,sc" name="getValue">
             <argumentsTypes>
               <argumentType typecode="double"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the value of this polynomial in a certain point.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the value of this polynomial in a certain point.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the value of this polynomial in a certain point.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the value of this polynomial in a certain point.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Model the quadratic equation -x^2 + 4x + 0.6 = 0
 var eq = plugins.amortization.newPolynomial();
 eq.addTerm(-1, 2);
 eq.addTerm(4, 1);
@@ -922,19 +922,19 @@ else application.output("Min point.");]]></sample>
               <parameter name="x" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="double"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="multiplyByPolynomial">
+          <function clientSupport="ng,wc,sc" name="multiplyByPolynomial">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Multiplies this polynomial with another polynomial.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Multiplies this polynomial with another polynomial.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Multiplies this polynomial with another polynomial.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Multiplies this polynomial with another polynomial.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Model the quadratic equation (x+1)*(x+2) = 0
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Model the quadratic equation (x+1)*(x+2) = 0
 var eq = plugins.amortization.newPolynomial();
 eq.addTerm(1, 1);
 eq.addTerm(1, 0);
@@ -952,20 +952,20 @@ application.output("eq(" + r2 + ")=" + eq.getValue(r2));]]></sample>
               <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="multiplyByTerm">
+          <function clientSupport="ng,wc,sc" name="multiplyByTerm">
             <argumentsTypes>
               <argumentType typecode="double"/>
               <argumentType typecode="int"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Multiples this polynomial with a term.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Multiples this polynomial with a term.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Multiples this polynomial with a term.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Multiples this polynomial with a term.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
+              <sample clientSupport="ng,wc,sc"><![CDATA[// (x+1) + 2*(x+1)*x + 3*(x+1)*x^2 + 4*(x+1)*x^3
 var eq = plugins.amortization.newPolynomial();
 for (var i = 0; i < 4; i++)
 {
@@ -983,17 +983,17 @@ application.output(eq.getValue(2));]]></sample>
               <parameter name="exponent" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setToZero">
+          <function clientSupport="ng,wc,sc" name="setToZero">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Sets this polynomial to zero.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Sets this polynomial to zero.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Sets this polynomial to zero.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Sets this polynomial to zero.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var eq = plugins.amortization.newPolynomial();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var eq = plugins.amortization.newPolynomial();
 eq.addTerm(2, 3);
 application.output(eq.getValue(1.1));
 eq.setToZero();
@@ -1002,19 +1002,19 @@ application.output(eq.getValue(1.1));]]></sample>
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="amortization" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationProvider" scriptingName="plugins.amortization">
+      <object clientSupport="ng,wc,sc" publicName="amortization" qualifiedName="com.servoy.extensions.plugins.amortization.AmortizationProvider" scriptingName="plugins.amortization">
         <functions>
-          <function clientSupport="wc,sc" name="newCalculation">
+          <function clientSupport="ng,wc,sc" name="newCalculation">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.amortization.AmortizationCalculation" typecode="com.servoy.extensions.plugins.amortization.AmortizationCalculation"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Creates a new amortization calculation.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Creates a new amortization calculation.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Creates a new amortization calculation.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Creates a new amortization calculation.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Calculate the interest rate for an amortization schedule
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Calculate the interest rate for an amortization schedule
 // with a loan of 2000 dollars  on January 1, 2005, and 5
 // monthly payments of 500 dollars starting on Febuary 28th,
 // payments made on the last day of each month.
@@ -1081,17 +1081,17 @@ var s = "<html>" + c.getAmortizationSchedule().getAsHTML();
 var rb = c.getRestBalance();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="newPolynomial">
+          <function clientSupport="ng,wc,sc" name="newPolynomial">
             <argumentsTypes/>
             <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// create a new polynomial
+              <sample clientSupport="ng,wc,sc"><![CDATA[// create a new polynomial
 var p = plugins.amortization.newPolynomial();
 
 // make the polynomial -4*x^2 + 9
@@ -1146,19 +1146,19 @@ plugins.dialogs.showInfoDialog(
 );]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="newPolynomial">
+          <function clientSupport="ng,wc,sc" name="newPolynomial">
             <argumentsTypes>
               <argumentType typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Creates a new polynomial which is either 0 or a copy of the specified polynomial.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// create a new polynomial
+              <sample clientSupport="ng,wc,sc"><![CDATA[// create a new polynomial
 var p = plugins.amortization.newPolynomial();
 
 // make the polynomial -4*x^2 + 9
@@ -1216,7 +1216,7 @@ plugins.dialogs.showInfoDialog(
               <parameter name="polynomial" type="com.servoy.extensions.plugins.amortization.Polynomial" typecode="com.servoy.extensions.plugins.amortization.Polynomial"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="nextDate">
+          <function clientSupport="ng,wc,sc" name="nextDate">
             <argumentsTypes>
               <argumentType typecode="java.util.Date"/>
               <argumentType typecode="int"/>
@@ -1224,7 +1224,7 @@ plugins.dialogs.showInfoDialog(
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Date" typecode="java.util.Date"/>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//Helper method to get the next date when a period is given;
+              <sample clientSupport="ng,wc,sc"><![CDATA[//Helper method to get the next date when a period is given;
 //valid periods are:
 //PERIOD_ANNUALY : 1
 //PERIOD_BI_ANNUALLY : 2

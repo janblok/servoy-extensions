@@ -2,18 +2,18 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="JSClient" qualifiedName="com.servoy.extensions.plugins.headlessclient.JSClient">
+      <object clientSupport="ng,wc,sc" publicName="JSClient" qualifiedName="com.servoy.extensions.plugins.headlessclient.JSClient">
         <constants>
-          <constant clientSupport="wc,sc" name="CALLBACK_EVENT">
+          <constant clientSupport="ng,wc,sc" name="CALLBACK_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when it executed normally.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -32,16 +32,16 @@
 }]]></sample>
             </samples>
           </constant>
-          <constant clientSupport="wc,sc" name="CALLBACK_EXCEPTION_EVENT">
+          <constant clientSupport="ng,wc,sc" name="CALLBACK_EXCEPTION_EVENT">
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Constant that is returned as a JSEvent type when in the callback method when an exception occurred.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -62,20 +62,20 @@
           </constant>
         </constants>
         <functions>
-          <function clientSupport="wc,sc" name="getClientID">
+          <function clientSupport="ng,wc,sc" name="getClientID">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Gets the id of the client.
+              <description clientSupport="ng,wc,sc"><![CDATA[Gets the id of the client.
 
 This client id can be used to find the client from the headless client plugin.
 Note that this client id is not the same id as the id displayed on the Aplicationb Server admin page.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Gets the id of the client.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Gets the id of the client.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
+              <sample clientSupport="ng,wc,sc"><![CDATA[var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 var clientID = headlessClient.getClientID()
 ....
 headlessClient = plugins.headlessclient.getClient(clientID);
@@ -84,20 +84,20 @@ if (headlessClient != null && headlessClient.isValid()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getDataProviderValue">
+          <function clientSupport="ng,wc,sc" name="getDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value for the data-provider.]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Get a data-provider value.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Get a data-provider value.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -123,7 +123,7 @@ if (headlessClient != null && headlessClient.isValid()) {
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="getDataProviderValue">
+          <function clientSupport="ng,wc,sc" name="getDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -131,13 +131,13 @@ if (headlessClient != null && headlessClient.isValid()) {
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the value of the data-provider.]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Get a data-provider value.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Get a data-provider value.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Get a data-provider value.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -166,17 +166,17 @@ if (headlessClient != null && headlessClient.isValid()) {
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="isValid">
+          <function clientSupport="ng,wc,sc" name="isValid">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[returns true if this client is still valid/usable.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[returns true if this client is still valid/usable.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[returns true if this client is still valid/usable.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[returns true if this client is still valid/usable.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -195,7 +195,7 @@ if (headlessClient != null && headlessClient.isValid()) {
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="queueMethod">
+          <function clientSupport="ng,wc,sc" name="queueMethod">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -204,17 +204,17 @@ if (headlessClient != null && headlessClient.isValid()) {
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Queues a method call on the remote server. The callback method will be called when the method is executed on the server
+              <description clientSupport="ng,wc,sc"><![CDATA[Queues a method call on the remote server. The callback method will be called when the method is executed on the server
 and the return value is given as the JSEvent.data object with the JSEvent.getType() value of JSClient.CALLBACK_EVENT. 
 If an exception is thrown somewhere then the callback method will be called with
 the exception as the JSEvent data object with the JSEvent.getType() value of JSClient.CALLBACK_EXCEPTION_EVENT
 The second argument that is give back is the JSClient instance that did the call.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Queues a method call on the remote server.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Queues a method call on the remote server.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -247,7 +247,7 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setDataProviderValue">
+          <function clientSupport="ng,wc,sc" name="setDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -255,13 +255,13 @@ The second argument that is give back is the JSClient instance that did the call
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change.]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set a data-provider value.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set a data-provider value.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -290,7 +290,7 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setDataProviderValue">
+          <function clientSupport="ng,wc,sc" name="setDataProviderValue">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -299,13 +299,13 @@ The second argument that is give back is the JSClient instance that did the call
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"><![CDATA[the old value or null if no change]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set a data-provider value.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set a data-provider value.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set a data-provider value.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	// only gets the globals.media when the 'remoteMethod' is currently executing for this client
 	var value = jsclient.getDataProviderValue(null, "scopes.globals.number", 'remoteMethod');
@@ -337,24 +337,24 @@ The second argument that is give back is the JSClient instance that did the call
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" deprecated="true" name="shutDown">
+          <function clientSupport="ng,wc,sc" deprecated="true" name="shutDown">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <deprecated><![CDATA[Replaced by #shutdown(boolean)]]></deprecated>
           </function>
-          <function clientSupport="wc,sc" name="shutdown">
+          <function clientSupport="ng,wc,sc" name="shutdown">
             <argumentsTypes/>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[closes the client.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[closes the client.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[closes the client.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[closes the client.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -373,19 +373,19 @@ The second argument that is give back is the JSClient instance that did the call
 }]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="shutdown">
+          <function clientSupport="ng,wc,sc" name="shutdown">
             <argumentsTypes>
               <argumentType typecode="boolean"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[closes the client.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[closes the client.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[closes the client.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[closes the client.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
+              <sample clientSupport="ng,wc,sc"><![CDATA[if (jsclient && jsclient.isValid())
 {
 	/*Queue a method where the callback can do something like this
 	if (event.getType() == JSClient.CALLBACK_EVENT)
@@ -409,9 +409,9 @@ The second argument that is give back is the JSClient instance that did the call
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider" scriptingName="plugins.headlessclient">
+      <object clientSupport="ng,wc,sc" publicName="headlessclient" qualifiedName="com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider" scriptingName="plugins.headlessclient">
         <functions>
-          <function clientSupport="wc,sc" name="createClient">
+          <function clientSupport="ng,wc,sc" name="createClient">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -420,7 +420,7 @@ The second argument that is give back is the JSClient instance that did the call
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Creates a headless client on the server that will open the given solution.
+              <description clientSupport="ng,wc,sc"><![CDATA[Creates a headless client on the server that will open the given solution.
 The clientId of this client can be stored in the database to be shared between clients so that that specific client can be used 
 over multiply clients later on or picked up later on by this client. (Even after restart of this client) 
 
@@ -429,10 +429,10 @@ you can load any solution from the workspace when you pass "nodebug" as last arg
 But then you won't be able to debug it, breakpoints won't hit.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Creates a headless client on the server that will open the given solution.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Creates a headless client on the server that will open the given solution.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
 var headlessClient = plugins.headlessclient.createClient("someSolution", "user", "pass", null);
 if (headlessClient != null && headlessClient.isValid()) { 
 	var x = new Object();
@@ -448,19 +448,19 @@ if (headlessClient != null && headlessClient.isValid()) {
               <parameter name="solutionOpenMethodArgs" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="getClient">
+          <function clientSupport="ng,wc,sc" name="getClient">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Gets an existing headless client for the given client uuid.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Gets an existing headless client for the given client uuid.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Gets an existing headless client for the given client uuid.
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Gets an existing headless client for the given client uuid.
 var headlessClient = plugins.headlessclient.getClient("clientID");
 if (headlessClient != null && headlessClient.isValid()) {
 	 headlessClient.queueMethod(null, "someRemoteMethod", null, callback);
@@ -470,7 +470,7 @@ if (headlessClient != null && headlessClient.isValid()) {
               <parameter name="clientID" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="getOrCreateClient">
+          <function clientSupport="ng,wc,sc" name="getOrCreateClient">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -480,7 +480,7 @@ if (headlessClient != null && headlessClient.isValid()) {
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.headlessclient.JSClient" typecode="com.servoy.extensions.plugins.headlessclient.JSClient"><![CDATA[An existing JSClient or the JSClient that is created.]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
+              <description clientSupport="ng,wc,sc"><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
 it will create a headless client on the server that will open the given solution if it didn't exists yet.
 
 If the client does exist but it is not loaded with that solution an exception will be thrown.
@@ -490,11 +490,11 @@ you can load any solution from the workspace when you pass "nodebug" as last arg
 But then you won't be able to debug it, breakpoints won't hit.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
+              <summary clientSupport="ng,wc,sc"><![CDATA[This will try to get a existing client by the given id if that client is already created for that specific solution;
 it will create a headless client on the server that will open the given solution if it didn't exists yet.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
+              <sample clientSupport="ng,wc,sc"><![CDATA[// Creates a headless client that will open the given solution.
 var storedSolutionSpecificID = "aaaabbbbccccc1111";
 var headlessClient = plugins.headlessclient.getOrCreateClient(storedSolutionSpecificID, "someSolution", "user", "pass", null);
 if (headlessClient != null && headlessClient.isValid()) { 

@@ -19,7 +19,6 @@ package com.servoy.extensions.plugins.headlessclient;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.IReturnedTypesProvider;
@@ -27,7 +26,6 @@ import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
 @ServoyDocumented(publicName = HeadlessClientPlugin.PLUGIN_NAME, scriptingName = "plugins." + HeadlessClientPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class HeadlessClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final HeadlessClientPlugin plugin;

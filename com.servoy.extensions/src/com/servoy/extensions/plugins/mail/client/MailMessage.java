@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 
@@ -30,7 +29,6 @@ import com.servoy.j2db.scripting.IJavaScriptType;
  * @author jblok
  */
 @ServoyDocumented
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class MailMessage implements Serializable, IJavaScriptType
 {
 	public List<Attachment> attachments = new ArrayList<Attachment>();

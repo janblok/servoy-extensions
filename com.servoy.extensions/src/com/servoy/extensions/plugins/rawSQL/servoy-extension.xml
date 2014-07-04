@@ -2,16 +2,16 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="rawSQL" qualifiedName="com.servoy.extensions.plugins.rawSQL.RawSQLProvider" scriptingName="plugins.rawSQL">
+      <object clientSupport="ng,wc,sc" publicName="rawSQL" qualifiedName="com.servoy.extensions.plugins.rawSQL.RawSQLProvider" scriptingName="plugins.rawSQL">
         <functions>
-          <function clientSupport="wc,sc" deprecated="true" name="convertUUIDToBytes">
+          <function clientSupport="ng,wc,sc" deprecated="true" name="convertUUIDToBytes">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
             <deprecated><![CDATA[Replaced by application#getUUID(String)]]></deprecated>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -26,7 +26,7 @@ var uuid = application.getNewUUID();
 plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" deprecated="true" name="convertUUIDToString">
+          <function clientSupport="ng,wc,sc" deprecated="true" name="convertUUIDToString">
             <argumentsTypes>
               <argumentType typecode="[B"/>
             </argumentsTypes>
@@ -36,7 +36,7 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
               <parameter name="data" type="byte[]" typecode="[B"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="executeSQL">
+          <function clientSupport="ng,wc,sc" name="executeSQL">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -44,13 +44,13 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -89,7 +89,7 @@ else
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="executeSQL">
+          <function clientSupport="ng,wc,sc" name="executeSQL">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -98,13 +98,13 @@ else
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -146,7 +146,7 @@ else
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="executeStoredProcedure">
+          <function clientSupport="ng,wc,sc" name="executeStoredProcedure">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -155,13 +155,13 @@ else
             </argumentsTypes>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet[]" typecode="[Lcom.servoy.j2db.dataprocessing.IDataSet;"><![CDATA[the result sets created by the procedure.]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -188,7 +188,7 @@ for (var i = 0; i < datasets.length; i++) {
               <parameter name="maxNumberOfRowsToRetrieve" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="executeStoredProcedure">
+          <function clientSupport="ng,wc,sc" name="executeStoredProcedure">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -198,13 +198,13 @@ for (var i = 0; i < datasets.length; i++) {
             </argumentsTypes>
             <return type="com.servoy.j2db.dataprocessing.JSDataSet" typecode="com.servoy.j2db.dataprocessing.JSDataSet"><![CDATA[a dataset with output (in case of output data) or the last result set executed by the procedure.]]></return>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Execute a stored procedure.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Execute a stored procedure.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Execute a stored procedure.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Execute a stored procedure.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -234,20 +234,20 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
               <parameter name="maxNumberOfRowsToRetrieve" type="com.servoy.j2db.documentation.scripting.docs.Number" typecode="int"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="flushAllClientsCache">
+          <function clientSupport="ng,wc,sc" name="flushAllClientsCache">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Flush cached database data. Use with extreme care, its affecting the performance of clients!]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Flush cached database data. Use with extreme care, its affecting the performance of clients!]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Flush cached database data.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Flush cached database data.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -279,17 +279,17 @@ else
               <parameter name="tableName" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="getException">
+          <function clientSupport="ng,wc,sc" name="getException">
             <argumentsTypes/>
             <return type="com.servoy.j2db.util.ServoyException" typecode="java.lang.Exception"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
@@ -317,12 +317,12 @@ else
 // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" deprecated="true" name="getExceptionMsg">
+          <function clientSupport="ng,wc,sc" deprecated="true" name="getExceptionMsg">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <deprecated><![CDATA[Replaced by #getException().]]></deprecated>
           </function>
-          <function clientSupport="wc,sc" name="notifyDataChange">
+          <function clientSupport="ng,wc,sc" name="notifyDataChange">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -331,13 +331,13 @@ else
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s).]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="ng,wc,sc"><![CDATA[/**************************************************************************** 
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE

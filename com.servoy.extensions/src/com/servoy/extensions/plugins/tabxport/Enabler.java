@@ -28,7 +28,7 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jblok
  */
 @ServoyDocumented(publicName = TextXportPlugin.PLUGIN_NAME, scriptingName = "plugins." + TextXportPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = false, wc = false, sc = true)
 public class Enabler implements IScriptable
 {
 	private JMenuItem imp;

@@ -70,7 +70,6 @@ import com.servoy.j2db.util.FileChooserUtils;
  * @author Servoy Stuff
  */
 @ServoyDocumented(publicName = FilePlugin.PLUGIN_NAME, scriptingName = "plugins." + FilePlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = false, sc = true)
 public class FileProvider implements IReturnedTypesProvider, IScriptable
 {
 
@@ -207,6 +206,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * plugins.file.showFileOpenDialog(null,null,false,new Array("JPG and GIF", "jpg", "gif"),mycallbackfunction,'Select some nice files')
 	 * 
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog()
 	{
 		return js_showFileOpenDialog(Integer.valueOf(1), (String)null, Boolean.FALSE, null, null, null);
@@ -218,6 +218,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Function callbackfunction)
 	{
 		return js_showFileOpenDialog(Integer.valueOf(1), (String)null, Boolean.FALSE, null, callbackfunction, null);
@@ -229,6 +230,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param selectionMode 0=both,1=Files,2=Dirs 
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode)
 	{
 		return js_showFileOpenDialog(selectionMode, (String)null, Boolean.FALSE, null, null, null);
@@ -241,6 +243,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, (String)null, Boolean.FALSE, null, callbackfunction, null);
@@ -253,6 +256,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory JSFile instance of default folder; null=default/previous 
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, null, null);
@@ -265,6 +269,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param selectionMode 0=both,1=Files,2=Dirs
 	 * @param startDirectory Path to default folder; null=default/previous 
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, null, null);
@@ -278,6 +283,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory JSFile instance of default folder,null=default/previous 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, callbackfunction, null);
@@ -291,6 +297,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory Path to default folder,null=default/previous 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, Boolean.FALSE, null, callbackfunction, null);
@@ -304,6 +311,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory JSFile instance of default folder, null=default/previous
 	 * @param multiselect true/false 
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
@@ -317,6 +325,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param startDirectory Path to default folder, null=default/previous
 	 * @param multiselect true/false 
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, null, null);
@@ -331,6 +340,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackfunction, null);
@@ -345,6 +355,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, null, callbackfunction, null);
@@ -359,6 +370,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param filter A filter or array of filters on the folder files.
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Object filter)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, null, null);
@@ -373,6 +385,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param multiselect true/false 
 	 * @param filter A filter or array of filters on the folder files.
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Object filter)
 	{
 
@@ -389,6 +402,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Object filter, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, null);
@@ -404,6 +418,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param filter A filter or array of filters on the folder files.
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Object filter, Function callbackfunction)
 	{
 		return js_showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, null);
@@ -420,6 +435,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 * @param title The tile of the dialog
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, JSFile startDirectory, Boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
 		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, title);
@@ -436,6 +452,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param callbackfunction A function that takes the (JSFile) array of the selected files as first argument
 	 * @param title The tile of the dialog
 	 */
+	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public Object js_showFileOpenDialog(Number selectionMode, String startDirectory, Boolean multiselect, Object filter, Function callbackfunction, String title)
 	{
 		return showFileOpenDialog(selectionMode, startDirectory, multiselect, filter, callbackfunction, title);
@@ -1920,7 +1937,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * var dir = plugins.file.showDirectorySelectDialog();
 	 * application.output("you've selected folder: " + dir.getAbsolutePath());
 	 */
-
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public JSFile js_showDirectorySelectDialog()
 	{
 		return js_showDirectorySelectDialog((String)null, null);
@@ -1932,6 +1949,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param directory Default directory as JSFile.
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public JSFile js_showDirectorySelectDialog(JSFile directory)
 	{
 		return js_showDirectorySelectDialog(directory, null);
@@ -1943,6 +1961,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * 
 	 * @param directory Default directory as file path.
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public JSFile js_showDirectorySelectDialog(String directory)
 	{
 		return js_showDirectorySelectDialog(directory, null);
@@ -1955,6 +1974,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param directory Default directory as JSFile.
 	 * @param title Dialog title.
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public JSFile js_showDirectorySelectDialog(JSFile directory, String title)
 	{
 		return showDirectorySelectDialog(directory, title);
@@ -1967,6 +1987,7 @@ public class FileProvider implements IReturnedTypesProvider, IScriptable
 	 * @param directory Default directory as file path.
 	 * @param title Dialog title.
 	 */
+	@ServoyClientSupport(ng = false, wc = false, sc = true)
 	public JSFile js_showDirectorySelectDialog(String directory, String title)
 	{
 		return showDirectorySelectDialog(directory, title);

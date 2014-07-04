@@ -2,21 +2,21 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="serialize" qualifiedName="com.servoy.extensions.plugins.serialize.SerializeProvider" scriptingName="plugins.serialize">
+      <object clientSupport="ng,wc,sc" publicName="serialize" qualifiedName="com.servoy.extensions.plugins.serialize.SerializeProvider" scriptingName="plugins.serialize">
         <functions>
-          <function clientSupport="wc,sc" name="fromJSON">
+          <function clientSupport="ng,wc,sc" name="fromJSON">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Deserialize from JSON text to an object.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Deserialize from JSON text to an object.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Deserialize from JSON text to an object.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Deserialize from JSON text to an object.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
+              <sample clientSupport="ng,wc,sc"><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
 var string_data = plugins.serialize.toJSON(org_array);
 var new_array = plugins.serialize.fromJSON(string_data);
 application.output(new_array.join('#'));]]></sample>
@@ -25,19 +25,19 @@ application.output(new_array.join('#'));]]></sample>
               <parameter name="data" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="toJSON">
+          <function clientSupport="ng,wc,sc" name="toJSON">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Serialize an object to JSON text.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Serialize an object to JSON text.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Serialize an object to JSON text.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Serialize an object to JSON text.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
+              <sample clientSupport="ng,wc,sc"><![CDATA[var org_array = new Array('A1','F1','Paris-Dakar');
 var string_data = plugins.serialize.toJSON(org_array);
 var new_array = plugins.serialize.fromJSON(string_data);
 application.output(new_array.join('#'));]]></sample>

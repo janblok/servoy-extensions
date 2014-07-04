@@ -27,7 +27,7 @@ import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.IDelegate;
 
 @ServoyDocumented(publicName = SpellCheckClientPlugin.PLUGIN_NAME, scriptingName = "plugins." + SpellCheckClientPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = false, wc = false, sc = true)
 public class SpellCheckClientProvider implements IScriptable, IReturnedTypesProvider
 {
 	private final SpellCheckClientPlugin plugin;

@@ -18,7 +18,6 @@ package com.servoy.extensions.plugins.mail.client;
 
 import java.io.Serializable;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IJavaScriptType;
 import com.servoy.j2db.util.MimeTypes;
@@ -27,7 +26,6 @@ import com.servoy.j2db.util.MimeTypes;
  * @author jblok
  */
 @ServoyDocumented(scriptingName = "Attachment")
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class Attachment implements Serializable, IJavaScriptType
 {
 	private final String name;

@@ -99,22 +99,22 @@ for (var i = 0; i < namesArray.length; i++) {
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="openid" qualifiedName="com.servoy.extensions.plugins.openid.OpenIDProvider" scriptingName="plugins.openid">
+      <object clientSupport="wc" publicName="openid" qualifiedName="com.servoy.extensions.plugins.openid.OpenIDProvider" scriptingName="plugins.openid">
         <functions>
-          <function clientSupport="wc,sc" name="createAuthenticateRequest">
+          <function clientSupport="wc" name="createAuthenticateRequest">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="org.mozilla.javascript.Function"/>
             </argumentsTypes>
             <return type="com.servoy.extensions.plugins.openid.JSAuthenticateRequest" typecode="com.servoy.extensions.plugins.openid.JSAuthenticateRequest"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Redirect to openID provider to login, callback method will receive answer.]]></description>
+              <description clientSupport="wc"><![CDATA[Redirect to openID provider to login, callback method will receive answer.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Redirect to openID provider to login, callback method will receive answer.]]></summary>
+              <summary clientSupport="wc"><![CDATA[Redirect to openID provider to login, callback method will receive answer.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
+              <sample clientSupport="wc"><![CDATA[var authenticateRequest = plugins.openid.createAuthenticateRequest('https://www.google.com/accounts/o8/id',openIDLoginCallback);
 authenticateRequest.addAttributeRequest('email','http://axschema.org/contact/email',true);
 //see http://www.axschema.org/types/ for more attributes, not all are supported by all providers!
 authenticateRequest.execute();

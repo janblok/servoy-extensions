@@ -53,7 +53,7 @@ import com.servoy.j2db.util.Debug;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented(publicName = OpenIDPlugin.PLUGIN_NAME, scriptingName = "plugins." + OpenIDPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = false, wc = true, sc = false)
 public class OpenIDProvider implements IScriptable, IReturnedTypesProvider
 {
 	private static final class CallBackBehavior extends AbstractBehavior implements IBehaviorListener

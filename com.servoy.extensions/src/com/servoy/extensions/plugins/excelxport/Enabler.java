@@ -23,7 +23,6 @@ import javax.swing.JMenuItem;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.dataprocessing.IFoundSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
@@ -33,7 +32,6 @@ import com.servoy.j2db.scripting.IScriptable;
  * @author jblok
  */
 @ServoyDocumented(publicName = ExcelXportPlugin.PLUGIN_NAME, scriptingName = "plugins." + ExcelXportPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class Enabler implements IScriptable
 {
 	private JMenuItem imp;

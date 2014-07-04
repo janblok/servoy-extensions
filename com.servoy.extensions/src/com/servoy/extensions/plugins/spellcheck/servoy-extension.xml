@@ -66,21 +66,21 @@
           </constant>
         </constants>
       </object>
-      <object clientSupport="wc,sc" publicName="spellcheck" qualifiedName="com.servoy.extensions.plugins.spellcheck.SpellCheckClientProvider" scriptingName="plugins.spellcheck">
+      <object clientSupport="sc" publicName="spellcheck" qualifiedName="com.servoy.extensions.plugins.spellcheck.SpellCheckClientProvider" scriptingName="plugins.spellcheck">
         <functions>
-          <function clientSupport="wc,sc" name="checkTextComponent">
+          <function clientSupport="sc" name="checkTextComponent">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></description>
+              <description clientSupport="sc"><![CDATA[Spellcheck the form element/component.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Spellcheck the form element/component.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
+              <sample clientSupport="sc"><![CDATA[// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
 // Spellchecking currently works in SmartClient only.
 plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
 // Optionally, the language can be sent as an argument to the function.
@@ -92,20 +92,20 @@ plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
               <parameter name="textComponent" type="com.servoy.j2db.documentation.scripting.docs.Object" typecode="java.lang.Object"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="checkTextComponent">
+          <function clientSupport="sc" name="checkTextComponent">
             <argumentsTypes>
               <argumentType typecode="java.lang.Object"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></description>
+              <description clientSupport="sc"><![CDATA[Spellcheck the form element/component.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Spellcheck the form element/component.]]></summary>
+              <summary clientSupport="sc"><![CDATA[Spellcheck the form element/component.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
+              <sample clientSupport="sc"><![CDATA[// The desired spellcheck provider and language are set via the SpellCheck Preference Page, in the Client Preferences.
 // Spellchecking currently works in SmartClient only.
 plugins.spellcheck.checkTextComponent(forms.actionDetails.elements.actionText);
 // Optionally, the language can be sent as an argument to the function.

@@ -19,13 +19,11 @@ package com.servoy.extensions.plugins.udp;
 import java.io.UTFDataFormatException;
 import java.net.DatagramPacket;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 import com.servoy.j2db.util.Debug;
 
 @ServoyDocumented(scriptingName = "JSPacket")
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSPacket implements IScriptable
 {
 	static final int MAX_PACKET_LENGTH = 64000;

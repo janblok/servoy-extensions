@@ -26,7 +26,6 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SimpleTrigger;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.Messages;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
@@ -38,7 +37,6 @@ import com.servoy.j2db.util.Debug;
  * @author jcompagner
  */
 @ServoyDocumented(publicName = SchedulerPlugin.PLUGIN_NAME, scriptingName = "plugins." + SchedulerPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class SchedulerProvider implements IScriptable
 {
 	private static Object schedulerLock = new Object();

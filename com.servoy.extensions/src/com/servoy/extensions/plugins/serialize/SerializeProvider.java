@@ -16,12 +16,10 @@
  */
 package com.servoy.extensions.plugins.serialize;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.IScriptable;
 
 @ServoyDocumented(publicName = SerializePlugin.PLUGIN_NAME, scriptingName = "plugins." + SerializePlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class SerializeProvider implements IScriptable
 {
 	private final SerializePlugin plugin;

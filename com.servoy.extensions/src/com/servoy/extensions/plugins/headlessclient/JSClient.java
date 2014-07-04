@@ -24,7 +24,6 @@ import java.util.concurrent.Executor;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Undefined;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.extensions.plugins.headlessclient.HeadlessClientProvider.ClientPool;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.scripting.FunctionDefinition;
@@ -34,7 +33,6 @@ import com.servoy.j2db.scripting.JSEvent;
 import com.servoy.j2db.util.Debug;
 
 @ServoyDocumented
-@ServoyClientSupport(ng = false, wc = true, sc = true)
 public class JSClient implements IScriptable, IConstantsObject
 {
 	private final IHeadlessServer headlessServer;
