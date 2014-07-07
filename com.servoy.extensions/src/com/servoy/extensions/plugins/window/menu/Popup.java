@@ -154,8 +154,7 @@ public class Popup extends AbstractMenu
 	 *
 	 * @sampleas js_show(IComponent)
 	 * 
-	 * @param x
-	 * @param y
+	 * @param jsEvent
 	 */
 	public void js_show(JSEvent jsEvent) throws PluginException
 	{
