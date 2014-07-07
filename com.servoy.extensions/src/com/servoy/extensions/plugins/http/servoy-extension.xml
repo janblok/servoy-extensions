@@ -2,89 +2,89 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="wc,sc" publicName="Cookie" qualifiedName="com.servoy.extensions.plugins.http.Cookie">
+      <object clientSupport="ng,wc,sc" publicName="Cookie" qualifiedName="com.servoy.extensions.plugins.http.Cookie">
         <functions>
-          <function clientSupport="wc,sc" name="getComment">
+          <function clientSupport="ng,wc,sc" name="getComment">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the cookie comment.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the cookie comment.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the cookie comment.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the cookie comment.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
+              <sample clientSupport="ng,wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var path = cookie.getComment();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getDomain">
+          <function clientSupport="ng,wc,sc" name="getDomain">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the cookie domain.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the cookie domain.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the cookie domain.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the cookie domain.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
+              <sample clientSupport="ng,wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var domain = cookie.getDomain();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getName">
+          <function clientSupport="ng,wc,sc" name="getName">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the cookie name.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the cookie name.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the cookie name.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the cookie name.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
+              <sample clientSupport="ng,wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var name = cookie.getName();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getPath">
+          <function clientSupport="ng,wc,sc" name="getPath">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the cookie path.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the cookie path.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the cookie path.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the cookie path.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
+              <sample clientSupport="ng,wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var path = cookie.getPath();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getSecure">
+          <function clientSupport="ng,wc,sc" name="getSecure">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the cookie secure attribute.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the cookie secure attribute.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the cookie secure attribute.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the cookie secure attribute.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
+              <sample clientSupport="ng,wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var path = cookie.getSecure();]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="getValue">
+          <function clientSupport="ng,wc,sc" name="getValue">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Returns the cookie value.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Returns the cookie value.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Returns the cookie value.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Returns the cookie value.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
+              <sample clientSupport="ng,wc,sc"><![CDATA[var cookie = client.getCookie('cookieName')
 var value = cookie.getValue();]]></sample>
             </samples>
           </function>
@@ -2398,7 +2398,7 @@ application.output(supportedOperations.join(','));]]></sample>
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="PostRequest" qualifiedName="com.servoy.extensions.plugins.http.PostRequest">
+      <object clientSupport="ng,wc,sc" publicName="PostRequest" qualifiedName="com.servoy.extensions.plugins.http.PostRequest">
         <functions>
           <function clientSupport="ng,wc,sc" name="addFile">
             <argumentsTypes>
@@ -2720,57 +2720,57 @@ var httpCode = poster.doPost()]]></sample>
               <sample clientSupport="ng,wc,sc"><![CDATA[var pageData = poster.getPageData()]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="setBodyContent">
+          <function clientSupport="ng,wc,sc" name="setBodyContent">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set the body of the request.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set the body of the request.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set the body of the request.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set the body of the request.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
             </samples>
             <parameters>
               <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setBodyContent">
+          <function clientSupport="ng,wc,sc" name="setBodyContent">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set the body of the request and content mime type.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set the body of the request and content mime type.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content, 'text/xml')]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[method.setBodyContent(content, 'text/xml')]]></sample>
             </samples>
             <parameters>
               <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setCharset">
+          <function clientSupport="ng,wc,sc" name="setCharset">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set the charset used when posting.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set the charset used when posting.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
 poster.addParameter('status',scopes.globals.textToPost);
 poster.addParameter('source','Test Source');
@@ -2790,7 +2790,7 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
           </function>
         </functions>
       </object>
-      <object clientSupport="wc,sc" publicName="PutRequest" qualifiedName="com.servoy.extensions.plugins.http.PutRequest">
+      <object clientSupport="ng,wc,sc" publicName="PutRequest" qualifiedName="com.servoy.extensions.plugins.http.PutRequest">
         <functions>
           <function clientSupport="ng,wc,sc" name="addHeader">
             <argumentsTypes>
@@ -2977,57 +2977,57 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setBodyContent">
+          <function clientSupport="ng,wc,sc" name="setBodyContent">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set the body of the request.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set the body of the request.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set the body of the request.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set the body of the request.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[method.setBodyContent(content)]]></sample>
             </samples>
             <parameters>
               <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setBodyContent">
+          <function clientSupport="ng,wc,sc" name="setBodyContent">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set the body of the request and content mime type.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set the body of the request and content mime type.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set the body of the request and content mime type.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[method.setBodyContent(content, 'text/xml')]]></sample>
+              <sample clientSupport="ng,wc,sc"><![CDATA[method.setBodyContent(content, 'text/xml')]]></sample>
             </samples>
             <parameters>
               <parameter name="content" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
               <parameter name="mimeType" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="setCharset">
+          <function clientSupport="ng,wc,sc" name="setCharset">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="void" typecode="void"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Set the charset used when posting. If this is null or not called it will use the default charset (UTF-8).]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Set the charset used when posting.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Set the charset used when posting.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
+              <sample clientSupport="ng,wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
 var poster = client.createPostRequest('https://twitter.com/statuses/update.json');
 poster.addParameter('status',scopes.globals.textToPost);
 poster.addParameter('source','Test Source');
