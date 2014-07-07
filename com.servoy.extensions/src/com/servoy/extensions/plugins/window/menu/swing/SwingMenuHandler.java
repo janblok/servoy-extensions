@@ -119,7 +119,8 @@ public class SwingMenuHandler implements IMenuHandler
 			}
 			Point compLocation = ((Component)component).getLocationOnScreen();
 			Point compLocationToWindow = new Point((int)(compLocation.getX() - windowLocation.getX()), (int)(compLocation.getY() - windowLocation.getY()));
-			return new Point(location.x - compLocationToWindow.x, location.y - compLocationToWindow.y);
+			return new Point((int)(location.x - compLocationToWindow.x - windowLocation.getX()),
+				(int)(location.y - compLocationToWindow.y - windowLocation.getY()));
 		}
 		return location;
 	}

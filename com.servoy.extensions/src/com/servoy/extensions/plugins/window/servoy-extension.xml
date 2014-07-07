@@ -7787,8 +7787,7 @@ if (event.getSource())
 //menu.show();]]></sample>
             </samples>
             <parameters>
-              <parameter name="x"/>
-              <parameter name="y"/>
+              <parameter name="jsEvent" type="com.servoy.j2db.scripting.JSEvent" typecode="com.servoy.j2db.scripting.JSEvent"/>
             </parameters>
           </function>
           <function clientSupport="wc,sc" name="show">
