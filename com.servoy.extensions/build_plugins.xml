@@ -133,6 +133,12 @@
 		<delete file="${beans.dir}/jfxpanel.jar"/>
 		<delete dir="${server_lib.dir}/template-handler.jar"/>
 		<delete dir="${drivers.dir}/oraclelobfix.jar"/>
+		
+		<delete>
+			<fileset dir="${src.dir}">
+				<include name="**/servoy-extension.*"/>
+			</fileset>
+		</delete>
 	</target>
 
  	<target name="prepare">
