@@ -136,7 +136,7 @@
 		
 		<delete>
 			<fileset dir="${src.dir}">
-				<include name="**/*servoy-extension.*"/>
+				<include name="**/*servoy-extension.html"/>
 			</fileset>
 		</delete>
 	</target>
