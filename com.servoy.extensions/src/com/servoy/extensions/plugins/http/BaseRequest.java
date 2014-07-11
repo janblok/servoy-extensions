@@ -111,6 +111,12 @@ public abstract class BaseRequest implements IScriptable, IJavaScriptType
 	 *
 	 * @sample
 	 * var response = method.executeRequest()
+	 * 
+	 * To be able to reuse the client, the response must be
+	 * closed if the content is not read via getResponseBody
+	 *  or getMediaData:
+	 * 
+	 * response.close()
 	 *
 	 */
 	public Response js_executeRequest()
