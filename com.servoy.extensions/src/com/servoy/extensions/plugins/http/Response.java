@@ -205,4 +205,23 @@ public class Response implements IScriptable, IJavaScriptType
 		return EntityUtils.getContentCharSet(res.getEntity());
 	}
 
+	/**
+	 * Needs to be called when not reading content via getResponseBody or getMediaData
+	 * to be able to reuse the client.
+	 * @return true if the entity content is consumed and content stream (if exists) is closed
+	 */
+	public boolean js_close()
+	{
+		try
+		{
+			EntityUtils.consume(res.getEntity());
+			return true;
+		}
+		catch (IOException e)
+		{
+			Debug.error(e);
+		}
+		return false;
+	}
+
 }

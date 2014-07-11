@@ -3078,6 +3078,18 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
       </object>
       <object clientSupport="wc,sc" publicName="Response" qualifiedName="com.servoy.extensions.plugins.http.Response">
         <functions>
+          <function clientSupport="wc,sc" name="close">
+            <argumentsTypes/>
+            <return type="com.servoy.j2db.documentation.scripting.docs.Boolean" typecode="boolean"><![CDATA[true if the entity content is consumed and content stream (if exists) is closed]]></return>
+            <descriptions>
+              <description clientSupport="wc,sc"><![CDATA[Needs to be called when not reading content via getResponseBody or getMediaData
+to be able to reuse the client.]]></description>
+            </descriptions>
+            <summaries>
+              <summary clientSupport="wc,sc"><![CDATA[Needs to be called when not reading content via getResponseBody or getMediaData
+to be able to reuse the client.]]></summary>
+            </summaries>
+          </function>
           <function clientSupport="wc,sc" name="getCharset">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
