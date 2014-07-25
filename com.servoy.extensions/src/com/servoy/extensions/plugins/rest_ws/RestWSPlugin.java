@@ -162,7 +162,7 @@ public class RestWSPlugin implements IServerPlugin
 			{
 				try
 				{
-					poolSize = Integer.parseInt(application.getSettings().getProperty(CLIENT_POOL_SIZE_PROPERTY));
+					poolSize = Integer.parseInt(application.getSettings().getProperty(CLIENT_POOL_SIZE_PROPERTY, "" + CLIENT_POOL_SIZE_DEFAULT).trim());
 				}
 				catch (NumberFormatException nfe)
 				{
