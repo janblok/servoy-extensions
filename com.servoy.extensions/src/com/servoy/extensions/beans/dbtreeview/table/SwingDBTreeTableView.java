@@ -231,12 +231,6 @@ public class SwingDBTreeTableView extends SwingDBTreeView implements ITreeTableS
 		treeTable.addMouseListener(new MouseAdapter()
 		{
 			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				if (e.getClickCount() == 2) SwingDBTreeTableView.this.mouseClicked(e);
-			}
-
-			@Override
 			public void mousePressed(MouseEvent e)
 			{
 				if (e.isPopupTrigger()) SwingDBTreeTableView.this.mouseRightClick(e);
