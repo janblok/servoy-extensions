@@ -93,7 +93,7 @@ import com.servoy.j2db.util.toolbar.ToolbarPanel;
  */
 @SuppressWarnings("nls")
 @ServoyDocumented(publicName = WindowPlugin.PLUGIN_NAME, scriptingName = "plugins." + WindowPlugin.PLUGIN_NAME)
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = true, wc = true, sc = true)
 public class WindowProvider implements IReturnedTypesProvider, IScriptable
 {
 	private final WindowPlugin plugin;

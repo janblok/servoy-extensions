@@ -28,7 +28,7 @@ import com.servoy.j2db.plugins.IClientPluginAccess;
  * 
  */
 @ServoyDocumented
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = true, wc = true, sc = true)
 public class CheckBox extends AbstractMenuItem
 {
 

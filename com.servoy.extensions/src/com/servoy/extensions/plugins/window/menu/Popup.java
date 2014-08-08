@@ -38,7 +38,7 @@ import com.servoy.j2db.ui.scripting.AbstractRuntimeBaseComponent;
  * 
  */
 @ServoyDocumented
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = true, wc = true, sc = true)
 public class Popup extends AbstractMenu
 {
 	public Popup()

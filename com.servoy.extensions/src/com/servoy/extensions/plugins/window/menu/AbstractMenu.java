@@ -35,7 +35,7 @@ import com.servoy.j2db.util.Utils;
  * @author rgansevles
  *
  */
-@ServoyClientSupport(ng = false, wc = true, sc = true)
+@ServoyClientSupport(ng = true, wc = true, sc = true)
 public abstract class AbstractMenu implements IScriptable, IJavaScriptType
 {
 	private final IClientPluginAccess pluginAccess;
