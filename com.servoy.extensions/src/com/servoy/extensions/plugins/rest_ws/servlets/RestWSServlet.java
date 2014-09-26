@@ -47,6 +47,7 @@ import org.mozilla.javascript.Wrapper;
 import org.mozilla.javascript.xml.XMLObject;
 
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin;
+import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.ExecFailedException;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NoClientsException;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthenticatedException;
 import com.servoy.extensions.plugins.rest_ws.RestWSPlugin.NotAuthorizedException;
@@ -160,6 +161,7 @@ public class RestWSServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Pair<IHeadlessClient, String> client = null;
+		boolean reloadSolution = plugin.shouldReloadSolutionAfterRequest();
 		try
 		{
 			plugin.log.trace("GET");
@@ -173,6 +175,11 @@ public class RestWSServlet extends HttpServlet
 			HTTPUtils.setNoCacheHeaders(response);
 			sendResult(request, response, result, CONTENT_DEFAULT);
 		}
+		catch (ExecFailedException e)
+		{
+			reloadSolution = true;
+			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+		}
 		catch (Exception e)
 		{
 			handleException(e, request, response, client != null ? client.getLeft() : null);
@@ -181,7 +188,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(client.getRight(), client.getLeft());
+				plugin.releaseClient(client.getRight(), client.getLeft(), reloadSolution);
 			}
 		}
 	}
@@ -207,7 +214,7 @@ public class RestWSServlet extends HttpServlet
 		String errorResponse = null;
 		if (e instanceof NotAuthenticatedException)
 		{
-			plugin.log.debug(request.getRequestURI() + ": Not authenticated");
+			if (plugin.log.isDebugEnabled()) plugin.log.debug(request.getRequestURI() + ": Not authenticated");
 			response.setHeader("WWW-Authenticate", "Basic realm=\"" + ((NotAuthenticatedException)e).getRealm() + '"');
 			errorCode = HttpServletResponse.SC_UNAUTHORIZED;
 		}
@@ -265,6 +272,7 @@ public class RestWSServlet extends HttpServlet
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Pair<IHeadlessClient, String> client = null;
+		boolean reloadSolution = plugin.shouldReloadSolutionAfterRequest();
 		try
 		{
 			plugin.log.trace("DELETE");
@@ -276,6 +284,11 @@ public class RestWSServlet extends HttpServlet
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
+		catch (ExecFailedException e)
+		{
+			reloadSolution = true;
+			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+		}
 		catch (Exception e)
 		{
 			handleException(e, request, response, client != null ? client.getLeft() : null);
@@ -284,7 +297,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(client.getRight(), client.getLeft());
+				plugin.releaseClient(client.getRight(), client.getLeft(), reloadSolution);
 			}
 		}
 	}
@@ -293,6 +306,7 @@ public class RestWSServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Pair<IHeadlessClient, String> client = null;
+		boolean reloadSolution = plugin.shouldReloadSolutionAfterRequest();
 		try
 		{
 			byte[] contents = getBody(request);
@@ -317,6 +331,11 @@ public class RestWSServlet extends HttpServlet
 				sendResult(request, response, result, contentType);
 			}
 		}
+		catch (ExecFailedException e)
+		{
+			reloadSolution = true;
+			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+		}
 		catch (Exception e)
 		{
 			handleException(e, request, response, client != null ? client.getLeft() : null);
@@ -325,7 +344,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(client.getRight(), client.getLeft());
+				plugin.releaseClient(client.getRight(), client.getLeft(), reloadSolution);
 			}
 		}
 	}
@@ -334,6 +353,7 @@ public class RestWSServlet extends HttpServlet
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Pair<IHeadlessClient, String> client = null;
+		boolean reloadSolution = plugin.shouldReloadSolutionAfterRequest();
 		try
 		{
 			byte[] contents = getBody(request);
@@ -357,6 +377,11 @@ public class RestWSServlet extends HttpServlet
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
+		catch (ExecFailedException e)
+		{
+			reloadSolution = true;
+			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+		}
 		catch (Exception e)
 		{
 			handleException(e, request, response, client != null ? client.getLeft() : null);
@@ -365,7 +390,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(client.getRight(), client.getLeft());
+				plugin.releaseClient(client.getRight(), client.getLeft(), reloadSolution);
 			}
 		}
 	}
@@ -376,6 +401,7 @@ public class RestWSServlet extends HttpServlet
 		IHeadlessClient client = null;
 		WsRequest wsRequest = null;
 		boolean nodebug = getNodebugHeadderValue(request);
+		boolean reloadSolution = plugin.shouldReloadSolutionAfterRequest();
 		try
 		{
 			plugin.log.trace("OPTIONS");
@@ -418,6 +444,11 @@ public class RestWSServlet extends HttpServlet
 			response.setHeader("Access-Control-Expose-Headers", value + ", " + WS_NODEBUG_HEADER + ", " + WS_USER_PROPERTIES_HEADER);
 			setResponseUserProperties(request, response, client.getPluginAccess());
 		}
+		catch (ExecFailedException e)
+		{
+			reloadSolution = true;
+			handleException(e.getCause(), request, response, client);
+		}
 		catch (Exception e)
 		{
 			handleException(e, request, response, client);
@@ -426,7 +457,7 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (client != null)
 			{
-				plugin.releaseClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName, client);
+				plugin.releaseClient(nodebug ? wsRequest.solutionName + ":nodebug" : wsRequest.solutionName, client, reloadSolution);
 			}
 		}
 	}
@@ -435,7 +466,7 @@ public class RestWSServlet extends HttpServlet
 	{
 		String path = request.getPathInfo(); //without servlet name
 
-		plugin.log.debug("Request '" + path + '\'');
+		if (plugin.log.isDebugEnabled()) plugin.log.debug("Request '" + path + '\'');
 
 		// parse the path: /webServiceName/mysolution/myform/arg1/arg2/...
 		String[] segments = path == null ? null : path.split("/");
@@ -464,7 +495,7 @@ public class RestWSServlet extends HttpServlet
 		setApplicationUserProperties(request, client.getPluginAccess());
 		String path = request.getPathInfo(); //without servlet name
 
-		plugin.log.debug("Request '" + path + '\'');
+		if (plugin.log.isDebugEnabled()) plugin.log.debug("Request '" + path + '\'');
 
 		WsRequest wsRequest = parsePath(request);
 
@@ -546,11 +577,20 @@ public class RestWSServlet extends HttpServlet
 			}
 		}
 
-		plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)");
-		//DO NOT USE FunctionDefinition here! we want to be able to catch possible exceptions! 
-		Object result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
-		plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
-		//flush updated cookies from the application
+		if (plugin.log.isDebugEnabled()) plugin.log.debug("executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)");
+		// DO NOT USE FunctionDefinition here! we want to be able to catch possible exceptions!
+		Object result;
+		try
+		{
+			result = client.getPluginAccess().executeMethod(wsRequest.formName, methodName, args, false);
+		}
+		catch (Exception e)
+		{
+			plugin.log.info("Method execution failed: executeMethod('" + wsRequest.formName + "', '" + methodName + "', <args>)", e);
+			throw new ExecFailedException(e);
+		}
+		if (plugin.log.isDebugEnabled()) plugin.log.debug("result = " + (result == null ? "<NULL>" : ("'" + result + '\'')));
+		// flush updated cookies from the application
 		setResponseUserProperties(request, response, client.getPluginAccess());
 		return result;
 
@@ -612,7 +652,7 @@ public class RestWSServlet extends HttpServlet
 			{
 				return retval instanceof Boolean ? null : retval;
 			}
-			plugin.log.debug("Authentication method " + WS_AUTHENTICATE + " denied authentication");
+			if (plugin.log.isDebugEnabled()) plugin.log.debug("Authentication method " + WS_AUTHENTICATE + " denied authentication");
 			throw new NotAuthenticatedException(solutionName);
 		}
 
@@ -622,7 +662,6 @@ public class RestWSServlet extends HttpServlet
 			plugin.log.debug("Supplied credentails not valid");
 			throw new NotAuthenticatedException(user);
 		}
-
 
 		String[] userGroups = plugin.getServerAccess().getUserGroups(userUid);
 		// find a match in groups
@@ -643,6 +682,7 @@ public class RestWSServlet extends HttpServlet
 				}
 			}
 		}
+
 		// no match
 		throw new NotAuthorizedException("User not authorized");
 	}
@@ -988,7 +1028,6 @@ public class RestWSServlet extends HttpServlet
 			{
 				json = plugin.getJSONSerializer().toJSON(result);
 			}
-
 
 			String content;
 			String contentTypeCharset = getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT);

@@ -65,6 +65,8 @@ public class RestWSPlugin implements IServerPlugin
 	private static final String ACTION_FAIL = "fail";
 	private static final String ACTION_GROW = "grow";
 	private static final String AUTHORIZED_GROUPS_PROPERTY = "rest_ws_plugin_authorized_groups";
+	private static final String RELOAD_SOLUTION_AFTER_REQUEST_PROPERTY = "rest_ws_reload_solution_after_request";
+	private static final Boolean RELOAD_SOLUTION_AFTER_REQUEST_DEFAULT = Boolean.TRUE;
 
 	public static final String WEBSERVICE_NAME = "rest_ws";
 	private static final String[] SOLUTION_OPEN_METHOD_ARGS = new String[] { "rest_ws_server" };
@@ -73,6 +75,7 @@ public class RestWSPlugin implements IServerPlugin
 
 	private JSONSerializerWrapper serializerWrapper;
 	private GenericKeyedObjectPool clientPool = null;
+	private Boolean shouldReloadSolutionAfterRequest;
 	private IServerAccess application;
 
 
@@ -104,6 +107,9 @@ public class RestWSPlugin implements IServerPlugin
 			": allows the pool to temporarily grow, by starting additional clients. These will be automatically removed when not required anymore.");
 		req.put(AUTHORIZED_GROUPS_PROPERTY,
 			"Only authenticated users in the listed groups (comma-separated) have access, when left empty unauthorised access is allowed");
+
+		// RELOAD_SOLUTION_AFTER_REQUEST_PROPERTY is discouraged so we do not show it in the admin page plugin properties
+
 		return req;
 	}
 
@@ -113,6 +119,9 @@ public class RestWSPlugin implements IServerPlugin
 
 	public void unload() throws PluginException
 	{
+		shouldReloadSolutionAfterRequest = null;
+		serializerWrapper = null;
+		// TODO: clear client pool
 	}
 
 	public Properties getProperties()
@@ -138,12 +147,30 @@ public class RestWSPlugin implements IServerPlugin
 
 	public String[] getAuthorizedGroups()
 	{
+		// TODO: cache value
 		String property = application.getSettings().getProperty(AUTHORIZED_GROUPS_PROPERTY);
 		if (property == null || property.trim().length() == 0)
 		{
 			return null;
 		}
 		return property.split(",");
+	}
+
+	/*
+	 * This is potentially dangerous, only reuse clients with loaded solution if you are very sure the client did not keep state!
+	 * 
+	 * USE AT OWN RISK
+	 */
+	public boolean shouldReloadSolutionAfterRequest()
+	{
+		if (shouldReloadSolutionAfterRequest == null)
+		{
+			String property = application.getSettings().getProperty(RELOAD_SOLUTION_AFTER_REQUEST_PROPERTY);
+			shouldReloadSolutionAfterRequest = (property != null && "false".equalsIgnoreCase(property.trim())) ? Boolean.FALSE
+				: RELOAD_SOLUTION_AFTER_REQUEST_DEFAULT;
+		}
+
+		return shouldReloadSolutionAfterRequest.booleanValue();
 	}
 
 	synchronized KeyedObjectPool getClientPool()
@@ -173,26 +200,26 @@ public class RestWSPlugin implements IServerPlugin
 				if (ACTION_FAIL.equalsIgnoreCase(exchaustedActionCode))
 				{
 					exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_FAIL;
-					log.debug("Client pool, exchaustedAction=" + ACTION_FAIL);
+					if (log.isDebugEnabled()) log.debug("Client pool, exchaustedAction=" + ACTION_FAIL);
 				}
 				else if (ACTION_GROW.equalsIgnoreCase(exchaustedActionCode))
 				{
 					exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_GROW;
-					log.debug("Client pool, exchaustedAction=" + ACTION_GROW);
+					if (log.isDebugEnabled()) log.debug("Client pool, exchaustedAction=" + ACTION_GROW);
 				}
 				else
 				{
 					exchaustedAction = GenericKeyedObjectPool.WHEN_EXHAUSTED_BLOCK;
-					log.debug("Client pool, exchaustedAction=" + ACTION_BLOCK);
+					if (log.isDebugEnabled()) log.debug("Client pool, exchaustedAction=" + ACTION_BLOCK);
 				}
 			}
-			log.debug("Creating client pool, maxSize=" + poolSize);
+			if (log.isDebugEnabled()) log.debug("Creating client pool, maxSize=" + poolSize);
 			clientPool = new GenericKeyedObjectPool(new BaseKeyedPoolableObjectFactory()
 			{
 				@Override
 				public Object makeObject(Object key) throws Exception
 				{
-					log.debug("creating new session client for solution '" + key + '\'');
+					if (log.isDebugEnabled()) log.debug("creating new session client for solution '" + key + '\'');
 					String solutionName = (String)key;
 					String[] solOpenArgs = SOLUTION_OPEN_METHOD_ARGS;
 
@@ -228,14 +255,14 @@ public class RestWSPlugin implements IServerPlugin
 						}
 					}
 					boolean valid = client.isValid();
-					log.debug("Validated session client for solution '" + key + "', valid = " + valid);
+					if (log.isDebugEnabled()) log.debug("Validated session client for solution '" + key + "', valid = " + valid);
 					return valid;
 				}
 
 				@Override
 				public void destroyObject(Object key, Object obj) throws Exception
 				{
-					log.debug("Destroying session client for solution '" + key + "'");
+					if (log.isDebugEnabled()) log.debug("Destroying session client for solution '" + key + "'");
 					IHeadlessClient client = ((IHeadlessClient)obj);
 					try
 					{
@@ -267,40 +294,55 @@ public class RestWSPlugin implements IServerPlugin
 		}
 	}
 
-	public void releaseClient(final String poolKey, final IHeadlessClient client)
+	public void releaseClient(final String poolKey, final IHeadlessClient client, boolean reloadSolution)
 	{
-		application.getExecutor().execute(new Runnable()
+		if (reloadSolution)
 		{
-			@Override
-			public void run()
+			application.getExecutor().execute(new Runnable()
 			{
-				boolean solutionReopened = false;
-				try
+				@Override
+				public void run()
 				{
-					client.closeSolution(true);
-					String[] arr = poolKey.split(":");
-					client.loadSolution(arr.length == 2 ? arr[0] : poolKey); // avoid the ":nodebug" part from the pool key...
-					solutionReopened = true;
-				}
-				catch (Exception ex)
-				{
-					Debug.error("cannot reopen solution " + poolKey, ex);
-					client.shutDown(true);
-				}
-				finally
-				{
+					boolean solutionReopened = false;
 					try
 					{
-						if (solutionReopened) getClientPool().returnObject(poolKey, client);
-						else getClientPool().invalidateObject(poolKey, client);
+						client.closeSolution(true);
+						String[] arr = poolKey.split(":");
+						client.loadSolution(arr.length == 2 ? arr[0] : poolKey); // avoid the ":nodebug" part from the pool key...
+						solutionReopened = true;
 					}
 					catch (Exception ex)
 					{
-						Debug.error(ex);
+						Debug.error("cannot reopen solution " + poolKey, ex);
+						client.shutDown(true);
+					}
+					finally
+					{
+						try
+						{
+							if (solutionReopened) getClientPool().returnObject(poolKey, client);
+							else getClientPool().invalidateObject(poolKey, client);
+						}
+						catch (Exception ex)
+						{
+							Debug.error(ex);
+						}
 					}
 				}
+			});
+		}
+		else
+		{
+			// This is potentially dangerous, only reuse clients with loaded solution if you are very sure the client did not keep state!
+			try
+			{
+				getClientPool().returnObject(poolKey, client);
 			}
-		});
+			catch (Exception ex)
+			{
+				Debug.error(ex);
+			}
+		}
 	}
 
 	public static class NoClientsException extends Exception
@@ -313,6 +355,7 @@ public class RestWSPlugin implements IServerPlugin
 			super(message);
 		}
 	}
+
 	public static class NotAuthenticatedException extends Exception
 	{
 		private final String realm;
@@ -325,6 +368,20 @@ public class RestWSPlugin implements IServerPlugin
 		public String getRealm()
 		{
 			return realm;
+		}
+	}
+
+	public static class ExecFailedException extends Exception
+	{
+		public ExecFailedException(Exception e)
+		{
+			super(e);
+		}
+
+		@Override
+		public Exception getCause()
+		{
+			return (Exception)super.getCause();
 		}
 	}
 }
