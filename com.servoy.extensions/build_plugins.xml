@@ -31,12 +31,10 @@
 		
 	<property name="bin_plugins.dir" value="${bin.dir}/com/servoy/extensions/plugins"/>
 	<property name="bin_beans.dir" value="${bin.dir}/com/servoy/extensions/beans"/>
-	<property name="bin_template.dir" value="${bin.dir}/com/servoy/extensions/template"/>
 	<property name="bin_oraclefix.dir" value="${bin.dir}/com/servoy/extensions/oraclefix"/>
 
 	<property name="src_plugins.dir" value="${src.dir}/com/servoy/extensions/plugins"/>
 	<property name="src_beans.dir" value="${src.dir}/com/servoy/extensions/beans"/>
-	<property name="src_template.dir" value="${src.dir}/com/servoy/extensions/template"/>
 	<property name="src_oraclefix.dir" value="${src.dir}/com/servoy/extensions/oraclefix"/>
 
 	<property name="plugins.dir" value="${build_build.build.dir}/plugins"/>
@@ -131,7 +129,6 @@
 			description="Delete all extensions' temporary and result files" unless="do_not_clean">
 		<delete file="${beans.dir}/dbtreeview.jar"/>
 		<delete file="${beans.dir}/jfxpanel.jar"/>
-		<delete dir="${server_lib.dir}/template-handler.jar"/>
 		<delete dir="${drivers.dir}/oraclelobfix.jar"/>
 		
 		<delete>
