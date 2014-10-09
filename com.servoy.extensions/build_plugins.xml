@@ -26,8 +26,8 @@
 	
 	<property file="personal_settings.properties"/>
 	
-	<property name="jdk1.6_home" value="${JAVA_HOME}"/>
-	<property name="javac_1.6" value="${jdk1.6_home}/bin/javac"/>		
+	<property name="jdk1.7_home" value="${JAVA_HOME}"/>
+	<property name="javac_1.7" value="${jdk1.7_home}/bin/javac"/>		
 		
 	<property name="bin_plugins.dir" value="${bin.dir}/com/servoy/extensions/plugins"/>
 	<property name="bin_beans.dir" value="${bin.dir}/com/servoy/extensions/beans"/>
@@ -86,6 +86,7 @@
 		<fileset dir="${eclipse_target.dir}/compile_target/install/plugins">
 			<include name="org.eclipse.osgi_*.jar" />
 			<include name="javax.*.jar" />
+			<include name="org.apache.*.jar" />
 		</fileset>
 		<fileset dir="${eclipse_target.dir}/ship_plugins/plugins">
 			<exclude name="org.eclipse*.jar" />
@@ -116,7 +117,7 @@
 			deprecation="off"
 			classpathref="classpath"
 			fork="yes"
-			executable="${javac_1.6}"
+			executable="${javac_1.7}"
 		/>
 	</target>
 
