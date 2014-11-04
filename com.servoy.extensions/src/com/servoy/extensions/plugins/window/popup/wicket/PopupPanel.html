@@ -14,7 +14,8 @@ if (typeof(ServoyPopup) == "undefined")
 		{
 			ServoyPopup.id = id;
 			ServoyPopup.callback = callback;
-			var hitEvent = 'ontouchstart' in document? 'touchstart': 'click';
+			var mobileBrowser = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)
+			var hitEvent = mobileBrowser ? 'touchstart': 'click';
 			$('iframe').each(function() { 
 				try {
 					var parentDiv=$(this).closest("div"); 
