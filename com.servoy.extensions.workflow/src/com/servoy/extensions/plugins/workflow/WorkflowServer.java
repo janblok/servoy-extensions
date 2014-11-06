@@ -79,7 +79,7 @@ public class WorkflowServer implements IWorkflowPluginService
 		IApplicationServerSingleton as = ApplicationServerRegistry.get(); 
 		if (as != null)
 		{
-			IUserManager userManager = as.getService(IUserManager.class);
+			IUserManager userManager = as.getUserManager();//getService(IUserManager.class);
 			Set<String> servoyGroupNames = new HashSet<String>();
 			String clientId = as.getClientId();
 			IDataSet groups_ds = userManager.getGroups(clientId);
@@ -474,54 +474,94 @@ public class WorkflowServer implements IWorkflowPluginService
 
 	public Pair<String,String> getMailTemplate(String templateName)
 	{
-		MailTemplateRegistry mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
-		MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
-		if (template != null)
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		try
 		{
-			String text = (template.getText() == null ? "" : template.getText());
-			String html = (template.getHtml() == null ? "" : template.getHtml());
-			return new Pair<String,String>(template.getSubject(),text+html);
+			Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+
+			MailTemplateRegistry mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
+			MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
+			if (template != null)
+			{
+				String text = (template.getText() == null ? "" : template.getText());
+				String html = (template.getHtml() == null ? "" : template.getHtml());
+				return new Pair<String,String>(template.getSubject(),text+html);
+			}
+			return null;
 		}
-		return null;
+		finally
+		{
+			Thread.currentThread().setContextClassLoader(cl);
+		}
 	}
 	
 	public void addMailTemplate(String templateName,String subject,String msgText)
 	{
-		MailTemplateRegistry mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
-		MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
-		if (template != null)
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		try
 		{
-			Debug.warn("Overwriting mail template "+templateName);
+			Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+
+			MailTemplateRegistry mailTemplateRegistry = processEngine.get(MailTemplateRegistry.class);
+			MailTemplate template = mailTemplateRegistry.getTemplate(templateName);
+			if (template != null)
+			{
+				Debug.warn("Overwriting mail template "+templateName);
+			}
+			template = new MailTemplate();
+			template.setSubject(subject);
+	
+			int htmlIndex = msgText.toLowerCase().indexOf("<html"); //$NON-NLS-1$
+			boolean hasHTML = (htmlIndex != -1);
+			boolean hasPlain = !hasHTML || htmlIndex > 0;
+			String plain = hasHTML ? msgText.substring(0, htmlIndex) : msgText;
+			String html = hasHTML ? msgText.substring(htmlIndex) : null;
+			if (hasPlain) template.setText(plain);
+			if (hasHTML) template.setHtml(html);
+	
+			mailTemplateRegistry.addTemplate(templateName, template);
 		}
-		template = new MailTemplate();
-		template.setSubject(subject);
-
-		int htmlIndex = msgText.toLowerCase().indexOf("<html"); //$NON-NLS-1$
-		boolean hasHTML = (htmlIndex != -1);
-		boolean hasPlain = !hasHTML || htmlIndex > 0;
-		String plain = hasHTML ? msgText.substring(0, htmlIndex) : msgText;
-		String html = hasHTML ? msgText.substring(htmlIndex) : null;
-		if (hasPlain) template.setText(plain);
-		if (hasHTML) template.setHtml(html);
-
-		mailTemplateRegistry.addTemplate(templateName, template);
+		finally
+		{
+			Thread.currentThread().setContextClassLoader(cl);
+		}
 	}
 
 	public List<Deployment> getDeploymentList()
 	{
 		List<Deployment> retval = new ArrayList<Deployment>();
-		DeploymentQuery dq = processEngine.getRepositoryService().createDeploymentQuery();
-		Iterator<org.jbpm.api.Deployment> it = dq.list().iterator();
-		while (it.hasNext()) 
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		try
 		{
-			org.jbpm.api.Deployment d = it.next();
-			retval.add(new Deployment(d.getId(), d.getName(), d.getState(), d.getTimestamp()));
+			Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+			
+			DeploymentQuery dq = processEngine.getRepositoryService().createDeploymentQuery();
+			Iterator<org.jbpm.api.Deployment> it = dq.list().iterator();
+			while (it.hasNext()) 
+			{
+				org.jbpm.api.Deployment d = it.next();
+				retval.add(new Deployment(d.getId(), d.getName(), d.getState(), d.getTimestamp()));
+			}
+		}
+		finally
+		{
+			Thread.currentThread().setContextClassLoader(cl);
 		}
 		return retval;
 	}
 
 	public void suspendDeployment(String deploymentId)
 	{
-		processEngine.getRepositoryService().suspendDeployment(deploymentId);
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		try
+		{
+			Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+			
+			processEngine.getRepositoryService().suspendDeployment(deploymentId);
+		}
+		finally
+		{
+			Thread.currentThread().setContextClassLoader(cl);
+		}			
 	}
 }
