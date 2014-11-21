@@ -176,8 +176,9 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (ExecFailedException e)
 		{
-			reloadSolution = true;
 			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+			// do not reload solution when the error was thrown in solution code
+			if (!reloadSolution) reloadSolution = !e.isUserScriptException();
 		}
 		catch (Exception e)
 		{
@@ -245,6 +246,7 @@ public class RestWSServlet extends HttpServlet
 			if (((JavaScriptException)e).getValue() instanceof Double)
 			{
 				errorCode = ((Double)((JavaScriptException)e).getValue()).intValue();
+
 			}
 			else if (((JavaScriptException)e).getValue() instanceof Wrapper && ((Wrapper)((JavaScriptException)e).getValue()).unwrap() instanceof Object[])
 			{
@@ -285,8 +287,9 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (ExecFailedException e)
 		{
-			reloadSolution = true;
 			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+			// do not reload solution when the error was thrown in solution code
+			if (!reloadSolution) reloadSolution = !e.isUserScriptException();
 		}
 		catch (Exception e)
 		{
@@ -332,8 +335,9 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (ExecFailedException e)
 		{
-			reloadSolution = true;
 			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+			// do not reload solution when the error was thrown in solution code
+			if (!reloadSolution) reloadSolution = !e.isUserScriptException();
 		}
 		catch (Exception e)
 		{
@@ -378,8 +382,9 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (ExecFailedException e)
 		{
-			reloadSolution = true;
 			handleException(e.getCause(), request, response, client != null ? client.getLeft() : null);
+			// do not reload solution when the error was thrown in solution code
+			if (!reloadSolution) reloadSolution = !e.isUserScriptException();
 		}
 		catch (Exception e)
 		{
@@ -445,8 +450,9 @@ public class RestWSServlet extends HttpServlet
 		}
 		catch (ExecFailedException e)
 		{
-			reloadSolution = true;
 			handleException(e.getCause(), request, response, client);
+			// do not reload solution when the error was thrown in solution code
+			if (!reloadSolution) reloadSolution = !e.isUserScriptException();
 		}
 		catch (Exception e)
 		{
