@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.pool.BaseKeyedPoolableObjectFactory;
 import org.apache.commons.pool.KeyedObjectPool;
 import org.apache.commons.pool.impl.GenericKeyedObjectPool;
+import org.mozilla.javascript.JavaScriptException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -382,6 +383,11 @@ public class RestWSPlugin implements IServerPlugin
 		public Exception getCause()
 		{
 			return (Exception)super.getCause();
+		}
+
+		public boolean isUserScriptException()
+		{
+			return getCause() instanceof JavaScriptException;
 		}
 	}
 }
