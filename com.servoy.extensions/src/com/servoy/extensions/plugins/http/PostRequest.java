@@ -35,8 +35,8 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -48,6 +48,7 @@ import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.Pair;
+import com.servoy.j2db.util.Utils;
 
 /**
  * @author jblok
@@ -84,16 +85,16 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	 * @sample
 	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
-	 * 
+	 *
 	 * var f = plugins.file.convertToJSFile('./somefile02.txt')
 	 * if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
-	 * 
+	 *
 	 * f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
 	 * if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)
 	 *
-	 * @param parameterName 
-	 * @param fileName 
-	 * @param fileLocation 
+	 * @param parameterName
+	 * @param fileName
+	 * @param fileLocation
 	 */
 	public boolean js_addFile(String parameterName, String fileName, String fileLocation)
 	{
@@ -111,17 +112,17 @@ public class PostRequest extends BaseEntityEnclosingRequest
 
 	/**
 	 * Add a file to the post.
-	 * 
+	 *
 	 * @sample
 	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
-	 * 
+	 *
 	 * var f = plugins.file.convertToJSFile('./somefile02.txt')
 	 * if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
-	 * 
+	 *
 	 * f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
 	 * if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)
-	 * 
+	 *
 	 * @param parameterName
 	 * @param jsFile
 	 */
@@ -137,17 +138,17 @@ public class PostRequest extends BaseEntityEnclosingRequest
 
 	/**
 	 * Add a file to the post.
-	 * 
+	 *
 	 * @sample
 	 * poster.addFile('myFileParamName','manual.doc','c:/temp/manual_01a.doc')
 	 * poster.addFile(null,'postXml.xml','c:/temp/postXml.xml') // sets the xml to post
-	 * 
+	 *
 	 * var f = plugins.file.convertToJSFile('./somefile02.txt')
 	 * if (f && f.exists()) poster.addFile('myTxtFileParamName','somefile.txt', f)
-	 * 
+	 *
 	 * f = plugins.file.convertToJSFile('./anotherfile_v2b.txt')
 	 * if (f && f.exists()) poster.addFile('myOtherTxtFileParamName', f)
-	 * 
+	 *
 	 * @param parameterName
 	 * @param fileName
 	 * @param jsFile
@@ -169,8 +170,8 @@ public class PostRequest extends BaseEntityEnclosingRequest
 	 * poster.addParameter('name','value')
 	 * poster.addParameter(null,'value') //sets the content to post
 	 *
-	 * @param name 
-	 * @param value 
+	 * @param name
+	 * @param value
 	 */
 	public boolean js_addParameter(String name, String value)
 	{
@@ -269,8 +270,9 @@ public class PostRequest extends BaseEntityEnclosingRequest
 				}
 				else if (file instanceof JSFile)
 				{
-					((MultipartEntity)entity).addPart(e.getKey().getLeft(), new InputStreamBody(((JSFile)file).getAbstractFile().getInputStream(),
-						"binary/octet-stream", ((JSFile)file).js_getName()));
+					((MultipartEntity)entity).addPart(e.getKey().getLeft(),
+						new ByteArrayBody(Utils.getBytesFromInputStream(((JSFile)file).getAbstractFile().getInputStream()), "binary/octet-stream",
+							((JSFile)file).js_getName()));
 				}
 				else
 				{
@@ -295,9 +297,9 @@ public class PostRequest extends BaseEntityEnclosingRequest
 
 	/**
 	 * Get the result page data after a post.
-	 * 
+	 *
 	 * @deprecated Replaced by {@link #executeRequest(String,String)}
-	 * 
+	 *
 	 * @sample
 	 * var pageData = poster.getPageData()
 	 */
