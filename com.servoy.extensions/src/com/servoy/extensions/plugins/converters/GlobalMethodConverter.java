@@ -26,15 +26,15 @@ import com.servoy.j2db.dataprocessing.IUIConverter;
 import com.servoy.j2db.dataprocessing.PropertyDescriptor;
 import com.servoy.j2db.persistence.ArgumentType;
 import com.servoy.j2db.persistence.Column;
+import com.servoy.j2db.persistence.IColumnTypes;
 import com.servoy.j2db.persistence.IMethodArgument;
 import com.servoy.j2db.persistence.IMethodTemplate;
-import com.servoy.j2db.persistence.IColumnTypes;
 import com.servoy.j2db.plugins.IMethodTemplatesFactory;
 import com.servoy.j2db.plugins.IMethodTemplatesProvider;
 
 /**
  * Column/UI converter that uses global methods.
- * 
+ *
  * @author pianas
  */
 
@@ -56,7 +56,7 @@ public class GlobalMethodConverter implements ITypedColumnConverter, IUIConverte
 		Object value = obj;
 		if (plugin.getApplication() != null && methodName != null && methodName.trim().length() != 0)
 		{
-			value = plugin.getApplication().executeMethod(null, methodName, new Object[] { obj, Column.getDisplayTypeString(column_type) }, false);
+			value = plugin.getApplication().executeMethod(null, methodName, new Object[] { obj, Column.getDisplayTypeString(column_type) }, false, false);
 		}
 		return value;
 	}
