@@ -78,7 +78,7 @@ public class PDFProvider implements IScriptable
 	}
 
 	/**
-	 * Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned. 
+	 * Returns a PDF printer that can be used in print calls. The PDF printer that generates a PDF into the specified file is returned.
 	 *
 	 * @sample
 	 * //to print current record without printdialog to pdf file in temp dir.
@@ -116,7 +116,7 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is stored in memory and can be retrieved when ending the meta print job and can be saved, for example, into a dataprovider.
-	 * 
+	 *
 	 * @sampleas js_endMetaPrintJob()
 	 */
 	public boolean js_startMetaPrintJob()
@@ -126,7 +126,7 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Used for printing multiple things into the same PDF document. Starts a meta print job and all print calls made before ending the meta print job will be done into the same PDF document. The PDF document is generated in a File specified by the filename.
-	 * 
+	 *
 	 * @sampleas js_endMetaPrintJob()
 	 *
 	 * @param filename the file name
@@ -162,7 +162,7 @@ public class PDFProvider implements IScriptable
 			{
 				message += " for " + filename;
 			}
-			throw new RuntimeException(message, e); //$NON-NLS-1$
+			throw new RuntimeException(message, e);
 		}
 	}
 
@@ -181,7 +181,7 @@ public class PDFProvider implements IScriptable
 	 * }
 	 * application.output('total printed pages: ' + plugins.pdf_output.getTotalPagesPrinted());
 	 * plugins.pdf_output.endMetaPrintJob()
-	 * 
+	 *
 	 * //to print multiple forms to one pdf document (to store in dataprovider).
 	 * var success = plugins.pdf_output.startMetaPrintJob()
 	 * if (success)
@@ -219,7 +219,7 @@ public class PDFProvider implements IScriptable
 	 * plugins.pdf_output.insertFontDirectory('c:/Windows/Fonts');
 	 * plugins.pdf_output.insertFontDirectory('c:/WinNT/Fonts');
 	 * plugins.pdf_output.insertFontDirectory('/Library/Fonts');
-	 * 
+	 *
 	 * @param path the path to use
 	 */
 	public int js_insertFontDirectory(String path)
@@ -233,6 +233,7 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Combine multiple protected PDF docs into one.
+	 * Note: this function may fail when creating large PDF files due to lack of available heap memory. To compensate, please configure the application server with more heap memory via -Xmx parameter.
 	 *
 	 * @sample
 	 * pdf_blob_column = combineProtectedPDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3), new Array(pdf_blob1_pass,pdf_blob2_pass,pdf_blob3_pass));
@@ -304,18 +305,18 @@ public class PDFProvider implements IScriptable
 				// step 5: we close the document
 				document.close();
 			}
+			return baos.toByteArray();
 		}
-		catch (Exception e)
+		catch (Throwable e)
 		{
 			Debug.error(e);
-			throw new RuntimeException("Error combinding pdf documents", e); //$NON-NLS-1$
-
+			throw new RuntimeException("Error combinding pdf documents: " + e.getMessage(), e); //$NON-NLS-1$
 		}
-		return baos.toByteArray();
 	}
 
 	/**
 	 * Combine multiple PDF docs into one.
+	 * Note: this function may fail when creating large PDF files due to lack of available heap memory. To compensate, please configure the application server with more heap memory via -Xmx parameter.
 	 *
 	 * @sample
 	 * pdf_blob_column = combinePDFDocuments(new Array(pdf_blob1,pdf_blob2,pdf_blob3));
@@ -461,10 +462,10 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add metadata to the PDF, like Author
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sample
 	 * // Add metadata to the PDF, like Author
 	 * var pdf = plugins.file.showFileOpenDialog();
@@ -473,12 +474,12 @@ public class PDFProvider implements IScriptable
 	 * 	var metaData = { Author: 'Servoy' };
 	 * 	pdfResult = %%elementName%%.addMetaData(data, metaData);
 	 * }
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param metaData a JavaScript object ({@link Scriptable}) that contains the metadata as property/value pairs
-	 * 
+	 *
 	 * @return the PDF with metaData added
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_addMetaData(byte[] data, Scriptable metaData) throws Exception
@@ -497,24 +498,24 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 *  Add password protection and security options to the PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sample
 	 * // Add password protection and security options to the PDF
-	 * // NOTE: Passwords are case sensitive 
+	 * // NOTE: Passwords are case sensitive
 	 * var unEncryptedFile = plugins.file.showFileOpenDialog();
 	 * if (unEncryptedFile) {
 	 * 	var data = plugins.file.readFile(unEncryptedFile);
 	 * 	encryptedResult = %%elementName%%.encrypt(data, 'secretPassword', 'secretUserPassword', false, false, false, false, false, false, false, false, true);
 	 * }
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param ownerPassword the owner password
-	 * 
+	 *
 	 * @return the encrypted PDF
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_encrypt(byte[] data, String ownerPassword) throws Exception
@@ -524,18 +525,18 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 *  Add password protection and security options to the PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_encrypt(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param ownerPassword the owner password
 	 * @param userPassword the user password
-	 * 
+	 *
 	 * @return the encrypted PDF
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword) throws Exception
@@ -545,12 +546,12 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 *  Add password protection and security options to the PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_encrypt(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param ownerPassword the owner password
 	 * @param userPassword the user password
@@ -562,9 +563,9 @@ public class PDFProvider implements IScriptable
 	 * @param allowModifyContents whether to set the allow modify contents permission
 	 * @param allowPrinting whether to set the allow printing permission
 	 * @param allowScreenreaders whether to set the allow screen readers permission
-	 * 
+	 *
 	 * @return the encrypted PDF
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword, boolean allowAssembly, boolean allowCopy, boolean allowDegradedPrinting,
@@ -576,12 +577,12 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 *  Add password protection and security options to the PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_encrypt(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param ownerPassword the owner password
 	 * @param userPassword the user password
@@ -594,9 +595,9 @@ public class PDFProvider implements IScriptable
 	 * @param allowPrinting whether to set the allow printing permission
 	 * @param allowScreenreaders whether to set the allow screen readers permission
 	 * @param is128bit whether to use 128-bit encryption
-	 * 
+	 *
 	 * @return the encrypted PDF
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword, boolean allowAssembly, boolean allowCopy, boolean allowDegradedPrinting,
@@ -609,12 +610,12 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add password protection and security options to the PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_encrypt(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param ownerPassword the owner password
 	 * @param userPassword the user password
@@ -628,9 +629,9 @@ public class PDFProvider implements IScriptable
 	 * @param allowScreenreaders whether to set the allow screen readers permission
 	 * @param is128bit whether to use 128-bit encryption
 	 * @param metaData a JavaScript object ({@link Scriptable}) that contains the metadata as property/value pairs
-	 * 
+	 *
 	 * @return the encrypted PDF
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_encrypt(byte[] data, String ownerPassword, String userPassword, boolean allowAssembly, boolean allowCopy, boolean allowDegradedPrinting,
@@ -680,10 +681,10 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add pages numbers to a PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sample
 	 * // Add pages numbers to a PDF
 	 * var unNumberedFile = plugins.file.showFileOpenDialog();
@@ -691,11 +692,11 @@ public class PDFProvider implements IScriptable
 	 * 	var data = plugins.file.readFile(unNumberedFile);
 	 * 	pageNumberedPdf = %%elementName%%.numberPages(data, 12, 520, 30, 'Courier', '#ff0033');
 	 * }
-	 * 
+	 *
 	 * @param data the PDF
-	 * 
+	 *
 	 * @return the PDF with numbered pages
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_numberPages(byte[] data) throws Exception
@@ -705,21 +706,21 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add pages numbers to a PDF
-	 * 
+	 *
 	 * @sampleas js_numberPages(byte[])
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param fontSize the font size to use
 	 * @param locationX the x location of the numbers
 	 * @param locationY the y location of the numbers
 	 * @param font the font to use
 	 * @param hexColor the font color to use
-	 * 
+	 *
 	 * @return the PDF with numbered pages
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_numberPages(byte[] data, int fontSize, int locationX, int locationY, String font, String hexColor) throws Exception
@@ -735,10 +736,10 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add an image as a watermark on every page, or the pages specified as a parameter
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sample
 	 * // Add an image as a watermark on every page, or the pages specified as a parameter.
 	 * var pdf = plugins.file.showFileOpenDialog();
@@ -747,12 +748,12 @@ public class PDFProvider implements IScriptable
 	 * 	var image = plugins.file.showFileOpenDialog();
 	 * 	modifiedPdf = %%elementName%%.watermark(data, image);
 	 * }
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param image the path of an image to use
-	 * 
+	 *
 	 * @return the PDF with added watermak
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_watermark(byte[] data, String image) throws Exception
@@ -762,20 +763,20 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add an image as a watermark on every page, or the pages specified as a parameter
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_watermark(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param image the path of an image to use
 	 * @param locationX the x location of the image
 	 * @param locationY the y location of the image
 	 * @param isOver whether to put over the content
-	 * 
+	 *
 	 * @return the PDF with added watermak
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_watermark(byte[] data, String image, int locationX, int locationY, boolean isOver) throws Exception
@@ -785,21 +786,21 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add an image as a watermark on every page, or the pages specified as a parameter
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_watermark(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param image the path of an image to use
 	 * @param locationX the x location of the image
 	 * @param locationY the y location of the image
 	 * @param isOver whether to put over the content
 	 * @param pages an array of pages where to apply the watermark
-	 * 
+	 *
 	 * @return the PDF with added watermak
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_watermark(byte[] data, String image, int locationX, int locationY, boolean isOver, String[] pages) throws Exception
@@ -815,10 +816,10 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add some PDF based content over a PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sample
 	 * // Add some PDF based content over a PDF
 	 * var pages = new Array();
@@ -837,12 +838,12 @@ public class PDFProvider implements IScriptable
 	 * 		//overlayedPdf = %%elementName%%.overlay( data, data2, pages );
 	 * 	}
 	 * }
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param forOverlay a PDF to use as overlay
-	 * 
+	 *
 	 * @return the PDF with added overlay
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_overlay(byte[] data, byte[] forOverlay) throws Exception
@@ -852,18 +853,18 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add some PDF based content over a PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_overlay(byte[], byte[])
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param forOverlay a PDF to use as overlay
 	 * @param pages an array of page numbers to put the overlay on
-	 * 
+	 *
 	 * @return the PDF with added overlay
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_overlay(byte[] data, byte[] forOverlay, String[] pages) throws Exception
@@ -873,18 +874,18 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add some PDF based content over a PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_overlay(byte[], byte[])
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param forOverlay a PDF to use as overlay
 	 * @param isOver whether the overlay will be put over the content
-	 * 
+	 *
 	 * @return the PDF with added overlay
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_overlay(byte[] data, byte[] forOverlay, boolean isOver) throws Exception
@@ -895,19 +896,19 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add some PDF based content over a PDF
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_overlay(byte[], byte[])
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param forOverlay a PDF to use as overlay
 	 * @param isOver whether the overlay will be put over the content
 	 * @param pages an array of page numbers to put the overlay on
-	 * 
+	 *
 	 * @return the PDF with added overlay
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_overlay(byte[] data, byte[] forOverlay, boolean isOver, String[] pages) throws Exception
@@ -922,10 +923,10 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add text over every page at a 45 degree angle
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sample
 	 * // Add text over every page at a 45 degree angle\m
 	 * var pdf = plugins.file.showFileOpenDialog();
@@ -933,12 +934,12 @@ public class PDFProvider implements IScriptable
 	 * 	var data = plugins.file.readFile(pdf);
 	 * 	modifiedPdf = %%elementName%%.overlayText(data, 'DRAFT', 230, 430, true, 32, 'Helvetica', '#33ff33');
 	 * }
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param text the text to use for the overlay
-	 * 
+	 *
 	 * @return the PDF with added overlay
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_overlayText(byte[] data, String text) throws Exception
@@ -948,12 +949,12 @@ public class PDFProvider implements IScriptable
 
 	/**
 	 * Add text over every page at a 45 degree angle
-	 * 
+	 *
 	 * @author Scott Buttler
 	 * Adapted from the PDF Pro plugin with full approval from the author
-	 * 
+	 *
 	 * @sampleas js_overlayText(byte[], String)
-	 * 
+	 *
 	 * @param data the PDF
 	 * @param text the text to use for the overlay
 	 * @param locationX the x location of the overlay
@@ -962,9 +963,9 @@ public class PDFProvider implements IScriptable
 	 * @param fontSize the font size to use
 	 * @param font the font to use
 	 * @param hexColor the font color to use
-	 * 
+	 *
 	 * @return the PDF with added overlay
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public byte[] js_overlayText(byte[] data, String text, int locationX, int locationY, boolean isOver, int fontSize, String font, String hexColor)
