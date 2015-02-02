@@ -53,9 +53,9 @@ import com.servoy.j2db.util.TreeBidiMap;
 
 /**
  * This class handles (de)registering of shortcuts in the Web client (Wicket).
- * 
+ *
  * @author rgansevles
- * 
+ *
  */
 public class WicketShortcutHandler implements IShortcutHandler
 {
@@ -144,7 +144,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 		int supportedModifiers = InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK | InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK;
 		if ((modifiers | supportedModifiers) != supportedModifiers)
 		{
-			Debug.log("WindowPlugin: shortcut contains unsopported modifiers"); //$NON-NLS-1$
+			Debug.log("WindowPlugin: shortcut contains unsupported modifiers: " + modifiers); //$NON-NLS-1$
 		}
 
 		String specialKey = specialKeys.get(Integer.valueOf(key.getKeyCode()));
@@ -449,7 +449,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 			case KeyEvent.VK_BEGIN :
 				return "Begin";
 
-				// modifiers 
+				// modifiers
 			case KeyEvent.VK_SHIFT :
 				return "Shift";
 			case KeyEvent.VK_CONTROL :
