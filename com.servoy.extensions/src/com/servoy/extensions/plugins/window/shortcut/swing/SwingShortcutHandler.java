@@ -47,9 +47,9 @@ import com.servoy.j2db.util.Debug;
 
 /**
  * This class handles (de)registering of shortcuts in the smart client (Swing).
- * 
+ *
  * @author rgansevles
- * 
+ *
  */
 public class SwingShortcutHandler implements IShortcutHandler
 {
@@ -63,7 +63,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 	private final InputMap specialKeysInputMap = new InputMap();
 
 	/**
-	 * Needed because if you have a Scrollpane and you press UP, DOWN, LEFT, RIGHT 
+	 * Needed because if you have a Scrollpane and you press UP, DOWN, LEFT, RIGHT
 	 * it doesn't get to fire the registered action because it is consumed by scroll pane to scroll around
 	 */
 	private class ShortcutDispatcher implements KeyEventDispatcher
@@ -72,7 +72,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 		public boolean dispatchKeyEvent(KeyEvent e)
 		{
 			Component comp = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-			if (e.getID() == KeyEvent.KEY_PRESSED && !(comp instanceof DataComboBox || comp.getParent() instanceof DataComboBox))
+			if (e.getID() == KeyEvent.KEY_PRESSED && (comp == null || !(comp instanceof DataComboBox || comp.getParent() instanceof DataComboBox)))
 			{
 				int k = e.getKeyCode();
 				if (isSpecialKey(k))
@@ -193,7 +193,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 	/**
 	 * Find the first IComponent child (breath-first search)
-	 * 
+	 *
 	 * @param component
 	 * @return
 	 */
