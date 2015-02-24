@@ -64,7 +64,7 @@ import com.servoy.j2db.util.Utils;
  * Servlet for mapping RESTfull Web Service request to Servoy methods.
  * <p>
  * Resources are addressed via path
- * 
+ *
  * <pre>
  * /servoy-service/rest_ws/mysolution/myform/arg1/arg2
  * </pre>.
@@ -80,13 +80,13 @@ import com.servoy.j2db.util.Utils;
  * <li>DELETE<br>
  * call the method mysolution.myform.ws_delete(args), set status NOT_FOUND when FALSE was returned
  * </ul>
- * 
+ *
  * <p>
  * The solution is opened via a Servoy Headless Client which is shared across multiple requests, requests are assumed to be stateless. Clients are managed via a
  * pool, 1 client per concurrent request is used.
- * 
+ *
  * @author rgansevles
- * 
+ *
  */
 @SuppressWarnings("nls")
 public class RestWSServlet extends HttpServlet
@@ -194,7 +194,7 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	/**
-	 * 
+	 *
 	 * @param request HttpServletRequest
 	 * @return  a pair of IHeadlessClient object and the keyname from the objectpool ( the keyname depends if it nodebug mode is enabled)
 	 * @throws Exception
@@ -373,10 +373,15 @@ public class RestWSServlet extends HttpServlet
 			}
 			client = getClient(request);
 			String charset = getHeaderKey(request.getHeader("Content-Type"), "charset", CHARSET_DEFAULT);
-			if (Boolean.FALSE.equals(wsService(WS_UPDATE, new Object[] { decodeContent(request.getContentType(), contentType, contents, charset) }, request,
-				response, client.getLeft())))
+			Object result = wsService(WS_UPDATE, new Object[] { decodeContent(request.getContentType(), contentType, contents, charset) }, request, response,
+				client.getLeft());
+			if (Boolean.FALSE.equals(result))
 			{
 				sendError(response, HttpServletResponse.SC_NOT_FOUND);
+			}
+			else
+			{
+				sendResult(request, response, result, contentType);
 			}
 			HTTPUtils.setNoCacheHeaders(response);
 		}
@@ -767,7 +772,7 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	/**
-	 * 
+	 *
 	 * Gets the key from a headder . For example, the folowing header :<br/>
 	 * <b>Content-Disposition: form-data; name="myFile"; filename="SomeRandomFile.txt"</b>
 	 * <br/>
@@ -843,10 +848,10 @@ public class RestWSServlet extends HttpServlet
 	}
 
 	/**
-	 * Serializes user properties as a json string header   ("servoy.userproperties" header)  
+	 * Serializes user properties as a json string header   ("servoy.userproperties" header)
 	 * AND besides the custom header they are also serialized cookies for non mobile clients
 	 * @param request TODO
-	 * 
+	 *
 	 */
 	void setResponseUserProperties(HttpServletRequest request, HttpServletResponse response, IClientPluginAccess client)
 	{
@@ -959,7 +964,7 @@ public class RestWSServlet extends HttpServlet
 
 	private boolean getNodebugHeadderValue(HttpServletRequest request)
 	{
-		// when DOING cross to an url the browser first sends and extra options request with the request method  and 
+		// when DOING cross to an url the browser first sends and extra options request with the request method  and
 		//headers it will set ,before sending the actual request
 		//http://stackoverflow.com/questions/1256593/jquery-why-am-i-getting-an-options-request-insted-of-a-get-request
 		if (request.getMethod().equalsIgnoreCase("OPTIONS"))
@@ -1096,7 +1101,7 @@ public class RestWSServlet extends HttpServlet
 		}
 	}
 
-	/** 
+	/**
 	 * Send the error response but prevent output of the default (html) error page
 	 * @param response
 	 * @param error
@@ -1107,11 +1112,11 @@ public class RestWSServlet extends HttpServlet
 		sendError(response, error, null);
 	}
 
-	/** 
+	/**
 	 * Send the error response with specified error response msg
 	 * @param response
 	 * @param error
-	 * @param errorResponse 
+	 * @param errorResponse
 	 * @throws IOException
 	 */
 	protected void sendError(HttpServletResponse response, int error, String errorResponse) throws IOException
