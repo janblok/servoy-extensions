@@ -31,7 +31,7 @@ import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * The main {@link IClientPlugin} implementation
- * 
+ *
  * @author jcompagner
  */
 public class FilePlugin implements IClientPlugin
@@ -73,7 +73,8 @@ public class FilePlugin implements IClientPlugin
 	{
 		if (fileProvider == null)
 		{
-			if (access != null && access.getApplicationType() == IClientPluginAccess.WEB_CLIENT)
+			if (access != null &&
+				(access.getApplicationType() == IClientPluginAccess.WEB_CLIENT || access.getApplicationType() == IClientPluginAccess.NG_CLIENT))
 			{
 				fileProvider = new WebFileProvider(this);
 			}

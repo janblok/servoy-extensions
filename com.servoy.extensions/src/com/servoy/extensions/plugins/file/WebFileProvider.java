@@ -28,9 +28,9 @@ import java.io.OutputStream;
 
 import org.mozilla.javascript.Function;
 
+import com.servoy.j2db.plugins.IAllWebClientPluginAccess;
 import com.servoy.j2db.plugins.IClientPluginAccess;
 import com.servoy.j2db.scripting.FunctionDefinition;
-import com.servoy.j2db.server.headlessclient.IWebClientPluginAccess;
 import com.servoy.j2db.util.Debug;
 import com.servoy.j2db.util.MimeTypes;
 
@@ -75,8 +75,8 @@ public class WebFileProvider extends FileProvider
 			else if (f != null) name = f.toString();
 			IClientPluginAccess access = plugin.getClientPluginAccess();
 			String type = (mimeType == null) ? MimeTypes.getContentType(data, name) : mimeType.trim();
-			String url = ((IWebClientPluginAccess)access).serveResource(name, data, type);
-			((IWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
+			String url = ((IAllWebClientPluginAccess)access).serveResource(name, data, type);
+			((IAllWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
 			return true;
 		}
 		else
@@ -91,8 +91,8 @@ public class WebFileProvider extends FileProvider
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		String fileName = file.js_getName();
 		byte[] data = file.jsFunction_getBytes();
-		String url = ((IWebClientPluginAccess)access).serveResource(fileName, data, MimeTypes.getContentType(data, fileName), "inline"); //$NON-NLS-1$
-		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
+		String url = ((IAllWebClientPluginAccess)access).serveResource(fileName, data, MimeTypes.getContentType(data, fileName), "inline"); //$NON-NLS-1$
+		((IAllWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;
 	}
 
@@ -103,8 +103,8 @@ public class WebFileProvider extends FileProvider
 
 		IClientPluginAccess access = plugin.getClientPluginAccess();
 		String type = (mimeType == null) ? MimeTypes.getContentType(data, name) : mimeType.trim();
-		String url = ((IWebClientPluginAccess)access).serveResource(name, data, type, "inline"); //$NON-NLS-1$
-		((IWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
+		String url = ((IAllWebClientPluginAccess)access).serveResource(name, data, type, "inline"); //$NON-NLS-1$
+		((IAllWebClientPluginAccess)access).showURL(url, webClientTarget != null ? webClientTarget : "_blank", webClientTargetOptions, 0, true); //$NON-NLS-1$
 		return true;
 	}
 
@@ -168,8 +168,8 @@ public class WebFileProvider extends FileProvider
 	}
 
 	/**
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 * @see com.servoy.extensions.plugins.file.FileProvider#writeTXT(java.lang.Object, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("nls")
@@ -191,8 +191,8 @@ public class WebFileProvider extends FileProvider
 					}
 					String name = f == null ? "file.txt" : f instanceof JSFile ? ((JSFile)f).js_getName() : f.toString();
 					IClientPluginAccess access = plugin.getClientPluginAccess();
-					String url = ((IWebClientPluginAccess)access).serveResource(name, baos.toByteArray(), mimeType);
-					((IWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
+					String url = ((IAllWebClientPluginAccess)access).serveResource(name, baos.toByteArray(), mimeType);
+					((IAllWebClientPluginAccess)access).showURL(url, "_self", null, 0, false);
 					return true;
 				}
 			}
@@ -351,7 +351,7 @@ public class WebFileProvider extends FileProvider
 
 	/**
 	 * Utility method to extract the name of a path (last part of a path)
-	 * 
+	 *
 	 * @param path the path that we want to extract the name from
 	 * @return the extracted name
 	 */
