@@ -21,8 +21,8 @@
 	<property name="eclipse_target.dir" value="../eclipse_target"/>
 	<property name="javacVerbose" value="false"/>
 	<property name="javacDebugInfo" value="true"/>
-	<property name="bundleJavacSource" value="1.6"/>
-	<property name="bundleJavacTarget" value="1.6"/>
+	<property name="bundleJavacSource" value="1.7"/>
+	<property name="bundleJavacTarget" value="1.7"/>
 	
 	<property file="personal_settings.properties"/>
 	
