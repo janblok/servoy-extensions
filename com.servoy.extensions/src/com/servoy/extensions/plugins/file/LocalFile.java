@@ -31,7 +31,7 @@ import com.servoy.j2db.util.FileChooserUtils;
 
 /**
  * Implementation of an {@link IAbstractFile} for local (client-side) files
- * 
+ *
  * @author jcompagner
  * @author Servoy Stuff
  * @since Servoy 5.2
@@ -161,6 +161,7 @@ public class LocalFile implements IAbstractFile
 	public IAbstractFile[] listFiles()
 	{
 		File[] listFiles = file.listFiles();
+		if (listFiles == null) return new LocalFile[0];
 		LocalFile[] files = new LocalFile[listFiles.length];
 		for (int i = 0; i < listFiles.length; i++)
 		{
@@ -215,7 +216,7 @@ public class LocalFile implements IAbstractFile
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.j2db.plugins.IUploadData#getInputStream()
 	 */
 	public InputStream getInputStream() throws IOException
@@ -225,7 +226,7 @@ public class LocalFile implements IAbstractFile
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[])
 	 */
 	public boolean setBytes(byte[] bytes)
@@ -236,7 +237,7 @@ public class LocalFile implements IAbstractFile
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IAbstractFile#setBytes(byte[], boolean)
 	 */
 	public boolean setBytes(byte[] bytes, boolean createFile)
