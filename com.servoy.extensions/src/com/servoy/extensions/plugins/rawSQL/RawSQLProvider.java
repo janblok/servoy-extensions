@@ -16,6 +16,8 @@
  */
 package com.servoy.extensions.plugins.rawSQL;
 
+import java.util.Collection;
+
 import com.servoy.j2db.dataprocessing.IDataSet;
 import com.servoy.j2db.dataprocessing.JSDataSet;
 import com.servoy.j2db.documentation.ServoyDocumented;
@@ -28,7 +30,7 @@ import com.servoy.j2db.util.UUID;
 
 /**
  * Rawsql plugin scriptable.
- * 
+ *
  * @author jblok
  */
 @ServoyDocumented(publicName = RawSQLPlugin.PLUGIN_NAME, scriptingName = "plugins." + RawSQLPlugin.PLUGIN_NAME)
@@ -76,17 +78,14 @@ public class RawSQLProvider implements IScriptable
 	 * Execute any SQL, returns true if successful.
 	 *
 	 * @sample
-	 * /**************************************************************************** 
+	 * /****************************************************************************
 	 * WARNING! You can cause data loss or serious data integrity compromises!
 	 * You should have a THOROUGH understanding of both SQL and your backend
 	 * database (and other interfaces that may use that backend) BEFORE YOU USE
 	 * ANY OF THESE COMMANDS.
 	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-	 * 
-	 * Note that when server names have been switched (databasemanager.switchServer),the 
-	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 	 * ****************************************************************************&#47;
-	 * 
+	 *
 	 * var country = 'NL'
 	 * var done = plugins.rawSQL.executeSQL("example_data","employees","update employees set country = ?", [country])
 	 * if (done)
@@ -99,11 +98,11 @@ public class RawSQLProvider implements IScriptable
 	 * 	var msg = plugins.rawSQL.getException().getMessage(); //see exception node for more info about the exception obj
 	 * 	plugins.dialogs.showErrorDialog('Error',  'SQL exception: '+msg,  'Ok')
 	 * }
-	 * 
+	 *
 	 * // Note that when this function is used to create a new table in the database, this table will only be seen by
 	 * // the Servoy Application Server when the table name starts with 'temp_', otherwise a server restart is needed.
-	 * 
-	 * @param serverName the name of the server 
+	 *
+	 * @param serverName the name of the server
 	 * @param tableName the name of the table
 	 * @param sql the sql query to execute
 	 */
@@ -116,8 +115,8 @@ public class RawSQLProvider implements IScriptable
 	 * @clonedesc js_executeSQL(String,String,String)
 	 *
 	 * @sampleas js_executeSQL(String,String,String)
-	 * 
-	 * @param serverName the name of the server 
+	 *
+	 * @param serverName the name of the server
 	 * @param tableName the name of the table
 	 * @param sql the sql query to execute
 	 * @param sql_args the arguments for the query
@@ -126,9 +125,9 @@ public class RawSQLProvider implements IScriptable
 	{
 		try
 		{
-			String originalServerName = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName);
-			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(originalServerName);
-			return getSQLService().executeSQL(plugin.getClientPluginAccess().getClientID(), serverName, tableName, sql, sql_args, tid);
+			ServerMapping serverMapping = getServerMapping(serverName);
+			return getSQLService().executeSQL(plugin.getClientPluginAccess().getClientID(), serverMapping.remoteServername, tableName, sql, sql_args,
+				serverMapping.transactionID);
 		}
 		catch (Exception ex)
 		{
@@ -142,17 +141,14 @@ public class RawSQLProvider implements IScriptable
 	 * Execute a stored procedure.
 	 *
 	 * @sample
-	 * /**************************************************************************** 
+	 * /****************************************************************************
 	 * WARNING! You can cause data loss or serious data integrity compromises!
 	 * You should have a THOROUGH understanding of both SQL and your backend
 	 * database (and other interfaces that may use that backend) BEFORE YOU USE
 	 * ANY OF THESE COMMANDS.
 	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-	 * 
-	 * Note that when server names have been switched (databasemanager.switchServer),the 
-	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 	 * ****************************************************************************&#47;
-	 * 
+	 *
 	 * var maxReturnedRows = 10; //useful to limit number of rows
 	 * var procedure_declaration = '{?=calculate_interest_rate(?)}'
 	 * // define the direction, a 0 for input data, a 1 for output data
@@ -164,12 +160,12 @@ public class RawSQLProvider implements IScriptable
 	 * var dataset = plugins.rawSQL.executeStoredProcedure(databaseManager.getDataSourceServerName(controller.getDataSource()), procedure_declaration, args, typesArray, maxReturnedRows);
 	 * var interest_rate = dataset.getValue(1, 1);
 	 *
-	 * @param serverName 
-	 * @param procedureDeclaration 
-	 * @param arguments 
-	 * @param inOutDirectionality 
-	 * @param maxNumberOfRowsToRetrieve 
-	 * 
+	 * @param serverName
+	 * @param procedureDeclaration
+	 * @param arguments
+	 * @param inOutDirectionality
+	 * @param maxNumberOfRowsToRetrieve
+	 *
 	 * @return a dataset with output (in case of output data) or the last result set executed by the procedure.
 	 */
 	public JSDataSet js_executeStoredProcedure(String serverName, String procedureDeclaration, Object[] arguments, int[] inOutDirectionality,
@@ -182,12 +178,11 @@ public class RawSQLProvider implements IScriptable
 
 		try
 		{
-			String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(
-				plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName));
-			String cid = plugin.getClientPluginAccess().getClientID();
+			ServerMapping serverMapping = getServerMapping(serverName);
+
 			// TODO HOW TO HANDLE ARGS WITH NULL?? sHOULD BE CONVERTED TO NullValue?????
-			IDataSet set = getSQLService().executeStoredProcedure(cid, serverName, tid, procedureDeclaration, arguments, inOutDirectionality, 0,
-				maxNumberOfRowsToRetrieve);
+			IDataSet set = getSQLService().executeStoredProcedure(plugin.getClientPluginAccess().getClientID(), serverMapping.remoteServername,
+				serverMapping.transactionID, procedureDeclaration, arguments, inOutDirectionality, 0, maxNumberOfRowsToRetrieve);
 			return new JSDataSet(((ClientPluginAccessProvider)plugin.getClientPluginAccess()).getApplication(), set);
 		}
 		catch (ServoyException ex)
@@ -208,17 +203,14 @@ public class RawSQLProvider implements IScriptable
 	 * Execute a stored procedure, return all created result sets.
 	 *
 	 * @sample
-	 * /**************************************************************************** 
+	 * /****************************************************************************
 	 * WARNING! You can cause data loss or serious data integrity compromises!
 	 * You should have a THOROUGH understanding of both SQL and your backend
 	 * database (and other interfaces that may use that backend) BEFORE YOU USE
 	 * ANY OF THESE COMMANDS.
 	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-	 * 
-	 * Note that when server names have been switched (databasemanager.switchServer),the 
-	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 	 * ****************************************************************************&#47;
-	 * 
+	 *
 	 * var maxReturnedRows = 10; //useful to limit number of rows
 	 * var procedure_declaration = '{ get_unpaid_orders_and_their_customers(?) }'
 	 * var args = [42]
@@ -227,39 +219,36 @@ public class RawSQLProvider implements IScriptable
 	 * 	var ds = datasets[i]
 	 * 	// process dataset
 	 * }
-	 * 
-	 * @param serverName 
-	 * @param procedureDeclaration 
-	 * @param arguments 
-	 * @param maxNumberOfRowsToRetrieve 
-	 * 
+	 *
+	 * @param serverName
+	 * @param procedureDeclaration
+	 * @param arguments
+	 * @param maxNumberOfRowsToRetrieve
+	 *
 	 * @return the result sets created by the procedure.
 	 */
 	public IDataSet[] js_executeStoredProcedure(String serverName, String procedureDeclaration, Object[] arguments, int maxNumberOfRowsToRetrieve)
 		throws Exception
 	{
-		String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(
-			plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName));
+		ServerMapping serverMapping = getServerMapping(serverName);
+
 		// TODO HOW TO HANDLE ARGS WITH NULL?? sHOULD BE CONVERTED TO NullValue?????
-		return getSQLService().executeStoredProcedure(plugin.getClientPluginAccess().getClientID(), serverName, tid, procedureDeclaration, arguments, 0,
-			maxNumberOfRowsToRetrieve);
+		return getSQLService().executeStoredProcedure(plugin.getClientPluginAccess().getClientID(), serverMapping.remoteServername,
+			serverMapping.transactionID, procedureDeclaration, arguments, 0, maxNumberOfRowsToRetrieve);
 	}
 
 	/**
 	 * @deprecated Replaced by {@link application#getUUID(String)}
 	 *
 	 * @sample
-	 * /**************************************************************************** 
+	 * /****************************************************************************
 	 * WARNING! You can cause data loss or serious data integrity compromises!
 	 * You should have a THOROUGH understanding of both SQL and your backend
 	 * database (and other interfaces that may use that backend) BEFORE YOU USE
 	 * ANY OF THESE COMMANDS.
 	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-	 * 
-	 * Note that when server names have been switched (databasemanager.switchServer),the 
-	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 	 * ****************************************************************************&#47;
-	 * 
+	 *
 	 * var uuid = application.getNewUUID();
 	 * plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', 'insert into employees (employees_id, creation_date) values (?, ?)', [plugins.rawSQL.convertUUIDToBytes(uuid), new Date()]);
 	 */
@@ -271,7 +260,7 @@ public class RawSQLProvider implements IScriptable
 
 	/**
 	 * @deprecated Replaced by {@link application#getUUID(byte[])}
-	 * 
+	 *
 	 * @param data
 	 * @return
 	 */
@@ -285,7 +274,7 @@ public class RawSQLProvider implements IScriptable
 	 * Flush cached database data. Use with extreme care, its affecting the performance of clients!
 	 *
 	 * @sampleas js_executeSQL(String,String,String)
-	 * 
+	 *
 	 * @param serverName
 	 * @param tableName
 	 */
@@ -293,15 +282,15 @@ public class RawSQLProvider implements IScriptable
 	{
 		try
 		{
-			String originalServerName = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName);
-			String transactionID = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(originalServerName);
-			if (transactionID != null)
+			ServerMapping serverMapping = getServerMapping(serverName);
+			if (serverMapping.transactionID != null)
 			{
 				// flush data locally within the transaction
-				plugin.getClientPluginAccess().getDatabaseManager().notifyDataChange(DataSourceUtils.createDBTableDataSource(originalServerName, tableName),
-					null, 0);
+				plugin.getClientPluginAccess().getDatabaseManager().notifyDataChange(
+					DataSourceUtils.createDBTableDataSource(serverMapping.localServername, tableName), null, 0);
 			}
-			return getSQLService().flushAllClientsCache(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, transactionID);
+			return getSQLService().flushAllClientsCache(plugin.getClientPluginAccess().getClientID(), true, serverMapping.remoteServername, tableName,
+				serverMapping.transactionID);
 		}
 		catch (Exception ex)
 		{
@@ -315,27 +304,24 @@ public class RawSQLProvider implements IScriptable
 	 * Notify clients about changes in records, based on pk(s). Use with extreme care, its affecting the performance of clients!
 	 *
 	 * @sample
-	 * /**************************************************************************** 
+	 * /****************************************************************************
 	 * WARNING! You can cause data loss or serious data integrity compromises!
 	 * You should have a THOROUGH understanding of both SQL and your backend
 	 * database (and other interfaces that may use that backend) BEFORE YOU USE
 	 * ANY OF THESE COMMANDS.
 	 * You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-	 * 
-	 * Note that when server names have been switched (databasemanager.switchServer),the 
-	 * real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 	 * ****************************************************************************&#47;
-	 * 
+	 *
 	 * var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
 	 * //var action = SQL_ACTION_TYPES.INSERT_ACTION //pks inserted
 	 * //var action = SQL_ACTION_TYPES.UPDATE_ACTION //pks updates
 	 * var pksdataset = databaseManager.convertToDataSet(new Array(12,15,16,21))
 	 * var ok = plugins.rawSQL.notifyDataChange(databaseManager.getDataSourceServerName(controller.getDataSource()), 'employees', pksdataset,action)
 	 *
-	 * @param serverName 
-	 * @param tableName 
-	 * @param pksDataset 
-	 * @param action 
+	 * @param serverName
+	 * @param tableName
+	 * @param pksDataset
+	 * @param action
 	 */
 	public boolean js_notifyDataChange(String serverName, String tableName, IDataSet pksDataset, int action)
 	{
@@ -343,16 +329,15 @@ public class RawSQLProvider implements IScriptable
 
 		try
 		{
-			String originalServerName = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(serverName);
-			String transactionID = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(originalServerName);
-			if (transactionID != null)
+			ServerMapping serverMapping = getServerMapping(serverName);
+			if (serverMapping.transactionID != null)
 			{
 				// flush data locally within the transaction
-				plugin.getClientPluginAccess().getDatabaseManager().notifyDataChange(DataSourceUtils.createDBTableDataSource(originalServerName, tableName),
-					pksDataset, action);
+				plugin.getClientPluginAccess().getDatabaseManager().notifyDataChange(
+					DataSourceUtils.createDBTableDataSource(serverMapping.localServername, tableName), pksDataset, action);
 			}
-			return getSQLService().notifyDataChange(plugin.getClientPluginAccess().getClientID(), true, serverName, tableName, pksDataset, action,
-				transactionID);
+			return getSQLService().notifyDataChange(plugin.getClientPluginAccess().getClientID(), true, serverMapping.remoteServername, tableName, pksDataset,
+				action, serverMapping.transactionID);
 		}
 		catch (Exception ex)
 		{
@@ -361,5 +346,53 @@ public class RawSQLProvider implements IScriptable
 			return false;
 		}
 	}
+
+	private ServerMapping getServerMapping(String serverName) throws ServoyException
+	{
+		// This will always return a collection of at least 1 server name.
+		Collection<String> originalServerNames = plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerNames(serverName);
+
+		String remoteServername;
+		String localServername;
+		if (originalServerNames.contains(serverName))
+		{
+			// not switched or the 'logical' server name was passed (new behaviour)
+			remoteServername = plugin.getClientPluginAccess().getDatabaseManager().getSwitchedToServerName(serverName);
+			localServername = serverName;
+		}
+		else
+		{
+			// the switched-to server was used (old behaviour)
+			remoteServername = serverName;
+			// pick one of the original servers, unless we have a tx it does not matter which to use.
+			localServername = originalServerNames.iterator().next();
+			Debug.warn("Deprecated rawSQL call, use logical server name (" + localServername + ") in stead of real server name (" + remoteServername + ")");
+		}
+
+		String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(
+			plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(localServername));
+		if (tid != null && !originalServerNames.contains(serverName) && originalServerNames.size() > 1)
+		{
+			// We have a transaction but don't know for which local server
+			throw new IllegalArgumentException("Cannot determine transaction server for rawsql processing, use one of " + originalServerNames);
+		}
+
+		return new ServerMapping(localServername, remoteServername, tid);
+	}
+
+	private static class ServerMapping
+	{
+		public final String localServername;
+		public final String remoteServername;
+		public final String transactionID;
+
+		public ServerMapping(String localServername, String remoteServername, String transactionID)
+		{
+			this.localServername = localServername;
+			this.remoteServername = remoteServername;
+			this.transactionID = transactionID;
+		}
+	}
+
 
 }
