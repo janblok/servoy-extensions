@@ -369,8 +369,7 @@ public class RawSQLProvider implements IScriptable
 			Debug.warn("Deprecated rawSQL call, use logical server name (" + localServername + ") in stead of real server name (" + remoteServername + ")");
 		}
 
-		String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(
-			plugin.getClientPluginAccess().getDatabaseManager().getOriginalServerName(localServername));
+		String tid = plugin.getClientPluginAccess().getDatabaseManager().getTransactionID(localServername);
 		if (tid != null && !originalServerNames.contains(serverName) && originalServerNames.size() > 1)
 		{
 			// We have a transaction but don't know for which local server
