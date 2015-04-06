@@ -6,7 +6,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/servoy_shared"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/servoy_smart_client"/>
 	<classpathentry exported="true" kind="lib" path="lib/inmethod-grid.jar" sourcepath="lib/inmethod-grid-1.4.10-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jakarta-poi.jar" sourcepath="libsrc/poi-src-3.9-20121203.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/jakarta-poi.jar" sourcepath="libsrc/poi-src-3.11-20141221.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/metadataextractor.jar" sourcepath="libsrc/metadataextractor-src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/jFdfTk.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/itext.jar"/>
