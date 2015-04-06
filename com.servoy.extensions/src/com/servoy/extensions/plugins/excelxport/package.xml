@@ -3,7 +3,7 @@
   xsi:schemaLocation="http://www.servoy.com/extension http://www.servoy.com/schema/servoy-extension-1.xsd">
 	<extension-id>com.servoy.excelxport</extension-id>
 	<extension-name>Excelxport Plugin</extension-name> 
-	<version>7.3.1</version>
+	<version>8.0</version>
 	<dependencies>
 	    <servoy>
 	       <min-version>7.3 i2</min-version>
@@ -11,7 +11,7 @@
 	    <lib>
         	<id>org.apache.poi</id> <!-- most relevant package name in the jar file (no useful MANIFEST.MF listed id available here) -->
        		<path>application_server/plugins/jakarta-poi/jakarta-poi.jar</path>
-      		<version>3.9</version>
+      		<version>3.11</version>
        		<min-version>3.9</min-version>
     	</lib>
 	</dependencies>
