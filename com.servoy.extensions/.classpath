@@ -24,6 +24,6 @@
 	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/servlet-api.jar"/>
 	<classpathentry kind="lib" path="/eclipse_target/compile_target/install/plugins/org.apache.httpcomponents.httpclient_4.2.6.v201311072007.jar"/>
 	<classpathentry kind="lib" path="/eclipse_target/compile_target/install/plugins/org.apache.httpcomponents.httpcore_4.2.5.v201311072007.jar"/>
-	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/jabsorb_1.3.1.jar"/>
+	<classpathentry kind="lib" path="/eclipse_target/ship_plugins/plugins/jabsorb_1.3.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
