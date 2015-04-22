@@ -2,7 +2,7 @@
 <servoyextension>
   <servoydoc>
     <plugins>
-      <object clientSupport="mc,wc,sc" publicName="dialogs" qualifiedName="com.servoy.extensions.plugins.dialog.DialogProvider" scriptingName="plugins.dialogs">
+      <object clientSupport="ng,mc,wc,sc" publicName="dialogs" qualifiedName="com.servoy.extensions.plugins.dialog.DialogProvider" scriptingName="plugins.dialogs">
         <functions>
           <function clientSupport="wc,sc" deprecated="true" name="showDialog">
             <argumentsTypes>
@@ -40,7 +40,7 @@
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showErrorDialog" varargs="true">
+          <function clientSupport="ng,wc,sc" name="showErrorDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -48,13 +48,13 @@
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show dialog
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allowed','OK');]]></sample>
             </samples>
             <parameters>
@@ -69,7 +69,7 @@ var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allow
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showInfoDialog" varargs="true">
+          <function clientSupport="ng,wc,sc" name="showInfoDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -77,13 +77,13 @@ var thePressedButton = plugins.dialogs.showErrorDialog('Title', 'Value not allow
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show dialog
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowed','OK');]]></sample>
             </samples>
             <parameters>
@@ -98,53 +98,53 @@ var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Value not allowe
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showInputDialog">
+          <function clientSupport="ng,wc,sc" name="showInputDialog">
             <argumentsTypes/>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
             </samples>
           </function>
-          <function clientSupport="wc,sc" name="showInputDialog">
+          <function clientSupport="ng,wc,sc" name="showInputDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
             </samples>
             <parameters>
               <parameter name="dialog_title" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showInputDialog">
+          <function clientSupport="ng,wc,sc" name="showInputDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
             </samples>
             <parameters>
@@ -152,7 +152,7 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="msg" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showInputDialog">
+          <function clientSupport="ng,wc,sc" name="showInputDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -160,13 +160,13 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data. Returns the entered data, or nothing when canceled.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows an input dialog where the user can enter data.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled 
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show input dialog ,returns nothing when canceled
 var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sample>
             </samples>
             <parameters>
@@ -175,20 +175,20 @@ var typedInput = plugins.dialogs.showInputDialog('Specify','Your name');]]></sam
               <parameter name="initialValue" type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             </parameters>
           </function>
-          <function clientSupport="mc,wc,sc" name="showQuestionDialog">
+          <function clientSupport="ng,mc,wc,sc" name="showQuestionDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+              <description clientSupport="ng,mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+              <summary clientSupport="ng,mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="mc,wc,sc"><![CDATA[//show dialog
+              <sample clientSupport="ng,mc,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');]]></sample>
             </samples>
             <parameters>
@@ -200,7 +200,7 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showQuestionDialog" varargs="true">
+          <function clientSupport="ng,wc,sc" name="showQuestionDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -208,13 +208,13 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show dialog
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not allowed','OK');]]></sample>
             </samples>
             <parameters>
@@ -229,7 +229,7 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showSelectDialog">
+          <function clientSupport="ng,wc,sc" name="showSelectDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -237,13 +237,13 @@ var thePressedButton = plugins.dialogs.showQuestionDialog('Title', 'Value not al
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show select,returns nothing when canceled 
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show select,returns nothing when canceled
 var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
 //also possible to pass array with options
 //var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name', new Array('jan','johan','sebastiaan'));]]></sample>
@@ -254,7 +254,7 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="optionArray" type="com.servoy.j2db.documentation.scripting.docs.Object[]" typecode="[Ljava.lang.Object;"/>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showSelectDialog" varargs="true">
+          <function clientSupport="ng,wc,sc" name="showSelectDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -262,13 +262,13 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options. Returns the selected entry, or nothing when canceled.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows a selection dialog, where the user can select an entry from a list of options.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show select,returns nothing when canceled 
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show select,returns nothing when canceled
 var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name','jan','johan','sebastiaan');
 //also possible to pass array with options
 //var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a name', new Array('jan','johan','sebastiaan'));]]></sample>
@@ -279,20 +279,20 @@ var selectedValue = plugins.dialogs.showSelectDialog('Select','please select a n
               <parameter name="options" type="com.servoy.j2db.documentation.scripting.docs.String[]" typecode="[Ljava.lang.String;"/>
             </parameters>
           </function>
-          <function clientSupport="mc,wc,sc" name="showWarningDialog">
+          <function clientSupport="ng,mc,wc,sc" name="showWarningDialog">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+              <description clientSupport="ng,mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+              <summary clientSupport="ng,mc,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="mc,wc,sc"><![CDATA[//show dialog
+              <sample clientSupport="ng,mc,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed');]]></sample>
             </samples>
             <parameters>
@@ -304,7 +304,7 @@ var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not all
               </parameter>
             </parameters>
           </function>
-          <function clientSupport="wc,sc" name="showWarningDialog" varargs="true">
+          <function clientSupport="ng,wc,sc" name="showWarningDialog" varargs="true">
             <argumentsTypes>
               <argumentType typecode="java.lang.String"/>
               <argumentType typecode="java.lang.String"/>
@@ -312,13 +312,13 @@ var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not all
             </argumentsTypes>
             <return type="com.servoy.j2db.documentation.scripting.docs.String" typecode="java.lang.String"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
+              <description clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
+              <summary clientSupport="ng,wc,sc"><![CDATA[Shows a message dialog with the specified title, message and a customizable set of buttons.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[//show dialog
+              <sample clientSupport="ng,wc,sc"><![CDATA[//show dialog
 var thePressedButton = plugins.dialogs.showWarningDialog('Title', 'Value not allowed','OK');]]></sample>
             </samples>
             <parameters>

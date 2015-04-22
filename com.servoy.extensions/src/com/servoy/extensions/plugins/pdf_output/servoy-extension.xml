@@ -40,7 +40,8 @@ if (pdf) {
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Combine multiple PDF docs into one.]]></description>
+              <description clientSupport="wc,sc"><![CDATA[Combine multiple PDF docs into one.
+Note: this function may fail when creating large PDF files due to lack of available heap memory. To compensate, please configure the application server with more heap memory via -Xmx parameter.]]></description>
             </descriptions>
             <summaries>
               <summary clientSupport="wc,sc"><![CDATA[Combine multiple PDF docs into one.]]></summary>
@@ -61,7 +62,8 @@ if (pdf) {
             </argumentsTypes>
             <return type="byte[]" typecode="[B"/>
             <descriptions>
-              <description clientSupport="wc,sc"><![CDATA[Combine multiple protected PDF docs into one.]]></description>
+              <description clientSupport="wc,sc"><![CDATA[Combine multiple protected PDF docs into one.
+Note: this function may fail when creating large PDF files due to lack of available heap memory. To compensate, please configure the application server with more heap memory via -Xmx parameter.]]></description>
             </descriptions>
             <summaries>
               <summary clientSupport="wc,sc"><![CDATA[Combine multiple protected PDF docs into one.]]></summary>
@@ -162,7 +164,7 @@ if (result_pdf_doc != null)
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
-// NOTE: Passwords are case sensitive 
+// NOTE: Passwords are case sensitive
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
@@ -193,7 +195,7 @@ if (unEncryptedFile) {
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
-// NOTE: Passwords are case sensitive 
+// NOTE: Passwords are case sensitive
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
@@ -235,7 +237,7 @@ if (unEncryptedFile) {
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
-// NOTE: Passwords are case sensitive 
+// NOTE: Passwords are case sensitive
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
@@ -302,7 +304,7 @@ if (unEncryptedFile) {
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
-// NOTE: Passwords are case sensitive 
+// NOTE: Passwords are case sensitive
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
@@ -373,7 +375,7 @@ if (unEncryptedFile) {
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[// Add password protection and security options to the PDF
-// NOTE: Passwords are case sensitive 
+// NOTE: Passwords are case sensitive
 var unEncryptedFile = plugins.file.showFileOpenDialog();
 if (unEncryptedFile) {
 	var data = plugins.file.readFile(unEncryptedFile);
