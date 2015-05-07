@@ -69,7 +69,7 @@ public class ExecuteScriptMethodJob implements StatefulJob
 		}
 		try
 		{
-			access.executeMethod(methodcontext, methodname, args, true);
+			access.executeMethod(methodcontext, methodname, args, true, false);
 		}
 		catch (Exception e1)
 		{
