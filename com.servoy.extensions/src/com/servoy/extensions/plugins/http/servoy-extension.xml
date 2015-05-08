@@ -220,8 +220,9 @@ var value = cookie.getValue();]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -241,8 +242,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -419,8 +421,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -440,8 +443,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -496,7 +500,7 @@ response.close()]]></sample>
               <description clientSupport="wc,sc"><![CDATA[202 Accepted (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[202 Accepted (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[202 Accepted (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -519,7 +523,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[502 Bad Gateway (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[502 Bad Gateway (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[502 Bad Gateway (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -542,7 +546,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[400 Bad Request (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[400 Bad Request (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[400 Bad Request (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -565,7 +569,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[409 Conflict (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[409 Conflict (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[409 Conflict (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -588,7 +592,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[100 Continue (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[100 Continue (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[100 Continue (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -611,7 +615,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[201 Created (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[201 Created (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[201 Created (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -634,7 +638,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[417 Expectation Failed (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[417 Expectation Failed (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[417 Expectation Failed (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -680,7 +684,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[403 Forbidden (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[403 Forbidden (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[403 Forbidden (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -703,7 +707,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[504 Gateway Timeout (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[504 Gateway Timeout (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[504 Gateway Timeout (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -726,7 +730,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[410 Gone (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[410 Gone (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[410 Gone (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -749,7 +753,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[505 HTTP Version Not Supported (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[505 HTTP Version Not Supported (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[505 HTTP Version Not Supported (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -822,7 +826,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[500 Server Error (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[500 Server Error (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[500 Server Error (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -845,7 +849,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[411 Length Required (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[411 Length Required (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[411 Length Required (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -916,7 +920,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[405 Method Not Allowed (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[405 Method Not Allowed (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[405 Method Not Allowed (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -939,7 +943,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[301 Moved Permanently (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[301 Moved Permanently (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[301 Moved Permanently (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -962,7 +966,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[302 Moved Temporarily (Sometimes Found) (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[302 Moved Temporarily (Sometimes Found) (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[302 Moved Temporarily (Sometimes Found) (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -985,7 +989,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[300 Mutliple Choices (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[300 Mutliple Choices (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[300 Mutliple Choices (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1010,7 +1014,7 @@ OK (HTTP/1.1 - draft-ietf-http-v11-spec-rev-01?)]]></description>
             </descriptions>
             <summaries>
               <summary clientSupport="wc,sc"><![CDATA[207 Multi-Status (WebDAV - RFC 2518) or 207 Partial Update
-OK (HTTP/1.]]></summary>
+OK (HTTP/1.1 - draft-ietf-http-v11-spec-rev-01?)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1033,7 +1037,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[203 Non Authoritative Information (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[203 Non Authoritative Information (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[203 Non Authoritative Information (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1056,7 +1060,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[406 Not Acceptable (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[406 Not Acceptable (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[406 Not Acceptable (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1079,7 +1083,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[404 Not Found (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[404 Not Found (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[404 Not Found (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1102,7 +1106,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[501 Not Implemented (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[501 Not Implemented (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[501 Not Implemented (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1125,7 +1129,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[304 Not Modified (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[304 Not Modified (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[304 Not Modified (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1148,7 +1152,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[204 No Content (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[204 No Content (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[204 No Content (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1171,7 +1175,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[200 OK (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[200 OK (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[200 OK (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1194,7 +1198,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[206 Partial Content (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[206 Partial Content (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[206 Partial Content (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1217,7 +1221,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[402 Payment Required (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[402 Payment Required (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[402 Payment Required (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1240,7 +1244,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[412 Precondition Failed (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[412 Precondition Failed (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[412 Precondition Failed (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1286,7 +1290,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[407 Proxy Authentication Required (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[407 Proxy Authentication Required (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[407 Proxy Authentication Required (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1309,7 +1313,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[416 Requested Range Not Satisfiable (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[416 Requested Range Not Satisfiable (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[416 Requested Range Not Satisfiable (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1332,7 +1336,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[408 Request Timeout (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[408 Request Timeout (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[408 Request Timeout (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1355,7 +1359,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[413 Request Entity Too Large (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[413 Request Entity Too Large (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[413 Request Entity Too Large (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1378,7 +1382,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[414 Request-URI Too Long (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[414 Request-URI Too Long (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[414 Request-URI Too Long (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1401,7 +1405,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[205 Reset Content (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[205 Reset Content (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[205 Reset Content (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1424,7 +1428,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[303 See Other (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[303 See Other (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[303 See Other (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1447,7 +1451,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[503 Service Unavailable (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[503 Service Unavailable (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[503 Service Unavailable (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1470,7 +1474,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[101 Switching Protocols (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[101 Switching Protocols (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[101 Switching Protocols (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1493,7 +1497,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[307 Temporary Redirect (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[307 Temporary Redirect (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[307 Temporary Redirect (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1516,7 +1520,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[401 Unauthorized (HTTP/1.0 - RFC 1945)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[401 Unauthorized (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[401 Unauthorized (HTTP/1.0 - RFC 1945)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1562,7 +1566,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[415 Unsupported Media Type (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[415 Unsupported Media Type (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[415 Unsupported Media Type (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1585,7 +1589,7 @@ switch(httpCode) {
               <description clientSupport="wc,sc"><![CDATA[305 Use Proxy (HTTP/1.1 - RFC 2616)]]></description>
             </descriptions>
             <summaries>
-              <summary clientSupport="wc,sc"><![CDATA[305 Use Proxy (HTTP/1.]]></summary>
+              <summary clientSupport="wc,sc"><![CDATA[305 Use Proxy (HTTP/1.1 - RFC 2616)]]></summary>
             </summaries>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var client = plugins.http.createNewHttpClient();
@@ -1734,8 +1738,9 @@ switch(httpCode) {
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -1755,8 +1760,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -2353,8 +2359,9 @@ if (cookieSet)
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -2374,8 +2381,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -2689,8 +2697,9 @@ var httpCode = poster.doPost()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -2710,8 +2719,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -2970,8 +2980,9 @@ var httpCode = poster.executeRequest(scopes.globals.twitterUserName, scopes.glob
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -2991,8 +3002,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -3368,8 +3380,9 @@ for (header in allHeaders) application.output(header + ': ' + allHeaders[header]
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>
@@ -3389,8 +3402,9 @@ response.close()]]></sample>
             <samples>
               <sample clientSupport="wc,sc"><![CDATA[var response = method.executeRequest()
 
-To be able to reuse the client, the response must be closed if the content
-is not read via getResponseBody or getMediaData:
+To be able to reuse the client, the response must be
+closed if the content is not read via getResponseBody
+ or getMediaData:
 
 response.close()]]></sample>
             </samples>

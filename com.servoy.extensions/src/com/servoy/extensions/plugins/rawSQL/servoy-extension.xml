@@ -11,15 +11,12 @@
             <return type="byte[]" typecode="[B"/>
             <deprecated><![CDATA[Replaced by application#getUUID(String)]]></deprecated>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var uuid = application.getNewUUID();
@@ -50,15 +47,12 @@ plugins.rawSQL.executeSQL(databaseManager.getDataSourceServerName(controller.get
               <summary clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var country = 'NL'
@@ -104,15 +98,12 @@ else
               <summary clientSupport="wc,sc"><![CDATA[Execute any SQL, returns true if successful.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var country = 'NL'
@@ -161,15 +152,12 @@ else
               <summary clientSupport="wc,sc"><![CDATA[Execute a stored procedure, return all created result sets.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var maxReturnedRows = 10; //useful to limit number of rows
@@ -204,15 +192,12 @@ for (var i = 0; i < datasets.length; i++) {
               <summary clientSupport="wc,sc"><![CDATA[Execute a stored procedure.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var maxReturnedRows = 10; //useful to limit number of rows
@@ -247,15 +232,12 @@ var interest_rate = dataset.getValue(1, 1);]]></sample>
               <summary clientSupport="wc,sc"><![CDATA[Flush cached database data.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var country = 'NL'
@@ -289,15 +271,12 @@ else
               <summary clientSupport="wc,sc"><![CDATA[If the result from a function was false, it will return the exception object.]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var country = 'NL'
@@ -337,15 +316,12 @@ else
               <summary clientSupport="wc,sc"><![CDATA[Notify clients about changes in records, based on pk(s).]]></summary>
             </summaries>
             <samples>
-              <sample clientSupport="wc,sc"><![CDATA[/**************************************************************************** 
+              <sample clientSupport="wc,sc"><![CDATA[/***************************************************************************
 WARNING! You can cause data loss or serious data integrity compromises!
 You should have a THOROUGH understanding of both SQL and your backend
 database (and other interfaces that may use that backend) BEFORE YOU USE
 ANY OF THESE COMMANDS.
 You should also READ THE DOCUMENTATION BEFORE USING ANY OF THESE COMMANDS
-
-Note that when server names have been switched (databasemanager.switchServer),the 
-real server names must be used here, plugins.rawSQL is not transparent to switched servers.
 ****************************************************************************/
 
 var action = SQL_ACTION_TYPES.DELETE_ACTION //pks deleted
