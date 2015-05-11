@@ -58,7 +58,7 @@ import com.servoy.j2db.util.UUID;
 
 /**
  * Server mail component
- * 
+ *
  * @author jblok
  */
 @SuppressWarnings("nls")
@@ -149,7 +149,7 @@ public class MailServer implements IMailService, IServerPlugin
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
 		try
 		{
-			Thread.currentThread().setContextClassLoader(application.getPluginManager().getClassLoader());
+			Thread.currentThread().setContextClassLoader(javax.mail.Session.class.getClassLoader());
 
 			MimeMessage message = createMessage(to, from, subject, rawMsgText, cc, bcc, attachments, overrideProperties);
 			message.setHeader("Precedence", "bulk");
@@ -174,7 +174,7 @@ public class MailServer implements IMailService, IServerPlugin
 		ClassLoader saveCl = Thread.currentThread().getContextClassLoader();
 		try
 		{
-			Thread.currentThread().setContextClassLoader(application.getPluginManager().getClassLoader());
+			Thread.currentThread().setContextClassLoader(javax.mail.Session.class.getClassLoader());
 
 			MimeMessage message = createMessage(to, from, subject, rawMsgText, cc, bcc, attachments, overrideProperties);
 			Transport.send(message);
