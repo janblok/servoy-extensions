@@ -206,7 +206,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 					"else if(e.srcElement) element=e.srcElement;").append( //$NON-NLS-1$
 					"if(element.nodeType==3) element=element.parentNode;").append(// defeat Safari bug //$NON-NLS-1$
 					getCallbackScript()).append(//
-					"},{'propagate':true,'disable_in_input':false})}"), "registerShortcut"); //$NON-NLS-1$ //$NON-NLS-2$
+					"},{'propagate':false,'disable_in_input':false})}"), "registerShortcut"); //$NON-NLS-1$ //$NON-NLS-2$
 
 				if (headRendered && !isAjax)
 				{
