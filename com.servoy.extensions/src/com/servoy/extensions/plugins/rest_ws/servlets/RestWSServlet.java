@@ -975,45 +975,75 @@ public class RestWSServlet extends HttpServlet
 				return true;
 			}
 		}
-		return request.getHeader(WS_NODEBUG_HEADER) != null ? true : false;
+		return request.getHeader(WS_NODEBUG_HEADER) != null;
 	}
 
 	protected void sendResult(HttpServletRequest request, HttpServletResponse response, Object result, int defaultContentType) throws Exception
 	{
-		int contentType = getRequestContentType(request, "Accept", null, (result instanceof byte[]) ? CONTENT_BINARY : defaultContentType);
-
 		String resultContentType;
 		byte[] bytes;
 
 		if (result instanceof byte[])
 		{
-			if (contentType == CONTENT_BINARY)
+			bytes = (byte[])result;
+			resultContentType = MimeTypes.getContentType(bytes);
+
+			if (request.getHeader("Accept") != null)
 			{
-				bytes = (byte[])result;
-				//get content type from accept header (if multiple types specified in accept header, take the first), if not guess from response content
-				resultContentType = request.getHeader("Accept") != null ? request.getHeader("Accept").split(";")[0] : MimeTypes.getContentType(bytes);
-				if (resultContentType == null) resultContentType = "application/octet-stream";//if still null, then set to standard
+				String[] acceptContentTypes = request.getHeader("Accept").split(",");
+
+				if (resultContentType == null)
+				{
+					// cannot determine content type, just use first from accept header
+					resultContentType = getFirstNonpatternContentType(acceptContentTypes);
+					if (resultContentType != null && acceptContentTypes.length > 1)
+					{
+						plugin.log.warn("Could not determine byte array content type, using {} from accept header {}", resultContentType,
+							request.getHeader("Accept"));
+					}
+				}
+
+				if (resultContentType == null)
+				{
+					resultContentType = "application/octet-stream"; // if still null, then set to standard
+				}
+
+				// check if content type based on bytes is in accept header
+				boolean found = false;
+				for (String acc : acceptContentTypes)
+				{
+					if (matchContentType(acc.trim().split(";")[0], resultContentType))
+					{
+						found = true;
+						break;
+					}
+				}
+
+				if (!found)
+				{
+					plugin.log.warn("Byte array content type {} not found in accept header {}", resultContentType, request.getHeader("Accept"));
+				}
 			}
-			else
+
+			if (resultContentType == null)
 			{
-				//requested type is json or xml
-				plugin.log.error("Request for non-binary data was made, but the return data is a byte array.");
-				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
-				return;
+				resultContentType = "application/octet-stream"; // if still null, then set to standard
 			}
 		}
 		else
 		{
+			int contentType = getRequestContentType(request, "Accept", null, defaultContentType);
+
 			if (contentType == CONTENT_BINARY)
 			{
 				plugin.log.error("Request for binary data was made, but the return data is not a byte array; return data is " + result);
 				sendError(response, HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 				return;
 			}
-			boolean isXML = (result instanceof XMLObject);
-			boolean isJSON = (result instanceof JSONObject || result instanceof JSONArray);
+			boolean isXML = result instanceof XMLObject;
+			boolean isJSON = result instanceof JSONObject || result instanceof JSONArray;
 
-			Object json = null;
+			Object json;
 			if (isXML)
 			{
 				json = XML.toJSONObject(result.toString());
@@ -1095,10 +1125,48 @@ public class RestWSServlet extends HttpServlet
 		{
 			if (outputStream != null)
 			{
-				outputStream.flush();
-				outputStream.close();
+				try
+				{
+					outputStream.flush();
+				}
+				finally
+				{
+					outputStream.close();
+				}
 			}
 		}
+	}
+
+	private static String getFirstNonpatternContentType(String[] contentTypes)
+	{
+		for (String acc : contentTypes)
+		{
+			String contentType = acc.trim().split(";")[0];
+			String[] split = contentType.split("/");
+			if (split.length == 2 && !split[0].equals("*") && !split[1].equals("*"))
+			{
+				return contentType;
+			}
+		}
+		return null;
+	}
+
+	private static boolean matchContentType(String contentTypePattern, String contentType)
+	{
+		String[] patSplit = contentTypePattern.split("/");
+		if (patSplit.length != 2)
+		{
+			return false;
+		}
+
+		String[] typeSplit = contentType.split("/");
+		if (typeSplit.length != 2)
+		{
+			return false;
+		}
+
+		return (patSplit[0].equals("*") || patSplit[0].equalsIgnoreCase(typeSplit[0])) &&
+			(patSplit[1].equals("*") || patSplit[1].equalsIgnoreCase(typeSplit[1]));
 	}
 
 	/**
