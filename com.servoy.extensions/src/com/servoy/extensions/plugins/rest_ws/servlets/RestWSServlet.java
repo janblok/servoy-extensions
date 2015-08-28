@@ -724,17 +724,17 @@ public class RestWSServlet extends HttpServlet
 			{
 				return CONTENT_XML;
 			}
-			if (header.indexOf("octet-stream") >= 0)
+			if (header.indexOf("text") >= 0)
 			{
-				return CONTENT_BINARY;
+				return CONTENT_TEXT;
 			}
 			if (header.indexOf("multipart") >= 0)
 			{
 				return CONTENT_MULTIPART;
 			}
-			if (header.indexOf("text") >= 0)
+			if (header.indexOf("octet-stream") >= 0 || header.indexOf("application") >= 0)
 			{
-				return CONTENT_TEXT;
+				return CONTENT_BINARY;
 			}
 		}
 
@@ -756,14 +756,14 @@ public class RestWSServlet extends HttpServlet
 
 	private int guessContentType(String stringContent, int defaultContentType)
 	{
-		if (stringContent != null)
+		if (stringContent != null & stringContent.length() > 0)
 		{
 			// start guessing....
-			if (stringContent.length() > 0 && stringContent.charAt(0) == '<')
+			if (stringContent.charAt(0) == '<')
 			{
 				return CONTENT_XML;
 			}
-			if (stringContent.length() > 0 && stringContent.charAt(0) == '{')
+			if (stringContent.charAt(0) == '{')
 			{
 				return CONTENT_JSON;
 			}
@@ -773,7 +773,7 @@ public class RestWSServlet extends HttpServlet
 
 	/**
 	 *
-	 * Gets the key from a headder . For example, the folowing header :<br/>
+	 * Gets the key from a header . For example, the following header :<br/>
 	 * <b>Content-Disposition: form-data; name="myFile"; filename="SomeRandomFile.txt"</b>
 	 * <br/>
 	 * calling getHeaderKey(header,"name","--") will return <b>myFile<b/>
