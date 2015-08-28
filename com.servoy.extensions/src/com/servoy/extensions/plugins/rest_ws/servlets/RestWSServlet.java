@@ -769,7 +769,7 @@ public class RestWSServlet extends HttpServlet
 
 	private int guessContentType(String stringContent, int defaultContentType)
 	{
-		if (stringContent != null & stringContent.length() > 0)
+		if (stringContent != null && stringContent.length() > 0)
 		{
 			// start guessing....
 			if (stringContent.charAt(0) == '<')
