@@ -88,7 +88,7 @@ import com.servoy.j2db.util.toolbar.ToolbarPanel;
 
 /**
  * Provider for the Window plugin.
- * 
+ *
  * @author rgansevles
  */
 @SuppressWarnings("nls")
@@ -136,6 +136,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	private IShortcutHandler shortcutHandler;
 	Map<KeyStroke, Map<String, ShortcutCallData>> shortcuts = new HashMap<KeyStroke, Map<String, ShortcutCallData>>(); // KeyStroke -> context -> call data
+	private final Map<KeyStroke, Boolean> consume = new HashMap<>();
 
 	private IShortcutHandler getShortcutHandler()
 	{
@@ -171,7 +172,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	{
 		for (KeyStroke key : shortcuts.keySet())
 		{
-			getShortcutHandler().addShortcut(key);
+			getShortcutHandler().addShortcut(key, consume.get(key).booleanValue());
 		}
 	}
 
@@ -257,9 +258,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
 	 */
@@ -269,9 +270,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
 	 * @param arguments
@@ -282,9 +283,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
 	 * @param contextFilter	only triggers the shortcut when on this form
@@ -295,48 +296,49 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param method the method/function that needs to be called when the shortcut is hit
 	 */
 	public boolean js_createShortcut(String shortcut, Function method)
 	{
-		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, null);
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, null, false);
 	}
 
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param method the method/function that needs to be called when the shortcut is hit
 	 * @param contextFilter	only triggers the shortcut when on this form
 	 */
 	public boolean js_createShortcut(String shortcut, Function method, String contextFilter)
 	{
-		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, null);
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, null, false);
 	}
 
 
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param method the method/function that needs to be called when the shortcut is hit
 	 * @param arguments
 	 */
 	public boolean js_createShortcut(String shortcut, Function method, Object[] arguments)
 	{
-		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, arguments);
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), null, arguments, false);
 	}
 
+
 	/**
-	 * @clonedesc js_createShortcut(String, String, String, Object[])
-	 * @sampleas js_createShortcut(String, String, String, Object[])
-	 * 
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
 	 * @param shortcut
 	 * @param method the method/function that needs to be called when the shortcut is hit
 	 * @param contextFilter	only triggers the shortcut when on this form
@@ -344,7 +346,36 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 */
 	public boolean js_createShortcut(String shortcut, Function method, String contextFilter, Object[] arguments)
 	{
-		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, arguments);
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, arguments, false);
+	}
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
+	 * @param shortcut
+	 * @param method the method/function that needs to be called when the shortcut is hit
+	 * @param contextFilter	only triggers the shortcut when on this form
+	 * @param arguments
+	 * @param consumeEvent if true then the shotcut will consume the event and the default browser behavior will not be executed (default false)
+	 */
+	public boolean js_createShortcut(String shortcut, Function method, String contextFilter, Object[] arguments, boolean consumeEvent)
+	{
+		return finalizeCreateShortcut(shortcut, new FunctionDefinition(method), contextFilter, arguments, consumeEvent);
+	}
+
+	/**
+	 * @clonedesc js_createShortcut(String, String, String, Object[],boolean)
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
+	 *
+	 * @param shortcut
+	 * @param method the method/function that needs to be called when the shortcut is hit
+	 * @param contextFilter	only triggers the shortcut when on this form
+	 * @param arguments
+	 */
+	public boolean js_createShortcut(String shortcut, String methodName, String contextFilter, Object[] arguments)
+	{
+		return js_createShortcut(shortcut, methodName, contextFilter, arguments, false);
 	}
 
 	/**
@@ -365,16 +396,18 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * //plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', new Array(argument1, argument2));
 	 * // Passing the method as a name and the contextFilter set so that this shortcut only trigger on the form 'frm_contacts'.
 	 * plugins.window.createShortcut('control RIGHT', 'frm_contacts.handleMyShortcut', 'frm_contacts', new Array(argument1, argument2));
-	 * // Num Lock and Substract shortcuts 
+	 * // Num Lock and Substract shortcuts
 	 * plugins.window.createShortcut("NUMPAD8", handleMyShortcut);
 	 * plugins.window.createShortcut("SUBTRACT", handleMyShortcut);
 	 * // remove global shortcut and form-level shortcut
 	 * plugins.window.removeShortcut('menu 1');
 	 * plugins.window.removeShortcut('control RIGHT', 'frm_contacts');
+	 * // consuming they keystroke so that a default browser event will not happen
+	 * plugins.window.createShortcut('F4', scopes.globals.handleOrdersShortcut, 'frm_contacts', null, true);
 	 * // shortcut handlers are called with an JSEvent argument
-	 * ///* 
+	 * ///*
 	 * // * Handle keyboard shortcut.
-	 * // * 
+	 * // *
 	 * // * @param {JSEvent} event the event that triggered the action
 	 * // *&#47;
 	 * //function handleShortcut(event)
@@ -383,17 +416,18 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * //  application.output(event.getFormName()) // returns 'frm_contacts'
 	 * //  application.output(event.getElementName()) // returns 'contact_name_field' or null when no element is selected
 	 * //}
-	 * // NOTES: 
+	 * // NOTES:
 	 * // 1) shortcuts will not override existing operating system or browser shortcuts,
 	 * // choose your shortcuts carefully to make sure they work in all clients.
 	 * // 2) always use lower-case letters for modifiers (shift, control, etc.), otherwise createShortcut will fail.
 	 *
-	 * @param shortcut 
+	 * @param shortcut
 	 * @param methodName scopes.scopename.methodname or formname.methodname String to target the method to execute
 	 * @param contextFilter	only triggers the shortcut when on this form
 	 * @param arguments
+	 * @param consumeEvent if true then the shotcut will consume the event and the default browser behavior will not be executed (default false)
 	 */
-	public boolean js_createShortcut(String shortcut, String methodName, String contextFilter, Object[] arguments)
+	public boolean js_createShortcut(String shortcut, String methodName, String contextFilter, Object[] arguments, boolean consumeEvent)
 	{
 		FunctionDefinition functionDef;
 		// string callback
@@ -440,10 +474,10 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 		}
 		functionDef = new FunctionDefinition(contextName, methodNameIntern);
 
-		return finalizeCreateShortcut(shortcut, functionDef, contextFilter, arguments);
+		return finalizeCreateShortcut(shortcut, functionDef, contextFilter, arguments, consumeEvent);
 	}
 
-	boolean finalizeCreateShortcut(String shortcut, FunctionDefinition functionDef, String formName, Object[] arguments)
+	boolean finalizeCreateShortcut(String shortcut, FunctionDefinition functionDef, String formName, Object[] arguments, boolean consumeEvent)
 	{
 		KeyStroke key = parseShortcut(plugin.getClientPluginAccess(), shortcut);
 		if (key == null)
@@ -458,7 +492,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			// first time this shortcut was used
 			shortcutMap = new HashMap<String, ShortcutCallData>();
 			shortcuts.put(key, shortcutMap);
-			getShortcutHandler().addShortcut(key);
+			consume.put(key, Boolean.valueOf(consumeEvent));
+			getShortcutHandler().addShortcut(key, consumeEvent);
 		}
 		shortcutMap.put(formName, new ShortcutCallData(shortcut, functionDef, arguments));
 
@@ -468,9 +503,9 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Remove a shortcut.
 	 *
-	 * @sampleas js_createShortcut(String, String, String, Object[])
+	 * @sampleas js_createShortcut(String, String, String, Object[],boolean)
 	 *
-	 * @param shortcut  
+	 * @param shortcut
 	 */
 	public boolean js_removeShortcut(String shortcut)
 	{
@@ -532,11 +567,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Bring the window into/out of fullsceen mode.
-	 * 
+	 *
 	 * @sample
-	 * // active fullscreen mode 
+	 * // active fullscreen mode
 	 * plugins.window.setFullScreen(true);
-	 * 
+	 *
 	 * @param full
 	 */
 	public void js_setFullScreen(boolean full)
@@ -599,11 +634,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Show or hide the toolbar area.
-	 * 
+	 *
 	 * @sample
 	 * // hide the toolbar area
 	 * plugins.window.setToolBarAreaVisible(false);
-	 * 
+	 *
 	 * @param visible
 	 */
 	public void js_setToolBarAreaVisible(boolean visible)
@@ -625,11 +660,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Show or hide the statusbar.
-	 * 
+	 *
 	 * @sample
 	 * // hide the statusbar
 	 * plugins.window.setStatusBarVisible(false);
-	 * 
+	 *
 	 * @param visible
 	 */
 	public void js_setStatusBarVisible(boolean visible)
@@ -661,17 +696,17 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
-	 * 
+	 *
 	 * @sample
 	 * // Show a form as popup panel, where the closeFormPopup can pass return a value to a dataprovider in the specified scope.
 	 * plugins.window.showFormPopup(null,forms.orderPicker,foundset.getSelectedRecord(),"order_id");
 	 * // do call closeFormPopup(ordervalue) from the orderPicker form
-	 * 
+	 *
 	 * @param elementToShowRelatedTo element to show related to or null to center in screen
 	 * @param form the form to show
 	 * @param scope the scope to put retval into
 	 * @param dataproviderID the dataprovider of scope to fill
-	 * 
+	 *
 	 */
 	public void js_showFormPopup(IComponent elementToShowRelatedTo, IForm form, Object scope, String dataproviderID)
 	{
@@ -681,7 +716,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_showFormPopup(IComponent, IForm, Object, String)
 	 * @sampleas js_showFormPopup(IComponent, IForm, Object, String)
-	 * 
+	 *
 	 * @param elementToShowRelatedTo element to show related to or null to center in screen
 	 * @param form the form to show
 	 * @param scope the scope to put retval into
@@ -733,8 +768,8 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 			}
 			else if (scriptable == null)
 			{
-				throw new RuntimeException("Can't show a form popup of form: " + form + ", because the scope " + scope +
-					" is null or not a valid scriptable object");
+				throw new RuntimeException(
+					"Can't show a form popup of form: " + form + ", because the scope " + scope + " is null or not a valid scriptable object");
 			}
 		}
 	}
@@ -742,7 +777,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * Close the current form popup panel and assign the value to the configured data provider.
 	 * @sampleas js_showFormPopup(IComponent, IForm, Object, String)
-	 * 
+	 *
 	 * @param retval return value for data provider
 	 */
 	public void js_closeFormPopup(Object retval)
@@ -832,25 +867,25 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method addToolBar only works in the smart client.
-	 * 
+	 *
 	 * // add a toolbar with only a name
 	 * var toolbar0 = plugins.window.addToolBar("toolbar_0");
 	 * toolbar0.addButton("click me 0", feedback_button);
-	 * 
+	 *
 	 * // add a toolbar with a name and the row you want it to show at
 	 * // row number starts at 0
 	 * var toolbar1 = plugins.window.addToolBar("toolbar_1", 2);
 	 * toolbar1.addButton("click me 1", feedback_button);
-	 * 
+	 *
 	 * // add a toolbar with a name and display name
 	 * var toolbar2 = plugins.window.addToolBar("toolbar_2", "toolbar_2_internal_name");
 	 * toolbar2.addButton("click me 2", feedback_button);
-	 * 
+	 *
 	 * // add a toolbar with a name, display name and the row you want the
-	 * // toolbar to show at. row number starts at 0 
+	 * // toolbar to show at. row number starts at 0
 	 * var toolbar3 = plugins.window.addToolBar("toolbar_3", "toolbar_3_internal_name", 3);
 	 * toolbar3.addButton("click me 3", feedback_button);
-	 * 
+	 *
 	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
 	 */
 	public ToolBar js_addToolBar(String name) throws Exception
@@ -860,11 +895,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Add a toolbar.
-	 * 
+	 *
 	 * @sampleas js_addToolBar(String)
-	 * 
+	 *
 	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
-	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
+	 * @param row the row inside the toolbar panel where this toolbar is to be added.
 	 */
 	public ToolBar js_addToolBar(String name, int row) throws Exception
 	{
@@ -873,11 +908,11 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Add a toolbar.
-	 * 
+	 *
 	 * @sampleas js_addToolBar(String)
-	 * 
+	 *
 	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
-	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu)
 	 */
 	public ToolBar js_addToolBar(String name, String displayname) throws Exception
 	{
@@ -886,12 +921,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Add a toolbar.
-	 * 
+	 *
 	 * @sampleas js_addToolBar(String)
-	 * 
+	 *
 	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
-	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
-	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu)
+	 * @param row the row inside the toolbar panel where this toolbar is to be added.
 	 */
 	public ToolBar js_addToolBar(String name, String displayname, int row) throws Exception
 	{
@@ -904,30 +939,30 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method addToolBar only works in the smart client.
-	 * 
+	 *
 	 * // create a window
 	 * var win = application.createWindow("myWindow", JSWindow.WINDOW);
-	 * 
+	 *
 	 * // add a toolbar with only a name
 	 * var toolbar0 = plugins.window.addToolBar(win,"toolbar_0");
 	 * toolbar0.addButton("click me 0", callback_function);
-	 * 
+	 *
 	 * // add a toolbar with a name and the row you want it to show at
 	 * // row number starts at 0
 	 * var toolbar1 = plugins.window.addToolBar(win,"toolbar_1", 2);
 	 * toolbar1.addButton("click me 1", callback_function);
-	 * 
+	 *
 	 * // add a toolbar with a name and display name
 	 * var toolbar2 = plugins.window.addToolBar(win,"toolbar_2", "toolbar_2_internal_name");
 	 * toolbar2.addButton("click me 2", callback_function);
-	 * 
+	 *
 	 * // add a toolbar with a name, display name and the row you want the
-	 * // toolbar to show at. row number starts at 0 
+	 * // toolbar to show at. row number starts at 0
 	 * var toolbar3 = plugins.window.addToolBar(win,"toolbar_3", "toolbar_3_internal_name", 3);
 	 * toolbar3.addButton("click me 3", callback_function);
-	 * 
+	 *
 	 * win.show(forms.Myform)
-	 * 
+	 *
 	 * @param window
 	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
 	 */
@@ -938,12 +973,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * @clonedesc js_addToolBar(JSWindow,String)
-	 * 
+	 *
 	 * @sampleas js_addToolBar(JSWindow,String)
-	 * 
+	 *
 	 * @param window
 	 * @param name the name by which this toolbar is identified in code. If display name is missing, name will be used as displayName as well.
-	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
+	 * @param row the row inside the toolbar panel where this toolbar is to be added.
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String name, int row) throws Exception
 	{
@@ -952,12 +987,12 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * @clonedesc js_addToolBar(JSWindow,String)
-	 * 
+	 *
 	 * @sampleas js_addToolBar(JSWindow,String)
-	 * 
+	 *
 	 * @param window
 	 * @param name the name by which this toolbar is identified in code
-	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu)
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String name, String displayname) throws Exception
 	{
@@ -966,13 +1001,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * @clonedesc js_addToolBar(JSWindow,String)
-	 * 
+	 *
 	 * @sampleas js_addToolBar(JSWindow,String)
-	 * 
+	 *
 	 * @param window
 	 * @param name the name by which this toolbar is identified in code.
-	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu) 
-	 * @param row the row inside the toolbar panel where this toolbar is to be added. 
+	 * @param displayname the name by which this toolbar will be identified in the UI. (for example in the toolbar panel's context menu)
+	 * @param row the row inside the toolbar panel where this toolbar is to be added.
 	 */
 	public ToolBar js_addToolBar(JSWindow window, String name, String displayname, int row) throws Exception
 	{
@@ -999,15 +1034,15 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method getToolBar only works in the smart client.
-	 * 
+	 *
 	 * // the toolbar must first be created with a call to addToolbar
 	 * plugins.window.addToolBar("toolbar_0");
-	 * 
+	 *
 	 * // get the toolbar at the panel by name
 	 * var toolbar = plugins.window.getToolBar("toolbar_0");
 	 * // add a button to the toolbar
 	 * toolbar.addButton("button", feedback_button);
-	 * 
+	 *
 	 * @param name
 	 */
 	public ToolBar js_getToolBar(String name) throws Exception
@@ -1021,23 +1056,23 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method getToolBar only works in the smart client.
-	 * 
+	 *
 	 * // create a window
 	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
 	 * // the toolbar must first be created with a call to addToolbar
 	 * plugins.window.addToolBar(win,"toolbar_0");
-	 * 
-	 * // show the empty toolbar and wait 4 seconds  
+	 *
+	 * // show the empty toolbar and wait 4 seconds
 	 * win.show(forms.MyForm)
 	 * application.updateUI(4000)
-	 * 
+	 *
 	 * // get the toolbar at the panel by name
 	 * var toolbar = plugins.window.getToolBar(win,"toolbar_0");
 	 * // add a button to the toolbar
 	 * toolbar.addButton("button", callback_function);
-	 * 
+	 *
 	 * @param window
-	 * @param name 
+	 * @param name
 	 */
 	public ToolBar js_getToolBar(JSWindow window, String name) throws Exception
 	{
@@ -1057,18 +1092,18 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method removeToolBar only works in the smart client.
-	 * 
+	 *
 	 * // the toolbar must first be created with a call to addToolbar
 	 * var toolbar = plugins.window.addToolBar("toolbar_0");
-	 * 
+	 *
 	 * // add a button to the toolbar
 	 * toolbar.addButton("button", feedback_button);
-	 * 
+	 *
 	 * // removing a toolbar from the toolbar panel is done by name
 	 * // the plugin checks the existence of the toolbar
 	 * // when the toolbar does not exist it will not throw an error though.
 	 * plugins.window.removeToolBar("toolbar_0");
-	 * 
+	 *
 	 * @param name
 	 */
 	public void js_removeToolBar(String name) throws Exception
@@ -1095,23 +1130,23 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method removeToolBar only works in the smart client.
-	 * // create a window 
+	 * // create a window
 	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
 	 * // the toolbar must first be created with a call to addToolbar
 	 * var toolbar = plugins.window.addToolBar(win,"toolbar_0");
-	 * 
+	 *
 	 * // add a button to the toolbar
 	 * toolbar.addButton("button", callcbackMethod);
-	 * 
+	 *
 	 * // show the toolbar with the button and wait 4 seconds, then remove it
 	 * win.show(forms.MyForm)
 	 * application.updateUI(4000)
-	 * 
+	 *
 	 * // removing a toolbar from the toolbar panel is done by name
 	 * // the plugin checks the existence of the toolbar
 	 * // when the toolbar does not exist it will not throw an error though.
 	 * plugins.window.removeToolBar(win,"toolbar_0");
-	 * 
+	 *
 	 * @param window
 	 * @param name
 	 */
@@ -1134,19 +1169,19 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method getToolbarNames only works in the smart client.
-	 * 
+	 *
 	 * // create an array of toolbar names
 	 * var names = plugins.window.getToolbarNames();
-	 * 
+	 *
 	 * // create an empty message variable
 	 * var message = "";
-	 * 
+	 *
 	 * // loop through the array
 	 * for (var i = 0 ; i < names.length ; i++) {
 	 * 	//add the name(s) to the message
 	 * 	message += names[i] + "\n";
 	 * }
-	 * 
+	 *
 	 * // show the message
 	 * plugins.dialogs.showInfoDialog("toolbar names", message);
 	 */
@@ -1160,23 +1195,23 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 *
 	 * @sample
 	 * // Note: method getToolbarNames only works in the smart client.
-	 * // create a window 
+	 * // create a window
 	 * 	var win = application.createWindow("myWindow", JSWindow.WINDOW);
 	 * // the toolbar must first be created with a call to addToolbar
 	 * 	 plugins.window.addToolBar(win,"toolbar_0");
 	 *   plugins.window.addToolBar(win,"toolbar_1");
 	 * // create an array of toolbar names
 	 * var names = plugins.window.getToolbarNames(win);
-	 * 
+	 *
 	 * // create an empty message variable
 	 * var message = "";
-	 * 
+	 *
 	 * // loop through the array
 	 * for (var i = 0 ; i < names.length ; i++) {
 	 * 	//add the name(s) to the message
 	 * 	message += names[i] + "\n";
 	 * }
-	 * 
+	 *
 	 * // show the message
 	 * plugins.dialogs.showInfoDialog("toolbar names", message);
 	 * @param window
@@ -1222,7 +1257,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_getMenuBar()
 	 * @sampleas js_getMenuBar()
-	 * 
+	 *
 	 * @param windowName the name of the window
 	 */
 	public MenuBar js_getMenuBar(String windowName)
@@ -1296,7 +1331,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * @param index the index at which to add the menu
-	 * 
+	 *
 	 * @deprecated Replaced by {@link MenuBar#addMenu()}.
 	 */
 	@Deprecated
@@ -1334,7 +1369,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * @param args array of arguments
-	 * 
+	 *
 	 * @deprecated Replaced by {@link #createPopupMenu()}.
 	 */
 	@Deprecated
@@ -1363,13 +1398,13 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 
 	/**
 	 * Creates a new popup menu that can be populated with items and displayed.
-	 * 
+	 *
 	 * @sample
 	 * // create a popup menu
 	 * var menu = plugins.window.createPopupMenu();
 	 * // add a menu item
 	 * menu.addMenuItem("an entry", feedback);
-	 * 
+	 *
 	 * if (event.getSource()) {
 	 * 	// display the popup over the component which is the source of the event
 	 * 	menu.show(event.getSource());
@@ -1428,9 +1463,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @deprecated Obsolete method.
 	 */
 	@Deprecated
-	public boolean js_register(@SuppressWarnings("unused")
-	String code, @SuppressWarnings("unused")
-	String developer)
+	public boolean js_register(@SuppressWarnings("unused") String code, @SuppressWarnings("unused") String developer)
 	{
 		return true;
 	}
@@ -1581,7 +1614,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	 * @sample
 	 * // maximize the main window:
 	 * plugins.window.maximize();
-	 * 
+	 *
 	 * // create a new window
 	 * var win = application.createWindow("windowName", JSWindow.WINDOW);
 	 * // show a form in the new window
@@ -1597,7 +1630,7 @@ public class WindowProvider implements IReturnedTypesProvider, IScriptable
 	/**
 	 * @clonedesc js_maximize()
 	 * @sampleas js_maximize()
-	 * 
+	 *
 	 * @param windowName
 	 */
 	public void js_maximize(final String windowName)

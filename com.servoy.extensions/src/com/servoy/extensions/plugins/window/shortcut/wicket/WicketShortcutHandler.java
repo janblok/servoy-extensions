@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.KeyStroke;
@@ -63,6 +64,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 	public static final String BEHAVIOUR = "ShortcutBehaviour"; //$NON-NLS-1$
 
 	private static final Map<Integer, String> specialKeys = new HashMap<Integer, String>();
+
 	static
 	{
 		specialKeys.put(new Integer(KeyEvent.VK_BACK_QUOTE), "`"); //$NON-NLS-1$
@@ -112,7 +114,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 		this.access = access;
 	}
 
-	public boolean addShortcut(KeyStroke key)
+	public boolean addShortcut(KeyStroke key, boolean consumeEvent)
 	{
 		String shortcut = convertToJSShortcut(key);
 		if (shortcut == null)
@@ -126,9 +128,9 @@ public class WicketShortcutHandler implements IShortcutHandler
 			access.getPageContributor().addBehavior(BEHAVIOUR, behavior = new HandleShortcutbehaviour());
 		}
 
-		shortcuts.put(new ComparableKeyStroke(key), shortcut);
+		shortcuts.put(new ComparableKeyStroke(key, consumeEvent), shortcut);
 		// always call registerShortcut() (also when shortcut is already in the set), needed when called after opening new dialog
-		behavior.getRegisterShortcutJS(shortcut);
+		behavior.getRegisterShortcutJS(shortcut, consumeEvent);
 		return true;
 	}
 
@@ -161,7 +163,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 
 	public boolean removeShortcut(KeyStroke key)
 	{
-		String shortcut = shortcuts.remove(new ComparableKeyStroke(key));
+		String shortcut = shortcuts.remove(new ComparableKeyStroke(key, false));
 		if (shortcut == null)
 		{
 			return false;
@@ -198,24 +200,26 @@ public class WicketShortcutHandler implements IShortcutHandler
 			if (!headRendered || !isAjax)
 			{
 				response.renderJavascriptReference(shortcut_js);
-				response.renderJavascript(new StringBuilder().append(//
-					"function registerShortcut(sc){").append( //$NON-NLS-1$
-					"shortcut.add(sc,function(e){").append( //$NON-NLS-1$
-					"var element;").append( //$NON-NLS-1$
-					"if(e.target) element=e.target;").append( //$NON-NLS-1$
-					"else if(e.srcElement) element=e.srcElement;").append( //$NON-NLS-1$
-					"if(element.nodeType==3) element=element.parentNode;").append(// defeat Safari bug //$NON-NLS-1$
-					getCallbackScript()).append(//
-					"},{'propagate':false,'disable_in_input':false})}"), "registerShortcut"); //$NON-NLS-1$ //$NON-NLS-2$
+				response.renderJavascript(
+					new StringBuilder().append(//
+						"function registerShortcut(sc, consumeEvent){").append( //$NON-NLS-1$
+							"shortcut.add(sc,function(e){").append( //$NON-NLS-1$
+								"var element;").append( //$NON-NLS-1$
+									"if(e.target) element=e.target;").append( //$NON-NLS-1$
+										"else if(e.srcElement) element=e.srcElement;").append( //$NON-NLS-1$
+											"if(element.nodeType==3) element=element.parentNode;").append(// defeat Safari bug //$NON-NLS-1$
+												getCallbackScript()).append(//
+													"},{'propagate':!consumeEvent,'disable_in_input':false})}"), //$NON-NLS-1$
+					"registerShortcut"); //$NON-NLS-1$
 
 				if (headRendered && !isAjax)
 				{
 					// page refresh, re-register all existing shortcuts
 					renderedShortcuts.clear();
 					StringBuilder sb = new StringBuilder();
-					for (String sc : shortcuts.values())
+					for (Entry<ComparableKeyStroke, String> entry : shortcuts.entrySet())
 					{
-						CharSequence js = getRegisterShortcutJS(sc, false);
+						CharSequence js = getRegisterShortcutJS(entry.getValue(), false, entry.getKey().shouldConsume());
 						if (js != null)
 						{
 							sb.append(js);
@@ -259,16 +263,16 @@ public class WicketShortcutHandler implements IShortcutHandler
 
 		List<CharSequence> newShortCuts = new ArrayList<CharSequence>();
 
-		public CharSequence getRegisterShortcutJS(String sc)
+		public CharSequence getRegisterShortcutJS(String sc, boolean consumeEvent)
 		{
-			return getRegisterShortcutJS(sc, true);
+			return getRegisterShortcutJS(sc, true, consumeEvent);
 		}
 
-		public CharSequence getRegisterShortcutJS(String sc, boolean fillNewShortCutsMap)
+		public CharSequence getRegisterShortcutJS(String sc, boolean fillNewShortCutsMap, boolean consumeEvent)
 		{
 			if (renderedShortcuts.add(sc))
 			{
-				StringBuilder newShortcutJS = new StringBuilder().append("registerShortcut('").append(sc).append("');"); //$NON-NLS-1$ //$NON-NLS-2$
+				StringBuilder newShortcutJS = new StringBuilder().append("registerShortcut('").append(sc).append("'," + consumeEvent + ");"); //$NON-NLS-1$ //$NON-NLS-2$
 				if (fillNewShortCutsMap) newShortCuts.add(newShortcutJS);
 				return newShortcutJS;
 			}
@@ -369,11 +373,21 @@ public class WicketShortcutHandler implements IShortcutHandler
 	public static class ComparableKeyStroke implements Comparable<ComparableKeyStroke>
 	{
 		public final KeyStroke keyStroke;
+		private final boolean consume;
 
-		public ComparableKeyStroke(KeyStroke keyStroke)
+		public ComparableKeyStroke(KeyStroke keyStroke, boolean consume)
 		{
+			this.consume = consume;
 			assert keyStroke != null;
 			this.keyStroke = keyStroke;
+		}
+
+		/**
+		 * @return
+		 */
+		public boolean shouldConsume()
+		{
+			return consume;
 		}
 
 		public int compareTo(ComparableKeyStroke cks)
@@ -449,7 +463,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 			case KeyEvent.VK_BEGIN :
 				return "Begin";
 
-				// modifiers
+			// modifiers
 			case KeyEvent.VK_SHIFT :
 				return "Shift";
 			case KeyEvent.VK_CONTROL :
@@ -461,7 +475,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 			case KeyEvent.VK_ALT_GRAPH :
 				return "Alt Graph";
 
-				// punctuation
+			// punctuation
 			case KeyEvent.VK_COMMA :
 				return "Comma";
 			case KeyEvent.VK_PERIOD :
@@ -479,7 +493,7 @@ public class WicketShortcutHandler implements IShortcutHandler
 			case KeyEvent.VK_CLOSE_BRACKET :
 				return "Close Bracket";
 
-				// numpad numeric keys handled below
+			// numpad numeric keys handled below
 			case KeyEvent.VK_MULTIPLY :
 				return "NumPad *";
 			case KeyEvent.VK_ADD :

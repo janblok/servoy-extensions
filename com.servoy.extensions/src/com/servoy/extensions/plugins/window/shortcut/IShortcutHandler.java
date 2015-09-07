@@ -20,22 +20,22 @@ import javax.swing.KeyStroke;
 
 /**
  * Interface for shortcut handlers
- * 
+ *
  * @author rgansevles
- * 
+ *
  */
 public interface IShortcutHandler
 {
 	/**
 	 * Add a shortcut to the current window
-	 * 
+	 *
 	 * @param shortcut
 	 */
-	boolean addShortcut(KeyStroke key);
+	boolean addShortcut(KeyStroke key, boolean consumeEvent);
 
 	/**
 	 * Remove a shortcut from the current window
-	 * 
+	 *
 	 * @param shortcut
 	 */
 

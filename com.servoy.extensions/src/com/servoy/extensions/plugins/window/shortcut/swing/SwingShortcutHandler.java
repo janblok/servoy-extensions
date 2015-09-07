@@ -98,7 +98,7 @@ public class SwingShortcutHandler implements IShortcutHandler
 
 	}
 
-	public boolean addShortcut(final KeyStroke key)
+	public boolean addShortcut(final KeyStroke key, boolean consumeEvent)
 	{
 		RootPaneContainer rootPaneContainer = getRootPane();
 		if (rootPaneContainer == null)
