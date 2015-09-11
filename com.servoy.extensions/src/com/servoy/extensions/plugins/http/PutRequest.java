@@ -17,19 +17,12 @@
 
 package com.servoy.extensions.plugins.http;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.FileEntity;
-import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.servoy.extensions.plugins.file.JSFile;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IClientPluginAccess;
-import com.servoy.j2db.util.Debug;
 
 /**
  * @author pbakker
@@ -55,20 +48,12 @@ public class PutRequest extends BaseEntityEnclosingRequest
 	 * @sample
 	 * putRequest.setFile('c:/temp/manual_01a.doc')
 	 *
-	 * @param filePath 
+	 * @param filePath
 	 */
 	public boolean js_setFile(String filePath)
 	{
-		if (filePath != null)
-		{
-			File file = new File(filePath);
-			if (file.exists())
-			{
-				((HttpPut)method).setEntity(new FileEntity(file, ContentType.create("binary/octet-stream"))); //$NON-NLS-1$
-				return true;
-			}
-		}
-		return false;
+		clearFiles();
+		return js_addFile(null, null, filePath);
 	}
 
 	/**
@@ -77,24 +62,12 @@ public class PutRequest extends BaseEntityEnclosingRequest
 	 * @sample
 	 * putRequest.setFile(jsFileInstance)
 	 *
-	 * @param file 
+	 * @param file
 	 */
 	public boolean js_setFile(JSFile file)
 	{
-		if (file != null && file.js_exists())
-		{
-			try
-			{
-				((HttpPut)method).setEntity(new InputStreamEntity(file.getAbstractFile().getInputStream(), file.js_size(),
-					ContentType.create("binary/octet-stream"))); //$NON-NLS-1$
-				return true;
-			}
-			catch (IOException e)
-			{
-				Debug.error(e);
-			}
-		}
-		return false;
+		clearFiles();
+		return js_addFile(null, file);
 	}
 
 }
