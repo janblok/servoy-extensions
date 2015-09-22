@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import com.servoy.base.scripting.annotations.ServoyClientSupport;
 import com.servoy.j2db.documentation.ServoyDocumented;
 import com.servoy.j2db.plugins.IUploadData;
 import com.servoy.j2db.scripting.IJavaScriptType;
@@ -29,7 +28,7 @@ import com.servoy.j2db.scripting.IScriptable;
 
 /**
  * The {@link IScriptObject} representation of a file, either local, remote or web.
- * 
+ *
  * @author jcompagner
  * @author Servoy Stuff
  */
@@ -209,12 +208,11 @@ public class JSFile implements IScriptable, IJavaScriptType
 
 	/**
 	 * Gets the contents (bytes) for the file data.
-	 * 
+	 *
 	 * @sample
 	 * var theFile = plugins.file.showFileOpenDialog();
 	 * application.output('The file size in bytes: ' + theFile.getBytes());
 	 */
-	@ServoyClientSupport(ng = false, wc = true, sc = true)
 	public byte[] jsFunction_getBytes()
 	{
 		return file.getBytes();
@@ -369,7 +367,7 @@ public class JSFile implements IScriptable, IJavaScriptType
 	 * // var f = plugins.convertToRemoteJSFile('/story.txt');
 	 * // f.renameTo('/otherstory.txt');
 	 *
-	 * @param destination 
+	 * @param destination
 	 */
 	public boolean js_renameTo(Object destination)
 	{
@@ -399,8 +397,8 @@ public class JSFile implements IScriptable, IJavaScriptType
 	 * f.createNewFile();
 	 * // Make the file look old.
 	 * f.setLastModified(new Date(1999, 5, 21));
-	 * 
-	 * @param date 
+	 *
+	 * @param date
 	 */
 	public boolean js_setLastModified(Object date)
 	{
@@ -446,15 +444,15 @@ public class JSFile implements IScriptable, IJavaScriptType
 	/**
 	 * Set the content of the file (local or remote) to the bytes provided<br/>
 	 * Will not create a new file if one doesn't exist
-	 * 
+	 *
 	 * @sample
 	 * var file = plugins.file.convertToJSFile('/pathTo/file.jpg');
 	 * // or for a remote file:
 	 * // var file = plugins.file.convertToRemoteJSFile('/remotePathTo/file.jpg');
 	 * var success = file.setBytes(blobDataProvider, true);
-	 * 
+	 *
 	 * @param bytes the data
-	 * 
+	 *
 	 * @return true if the operation worked
 	 * @since 5.2.5
 	 */
@@ -465,12 +463,12 @@ public class JSFile implements IScriptable, IJavaScriptType
 
 	/**
 	 * Set the content of the file (local or remote) to the bytes provided
-	 * 
+	 *
 	 * @sampleas js_setBytes(byte[])
-	 * 
+	 *
 	 * @param bytes the data
 	 * @param createFile true to create a file if it doesn't exist
-	 * 
+	 *
 	 * @return true if the operation worked
 	 * @since 5.2.5
 	 */
