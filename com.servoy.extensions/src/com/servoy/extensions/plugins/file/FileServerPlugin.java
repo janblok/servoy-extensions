@@ -36,7 +36,7 @@ import com.servoy.j2db.util.Debug;
 
 /**
  * The server plugin, also {@link IFileService} implementation
- * 
+ *
  * @author Servoy Stuff
  * @since Servoy 5.2
  */
@@ -108,14 +108,21 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 			}
 			else
 			{
-				defaultFolder = new File(System.getProperty("user.home") + File.separator + ".servoy" + File.separator + "uploads" + File.separator +
-					UUID.randomUUID());
+				if (System.getProperty("servoy.application_server.dir") != null)
+				{
+					defaultFolder = new File(System.getProperty("servoy.application_server.dir"), "uploads");
+				}
+				else
+				{
+					defaultFolder = new File(
+						System.getProperty("user.home") + File.separator + ".servoy" + File.separator + "uploads" + File.separator + UUID.randomUUID());
+				}
 				if (!defaultFolder.exists())
 				{
 					if (!defaultFolder.mkdirs())
 					{
-						throw new RuntimeException("Cant set the default folder for the File plugin to '" + defaultFolder.getCanonicalPath() +
-							"' can't create the directory");
+						throw new RuntimeException(
+							"Cant set the default folder for the File plugin to '" + defaultFolder.getCanonicalPath() + "' can't create the directory");
 					}
 				}
 
@@ -170,7 +177,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#openTransfer(String,String)
 	 */
 	@SuppressWarnings("nls")
@@ -192,7 +199,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFolderContent(String,String,String[],int,int,int)
 	 */
 	@SuppressWarnings("nls")
@@ -277,7 +284,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFileData(String,String)
 	 */
 	@SuppressWarnings("nls")
@@ -302,7 +309,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#getRemoteFileData(String,String[])
 	 */
 	public RemoteFileData[] getRemoteFileData(final String clientId, final String[] paths) throws RemoteException, IOException, SecurityException
@@ -321,10 +328,10 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/**
 	 * Security check to avoid hacking of the transfer capabilities of the plugin
-	 * 
+	 *
 	 * @param clientId the id of a client
 	 * @param filePath the file path to check - must start with '/'
-	 * 
+	 *
 	 * @throws IOException if the plugin is unloaded
 	 * @throws SecurityException if the client is not authenticated
 	 */
@@ -344,7 +351,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#writeBytes(UUID,byte[],int,int)
 	 */
 	@SuppressWarnings("nls")
@@ -358,7 +365,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#readBytes(UUID,int)
 	 */
 	@SuppressWarnings("nls")
@@ -372,7 +379,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#closeTransfer(UUID)
 	 */
 	public Object closeTransfer(final UUID uuid)
@@ -383,7 +390,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#delete(String,String)
 	 */
 	@SuppressWarnings("nls")
@@ -400,7 +407,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#getContentType(String,String)
 	 */
 	@SuppressWarnings("nls")
@@ -417,7 +424,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#renameTo(String,String,String)
 	 */
 	@SuppressWarnings("nls")
@@ -452,7 +459,7 @@ public class FileServerPlugin implements IServerPlugin, IFileService
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.servoy.extensions.plugins.file.IFileService#getDefaultFolderLocation()
 	 */
 	public String getDefaultFolderLocation(final String clientId) throws RemoteException
