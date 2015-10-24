@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.servoy</groupId>
+		<artifactId>com.servoy-extensions.bom</artifactId>
+		<version>8.0.0.3013</version>
+	</parent>
+	
+	<artifactId>com.servoy.extensions.workflow</artifactId>
+
+	<name>Servoy extensions.workflow</name>
+    <packaging>eclipse-plugin</packaging>
+	
+	<url>http://www.servoy.com</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.servoy</groupId>
+			<artifactId>servoy_base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.4.5</version>
+		</dependency>
+		<dependency>
+			<groupId>de.odysseus.juel</groupId>
+			<artifactId>juel</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.livetribe</groupId>
+			<artifactId>livetribe-jsr223</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mvel</groupId>
+			<artifactId>mvel2</artifactId>
+			<version>2.1.0.drools5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-api</artifactId>
+			<version>5.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>5.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>5.0.1</version>
+		</dependency>
+		
+		<!-- Is inserted in repo below -->
+		<dependency>
+            <groupId>org.jbpm.jbpm4</groupId>
+            <artifactId>jbpm</artifactId>
+            <version>4.4.patch</version>
+		</dependency>
+		
+		<!-- for some strange reason it does not work without with tycho -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-install-plugin</artifactId>
+			    <version>2.4</version>
+			    <executions>
+			        <execution>
+			            <phase>initialize</phase>
+			            <goals>
+			                <goal>install-file</goal>
+			            </goals>
+			            <configuration>
+			                <groupId>org.jbpm.jbpm4</groupId>
+			                <artifactId>jbpm</artifactId>
+			                <version>4.4.patch</version>
+			                <packaging>jar</packaging>
+			                <file>${project.basedir}/lib/jbpm.jar</file>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
